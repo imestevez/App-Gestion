@@ -1,0 +1,391 @@
+
+/*
+    Css: estilo.css
+    Creado el: 28/9/2017
+    Creado por: ignfpi;
+    
+    El fichero estilo.css contiene el estilo de de la página web del fichero EntregaET1.html
+*/
+
+* {
+    margin:0%;
+    padding:0%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+title{
+   color: darkblue;
+}
+
+header{
+    background-color: deepskyblue;
+    width: 100%;
+    height: 150px;
+    border: 1px solid darkblue;
+   background-image: url(../images/images.jpg);
+    background-repeat: no-repeat;
+    
+}
+
+/*Estilo del titulo de la cabecera*/
+header h1{ 
+    color: darkblue; 
+    text-align: center;
+    font  : 55px sans-serif;
+    margin-top: 20px;
+}
+
+/*Estilo del titulo del texto del body*/
+h2{
+    color: darkblue; 
+    text-align: left;
+    font: 30px sans-serif;
+    margin-top: 20px;
+    margin-left: 20px;
+    font-style: oblique;
+}
+
+/*Estilo del texto del body*/
+h3{
+    color: black; 
+    text-align: left;
+    font: 22px sans-serif;
+    margin: 3%;
+}
+/*Clase de la div del texto*/
+.texto{
+     margin: 2%;
+    border-radius: 5px;
+    border: solid black;
+    height: auto;
+}
+
+/*estilo de las imágenes del apartado del texto*/
+.texto img{
+    float: right;
+    margin-left: 5%;
+    margin-bottom: 2%;
+    margin-right: 2%;
+    margin-top: 2%;
+}
+
+label{
+    display: block;
+    margin: 1% 0 0 0;
+    font-size: 16px sans-serif;
+    padding-bottom: 1%;
+    padding-left: 1.5%;
+}
+
+/*Estilo de los elementos colocados a la izquierda en los formularios*/
+#izquierda{
+    padding-top: 0px;
+    float: left;
+    font: 16px sans-serif;
+    border-color: darkblue;  
+    border-radius: 20px;
+    color: darkblue;
+    width: 100%;
+}
+/*estilo de los divs ocultos*/
+.oculto{
+    background-color: crimson;
+    color: white;
+    text-align: center;
+    width: 40%;
+    margin-left: 1%;
+    margin-bottom: 2%;
+    display: block;
+    float: right;
+}
+
+
+/*Estilo de los elementos colocados a la derecha en los formularios*/
+#derecha{
+    padding-top: 0px;
+    float: right;
+    font: 16px sans-serif;
+    border-color: darkblue;  
+    border-radius: 20px;
+    color: darkblue;
+    width: 40%;
+
+}
+
+
+/*Iconos de la cabecera*/
+header .menu_derecha{
+    display: flex;
+    float: right;
+    padding-bottom: 0.5%;
+    font: 16px sans-serif;
+
+}
+.menu_derecha label {
+    padding-left: 0%;
+}
+.menu_derecha label input{
+    padding-left: 0%;
+}
+.menu_derecha label input:hover {
+    padding-left: 0%;
+}
+.menu_derecha input{
+    margin-left: 5px;
+}
+.menu_derecha div{
+    display: flex;
+}
+body {
+    font  : 18px sans-serif;
+    background-image: url(../images/images.jpg);
+     background-repeat: no-repeat;
+    background-color:  #A3DAF7; 
+} 
+
+input{
+    font: 16px sans-serif;
+    border-color: darkblue;  
+    border-radius: 20px;
+    color: darkblue;
+    width: auto;
+    padding-left: 10px;
+}
+
+.del{
+  background-color: aliceblue;
+  border: 0 none;
+  color: black;
+  margin-left: 5%;
+  margin-right: 5%;
+  padding-left: 0px;
+  border-radius: 0px;
+  visibility: hidden;
+
+}
+.del:hover {
+  background-color: aliceblue;
+  border-radius: 0px;
+  padding-left: 0px;
+  visibility: hidden;
+
+
+
+}
+/*Cuando se pasa el cursor del raton por encima de los input*/
+input:hover {
+  background-color: #CCF;
+  padding-left: 10px;
+  border-radius: 10px;
+
+}
+input[type="image"]{
+    padding-left: 0px;
+    border-radius: 0px;
+}
+input[type="image"]:hover {
+  background-color: #CCF;
+    padding-left: 0%;
+}
+/*Para el selector de grupo de practicas*/
+label select  {
+    width: 20%;
+    border-radius: 20px;
+    border-color: darkblue;
+    color: darkblue;
+}
+
+/*label de los formularios*/
+.add label select, .edit label select, .search label select {
+    width: 31%;
+    border-radius: 20px;
+    border-color: darkblue;
+    color: darkblue;
+}
+
+/*fiedset que engloba a los formularios*/
+fieldset{
+    background: aliceblue;
+    height: auto;
+    width: 90%;
+    border: 5px solid black;
+    color: darkblue;  
+    border-radius: 5px;
+    margin-left: 5%;
+    margin-bottom: 5%;
+    margin-top: 5%;
+}
+
+fieldset input{
+    margin-left: 1%;
+}
+
+fieldset .acciones input{
+    margin-right: 5%;
+    margin-top: 5%;
+
+}
+/*estilo de la division  para submit y reset*/
+.acciones {
+    margin-bottom: 2.5%;
+    margin-left: 40%;
+}
+
+.acciones > input: hover{
+    background-color: darkblue;
+    padding-left: 0px;
+}
+.accionesTable{
+    margin-bottom: 2.5%;
+    margin-left: 45%;
+
+}
+.accionesTable > a > input{
+    margin-left: 5%;
+}
+.accionesTable > input: hover{
+    background-color: darkblue;
+    padding-left: 0px;
+}
+/*Título de las tablas*/
+caption{
+        color: darkblue; 
+        font  : 25px sans-serif;
+}
+legend{
+    font  : 25px sans-serif;
+}
+/*tablas*/
+.showAll {
+    margin-top: 5%;
+    border-collapse: collapse;
+    width: 95%;
+    border: 5px solid black;
+    margin-left: 2.5%;
+    margin-bottom: 5%;
+}
+.showcurrent, .delete{
+    width: 50%;
+    margin-left: 25%;
+    margin-top: 5%;
+    border-collapse: collapse;
+    border: 5px solid black;
+    margin-bottom: 5%;
+}
+.showAll th{
+    background-color:cornflowerblue ;
+    text-align: center;
+    border: 1px solid black;
+}
+
+.showAll td {
+    height: 50px;
+    vertical-align: bottom;
+    text-align: center;
+    background-color: aliceblue;
+     border: 1px solid black;
+
+}
+
+ .showcurrent th, .delete th{
+    background-color:cornflowerblue ;
+    text-align: center;
+    border: 1px solid black;
+    width: 10%;
+}
+
+ .showcurrent td, .delete td {
+    height: 50px;
+    vertical-align: bottom;
+    text-align: center;
+    background-color: aliceblue;
+    border: 1px solid black;
+    width: 70%;
+     min-width: 60%;
+}
+/*espacio de trabajo*/
+.pagina{
+    width: 80%;
+    height: 120%;
+    min-height: : 100%;
+    margin-top: 0px;
+    float: right;
+    background-color: #FFF;
+}
+
+footer {
+    height: 80px;
+    background-color: deepskyblue;
+   background-image: url(../images/images.jpg);
+    background-repeat: no-repeat;
+    border-top: 10px solid darkblue;
+    width: 100%;
+    text-align: center;
+    color: darkblue;
+    float: right;
+}
+a{
+    text-decoration: none;
+}
+
+/*Menu lateral izquierda*/
+.contenedor-menu{
+    width: 20%;
+    min-width: 5%;
+    display: inline-block;
+    font-family: 20px sans-serif;
+    margin: 0;
+    float: left;
+    height: 100%;
+
+}
+.contenedor-menu .menu{
+    width: 100%;
+
+}
+.contenedor-menu ul{
+    list-style: none;
+
+}
+
+.contenedor-menu ul li a{
+    color: white;
+    display: block;
+    padding: 15px 20px;
+    background-color: darkblue;
+}
+.contenedor-menu .menu li a:hover{
+    background-color: darkblue;
+    color: white;
+}
+
+.contenedor-menu .menu .icono{
+    font-size: 20px;
+    line-height: 20px;
+}
+
+.contenedor-menu .menu .icono.izquierda{
+    float: left;
+    margin-right: 10px;
+}
+
+.contenedor-menu .menu .icono.derecha{
+    float: right;
+    margin-left: 5px;
+}
+
+.contenedor-menu .menu ul{
+    display: none;
+}
+
+.contenedor-menu .menu li ul li a{
+    
+    background: #424242;
+    color: #e9e9e9;
+}
+
+.contenedor-menu .menu .activado > a{
+    background: #1a95b5;
+    color: white;
+}
