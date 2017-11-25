@@ -17,7 +17,7 @@ if (!IsAuthenticated()){
 }
 //esta autenticado
 else{
-	include '../Views/USUARIOS_INDEX_View.php'; 
+	include '../Views/USUARIO_INDEX_View.php'; 
 	new Index(); //crea la vista de usuarios autenticados
 }
 

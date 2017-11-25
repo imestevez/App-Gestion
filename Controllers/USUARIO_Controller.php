@@ -2,7 +2,7 @@
 <?php
 
 /*
-//Script : USUARIOS_Controller.php
+//Script : USUARIO_Controller.php
 //Creado el : 13-10-2017
 //Creado por: vugsj4
 //-------------------------------------------------------
@@ -16,15 +16,15 @@ include_once '../Functions/Authentication.php';
 if (!IsAuthenticated()){
 	header('Location:../index.php');
 }
-include '../Models/USUARIOS_Model.php';
+include '../Models/USUARIO_Model.php';
 
-include '../Views/Register_View.php';
-include '../Views/USUARIOS_SHOWALL_View.php';
-include '../Views/USUARIOS_SHOWCURRENT_View.php';
-include '../Views/USUARIOS_ADD_View.php';
-include '../Views/USUARIOS_EDIT_View.php';
-include '../Views/USUARIOS_SEARCH_View.php';
-include '../Views/USUARIOS_DELETE_View.php';
+include '../Views/Registro_View.php';
+include '../Views/USUARIO_SHOWALL_View.php';
+include '../Views/USUARIO_SHOWCURRENT_View.php';
+include '../Views/USUARIO_ADD_View.php';
+include '../Views/USUARIO_EDIT_View.php';
+include '../Views/USUARIO_SEARCH_View.php';
+include '../Views/USUARIO_DELETE_View.php';
 include '../Views/MESSAGE_View.php';
 
 
@@ -56,7 +56,7 @@ function get_data_form(){
 	$sexo = $_REQUEST['sexo'];
 	$action = $_REQUEST['action'];
 
-	$USUARIOS = new USUARIOS_Model(
+	$USUARIO = new USUARIO_Model(
 		$login, 
 		$password, 
 		$DNI, 
@@ -68,7 +68,7 @@ function get_data_form(){
 		$fotopersonal,
 		$sexo);
 
-	return $USUARIOS;
+	return $USUARIO;
 }
 
 //Funcion para coger los datos del formulario de un usuario ya almacenado
@@ -102,7 +102,7 @@ function get_data_UserBD(){
 	$sexo = $_REQUEST['sexo'];
 	$action = $_REQUEST['action'];
 
-	$USUARIOS = new USUARIOS_Model(
+	$USUARIO = new USUARIO_Model(
 		$login, 
 		$password, 
 		$DNI, 
@@ -114,7 +114,7 @@ function get_data_UserBD(){
 		$fotopersonal,
 		$sexo);
 
-	return $USUARIOS;
+	return $USUARIO;
 }
 
 //Si el usuario no elige ninguna opción
@@ -129,61 +129,61 @@ if (!isset($_REQUEST['action'])){
 		case 'ADD': //Si quiere hacer un ADD
 			if (!$_POST){ //si viene del showall (no es un post)
 
-				$form = new USUARIOS_ADD(); //Crea la vista ADD y muestra formulario para rellenar por el usuario
+				$form = new USUARIO_ADD(); //Crea la vista ADD y muestra formulario para rellenar por el usuario
 			}
 			else{ //si viene del add 
 
-				$USUARIOS = get_data_form(); //recibe datos
-				$lista = $USUARIOS->ADD(); //mete datos en respuesta usuarios despues de ejecutar el add con los de USUARIOS
-				$usuario = new MESSAGE($lista, '../Controllers/USUARIOS_Controller.php'); //muestra el mensaje despues de la sentencia sql
+				$USUARIO = get_data_form(); //recibe datos
+				$lista = $USUARIO->ADD(); //mete datos en respuesta usuarios despues de ejecutar el add con los de USUARIO
+				$usuario = new MESSAGE($lista, '../Controllers/USUARIO_Controller.php'); //muestra el mensaje despues de la sentencia sql
 			}
 			break;
 		case 'DELETE': //Si quiere hacer un DELETE
 			if (!$_POST){ //viene del showall con una clave
-				$USUARIOS = new USUARIOS_Model($_REQUEST['login'], '','', '', '', '', '', '', '', '', ''); //crea un un USUARIOS_Model con el login del usuario
-				$valores = $USUARIOS->RellenaDatos(); //completa el resto de atributos a partir de la clave
-				$usuario = new USUARIOS_DELETE($valores); //Crea la vista de DELETE con los datos del usuario
+				$USUARIO = new USUARIO_Model($_REQUEST['login'], '','', '', '', '', '', '', '', '', ''); //crea un un USUARIO_Model con el login del usuario
+				$valores = $USUARIO->RellenaDatos(); //completa el resto de atributos a partir de la clave
+				$usuario = new USUARIO_DELETE($valores); //Crea la vista de DELETE con los datos del usuario
 			}
 			else{//si viene con un post
-				$USUARIOS = get_data_UserBD(); //coge los datos del formulario del usuario que desea borrar
-				$respuesta = $USUARIOS->DELETE(); //Ejecuta la funcion DELETE() en el USUARIOS_Model
-				$mensaje = new MESSAGE($respuesta, '../Controllers/USUARIOS_Controller.php'); //muestra el mensaje despues de la sentencia sql
+				$USUARIO = get_data_UserBD(); //coge los datos del formulario del usuario que desea borrar
+				$respuesta = $USUARIO->DELETE(); //Ejecuta la funcion DELETE() en el USUARIO_Model
+				$mensaje = new MESSAGE($respuesta, '../Controllers/USUARIO_Controller.php'); //muestra el mensaje despues de la sentencia sql
 			}
 			break;
 		case 'EDIT': //si el usuario quiere editar	
 			if (!$_POST){
-				$USUARIOS = new USUARIOS_Model($_REQUEST['login'], '','', '', '', '', '', '', '', '', ''); //crea un un USUARIOS_Model con el login del usuario 
-				$datos = $USUARIOS->RellenaDatos();  //A partir del login recoge todos los atributos
-				$usuario = new USUARIOS_EDIT($datos); //Crea la vista EDIT con los datos del usuario
+				$USUARIO = new USUARIO_Model($_REQUEST['login'], '','', '', '', '', '', '', '', '', ''); //crea un un USUARIO_Model con el login del usuario 
+				$datos = $USUARIO->RellenaDatos();  //A partir del login recoge todos los atributos
+				$usuario = new USUARIO_EDIT($datos); //Crea la vista EDIT con los datos del usuario
 			}
 			else{
-				$USUARIOS = get_data_UserBD(); //coge los datos del formulario del usuario que desea editar
-				$respuesta = $USUARIOS->EDIT(); //Ejecuta la funcion EDIT() en el USUARIOS_Model
-				$mensaje = new MESSAGE($respuesta, '../Controllers/USUARIOS_Controller.php');//muestra el mensaje despues de la sentencia sql
+				$USUARIO = get_data_UserBD(); //coge los datos del formulario del usuario que desea editar
+				$respuesta = $USUARIO->EDIT(); //Ejecuta la funcion EDIT() en el USUARIO_Model
+				$mensaje = new MESSAGE($respuesta, '../Controllers/USUARIO_Controller.php');//muestra el mensaje despues de la sentencia sql
 			}
 			break;
 		case 'SEARCH': //si desea realizar una busqueda
 			if (!$_POST){
-				$USUARIOS = new USUARIOS_SEARCH();//Crea la vista SEARCH y muestra formulario para rellenar por el usuario
+				$USUARIO = new USUARIO_SEARCH();//Crea la vista SEARCH y muestra formulario para rellenar por el usuario
 			}
 			else{
-				$USUARIOS = get_data_UserBD(); //coge los datos del formulario del usuario que desea buscar
-				$datos = $USUARIOS->SEARCH();//Ejecuta la funcion SEARCH() en el USUARIOS_Model
+				$USUARIO = get_data_UserBD(); //coge los datos del formulario del usuario que desea buscar
+				$datos = $USUARIO->SEARCH();//Ejecuta la funcion SEARCH() en el USUARIO_Model
 				$lista = array('login','password','DNI','nombre','apellidos','telefono','email','FechaNacimiento','fotopersonal','sexo');
-				$resultado = new USUARIOS_SHOWALL($lista, $datos, 0, 0, 0, 0, 'SEARCH', '../Controllers/USUARIOS_Controller.php');//Crea la vista SHOWALL y muestra los usuarios que cumplen los parámetros de búsqueda 
+				$resultado = new USUARIO_SHOWALL($lista, $datos, 0, 0, 0, 0, 'SEARCH', '../Controllers/USUARIO_Controller.php');//Crea la vista SHOWALL y muestra los usuarios que cumplen los parámetros de búsqueda 
 			}
 			break;
 		case 'SHOWCURRENT': //si desea ver un usuario en detalle
-			$USUARIOS = new USUARIOS_Model($_REQUEST['login'], '','', '', '', '', '', '', '', '', '');//crea un un USUARIOS_Model con el login del usuario 
-			$tupla = $USUARIOS->RellenaDatos();//A partir del login recoge todos los atributos
-			$usuario = new USUARIOS_SHOWCURRENT($tupla); //Crea la vista SHOWCURRENT del usuario requerido
+			$USUARIO = new USUARIO_Model($_REQUEST['login'], '','', '', '', '', '', '', '', '', '');//crea un un USUARIO_Model con el login del usuario 
+			$tupla = $USUARIO->RellenaDatos();//A partir del login recoge todos los atributos
+			$usuario = new USUARIO_SHOWCURRENT($tupla); //Crea la vista SHOWCURRENT del usuario requerido
 			break;
 		default: //Por defecto, Se muestra la vista SHOWALL
 			if (!$_POST){
-				$USUARIOS = new USUARIOS_Model($_REQUEST['login'], '','','', '', '', '', '', '', '', '');//crea un un USUARIOS_Model con el login del usuario 
+				$USUARIO = new USUARIO_Model($_REQUEST['login'], '','','', '', '', '', '', '', '', '');//crea un un USUARIO_Model con el login del usuario 
 			}
 			else{
-				$USUARIOS = get_data_form(); //Coge los datos del formulario
+				$USUARIO = get_data_form(); //Coge los datos del formulario
 			}
 
 			if(!isset($_REQUEST['num_pagina'])){ //Si es la 1a página del showall a mostrar
@@ -193,10 +193,10 @@ if (!isset($_REQUEST['action'])){
 			}
 			$num_tupla = $num_pagina*10; //número de la 1º tupla a mostrar
 			$max_tuplas = $num_tupla+10; // el número de tuplas a mostrar por página
-			$totalTuplas = $USUARIOS->contarTuplas(); //Cuenta el número de tuplas que hay en la BD
-			$datos = $USUARIOS->SHOWALL($num_tupla,$max_tuplas); //Ejecuta la funcion SHOWALL() en el USUARIOS_Model
+			$totalTuplas = $USUARIO->contarTuplas(); //Cuenta el número de tuplas que hay en la BD
+			$datos = $USUARIO->SHOWALL($num_tupla,$max_tuplas); //Ejecuta la funcion SHOWALL() en el USUARIO_Model
 			$lista = array('login', 'password', 'DNI','nombre','apellidos','telefono','email','FechaNacimiento','fotopersonal','sexo');
-			$UsuariosBD = new USUARIOS_SHOWALL($lista, $datos, $num_tupla, $max_tuplas, $totalTuplas, $num_pagina, 'SHOWALL', '../Controllers/USUARIOS_Controller.php'); //Crea la vista SHOWALL de los usuarios de la BD	
+			$UsuariosBD = new USUARIO_SHOWALL($lista, $datos, $num_tupla, $max_tuplas, $totalTuplas, $num_pagina, 'SHOWALL', '../Controllers/USUARIO_Controller.php'); //Crea la vista SHOWALL de los usuarios de la BD	
 	}
 
 ?>

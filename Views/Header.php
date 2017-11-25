@@ -81,16 +81,13 @@ Contiene el html de la cabecera de las vistas
     </div>
  </nav>  
        
-<?php
-    //}   
-?>
      </header>
 
 <div id = 'main'>
 <?php
     //session_start();
     if (IsAuthenticated()){ //si esta autenticado
-        include 'Menu_Lateral_View.php';
+        include 'Menu_Lateral.php';
     }
 ?>
 </div>

@@ -18,7 +18,7 @@ class Register{
 
 function render(){
 
-include 'Header_View.php'; //header necesita los strings
+include 'Header.php'; //header necesita los strings
 ?>	
 
 
@@ -94,7 +94,7 @@ include 'Header_View.php'; //header necesita los strings
    
     </section>      
 <?php
-        include 'Footer_View.php';
+        include 'Footer.php';
 		} //fin metodo render
 
 	} //fin REGISTER

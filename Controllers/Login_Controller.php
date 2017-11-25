@@ -17,9 +17,9 @@ else{ //si se introdujeron
 
 	include '../Views/MESSAGE_View.php'; //incluye la vista de mensajes 
 	include '../Functions/Access_DB.php'; //incluye la conexión a la BD
-	include '../Models/USUARIOS_Model.php'; //incluye el Modelo de usuarios
+	include '../Models/USUARIO_Model.php'; //incluye el Modelo de usuarios
 
-	$usuario = new USUARIOS_Model($_REQUEST['login'],$_REQUEST['password'],'','','','','','','',''); //crea un usuario con el login y password insertados
+	$usuario = new USUARIO_Model($_REQUEST['login'],$_REQUEST['password'],'','','','','','','',''); //crea un usuario con el login y password insertados
 	$respuesta = $usuario->login(); //Comprueba que existe el login y se corresponde con las contraseña introducida
 
 	if ($respuesta == 'true'){ //si se introdujeron correctamente

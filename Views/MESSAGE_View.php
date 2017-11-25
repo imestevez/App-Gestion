@@ -55,7 +55,7 @@ class MESSAGE{
 //funcion que muestra los datos al usuario
 function render(){
 
-  include 'Header_View.php';
+  include 'Header.php';
 ?>
      <section class="pagina" style="min-height: 450px">
 
@@ -78,14 +78,14 @@ function render(){
 
 </section>
 <?php
-  include 'Footer_View.php';
+  include 'Footer.php';
 	
 }//fin render()
 
 //funcion que muestra solo el mensaje
 
 function mensaje(){
-	  include 'Header_View.php';
+	  include 'Header.php';
 ?>
      <section class="pagina" style="min-height: 400px">
 
@@ -98,7 +98,7 @@ function mensaje(){
 
 	</section>
 <?php
-  include 'Footer_View.php';
+  include 'Footer.php';
 } // fin mensaje()
 
 }//fin clase
