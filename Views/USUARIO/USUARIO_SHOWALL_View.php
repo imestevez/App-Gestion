@@ -57,8 +57,8 @@ function render(){
                 <th><?php echo $strings['Email']?></th>
                 <th><?php echo $strings['Direccion']?></th>
 
-                <td><a href="../Controllers/USUARIOS_Controller.php?action=SEARCH"><input type="image" src="../Views/images/search.png" name="action" title="<?php echo $strings['Buscar']?>" value="SEARCH"></a>
-                    <a href="../Controllers/USUARIOS_Controller.php?action=ADD" ><input type="image" src="../Views/images/anadir.png" name="action" title="<?php echo $strings['Añadir']?>" value="ADD" ></a>
+                <td><a href="../Controllers/USUARIO_Controller.php?action=SEARCH"><input type="image" src="../Views/images/search.png" name="action" title="<?php echo $strings['Buscar']?>" value="SEARCH"></a>
+                    <a href="../Controllers/USUARIO_Controller.php?action=ADD" ><input type="image" src="../Views/images/anadir.png" name="action" title="<?php echo $strings['Añadir']?>" value="ADD" ></a>
                 </td>
                 </tr>
 <?php		
@@ -75,9 +75,9 @@ function render(){
                 <td><?php echo $row["direccion"]; ?></td>
 
                 <td class="edit_tabla">
-                    <a href="../Controllers/USUARIOS_Controller.php?action=SHOWCURRENT&login=<?php echo $row["login"]?>"><input type="image" src="../Views/images/ojo.png" name="action" title="<?php echo $strings['Mostrar en detalle'] ?>" value="SHOWCURRENT" action=""></a>
-                    <a href="../Controllers/USUARIOS_Controller.php?action=EDIT&login=<?php echo $row["login"]?>"><input type="image" src="../Views/images/edit.png" name="action" title="<?php echo $strings['Editar'] ?>" value="EDIT"></a>
-                    <a href="../Controllers/USUARIOS_Controller.php?action=DELETE&login=<?php echo $row["login"]?>""><input type="image" src="../Views/images/delete.png" name="action" title="<?php echo $strings['Eliminar'] ?>" value="DELETE"></a>
+                    <a href="../Controllers/USUARIO_Controller.php?action=SHOWCURRENT&login=<?php echo $row["login"]?>"><input type="image" src="../Views/images/ojo.png" name="action" title="<?php echo $strings['Mostrar en detalle'] ?>" value="SHOWCURRENT" action=""></a>
+                    <a href="../Controllers/USUARIO_Controller.php?action=EDIT&login=<?php echo $row["login"]?>"><input type="image" src="../Views/images/edit.png" name="action" title="<?php echo $strings['Editar'] ?>" value="EDIT"></a>
+                    <a href="../Controllers/USUARIO_Controller.php?action=DELETE&login=<?php echo $row["login"]?>""><input type="image" src="../Views/images/delete.png" name="action" title="<?php echo $strings['Eliminar'] ?>" value="DELETE"></a>
                 </td>
                 </tr>              
            
@@ -93,13 +93,13 @@ function render(){
 
         if($this->num_pagina > 0){ // Si la tupla 1 mostrada es la primera de la BD
 ?>
-         <a href="../Controllers/USUARIOS_Controller.php?num_pagina=<?php echo $this->num_pagina-1?>&action=SHOWALL"><input type="image" src="../Views/images/prev.png" name="action" title="<?php echo $strings['Anterior'] ?>" value="PREV"></a>
+         <a href="../Controllers/USUARIO_Controller.php?num_pagina=<?php echo $this->num_pagina-1?>&action=SHOWALL"><input type="image" src="../Views/images/prev.png" name="action" title="<?php echo $strings['Anterior'] ?>" value="PREV"></a>
 <?php
         } //Fin del if si es la 1ª tupla
 
         if($this->max_tuplas < $this->total_tuplas){ //Si la tupla mostrada es la última de la BD
 ?>
-        <a href="../Controllers/USUARIOS_Controller.php?num_pagina=<?php echo $this->num_pagina+1?>&action=SHOWALL"><input type="image" src="../Views/images/next.png" name="action" title="<?php echo $strings['Siguiente'] ?>" value="NEXT"></a>
+        <a href="../Controllers/USUARIO_Controller.php?num_pagina=<?php echo $this->num_pagina+1?>&action=SHOWALL"><input type="image" src="../Views/images/next.png" name="action" title="<?php echo $strings['Siguiente'] ?>" value="NEXT"></a>
 <?php
         }//Fin del if si es la ultima tupla
 
@@ -129,8 +129,8 @@ function renderSearch(){
                 <th><?php echo $strings['Email']?></th>
                 <th><?php echo $strings['Direccion']?></th>
 
-                <td><a href="../Controllers/USUARIOS_Controller.php?action=SEARCH"><input type="image" src="../Views/images/search.png" name="action" title="<?php echo $strings['Buscar']?>" value="SEARCH"></a>
-                    <a href="../Controllers/USUARIOS_Controller.php?action=ADD" ><input type="image" src="../Views/images/anadir.png" name="action" title="<?php echo $strings['Añadir']?>" value="ADD" ></a>
+                <td><a href="../Controllers/USUARIO_Controller.php?action=SEARCH"><input type="image" src="../Views/images/search.png" name="action" title="<?php echo $strings['Buscar']?>" value="SEARCH"></a>
+                    <a href="../Controllers/USUARIO_Controller.php?action=ADD" ><input type="image" src="../Views/images/anadir.png" name="action" title="<?php echo $strings['Añadir']?>" value="ADD" ></a>
                 </td>
                 </tr>
 <?php
@@ -147,9 +147,9 @@ function renderSearch(){
                 <td><?php echo $row["direccion"]; ?></td>
 
             <td class="edit_tabla">
-                    <a href="../Controllers/USUARIOS_Controller.php?action=SHOWCURRENT&login=<?php echo $row["login"]?>"><input type="image" src="../Views/images/ojo.png" name="action" title="<?php echo $strings['Mostrar en detalle'] ?>" value="SHOWCURRENT" action=""></a>
-                    <a href="../Controllers/USUARIOS_Controller.php?action=EDIT&login=<?php echo $row["login"]?>"><input type="image" src="../Views/images/edit.png" name="action" title="<?php echo $strings['Editar'] ?>" value="EDIT"></a>
-                    <a href="../Controllers/USUARIOS_Controller.php?action=DELETE&login=<?php echo $row["login"]?>""><input type="image" src="../Views/images/delete.png" name="action" title="<?php echo $strings['Eliminar'] ?>" value="DELETE"></a>
+                    <a href="../Controllers/USUARIO_Controller.php?action=SHOWCURRENT&login=<?php echo $row["login"]?>"><input type="image" src="../Views/images/ojo.png" name="action" title="<?php echo $strings['Mostrar en detalle'] ?>" value="SHOWCURRENT" action=""></a>
+                    <a href="../Controllers/USUARIO_Controller.php?action=EDIT&login=<?php echo $row["login"]?>"><input type="image" src="../Views/images/edit.png" name="action" title="<?php echo $strings['Editar'] ?>" value="EDIT"></a>
+                    <a href="../Controllers/USUARIO_Controller.php?action=DELETE&login=<?php echo $row["login"]?>""><input type="image" src="../Views/images/delete.png" name="action" title="<?php echo $strings['Eliminar'] ?>" value="DELETE"></a>
                 </td>
                 </tr>               
            
@@ -164,7 +164,7 @@ function renderSearch(){
     if(isset($_REQUEST['action'])){ //si viene de un formulario
         if($_REQUEST['action'] == 'SEARCH'){  //Si se muestra a partir de un SEARCH
 ?>
-           <a href="../Controllers/USUARIOS_Controller.php?action=SHOWALL"><input type="image" src="../Views/images/back.png" name="action" title="<?php echo $strings['Volver'] ?>" value="BACK"></a>
+           <a href="../Controllers/USUARIO_Controller.php?action=SHOWALL"><input type="image" src="../Views/images/back.png" name="action" title="<?php echo $strings['Volver'] ?>" value="BACK"></a>
 <?php
         }
     }//Fin del if si es SEARCH

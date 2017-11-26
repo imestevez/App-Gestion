@@ -29,7 +29,7 @@ function render(){
                 <legend style="margin-left: 30%"><?php echo $strings['Búsqueda de usuario']?></legend>
 
          
-            <form method="post" name="SEARCH" action="../Controllers/USUARIOS_Controller.php" enctype="multipart/form-data" >
+            <form method="post" name="SEARCH" action="../Controllers/USUARIO_Controller.php" enctype="multipart/form-data" >
                 
                 <div id="izquierda">
                     <label for="login"><?php echo $strings['Login']?>: </label>
@@ -62,11 +62,11 @@ function render(){
                 </div>
                 <div class="acciones" style="float: right; margin-left:0%; margin-right: 50%">
                    
-                     <a href="../Controllers/USUARIOS_Controller.php?action=SEARCH"><input type="image" name="action" value="SEARCH" action="#" src="../Views/images/search.png" title="<?php echo $strings['Buscar']?>" onclick=" return validar('SEARCH')" ></a>
+                     <a href="../Controllers/USUARIO_Controller.php?action=SEARCH"><input type="image" name="action" value="SEARCH" action="#" src="../Views/images/search.png" title="<?php echo $strings['Buscar']?>" onclick=" return validar('SEARCH')" ></a>
                 </div>
              </form>  
                    <div class="acciones" style="float: left;">
-                     <a href="../Controllers/USUARIOS_Controller.php?action=SHOWALL"><input type="image" src="../Views/images/back.png" title="<?php echo $strings['Volver']?>"></a>
+                     <a href="../Controllers/USUARIO_Controller.php?action=SHOWALL"><input type="image" src="../Views/images/back.png" title="<?php echo $strings['Volver']?>"></a>
                 </div>
             </fieldset>
 

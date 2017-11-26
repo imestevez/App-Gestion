@@ -1,8 +1,8 @@
 <?php
 /*
 //Clase : USUARIOS_DELETE
-//Creado el : 15-10-2017
-//Creado por: vugsj4
+//Creado el : 24-11-2017
+//Creado por: SOLFAMIDAS
 //-------------------------------------------------------
 
 Muestra la tabla de borrado del usuario seleccionado
@@ -55,7 +55,7 @@ function render(){
             </table>
 
 
-       <form method="post" name="DELETE" action="../Controllers/USUARIOS_Controller.php" enctype="multipart/form-data" >
+       <form method="post" name="DELETE" action="../Controllers/USUARIO_Controller.php" enctype="multipart/form-data" >
                 <input class="del" type="text" name="login" maxlength="15" size="<?php echo strlen($this->login); ?>" readonly value="<?php echo $this->login ?>" >
                 <input class="del" type="text" name="DNI" maxlength="9" size="9" readonly value="<?php echo $this->DNI ?>">
                 <input class="del" type="text" name="nombre" maxlength="30" size="<?php echo strlen($this->nombre); ?>" readonly value="<?php echo $this->nombre ?>">
@@ -66,12 +66,12 @@ function render(){
 
                   <div class="accionesTable" style="margin-left: 0%; float: right; margin-right: 45%">
 
-                    <a href="../Controllers/USUARIOS_Controller.php?action=DELETE&login=<?php echo $this->login ?>"><input type="image" name="action" value="DELETE" action="#" src="../Views/images/confirmar.png" title="<?php echo $strings['Borrar Usuario'] ?>" ></a>
+                    <a href="../Controllers/USUARIO_Controller.php?action=DELETE&login=<?php echo $this->login ?>"><input type="image" name="action" value="DELETE" action="#" src="../Views/images/confirmar.png" title="<?php echo $strings['Borrar Usuario'] ?>" ></a>
                     </div>
              </form>
 
                   <div class="accionesTable" style="float: left;">
-                    <a href="../Controllers/USUARIOS_Controller.php?action=SHOWALL"><input type="image" src="../Views/images/back.png" title="<?php echo $strings['Volver'] ?>"></a>  
+                    <a href="../Controllers/USUARIO_Controller.php?action=SHOWALL"><input type="image" src="../Views/images/back.png" title="<?php echo $strings['Volver'] ?>"></a>  
                     </div>    
 		</section>
 <?php

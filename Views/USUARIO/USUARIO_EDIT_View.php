@@ -2,8 +2,8 @@
 
 /*
 //Clase : USUARIOS_EDIT
-//Creado el : 17-10-2017
-//Creado por: vugsj4
+//Creado el : 24-11-2017
+//Creado por: SOLFAMIDAS
 //-----------------
 Muestra el formulario con los datos del usuario indicado permitiendo modificarlos
 
@@ -52,7 +52,7 @@ function render(){
                 <legend style="margin-left: 30%"><?php echo $strings['Editar Usuario'] ?></legend>
 
 
-            <form method="post" name="EDIT" action="../Controllers/USUARIOS_Controller.php" enctype="multipart/form-data">
+            <form method="post" name="EDIT" action="../Controllers/USUARIO_Controller.php" enctype="multipart/form-data">
          
 
                 <div id="izquierda">
@@ -100,11 +100,11 @@ function render(){
                 </div>
                     
                 <div class="acciones" style="float: right; margin-left:0%; margin-right: 50%">
-                    <a href="../Controllers/USUARIOS_Controller.php?action=EDIT"> <input type="image" name="action" value="EDIT" src="../Views/images/confirmar.png" title="<?php echo $strings['Enviar Formulario'] ?>" onclick="return validar('EDIT') && encriptar()"></a>
+                    <a href="../Controllers/USUARIO_Controller.php?action=EDIT"> <input type="image" name="action" value="EDIT" src="../Views/images/confirmar.png" title="<?php echo $strings['Enviar Formulario'] ?>" onclick="return validar('EDIT') && encriptar()"></a>
                 </div>
              </form>                     
                 <div class="acciones" style="float: left;">
-                    <a href="../Controllers/USUARIOS_Controller.php?action=SHOWALL"><input type="image" src="../Views/images/back.png" title="<?php echo $strings['Volver']?>"></a>
+                    <a href="../Controllers/USUARIO_Controller.php?action=SHOWALL"><input type="image" src="../Views/images/back.png" title="<?php echo $strings['Volver']?>"></a>
                 </div>
          </fieldset>
  

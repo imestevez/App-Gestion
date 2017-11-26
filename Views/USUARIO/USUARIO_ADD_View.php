@@ -2,8 +2,8 @@
 
 /*
 //Clase : USUARIOS_ADD
-//Creado el : 15-10-2017
-//Creado por: vugsj4
+//Creado el : 24-11-2017
+//Creado por: SOLFAMIDAS
 //-------------------------------------------------------
 
 Muestra el formulario de registro que permite al usuario añadir sus datos al sistema
@@ -29,7 +29,7 @@ include '../Views/Header.php';
      <section class="pagina">
          <fieldset class="add">
                 <legend style="margin-left: 30%"><?php echo $strings['Registro de usuario'] ?></legend>
-            <form method="post" name="ADD"  action="../Controllers/USUARIOS_Controller.php" enctype="multipart/form-data" >
+            <form method="post" name="ADD"  action="../Controllers/USUARIO_Controller.php" enctype="multipart/form-data" >
                 <div id="izquierda">
                     <label for="login"><?php echo $strings['Login']?>: </label>
                         <input type="text" name="login" maxlength="15" size="15" onblur="javascript:void(validarLogin(this, 25))"  ><div id="login" class="oculto" style="display:none"><?php echo $strings['div_Alfanumerico']?></div> <div id="loginVacio" class="oculto" style="display:none"><?php echo $strings['div_login_vacio']?></div> 
@@ -69,11 +69,11 @@ include '../Views/Header.php';
                          <input type="text" name="direccion" maxlength="60" size="60"><div id="direccion" class="oculto" style="display:none"><?php echo $strings['div_direccion']?></div> <div id="direccionVacio" class="oculto" style="display:none"><?php echo $strings['div_direccion_vacio']?></div> 
                 </div>
                 <div class="acciones" style="float: right; margin-left:0%; margin-right: 50%">
-                    <a href="../Controllers/USUARIOS_Controller.php?action=ADD"> <input type="image" name="action" value="ADD" src="../Views/images/confirmar.png" title="<?php echo $strings['Enviar Formulario'] ?>" onclick="return validar('ADD') && encriptar() "></a>
+                    <a href="../Controllers/USUARIO_Controller.php?action=ADD"> <input type="image" name="action" value="ADD" src="../Views/images/confirmar.png" title="<?php echo $strings['Enviar Formulario'] ?>" onclick="return validar('ADD') && encriptar() "></a>
                 </div>
              </form>                     
                 <div class="acciones" style="float: left;">
-                     <a href="../Controllers/USUARIOS_Controller.php?action=SHOWALL"><input type="image" src="../Views/images/back.png" title="<?php echo $strings['Volver']?>"></a>
+                     <a href="../Controllers/USUARIO_Controller.php?action=SHOWALL"><input type="image" src="../Views/images/back.png" title="<?php echo $strings['Volver']?>"></a>
                 </div>
          </fieldset> 
     </section>
