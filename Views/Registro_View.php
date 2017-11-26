@@ -18,7 +18,7 @@ class Register{
 
 function render(){
 
-include 'Header.php'; //header necesita los strings
+include '../Views/Header.php'; //header necesita los strings
 ?>	
 
 
@@ -67,21 +67,9 @@ include 'Header.php'; //header necesita los strings
                         <label for="email"><?php echo $strings['Email']?>: </label>
                          <input type="email" name="email" maxlength="60" size="60" placeholder="<?php echo $strings['ejemplo']?>@email.com" onblur="javascript:void(validarEmail(this, 60))" ><div id="email" class="oculto" style="display:none"><?php echo $strings['div_email']?></div> <div id="emailVacio" class="oculto" style="display:none"><?php echo $strings['div_email_vacio']?></div> 
                 </div>
-                <div id="izquierda">
-                    <label for="FechaNacimiento"><?php echo $strings['Fecha de Nacimiento']?>: </label>
-                          <input type="text" id="fechnacuser" name="FechaNacimiento" class="tcal" size="10" readonly onblur="javascript:void(validarFecha(this))" onmouseover="javascript:void(validarFecha(this))" ><div id="FechaNacimientoVacio" class="oculto" style="display:none"><?php echo $strings['div_fecha_vacia']?></div><div id="FechaNacimiento" class="oculto" style="display:none"><?php echo $strings['div_fecha']?></div> 
-                </div>
-                 <div  id="izquierda">    
-                    <label for="fotopersonal"><?php echo $strings['Foto personal']?>: </label>
-                    <input type="file" name="fotopersonal" size="50" accept=".png" accept=".jpeg" onblur="javascript:void(validarFotoPersonal(this))"  ><div id="fotopersonalVacio" class="oculto" style="display:none"><?php echo $strings['div_foto_vacia']?></div>  
-                </div>
-
-                 <div  id="izquierda">
-                        <label for="sexo"><?php echo $strings['Sexo']?>: </label>
-                         <input type="radio"  name="sexo" id="hombre" value="hombre"  onblur="javascript:void(validarSexo(this))" ><?php echo $strings['Hombre']?> 
-                         <input type="radio"  name="sexo" id="mujer" value="mujer"  onblur="javascript:void(validarSexo(this))"  ><?php echo $strings['Mujer']?>
-                         <div id="sexoVacio" class="oculto" style="display:none"><?php echo $strings['div_sexo_vacio']?></div> 
-
+                <div  id="izquierda">
+                        <label for="direccion"><?php echo $strings['Direccion']?>: </label>
+                         <input type="text" name="direccion" maxlength="60" size="60"><div id="direccion" class="oculto" style="display:none"><?php echo $strings['div_direccion']?></div> <div id="direccionVacio" class="oculto" style="display:none"><?php echo $strings['div_direccion_vacio']?></div> 
                 </div>
                 <div class="acciones" style="float: right; margin-left:0%; margin-right: 50%">
                     <a href="../Controllers/USUARIOS_Controller.php?action=ADD"> <input type="image" name="action" value="ADD" src="../Views/images/confirmar.png" title="<?php echo $strings['Enviar Formulario'] ?>" onclick="return validar('ADD') && encriptar() "></a>
@@ -94,7 +82,7 @@ include 'Header.php'; //header necesita los strings
    
     </section>      
 <?php
-        include 'Footer.php';
+        include '../Views/Footer.php';
 		} //fin metodo render
 
 	} //fin REGISTER
