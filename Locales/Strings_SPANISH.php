@@ -48,6 +48,7 @@ array(
 	'mujer' => 'mujer',
 	'Nombre de la foto personal' => 'Nombre de la foto personal',
 	'ejemplo' => 'ejemplo',
+	'Direccion' => 'Dirección',
 
 	/* Divs de validacion*/
 	'div_Alfanumerico' => 'Solo se aceptan letras, números y los caracteres . _ -',
@@ -68,6 +69,8 @@ array(
 	'div_foto_vacia' => 'La Foto personal no puede estar vacía',
 	'div_sexo_vacio' => 'El Sexo no puede estar vacío',
 	'div_tam' => 'El tamaño del campo supera el máximo permitido, 50 caracteres',
+	'div_direccion' => 'Solo se aceptan letras, números y los caracteres , - / ',
+	'div_direccion_vacio' => 'La dirección no puede estar vacía',
 	/*showcurrent*/
 	'Vista en detalle de usuario' => 'Vista en detalle de usuario',
 	'Campo' => 'Campo',

@@ -48,6 +48,7 @@ array(
 	'mujer' => 'woman',
 	'Nombre de la foto personal' => 'Name of personal photo',
 	'ejemplo' => 'example',
+	'Direccion' => 'Address',
 
 	/*divs de validación*/
 	'div_Alfanumerico' => 'Only letters, numbers and the characters . _ - are accepted',
@@ -68,6 +69,8 @@ array(
 	'div_foto_vacia' => 'The Personal photo cannot be empty',
 	'div_sexo_vacio' => 'The Sex cannot be empty',
 	'div_tam' => 'The size of the field overcomes the allowed maximum, 50 characters',
+	'div_direccion' => 'Only letters, numbers and the characters , - / are accepted',
+	'div_direccion_vacio' => 'Address cannot be empty',
 
 	/*showcurrent*/
 	'Vista en detalle de usuario' => 'Show in detail of the user',
