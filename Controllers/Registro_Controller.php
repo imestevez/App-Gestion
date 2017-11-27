@@ -17,7 +17,7 @@ if(!isset($_POST['login'])){ //si no se introdujo el login
 }
 else{
 		
-	include '../Models/USUARIOS_Model.php'; //incluye el modelo de usuarios
+	include '../Models/USUARIO_Model.php'; //incluye el modelo de usuarios
 
 	if($_REQUEST['action'] == 'BACK'){ //si el usuario pulsa en volver
 		header('Location: ./Login_Controller.php'); //lo redirige al controlador de login
@@ -31,15 +31,10 @@ else{
 	$apellidos = $_REQUEST['apellidos'];
 	$telefono = $_REQUEST['telefono'];
 	$email = $_REQUEST['email'];
-	$FechaNacimiento = $_REQUEST['FechaNacimiento'];
-	$foto = $_FILES['fotopersonal']['name'];
-	$ruta = $_FILES['fotopersonal']['tmp_name'];
-	$fotopersonal = "../Files/".$foto;
-	move_uploaded_file($ruta, $fotopersonal);
-	$sexo = $_REQUEST['sexo'];
+	$direccion = $_REQUEST['direccion'];
 	$action = $_REQUEST['action'];
 
-	$USUARIOS = new USUARIOS_Model(
+	$USUARIOS = new USUARIO_Model(
 		$login, 
 		$password, 
 		$DNI, 
@@ -47,9 +42,7 @@ else{
 		$apellidos,
 		$telefono, 
 		$email, 
-		$FechaNacimiento, 
-		$fotopersonal,
-		$sexo);
+		$direccion);
 
 		$respuesta = $USUARIOS->comprobarRegistro(); //comprueba que los datos están correctamente
 
