@@ -2,7 +2,7 @@
 
     script: main.js
     Creado el: 29/9/2017
-    Creado por: ignfpi;
+    Creado por: SOLFAMIDAS;
     
     El fichero main.js contiene las funciones jQuery para conseguir que  el menu lateral sea desplegable al hacer click de EntregaET1.html
 */

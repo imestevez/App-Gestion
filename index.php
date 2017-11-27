@@ -2,7 +2,7 @@
 /*
 //Script : index.php
 //Creado el : 1-11-2017
-//Creado por: vugsj4
+//Creado por: SOLFAMIDAS
 //-------------------------------------------------------
 
 // index.php es la entrada a la aplicación. El primer script que se ejecuta

@@ -2,7 +2,7 @@
 /*
 //Script : Register.Controller.php
 //Creado el : 1-11-2017
-//Creado por: vugsj4
+//Creado por: SOLFAMIDAS
 //-------------------------------------------------------
 
 Controlador del para llevar a cabo el proceso de registro de usuarios

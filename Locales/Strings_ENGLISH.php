@@ -3,7 +3,7 @@
 /*
 //Script : Strings_ENGLISH.php
 //Creado el : 18-10-2017
-//Creado por: vugsj4
+//Creado por: SOLFAMIDAS
 //-------------------------------------------------------
 
 Script que contiene el array de las palabras clave en inglés

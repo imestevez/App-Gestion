@@ -31,7 +31,7 @@ function render(){
      <section class="pagina" style="min-height: 400px">
 
      		<div style="margin-left: 5%; margin-top: 5%">
-			<br><p  style="margin-left: 25%; margin-top: 2%"> <?php echo $strings[$this->mensaje]?></p>
+			<br><p  style="margin-left: 25%; margin-top: 2%"> <?php echo /*$strings[*/$this->mensaje/*]*/?></p>
 			</div>
             <div class="acciones" style="margin-top: 20%">
 			<a href= "<?php echo $this->origen?>" ><input type="image" name="" type="image" name="action" src="../Views/images/back.png" value="volver" title="<?php echo $strings['Volver'] ?>" ></a>
