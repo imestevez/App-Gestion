@@ -19,12 +19,12 @@ if (!IsAuthenticated()){
 include '../Models/USUARIO_Model.php';
 
 include '../Views/Registro_View.php';
-include '../Views/USUARIO_SHOWALL_View.php';
-include '../Views/USUARIO_SHOWCURRENT_View.php';
-include '../Views/USUARIO_ADD_View.php';
-include '../Views/USUARIO_EDIT_View.php';
-include '../Views/USUARIO_SEARCH_View.php';
-include '../Views/USUARIO_DELETE_View.php';
+include '../Views/USUARIO/USUARIO_SHOWALL_View.php';
+include '../Views/USUARIO/USUARIO_SHOWCURRENT_View.php';
+include '../Views/USUARIO/USUARIO_ADD_View.php';
+include '../Views/USUARIO/USUARIO_EDIT_View.php';
+include '../Views/USUARIO/USUARIO_SEARCH_View.php';
+include '../Views/USUARIO/USUARIO_DELETE_View.php';
 include '../Views/MESSAGE_View.php';
 
 
@@ -39,21 +39,7 @@ function get_data_form(){
 	$apellidos = $_REQUEST['apellidos'];
 	$telefono = $_REQUEST['telefono'];
 	$email = $_REQUEST['email'];
-	$FechaNacimiento = $_REQUEST['FechaNacimiento'];
-
-	if($_FILES['fotopersonal']['tmp_name'] <> ''){ //Si la foto tiene una ruta origen
-		$foto = $_FILES['fotopersonal']['name'];
-		$ruta = $_FILES['fotopersonal']['tmp_name'];
-		
-		$fotopersonal = "../Files/".$foto;
-
-		move_uploaded_file($ruta, $fotopersonal); //se mueve la foto al directorio destino
-
-	}else{ //si no tiene ruta origen
-		$fotopersonal= '';
-	}
-
-	$sexo = $_REQUEST['sexo'];
+	$direccion = $_REQUEST['direccion'];
 	$action = $_REQUEST['action'];
 
 	$USUARIO = new USUARIO_Model(
@@ -64,9 +50,7 @@ function get_data_form(){
 		$apellidos,
 		$telefono, 
 		$email, 
-		$FechaNacimiento, 
-		$fotopersonal,
-		$sexo);
+		$direccion);
 
 	return $USUARIO;
 }
@@ -86,20 +70,7 @@ function get_data_UserBD(){
 	$apellidos = $_REQUEST['apellidos'];
 	$telefono = $_REQUEST['telefono'];
 	$email = $_REQUEST['email'];
-	$FechaNacimiento = $_REQUEST['FechaNacimiento'];
-	
-	if($_FILES['newfotopersonal']['tmp_name'] <> ''){ //Si la foto tiene una ruta origen
-		$foto = $_FILES['newfotopersonal']['name'];
-		$ruta = $_FILES['newfotopersonal']['tmp_name'];
-		
-		$fotopersonal = "../Files/".$foto;
-
-		move_uploaded_file($ruta, $fotopersonal); //se mueve la foto al directorio destino
-
-	}else{
-		$fotopersonal = $_REQUEST['fotopersonal'];
-	}
-	$sexo = $_REQUEST['sexo'];
+	$direccion = $_REQUEST['direccion'];
 	$action = $_REQUEST['action'];
 
 	$USUARIO = new USUARIO_Model(
@@ -110,9 +81,7 @@ function get_data_UserBD(){
 		$apellidos,
 		$telefono, 
 		$email, 
-		$FechaNacimiento, 
-		$fotopersonal,
-		$sexo);
+		$direccion);
 
 	return $USUARIO;
 }
@@ -140,7 +109,7 @@ if (!isset($_REQUEST['action'])){
 			break;
 		case 'DELETE': //Si quiere hacer un DELETE
 			if (!$_POST){ //viene del showall con una clave
-				$USUARIO = new USUARIO_Model($_REQUEST['login'], '','', '', '', '', '', '', '', '', ''); //crea un un USUARIO_Model con el login del usuario
+				$USUARIO = new USUARIO_Model($_REQUEST['login'], '','', '', '', '', '', ''); //crea un un USUARIO_Model con el login del usuario
 				$valores = $USUARIO->RellenaDatos(); //completa el resto de atributos a partir de la clave
 				$usuario = new USUARIO_DELETE($valores); //Crea la vista de DELETE con los datos del usuario
 			}
@@ -152,7 +121,7 @@ if (!isset($_REQUEST['action'])){
 			break;
 		case 'EDIT': //si el usuario quiere editar	
 			if (!$_POST){
-				$USUARIO = new USUARIO_Model($_REQUEST['login'], '','', '', '', '', '', '', '', '', ''); //crea un un USUARIO_Model con el login del usuario 
+				$USUARIO = new USUARIO_Model($_REQUEST['login'], '','', '', '', '', '', ''); //crea un un USUARIO_Model con el login del usuario 
 				$datos = $USUARIO->RellenaDatos();  //A partir del login recoge todos los atributos
 				$usuario = new USUARIO_EDIT($datos); //Crea la vista EDIT con los datos del usuario
 			}
@@ -169,18 +138,18 @@ if (!isset($_REQUEST['action'])){
 			else{
 				$USUARIO = get_data_UserBD(); //coge los datos del formulario del usuario que desea buscar
 				$datos = $USUARIO->SEARCH();//Ejecuta la funcion SEARCH() en el USUARIO_Model
-				$lista = array('login','password','DNI','nombre','apellidos','telefono','email','FechaNacimiento','fotopersonal','sexo');
+				$lista = array('login','password','DNI','nombre','apellidos','telefono','email','direccion');
 				$resultado = new USUARIO_SHOWALL($lista, $datos, 0, 0, 0, 0, 'SEARCH', '../Controllers/USUARIO_Controller.php');//Crea la vista SHOWALL y muestra los usuarios que cumplen los parámetros de búsqueda 
 			}
 			break;
 		case 'SHOWCURRENT': //si desea ver un usuario en detalle
-			$USUARIO = new USUARIO_Model($_REQUEST['login'], '','', '', '', '', '', '', '', '', '');//crea un un USUARIO_Model con el login del usuario 
+			$USUARIO = new USUARIO_Model($_REQUEST['login'], '','', '', '', '', '', '');//crea un un USUARIO_Model con el login del usuario 
 			$tupla = $USUARIO->RellenaDatos();//A partir del login recoge todos los atributos
 			$usuario = new USUARIO_SHOWCURRENT($tupla); //Crea la vista SHOWCURRENT del usuario requerido
 			break;
 		default: //Por defecto, Se muestra la vista SHOWALL
 			if (!$_POST){
-				$USUARIO = new USUARIO_Model($_REQUEST['login'], '','','', '', '', '', '', '', '', '');//crea un un USUARIO_Model con el login del usuario 
+				$USUARIO = new USUARIO_Model($_REQUEST['login'], '','','', '', '', '', '');//crea un un USUARIO_Model con el login del usuario 
 			}
 			else{
 				$USUARIO = get_data_form(); //Coge los datos del formulario
@@ -195,7 +164,7 @@ if (!isset($_REQUEST['action'])){
 			$max_tuplas = $num_tupla+10; // el número de tuplas a mostrar por página
 			$totalTuplas = $USUARIO->contarTuplas(); //Cuenta el número de tuplas que hay en la BD
 			$datos = $USUARIO->SHOWALL($num_tupla,$max_tuplas); //Ejecuta la funcion SHOWALL() en el USUARIO_Model
-			$lista = array('login', 'password', 'DNI','nombre','apellidos','telefono','email','FechaNacimiento','fotopersonal','sexo');
+			$lista = array('login', 'password', 'DNI','nombre','apellidos','telefono','email','direccion');
 			$UsuariosBD = new USUARIO_SHOWALL($lista, $datos, $num_tupla, $max_tuplas, $totalTuplas, $num_pagina, 'SHOWALL', '../Controllers/USUARIO_Controller.php'); //Crea la vista SHOWALL de los usuarios de la BD	
 	}
 
