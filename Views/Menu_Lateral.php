@@ -3,7 +3,7 @@
 /*
 //Script :Menu_Lateral.php
 //Creado el : 16-10-2017
-//Creado por: vugsj4
+//Creado por: SOLFAMIDAS
     
     Esta clase es la vista de los usuarios de la BD
 

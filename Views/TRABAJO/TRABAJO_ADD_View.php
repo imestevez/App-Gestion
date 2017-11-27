@@ -29,7 +29,7 @@ include '../Views/Header.php';
 </script>
 
      <section class="pagina">
-         <fieldset class="add">
+         <fieldset class="add" style="width: 70%; margin-left: 15%">
                 <legend style="margin-left: 30%"><?php echo $strings[''] ?></legend>
             <form method="post" name="ADD"  action="../Controllers/TRABAJO_Controller.php" enctype="multipart/form-data" >
                 <div id="izquierda">
@@ -54,7 +54,7 @@ include '../Views/Header.php';
 
                 <div id="izquierda">
                     <label for="PorcetajeNota"><?php echo $strings['']?>:</label>
-                        <input type="text" name="PorcetajeNota" maxlength="20" size="20"  onblur=""  ><div id="PorcetajeNota" class="oculto" style="display:none"><?php echo $strings['']?></div> <div id="PorcetajeNotaVacio" class="oculto" style="display:none"><?php echo $strings['div_telefono_vacio']?></div> 
+                        <input type="text" name="PorcetajeNota" maxlength="20" size="20"  onblur=""  ><div id="PorcetajeNota" class="oculto" style="display:none"><?php echo $strings['']?></div> <div id="PorcetajeNotaVacio" class="oculto" style="display:none"><?php echo $strings['']?></div> 
                 </div>
                
                 <div class="acciones" style="float: right; margin-left:0%; margin-right: 50%">

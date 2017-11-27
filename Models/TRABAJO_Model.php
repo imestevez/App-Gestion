@@ -25,14 +25,18 @@ function __construct($IdTrabajo, $NombreTrabajo, $FechIniTrabajo,$FechFinTrabajo
 	//asignación de valores de parámetro a los atributos de la clase
 	$this->IdTrabajo = $IdTrabajo;
 	$this->NombreTrabajo = $NombreTrabajo;
+	$this->FechIniTrabajo = $FechIniTrabajo;
+    $this->FechFinTrabajo = $FechFinTrabajo;
 	$this->PorcetajeNota = $PorcetajeNota;
 
 	//si la Fecha viene vacia la asignamos vacia
 	if ($FechIniTrabajo == ''){
+
 		$this->FechIniTrabajo = NULL;
 	}
 	else{ // si no viene vacia 
 		if(strlen($this->FechIniTrabajo) == 10){	//si viene la fecha entera le cambiamos el formato para que se adecue al de la bd
+
 		$this->FechIniTrabajo = date_format(date_create($this->FechIniTrabajo), 'Y-m-d');
 
 		}
@@ -46,9 +50,9 @@ function __construct($IdTrabajo, $NombreTrabajo, $FechIniTrabajo,$FechFinTrabajo
 		$this->FechFinTrabajo = date_format(date_create($this->FechFinTrabajo), 'Y-m-d');
 
 		}
+
+
 	}
-
-
 
 	// incluimos la funcion de acceso a la bd
 	include_once '../Functions/Access_DB.php';
@@ -72,7 +76,7 @@ function __construct($IdTrabajo, $NombreTrabajo, $FechIniTrabajo,$FechFinTrabajo
 //Inserta en la tabla  de la bd  los valores
 // de los atributos del objeto. Comprueba si la clave/s esta vacia y si 
 //existe ya en la tabla
-/*
+
 function ADD()
 {
 
@@ -103,29 +107,8 @@ function ADD()
 									'$this->FechIniTrabajo',
 									'$this->FechFinTrabajo',
 									'$this->PorcetajeNota')";
-				
+				echo $sql;
 				 if (!($result = $this->mysqli->query($sql))){ //si da error la consulta se comrpueba el por que
-
-			        $sql = "SELECT * FROM TRABAJO WHERE (FechIniTrabajo = '$this->FechIniTrabajo')"; //comprobar que no hay FechIniTrabajo iguales
-				 	$result = $this->mysqli->query($sql); ;// numero de tuplas de la consulta
-					$num_rows = mysqli_num_rows($result);
-				
-				    if ($num_rows > 0)    // si el numero de filas es mayor que 0 es que existe un FechIniTrabajo duplicado
-				    {
-			        	$this->lista['mensaje'] = 'ERROR: Fallo en la inserción. Ya existe el FechIniTrabajo'; 
-						return $this->lista; 
-					}
-
-			        $sql = "SELECT * FROM TRABAJO WHERE (email = '$this->email')"; //comprobar que no hay email iguales
-				 	$result = $this->mysqli->query($sql);
-					$num_rows = mysqli_num_rows($result);// numero de tuplas de la consulta
-				    
-				    if ($num_rows > 0) // si el numero de filas es mayor que 0 es que existe un FechIniTrabajo duplicado
-				    {
-			        	$this->lista['mensaje'] = 'ERROR: Fallo en la inserción. Ya existe el email'; 
-						return $this->lista;
-					}
-				
 					//Si no hay atributos Clave y unique duplicados es que hay campos sin completar
         			return 'ERROR: Introduzca todos los valores de todos los campos'; // introduzca un valor para el usuario
 				}
@@ -162,27 +145,19 @@ function __destruct()
 function SEARCH()
 { 	// construimos la sentencia de busqueda con LIKE y los atributos de la entidad
     $sql = "SELECT  IdTrabajo,
+    				NombreTrabajo,
     				FechIniTrabajo,
 					FechFinTrabajo,
-					PorcetajeNota,
-					telefono,
-					email,
-					Fecha,
-					fotopersonal,
-					sexo
+					PorcetajeNota
        			FROM TRABAJO 
     			WHERE 
     				(
     				(IdTrabajo LIKE '%$this->IdTrabajo%') &&
+    				(NombreTrabajo LIKE '%$this->NombreTrabajo%') &&
     				(FechIniTrabajo LIKE '%$this->FechIniTrabajo%') &&
 	 				(FechFinTrabajo LIKE '%$this->FechFinTrabajo%') &&
-	 				(PorcetajeNota LIKE '%$this->PorcetajeNota%') &&
-	 				(telefono LIKE '%$this->telefono%') &&
-	 				(email LIKE '%$this->email%') &&
-	 				(Fecha LIKE '%$this->Fecha%') &&
-	 				(fotopersonal LIKE '%$this->fotopersonal%') &&
-	 				(sexo LIKE '%$this->sexo%')
-    				)";
+	 				(PorcetajeNota LIKE '%$this->PorcetajeNota%') 
+	 				)";
     				
 
     // si se produce un error en la busqueda mandamos el mensaje de error en la consulta
@@ -329,5 +304,5 @@ function contarTuplas(){
 
     return $total_tuplas;
 }
-*/
+
 }

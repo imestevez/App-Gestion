@@ -18,12 +18,12 @@ if (!IsAuthenticated()){
 }
 include '../Models/TRABAJO_Model.php';
 
-//include '../Views/TRABAJO/TRABAJO_SHOWALL_View.php';
-//include '../Views/TRABAJO/TRABAJO_SHOWCURRENT_View.php';
+include '../Views/TRABAJO/TRABAJO_SHOWALL_View.php';
+include '../Views/TRABAJO/TRABAJO_SHOWCURRENT_View.php';
 include '../Views/TRABAJO/TRABAJO_ADD_View.php';
-//include '../Views/TRABAJO/TRABAJO_EDIT_View.php';
-//include '../Views/TRABAJO/TRABAJO_SEARCH_View.php';
-//include '../Views/TRABAJO/TRABAJO_DELETE_View.php';
+include '../Views/TRABAJO/TRABAJO_EDIT_View.php';
+include '../Views/TRABAJO/TRABAJO_SEARCH_View.php';
+include '../Views/TRABAJO/TRABAJO_DELETE_View.php';
 include '../Views/MESSAGE_View.php';
 
 
@@ -79,7 +79,6 @@ if (!isset($_REQUEST['action'])){
 
 }
 
-$action = 'ADD';
 
 	// En funcion de la accion elegida
 	Switch ($action){

@@ -1,7 +1,7 @@
 <!--
-Script : Header_View.php
+Script : Header.php
 Creado el : 14-10-2017
-Creado por: vugsj4
+Creado por: SOLFAMIDAS
 
 Contiene el html de la cabecera de las vistas
 
