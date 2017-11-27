@@ -17,15 +17,13 @@ class USUARIO_Model { //declaración de la clase
 	var $apellidos; //declaración del atributo apellidos
 	var $telefono; //declaración del atributo telefono
 	var $email; //declaración del atributo email
-	var $FechaNacimiento; // declaración del atributo FechaNacimiento
-	var $fotopersonal; //declaracion del atributo fotopersonal
-	var $sexo; //declaración del atributo titulación
+	var $direccion; // declaración del atributo FechaNacimiento
 	var $lista; // array para almacenar los datos del usuario
 	var $mysqli; // declaración del atributo manejador de la bd
 
 //Constructor de la clase
 
-function __construct($login, $password, $DNI,$nombre,$apellidos,$telefono,$email,$FechaNacimiento,$fotopersonal,$sexo){
+function __construct($login, $password, $DNI,$nombre,$apellidos,$telefono,$email,$direccion){
 	//asignación de valores de parámetro a los atributos de la clase
 	$this->login = $login;
 	$this->password = $password;
@@ -34,20 +32,9 @@ function __construct($login, $password, $DNI,$nombre,$apellidos,$telefono,$email
 	$this->apellidos = $apellidos;
 	$this->telefono = $telefono;
 	$this->email = $email;
-	$this->FechaNacimiento = $FechaNacimiento;
-	$this->fotopersonal = $fotopersonal;
-	$this->sexo = $sexo;
+	$this->direccion = $direccion;
 	
-	//si la FechaNacimiento de nacimiento viene vacia la asignamos vacia
-	if ($FechaNacimiento == ''){
-		$this->FechaNacimiento = NULL;
-	}
-	else{ // si no viene vacia 
-		if(strlen($this->FechaNacimiento) == 10){	//si viene la fecha entera le cambiamos el formato para que se adecue al de la bd
-		$this->FechaNacimiento = date_format(date_create($this->FechaNacimiento), 'Y-m-d');
-		}
-	}
-
+	
 	// incluimos la funcion de acceso a la bd
 	include_once '../Functions/Access_DB.php';
 	// conectamos con la bd y guardamos el manejador en un atributo de la clase
@@ -58,13 +45,11 @@ function __construct($login, $password, $DNI,$nombre,$apellidos,$telefono,$email
 			"login"=>$this->login,
 			"password"=>$this->password,
 			"DNI"=>$this->DNI,
-			"nombre" => $this->nombre,
-			"apellidos" => $this->apellidos,
-			"telefono" => $this->telefono,
-			"email" => $this->email,
-			"FechaNacimiento" => $this->FechaNacimiento,
-			"fotopersonal" => $this->fotopersonal,
-			"sexo" => $this->sexo,
+			"Nombre" => $this->nombre,
+			"Apellidos" => $this->apellidos,
+			"Telefono" => $this->telefono,
+			"Correo" => $this->email,
+			"Direccion" => $this->direccion,
 			"sql" => $this->mysqli, 
 			"mensaje"=> '');
 } // fin del constructor
@@ -98,13 +83,11 @@ function ADD()
 				login,
 				password,
 				DNI,
-				nombre,
-				apellidos,
-				telefono,
-				email,
-				FechaNacimiento,
-				fotopersonal,
-				sexo) VALUES(
+				Nombre,
+				Apellidos,
+				Telefono,
+				Correo,
+				Direccion) VALUES(
 									'$this->login',
 									'$this->password',
 									'$this->DNI',
@@ -112,9 +95,8 @@ function ADD()
 									'$this->apellidos',
 									'$this->telefono', 
 									'$this->email',
-									'$this->FechaNacimiento',
-									'$this->fotopersonal', 
-									'$this->sexo')";
+									'$this->direccion'
+								)";
 				
 				 if (!($result = $this->mysqli->query($sql))){ //si da error la consulta se comrpueba el por que
 
@@ -128,7 +110,7 @@ function ADD()
 						return $this->lista; 
 					}
 
-			        $sql = "SELECT * FROM USUARIO WHERE (email = '$this->email')"; //comprobar que no hay email iguales
+			        $sql = "SELECT * FROM USUARIO WHERE (Correo = '$this->email')"; //comprobar que no hay email iguales
 				 	$result = $this->mysqli->query($sql);
 					$num_rows = mysqli_num_rows($result);// numero de tuplas de la consulta
 				    
@@ -175,25 +157,21 @@ function SEARCH()
 { 	// construimos la sentencia de busqueda con LIKE y los atributos de la entidad
     $sql = "SELECT  login,
     				DNI,
-					nombre,
-					apellidos,
-					telefono,
-					email,
-					FechaNacimiento,
-					fotopersonal,
-					sexo
+					Nombre,
+					Apellidos,
+					Telefono,
+					Correo,
+					Direccion
        			FROM USUARIO 
     			WHERE 
     				(
     				(login LIKE '%$this->login%') &&
     				(DNI LIKE '%$this->DNI%') &&
-	 				(nombre LIKE '%$this->nombre%') &&
-	 				(apellidos LIKE '%$this->apellidos%') &&
-	 				(telefono LIKE '%$this->telefono%') &&
-	 				(email LIKE '%$this->email%') &&
-	 				(FechaNacimiento LIKE '%$this->FechaNacimiento%') &&
-	 				(fotopersonal LIKE '%$this->fotopersonal%') &&
-	 				(sexo LIKE '%$this->sexo%')
+	 				(Nombre LIKE '%$this->nombre%') &&
+	 				(Apellidos LIKE '%$this->apellidos%') &&
+	 				(Telefono LIKE '%$this->telefono%') &&
+	 				(Correo LIKE '%$this->email%') &&
+	 				(Direccion LIKE '%$this->direccion%')
     				)";
     				
 
@@ -263,8 +241,8 @@ function EDIT()
 		$this->apellidos <> '' &&
 		$this->telefono <> '' &&
 		$this->email <> '' &&
-		$this->fotopersonal <> '' &&
-		$this->sexo <> '' ){
+		$this->direccion <> '' 
+	){
 
 		// se construye la sentencia de busqueda de la tupla en la bd
 	    $sql = "SELECT * FROM USUARIO WHERE (login = '$this->login')";
@@ -279,13 +257,12 @@ function EDIT()
 						login = '$this->login',
 						password = '$this->password',
 						DNI = '$this->DNI',
-						nombre = '$this->nombre',
-						apellidos = '$this->apellidos',
-						telefono = '$this->telefono',
-						email = '$this->email',
-						FechaNacimiento = '$this->FechaNacimiento',
-						fotopersonal = '$this->fotopersonal',
-						sexo = '$this->sexo'
+						Nombre = '$this->nombre',
+						Apellidos = '$this->apellidos',
+						Telefono = '$this->telefono',
+						Correo = '$this->email',
+						Direccion = '$this->direccion'
+						
 					WHERE ( login = '$this->login')";
 					
 			// si hay un problema con la query se envia un mensaje de error en la modificacion
@@ -303,7 +280,7 @@ function EDIT()
 					return $this->lista;
 				}
 
-			     $sql = "SELECT * FROM USUARIO WHERE (email = '$this->email')";
+			     $sql = "SELECT * FROM USUARIO WHERE (Correo = '$this->email')";
 			    // se ejecuta la query
 			    $result = $this->mysqli->query($sql);
 			    $num_rows = mysqli_num_rows($result);
