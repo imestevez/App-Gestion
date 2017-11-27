@@ -1,7 +1,7 @@
 /*
     script: jquery.js
     Creado el: 29/9/2017
-    Creado por: ignfpi;
+    Creado por: SOLFAMIDAS;
     
     El fichero estilo.css contiene el estilo de de la página web del fichero EntregaET1.html
 

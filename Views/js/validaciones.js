@@ -1,7 +1,7 @@
 /*
       script: validaciones.js
     Creado el: 1/10/2017
-    Creado por: ignfpi;
+    Creado por: SOLFAMIDAS;
     
     El fichero validaciones.js contiene las funciones necesarias para validar los campos del formulario del fichero EntregaET1.html
     además de las propuestos en la ET1

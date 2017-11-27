@@ -3,7 +3,7 @@
 /*
 //Script : CambioIdioma.php
 //Creado el : 14-10-2017
-//Creado por: vugsj4
+//Creado por: SOLFAMIDAS
 //-------------------------------------------------------
 
 Script que realiza el cambio de idioma al pulsar en los respectivos iconos multilenguaje

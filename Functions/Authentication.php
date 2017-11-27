@@ -2,7 +2,7 @@
 /*
 //Script : CambioIdioma.php
 //Modificado el : 14-10-2017
-//Modificado por: vugsj4
+//Modificado por: SOLFAMIDAS
 --------------------------------------
 /*
 function IsAuthenticated()

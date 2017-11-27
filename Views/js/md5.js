@@ -2,7 +2,7 @@ md5.js
 /*
     script: md5.js
     Creado el: 6/11/2017
-    Creado por: ignfpi;
+    Creado por: SOLFAMIDAS;
 
     Script utilizado para la encriptación de la contraseña
 

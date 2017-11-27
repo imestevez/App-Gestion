@@ -19,9 +19,9 @@ class Index {
 	
 		include_once '../Locales/Strings_SPANISH.php';
 		//include_once '../Views/Header_View.php';
-		//Sinclude '../Controllers/USUARIO_Controller.php';
+		include '../Controllers/USUARIO_Controller.php';
 
-		include '../Controllers/TRABAJO_Controller.php';		
+		//include '../Controllers/TRABAJO_Controller.php';		
 		//include_once '../Views/Footer_View.php';
 
 

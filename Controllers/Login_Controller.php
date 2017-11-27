@@ -2,7 +2,7 @@
 /*
 //Script : Login.Controller.php
 //Creado el : 1-11-2017
-//Creado por: vugsj4
+//Creado por: SOLFAMIDAS
 //-------------------------------------------------------
 
 Controlador del para llevar a cabo el proceso de autenticaciones cuando el usuario quiere acceder al sistema con su login y password

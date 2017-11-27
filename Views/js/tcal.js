@@ -3,7 +3,7 @@
 
      script: tcal.js
     Creado el: 28/9/2017
-    Creado por: ignfpi;
+    Creado por: SOLFAMIDAS;
     
     El fichero tcal.js contiene las funciones necesarias para poder visualizar y utilizar el datapicker Tigra Calendar
 */
