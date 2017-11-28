@@ -11,9 +11,9 @@ Muestra la tabla de borrado del usuario seleccionado
 class TRABAJO_SHOWCURRENT{
     var $IdTrabajo; //atributo IdTrabajo
     var $NombreTrabajo; //atributo NombreTrabajo
-    var $FechIniTrabajo; // declaración del atributo FechIniTrabajo
-    var $FechFinTrabajo; //declaración del atributo FechFinTrabajo
-    var $PorcetajeNota; //declaración del atributo PorcetajeNota
+    var $FechaIniTrabajo; // declaración del atributo FechaIniTrabajo
+    var $FechaFinTrabajo; //declaración del atributo FechaFinTrabajo
+    var $PorcentajeNota; //declaración del atributo PorcentajeNota
     var $lista; // array para almacenar los datos del usuario
     var $mysqli; // declaración del atributo manejador de la bd
 
@@ -21,23 +21,23 @@ function __construct($tupla){
     //asignación de valores de parámetro a los atributos de la clase
     $this->IdTrabajo = $tupla['IdTrabajo'];
     $this->NombreTrabajo = $tupla['NombreTrabajo'];
-    $this->FechIniTrabajo = $tupla['FechIniTrabajo'];
-    $this->FechFinTrabajo = $tupla['FechFinTrabajo'];
-    $this->PorcetajeNota = $tupla['PorcetajeNota'];
+    $this->FechaIniTrabajo = $tupla['FechaIniTrabajo'];
+    $this->FechaFinTrabajo = $tupla['FechaFinTrabajo'];
+    $this->PorcentajeNota = $tupla['PorcentajeNota'];
 
-  //si la FechIniTrabajo  viene vacia la asignamos vacia
-    if ($this->FechIniTrabajo == ''){
-        $this->FechIniTrabajo = NULL;
+  //si la FechaIniTrabajo  viene vacia la asignamos vacia
+    if ($this->FechaIniTrabajo == ''){
+        $this->FechaIniTrabajo = NULL;
     }
     else{ // si no viene vacia 
-        $this->FechIniTrabajo = date_format(date_create($this->FechIniTrabajo), 'd-m-Y');
+        $this->FechaIniTrabajo = date_format(date_create($this->FechaIniTrabajo), 'd-m-Y');
     }
-    //si la FechFinTrabajo  viene vacia la asignamos vacia
-    if ($this->FechFinTrabajo == ''){
-        $this->FechFinTrabajo = NULL;
+    //si la FechaFinTrabajo  viene vacia la asignamos vacia
+    if ($this->FechaFinTrabajo == ''){
+        $this->FechaFinTrabajo = NULL;
     }
     else{ // si no viene vacia 
-        $this->FechFinTrabajo = date_format(date_create($this->FechFinTrabajo), 'd-m-Y');
+        $this->FechaFinTrabajo = date_format(date_create($this->FechaFinTrabajo), 'd-m-Y');
     }
     $this->render();
 }
@@ -52,13 +52,13 @@ function render(){
 ?>
      <section class="pagina">
              <table class="showcurrent">
-                 <caption><?php echo $strings[''] ?></caption>
-                <tr><th><?php echo $strings['Campo'] ?></th><th>Valor</th></tr>
-                 <tr><th><?php echo $strings[''] ?></th><td><?php echo $this->IdTrabajo ?></td></tr>
-                 <tr><th><?php echo $strings[''] ?></th><td><?php echo $this->NombreTrabajo ?></td></tr>
-                <tr><th><?php echo $strings[''] ?></th><td><?php echo $this->FechIniTrabajo ?></td></tr>
-                <tr><th><?php echo $strings[''] ?></th><td><?php echo $this->FechFinTrabajo ?></td></tr>
-                  <tr><th><?php echo $strings[''] ?></th><td><?php echo $this->PorcetajeNota ?></td></tr>
+             <caption><?php echo $strings['Borrar trabajo'] ?></caption>
+                  <tr><th><?php echo $strings['Campo'] ?></th><th><?php echo $strings['Valor'] ?></th></tr>
+                 <tr><th><?php echo $strings['IdTrabajo'] ?></th><td><?php echo $this->IdTrabajo ?></td></tr>
+                 <tr><th><?php echo $strings['NombreTrabajo'] ?></th><td><?php echo $this->NombreTrabajo ?></td></tr>
+                <tr><th><?php echo $strings['FechaIniTrabajo'] ?></th><td><?php echo $this->FechaIniTrabajo ?></td></tr>
+                <tr><th><?php echo $strings['FechaFinTrabajo'] ?></th><td><?php echo $this->FechaFinTrabajo ?></td></tr>
+                  <tr><th><?php echo $strings['PorcentajeNota'] ?></th><td><?php echo $this->PorcentajeNota ?></td></tr>
                 </table>
                     <div class="accionesTable">
                      <a href="../Controllers/TRABAJO_Controller.php?action=SHOWALL"><input type="image" name="action" value="SHOWALL" src="../Views/images/back.png" title="<?php echo $strings['Volver'] ?>"></a>
