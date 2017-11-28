@@ -247,7 +247,6 @@ array(
 
 
 
-
 // ------------------------ ESPACIO DE TRABAJO PARA PABLO ---------------------------
 //Funcionalidades
 	'div_vacio' => 'El campo no puede estar vacío.',

@@ -156,15 +156,7 @@ array(
 	'EditarGrupo' => 'Editar Grupo',
 	'BuscaGrupo' => 'Buscar Grupo',
 	'Grupos' => 'Grupos',
-	'Vista en detalle de grupo' => 'Vista en detalle do Grupo'
-
-
-
-
-
-
-
-
+	'Vista en detalle de grupo' => 'Vista en detalle do Grupo',
 
 
 
@@ -217,15 +209,6 @@ array(
 'Buscar trabajo' => 'Buscar traballo',
 'Editar trabajo' => 'Editar traballo',
 'div_letras' => 'Solo se aceptan numeros',
-
-
-
-
-
-
-
-
-
 
 
 
