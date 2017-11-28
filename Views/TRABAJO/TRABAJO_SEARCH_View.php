@@ -20,9 +20,12 @@ function render(){
 
 ?>
 
-<script type="text/javascript"> 
-    <?php include '../Views/js/validaciones.js' ?>
+<script type="text/javascript">
+    
+    <?php include '../Views/js/validacionesTRABAJO.js'; ?>
+
 </script>
+
      <section class="pagina">
 
              <fieldset class="search" >
@@ -32,27 +35,27 @@ function render(){
             <form method="post" name="SEARCH" action="../Controllers/TRABAJO_Controller.php" enctype="multipart/form-data" >
                 <div id="izquierda">
                     <label for="IdTrabajo"><?php echo $strings['IdTrabajo'] ?>: </label>
-                        <input type="text" name="IdTrabajo" maxlength="6" size="6" onblur=""  ><div id="IdTrabajo" class="oculto" style="display:none"><?php echo $strings['div_Alfanumerico']?></div>
+                        <input type="text" name="IdTrabajo" maxlength="6" size="6"  onblur="validarIdTrabajoBuscar(this,6)"  ><div id="IdTrabajo" class="oculto" style="display:none"><?php echo $strings['div_Alfanumerico']?></div> 
                 </div>
 
                 <div id="izquierda">
                     <label for="NombreTrabajo"><?php echo $strings['NombreTrabajo']?>: </label>
-                        <input type="text" name="NombreTrabajo" maxlength="60" size="60" onblur=""  ><div id="NombreTrabajo" class="oculto" style="display:none"><?php echo $strings['div_Alfanumerico']?></div>  
+                        <input type="text" name="NombreTrabajo" maxlength="60" size="60" onblur="validarNombreTrabajoBuscar(this,60)"  ><div id="NombreTrabajo" class="oculto" style="display:none"><?php echo $strings['div_Alfanumerico']?></div> 
                 </div>
 
                 <div id="izquierda">
                 
                 <label for="FechaIniTrabajo"><?php echo $strings['FechaIniTrabajo']?>: </label>
-                          <input type="text" id="fechnacuser" name="FechaIniTrabajo" size="10"  onblur="javascript:void(validarFecha(this))" onmouseover="javascript:void(validarFecha(this))" ><div id="FechaIniTrabajo" class="oculto" style="display:none"><?php echo $strings['div_fecha']?></div> 
+                          <input type="text" id="fechnacuser" name="FechaIniTrabajo" maxlength="10" size="10"  onblur="javascript:void(validarFechaIniTrabajoBuscar(this))" onmouseover="javascript:void(validarFechaIniTrabajoBuscar(this))" ><div id="FechaIniTrabajo" class="oculto" style="display:none"><?php echo $strings['div_fecha']?></div><div id="FechaIniTrabajoParcial" class="oculto" style="display:none"><?php echo $strings['div_fechaParcial']?></div>
                 </div>
                 <div id="izquierda">
                  <label for="FechaFinTrabajo"><?php echo $strings['FechaFinTrabajo']?>: </label>
-                          <input type="text" id="fechnacuser" name="FechaFinTrabajo"  size="10"  onblur="javascript:void(validarFecha(this))" onmouseover="javascript:void(validarFecha(this))" ><div id="FechaFinTrabajo" class="oculto" style="display:none"><?php echo $strings['div_fecha']?></div> 
+                          <input type="text" id="fechnacuser" name="FechaFinTrabajo" maxlength="10" size="10"  onblur="javascript:void(validarFechaFinTrabajoBuscar(this))" onmouseover="javascript:void(validarFechaFinTrabajoBuscar(this))" ><div id="FechaFinTrabajo" class="oculto" style="display:none"><?php echo $strings['div_fecha']?></div><div id="FechaIniTrabajoParcial" class="oculto" style="display:none"><?php echo $strings['div_fechaParcial']?></div>  
                 </div>
 
                 <div id="izquierda">
                     <label for="PorcentajeNota"><?php echo $strings['PorcentajeNota']?>:</label>
-                        <input type="text" name="PorcentajeNota" maxlength="2" size="2"  onblur=""  ><div id="PorcentajeNota" class="oculto" style="display:none"><?php echo $strings['div_letras']?></div>  
+                        <input type="number" name="PorcentajeNota" maxlength="2" size="2" min="0" max="99" onblur="validarPorcentajeNotaBuscar(this, 0, 99)"  ><div id="PorcentajeNota" class="oculto" style="display:none"><?php echo $strings['div_numeros']?></div><div id="PorcentajeNotaMax" class="oculto" style="display:none"><?php echo $strings['div_numerosRango']?></div>
                 </div>
                 <div class="acciones" style="float: right; margin-left:0%; margin-right: 50%">
                    

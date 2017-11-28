@@ -208,7 +208,10 @@ array(
 'PorcentajeNota' => 'Porcentaxe nota',
 'Buscar trabajo' => 'Buscar traballo',
 'Editar trabajo' => 'Editar traballo',
-'div_letras' => 'Solo se aceptan numeros',
+'div_numeros' => 'Solo se aceptan numeros',
+'div_numerosRango' => 'O numero ten que estar entre 0 e 99',
+'div_textoRango' => 'O numero de caracteres supera o maximo',
+'div_fechaParcial'=> 'Solo se aceptan numeros e -',
 
 
 

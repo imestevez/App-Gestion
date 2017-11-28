@@ -209,10 +209,10 @@ array(
 'Borrar trabajo' => 'Delete work',
 'Buscar trabajo' => 'Search work',
 'Editar trabajo' => 'Edit work',
-'div_letras' => 'Only are accepted numbers',
-
-
-
+'div_numeros' => 'Only are accepted numbers',
+'div_numerosRango' => 'The number has to be between 0 and 99',
+'div_textoRango' => 'The number of characters overcomes the maximum',
+'div_fechaParcial'=> 'Only are accepted numbers and -',
 
 
 
