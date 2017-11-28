@@ -348,6 +348,11 @@ array(
 
 
 // ------------------------ ESPACIO DE TRABAJO PARA DIEGO ---------------------------
+	'Id de la accion' => 'Action ID',
+	'Nombre de la accion' => 'Action Name',
+	'Descripcion de la accion' => 'Action description',
+	'Búsqueda de accion' => 'Action search'
+	
  )
 ;
  ?>
