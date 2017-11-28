@@ -208,8 +208,8 @@ array(
 'PorcentajeNota' => 'Porcentaje nota',
 'Borrar trabajo' => 'Borrar trabajo',
 'Buscar trabajo' => 'Buscar trabajo',
-
-
+'Editar trabajo' => 'Editar trabajo',
+'div_letras' => 'Solo se aceptan numeros',
 
 
 

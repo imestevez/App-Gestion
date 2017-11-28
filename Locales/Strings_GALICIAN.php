@@ -207,6 +207,8 @@ array(
 'FechaFinTrabajo' => 'Data Fin',
 'PorcentajeNota' => 'Porcentaxe nota',
 'Buscar trabajo' => 'Buscar traballo',
+'Editar trabajo' => 'Editar traballo',
+'div_letras' => 'Solo se aceptan numeros',
 
 
 

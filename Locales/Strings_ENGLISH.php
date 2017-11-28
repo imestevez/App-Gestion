@@ -208,7 +208,8 @@ array(
 'PorcentajeNota' => 'Percentage of qualification',
 'Borrar trabajo' => 'Delete work',
 'Buscar trabajo' => 'Search work',
-
+'Editar trabajo' => 'Edit work',
+'div_letras' => 'Only are accepted numbers',
 
 
 
