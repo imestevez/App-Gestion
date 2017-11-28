@@ -2,7 +2,7 @@
 /*
 //Script : Desconectar.php
 //Creado el : 14-10-2017
-//Creado por: vugsj4
+//Creado por: SOLFAMIDAS
 //-------------------------------------------------------
 
 Script que realiza la desconexión al sistema de un usuario logeado

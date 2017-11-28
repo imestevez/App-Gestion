@@ -18,18 +18,18 @@ class Login{
 
 function render(){
 
-include 'Header_View.php'; 
+include 'Header.php'; 
 ?>
 
 <script type="text/javascript">
-    <?php include '../Views/js/validaciones.js' ?>
+    <?php include '../Views/js/validaciones.js'; ?>
 </script>
 
 		<section class="pagina" style="min-height: 500px">
         
       <label style="margin-left: 25%; margin-top: 5%"> <strong> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<?php echo $strings['Usuario no autenticado']?></strong>&nbsp&nbsp&nbsp&nbsp
 
-			 <a href='../Controllers/Register_Controller.php'><input type="image" name="registrar" src="../Views/images/anadir.png" name="action" title="<?php echo $strings['Registro de usuario'] ?>" value="ADD" ></a></label>
+			 <a href='../Controllers/Registro_Controller.php'><input type="image" name="registrar" src="../Views/images/anadir.png" name="action" title="<?php echo $strings['Registro de usuario'] ?>" value="ADD" ></a></label>
 		  <fieldset class="add" style="width: 50%; margin-left: 20%">	 
                 <legend><?php echo $strings['Identificarse']; ?> </legend>
 
@@ -54,7 +54,7 @@ include 'Header_View.php';
 	</section>
 							
 <?php
-			include 'Footer_View.php';
+			include 'Footer.php';
 		} //fin metodo render
 
 	} //fin Login

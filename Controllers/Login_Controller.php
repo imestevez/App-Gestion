@@ -2,7 +2,7 @@
 /*
 //Script : Login.Controller.php
 //Creado el : 1-11-2017
-//Creado por: vugsj4
+//Creado por: SOLFAMIDAS
 //-------------------------------------------------------
 
 Controlador del para llevar a cabo el proceso de autenticaciones cuando el usuario quiere acceder al sistema con su login y password
@@ -17,9 +17,9 @@ else{ //si se introdujeron
 
 	include '../Views/MESSAGE_View.php'; //incluye la vista de mensajes 
 	include '../Functions/Access_DB.php'; //incluye la conexión a la BD
-	include '../Models/USUARIOS_Model.php'; //incluye el Modelo de usuarios
+	include '../Models/USUARIO_Model.php'; //incluye el Modelo de usuarios
 
-	$usuario = new USUARIOS_Model($_REQUEST['login'],$_REQUEST['password'],'','','','','','','',''); //crea un usuario con el login y password insertados
+	$usuario = new USUARIO_Model($_REQUEST['login'],$_REQUEST['password'],'','','','','',''); //crea un usuario con el login y password insertados
 	$respuesta = $usuario->login(); //Comprueba que existe el login y se corresponde con las contraseña introducida
 
 	if ($respuesta == 'true'){ //si se introdujeron correctamente

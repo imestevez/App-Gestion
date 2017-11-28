@@ -2,7 +2,7 @@
 /*
 //Script : Index.Controller.php
 //Creado el : 1-11-2017
-//Creado por: vugsj4
+//Creado por: SOLFAMIDAS
 //-------------------------------------------------------
 
 Controlador del index.php,  en función de la situación del usuario en el sistema nos redirige a una página u a otra
@@ -17,7 +17,7 @@ if (!IsAuthenticated()){
 }
 //esta autenticado
 else{
-	include '../Views/USUARIOS_INDEX_View.php'; 
+	include '../Views/USUARIO_INDEX_View.php'; 
 	new Index(); //crea la vista de usuarios autenticados
 }
 

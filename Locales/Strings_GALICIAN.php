@@ -4,7 +4,7 @@
 /*
 //Script : Strings_GALICIAN.php
 //Creado el : 18-10-2017
-//Creado por: vugsj4
+//Creado por: SOLFAMIDAS
 //-------------------------------------------------------
 
 Script que contiene el array de las palabras clave en galician
@@ -49,6 +49,7 @@ array(
 	'mujer' => 'muller',
 	'Nombre de la foto personal' => 'Nome da foto personal',
 	'ejemplo' => 'exemplo',
+	'Direccion' => 'Dirección',
 	/* Divs de validacion*/
 	'div_Alfanumerico' => 'Solo se aceptan letras, números e los caracteres . _ -',
 	'div_login_vacio' => 'O Login non pode estar vacío',
@@ -68,6 +69,8 @@ array(
 	'div_foto_vacia' => 'A Foto persoal non pode estar vacía',
 	'div_sexo_vacio' => 'O Sexo non pode estar vacío',
 	'div_tam' => 'O tamaño do campo supera o máximo permitido, 50 caracteres',
+	'div_direccion' => 'Só se aceptan letras, números e os caracteres , - / ',
+	'div_direccion_vacio' => 'A dirección non pode estar vacía',
 
 	/*showcurrent*/
 	'Vista en detalle de usuario' => 'Vista en detalle de usuario',
@@ -133,7 +136,218 @@ array(
 	'La password para este usuario no es correcta' => 'O contrasinal para este usuario non es correcta',
 	'Registro' => 'Registro',
 	'Error en la inserción' => 'Error na inserción',
-	'Gestión Asignatura IU' => 'Xestión Asignatura IU'
+	'Gestión Asignatura IU' => 'Xestión Asignatura IU',
+
+
+
+
+
+
+
+
+
+
+	// ----------------- ESPACIO DE TRABAJO PARA DANIEL -------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ // ------------------------ ESPACIO DE TRABAJO PARA IVAN ---------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// ------------------------ ESPACIO DE TRABAJO PARA PABLO ---------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// ------------------------ ESPACIO DE TRABAJO PARA CRISTINA ---------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// ------------------------ ESPACIO DE TRABAJO PARA DIEGO ---------------------------
 )
 ;
  ?>

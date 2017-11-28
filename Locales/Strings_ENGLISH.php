@@ -3,7 +3,7 @@
 /*
 //Script : Strings_ENGLISH.php
 //Creado el : 18-10-2017
-//Creado por: vugsj4
+//Creado por: SOLFAMIDAS
 //-------------------------------------------------------
 
 Script que contiene el array de las palabras clave en inglés
@@ -48,6 +48,7 @@ array(
 	'mujer' => 'woman',
 	'Nombre de la foto personal' => 'Name of personal photo',
 	'ejemplo' => 'example',
+	'Direccion' => 'Address',
 
 	/*divs de validación*/
 	'div_Alfanumerico' => 'Only letters, numbers and the characters . _ - are accepted',
@@ -68,6 +69,8 @@ array(
 	'div_foto_vacia' => 'The Personal photo cannot be empty',
 	'div_sexo_vacio' => 'The Sex cannot be empty',
 	'div_tam' => 'The size of the field overcomes the allowed maximum, 50 characters',
+	'div_direccion' => 'Only letters, numbers and the characters , - / are accepted',
+	'div_direccion_vacio' => 'Address cannot be empty',
 
 	/*showcurrent*/
 	'Vista en detalle de usuario' => 'Show in detail of the user',
@@ -130,7 +133,221 @@ array(
 	'La password para este usuario no es correcta' => 'Incorrect password for this login',
 	'Registro' => 'Register',
 	'Error en la inserción' => 'Add error',
-	'Gestión Asignatura IU' => 'User Interface Management'
+	'Gestión Asignatura IU' => 'User Interface Management',
+
+
+
+
+
+
+
+
+
+
+
+
+
+	// ----------------- ESPACIO DE TRABAJO PARA DANIEL -------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ // ------------------------ ESPACIO DE TRABAJO PARA IVAN ---------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// ------------------------ ESPACIO DE TRABAJO PARA PABLO ---------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// ------------------------ ESPACIO DE TRABAJO PARA CRISTINA ---------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// ------------------------ ESPACIO DE TRABAJO PARA DIEGO ---------------------------
  )
 ;
  ?>
