@@ -1,9 +1,9 @@
 /*
-    script: validacionesFUNCIONALIDADES.js
+    script: validacionesGRUPO.js
     Creado el: 28/11/2017
     Creado por: SOLFAMIDAS;
     
-    El fichero validacionesFUNCIONALIDADES.js contiene las funciones necesarias para validar los formularios de Funcionalidad.
+    El fichero validacionesGRUPO.js contiene las funciones necesarias para validar los formularios de Grupo.
 
 */
 
@@ -65,17 +65,49 @@ function comprobarAlfanumerico(campo, tamaño_max)
     
 }
 
+
+//Función para comprobar que un campo es alfabético y no supera el tamaño máximo permitido. Acepta todas las letras, mayúsculas y minúsculas, incluida la ñ y ç, además depalabras acentuadas.
+function comprobarAlfabetico(campo, tamaño_max) 
+{
+    var idVacio = campo.name.concat('Vacio'); //concatena al nombre del campo 'Vacio' para acceder a los divs correspondientes a los campos vacios
+
+    var expr_alfabet; //Expresión regular para comprobar que solo tiene letras, numeros y(_ - .)
+    expr_alfabet = /^[a-zA-ZñÑáéíóúÁÉÍÓÚçÇ\s]+$/; //solo letras
+    
+    if (expr_alfabet.test(campo.value) == false) //Si no cumple la expresión regular
+    {
+        document.getElementById(idVacio).style.display = 'none';
+        document.getElementById(campo.name).style.display = 'block';
+
+        return false;
+    }
+      else //Si cumple la expresión regular
+      {
+        if (campo.value.length > tamaño_max) //Si el tamaño del campo supera el maximo
+        {
+          document.getElementById(idVacio).style.display = 'none';
+            document.getElementById(campo.name).style.display = 'block';
+            return false;
+        }
+          else //Si el tamaño está dentro del rango
+          {
+            document.getElementById(campo.name).style.display = 'none';
+            return true;
+      }
+    }
+}
+
 /*--------------------------------------------------------------------------------------------
 -------------Funciones Necesarias para validar el formulario ADD y EDIT-----------------------
 --------------------------------------------------------------------------------------------*/
 
-//Función que comprueba que el IdFuncionalidad es de tipo alfanumérico y no supera el maximo permitido
-function validarIdFuncionalidad(IdFuncionalidad, tamaño_max)
+//Función que comprueba que el IdGrupo es de tipo alfanumérico y no supera el maximo permitido
+function validarIdGrupo(IdGrupo, tamaño_max)
 {  
 
-  if(comprobarVacio(IdFuncionalidad))//Si el campo no está vacio el campo
+  if(comprobarVacio(IdGrupo))//Si el campo no está vacio el campo
       {
-          if(comprobarAlfanumerico(IdFuncionalidad,tamaño_max))//Si login cumple la expresión regular de campo Alfabético
+          if(comprobarAlfanumerico(IdGrupo,tamaño_max))//Si login cumple la expresión regular de campo Alfabético
        {
            return true;
        }else{ //Si no cumple la expresión regular
@@ -87,13 +119,13 @@ function validarIdFuncionalidad(IdFuncionalidad, tamaño_max)
 
 }
 
-//Función que comprueba que el NombreFuncionalidad es de tipo alfanumérico y no supera el maximo permitido
-function validarNombreFuncionalidad(NombreFuncionalidad, tamaño_max)
+//Función que comprueba que el NombreGrupo es de tipo alfanumérico y no supera el maximo permitido
+function validarNombreGrupo(NombreGrupo, tamaño_max)
 {  
 
-  if(comprobarVacio(NombreFuncionalidad))//Si el campo no está vacio el campo
+  if(comprobarVacio(NombreGrupo))//Si el campo no está vacio el campo
       {
-          if(comprobarAlfanumerico(NombreFuncionalidad,tamaño_max))//Si login cumple la expresión regular de campo Alfabético
+          if(comprobarAlfanumerico(NombreGrupo,tamaño_max))//Si login cumple la expresión regular de campo Alfabético
        {
            return true;
        }else{ //Si no cumple la expresión regular
@@ -105,13 +137,13 @@ function validarNombreFuncionalidad(NombreFuncionalidad, tamaño_max)
 
 }
 
-//Función que comprueba que la DescripFuncionalidad es de tipo alfanumérico y no supera el maximo permitido
-function validarDescripFuncionalidad(DescripFuncionalidad, tamaño_max)
+//Función que comprueba que la DescripGrupo es de tipo alfanumérico y no supera el maximo permitido
+function validarDescripGrupo(DescripGrupo, tamaño_max)
 {  
 
-  if(comprobarVacio(DescripFuncionalidad))//Si el campo no está vacio el campo
+  if(comprobarVacio(DescripGrupo))//Si el campo no está vacio el campo
       {
-          if(comprobarAlfanumerico(DescripFuncionalidad,tamaño_max))//Si login cumple la expresión regular de campo Alfabético
+          if(comprobarAlfabetico(DescripGrupo,tamaño_max))//Si login cumple la expresión regular de campo Alfabético
        {
            return true;
        }else{ //Si no cumple la expresión regular
@@ -151,7 +183,7 @@ function comprobarVacioBuscar(campo)
 //Función para comprobar que un campo solo tiene letras (mayúsculas y minúsculas), números y los caracteres "- . _" para el formulario SEARCH
 function comprobarAlfanumericoBuscar(campo, tamaño_max)
 {
-     var expr_alfanum; //Expresión regular para comprobar que un campo (login y contraseña) es alfanumerico y puede incluir caracteres como 
+     var expr_alfanum; //Expresión regular para comprobar que un campo es alfanumerico y puede incluir caracteres como 
     expr_alfanum =  /^[a-zA-Z0-9ñÑ_.-]+$/; //letras números y caracteres -_ .
     
      if (expr_alfanum.test(campo.value) == false) //Si no cumple la expresión regular
@@ -172,11 +204,39 @@ function comprobarAlfanumericoBuscar(campo, tamaño_max)
   }
 }
 
-//Función para validar la búsqueda por IdFuncionalidad
-function validarIdFuncionalidadBuscar(IdFuncionalidad, tamaño_max)
+//Función para comprobar que un campo es alfabético y no supera el tamaño máximo permitido. Acepta todas las letras, mayúsculas y minúsculas, incluida la ñ y ç, además depalabras acentuadas  para el formulario SEARCH
+function comprobarAlfabeticoBuscar(campo, tamaño_max) 
 {
-    if(comprobarVacioBuscar(IdFuncionalidad)){ //Si el IdFuncionalidad no está vacío
-        if(comprobarAlfanumericoBuscar(IdFuncionalidad,tamaño_max)) //Si cumple la expresión regular de campo Alfabético
+
+    var expr_alfabet; //Expresión regular para comprobar que solo tiene letras
+    expr_alfabet = /^[a-zA-ZñÑáéíóúÁÉÍÓÚçÇ\s]+$/; // solo letras
+    
+    if (expr_alfabet.test(campo.value) == false) //Si no cumple la expresión regular
+    {
+        document.getElementById(campo.name).style.display = 'block';
+
+        return false;
+    }
+      else //Si cumple la expresión regular
+      {
+        if (campo.value.length > tamaño_max) //Si el tamaño del campo supera el maximo
+        {
+            document.getElementById(campo.name).style.display = 'block';
+            return false;
+        }
+          else //Si el tamaño está dentro del rango
+          {
+            document.getElementById(campo.name).style.display = 'none';
+            return true;
+      }
+    }
+}
+
+//Función para validar la búsqueda por IdGrupo
+function validarIdGrupoBuscar(IdGrupo, tamaño_max)
+{
+    if(comprobarVacioBuscar(IdGrupo)){ //Si el IdGrupo no está vacío
+        if(comprobarAlfanumericoBuscar(IdGrupo,tamaño_max)) //Si cumple la expresión regular de campo Alfabético
             {
                 return true;
             }else{ //si no cumple la expresión regular
@@ -189,11 +249,11 @@ function validarIdFuncionalidadBuscar(IdFuncionalidad, tamaño_max)
 
 }
 
-//Función para validar la búsqueda por NombreFuncionalidad
-function validarNombreFuncionalidadBuscar(NombreFuncionalidad, tamaño_max)
+//Función para validar la búsqueda por NombreGrupo
+function validarNombreGrupoBuscar(NombreGrupo, tamaño_max)
 {
-    if(comprobarVacioBuscar(NombreFuncionalidad)){ //Si el IdFuncionalidad no está vacío
-        if(comprobarAlfanumericoBuscar(NombreFuncionalidad,tamaño_max)) //Si cumple la expresión regular de campo Alfabético
+    if(comprobarVacioBuscar(NombreGrupo)){ //Si el IdGrupo no está vacío
+        if(comprobarAlfanumericoBuscar(NombreGrupo,tamaño_max)) //Si cumple la expresión regular de campo Alfabético
             {
                 return true;
             }else{ //si no cumple la expresión regular
@@ -206,11 +266,11 @@ function validarNombreFuncionalidadBuscar(NombreFuncionalidad, tamaño_max)
 
 }
 
-//Función para validar la búsqueda por DescripFuncionalidad
-function validarDescripFuncionalidadBuscar(DescripFuncionalidad, tamaño_max)
+//Función para validar la búsqueda por DescripGrupo
+function validarDescripGrupoBuscar(DescripGrupo, tamaño_max)
 {
-    if(comprobarVacioBuscar(DescripFuncionalidad)){ //Si el IdFuncionalidad no está vacío
-        if(comprobarAlfanumericoBuscar(DescripFuncionalidad,tamaño_max)) //Si cumple la expresión regular de campo Alfabético
+    if(comprobarVacioBuscar(DescripGrupo)){ //Si el IdGrupo no está vacío
+        if(comprobarAlfabeticoBuscar(DescripGrupo,tamaño_max)) //Si cumple la expresión regular de campo Alfabético
             {
                 return true;
             }else{ //si no cumple la expresión regular
@@ -238,9 +298,9 @@ function validar(formulario)
         //si todos los campos estan correctos y devuelven true
 
         if( 
-          (validarIdFuncionalidadBuscar(form.IdFuncionalidad, 6)) && 
-          (validarNombreFuncionalidadBuscar(form.NombreFuncionalidad, 60)) && 
-          (validarDescripFuncionalidadBuscar(form.DescripFuncionalidad, 100)) ){
+          (validarIdGrupoBuscar(form.IdGrupo, 6)) && 
+          (validarNombreGrupoBuscar(form.NombreGrupo, 60)) && 
+          (validarDescripGrupoBuscar(form.DescripGrupo, 100)) ){
 
           alerta = false; //Se le asigna false a la variable alerta 
         }
@@ -250,9 +310,9 @@ function validar(formulario)
         //si todos los campos estan correctos y devuelven true
 
         if( 
-          (validarIdFuncionalidad(form.IdFuncionalidad, 6)) && 
-          (validarNombreFuncionalidad(form.NombreFuncionalidad, 60)) && 
-          (validarDescripFuncionalidad(form.DescripFuncionalidad, 100)) ){
+          (validarIdGrupo(form.IdGrupo, 6)) && 
+          (validarNombreGrupo(form.NombreGrupo, 60)) && 
+          (validarDescripGrupo(form.DescripGrupo, 100)) ){
 
           alerta = false; //Se le asigna false a la variable alerta 
         }
@@ -261,9 +321,9 @@ function validar(formulario)
     if(formulario == 'EDIT'){ //Si es el formulario es el de editar
         //si todos los campos estan correctos y devuelven true
         if( 
-          (validarIdFuncionalidad(form.IdFuncionalidad, 6)) && 
-          (validarNombreFuncionalidad(form.NombreFuncionalidad, 60)) && 
-          (validarDescripFuncionalidad(form.DescripFuncionalidad, 100)) ){
+          (validarIdGrupo(form.IdGrupo, 6)) && 
+          (validarNombreGrupo(form.NombreGrupo, 60)) && 
+          (validarDescripGrupo(form.DescripGrupo, 100)) ){
 
           alerta = false; //Se le asigna false a la variable alerta 
         }

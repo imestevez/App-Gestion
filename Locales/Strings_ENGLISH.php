@@ -148,15 +148,15 @@ array(
 
 
 	// ----------------- ESPACIO DE TRABAJO PARA DANIEL -------------------------
-
-
-
-
-
-
-
-
-
+	'AñadirGrupo' => 'Add Group',
+	'NombreGrupo' => 'Group Name',
+	'DescripGrupo' => 'Group Description',
+	'IdGrupo' => 'GroupID',
+	'BorrarGrupo' => 'Delete Group',
+	'EditarGrupo' => 'Edit Group',
+	'BuscaGrupo' => 'Search Group',
+	'Grupos' => 'Groups',
+	'Vista en detalle de grupo' => 'Show in detail of the group',
 
 
 
@@ -213,13 +213,6 @@ array(
 'div_numerosRango' => 'The number has to be between 0 and 99',
 'div_textoRango' => 'The number of characters overcomes the maximum',
 'div_fechaParcial'=> 'Only are accepted numbers and -',
-
-
-
-
-
-
-
 
 
 
@@ -355,6 +348,13 @@ array(
 
 
 // ------------------------ ESPACIO DE TRABAJO PARA DIEGO ---------------------------
+	'Id de la accion' => 'Action ID',
+	'Nombre de la accion' => 'Action Name',
+	'Descripcion de la accion' => 'Action description',
+	'Búsqueda de accion' => 'Action search',
+	'Acciones'=> 'Actions',
+	'Búsqueda de acciones' => 'Search actions'
+	
  )
 ;
  ?>

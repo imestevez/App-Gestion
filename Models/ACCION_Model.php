@@ -1,40 +1,29 @@
 
 <?php
 /*
-//Clase : USUARIO_Model.php
+//Clase : USUARIOS_Model.php
 //Creado el : 13-10-2017
-//Creado por: SOLFAMIDAS
+//Creado por: vugsj4
 //-------------------------------------------------------
 
 Modelo de datos de usuarios que accede a la Base de Datos
 */
-class USUARIO_Model { //declaración de la clase
+class ACCION_Model { //declaración de la clase
 
-	var $login; //atributo login
-	var $password; //atributo contraseña
-	var $DNI; // declaración del atributo DNI
-	var $nombre; //declaración del atributo nombre
-	var $apellidos; //declaración del atributo apellidos
-	var $telefono; //declaración del atributo telefono
-	var $email; //declaración del atributo email
-	var $direccion; // declaración del atributo direccion
-	var $lista; // array para almacenar los datos del usuario
+	var $IdAccion; //declaración del atributo IdAccion de la accion
+    var $NombreAccion; //declaración del atributo NombreAccion de la accion
+    var $DescripAccion; //declaración del atributo DescripAccion
+    var $lista; // array para almacenar los datos del usuario
 	var $mysqli; // declaración del atributo manejador de la bd
 
 //Constructor de la clase
 
-function __construct($login, $password, $DNI,$nombre,$apellidos,$telefono,$email,$direccion){
+function __construct($IdAccion, $NombreAccion, $DescripAccion){
 	//asignación de valores de parámetro a los atributos de la clase
-	$this->login = $login;
-	$this->password = $password;
-	$this->DNI = $DNI;
-	$this->nombre = $nombre;
-	$this->apellidos = $apellidos;
-	$this->telefono = $telefono;
-	$this->email = $email;
-	$this->direccion = $direccion;
-	
-	
+	$this->IdAccion = $IdAccion;
+	$this->NombreAccion = $NombreAccion;
+	$this->DescripAccion = $DescripAccion;
+
 	// incluimos la funcion de acceso a la bd
 	include_once '../Functions/Access_DB.php';
 	// conectamos con la bd y guardamos el manejador en un atributo de la clase
@@ -42,14 +31,9 @@ function __construct($login, $password, $DNI,$nombre,$apellidos,$telefono,$email
 
 	//lista con los datos del usuario
 	$this->lista = array(
-			"login"=>$this->login,
-			"password"=>$this->password,
-			"DNI"=>$this->DNI,
-			"Nombre" => $this->nombre,
-			"Apellidos" => $this->apellidos,
-			"Telefono" => $this->telefono,
-			"Correo" => $this->email,
-			"Direccion" => $this->direccion,
+			"IdAccion"=>$this->IdAccion,
+			"NombreAccion"=>$this->NombreAccion,
+			"DescripAccion"=>$this->DescripAccion,
 			"sql" => $this->mysqli, 
 			"mensaje"=> '');
 } // fin del constructor
@@ -63,9 +47,9 @@ function __construct($login, $password, $DNI,$nombre,$apellidos,$telefono,$email
 function ADD()
 {
 
-    if (($this->login <> '')){ // si el atributo clave de la entidad no esta vacio
+    if (($this->IdAccion <> '')){ // si el atributo clave de la entidad no esta vacio
 		// construimos el sql para buscar esa clave en la tabla
-        $sql = "SELECT * FROM USUARIO WHERE (login = '$this->login')"; //comprobar que no hay claves iguales
+        $sql = "SELECT * FROM ACCION WHERE (IdAccion = '$this->IdAccion')"; //comprobar que no hay claves iguales
 
 		if (!$result = $this->mysqli->query($sql)){ // si da error la ejecución de la query
 			$this->lista['mensaje'] = 'ERROR: No se ha podido conectar con la base de datos';
@@ -79,47 +63,16 @@ function ADD()
 			if ($num_rows == 0){ // miramos si el resultado de la consulta es vacio (no existe el login)
 
 				//construimos la sentencia sql de inserción en la bd
-				$sql = "INSERT INTO USUARIO(
-				login,
-				password,
-				DNI,
-				Nombre,
-				Apellidos,
-				Telefono,
-				Correo,
-				Direccion) VALUES(
-									'$this->login',
-									'$this->password',
-									'$this->DNI',
-									'$this->nombre',
-									'$this->apellidos',
-									'$this->telefono', 
-									'$this->email',
-									'$this->direccion'
-								)";
+				$sql = "INSERT INTO ACCION(
+				IdAccion,
+				NombreAccion,
+				DescripAccion) VALUES(
+									'$this->IdAccion',
+									'$this->NombreAccion',
+									'$this->DescripAccion')";
 				
 				 if (!($result = $this->mysqli->query($sql))){ //si da error la consulta se comrpueba el por que
 
-			        $sql = "SELECT * FROM USUARIO WHERE (DNI = '$this->DNI')"; //comprobar que no hay DNI iguales
-				 	$result = $this->mysqli->query($sql); ;// numero de tuplas de la consulta
-					$num_rows = mysqli_num_rows($result);
-				
-				    if ($num_rows > 0)    // si el numero de filas es mayor que 0 es que existe un DNI duplicado
-				    {
-			        	$this->lista['mensaje'] = 'ERROR: Fallo en la inserción. Ya existe el DNI'; 
-						return $this->lista; 
-					}
-
-			        $sql = "SELECT * FROM USUARIO WHERE (Correo = '$this->email')"; //comprobar que no hay email iguales
-				 	$result = $this->mysqli->query($sql);
-					$num_rows = mysqli_num_rows($result);// numero de tuplas de la consulta
-				    
-				    if ($num_rows > 0) // si el numero de filas es mayor que 0 es que existe un DNI duplicado
-				    {
-			        	$this->lista['mensaje'] = 'ERROR: Fallo en la inserción. Ya existe el email'; 
-						return $this->lista;
-					}
-				
 					//Si no hay atributos Clave y unique duplicados es que hay campos sin completar
         			return 'ERROR: Introduzca todos los valores de todos los campos'; // introduzca un valor para el usuario
 				}
@@ -155,26 +108,17 @@ function __destruct()
 //los datos proporcionados. Si van vacios devuelve todos
 function SEARCH()
 { 	// construimos la sentencia de busqueda con LIKE y los atributos de la entidad
-    $sql = "SELECT  login,
-    				DNI,
-					Nombre,
-					Apellidos,
-					Telefono,
-					Correo,
-					Direccion
-       			FROM USUARIO 
+    $sql = "SELECT  IdAccion,
+    				NombreAccion,
+    				DescripAccion
+       			FROM ACCION 
     			WHERE 
     				(
-    				(login LIKE '%$this->login%') &&
-    				(DNI LIKE '%$this->DNI%') &&
-	 				(Nombre LIKE '%$this->nombre%') &&
-	 				(Apellidos LIKE '%$this->apellidos%') &&
-	 				(Telefono LIKE '%$this->telefono%') &&
-	 				(Correo LIKE '%$this->email%') &&
-	 				(Direccion LIKE '%$this->direccion%')
-    				)";
+    				(IdAccion LIKE '%$this->IdAccion%') &&
+    				(NombreAccion LIKE '%$this->NombreAccion%') &&
+    				(DescripAccion LIKE '%$this->DescripAccion%') 
+	 				)";
     				
-
     // si se produce un error en la busqueda mandamos el mensaje de error en la consulta
     if (!($resultado = $this->mysqli->query($sql))){
 			$this->lista['mensaje'] = 'ERROR: Fallo en la consulta sobre la base de datos'; 
@@ -183,6 +127,7 @@ function SEARCH()
     else{ // si la busqueda es correcta devolvemos el recordset resultado
 		return $resultado;
 	}
+
 } // fin metodo SEARCH
 
 // funcion DELETE()
@@ -190,14 +135,14 @@ function SEARCH()
 // se manda un mensaje de que ese valor de clave no existe
 function DELETE()
 {	// se construye la sentencia sql de busqueda con los atributos de la clase
-    $sql = "SELECT * FROM USUARIO WHERE (login = '$this->login')";
+    $sql = "SELECT * FROM ACCION WHERE (IdAccion = '$this->IdAccion')";
     // se ejecuta la query
     $result = $this->mysqli->query($sql);
     // si existe una tupla con ese valor de clave
     if ($result->num_rows == 1)
     {
     	// se construye la sentencia sql de borrado
-        $sql = "DELETE FROM USUARIO WHERE (login = '$this->login')";
+        $sql = "DELETE FROM ACCION WHERE (IdAccion = '$this->IdAccion')";
         // se ejecuta la query
         $this->mysqli->query($sql);
         // se devuelve el mensaje de borrado correcto
@@ -215,7 +160,7 @@ function DELETE()
 // en el atributo de la clase
 function RellenaDatos()
 {	// se construye la sentencia de busqueda de la tupla
-    $sql = "SELECT * FROM USUARIO WHERE (login = '$this->login')";
+    $sql = "SELECT * FROM ACCION WHERE (IdAccion = '$this->IdAccion')";
     // Si la busqueda no da resultados, se devuelve el mensaje de que no existe
     if (!($resultado = $this->mysqli->query($sql))){
 		$this->lista['mensaje'] = 'ERROR: No existe en la base de datos'; 
@@ -234,18 +179,12 @@ function EDIT()
 {
 	//Si todos los campos tienen valor
 	if(
-		$this->login <> '' &&
-		$this->password <> '' &&
-		$this->DNI <> '' &&
-		$this->nombre <> '' &&
-		$this->apellidos <> '' &&
-		$this->telefono <> '' &&
-		$this->email <> '' &&
-		$this->direccion <> '' 
-	){
+		$this->IdAccion <> '' &&
+		$this->NombreAccion <> '' &&
+		$this->DescripAccion <> ''){
 
 		// se construye la sentencia de busqueda de la tupla en la bd
-	    $sql = "SELECT * FROM USUARIO WHERE (login = '$this->login')";
+	    $sql = "SELECT * FROM ACCION WHERE (IdAccion = '$this->IdAccion')";
 	    // se ejecuta la query
 	    $result = $this->mysqli->query($sql);
 	    $num_rows = mysqli_num_rows($result);
@@ -253,43 +192,15 @@ function EDIT()
 
 	    if ($num_rows == 1)
 	    {	// se construye la sentencia de modificacion en base a los atributos de la clase
-			$sql = "UPDATE USUARIO SET 
-						login = '$this->login',
-						password = '$this->password',
-						DNI = '$this->DNI',
-						Nombre = '$this->nombre',
-						Apellidos = '$this->apellidos',
-						Telefono = '$this->telefono',
-						Correo = '$this->email',
-						Direccion = '$this->direccion'
-						
-					WHERE ( login = '$this->login')";
+			$sql = "UPDATE ACCION SET 
+						IdAccion = '$this->IdAccion',
+						NombreAccion = '$this->NombreAccion',
+						DescripAccion = '$this->DescripAccion'
+					WHERE ( IdAccion = '$this->IdAccion')";
 					
 			// si hay un problema con la query se envia un mensaje de error en la modificacion
 	        if (!($result = $this->mysqli->query($sql))){
 
-			        		// se construye la sentencia de busqueda de la tupla en la bd
-			    $sql = "SELECT * FROM USUARIO WHERE (DNI = '$this->DNI')";
-			    // se ejecuta la query
-			    $result = $this->mysqli->query($sql);
-			    $num_rows = mysqli_num_rows($result);
-			    $row = $result->fetch_array();
-
-			    if( ($num_rows == 1) && ( $row['login'] != $this->login) ){ //Si devuelve 1 tupla y no coinciden los login
-			    	$this->lista['mensaje'] = 'ERROR: Fallo en la modificación. Ya existe el DNI'; 
-					return $this->lista;
-				}
-
-			     $sql = "SELECT * FROM USUARIO WHERE (Correo = '$this->email')";
-			    // se ejecuta la query
-			    $result = $this->mysqli->query($sql);
-			    $num_rows = mysqli_num_rows($result);
-			    $row = $result->fetch_array();
-
-			    if( ($num_rows == 1)  && ( $row['login'] != $this->login))  { //Si devuelve 1 tupla y no coinciden los login
-			    	$this->lista['mensaje'] = 'ERROR: Fallo en la modificación. Ya existe el email'; 
-					return $this->lista; 
-			    }
 			    	return 'ERROR: Fallo en la modificación. Introduzca todos los valores'; 
 		    }	
 			else{ // si no hay problemas con la modificación se indica que se ha modificado
@@ -315,7 +226,7 @@ function SHOWALL($num_tupla,$max_tuplas){
 
 	//$sql = "SELECT * FROM USUARIO";
 
-	$sql = "SELECT * FROM USUARIO LIMIT $num_tupla, $max_tuplas";
+	$sql = "SELECT * FROM ACCION LIMIT $num_tupla, $max_tuplas";
 
 	//echo $sql;
 
@@ -331,7 +242,7 @@ function SHOWALL($num_tupla,$max_tuplas){
 
 //funcion que devuelve el numero de tuplas de la base de datos
 function contarTuplas(){
-	$sql = "SELECT * FROM USUARIO";
+	$sql = "SELECT * FROM ACCION";
 
 	$datos = $this->mysqli->query($sql);
 
@@ -340,34 +251,14 @@ function contarTuplas(){
     return $total_tuplas;
 }
 //funcion que comprueba si el login y la password son correctos
-function login(){
+function IdAccion(){
 
-	$sql = "SELECT *
-			FROM USUARIO
-			WHERE (
-				(login = '$this->login') 
-			)";
-	$resultado = $this->mysqli->query($sql);
-	$num_rows = mysqli_num_rows($resultado);
-
-	if ($num_rows == 0){ //si hay 0 tuplas con ese login
-		return 'ERROR: El login no existe';
-	}
-	else{//si no hay 0 tuplas
-		$tupla = $resultado->fetch_array();
-		if ($tupla['password'] == $this->password){//si coinciden las contraseñas
-			return true;
-		}
-		else{//si no coinciden las contraseñas
-			return 'ERROR: La contraseña para este usuario no es correcta';
-		}
-	}
 }//fin metodo login
 
 //Funcion para comprobar si se realiza un registro correctamente
 function comprobarRegistro(){
 
-		$sql = "SELECT * FROM USUARIO WHERE login = '$this->login'";
+		$sql = "SELECT * FROM ACCION WHERE IdAccion = '$this->IdAccion'";
 
 		$result = $this->mysqli->query($sql);
 		$total_tuplas = mysqli_num_rows($result);

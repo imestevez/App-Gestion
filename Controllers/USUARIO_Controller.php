@@ -55,6 +55,31 @@ function get_data_form(){
 	return $USUARIO;
 }
 
+
+// funcion para coger los datos del formulario SEARCH
+function get_data_form_SEARCH(){
+
+	$login = $_REQUEST['login'];
+	$DNI = $_REQUEST['DNI'];
+	$nombre = $_REQUEST['nombre'];
+	$apellidos = $_REQUEST['apellidos'];
+	$telefono = $_REQUEST['telefono'];
+	$email = $_REQUEST['email'];
+	$direccion = $_REQUEST['direccion'];
+	$action = $_REQUEST['action'];
+
+	$USUARIO = new USUARIO_Model(
+		$login, 
+		'', 
+		$DNI, 
+		$nombre, 
+		$apellidos,
+		$telefono, 
+		$email, 
+		$direccion);
+
+	return $USUARIO;
+}
 //Funcion para coger los datos del formulario de un usuario ya almacenado
 function get_data_UserBD(){
 
@@ -114,7 +139,8 @@ if (!isset($_REQUEST['action'])){
 				$usuario = new USUARIO_DELETE($valores); //Crea la vista de DELETE con los datos del usuario
 			}
 			else{//si viene con un post
-				$USUARIO = get_data_UserBD(); //coge los datos del formulario del usuario que desea borrar
+				$USUARIO = get_data_form_SEARCH(); //coge los datos del formulario del usuario que desea borrar
+													//utilizamos esta funcion para que no salga el notice de password
 				$respuesta = $USUARIO->DELETE(); //Ejecuta la funcion DELETE() en el USUARIO_Model
 				$mensaje = new MESSAGE($respuesta, '../Controllers/USUARIO_Controller.php'); //muestra el mensaje despues de la sentencia sql
 			}
@@ -136,7 +162,7 @@ if (!isset($_REQUEST['action'])){
 				$USUARIO = new USUARIO_SEARCH();//Crea la vista SEARCH y muestra formulario para rellenar por el usuario
 			}
 			else{
-				$USUARIO = get_data_UserBD(); //coge los datos del formulario del usuario que desea buscar
+				$USUARIO = get_data_form_SEARCH(); //coge los datos del formulario del usuario que desea buscar
 				$datos = $USUARIO->SEARCH();//Ejecuta la funcion SEARCH() en el USUARIO_Model
 				$lista = array('login','password','DNI','nombre','apellidos','telefono','email','direccion');
 				$resultado = new USUARIO_SHOWALL($lista, $datos, 0, 0, 0, 0, 'SEARCH', '../Controllers/USUARIO_Controller.php');//Crea la vista SHOWALL y muestra los usuarios que cumplen los parámetros de búsqueda 

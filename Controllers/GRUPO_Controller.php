@@ -31,15 +31,15 @@ include '../Views/MESSAGE_View.php';
 // funcion para coger los datos del formulario
 function get_data_form(){
 
-	$idgrupo = $_REQUEST['idgrupo'];
-	$nombregrupo = $_REQUEST['nombregrupo'];
-	$descripgrupo = $_REQUEST['descripgrupo'];
+	$IdGrupo = $_REQUEST['IdGrupo'];
+	$NombreGrupo = $_REQUEST['NombreGrupo'];
+	$DescripGrupo = $_REQUEST['DescripGrupo'];
 	$action = $_REQUEST['action'];
 
 	$GRUPO = new GRUPO_Model(
-		$idgrupo, 
-		$nombregrupo, 
-		$descripgrupo);
+		$IdGrupo, 
+		$NombreGrupo, 
+		$DescripGrupo);
 
 	return $GRUPO;
 }
@@ -47,15 +47,15 @@ function get_data_form(){
 //Funcion para coger los datos del formulario de un grupo ya almacenado
 function get_data_GroupBD(){
 
-	$idgrupo = $_REQUEST['idgrupo'];
-	$nombregrupo = $_REQUEST['nombregrupo'];
-	$descripgrupo = $_REQUEST['descripgrupo'];
+	$IdGrupo = $_REQUEST['IdGrupo'];
+	$NombreGrupo = $_REQUEST['NombreGrupo'];
+	$DescripGrupo = $_REQUEST['DescripGrupo'];
 	$action = $_REQUEST['action'];
 
 	$GRUPO = new GRUPO_Model(
-		$idgrupo, 
-		$nombregrupo, 
-		$descripgrupo);
+		$IdGrupo, 
+		$NombreGrupo, 
+		$DescripGrupo);
 
 	return $GRUPO;
 }
@@ -83,7 +83,7 @@ if (!isset($_REQUEST['action'])){
 			break;
 		case 'DELETE': //Si quiere hacer un DELETE
 			if (!$_POST){ //viene del showall con una clave
-				$GRUPO = new GRUPO_Model($_REQUEST['idgrupo'], '',''); //crea un GRUPO_Model con el idgrupo del grupo
+				$GRUPO = new GRUPO_Model($_REQUEST['IdGrupo'], '',''); //crea un GRUPO_Model con el IdGrupo del grupo
 				$valores = $GRUPO->RellenaDatos(); //completa el resto de atributos a partir de la clave
 				$grupo = new GRUPO_DELETE($valores); //Crea la vista de DELETE con los datos del grupo
 			}
@@ -95,8 +95,8 @@ if (!isset($_REQUEST['action'])){
 			break;
 		case 'EDIT': //si el usuario quiere editar un grupo
 			if (!$_POST){
-				$GRUPO = new GRUPO_Model($_REQUEST['idgrupo'], '',''); //crea un GRUPO_Model con el idgrupo del grupo 
-				$datos = $GRUPO->RellenaDatos();  //A partir del idgrupo recoge todos los atributos
+				$GRUPO = new GRUPO_Model($_REQUEST['IdGrupo'], '',''); //crea un GRUPO_Model con el IdGrupo del grupo 
+				$datos = $GRUPO->RellenaDatos();  //A partir del IdGrupo recoge todos los atributos
 				$grupo = new GRUPO_EDIT($datos); //Crea la vista EDIT con los datos del grupo
 			}
 			else{
@@ -112,18 +112,18 @@ if (!isset($_REQUEST['action'])){
 			else{
 				$GRUPO = get_data_GroupBD(); //coge los datos del formulario del grupo que desea buscar
 				$datos = $GRUPO->SEARCH();//Ejecuta la funcion SEARCH() en el GRUPO_Model
-				$lista = array('idgrupo','nombregrupo','descripgrupo');
+				$lista = array('IdGrupo','NombreGrupo','DescripGrupo');
 				$resultado = new GRUPO_SHOWALL($lista, $datos, 0, 0, 0, 0, 'SEARCH', '../Controllers/GRUPO_Controller.php');//Crea la vista SHOWALL y muestra los grupos que cumplen los parámetros de búsqueda 
 			}
 			break;
 		case 'SHOWCURRENT': //si desea ver un grupo en detalle
-			$GRUPO = new GRUPO_Model($_REQUEST['idgrupo'], '','');//crea un GRUPO_Model con el idgrupo del grupo 
-			$tupla = $GRUPO->RellenaDatos();//A partir del idgrupo recoge todos los atributos
+			$GRUPO = new GRUPO_Model($_REQUEST['IdGrupo'], '','');//crea un GRUPO_Model con el IdGrupo del grupo 
+			$tupla = $GRUPO->RellenaDatos();//A partir del IdGrupo recoge todos los atributos
 			$grupo = new GRUPO_SHOWCURRENT($tupla); //Crea la vista SHOWCURRENT del grupo en cuestión
 			break;
 		default: //Por defecto, Se muestra la vista SHOWALL
 			if (!$_POST){
-				$GRUPO = new GRUPO_Model('', '','');//crea un GRUPO_Model con el idgrupo del grupo 
+				$GRUPO = new GRUPO_Model('', '','');//crea un GRUPO_Model con el IdGrupo del grupo 
 			}
 			else{
 				$GRUPO = get_data_form(); //Coge los datos del formulario
@@ -138,7 +138,7 @@ if (!isset($_REQUEST['action'])){
 			$max_tuplas = $num_tupla+10; // el número de tuplas a mostrar por página
 			$totalTuplas = $GRUPO->contarTuplas(); //Cuenta el número de tuplas que hay en la BD
 			$datos = $GRUPO->SHOWALL($num_tupla,$max_tuplas); //Ejecuta la funcion SHOWALL() en el GRUPO_Model
-			$lista = array('idgrupo', 'nombregrupo', 'descripgrupo');
+			$lista = array('IdGrupo', 'NombreGrupo', 'DescripGrupo');
 			$GruposBD = new GRUPO_SHOWALL($lista, $datos, $num_tupla, $max_tuplas, $totalTuplas, $num_pagina, 'SHOWALL', '../Controllers/GRUPO_Controller.php'); //Crea la vista SHOWALL de los grupos de la BD	
 	}
 
