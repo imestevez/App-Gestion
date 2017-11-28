@@ -1,6 +1,6 @@
 <?php
 /*
-//Clase : USUARIOS_SHOWCURRENT
+//Clase : USUARIO_SHOWCURRENT
 //Creado el : 24-11-2017
 //Creado por: SOLFAMIDAS
 //-------------------------------------------------------
@@ -9,7 +9,7 @@
 
 */
 
-class USUARIOS_SHOWCURRENT{
+class USUARIO_SHOWCURRENT{
 
 	
     var $login; //declaración del atributo login del usuario
@@ -26,11 +26,11 @@ function __construct($tupla){
 	//asignación de valores de parámetro a los atributos de la clase
 	$this->login = $tupla['login'];
     $this->DNI = $tupla['DNI'];
-	$this->nombre = $tupla['nombre'];
-	$this->apellidos = $tupla['apellidos'];
-	$this->telefono = $tupla['telefono'];
-	$this->email = $tupla['email'];
-	$this->direccion = $tupla['direccion'];
+	$this->nombre = $tupla['Nombre'];
+	$this->apellidos = $tupla['Apellidos'];
+	$this->telefono = $tupla['Telefono'];
+	$this->email = $tupla['Correo'];
+	$this->direccion = $tupla['Direccion'];
 
     $this->render();
 }
@@ -51,7 +51,7 @@ function render(){
                 <tr><th><?php echo $strings['Apellidos'] ?></th><td><?php echo $this->apellidos ?></td></tr>
                 <tr><th><?php echo $strings['Telefono'] ?></th><td><?php echo $this->telefono ?></td></tr>
                 <tr><th><?php echo $strings['Email'] ?></th><td><?php echo $this->email ?></td></tr>
-                <tr><th><?php echo $strings['Direccion'] ?></th><td><?php echo $strings[$this->direccion] ?></td></tr>
+                <tr><th><?php echo $strings['Direccion'] ?></th><td><?php echo $this->direccion ?></td></tr>
             </table>
             <div class="accionesTable">
                 <a href="../Controllers/USUARIO_Controller.php?action=SHOWALL"><input type="image" name="action" value="SHOWALL" src="../Views/images/back.png" title="<?php echo $strings['Volver'] ?>"></a>

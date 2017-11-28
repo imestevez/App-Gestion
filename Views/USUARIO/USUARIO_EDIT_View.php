@@ -1,14 +1,14 @@
 <?php
 
 /*
-//Clase : USUARIOS_EDIT
+//Clase : USUARIO_EDIT
 //Creado el : 24-11-2017
 //Creado por: SOLFAMIDAS
 //-----------------
 Muestra el formulario con los datos del usuario indicado permitiendo modificarlos
 
 */
-class USUARIOS_EDIT{
+class USUARIO_EDIT{
 
    
     var $login; //declaración del atributo login del usuario
@@ -25,11 +25,11 @@ function __construct($tupla){
     $this->login = $tupla['login'];
     $this->DNI = $tupla['DNI'];
     $this->password = $tupla['password'];
-    $this->nombre = $tupla['nombre'];
-    $this->apellidos = $tupla['apellidos'];
-    $this->telefono = $tupla['telefono'];
-    $this->email = $tupla['email'];
-    $this->direccion = $tupla['direccion'];
+    $this->nombre = $tupla['Nombre'];
+    $this->apellidos = $tupla['Apellidos'];
+    $this->telefono = $tupla['Telefono'];
+    $this->email = $tupla['Correo'];
+    $this->direccion = $tupla['Direccion'];
 
     $this->render();
 }
@@ -100,7 +100,7 @@ function render(){
                 </div>
                     
                 <div class="acciones" style="float: right; margin-left:0%; margin-right: 50%">
-                    <a href="../Controllers/USUARIO_Controller.php?action=EDIT"> <input type="image" name="action" value="EDIT" src="../Views/images/confirmar.png" title="<?php echo $strings['Enviar Formulario'] ?>" onclick="return validar('EDIT') && encriptar()"></a>
+                    <a href="../Controllers/USUARIO_Controller.php?action=EDIT"> <input type="image" name="action" value="EDIT" src="../Views/images/confirmar.png" title="<?php echo $strings['Enviar Formulario'] ?>" onclick=" encriptar()"></a>
                 </div>
              </form>                     
                 <div class="acciones" style="float: left;">

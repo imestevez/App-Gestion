@@ -1,6 +1,6 @@
 <?php
 /*
-//Clase : USUARIOS_SHOWALL
+//Clase : USUARIO_SHOWALL
 //Creado el : 24-11-2017
 //Creado por: SOLFAMIDAS
 //-------------------------------------------------------
@@ -8,7 +8,7 @@
     Esta clase es la vista de los usuarios de la BD
 
 */
-class USUARIOS_SHOWALL{
+class USUARIO_SHOWALL{
 
     var $datos;  //tuplas almacenadas en la BD
     var $origen; //Almacena el origen de la orden
@@ -68,11 +68,11 @@ function render(){
                 <tr>
                 <td><?php echo $row["login"]; ?></td>
                 <td><?php echo $row["DNI"]; ?></td>
-                <td><?php echo $row["nombre"]; ?></td>
-                <td><?php echo $row["apellidos"]; ?></td>
-                <td><?php echo $row["telefono"]; ?></td>
-                <td><?php echo $row["email"]; ?></td>
-                <td><?php echo $row["direccion"]; ?></td>
+                <td><?php echo $row["Nombre"]; ?></td>
+                <td><?php echo $row["Apellidos"]; ?></td>
+                <td><?php echo $row["Telefono"]; ?></td>
+                <td><?php echo $row["Correo"]; ?></td>
+                <td><?php echo $row["Direccion"]; ?></td>
 
                 <td class="edit_tabla">
                     <a href="../Controllers/USUARIO_Controller.php?action=SHOWCURRENT&login=<?php echo $row["login"]?>"><input type="image" src="../Views/images/ojo.png" name="action" title="<?php echo $strings['Mostrar en detalle'] ?>" value="SHOWCURRENT" action=""></a>
@@ -140,11 +140,11 @@ function renderSearch(){
 ?>  <tr>
                 <td><?php echo $row["login"]; ?></td>
                 <td><?php echo $row["DNI"]; ?></td>
-                <td><?php echo $row["nombre"]; ?></td>
-                <td><?php echo $row["apellidos"]; ?></td>
-                <td><?php echo $row["telefono"]; ?></td>
-                <td><?php echo $row["email"]; ?></td>
-                <td><?php echo $row["direccion"]; ?></td>
+                <td><?php echo $row["Nombre"]; ?></td>
+                <td><?php echo $row["Apellidos"]; ?></td>
+                <td><?php echo $row["Telefono"]; ?></td>
+                <td><?php echo $row["Correo"]; ?></td>
+                <td><?php echo $row["Direccion"]; ?></td>
 
             <td class="edit_tabla">
                     <a href="../Controllers/USUARIO_Controller.php?action=SHOWCURRENT&login=<?php echo $row["login"]?>"><input type="image" src="../Views/images/ojo.png" name="action" title="<?php echo $strings['Mostrar en detalle'] ?>" value="SHOWCURRENT" action=""></a>

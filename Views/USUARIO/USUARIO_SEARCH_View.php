@@ -1,14 +1,14 @@
 <?php
 
 /*
-//Clase : USUARIOS_SEARCH
+//Clase : USUARIO_SEARCH
 //Creado el : 24-11-2017
 //Creado por: SOLFAMIDAS
 //-------------------------------------------------------
 
 Muestra el formulario de búsqueda de usuarios con todos los campos
 */
-class USUARIOS_SEARCH {
+class USUARIO_SEARCH {
    function __construct(){
     $this->render();
    }
@@ -54,7 +54,7 @@ function render(){
                 </div>
                <div  id="izquierda">
                         <label for="email"><?php echo $strings['Email']?>: </label>
-                         <input type="text" name="email" maxlength="60" size="60" placeholder="<?php echo $strings['ejemplo']?>@email.com"  value="<?php echo $this->email?>" onblur="javascript:void(validarEmailBuscar(this, 60))" ><div id="email" class="oculto" style="display:none"><?php echo $strings['div_email']?></div> 
+                         <input type="text" name="email" maxlength="60" size="60" placeholder="<?php echo $strings['ejemplo']?>@email.com"  onblur="javascript:void(validarEmailBuscar(this, 60))" ><div id="email" class="oculto" style="display:none"><?php echo $strings['div_email']?></div> 
                 </div>
                 <div  id="izquierda">
                         <label for="direccion"><?php echo $strings['Direccion']?>: </label>
@@ -62,7 +62,7 @@ function render(){
                 </div>
                 <div class="acciones" style="float: right; margin-left:0%; margin-right: 50%">
                    
-                     <a href="../Controllers/USUARIO_Controller.php?action=SEARCH"><input type="image" name="action" value="SEARCH" action="#" src="../Views/images/search.png" title="<?php echo $strings['Buscar']?>" onclick=" return validar('SEARCH')" ></a>
+                     <a href="../Controllers/USUARIO_Controller.php?action=SEARCH"><input type="image" name="action" value="SEARCH" action="#" src="../Views/images/search.png" title="<?php echo $strings['Buscar']?>" onclick="" ></a>
                 </div>
              </form>  
                    <div class="acciones" style="float: left;">

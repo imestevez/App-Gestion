@@ -1,7 +1,7 @@
 <?php
 
 /*
-//Clase : USUARIOS_ADD
+//Clase : USUARIO_ADD
 //Creado el : 24-11-2017
 //Creado por: SOLFAMIDAS
 //-------------------------------------------------------
@@ -9,7 +9,7 @@
 Muestra el formulario de registro que permite al usuario añadir sus datos al sistema
 
 */
-class USUARIOS_ADD {
+class USUARIO_ADD {
    function __construct(){
     $this->render();
    }

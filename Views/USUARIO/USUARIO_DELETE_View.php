@@ -1,6 +1,6 @@
 <?php
 /*
-//Clase : USUARIOS_DELETE
+//Clase : USUARIO_DELETE
 //Creado el : 24-11-2017
 //Creado por: SOLFAMIDAS
 //-------------------------------------------------------
@@ -8,9 +8,9 @@
 Muestra la tabla de borrado del usuario seleccionado
 
 */
-class USUARIOS_DELETE{
+class USUARIO_DELETE{
 
-	   var $login; //declaración del atributo login del usuario
+	  var $login; //declaración del atributo login del usuario
     var $password; //declaración del atributo password del usuario
     var $DNI; //declaración del atributo DNI del usuario
     var $nombre; //declaración del atributo nombre
@@ -25,11 +25,11 @@ function __construct($tupla){
 	//asignación de valores de parámetro a los atributos de la clase
 	$this->login = $tupla['login'];
   $this->DNI = $tupla['DNI'];
-	$this->nombre = $tupla['nombre'];
-	$this->apellidos = $tupla['apellidos'];
-	$this->telefono = $tupla['telefono'];
-	$this->email = $tupla['email'];
-  $this->direccion = $tupla['direccion'];
+	$this->nombre = $tupla['Nombre'];
+	$this->apellidos = $tupla['Apellidos'];
+	$this->telefono = $tupla['Telefono'];
+	$this->email = $tupla['Correo'];
+  $this->direccion = $tupla['Direccion'];
 
   $this->render();
 }
@@ -56,13 +56,13 @@ function render(){
 
 
        <form method="post" name="DELETE" action="../Controllers/USUARIO_Controller.php" enctype="multipart/form-data" >
-                <input class="del" type="text" name="login" maxlength="15" size="<?php echo strlen($this->login); ?>" readonly value="<?php echo $this->login ?>" >
-                <input class="del" type="text" name="DNI" maxlength="9" size="9" readonly value="<?php echo $this->DNI ?>">
-                <input class="del" type="text" name="nombre" maxlength="30" size="<?php echo strlen($this->nombre); ?>" readonly value="<?php echo $this->nombre ?>">
-                <input class="del" type="text"  name="apellidos" maxlength="50" size="<?php echo strlen($this->apellidos); ?>" readonly value="<?php echo $this->apellidos ?>" >
-                <input class="del" type="text" name="telefono" maxlength="11" size="11" readonly  value="<?php echo $this->telefono ?>">
-                <input class="del" type="email" name="email" maxlength="60" size="<?php echo strlen($this->email); ?> " placeholder="ejemplo@email.com" readonly value="<?php echo $this->email?>" >
-                <input class="del" type="text" name="direccion" maxlength="60" size="<?php echo strlen($this->direccion); ?>" readonly value="<?php echo $this->direccion ?>">
+                <input class="del" type="text" name="login" size="<?php echo strlen($this->login); ?>" readonly value="<?php echo $this->login ?>" >
+                <input class="del" type="text" name="DNI" size="9" readonly value="<?php echo $this->DNI ?>">
+                <input class="del" type="text" name="nombre" size="<?php echo strlen($this->nombre); ?>" readonly value="<?php echo $this->nombre ?>">
+                <input class="del" type="text"  name="apellidos" size="<?php echo strlen($this->apellidos); ?>" readonly value="<?php echo $this->apellidos ?>" >
+                <input class="del" type="text" name="telefono" size="11" readonly  value="<?php echo $this->telefono ?>">
+                <input class="del" type="email" name="email" size="<?php echo strlen($this->email); ?> " placeholder="ejemplo@email.com" readonly value="<?php echo $this->email?>" >
+                <input class="del" type="text" name="direccion" size="<?php echo strlen($this->direccion); ?>" readonly value="<?php echo $this->direccion ?>">
 
                   <div class="accionesTable" style="margin-left: 0%; float: right; margin-right: 45%">
 
