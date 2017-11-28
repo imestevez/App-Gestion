@@ -64,7 +64,7 @@ array(
 	'div_telefono_vacio' => 'O Teléfono non pode estar vacío',
 	'div_email' => 'Solo se aceptan letras, números e os caracteres @ . _ -',
 	'div_email_vacio' => 'O Email non pode estar vacío',
-	'div_fecha_vacia' => 'A Data de Nacemento non pode estar vacía',
+	'div_fecha_vacia' => 'A data non pode estar vacía',
 	'div_fecha' => 'A Data de Nacemento debe ser inferior a la actual',
 	'div_foto_vacia' => 'A Foto persoal non pode estar vacía',
 	'div_sexo_vacio' => 'O Sexo non pode estar vacío',
@@ -198,8 +198,17 @@ array(
 
 
  // ------------------------ ESPACIO DE TRABAJO PARA IVAN ---------------------------
-
-
+'Gestiones' => 'Xestións',
+'Trabajos' => 'Traballos',
+'Añadir trabajo' => 'Añadir traballo',
+'IdTrabajo' => 'Id',
+'NombreTrabajo' => 'Nome',
+'FechaIniTrabajo' => 'Data Inicio',
+'FechaFinTrabajo' => 'Data Fin',
+'PorcentajeNota' => 'Porcentaxe nota',
+'Buscar trabajo' => 'Buscar traballo',
+'Editar trabajo' => 'Editar traballo',
+'div_letras' => 'Solo se aceptan numeros',
 
 
 
