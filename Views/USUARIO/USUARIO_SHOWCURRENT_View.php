@@ -44,7 +44,7 @@ function render(){
     <section class="pagina">
             <table class="showcurrent">
                 <caption><?php echo $strings['Vista en detalle de usuario'] ?></caption>
-                <tr><th><?php echo $strings['Campo'] ?></th><th>Valor</th></tr>
+                <tr><th><?php echo $strings['Campo'] ?></th><th><?php echo $strings['Valor'] ?></th></tr>
                 <tr><th><?php echo $strings['Login'] ?></th><td><?php echo $this->login ?></td></tr>
                 <tr><th><?php echo $strings['DNI'] ?></th><td><?php echo $this->DNI ?></td></tr>
                 <tr><th><?php echo $strings['Nombre'] ?></th><td><?php echo $this->nombre ?></td></tr>
