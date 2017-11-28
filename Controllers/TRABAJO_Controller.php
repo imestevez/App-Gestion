@@ -30,22 +30,40 @@ include '../Views/MESSAGE_View.php';
 
 // funcion para coger los datos del formulario
 function get_data_form(){
-//TRABAJO: *IdTrabajo (NombreTrabajo, FechIniTrabajo, FechFinTrabajo, )
 
-	$IdTrabajo = $_REQUEST['IdTrabajo'];
-	$NombreTrabajo = $_REQUEST['NombreTrabajo'];
-	$FechIniTrabajo = $_REQUEST['FechIniTrabajo'];
-	$FechFinTrabajo = $_REQUEST['FechFinTrabajo'];
-	$PorcetajeNota = $_REQUEST['PorcetajeNota'];
+	$IdTrabajo = '';
+	$NombreTrabajo = '';
+	$FechaIniTrabajo = '';
+	$FechaFinTrabajo = '';
+	$PorcentajeNota = '';
 	
+	$action = '';
+
+	if(isset($_REQUEST['IdTrabajo'])){
+	$IdTrabajo = $_REQUEST['IdTrabajo'];
+	}
+	if(isset($_REQUEST['NombreTrabajo'])){
+	$NombreTrabajo = $_REQUEST['NombreTrabajo'];
+	}
+	if(isset($_REQUEST['FechaIniTrabajo'])){
+	$FechaIniTrabajo = $_REQUEST['FechaIniTrabajo'];
+	}
+	if(isset($_REQUEST['FechaFinTrabajo'])){
+	$FechaFinTrabajo = $_REQUEST['FechaFinTrabajo'];
+	}
+	if(isset($_REQUEST['PorcentajeNota'])){
+	$PorcentajeNota = $_REQUEST['PorcentajeNota'];
+	}
+	if(isset($_REQUEST['action'])){
 	$action = $_REQUEST['action'];
+	}
 
 	$TRABAJO = new TRABAJO_Model(
 		$IdTrabajo, 
 		$NombreTrabajo, 
-		$FechIniTrabajo, 
-		$FechFinTrabajo, 
-		$PorcetajeNota);
+		$FechaIniTrabajo, 
+		$FechaFinTrabajo, 
+		$PorcentajeNota);
 
 	return $TRABAJO;
 }
@@ -53,20 +71,39 @@ function get_data_form(){
 //Funcion para coger los datos del formulario de un usuario ya almacenado
 function get_data_UserBD(){
 
+	$IdTrabajo = '';
+	$NombreTrabajo = '';
+	$FechaIniTrabajo = '';
+	$FechaFinTrabajo = '';
+	$PorcentajeNota = '';
+	
+	$action = '';
+
+	if(isset($_REQUEST['IdTrabajo'])){
 	$IdTrabajo = $_REQUEST['IdTrabajo'];
+	}
+	if(isset($_REQUEST['NombreTrabajo'])){
 	$NombreTrabajo = $_REQUEST['NombreTrabajo'];
-	$FechIniTrabajo = $_REQUEST['FechIniTrabajo'];
-	$FechFinTrabajo = $_REQUEST['FechFinTrabajo'];
-	$PorcetajeNota = $_REQUEST['PorcetajeNota'];
-
+	}
+	if(isset($_REQUEST['FechaIniTrabajo'])){
+	$FechaIniTrabajo = $_REQUEST['FechaIniTrabajo'];
+	}
+	if(isset($_REQUEST['FechaFinTrabajo'])){
+	$FechaFinTrabajo = $_REQUEST['FechaFinTrabajo'];
+	}
+	if(isset($_REQUEST['PorcentajeNota'])){
+	$PorcentajeNota = $_REQUEST['PorcentajeNota'];
+	}
+	if(isset($_REQUEST['action'])){
 	$action = $_REQUEST['action'];
-
+	}
+	
 	$TRABAJO = new TRABAJO_Model(
 		$IdTrabajo, 
 		$NombreTrabajo, 
-		$FechIniTrabajo, 
-		$FechFinTrabajo, 
-		$PorcetajeNota);
+		$FechaIniTrabajo, 
+		$FechaFinTrabajo, 
+		$PorcentajeNota);
 
 	return $TRABAJO;
 }
@@ -125,7 +162,7 @@ if (!isset($_REQUEST['action'])){
 			else{
 				$TRABAJO = get_data_UserBD(); //coge los datos del formulario del usuario que desea buscar
 				$datos = $TRABAJO->SEARCH();//Ejecuta la funcion SEARCH() en el TRABAJO_Model
-				$lista = array('IdTrabajo','NombreTrabajo','FechIniTrabajo','FechFinTrabajo','PorcetajeNota');
+				$lista = array('IdTrabajo','NombreTrabajo','FechaIniTrabajo','FechaFinTrabajo','PorcentajeNota');
 				$resultado = new TRABAJO_SHOWALL($lista, $datos, 0, 0, 0, 0, 'SEARCH', '../Controllers/TRABAJO_Controller.php');//Crea la vista SHOWALL y muestra los usuarios que cumplen los parámetros de búsqueda 
 			}
 			break;
@@ -136,7 +173,7 @@ if (!isset($_REQUEST['action'])){
 			break;
 		default: //Por defecto, Se muestra la vista SHOWALL
 			if (!$_POST){
-				$TRABAJO = new TRABAJO_Model($_REQUEST['IdTrabajo'], '','','', '');//crea un un TRABAJO_Model con el IdTrabajo del usuario 
+				$TRABAJO = new TRABAJO_Model('', '','','', '');//crea un un TRABAJO_Model con el IdTrabajo del usuario 
 			}
 			else{
 				$TRABAJO = get_data_form(); //Coge los datos del formulario
@@ -151,7 +188,7 @@ if (!isset($_REQUEST['action'])){
 			$max_tuplas = $num_tupla+10; // el número de tuplas a mostrar por página
 			$totalTuplas = $TRABAJO->contarTuplas(); //Cuenta el número de tuplas que hay en la BD
 			$datos = $TRABAJO->SHOWALL($num_tupla,$max_tuplas); //Ejecuta la funcion SHOWALL() en el TRABAJO_Model
-			$lista = array('IdTrabajo', 'NombreTrabajo', 'FechIniTrabajo','FechFinTrabajo','PorcetajeNota');
+			$lista = array('IdTrabajo', 'NombreTrabajo', 'FechaIniTrabajo','FechaFinTrabajo','PorcentajeNota');
 			$UsuariosBD = new TRABAJO_SHOWALL($lista, $datos, $num_tupla, $max_tuplas, $totalTuplas, $num_pagina, 'SHOWALL', '../Controllers/TRABAJO_Controller.php'); //Crea la vista SHOWALL de los usuarios de la BD	
 	}
 
