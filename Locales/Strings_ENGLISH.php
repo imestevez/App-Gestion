@@ -248,17 +248,17 @@ array(
 
 
 // ------------------------ ESPACIO DE TRABAJO PARA PABLO ---------------------------
-
-
-
-
-
-
-
-
-
-
-
+//Funcionalidades
+	'div_vacio' => 'The field can not be empty',
+	'Funcionalidades' => 'Functionalities',
+	'Id Funcionalidad' => 'Id Functionality',
+	'Nombre Funcionalidad' => 'Name Functionality',
+	'Descripción Funcionalidad' => 'Description Functionality',
+	'Añadir Funcionalidad' => 'Add Functionality',
+	'Borrar Funcionalidad' => 'Delete Functionality',
+	'Editar Funcionalidad' => 'Edit Functionality',
+	'Buscar Funcionalidad' => 'Search Functionality',
+	'Funcionalidad' => 'Functionality',
 
 
 
