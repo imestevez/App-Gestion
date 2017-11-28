@@ -359,7 +359,8 @@ array(
 	'Nombre de la accion' => 'Action Name',
 	'Descripcion de la accion' => 'Action description',
 	'Búsqueda de accion' => 'Action search',
-	'Acciones'=> 'Actions'
+	'Acciones'=> 'Actions',
+	'Búsqueda de acciones' => 'Search actions'
 	
  )
 ;
