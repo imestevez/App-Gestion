@@ -1,7 +1,7 @@
 
 <?php
 /*
-//Clase : USUARIOS_Model.php
+//Clase : USUARIO_Model.php
 //Creado el : 13-10-2017
 //Creado por: SOLFAMIDAS
 //-------------------------------------------------------
@@ -17,7 +17,7 @@ class USUARIO_Model { //declaración de la clase
 	var $apellidos; //declaración del atributo apellidos
 	var $telefono; //declaración del atributo telefono
 	var $email; //declaración del atributo email
-	var $direccion; // declaración del atributo FechaNacimiento
+	var $direccion; // declaración del atributo direccion
 	var $lista; // array para almacenar los datos del usuario
 	var $mysqli; // declaración del atributo manejador de la bd
 
