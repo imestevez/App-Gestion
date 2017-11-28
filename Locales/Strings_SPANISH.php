@@ -117,7 +117,7 @@ array(
 	'Inserción realizada con éxito' => 'Inserción realizada con éxito',
 
 
-
+	
 
 
 	'del usuario' => 'de',
@@ -248,17 +248,17 @@ array(
 
 
 // ------------------------ ESPACIO DE TRABAJO PARA PABLO ---------------------------
-
-
-
-
-
-
-
-
-
-
-
+//Funcionalidades
+	'div_vacio' => 'El campo no puede estar vacío.',
+	'Funcionalidades' => 'Funcionalidades',
+	'Id Funcionalidad' => 'Id Funcionalidad',
+	'Nombre Funcionalidad' => 'Nombre Funcionalidad',
+	'Descripción Funcionalidad' => 'Descripción Funcionalidad',
+	'Añadir Funcionalidad' => 'Añadir Funcionalidad',
+	'Borrar Funcionalidad' => 'Borrar Funcionalidad',
+	'Editar Funcionalidad' => 'Editar Funcionalidad',
+	'Buscar Funcionalidad' => 'Buscar Funcionalidad',
+	'Funcionalidad' => 'Funcionalidad',
 
 
 
