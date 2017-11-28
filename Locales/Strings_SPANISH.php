@@ -65,7 +65,7 @@ array(
 	'div_email' => 'Solo se aceptan letras, números y los caracteres @ . _ -',
 	'div_email_vacio' => 'El Email no puede estar vacío',
 	'div_fecha_vacia' => 'La Fecha de Nacimiento no puede estar vacía',
-	'div_fecha' => 'La Fecha de Nacimiento debe ser inferior a la actual',
+	'div_fecha' => 'La fecha debe ser inferior a la actual',
 	'div_foto_vacia' => 'La Foto personal no puede estar vacía',
 	'div_sexo_vacio' => 'El Sexo no puede estar vacío',
 	'div_tam' => 'El tamaño del campo supera el máximo permitido, 50 caracteres',
@@ -198,15 +198,16 @@ array(
 
 
  // ------------------------ ESPACIO DE TRABAJO PARA IVAN ---------------------------
-
-
-
-
-
-
-
-
-
+'Gestiones' => 'Gestiones',
+'Trabajos' => 'Trabajos',
+'Añadir trabajo' => 'Añadir trabajo',
+'IdTrabajo' => 'Id',
+'NombreTrabajo' => 'Nombre',
+'FechaIniTrabajo' => 'Fecha Inicio',
+'FechaFinTrabajo' => 'Fecha Fin',
+'PorcentajeNota' => 'Porcentaje nota',
+'Borrar trabajo' => 'Borrar trabajo',
+'Buscar trabajo' => 'Buscar trabajo',
 
 
 
