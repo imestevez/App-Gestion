@@ -190,7 +190,7 @@ function validarIdFuncionalidadBuscar(IdFuncionalidad, tamaño_max)
 }
 
 //Función para validar la búsqueda por NombreFuncionalidad
-function validarNomnreFuncionalidadBuscar(NombreFuncionalidad, tamaño_max)
+function validarNombreFuncionalidadBuscar(NombreFuncionalidad, tamaño_max)
 {
     if(comprobarVacioBuscar(NombreFuncionalidad)){ //Si el IdFuncionalidad no está vacío
         if(comprobarAlfanumericoBuscar(NombreFuncionalidad,tamaño_max)) //Si cumple la expresión regular de campo Alfabético
