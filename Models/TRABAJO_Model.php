@@ -13,41 +13,41 @@ class TRABAJO_Model { //declaración de la clase
 
 	var $IdTrabajo; //atributo IdTrabajo
 	var $NombreTrabajo; //atributo NombreTrabajo
-	var $FechIniTrabajo; // declaración del atributo FechIniTrabajo
-	var $FechFinTrabajo; //declaración del atributo FechFinTrabajo
-	var $PorcetajeNota; //declaración del atributo PorcetajeNota
+	var $FechaIniTrabajo; // declaración del atributo FechaIniTrabajo
+	var $FechaFinTrabajo; //declaración del atributo FechaFinTrabajo
+	var $PorcentajeNota; //declaración del atributo PorcentajeNota
 	var $lista; // array para almacenar los datos del usuario
 	var $mysqli; // declaración del atributo manejador de la bd
 
 //Constructor de la clase
 
-function __construct($IdTrabajo, $NombreTrabajo, $FechIniTrabajo,$FechFinTrabajo,$PorcetajeNota){
+function __construct($IdTrabajo, $NombreTrabajo, $FechaIniTrabajo,$FechaFinTrabajo,$PorcentajeNota){
 	//asignación de valores de parámetro a los atributos de la clase
 	$this->IdTrabajo = $IdTrabajo;
 	$this->NombreTrabajo = $NombreTrabajo;
-	$this->FechIniTrabajo = $FechIniTrabajo;
-    $this->FechFinTrabajo = $FechFinTrabajo;
-	$this->PorcetajeNota = $PorcetajeNota;
+	$this->FechaIniTrabajo = $FechaIniTrabajo;
+    $this->FechaFinTrabajo = $FechaFinTrabajo;
+	$this->PorcentajeNota = $PorcentajeNota;
 
 	//si la Fecha viene vacia la asignamos vacia
-	if ($FechIniTrabajo == ''){
+	if ($FechaIniTrabajo == ''){
 
-		$this->FechIniTrabajo = NULL;
+		$this->FechaIniTrabajo = NULL;
 	}
 	else{ // si no viene vacia 
-		if(strlen($this->FechIniTrabajo) == 10){	//si viene la fecha entera le cambiamos el formato para que se adecue al de la bd
+		if(strlen($this->FechaIniTrabajo) == 10){	//si viene la fecha entera le cambiamos el formato para que se adecue al de la bd
 
-		$this->FechIniTrabajo = date_format(date_create($this->FechIniTrabajo), 'Y-m-d');
+		$this->FechaIniTrabajo = date_format(date_create($this->FechaIniTrabajo), 'Y-m-d');
 
 		}
 	}
 	//si la Fecha  viene vacia la asignamos vacia
-	if ($FechFinTrabajo == ''){
-		$this->FechFinTrabajo = NULL;
+	if ($FechaFinTrabajo == ''){
+		$this->FechaFinTrabajo = NULL;
 	}
 	else{ // si no viene vacia 
-		if(strlen($this->FechFinTrabajo) == 10){	//si viene la fecha entera le cambiamos el formato para que se adecue al de la bd
-		$this->FechFinTrabajo = date_format(date_create($this->FechFinTrabajo), 'Y-m-d');
+		if(strlen($this->FechaFinTrabajo) == 10){	//si viene la fecha entera le cambiamos el formato para que se adecue al de la bd
+		$this->FechaFinTrabajo = date_format(date_create($this->FechaFinTrabajo), 'Y-m-d');
 
 		}
 
@@ -63,9 +63,9 @@ function __construct($IdTrabajo, $NombreTrabajo, $FechIniTrabajo,$FechFinTrabajo
 	$this->lista = array(
 			"IdTrabajo"=>$this->IdTrabajo,
 			"NombreTrabajo"=>$this->NombreTrabajo,
-			"FechIniTrabajo"=>$this->FechIniTrabajo,
-			"FechFinTrabajo" => $this->FechFinTrabajo,
-			"PorcetajeNota" => $this->PorcetajeNota,
+			"FechaIniTrabajo"=>$this->FechaIniTrabajo,
+			"FechaFinTrabajo" => $this->FechaFinTrabajo,
+			"PorcentajeNota" => $this->PorcentajeNota,
 			"sql" => $this->mysqli, 
 			"mensaje"=> '');
 } // fin del constructor
@@ -99,15 +99,14 @@ function ADD()
 				$sql = "INSERT INTO TRABAJO(
 				IdTrabajo,
 				NombreTrabajo,
-				FechIniTrabajo,
-				FechFinTrabajo,
-				PorcetajeNota) VALUES(
+				FechaIniTrabajo,
+				FechaFinTrabajo,
+				PorcentajeNota) VALUES(
 									'$this->IdTrabajo',
 									'$this->NombreTrabajo',
-									'$this->FechIniTrabajo',
-									'$this->FechFinTrabajo',
-									'$this->PorcetajeNota')";
-				echo $sql;
+									'$this->FechaIniTrabajo',
+									'$this->FechaFinTrabajo',
+									'$this->PorcentajeNota')";
 				 if (!($result = $this->mysqli->query($sql))){ //si da error la consulta se comrpueba el por que
 					//Si no hay atributos Clave y unique duplicados es que hay campos sin completar
         			return 'ERROR: Introduzca todos los valores de todos los campos'; // introduzca un valor para el usuario
@@ -119,7 +118,7 @@ function ADD()
 				}
 			}else{ //si hay un IdTrabajo igual
 
-	        	$this->lista['mensaje'] = 'ERROR: Fallo en la inserción. Ya existe el IdTrabajo'; 
+	        	$this->lista['mensaje'] = 'ERROR: Fallo en la inserción. Ya existe el Id'; 
 				return $this->lista; 
 			}
 		}
@@ -146,17 +145,17 @@ function SEARCH()
 { 	// construimos la sentencia de busqueda con LIKE y los atributos de la entidad
     $sql = "SELECT  IdTrabajo,
     				NombreTrabajo,
-    				FechIniTrabajo,
-					FechFinTrabajo,
-					PorcetajeNota
+    				FechaIniTrabajo,
+					FechaFinTrabajo,
+					PorcentajeNota
        			FROM TRABAJO 
     			WHERE 
     				(
     				(IdTrabajo LIKE '%$this->IdTrabajo%') &&
     				(NombreTrabajo LIKE '%$this->NombreTrabajo%') &&
-    				(FechIniTrabajo LIKE '%$this->FechIniTrabajo%') &&
-	 				(FechFinTrabajo LIKE '%$this->FechFinTrabajo%') &&
-	 				(PorcetajeNota LIKE '%$this->PorcetajeNota%') 
+    				(FechaIniTrabajo LIKE '%$this->FechaIniTrabajo%') &&
+	 				(FechaFinTrabajo LIKE '%$this->FechaFinTrabajo%') &&
+	 				(PorcentajeNota LIKE '%$this->PorcentajeNota%') 
 	 				)";
     				
 
@@ -221,9 +220,9 @@ function EDIT()
 	if(
 		$this->IdTrabajo <> '' &&
 		$this->NombreTrabajo <> '' &&
-		$this->FechIniTrabajo <> '' &&
-		$this->FechFinTrabajo <> '' &&
-		$this->PorcetajeNota <> ''){
+		$this->FechaIniTrabajo <> '' &&
+		$this->FechaFinTrabajo <> '' &&
+		$this->PorcentajeNota <> ''){
 
 		// se construye la sentencia de busqueda de la tupla en la bd
 	    $sql = "SELECT * FROM TRABAJO WHERE (IdTrabajo = '$this->IdTrabajo')";
@@ -237,23 +236,23 @@ function EDIT()
 			$sql = "UPDATE TRABAJO SET 
 						IdTrabajo = '$this->IdTrabajo',
 						NombreTrabajo = '$this->NombreTrabajo',
-						FechIniTrabajo = '$this->FechIniTrabajo',
-						FechFinTrabajo = '$this->FechFinTrabajo',
-						PorcetajeNota = '$this->PorcetajeNota'
+						FechaIniTrabajo = '$this->FechaIniTrabajo',
+						FechaFinTrabajo = '$this->FechaFinTrabajo',
+						PorcentajeNota = '$this->PorcentajeNota'
 					WHERE ( IdTrabajo = '$this->IdTrabajo')";
 					
 			// si hay un problema con la query se envia un mensaje de error en la modificacion
 	        if (!($result = $this->mysqli->query($sql))){
 
 			        		// se construye la sentencia de busqueda de la tupla en la bd
-			    $sql = "SELECT * FROM TRABAJO WHERE (FechIniTrabajo = '$this->FechIniTrabajo')";
+			    $sql = "SELECT * FROM TRABAJO WHERE (FechaIniTrabajo = '$this->FechaIniTrabajo')";
 			    // se ejecuta la query
 			    $result = $this->mysqli->query($sql);
 			    $num_rows = mysqli_num_rows($result);
 			    $row = $result->fetch_array();
 
 			    if( ($num_rows == 1) && ( $row['IdTrabajo'] != $this->IdTrabajo) ){ //Si devuelve 1 tupla y no coinciden los IdTrabajo
-			    	$this->lista['mensaje'] = 'ERROR: Fallo en la modificación. Ya existe FechIniTrabajo'; //añadir a strings
+			    	$this->lista['mensaje'] = 'ERROR: Fallo en la modificación. Ya existe FechaIniTrabajo'; //añadir a strings
 					return $this->lista;
 				}
 		    }	
@@ -278,11 +277,8 @@ function EDIT()
 
 function SHOWALL($num_tupla,$max_tuplas){
 
-	//$sql = "SELECT * FROM TRABAJO";
-
 	$sql = "SELECT * FROM TRABAJO LIMIT $num_tupla, $max_tuplas";
 
-	//echo $sql;
 
 	    // si se produce un error en la busqueda mandamos el mensaje de error en la consulta
     if (!($resultado = $this->mysqli->query($sql))){

@@ -65,7 +65,7 @@ array(
 	'div_email' => 'Only letters, numbers and the characters @ . _ - are accepted',
 	'div_email_vacio' => 'The Email cannot be empty',
 	'div_fecha_vacia' => 'The Date of birth cannot be empty',
-	'div_fecha' => 'The Date of birth must be lower than the current one',
+	'div_fecha' => 'The date must be lower than the current one',
 	'div_foto_vacia' => 'The Personal photo cannot be empty',
 	'div_sexo_vacio' => 'The Sex cannot be empty',
 	'div_tam' => 'The size of the field overcomes the allowed maximum, 50 characters',
@@ -206,11 +206,18 @@ array(
 
 
  // ------------------------ ESPACIO DE TRABAJO PARA IVAN ---------------------------
-
-
-
-
-
+'Gestiones' => 'Management',
+'Trabajos' => 'Works',
+'Añadir trabajo' => 'Add work',
+'IdTrabajo' => 'Id',
+'NombreTrabajo' => 'Name',
+'FechaIniTrabajo' => 'Date to begin',
+'FechaFinTrabajo' => 'Date to finish',
+'PorcentajeNota' => 'Percentage of qualification',
+'Borrar trabajo' => 'Delete work',
+'Buscar trabajo' => 'Search work',
+'Editar trabajo' => 'Edit work',
+'div_letras' => 'Only are accepted numbers',
 
 
 
