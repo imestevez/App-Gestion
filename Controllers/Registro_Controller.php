@@ -48,7 +48,7 @@ else{
 
 	if ($respuesta == 'true'){ //si estan correctamente
 		$respuesta = $USUARIOS->ADD(); //añade al usuaurio en la BD
-		Include '../Views/MESSAGE_View.php';
+		include '../Views/MESSAGE_View.php';
 		new MESSAGE($respuesta['mensaje'], 'Login_Controller.php');
 		}	
 	}

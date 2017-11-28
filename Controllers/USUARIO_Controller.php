@@ -4,7 +4,7 @@
 /*
 //Script : USUARIO_Controller.php
 //Creado el : 13-10-2017
-//Creado por: SOLFAMIDAS
+//Creado por: vugsj4
 //-------------------------------------------------------
 
 Controlador que recibe las peticiones del usuario y este ejectuta las acciones pertinentes sobre el Model de datos y las vistas
@@ -149,7 +149,7 @@ if (!isset($_REQUEST['action'])){
 			break;
 		default: //Por defecto, Se muestra la vista SHOWALL
 			if (!$_POST){
-				$USUARIO = new USUARIO_Model($_REQUEST['login'], '','','', '', '', '', '');//crea un un USUARIO_Model con el login del usuario 
+				$USUARIO = new USUARIO_Model('', '','','', '', '', '', '');//crea un un USUARIO_Model con el login del usuario 
 			}
 			else{
 				$USUARIO = get_data_form(); //Coge los datos del formulario
@@ -164,7 +164,7 @@ if (!isset($_REQUEST['action'])){
 			$max_tuplas = $num_tupla+10; // el número de tuplas a mostrar por página
 			$totalTuplas = $USUARIO->contarTuplas(); //Cuenta el número de tuplas que hay en la BD
 			$datos = $USUARIO->SHOWALL($num_tupla,$max_tuplas); //Ejecuta la funcion SHOWALL() en el USUARIO_Model
-			$lista = array('login', 'password', 'DNI','nombre','apellidos','telefono','email','direccion');
+			$lista = array('login', 'password', 'DNI','Nombre','Apellidos','Telefono','Email','Direccion');
 			$UsuariosBD = new USUARIO_SHOWALL($lista, $datos, $num_tupla, $max_tuplas, $totalTuplas, $num_pagina, 'SHOWALL', '../Controllers/USUARIO_Controller.php'); //Crea la vista SHOWALL de los usuarios de la BD	
 	}
 
