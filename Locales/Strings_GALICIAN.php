@@ -148,7 +148,15 @@ array(
 
 
 	// ----------------- ESPACIO DE TRABAJO PARA DANIEL -------------------------
-
+	'AñadirGrupo' => 'Engadir Grupo',
+	'NombreGrupo' => 'Nome Grupo',
+	'DescripGrupo' => 'Descripción Grupo',
+	'IdGrupo' => 'IdGrupo',
+	'BorrarGrupo' => 'Borrar Grupo',
+	'EditarGrupo' => 'Editar Grupo',
+	'BuscaGrupo' => 'Buscar Grupo',
+	'Grupos' => 'Grupos',
+	'Vista en detalle de grupo' => 'Vista en detalle do Grupo'
 
 
 

@@ -121,7 +121,7 @@ array(
 
 
 	'del usuario' => 'de',
-
+	'div_vacio' => 'El campo no puede estar vacío',
 
 	'idiomaSeleccionado' => 'ESPAÑOL',
 
@@ -148,15 +148,15 @@ array(
 
 
 // ----------------- ESPACIO DE TRABAJO PARA DANIEL -------------------------
-
-
-
-
-
-
-
-
-
+	'AñadirGrupo' => 'Añadir Grupo',
+	'NombreGrupo' => 'Nombre Grupo',
+	'DescripGrupo' => 'Descripción Grupo',
+	'IdGrupo' => 'IdGrupo',
+	'BorrarGrupo' => 'Borrar Grupo',
+	'EditarGrupo' => 'Editar Grupo',
+	'BuscaGrupo' => 'Buscar Grupo',
+	'Grupos' => 'Grupos',
+	'Vista en detalle de grupo' => 'Vista en detalle de Grupo',
 
 
 
