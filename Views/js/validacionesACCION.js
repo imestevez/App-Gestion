@@ -3,7 +3,7 @@
     Creado el: 28/11/2017
     Creado por: SOLFAMIDAS;
     
-    El fichero validacionesFUNCIONALIDADES.js contiene las funciones necesarias para validar los formularios de Funcionalidad.
+    El fichero validacionesACCION.js contiene las funciones necesarias para validar los formularios de Funcionalidad.
 
 */
 
@@ -69,13 +69,13 @@ function comprobarAlfanumerico(campo, tamaño_max)
 -------------Funciones Necesarias para validar el formulario ADD y EDIT-----------------------
 --------------------------------------------------------------------------------------------*/
 
-//Función que comprueba que el IdFuncionalidad es de tipo alfanumérico y no supera el maximo permitido
-function validarIdFuncionalidad(IdFuncionalidad, tamaño_max)
+//Función que comprueba que el IdAccion es de tipo alfanumérico y no supera el maximo permitido
+function validarIdAccion(IdAccion, tamaño_max)
 {  
 
-  if(comprobarVacio(IdFuncionalidad))//Si el campo no está vacio el campo
+  if(comprobarVacio(IdAccion))//Si el campo no está vacio el campo
       {
-          if(comprobarAlfanumerico(IdFuncionalidad,tamaño_max))//Si login cumple la expresión regular de campo Alfabético
+          if(comprobarAlfanumerico(IdAccion,tamaño_max))//Si login cumple la expresión regular de campo Alfabético
        {
            return true;
        }else{ //Si no cumple la expresión regular
@@ -87,13 +87,13 @@ function validarIdFuncionalidad(IdFuncionalidad, tamaño_max)
 
 }
 
-//Función que comprueba que el NombreFuncionalidad es de tipo alfanumérico y no supera el maximo permitido
-function validarNombreFuncionalidad(NombreFuncionalidad, tamaño_max)
+//Función que comprueba que el NombreAccion es de tipo alfanumérico y no supera el maximo permitido
+function validarNombreAccion(NombreAccion, tamaño_max)
 {  
 
-  if(comprobarVacio(NombreFuncionalidad))//Si el campo no está vacio el campo
+  if(comprobarVacio(NombreAccion))//Si el campo no está vacio el campo
       {
-          if(comprobarAlfanumerico(NombreFuncionalidad,tamaño_max))//Si login cumple la expresión regular de campo Alfabético
+          if(comprobarAlfanumerico(NombreAccion,tamaño_max))//Si login cumple la expresión regular de campo Alfabético
        {
            return true;
        }else{ //Si no cumple la expresión regular
@@ -105,13 +105,13 @@ function validarNombreFuncionalidad(NombreFuncionalidad, tamaño_max)
 
 }
 
-//Función que comprueba que la DescripFuncionalidad es de tipo alfanumérico y no supera el maximo permitido
-function validarDescripFuncionalidad(DescripFuncionalidad, tamaño_max)
+//Función que comprueba que la DescripAccion es de tipo alfanumérico y no supera el maximo permitido
+function validarDescripAccion(DescripAccion, tamaño_max)
 {  
 
-  if(comprobarVacio(DescripFuncionalidad))//Si el campo no está vacio el campo
+  if(comprobarVacio(DescripAccion))//Si el campo no está vacio el campo
       {
-          if(comprobarAlfanumerico(DescripFuncionalidad,tamaño_max))//Si login cumple la expresión regular de campo Alfabético
+          if(comprobarAlfanumerico(DescripAccion,tamaño_max))//Si login cumple la expresión regular de campo Alfabético
        {
            return true;
        }else{ //Si no cumple la expresión regular
@@ -172,11 +172,11 @@ function comprobarAlfanumericoBuscar(campo, tamaño_max)
   }
 }
 
-//Función para validar la búsqueda por IdFuncionalidad
-function validarIdFuncionalidadBuscar(IdFuncionalidad, tamaño_max)
+//Función para validar la búsqueda por IdAccion
+function validarIdAccionBuscar(IdAccion, tamaño_max)
 {
-    if(comprobarVacioBuscar(IdFuncionalidad)){ //Si el IdFuncionalidad no está vacío
-        if(comprobarAlfanumericoBuscar(IdFuncionalidad,tamaño_max)) //Si cumple la expresión regular de campo Alfabético
+    if(comprobarVacioBuscar(IdAccion)){ //Si el IdAccion no está vacío
+        if(comprobarAlfanumericoBuscar(IdAccion,tamaño_max)) //Si cumple la expresión regular de campo Alfabético
             {
                 return true;
             }else{ //si no cumple la expresión regular
@@ -189,11 +189,11 @@ function validarIdFuncionalidadBuscar(IdFuncionalidad, tamaño_max)
 
 }
 
-//Función para validar la búsqueda por NombreFuncionalidad
-function validarNombreFuncionalidadBuscar(NombreFuncionalidad, tamaño_max)
+//Función para validar la búsqueda por NombreAccion
+function validarNombreAccionBuscar(NombreAccion, tamaño_max)
 {
-    if(comprobarVacioBuscar(NombreFuncionalidad)){ //Si el IdFuncionalidad no está vacío
-        if(comprobarAlfanumericoBuscar(NombreFuncionalidad,tamaño_max)) //Si cumple la expresión regular de campo Alfabético
+    if(comprobarVacioBuscar(NombreAccion)){ //Si el NombreAccion no está vacío
+        if(comprobarAlfanumericoBuscar(NombreAccion,tamaño_max)) //Si cumple la expresión regular de campo Alfabético
             {
                 return true;
             }else{ //si no cumple la expresión regular
@@ -206,11 +206,11 @@ function validarNombreFuncionalidadBuscar(NombreFuncionalidad, tamaño_max)
 
 }
 
-//Función para validar la búsqueda por DescripFuncionalidad
-function validarDescripFuncionalidadBuscar(DescripFuncionalidad, tamaño_max)
+//Función para validar la búsqueda por DescripAccion
+function validarDescripAccionBuscar(DescripAccion, tamaño_max)
 {
-    if(comprobarVacioBuscar(DescripFuncionalidad)){ //Si el IdFuncionalidad no está vacío
-        if(comprobarAlfanumericoBuscar(DescripFuncionalidad,tamaño_max)) //Si cumple la expresión regular de campo Alfabético
+    if(comprobarVacioBuscar(DescripAccion)){ //Si el IdFuncionalidad no está vacío
+        if(comprobarAlfanumericoBuscar(DescripAccion,tamaño_max)) //Si cumple la expresión regular de campo Alfabético
             {
                 return true;
             }else{ //si no cumple la expresión regular
@@ -238,9 +238,9 @@ function validar(formulario)
         //si todos los campos estan correctos y devuelven true
 
         if( 
-          (validarIdFuncionalidadBuscar(form.IdFuncionalidad, 6)) && 
-          (validarNombreFuncionalidadBuscar(form.NombreFuncionalidad, 60)) && 
-          (validarDescripFuncionalidadBuscar(form.DescripFuncionalidad, 100)) ){
+          (validarIdAccionBuscar(form.IdAccion, 6)) && 
+          (validarNombreAccionBuscar(form.NombreAccion, 60)) && 
+          (validarDescripAccionBuscar(form.DescripAccion, 100)) ){
 
           alerta = false; //Se le asigna false a la variable alerta 
         }
@@ -250,9 +250,9 @@ function validar(formulario)
         //si todos los campos estan correctos y devuelven true
 
         if( 
-          (validarIdFuncionalidad(form.IdFuncionalidad, 6)) && 
-          (validarNombreFuncionalidad(form.NombreFuncionalidad, 60)) && 
-          (validarDescripFuncionalidad(form.DescripFuncionalidad, 100)) ){
+          (validarIdAccion(form.IdAccion, 6)) && 
+          (validarNombreAccion(form.NombreAccion, 60)) && 
+          (validarDescripAccion(form.DescripAccion, 100)) ){
 
           alerta = false; //Se le asigna false a la variable alerta 
         }
@@ -261,9 +261,9 @@ function validar(formulario)
     if(formulario == 'EDIT'){ //Si es el formulario es el de editar
         //si todos los campos estan correctos y devuelven true
         if( 
-          (validarIdFuncionalidad(form.IdFuncionalidad, 6)) && 
-          (validarNombreFuncionalidad(form.NombreFuncionalidad, 60)) && 
-          (validarDescripFuncionalidad(form.DescripFuncionalidad, 100)) ){
+          (validarIdAccion(form.IdAccion, 6)) && 
+          (validarNombreAccion(form.NombreAccion, 60)) && 
+          (validarDescripAccion(form.DescripAccion, 100)) ){
 
           alerta = false; //Se le asigna false a la variable alerta 
         }
