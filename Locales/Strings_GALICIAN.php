@@ -213,7 +213,8 @@ array(
 'div_textoRango' => 'O numero de caracteres supera o maximo',
 'div_fechaParcial'=> 'Solo se aceptan numeros e -',
 'Borrar trabajo' => "Borrar traballo",
-
+'ERROR: Fallo en la inserción. Ya existe el IdTrabajo' => 'ERROR: Fallo na inserción. Xa existe o ID traballo',
+'ERROR: No existe la entrega que desea borrar en la BD' => 'ERROR: Non existe a entrega que desea borrar na BD',
 
 
 

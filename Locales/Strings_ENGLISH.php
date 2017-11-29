@@ -214,8 +214,8 @@ array(
 'div_textoRango' => 'The number of characters overcomes the maximum',
 'div_fechaParcial'=> 'Only are accepted numbers and -',
 'Borrar trabajo' => 'Delete work',
-
-
+'ERROR: Fallo en la inserción. Ya existe el IdTrabajo' => 'ERROR: Insertion failed. The ID work already exists ',
+'ERROR: No existe la entrega que desea borrar en la BD' => 'ERROR: The delivery that you wish to delete doesn´t exists in the database',
 
 
 

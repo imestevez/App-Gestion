@@ -100,7 +100,7 @@ array(
 	'ERROR: No se ha podido conectar con la base de datos' => 'ERROR: No se ha podido conectar con la base de datos',
 	'ERROR: Fallo en la inserción. Ya existe el DNI' => 'ERROR: Fallo en la inserción. Ya existe el DNI',
 	'ERROR: Fallo en la inserción. Ya existe el email' => 'ERROR: Fallo en la modificación. Ya existe el email', 
-	'ERROR: Fallo en la inserción. Ya existe el login' => 'ERROR: Fallo en la modificación. Ya existe el nombre de usuario',
+	'ERROR: Fallo en la inserción. Ya existe el login' => 'ERROR: Fallo en la modificación. Ya existe el login',
 	'ERROR: Introduzca todos los valores de todos los campos' => 'ERROR: Introduzca todos los valores de todos los campos',
 	'ERROR: Fallo en la consulta sobre la base de datos' => 'ERROR: Fallo en la consulta sobre la base de datos',
 	'ERROR: No existe el usuario que desea borrar en la base de datos' => 'ERROR: No existe el usuario que desea borrar en la base de datos',
@@ -214,12 +214,9 @@ array(
 'div_textoRango' => 'El numero de caracteres supera el maximo',
 'div_fechaParcial'=> 'Solo se aceptan numeros y -',
 'Borrar trabajo' => 'Borrar trabajo',
-
-
-
-
-
-
+'ERROR: Fallo en la inserción. Ya existe el IdTrabajo' => 'ERROR: Fallo en la inserción. Ya existe el IdTrabajo,'
+'ERROR: Fallo en la inserción. Ya existe el IdTrabajo' => 'ERROR: Fallo en la inserción. Ya existe el ID trabajo',
+'ERROR: No existe la entrega que desea borrar en la BD' => 'ERROR: No existe la entrega que desea borrar en la BD',
 
 
 
