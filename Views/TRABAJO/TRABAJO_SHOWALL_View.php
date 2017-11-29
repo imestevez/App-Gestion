@@ -152,11 +152,26 @@ function renderSearch(){
                 </tr>
 <?php
             while( $row = mysqli_fetch_array($this->datos)) { //Mientras el numero de tuplas no llegue al máximo y haya tuplas en la BD
-?>  <tr>
+                 if ( $row["FechaIniTrabajo"] == ''){
+                $this->FechaIniTrabajo = NULL;
+            }
+            else{ // si no viene vacia 
+                $this->FechaIniTrabajo = date_format(date_create($row["FechaIniTrabajo"]), 'd-m-Y');
+            }
+            //si la FechaFinTrabajo  viene vacia la asignamos vacia
+            if ($row["FechaFinTrabajo"] == ''){
+                $this->FechaFinTrabajo = NULL;
+            }
+            else{ // si no viene vacia 
+                $this->FechaFinTrabajo = date_format(date_create($row["FechaFinTrabajo"]), 'd-m-Y');
+            }
+?>  
+
+<tr>
                 <td><?php echo $row["IdTrabajo"]; ?></td>
                 <td><?php echo $row["NombreTrabajo"]; ?></td>
-                <td><?php echo $row["FechaIniTrabajo"]; ?></td>
-                <td><?php echo $row["FechaFinTrabajo"]; ?></td>
+                <td><?php echo $this->FechaIniTrabajo; ?></td>
+                <td><?php echo $this->FechaFinTrabajo; ?></td>
                 <td><?php echo $row["PorcentajeNota"]; ?></td>
 
             <td class="edit_tabla">

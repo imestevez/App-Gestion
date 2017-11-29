@@ -121,7 +121,7 @@ array(
 
 
 	'del usuario' => 'de',
-
+	'div_vacio' => 'El campo no puede estar vacío',
 
 	'idiomaSeleccionado' => 'ESPAÑOL',
 
@@ -148,15 +148,15 @@ array(
 
 
 // ----------------- ESPACIO DE TRABAJO PARA DANIEL -------------------------
-
-
-
-
-
-
-
-
-
+	'AñadirGrupo' => 'Añadir Grupo',
+	'NombreGrupo' => 'Nombre Grupo',
+	'DescripGrupo' => 'Descripción Grupo',
+	'IdGrupo' => 'IdGrupo',
+	'BorrarGrupo' => 'Borrar Grupo',
+	'EditarGrupo' => 'Editar Grupo',
+	'BuscaGrupo' => 'Buscar Grupo',
+	'Grupos' => 'Grupos',
+	'Vista en detalle de grupo' => 'Vista en detalle de Grupo',
 
 
 
@@ -209,8 +209,10 @@ array(
 'Borrar trabajo' => 'Borrar trabajo',
 'Buscar trabajo' => 'Buscar trabajo',
 'Editar trabajo' => 'Editar trabajo',
-'div_letras' => 'Solo se aceptan numeros',
-
+'div_numeros' => 'Solo se aceptan numeros',
+'div_numerosRango' => 'El numero tiene que estar entre 0 y 99',
+'div_textoRango' => 'El numero de caracteres supera el maximo',
+'div_fechaParcial'=> 'Solo se aceptan numeros y -',
 
 
 

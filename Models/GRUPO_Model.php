@@ -1,55 +1,39 @@
 
 <?php
 /*
-//Clase : USUARIO_Model.php
-//Creado el : 13-10-2017
+//Clase : GRUPO_Model.php
+//Creado el : 24-11-2017
 //Creado por: SOLFAMIDAS
 //-------------------------------------------------------
 
-Modelo de datos de usuarios que accede a la Base de Datos
+Modelo de datos de grupo que accede a la Base de Datos
 */
-class USUARIO_Model { //declaración de la clase
+class GRUPO_Model { //declaración de la clase
 
-	var $login; //atributo login
-	var $password; //atributo contraseña
-	var $DNI; // declaración del atributo DNI
-	var $nombre; //declaración del atributo nombre
-	var $apellidos; //declaración del atributo apellidos
-	var $telefono; //declaración del atributo telefono
-	var $email; //declaración del atributo email
-	var $direccion; // declaración del atributo direccion
-	var $lista; // array para almacenar los datos del usuario
+	var $idgrupo; //atributo id de grupo
+	var $nombregrupo; //atributo nombre de grupo
+	var $descripgrupo; // declaración del atributo descripcion de grupo
+	var $lista; // array para almacenar los datos del grupo
 	var $mysqli; // declaración del atributo manejador de la bd
 
 //Constructor de la clase
 
-function __construct($login, $password, $DNI,$nombre,$apellidos,$telefono,$email,$direccion){
+function __construct($idgrupo, $nombregrupo, $descripgrupo){
 	//asignación de valores de parámetro a los atributos de la clase
-	$this->login = $login;
-	$this->password = $password;
-	$this->DNI = $DNI;
-	$this->nombre = $nombre;
-	$this->apellidos = $apellidos;
-	$this->telefono = $telefono;
-	$this->email = $email;
-	$this->direccion = $direccion;
-	
-	
+	$this->idgrupo = $idgrupo;
+	$this->nombregrupo = $nombregrupo;
+	$this->descripgrupo = $descripgrupo;
+		
 	// incluimos la funcion de acceso a la bd
 	include_once '../Functions/Access_DB.php';
 	// conectamos con la bd y guardamos el manejador en un atributo de la clase
 	$this->mysqli = ConnectDB();
 
-	//lista con los datos del usuario
+	//lista con los datos del grupo
 	$this->lista = array(
-			"login"=>$this->login,
-			"password"=>$this->password,
-			"DNI"=>$this->DNI,
-			"Nombre" => $this->nombre,
-			"Apellidos" => $this->apellidos,
-			"Telefono" => $this->telefono,
-			"Correo" => $this->email,
-			"Direccion" => $this->direccion,
+			"IdGrupo"=>$this->idgrupo,
+			"NombreGrupo"=>$this->nombregrupo,
+			"DescripGrupo"=>$this->descripgrupo,
 			"sql" => $this->mysqli, 
 			"mensaje"=> '');
 } // fin del constructor
@@ -63,9 +47,9 @@ function __construct($login, $password, $DNI,$nombre,$apellidos,$telefono,$email
 function ADD()
 {
 
-    if (($this->login <> '')){ // si el atributo clave de la entidad no esta vacio
+    if (($this->idgrupo <> '')){ // si el atributo clave de la entidad no esta vacio
 		// construimos el sql para buscar esa clave en la tabla
-        $sql = "SELECT * FROM USUARIO WHERE (login = '$this->login')"; //comprobar que no hay claves iguales
+        $sql = "SELECT * FROM GRUPO WHERE (IdGrupo = '$this->idgrupo')"; //comprobar que no hay claves iguales
 
 		if (!$result = $this->mysqli->query($sql)){ // si da error la ejecución de la query
 			$this->lista['mensaje'] = 'ERROR: No se ha podido conectar con la base de datos';
@@ -76,67 +60,47 @@ function ADD()
 
 			$num_rows = mysqli_num_rows($result);
 
-			if ($num_rows == 0){ // miramos si el resultado de la consulta es vacio (no existe el login)
+			if ($num_rows == 0){ // miramos si el resultado de la consulta es vacio (no existe el idgrupo)
 
 				//construimos la sentencia sql de inserción en la bd
-				$sql = "INSERT INTO USUARIO(
-				login,
-				password,
-				DNI,
-				Nombre,
-				Apellidos,
-				Telefono,
-				Correo,
-				Direccion) VALUES(
-									'$this->login',
-									'$this->password',
-									'$this->DNI',
-									'$this->nombre',
-									'$this->apellidos',
-									'$this->telefono', 
-									'$this->email',
-									'$this->direccion'
+				$sql = "INSERT INTO GRUPO(
+				IdGrupo,
+				NombreGrupo,
+				DescripGrupo) VALUES(
+									'$this->idgrupo',
+									'$this->nombregrupo',
+									'$this->descripgrupo'
 								)";
 				
 				 if (!($result = $this->mysqli->query($sql))){ //si da error la consulta se comrpueba el por que
 
-			        $sql = "SELECT * FROM USUARIO WHERE (DNI = '$this->DNI')"; //comprobar que no hay DNI iguales
+			        $sql = "SELECT * FROM GRUPO WHERE (NombreGrupo = '$this->nombregrupo')"; //comprobar que no hay un nombregrupo igual en la BD
 				 	$result = $this->mysqli->query($sql); ;// numero de tuplas de la consulta
 					$num_rows = mysqli_num_rows($result);
 				
-				    if ($num_rows > 0)    // si el numero de filas es mayor que 0 es que existe un DNI duplicado
+				    if ($num_rows > 0)    // si el numero de filas es mayor que 0 es que existe un nombregrupo duplicado
 				    {
 			        	$this->lista['mensaje'] = 'ERROR: Fallo en la inserción. Ya existe el DNI'; 
 						return $this->lista; 
 					}
-
-			        $sql = "SELECT * FROM USUARIO WHERE (Correo = '$this->email')"; //comprobar que no hay email iguales
-				 	$result = $this->mysqli->query($sql);
-					$num_rows = mysqli_num_rows($result);// numero de tuplas de la consulta
-				    
-				    if ($num_rows > 0) // si el numero de filas es mayor que 0 es que existe un DNI duplicado
-				    {
-			        	$this->lista['mensaje'] = 'ERROR: Fallo en la inserción. Ya existe el email'; 
-						return $this->lista;
-					}
 				
 					//Si no hay atributos Clave y unique duplicados es que hay campos sin completar
-        			return 'ERROR: Introduzca todos los valores de todos los campos'; // introduzca un valor para el usuario
+        			return 'ERROR: Introduzca todos los valores de todos los campos'; // introduzca un valor para el grupo
 				}
 
     			else{ //si no da error en la insercion devolvemos mensaje de exito
 					$this->lista['mensaje'] = 'Inserción realizada con éxito';
 					return $this->lista; //operacion de insertado correcta
 				}
-			}else{ //si hay un login igual
+			}else{ //si hay un idgrupo igual
 
 	        	$this->lista['mensaje'] = 'ERROR: Fallo en la inserción. Ya existe el login'; 
 				return $this->lista; 
 			}
 		}
     
-	}else{ //Si no se introduce un login
-			return 'ERROR: Introduzca todos los valores de todos los campos'; // introduzca un valor para el usuario
+	}else{ //Si no se introduce un idgrupo
+			return 'ERROR: Introduzca todos los valores de todos los campos'; // introduzca un valor para el grupo
 	}
 				
 } // fin del metodo ADD
@@ -155,23 +119,15 @@ function __destruct()
 //los datos proporcionados. Si van vacios devuelve todos
 function SEARCH()
 { 	// construimos la sentencia de busqueda con LIKE y los atributos de la entidad
-    $sql = "SELECT  login,
-    				DNI,
-					Nombre,
-					Apellidos,
-					Telefono,
-					Correo,
-					Direccion
-       			FROM USUARIO 
+    $sql = "SELECT  IdGrupo,
+    				NombreGrupo,
+					DescripGrupo
+       			FROM GRUPO 
     			WHERE 
     				(
-    				(login LIKE '%$this->login%') &&
-    				(DNI LIKE '%$this->DNI%') &&
-	 				(Nombre LIKE '%$this->nombre%') &&
-	 				(Apellidos LIKE '%$this->apellidos%') &&
-	 				(Telefono LIKE '%$this->telefono%') &&
-	 				(Correo LIKE '%$this->email%') &&
-	 				(Direccion LIKE '%$this->direccion%')
+    				(IdGrupo LIKE '%$this->idgrupo%') &&
+    				(NombreGrupo LIKE '%$this->nombregrupo%') &&
+	 				(DescripGrupo LIKE '%$this->descripgrupo%')
     				)";
     				
 
@@ -190,20 +146,20 @@ function SEARCH()
 // se manda un mensaje de que ese valor de clave no existe
 function DELETE()
 {	// se construye la sentencia sql de busqueda con los atributos de la clase
-    $sql = "SELECT * FROM USUARIO WHERE (login = '$this->login')";
+    $sql = "SELECT * FROM GRUPO WHERE (IdGrupo = '$this->idgrupo')";
     // se ejecuta la query
     $result = $this->mysqli->query($sql);
     // si existe una tupla con ese valor de clave
     if ($result->num_rows == 1)
     {
     	// se construye la sentencia sql de borrado
-        $sql = "DELETE FROM USUARIO WHERE (login = '$this->login')";
+        $sql = "DELETE FROM GRUPO WHERE (IdGrupo = '$this->idgrupo')";
         // se ejecuta la query
         $this->mysqli->query($sql);
         // se devuelve el mensaje de borrado correcto
         $this->lista['mensaje'] = 'Borrado correctamente'; 
 			return $this->lista;
-    } // si no existe el login a borrar se devuelve el mensaje de que no existe
+    } // si no existe el idgrupo a borrar se devuelve el mensaje de que no existe
     else{
     	 $this->lista['mensaje'] = 'ERROR: No existe el usuario que desea borrar en la BD'; 
 			return $this->lista;
@@ -215,7 +171,7 @@ function DELETE()
 // en el atributo de la clase
 function RellenaDatos()
 {	// se construye la sentencia de busqueda de la tupla
-    $sql = "SELECT * FROM USUARIO WHERE (login = '$this->login')";
+    $sql = "SELECT * FROM GRUPO WHERE (IdGrupo = '$this->idgrupo')";
     // Si la busqueda no da resultados, se devuelve el mensaje de que no existe
     if (!($resultado = $this->mysqli->query($sql))){
 		$this->lista['mensaje'] = 'ERROR: No existe en la base de datos'; 
@@ -234,18 +190,13 @@ function EDIT()
 {
 	//Si todos los campos tienen valor
 	if(
-		$this->login <> '' &&
-		$this->password <> '' &&
-		$this->DNI <> '' &&
-		$this->nombre <> '' &&
-		$this->apellidos <> '' &&
-		$this->telefono <> '' &&
-		$this->email <> '' &&
-		$this->direccion <> '' 
+		$this->idgrupo <> '' &&
+		$this->nombregrupo <> '' &&
+		$this->descripgrupo <> ''
 	){
 
 		// se construye la sentencia de busqueda de la tupla en la bd
-	    $sql = "SELECT * FROM USUARIO WHERE (login = '$this->login')";
+	    $sql = "SELECT * FROM GRUPO WHERE (IdGrupo = '$this->idgrupo')";
 	    // se ejecuta la query
 	    $result = $this->mysqli->query($sql);
 	    $num_rows = mysqli_num_rows($result);
@@ -253,44 +204,28 @@ function EDIT()
 
 	    if ($num_rows == 1)
 	    {	// se construye la sentencia de modificacion en base a los atributos de la clase
-			$sql = "UPDATE USUARIO SET 
-						login = '$this->login',
-						password = '$this->password',
-						DNI = '$this->DNI',
-						Nombre = '$this->nombre',
-						Apellidos = '$this->apellidos',
-						Telefono = '$this->telefono',
-						Correo = '$this->email',
-						Direccion = '$this->direccion'
-						
-					WHERE ( login = '$this->login')";
+			$sql = "UPDATE GRUPO SET 
+						IdGrupo = '$this->idgrupo',
+						NombreGrupo = '$this->nombregrupo',
+						DescripGrupo = '$this->descripgrupo'	
+					WHERE ( IdGrupo = '$this->idgrupo')";
 					
 			// si hay un problema con la query se envia un mensaje de error en la modificacion
 	        if (!($result = $this->mysqli->query($sql))){
 
 			        		// se construye la sentencia de busqueda de la tupla en la bd
-			    $sql = "SELECT * FROM USUARIO WHERE (DNI = '$this->DNI')";
+			    $sql = "SELECT * FROM GRUPO WHERE (NombreGrupo = '$this->nombregrupo')";
 			    // se ejecuta la query
 			    $result = $this->mysqli->query($sql);
 			    $num_rows = mysqli_num_rows($result);
 			    $row = $result->fetch_array();
 
-			    if( ($num_rows == 1) && ( $row['login'] != $this->login) ){ //Si devuelve 1 tupla y no coinciden los login
+			    if( ($num_rows == 1) && ( $row['IdGrupo'] != $this->idgrupo) ){ //Si devuelve 1 tupla y no coinciden los idgrupo
 			    	$this->lista['mensaje'] = 'ERROR: Fallo en la modificación. Ya existe el DNI'; 
 					return $this->lista;
 				}
 
-			     $sql = "SELECT * FROM USUARIO WHERE (Correo = '$this->email')";
-			    // se ejecuta la query
-			    $result = $this->mysqli->query($sql);
-			    $num_rows = mysqli_num_rows($result);
-			    $row = $result->fetch_array();
-
-			    if( ($num_rows == 1)  && ( $row['login'] != $this->login))  { //Si devuelve 1 tupla y no coinciden los login
-			    	$this->lista['mensaje'] = 'ERROR: Fallo en la modificación. Ya existe el email'; 
-					return $this->lista; 
-			    }
-			    	return 'ERROR: Fallo en la modificación. Introduzca todos los valores'; 
+			   	return 'ERROR: Fallo en la modificación. Introduzca todos los valores'; 
 		    }	
 			else{ // si no hay problemas con la modificación se indica que se ha modificado
 				$this->lista['mensaje'] =  'Modificado correctamente'; 
@@ -313,9 +248,8 @@ Devuelve las tuplas de la BD de 10 en 10
 */
 function SHOWALL($num_tupla,$max_tuplas){
 
-	//$sql = "SELECT * FROM USUARIO";
 
-	$sql = "SELECT * FROM USUARIO LIMIT $num_tupla, $max_tuplas";
+	$sql = "SELECT * FROM GRUPO LIMIT $num_tupla, $max_tuplas";
 
 	//echo $sql;
 
@@ -331,7 +265,7 @@ function SHOWALL($num_tupla,$max_tuplas){
 
 //funcion que devuelve el numero de tuplas de la base de datos
 function contarTuplas(){
-	$sql = "SELECT * FROM USUARIO";
+	$sql = "SELECT * FROM GRUPO";
 
 	$datos = $this->mysqli->query($sql);
 
@@ -340,6 +274,8 @@ function contarTuplas(){
     return $total_tuplas;
 }
 //funcion que comprueba si el login y la password son correctos
+
+/*
 function login(){
 
 	$sql = "SELECT *
@@ -363,21 +299,22 @@ function login(){
 		}
 	}
 }//fin metodo login
+*/
 
 //Funcion para comprobar si se realiza un registro correctamente
 function comprobarRegistro(){
 
-		$sql = "SELECT * FROM USUARIO WHERE login = '$this->login'";
+		$sql = "SELECT * FROM GRUPO WHERE IdGrupo = '$this->idgrupo'";
 
 		$result = $this->mysqli->query($sql);
 		$total_tuplas = mysqli_num_rows($result);
 
-		if ($total_tuplas > 0){  // esi hay mas de 0 tuplas, existe ya el usuarios
+		if ($total_tuplas > 0){  // si hay mas de 0 tuplas, ya existe el grupo
 			$this->lista['mensaje'] = 'ERROR: El usuario ya existe';
 			return $this->lista;
 			}
 		else{
-	    	return true; //no existe el usuario
+	    	return true; //no existe el grupo
 		}
 
 	}

@@ -148,15 +148,15 @@ array(
 
 
 	// ----------------- ESPACIO DE TRABAJO PARA DANIEL -------------------------
-
-
-
-
-
-
-
-
-
+	'AñadirGrupo' => 'Add Group',
+	'NombreGrupo' => 'Group Name',
+	'DescripGrupo' => 'Group Description',
+	'IdGrupo' => 'GroupID',
+	'BorrarGrupo' => 'Delete Group',
+	'EditarGrupo' => 'Edit Group',
+	'BuscaGrupo' => 'Search Group',
+	'Grupos' => 'Groups',
+	'Vista en detalle de grupo' => 'Show in detail of the group',
 
 
 
@@ -209,17 +209,10 @@ array(
 'Borrar trabajo' => 'Delete work',
 'Buscar trabajo' => 'Search work',
 'Editar trabajo' => 'Edit work',
-'div_letras' => 'Only are accepted numbers',
-
-
-
-
-
-
-
-
-
-
+'div_numeros' => 'Only are accepted numbers',
+'div_numerosRango' => 'The number has to be between 0 and 99',
+'div_textoRango' => 'The number of characters overcomes the maximum',
+'div_fechaParcial'=> 'Only are accepted numbers and -',
 
 
 

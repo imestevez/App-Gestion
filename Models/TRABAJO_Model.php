@@ -36,7 +36,6 @@ function __construct($IdTrabajo, $NombreTrabajo, $FechaIniTrabajo,$FechaFinTraba
 	}
 	else{ // si no viene vacia 
 		if(strlen($this->FechaIniTrabajo) == 10){	//si viene la fecha entera le cambiamos el formato para que se adecue al de la bd
-
 		$this->FechaIniTrabajo = date_format(date_create($this->FechaIniTrabajo), 'Y-m-d');
 
 		}

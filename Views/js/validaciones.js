@@ -743,7 +743,7 @@ function validarFechaBuscar(fecha)
 }
 //Funcion para validar la búsqueda por email
 function validarEmailBuscar(email, tamaño_max){
-    var expr_email;
+    var expr_email; //Expresion para validar una busqueda parcial por email
     expr_email = /^[a-zA-Z0-9ñÑ.-_]{0,}@{0,1}[a-z]{0,}\.{0,1}[a-z]{0,3}$/;
 
        if(comprobarVacioBuscar(email))//Si el campo no está vacio el campo
