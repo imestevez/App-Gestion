@@ -43,7 +43,7 @@ function comprobarTexto(campo, tamaño_max) {
  var idVacio = campo.name.concat('Vacio'); //concatena al nombre del campo 'Vacio' para acceder a los divs correspondientes a los campos vacios
 
      var expr_alfanum; //Expresión regular para comprobar que un campo (login y contraseña) es alfanumerico y puede incluir caracteres como 
-    expr_alfanum =  /^[a-zA-Z0-9ñÑ_.-\s]+$/; //letras y numeros _ . - y espacios
+    expr_alfanum =  /^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚçÇ_.-\s]+$/; //letras y numeros _ . - y espacios
     
      if (expr_alfanum.test(campo.value) == false) //Si no cumple la expresión regular
     { 
@@ -162,6 +162,7 @@ function comprobarEntero(campo,valormenor,valormayor)
 }
 
 
+//Función para validar un id del trabajo
 
 function validarIdTrabajo(IdTrabajo, tamaño_max){
 
@@ -179,6 +180,7 @@ function validarIdTrabajo(IdTrabajo, tamaño_max){
 
 
 }
+//Función para validar un nombre del trabajo
 
 function validarNombreTrabajo(NombreTrabajo, tamaño_max){
   
@@ -230,6 +232,7 @@ function validarFechaFinTrabajo(fecha)
         }
 }
 
+//Función para validar un porcentaje de nota del trabajo
 
 function validarPorcentajeNota(PorcentajeNota, min, max){
   
@@ -365,11 +368,11 @@ function validarIdTrabajoBuscar(IdTrabajo, tamaño_max){
 }
 //Funcion para validar busquedas por nombre
 
-function validarNombreTrabajoBuscar(NombreTrabajo, tamaño_max){
+function validarNombreTrabajoBuscar(NombreTrabajo, min, max){
   
    if(comprobarVacioBuscar(NombreTrabajo))//Si el campo no está vacio el campo
       {
-          if(comprobarTextoBuscar(NombreTrabajo,tamaño_max))//Si login cumple la expresión regular de campo Alfabético
+          if(comprobarTextoBuscar(NombreTrabajo,min, max))//Si login cumple la expresión regular de campo Alfabético
        {
            return true;
        }else{ //Si no cumple la expresión regular
@@ -433,11 +436,11 @@ function validarFechaFinTrabajoBuscar(fecha)
 
 //Funcion para validar busquedas por Porcentaje
 
-function validarPorcentajeNotaBuscar(PorcentajeNota){
+function validarPorcentajeNotaBuscar(PorcentajeNota, min, max){
   
    if(comprobarVacioBuscar(PorcentajeNota))//Si el campo no está vacio el campo
       {
-          if(comprobarEntero(PorcentajeNota,tamaño_max))//Si login cumple la expresión regular de campo Alfabético
+          if(comprobarEntero(PorcentajeNota,min,max))//Si login cumple la expresión regular de campo Alfabético
        {
            return true;
        }else{ //Si no cumple la expresión regular
@@ -462,17 +465,18 @@ function validar(formulario)
     form =  document.forms[formulario];
     if(formulario == 'SEARCH'){ //Si es el formulario es el de añadir
         //si todos los campos estan correctos y devuelven true
-
         if( 
           (validarIdTrabajoBuscar(form.IdTrabajo, 6)) && 
           (validarNombreTrabajoBuscar(form.NombreTrabajo, 60)) && 
           (validarFechaIniTrabajoBuscar(form.FechaIniTrabajo)) && 
-          (validarFechaFinTrabajoBuscarFe(form.FechaFinTrabajo)) && 
+          (validarFechaFinTrabajoBuscar(form.FechaFinTrabajo)) && 
           (validarPorcentajeNotaBuscar(form.PorcentajeNota,0,99))  ){
 
           alerta = false; //Se le asigna false a la variable alerta 
         }
-      }else{
+      }else{ //si son EDIT O ADD
+        //si todos los campos estan correctos y devuelven true
+
          if( 
           (validarIdTrabajo(form.IdTrabajo, 6)) && 
           (validarNombreTrabajo(form.NombreTrabajo, 60)) && 
