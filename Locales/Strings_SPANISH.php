@@ -214,9 +214,9 @@ array(
 'div_textoRango' => 'El numero de caracteres supera el maximo',
 'div_fechaParcial'=> 'Solo se aceptan numeros y -',
 'Borrar trabajo' => 'Borrar trabajo',
-'ERROR: Fallo en la inserción. Ya existe el IdTrabajo' => 'ERROR: Fallo en la inserción. Ya existe el IdTrabajo,'
 'ERROR: Fallo en la inserción. Ya existe el IdTrabajo' => 'ERROR: Fallo en la inserción. Ya existe el ID trabajo',
 'ERROR: No existe la entrega que desea borrar en la BD' => 'ERROR: No existe la entrega que desea borrar en la BD',
+'ERROR: No se ha modificado' => 'ERROR: No se ha modificado',
 
 
 
