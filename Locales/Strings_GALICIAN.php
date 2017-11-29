@@ -316,7 +316,6 @@ array(
 
 'Historias' => 'Historias',
 
-'IdTrabajo' => 'IdTraballo',
 'IdHistoria' => 'IdHistoria',
 'TextoHistoria' => 'TextoHistoria',
 

@@ -38,33 +38,34 @@ include '../Views/Header.php';
             </script>
 
     <section class="pagina">
-         <fieldset class="edit" style="width: 70%; margin-left: 15%">
+         <fieldset class="EDIT" >
                 <legend style="margin-left: 30%"><?php echo $strings['Editar historia'] ?></legend>
-            <form method="post" name="ÈDIT"  action="../Controllers/HISTORIA_Controller.php" enctype="multipart/form-data" >
+            <form method="post" name="EDIT"  action="../Controllers/HISTORIA_Controller.php" enctype="multipart/form-data" >
+               
                 <div id="izquierda">
                     <label for="IdTrabajo"><?php echo $strings['Id del trabajo'] ?>: </label>
-                        <input type="text" name="IdTrabajo" maxlength="6" size="6" readonly value="<?php echo $this->IdTrabajo?>" ><div id="IdTrabajo" class="oculto" style="display:none"><?php echo $strings['div_Alfanumerico']?></div> <div id="IdTrabajoVacio" class="oculto" style="display:none"><?php echo $strings['div_vacio']?></div> 
+                        <input type="text" name="IdTrabajo" maxlength="6" size="6" onblur="validarIdTrabajo(this,6)" value="<?php echo $this->IdTrabajo?>" readonly ><div id="IdTrabajo" class="oculto" style="display:none"><?php echo $strings['div_Alfanumerico']?></div> <div id="IdTrabajoVacio" class="oculto" style="display:none"><?php echo $strings['div_vacio']?></div> 
                 </div>
 
                 <div id="izquierda">
-                    <label for="IdHistoria"><?php echo $strings['Id de la historia']?>: </label>
-                        <input type="number" name="IdHistoria" maxlength="2" size="2" value="<?php echo $this->IdHistoria?>"  readonly  ><div id="IdHistoria" class="oculto" style="display:none"><?php echo $strings['div_Numerico']?></div> <div id="IdHistoriaVacio" class="oculto" style="display:none"><?php echo $strings['div_vacio']?></div> 
+                    <label for="IdHistoria"><?php echo  $strings['Id de la historia']?>: </label>
+                        <input type="number" name="IdHistoria" maxlength="2" size="2" onblur="validarIdHistoria(this,2)"  value="<?php echo $this->IdHistoria?>" readonly ><div id="IdHistoria" class="oculto" style="display:none"><?php echo $strings['div_Numerico']?></div> <div id="IdHistoriaVacio" class="oculto" style="display:none"><?php echo $strings['div_vacio']?></div> 
                 </div>
 
                 <div id="izquierda">
-                            <label for="TextoHistoria"><?php echo $strings['Texto de la historia'] ?>: </label>
-                                <input type="text" name="TextoHistoria" maxlength="300" size="50" value="<?php echo $this->TextoHistoria?>" onblur="javascript:void(validarTextoHistoria(this, 300))"  ><div id="TextoHistoria" class="oculto" style="display:none"><?php echo $strings['div_Alfanumerico']?></div> <div id="TextoHistoriaVacio" class="oculto" style="display:none"><?php echo $strings['div_vacio']?></div> 
-                        </div>
-                    
+                    <label for="TextoHistoria"><?php echo $strings['Texto de la historia'] ?>: </label>
+                        <textarea name="TextoHistoria" maxlength="300" rows="6" cols="50" onblur="javascript:void(validarTextoHistoria(this, 300))" style="margin-left: 10px; border-radius: 20px; border-top-left-radius: 0px; border-width: 2px; border-color: darkblue;" ><?php echo $this->TextoHistoria?></textarea><div id="TextoHistoria" class="oculto" style="display:none"><?php echo $strings['div_Alfanumerico']?></div><div id="TextoHistoriaVacio" class="oculto" style="display:none"><?php echo $strings['div_vacio']?></div> 
+                </div>
+
+               
                 <div class="acciones" style="float: right; margin-left:0%; margin-right: 50%">
-                    <a href="../Controllers/HISTORIA_Controller.php?action=EDIT"> <input type="image" name="action" value="EDIT" src="../Views/images/confirmar.png" title="<?php echo $strings['Editar historia'] ?>" onclick="return validar('EDIT')"></a>
+                    <a href="../Controllers/HISTORIA_Controller.php?action=EDIT"> <input type="image" name="action" value="EDIT" src="../Views/images/confirmar.png" title="<?php echo $strings['Enviar Formulario'] ?>" onclick="return validar('EDIT') "></a>
                 </div>
              </form>                     
                 <div class="acciones" style="float: left;">
-                    <a href="../Controllers/HISTORIA_Controller.php?action=SHOWALL"><input type="image" src="../Views/images/back.png" title="<?php echo $strings['Volver']?>"></a>
+                     <a href="../Controllers/HISTORIA_Controller.php?action=SHOWALL"><input type="image" src="../Views/images/back.png" title="<?php echo $strings['Volver']?>"></a>
                 </div>
-         </fieldset>
- 
+         </fieldset> 
     </section>
 <?php  
     include '../Views/Footer.php';
