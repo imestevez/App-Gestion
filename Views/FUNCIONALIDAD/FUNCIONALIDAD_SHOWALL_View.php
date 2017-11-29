@@ -68,7 +68,7 @@ function render(){
                 <td class="edit_tabla">
                     <a href="../Controllers/FUNCIONALIDAD_Controller.php?action=SHOWCURRENT&IdFuncionalidad=<?php echo $row["IdFuncionalidad"]?>"><input type="image" src="../Views/images/ojo.png" name="action" title="<?php echo $strings['Mostrar en detalle'] ?>" value="SHOWCURRENT" action=""></a>
                     <a href="../Controllers/FUNCIONALIDAD_Controller.php?action=EDIT&IdFuncionalidad=<?php echo $row["IdFuncionalidad"]?>"><input type="image" src="../Views/images/edit.png" name="action" title="<?php echo $strings['Editar'] ?>" value="EDIT"></a>
-                    <a href="../Controllers/FUNCIONALIDAD_Controller.php?action=DELETE&IdFuncionalidad=<?php echo $row["IdFuncionalidad"]?>""><input type="image" src="../Views/images/delete.png" name="action" title="<?php echo $strings['Eliminar'] ?>" value="DELETE"></a>
+                    <a href="../Controllers/FUNCIONALIDAD_Controller.php?action=DELETE&IdFuncionalidad=<?php echo $row["IdFuncionalidad"]?>"><input type="image" src="../Views/images/delete.png" name="action" title="<?php echo $strings['Eliminar'] ?>" value="DELETE"></a>
                 </td>
                 </tr>              
            
@@ -113,8 +113,8 @@ function renderSearch(){
                 <caption><?php echo $strings['Funcionalidades']?></caption>
                 <tr>
                     <th><?php echo $strings['Id Funcionalidad']?></th>   
-                    <th><?php echo $strings['Nombre Funcionalidad']?>:</th>                   
-                    <th><?php echo $strings['Descripción Funcionalidad']?>:</th>
+                    <th><?php echo $strings['Nombre Funcionalidad']?></th>                   
+                    <th><?php echo $strings['Descripción Funcionalidad']?></th>
              
 
                 <td><a href="../Controllers/FUNCIONALIDAD_Controller.php?action=SEARCH"><input type="image" src="../Views/images/search.png" name="action" title="<?php echo $strings['Buscar']?>" value="SEARCH"></a>
@@ -132,7 +132,7 @@ function renderSearch(){
                 <td class="edit_tabla">
                     <a href="../Controllers/FUNCIONALIDAD_Controller.php?action=SHOWCURRENT&IdFuncionalidad=<?php echo $row["IdFuncionalidad"]?>"><input type="image" src="../Views/images/ojo.png" name="action" title="<?php echo $strings['Mostrar en detalle'] ?>" value="SHOWCURRENT" action=""></a>
                     <a href="../Controllers/FUNCIONALIDAD_Controller.php?action=EDIT&IdFuncionalidad=<?php echo $row["IdFuncionalidad"]?>"><input type="image" src="../Views/images/edit.png" name="action" title="<?php echo $strings['Editar'] ?>" value="EDIT"></a>
-                    <a href="../Controllers/FUNCIONALIDAD_Controller.php?action=DELETE&IdFuncionalidad=<?php echo $row["IdFuncionalidad"]?>""><input type="image" src="../Views/images/delete.png" name="action" title="<?php echo $strings['Eliminar'] ?>" value="DELETE"></a>
+                    <a href="../Controllers/FUNCIONALIDAD_Controller.php?action=DELETE&IdFuncionalidad=<?php echo $row["IdFuncionalidad"]?>"><input type="image" src="../Views/images/delete.png" name="action" title="<?php echo $strings['Eliminar'] ?>" value="DELETE"></a>
                 </td>
                 </tr>               
            
