@@ -127,7 +127,7 @@ if (!isset($_REQUEST['action'])){
 			break;
 		default: //Por defecto, Se muestra la vista SHOWALL
 			if (!$_POST){
-				$FUNCIONALIDAD = new FUNCIONALIDAD_Model($_REQUEST['IdFuncionalidad'], '','');//crea un un FUNCIONALIDAD_Model con el IdFuncionalidad del usuario 
+				$FUNCIONALIDAD = new FUNCIONALIDAD_Model('', '','');//crea un un FUNCIONALIDAD_Model con el IdFuncionalidad del usuario 
 			}
 			else{
 				$FUNCIONALIDAD = get_data_form(); //Coge los datos del formulario
