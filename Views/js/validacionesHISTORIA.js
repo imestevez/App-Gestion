@@ -65,6 +65,67 @@ function comprobarAlfanumerico(campo, tamaño_max)
     
 }
 
+//Función para comprobar que un campo de tipo texto no supera el máximo de caracteres
+function comprobarTexto(campo, tamaño_max) {
+    
+ var idVacio = campo.name.concat('Vacio'); //concatena al nombre del campo 'Vacio' para acceder a los divs correspondientes a los campos vacios
+
+     var expr_alfanum; //Expresión regular para comprobar que un campo (login y contraseña) es alfanumerico y puede incluir caracteres como 
+    expr_alfanum =  /^[a-zA-Z0-9ñÑ_.-\s]+$/; //letras y numeros _ . - y espacios
+    
+     if (expr_alfanum.test(campo.value) == false) //Si no cumple la expresión regular
+    { 
+        document.getElementById(idVacio).style.display = 'none';
+        document.getElementById(campo.name).style.display = 'block';      
+        return false;
+    }
+      else //Si cumple la expresión regular
+      {
+        if (campo.value.length > tamaño_max) //Si el tamaño del campo supera el maximo
+        {
+          document.getElementById(idVacio).style.display = 'none';
+          document.getElementById(campo.name).style.display = 'block';
+            return false;
+        }
+        else //si el tamaño del campo no supera el máximo
+        {     
+            document.getElementById(campo.name).style.display = 'none';
+            return true;
+        }
+  }
+    
+}
+
+//Comprueba que el valor de un campo de tipo entero está entre el limite establecido
+function comprobarEntero(campo,valormenor,valormayor) 
+{
+
+    var idMax = campo.name.concat('Max'); //concatena al nombre del campo 'Max' para acceder a los divs correspondientes
+
+  var expr_entero; //Variable para comprobar que se introduce un entero
+  expr_entero = /^\d+$/;//que contenga solo digitos
+
+  if(expr_entero.test(campo.value)){ //Si cumple la expresión regular
+
+    if((campo.value < valormenor) || (campo.value > valormayor)) //Si el valor del campo es menor al mínimo o si es mayor al máximo
+    {
+        document.getElementById(campo.name).style.display = 'none';
+        document.getElementById(idMax).style.display = 'block';
+
+        return false;
+    }
+    else{//Si el valor está dentro del rango establecido
+        document.getElementById(idMax).style.display = 'none';    
+        document.getElementById(campo.name).style.display = 'none';
+        return true;
+     }
+   }else{ //Si no cumple la expresión regular
+        document.getElementById(idMax).style.display = 'none';    
+     document.getElementById(campo.name).style.display = 'block';
+      return false;
+   }
+}
+
 /*--------------------------------------------------------------------------------------------
 -------------Funciones Necesarias para validar el formulario ADD y EDIT-----------------------
 --------------------------------------------------------------------------------------------*/
@@ -94,7 +155,7 @@ function validarIdHistoria(IdHistoria, tamaño_max)
 
   if(comprobarVacio(IdHistoria))//Si el campo no está vacio el campo
       {
-          if(comprobarAlfanumerico(IdHistoria,tamaño_max))//Si IdHistoria cumple la expresión regular de campo Alfabético
+          if(comprobarEntero(IdHistoria,0,99))//Si IdHistoria cumple la expresión regular de campo Alfabético
        {
 
            return true;
@@ -113,7 +174,7 @@ function validarTextoHistoria(TextoHistoria, tamaño_max)
 
   if(comprobarVacio(TextoHistoria))//Si el campo no está vacio el campo
       {
-          if(comprobarAlfanumerico(TextoHistoria,tamaño_max))//Si TextoHistoria cumple la expresión regular de campo Alfabético
+          if(comprobarTexto(TextoHistoria,tamaño_max))//Si TextoHistoria cumple la expresión regular de campo Alfabético
        {
 
            return true;
@@ -175,6 +236,33 @@ function comprobarAlfanumericoBuscar(campo, tamaño_max)
   }
 }
 
+//Función para comprobar que un campo de tipo texto no supera el máximo de caracteres
+function comprobarTextoBuscar(campo, tamaño_max) {
+    
+     var expr_alfanum; //Expresión regular para comprobar que un campo (login y contraseña) es alfanumerico y puede incluir caracteres como 
+    expr_alfanum =  /^[a-zA-Z0-9ñÑ_.-\s]+$/; //letras y numeros _ . - y espacios
+    
+     if (expr_alfanum.test(campo.value) == false) //Si no cumple la expresión regular
+    { 
+        document.getElementById(campo.name).style.display = 'block';      
+        return false;
+    }
+      else //Si cumple la expresión regular
+      {
+        if (campo.value.length > tamaño_max) //Si el tamaño del campo supera el maximo
+        {
+          document.getElementById(campo.name).style.display = 'block';
+            return false;
+        }
+        else //si el tamaño del campo no supera el máximo
+        {     
+            document.getElementById(campo.name).style.display = 'none';
+            return true;
+        }
+  }
+}
+
+
 //Función para validar la búsqueda por IdTrabajo
 function validarIdTrabajoBuscar(IdTrabajo, tamaño_max)
 {
@@ -196,7 +284,7 @@ function validarIdTrabajoBuscar(IdTrabajo, tamaño_max)
 function validarIdHistoriaBuscar(IdHistoria, tamaño_max)
 {
     if(comprobarVacioBuscar(IdHistoria)){ //Si el IdHistoria no está vacío
-        if(comprobarAlfanumericoBuscar(IdHistoria,tamaño_max)) //Si cumple la expresión regular de campo Alfabético
+        if(comprobarEntero(IdHistoria,0,99)) //Si cumple la expresión regular de campo Alfabético
             {
                 return true;
             }else{ //si no cumple la expresión regular
@@ -213,7 +301,7 @@ function validarIdHistoriaBuscar(IdHistoria, tamaño_max)
 function validarTextoHistoriaBuscar(TextoHistoria, tamaño_max)
 {
     if(comprobarVacioBuscar(TextoHistoria)){ //Si el TextoHistoria no está vacío
-        if(comprobarAlfanumericoBuscar(TextoHistoria,tamaño_max)) //Si cumple la expresión regular de campo Alfabético
+        if(comprobarTextoBuscar(TextoHistoria,tamaño_max)) //Si cumple la expresión regular de campo Alfabético
             {
                 return true;
             }else{ //si no cumple la expresión regular
@@ -260,9 +348,6 @@ function validar(formulario)
     if(alerta == true){ //Si hubo alguna alerta (campo no validado correctamente)
       alert('<?php echo $strings['No se puede enviar el formulario. Revise que todos los campos están correctos'] ?>');
       return false;
-    }else{ //Si todos los campos están correctamente validados
-      alert('<?php echo $strings['Formulario correcto']?>');
-      return true;
     }
       
 }
