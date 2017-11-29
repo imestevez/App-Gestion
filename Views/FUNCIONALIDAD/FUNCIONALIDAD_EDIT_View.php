@@ -48,7 +48,7 @@ function render(){
 
                 <div id="izquierda">
                     <label for="DescripFuncionalidad"><?php echo $strings['Descripción Funcionalidad']?>: </label>
-                        <input type="text" name="DescripFuncionalidad" maxlength="100" size="100" value="<?php echo $this->NombreFuncionalidad?>"  onblur="javascript:void(validarDescripFuncionalidad(this, 100))" ><div id="DescripFuncionalidad" class="oculto" style="display:none"><?php echo $strings['div_Alfanumerico']?></div> <div id="DescripFuncionalidadVacio" class="oculto" style="display:none"><?php echo $strings['div_vacio']?></div> 
+                        <input type="text" name="DescripFuncionalidad" maxlength="100" size="100" value="<?php echo $this->DescripFuncionalidad?>"  onblur="javascript:void(validarDescripFuncionalidad(this, 100))" ><div id="DescripFuncionalidad" class="oculto" style="display:none"><?php echo $strings['div_Alfanumerico']?></div> <div id="DescripFuncionalidadVacio" class="oculto" style="display:none"><?php echo $strings['div_vacio']?></div> 
                 </div>
         
                 <div class="acciones" style="float: right; margin-left:0%; margin-right: 50%">
