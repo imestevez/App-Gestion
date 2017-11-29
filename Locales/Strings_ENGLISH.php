@@ -305,9 +305,29 @@ array(
 
 
 // ------------------------ ESPACIO DE TRABAJO PARA CRISTINA ---------------------------
+//Historias de usuario:
+'Añadir historia' => 'Add story',
+'Id del trabajo' => 'Work ID',
+'Id de la historia' => 'Story ID',
+'Texto de la historia' => 'Story text',
 
+'Eliminar historia' => 'Delete story',
 
+'Editar historia' => 'Edit story',
 
+'Buscar historia' => 'Search story',
+
+'Historias' => 'Storys',
+
+'Idtrabajo' => 'WorkId',
+'IdHistoria' => 'StoryId',
+'TextoHistoria' => 'StoryText',
+
+'Vista en detalle historia' => 'Showcurrent story',
+
+'div_Numerico' => 'Only numbers accepted',
+
+'ERROR: No existe ningún trabajo con ese IdTrabajo' => 'ERROR: Work not found',
 
 
 

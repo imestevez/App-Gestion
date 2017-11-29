@@ -299,7 +299,29 @@ array(
 
 
 // ------------------------ ESPACIO DE TRABAJO PARA CRISTINA ---------------------------
+//Historias de usuario:
+'Añadir historia' => 'Añadir historia',
+'Id del trabajo' => 'Id del trabajo',
+'Id de la historia' => 'Id de la historia',
+'Texto de la historia' => 'Texto de la historia',
 
+'Eliminar historia' => 'Eliminar historia',
+
+'Editar historia' => 'Editar historia',
+
+'Buscar historia' => 'Buscar historia',
+
+'Historias' => 'Historias',
+
+'Idtrabajo' => 'Idtrabajo',
+'IdHistoria' => 'IdHistoria',
+'TextoHistoria' => 'TextoHistoria',
+
+'Vista en detalle historia' => 'Vista en detalle historia',
+
+'div_Numerico' => 'Sólo se aceptan números',
+
+'ERROR: No existe ningún trabajo con ese IdTrabajo' => 'ERROR: No existe ningún trabajo con ese IdTrabajo',
 
 
 
