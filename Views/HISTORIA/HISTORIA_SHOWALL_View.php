@@ -110,9 +110,9 @@ function renderSearch(){
                 <table class="showAll">
                  <caption><?php echo $strings['Historias']?></caption>
                 <tr>
-                <th><?php echo $strings['Idtrabajo']?></th>   
-                <th><?php echo $strings['IdHistoria']?></th>                   
-                <th><?php echo $strings['TextoHistoria']?></th>
+                <th><?php echo $strings['Id del trabajo']?></th>   
+                <th><?php echo $strings['Id de la historia']?></th>                   
+                <th><?php echo $strings['Texto de la historia']?></th>
 
                 <td><a href="../Controllers/HISTORIA_Controller.php?action=SEARCH"><input type="image" src="../Views/images/search.png" name="action" title="<?php echo $strings['Buscar']?>" value="SEARCH"></a>
                     <a href="../Controllers/HISTORIA_Controller.php?action=ADD" ><input type="image" src="../Views/images/anadir.png" name="action" title="<?php echo $strings['Añadir']?>" value="ADD" ></a>

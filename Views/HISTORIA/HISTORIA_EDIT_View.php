@@ -48,8 +48,8 @@ include '../Views/Header.php';
                 </div>
 
                 <div id="izquierda">
-                    <label for="IdHistoria"><?php echo  $strings['Id de la historia']?>: </label>
-                        <input type="number" name="IdHistoria" maxlength="2" size="2" onblur="validarIdHistoria(this,2)"  value="<?php echo $this->IdHistoria?>" readonly ><div id="IdHistoria" class="oculto" style="display:none"><?php echo $strings['div_Numerico']?></div> <div id="IdHistoriaVacio" class="oculto" style="display:none"><?php echo $strings['div_vacio']?></div> 
+                    <label for="IdHistoria"><?php echo $strings['Id de la historia']?>:</label>
+                        <input type="number" name="IdHistoria" maxlength="2" size="2" min="0" max="99" value="<?php echo $this->IdHistoria?>" readonly onblur="validarIdHistoria(this, 0,99)"><div id="IdHistoria" class="oculto" style="display:none"><?php echo $strings['div_numeros']?></div> <div id="IdHistoriaMax" class="oculto" style="display:none"><?php echo $strings['div_numerosRango']?> </div> <div id="IdHistoriaVacio" class="oculto" style="display:none"><?php echo $strings['div_vacio']?></div> 
                 </div>
 
                 <div id="izquierda">
