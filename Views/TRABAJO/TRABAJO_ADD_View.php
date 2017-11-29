@@ -39,7 +39,7 @@ include '../Views/Header.php';
 
                 <div id="izquierda">
                     <label for="NombreTrabajo"><?php echo $strings['NombreTrabajo']?>: </label>
-                        <input type="text" name="NombreTrabajo" maxlength="60" size="60" onblur="validarNombreTrabajo(this,60)"  ><div id="NombreTrabajo" class="oculto" style="display:none"><?php echo $strings['div_Alfanumerico']?></div> <div id="NombreTrabajoVacio" class="oculto" style="display:none"><?php echo $strings['div_vacio']?></div> 
+                        <input type="text" name="NombreTrabajo" maxlength="60" size="60" onblur="validarNombreTrabajo(this,60)"  ><div id="NombreTrabajo" class="oculto" style="display:none"><?php echo $strings['div_AlfanumericoTexto']?></div> <div id="NombreTrabajoVacio" class="oculto" style="display:none"><?php echo $strings['div_vacio']?></div> 
                 </div>
 
 				<div id="izquierda">

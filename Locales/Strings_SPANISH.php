@@ -217,10 +217,18 @@ array(
 'ERROR: Fallo en la inserción. Ya existe el IdTrabajo' => 'ERROR: Fallo en la inserción. Ya existe el ID trabajo',
 'ERROR: No existe la entrega que desea borrar en la BD' => 'ERROR: No existe la entrega que desea borrar en la BD',
 'ERROR: No se ha modificado' => 'ERROR: No se ha modificado',
-
-
-
-
+'Añadir entrega' => 'Añadir entrega',
+'Borrar entrega' => 'Borrar entrega',
+'Buscar entrega' => 'Buscar entrega',
+'Editar entrega' => 'Editar entrega',
+'div_AlfanumericoTexto' => 'Solo se aceptan letras, espacios, números y los caracteres . _ -',
+'div_Ruta_vacia' => 'La ruta no puede estar vacia',
+'Horas' => 'Horas',
+'Ruta' => 'Ruta',
+'Cambiar la ruta' => 'Cambiar la ruta',
+'Mostrar trabajo' => 'Mostrar trabajo',
+'Entregas' => 'Entregas',
+'Mostrar entrega' => 'Mostrar entrega',
 
 
 

@@ -217,13 +217,18 @@ array(
 'ERROR: Fallo en la inserción. Ya existe el IdTrabajo' => 'ERROR: Insertion failed. The ID work already exists ',
 'ERROR: No existe la entrega que desea borrar en la BD' => 'ERROR: The delivery that you wish to delete doesn´t exists in the database',
 'ERROR: No se ha modificado' => 'ERROR: It has not been modified',
-
-
-
-
-
-
-
+'Añadir entrega' => 'Add delivery',
+'Borrar entrega' => 'Delete delivery',
+'Buscar entrega' => 'Search delivery',
+'Editar entrega' => 'Edit delivery',
+'div_AlfanumericoTexto' => 'Only letters, spaces, numbers and the characters . _ - are accepted',
+'div_Ruta_vacia' => 'The route does not has be empty',
+'Horas' => 'Hours',
+'Ruta' => 'Route',
+'Cambiar la ruta' => 'Change the route',
+'Mostrar trabajo' => 'Show work',
+'Entregas' => 'Deliveries',
+'Mostrar entrega' => 'Show delivery',
 
 
 
