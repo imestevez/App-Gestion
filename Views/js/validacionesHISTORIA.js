@@ -248,15 +248,14 @@ function validar(formulario)
           alerta = false; //Se le asigna false a la variable alerta 
         }
       }
-else{
+      else{ //si es edit o add
+          if( 
+            (validarIdTrabajo(form.IdTrabajo, 6)) && 
+            (validarIdHistoria(form.IdHistoria, 2)) && 
+            (validarTextoHistoria(form.TextoHistoria, 300)) ){
 
-        if( 
-          (validarIdTrabajo(form.IdTrabajo, 6)) && 
-          (validarIdHistoria(form.IdHistoria, 2)) && 
-          (validarTextoHistoria(form.TextoHistoria, 300)) ){
-
-          alerta = false; //Se le asigna false a la variable alerta 
-        }
+            alerta = false; //Se le asigna false a la variable alerta 
+          }
     }
     if(alerta == true){ //Si hubo alguna alerta (campo no validado correctamente)
       alert('<?php echo $strings['No se puede enviar el formulario. Revise que todos los campos están correctos'] ?>');
