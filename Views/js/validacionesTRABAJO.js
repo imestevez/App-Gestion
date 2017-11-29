@@ -43,7 +43,7 @@ function comprobarTexto(campo, tamaño_max) {
  var idVacio = campo.name.concat('Vacio'); //concatena al nombre del campo 'Vacio' para acceder a los divs correspondientes a los campos vacios
 
      var expr_alfanum; //Expresión regular para comprobar que un campo (login y contraseña) es alfanumerico y puede incluir caracteres como 
-    expr_alfanum =  /^[a-zA-Z0-9ñÑ_.-,\s]+$/; //letras y numeros _ . - y espacios
+    expr_alfanum =  /^[a-zA-Z0-9ñÑ_.-\s]+$/; //letras y numeros _ . - y espacios
     
      if (expr_alfanum.test(campo.value) == false) //Si no cumple la expresión regular
     { 

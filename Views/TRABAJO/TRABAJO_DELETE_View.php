@@ -70,7 +70,7 @@ function render(){
                 <input class="del" type="text"  name="FechaFinTrabajo" size="<?php echo strlen($this->FechaFinTrabajo); ?>" readonly value="<?php echo $this->FechaFinTrabajo ?>" >
                 <input class="del" type="text" name="PorcentajeNota" size="<?php echo strlen($this->PorcentajeNota); ?>" readonly  value="<?php echo $this->PorcentajeNota ?>">
 
-                  <div class="accionesTable" style="margin-left: 0%; float: right; margin-right: 45%;">
+                  <div class="accionesTable" style="margin-left: 0%; float: right;margin-top: 2%; margin-right: 45%">
 
                     <a href="../Controllers/TRABAJO_Controller.php?action=DELETE&IdTrabajo=<?php echo $this->IdTrabajo ?>"><input type="image" name="action" value="DELETE" action="#" src="../Views/images/confirmar.png" title="<?php echo $strings['Borrar Usuario'] ?>" ></a>
                     </div>

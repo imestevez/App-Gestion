@@ -213,7 +213,7 @@ array(
 'div_numerosRango' => 'El numero tiene que estar entre 0 y 99',
 'div_textoRango' => 'El numero de caracteres supera el maximo',
 'div_fechaParcial'=> 'Solo se aceptan numeros y -',
-
+'Borrar trabajo' => 'Borrar trabajo',
 
 
 
