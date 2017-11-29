@@ -17,9 +17,12 @@
 		function render(){
 			include '../Views/Header.php'; 
 ?>
-	<script type="text/javascript"><?php include '../Views/js/validaciones.js'; ?></script>
+			<script type="text/javascript">
+    
+            <?php include '../Views/js/validacionesHISTORIA.js'; ?>
 
-			<script type="text/javascript"><?php include '../Views/js/validacionesHISTORIA.js' ?></script>
+            </script>
+
 			<section class="pagina" style="min-height: 500px">
 
 				<fieldset class="add" style="width: 50%; margin-left: 20%">	 
@@ -42,7 +45,7 @@
                         		<input type="text" name="TextoHistoria" maxlength="300" size="50" onblur="javascript:void(validarTextoHistoria(this, 300))"  ><div id="TextoHistoria" class="oculto" style="display:none"><?php echo $strings['div_Alfanumerico']?></div> <div id="TextoHistoriaVacio" class="oculto" style="display:none"><?php echo $strings['div_vacio']?></div> 
                 		</div>
                 		
-                		<div class="acciones" style="float: right; margin-left:0%; margin-right: 50%">
+                		<div class="acciones" style="float: right; margin-left:0%; margin-right: 45%">
                     		<a href="../Controllers/HISTORIA_Controller.php?action=ADD"> <input type="image" name="action" value="ADD" src="../Views/images/confirmar.png" title="<?php echo $strings['Enviar Formulario'] ?>" onclick="return validar('ADD') "></a>
                 		</div>
 

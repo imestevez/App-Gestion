@@ -18,15 +18,17 @@
 			include '../Views/Header.php'; 
 ?>
     
-	<script type="text/javascript"><?php include '../Views/js/validaciones.js'; ?></script>
+	<script type="text/javascript">
+    
+            <?php include '../Views/js/validacionesHISTORIA.js'; ?>
 
-			<script type="text/javascript"><?php include '../Views/js/validacionesHISTORIA.js' ?></script>
+            </script>
 			<section class="pagina" style="min-height: 500px">
 
 				<fieldset class="add" style="width: 50%; margin-left: 20%">	 
                 <legend><?php echo $strings['Buscar historia']; ?> </legend>
 
-                	<form name="HISTORIA_SERACH" action="#" method="post" onsubmit="#">
+                	<form name="SEARCH" action="#" method="post" onsubmit="#">
 
                 		<div id="izquierda">
                     		<label for="IdTrabajo"><?php echo $strings['Id del trabajo'] ?>: </label>

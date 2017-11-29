@@ -77,6 +77,7 @@ function validarIdTrabajo(IdTrabajo, tamaño_max)
       {
           if(comprobarAlfanumerico(IdTrabajo,tamaño_max))//Si IdTrabajo cumple la expresión regular de campo Alfabético
        {
+
            return true;
        }else{ //Si no cumple la expresión regular
            return false;
@@ -95,6 +96,7 @@ function validarIdHistoria(IdHistoria, tamaño_max)
       {
           if(comprobarAlfanumerico(IdHistoria,tamaño_max))//Si IdHistoria cumple la expresión regular de campo Alfabético
        {
+
            return true;
        }else{ //Si no cumple la expresión regular
            return false;
@@ -113,6 +115,7 @@ function validarTextoHistoria(TextoHistoria, tamaño_max)
       {
           if(comprobarAlfanumerico(TextoHistoria,tamaño_max))//Si TextoHistoria cumple la expresión regular de campo Alfabético
        {
+
            return true;
        }else{ //Si no cumple la expresión regular
            return false;
@@ -245,21 +248,8 @@ function validar(formulario)
           alerta = false; //Se le asigna false a la variable alerta 
         }
       }
+else{
 
-    if(formulario == 'ADD'){ //Si es el formulario es el de añadir
-        //si todos los campos estan correctos y devuelven true
-
-        if( 
-          (validarIdTrabajo(form.IdTrabajo, 6)) && 
-          (validarIdHistoria(form.IdHistoria, 2)) && 
-          (validarTextoHistoria(form.TextoHistoria, 300)) ){
-
-          alerta = false; //Se le asigna false a la variable alerta 
-        }
-    }
-
-    if(formulario == 'EDIT'){ //Si es el formulario es el de editar
-        //si todos los campos estan correctos y devuelven true
         if( 
           (validarIdTrabajo(form.IdTrabajo, 6)) && 
           (validarIdHistoria(form.IdHistoria, 2)) && 

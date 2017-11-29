@@ -31,17 +31,16 @@ function render(){
 include '../Views/Header.php';
 ?>
 
-<script type="text/javascript"><?php include '../Views/js/validaciones.js'; ?></script>
-<script type="text/javascript">
+            <script type="text/javascript">
     
-    <?php include '../Views/js/validacionesHISTORIA.js'; ?>
+            <?php include '../Views/js/validacionesHISTORIA.js'; ?>
 
-</script>
+            </script>
 
     <section class="pagina">
          <fieldset class="edit" style="width: 70%; margin-left: 15%">
                 <legend style="margin-left: 30%"><?php echo $strings['Editar historia'] ?></legend>
-            <form method="post" name="ADD"  action="../Controllers/HISTORIA_Controller.php" enctype="multipart/form-data" >
+            <form method="post" name="ÈDIT"  action="../Controllers/HISTORIA_Controller.php" enctype="multipart/form-data" >
                 <div id="izquierda">
                     <label for="IdTrabajo"><?php echo $strings['Id del trabajo'] ?>: </label>
                         <input type="text" name="IdTrabajo" maxlength="6" size="6" readonly value="<?php echo $this->IdTrabajo?>" ><div id="IdTrabajo" class="oculto" style="display:none"><?php echo $strings['div_Alfanumerico']?></div> <div id="IdTrabajoVacio" class="oculto" style="display:none"><?php echo $strings['div_vacio']?></div> 
@@ -58,7 +57,7 @@ include '../Views/Header.php';
                         </div>
                     
                 <div class="acciones" style="float: right; margin-left:0%; margin-right: 50%">
-                    <a href="../Controllers/HISTORIA_Controller.php?action=EDIT"> <input type="image" name="action" value="EDIT" src="../Views/images/confirmar.png" title="<?php echo $strings['Editar historia'] ?>" onclick="return validar('EDIT')""></a>
+                    <a href="../Controllers/HISTORIA_Controller.php?action=EDIT"> <input type="image" name="action" value="EDIT" src="../Views/images/confirmar.png" title="<?php echo $strings['Editar historia'] ?>" onclick="return validar('EDIT')"></a>
                 </div>
              </form>                     
                 <div class="acciones" style="float: left;">
