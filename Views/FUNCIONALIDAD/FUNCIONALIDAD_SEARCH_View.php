@@ -29,12 +29,12 @@ function render(){
             <form method="post" name="SEARCH" action="../Controllers/FUNCIONALIDAD_Controller.php">
                 <div id="izquierda">
                     <label for="IdFuncionalidad"><?php echo $strings['Id Funcionalidad'] ?>: </label>
-                        <input type="text" name="IdFuncionalidad" maxlength="6" size="6" onblur="javascript:void(validarIdFuncionalidadBuscar(this, 100))" ><div id="IdFuncionalidad" class="oculto" style="display:none"><?php echo $strings['div_Alfanumerico']?></div> <div id="IdFuncionalidadVacio" class="oculto" style="display:none"><?php echo $strings['div_vacio']?></div> 
+                        <input type="text" name="IdFuncionalidad" maxlength="6" size="6" onblur="javascript:void(validarIdFuncionalidadBuscar(this, 6))" ><div id="IdFuncionalidad" class="oculto" style="display:none"><?php echo $strings['div_Alfanumerico']?></div> <div id="IdFuncionalidadVacio" class="oculto" style="display:none"><?php echo $strings['div_vacio']?></div> 
                 </div>
 
                 <div id="izquierda">
                     <label for="NombreFuncionalidad"><?php echo $strings['Nombre Funcionalidad']?>: </label>
-                        <input type="text" name="NombreFuncionalidad" maxlength="60" size="60"  onblur="javascript:void(validarNombreFuncionalidadBuscar(this, 100))" ><div id="NombreFuncionalidad" class="oculto" style="display:none"><?php echo $strings['div_Alfanumerico']?></div> <div id="NombreFuncionalidadVacio" class="oculto" style="display:none"><?php echo $strings['div_vacio']?></div> 
+                        <input type="text" name="NombreFuncionalidad" maxlength="60" size="60"  onblur="javascript:void(validarNombreFuncionalidadBuscar(this, 60))" ><div id="NombreFuncionalidad" class="oculto" style="display:none"><?php echo $strings['div_Alfanumerico']?></div> <div id="NombreFuncionalidadVacio" class="oculto" style="display:none"><?php echo $strings['div_vacio']?></div> 
                 </div>
 
                 <div id="izquierda">
