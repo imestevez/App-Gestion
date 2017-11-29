@@ -53,9 +53,7 @@
                 </div>
          </fieldset> 
     </section>
-		}
-
-	}
+		
 <?php
 
 		include '../Views/Footer.php';
