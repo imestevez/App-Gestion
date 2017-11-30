@@ -1,8 +1,8 @@
 <?php
 /*
 //Clase : Login
-//Creado el : 1-11-2017
-//Creado por: vugsj4
+//Creado el : 24-11-2017
+//Creado por: SOLFAMIDAS
 //-------------------------------------------------------
 
 Vista para que el  usuario se se loguee en el sistema
@@ -27,7 +27,7 @@ include 'Header.php';
 
 		<section class="pagina" style="min-height: 500px">
         
-      <label style="margin-left: 25%; margin-top: 5%"> <strong> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<?php echo $strings['Usuario no autenticado']?></strong>&nbsp&nbsp&nbsp&nbsp
+      <label style="margin-left: 25%; margin-top: 5%"> <strong> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $strings['Usuario no autenticado']?></strong>&nbsp;&nbsp;&nbsp;&nbsp;
 
 			 <a href='../Controllers/Registro_Controller.php'><input type="image" name="registrar" src="../Views/images/anadir.png" name="action" title="<?php echo $strings['Registro de usuario'] ?>" value="ADD" ></a></label>
 		  <fieldset class="add" style="width: 50%; margin-left: 20%">	 
@@ -39,7 +39,7 @@ include 'Header.php';
 
 				<div id="izquierda">
 				 	<label for="login"><?php echo $strings['Login'];?>:</label> 
-				 	<input type="text" name="login"  size="15" maxlength="15" onblur="javascript:void(validarLogin(this, 15))"  ><div id="login" class="oculto" style="display:none"><?php echo $strings['div_Alfanumerico']?></div> <div id="loginVacio" class="oculto" style="display:none"><?php echo $strings['div_login_vacio']?></div> 
+				 	<input type="text" name="login"  size="9" maxlength="9" onblur="javascript:void(validarLogin(this, 9))"  ><div id="login" class="oculto" style="display:none"><?php echo $strings['div_Alfanumerico']?></div> <div id="loginVacio" class="oculto" style="display:none"><?php echo $strings['div_login_vacio']?></div> 
 				 </div>
 				 <div id="izquierda">
 					<label for="password"><?php echo $strings['Contraseña'] ?>:</label>
