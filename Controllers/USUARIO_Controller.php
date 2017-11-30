@@ -32,15 +32,43 @@ include '../Views/MESSAGE_View.php';
 // funcion para coger los datos del formulario
 function get_data_form(){
 
-	$login = $_REQUEST['login'];
-	$password = $_REQUEST['password'];
-	$DNI = $_REQUEST['DNI'];
-	$nombre = $_REQUEST['nombre'];
-	$apellidos = $_REQUEST['apellidos'];
-	$telefono = $_REQUEST['telefono'];
-	$email = $_REQUEST['email'];
-	$direccion = $_REQUEST['direccion'];
-	$action = $_REQUEST['action'];
+	$login = null;
+	$password = null;
+	$DNI = null;
+	$nombre = null;
+	$apellidos = null;
+	$telefono = null;
+	$email = null;
+	$direccion = null;
+	$action = null;
+
+	if(isset($_REQUEST['login'])){
+		$login = $_REQUEST['login'];
+	}
+	if(isset($_REQUEST['password'])){
+		$password = $_REQUEST['password'];
+	}
+	if(isset($_REQUEST['DNI'])){
+		$DNI = $_REQUEST['DNI'];
+	}
+	if(isset($_REQUEST['nombre'])){
+		$nombre = $_REQUEST['nombre'];
+	}
+	if(isset($_REQUEST['apellidos'])){
+		$apellidos = $_REQUEST['apellidos'];
+	}
+	if(isset($_REQUEST['telefono'])){
+		$telefono = $_REQUEST['telefono'];
+	}
+	if(isset($_REQUEST['email'])){
+		$email = $_REQUEST['email'];
+	}
+	if(isset($_REQUEST['direccion'])){
+		$direccion = $_REQUEST['direccion'];
+	}
+	if(isset($_REQUEST['action'])){
+		$action = $_REQUEST['action'];
+	}
 
 	$USUARIO = new USUARIO_Model(
 		$login, 
@@ -56,30 +84,6 @@ function get_data_form(){
 }
 
 
-// funcion para coger los datos del formulario SEARCH
-function get_data_form_SEARCH(){
-
-	$login = $_REQUEST['login'];
-	$DNI = $_REQUEST['DNI'];
-	$nombre = $_REQUEST['nombre'];
-	$apellidos = $_REQUEST['apellidos'];
-	$telefono = $_REQUEST['telefono'];
-	$email = $_REQUEST['email'];
-	$direccion = $_REQUEST['direccion'];
-	$action = $_REQUEST['action'];
-
-	$USUARIO = new USUARIO_Model(
-		$login, 
-		'', 
-		$DNI, 
-		$nombre, 
-		$apellidos,
-		$telefono, 
-		$email, 
-		$direccion);
-
-	return $USUARIO;
-}
 //Funcion para coger los datos del formulario de un usuario ya almacenado
 function get_data_UserBD(){
 
@@ -162,7 +166,7 @@ if (!isset($_REQUEST['action'])){
 				$USUARIO = new USUARIO_SEARCH();//Crea la vista SEARCH y muestra formulario para rellenar por el usuario
 			}
 			else{
-				$USUARIO = get_data_form_SEARCH(); //coge los datos del formulario del usuario que desea buscar
+				$USUARIO = get_data_form(); //coge los datos del formulario del usuario que desea buscar
 				$datos = $USUARIO->SEARCH();//Ejecuta la funcion SEARCH() en el USUARIO_Model
 				$lista = array('login','password','DNI','nombre','apellidos','telefono','email','direccion');
 				$resultado = new USUARIO_SHOWALL($lista, $datos, 0, 0, 0, 0, 'SEARCH', '../Controllers/USUARIO_Controller.php');//Crea la vista SHOWALL y muestra los usuarios que cumplen los parámetros de búsqueda 
