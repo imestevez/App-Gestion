@@ -26,10 +26,10 @@ include '../Views/Header.php';
     
     <?php include '../Views/js/validacionesGRUPO.js' ?>
 </script>
-     <section class="pagina">
+     <section class="pagina" style="min-height: 900px">
          <fieldset class="add">
                 <legend style="margin-left: 30%"><?php echo $strings['AñadirGrupo'] ?></legend>
-            <form method="post" name="ADD"  action="../Controllers/GRUPO_Controller.php" enctype="multipart/form-data" >
+            <form method="post" name="ADD"  action="../Controllers/GRUPO_Controller.php" >
                 <div id="izquierda">
                     <label for="IdGrupo"><?php echo $strings['IdGrupo']?>: </label>
                         <input type="text" name="IdGrupo" maxlength="6" size="6" onblur="javascript:void(validarIdGrupo(this, 6))" ><div id="IdGrupo" class="oculto" style="display:none"><?php echo $strings['div_Alfanumerico']?></div> <div id="IdGrupoVacio" class="oculto" style="display:none"><?php echo $strings['div_vacio']?></div> 
@@ -46,7 +46,7 @@ include '../Views/Header.php';
                 </div>
 
                 <div class="acciones" style="float: right; margin-left:0%; margin-right: 50%">
-                    <a href="../Controllers/GRUPO_Controller.php?action=ADD"> <input type="image" name="action" value="ADD" src="../Views/images/confirmar.png" title="<?php echo $strings['Enviar Formulario'] ?>" onclick=""></a>
+                    <a href="../Controllers/GRUPO_Controller.php?action=ADD"> <input type="image" name="action" value="ADD" src="../Views/images/confirmar.png" title="<?php echo $strings['Enviar Formulario'] ?>" onclick="return validar('ADD')"></a>
                 </div>
              </form>                     
                 <div class="acciones" style="float: left;">
