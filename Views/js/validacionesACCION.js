@@ -1,9 +1,9 @@
 /*
-    script: validacionesFUNCIONALIDADES.js
+    script: validacionesACCION.js
     Creado el: 28/11/2017
     Creado por: SOLFAMIDAS;
     
-    El fichero validacionesACCION.js contiene las funciones necesarias para validar los formularios de Funcionalidad.
+    El fichero validacionesACCION.js contiene las funciones necesarias para validar los formularios de Acciones.
 
 */
 
@@ -16,12 +16,12 @@ function comprobarVacio(campo)
     
     var idVacio = campo.name.concat('Vacio'); //concatena al nombre del campo 'Vacio' para acceder a los divs correspondientes a los campos vacios
 
-  		if ((campo.value == null) || (campo.value.length == 0) )//si el valor del campo es nulo o la longitud es 0
+      if ((campo.value == null) || (campo.value.length == 0) )//si el valor del campo es nulo o la longitud es 0
         {
             document.getElementById(idVacio).style.display ='block';
             document.getElementById(campo.name).style.display ='none';
             return false;
-  		}
+      }
         if(expr.test(campo.value))//si el valor del campo cumple la expresión regular
         {
             document.getElementById(idVacio).style.display ='block';
@@ -29,10 +29,39 @@ function comprobarVacio(campo)
             return false;
         }
         document.getElementById(idVacio).style.display = 'none';
-  			return true;
+        return true;
 }
 
+//Función que admite alfanumérico y espacios
+function comprobarTexto(campo, tamaño_max) {
+    
+ var idVacio = campo.name.concat('Vacio'); //concatena al nombre del campo 'Vacio' para acceder a los divs correspondientes a los campos vacios
 
+     var expr_alfanum; //Expresión regular para comprobar que un campo (login y contraseña) es alfanumerico y puede incluir caracteres como 
+    expr_alfanum =  /^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚçÇ_.,-\s]+$/; //letras y numeros _ . - y espacios
+    
+     if (expr_alfanum.test(campo.value) == false) //Si no cumple la expresión regular
+    { 
+        document.getElementById(idVacio).style.display = 'none';
+        document.getElementById(campo.name).style.display = 'block';      
+        return false;
+    }
+      else //Si cumple la expresión regular
+      {
+        if (campo.value.length > tamaño_max) //Si el tamaño del campo supera el maximo
+        {
+          document.getElementById(idVacio).style.display = 'none';
+          document.getElementById(campo.name).style.display = 'block';
+            return false;
+        }
+        else //si el tamaño del campo no supera el máximo
+        {     
+            document.getElementById(campo.name).style.display = 'none';
+            return true;
+        }
+  }
+    
+}
 //Función para comprobar que un campo solo tiene letras (mayúsculas y minúsculas), números y los caracteres "- . _"
 function comprobarAlfanumerico(campo, tamaño_max)
 {
@@ -93,7 +122,7 @@ function validarNombreAccion(NombreAccion, tamaño_max)
 
   if(comprobarVacio(NombreAccion))//Si el campo no está vacio el campo
       {
-          if(comprobarAlfanumerico(NombreAccion,tamaño_max))//Si login cumple la expresión regular de campo Alfabético
+          if(comprobarTexto(NombreAccion,tamaño_max))//Si login cumple la expresión regular de campo Alfabético
        {
            return true;
        }else{ //Si no cumple la expresión regular
@@ -111,7 +140,7 @@ function validarDescripAccion(DescripAccion, tamaño_max)
 
   if(comprobarVacio(DescripAccion))//Si el campo no está vacio el campo
       {
-          if(comprobarAlfanumerico(DescripAccion,tamaño_max))//Si login cumple la expresión regular de campo Alfabético
+          if(comprobarTexto(DescripAccion,tamaño_max))//Si login cumple la expresión regular de campo Alfabético
        {
            return true;
        }else{ //Si no cumple la expresión regular
@@ -147,6 +176,31 @@ function comprobarVacioBuscar(campo)
          return true;
 }
 
+//Función para comprobar que un campo de tipo texto no supera el máximo de caracteres
+function comprobarTextoBuscar(campo, tamaño_max) {
+    
+     var expr_alfanum; //Expresión regular para comprobar que un campo (login y contraseña) es alfanumerico y puede incluir caracteres como 
+    expr_alfanum =  /^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚçÇ_.,-\s]+$/; //letras y numeros _ . - y espacios
+    
+     if (expr_alfanum.test(campo.value) == false) //Si no cumple la expresión regular
+    { 
+        document.getElementById(campo.name).style.display = 'block';      
+        return false;
+    }
+      else //Si cumple la expresión regular
+      {
+        if (campo.value.length > tamaño_max) //Si el tamaño del campo supera el maximo
+        {
+          document.getElementById(campo.name).style.display = 'block';
+            return false;
+        }
+        else //si el tamaño del campo no supera el máximo
+        {     
+            document.getElementById(campo.name).style.display = 'none';
+            return true;
+        }
+  }
+}
 
 //Función para comprobar que un campo solo tiene letras (mayúsculas y minúsculas), números y los caracteres "- . _" para el formulario SEARCH
 function comprobarAlfanumericoBuscar(campo, tamaño_max)
@@ -175,7 +229,7 @@ function comprobarAlfanumericoBuscar(campo, tamaño_max)
 //Función para validar la búsqueda por IdAccion
 function validarIdAccionBuscar(IdAccion, tamaño_max)
 {
-    if(comprobarVacioBuscar(IdAccion)){ //Si el IdAccion no está vacío
+    if(comprobarVacioBuscar(IdAccion)){ //Si el IdFuncionalidad no está vacío
         if(comprobarAlfanumericoBuscar(IdAccion,tamaño_max)) //Si cumple la expresión regular de campo Alfabético
             {
                 return true;
@@ -192,8 +246,8 @@ function validarIdAccionBuscar(IdAccion, tamaño_max)
 //Función para validar la búsqueda por NombreAccion
 function validarNombreAccionBuscar(NombreAccion, tamaño_max)
 {
-    if(comprobarVacioBuscar(NombreAccion)){ //Si el NombreAccion no está vacío
-        if(comprobarAlfanumericoBuscar(NombreAccion,tamaño_max)) //Si cumple la expresión regular de campo Alfabético
+    if(comprobarVacioBuscar(NombreAccion)){ //Si el IdFuncionalidad no está vacío
+        if(comprobarTextoBuscar(NombreAccion,tamaño_max)) //Si cumple la expresión regular de campo Alfabético
             {
                 return true;
             }else{ //si no cumple la expresión regular
@@ -209,8 +263,8 @@ function validarNombreAccionBuscar(NombreAccion, tamaño_max)
 //Función para validar la búsqueda por DescripAccion
 function validarDescripAccionBuscar(DescripAccion, tamaño_max)
 {
-    if(comprobarVacioBuscar(DescripAccion)){ //Si el IdFuncionalidad no está vacío
-        if(comprobarAlfanumericoBuscar(DescripAccion,tamaño_max)) //Si cumple la expresión regular de campo Alfabético
+    if(comprobarVacioBuscar(DescripAccion)){ //Si el IdAccion no está vacío
+        if(comprobarTextoBuscar(DescripAccion,tamaño_max)) //Si cumple la expresión regular de campo Alfabético
             {
                 return true;
             }else{ //si no cumple la expresión regular
