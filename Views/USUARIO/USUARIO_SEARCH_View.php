@@ -21,7 +21,7 @@ function render(){
 ?>
 
 <script type="text/javascript"> 
-    <?php include '../Views/js/validaciones.js' ?>
+    <?php include '../Views/js/validacionesUSUARIO.js' ?>
 </script>
      <section class="pagina">
 
@@ -33,7 +33,7 @@ function render(){
                 
                 <div id="izquierda">
                     <label for="login"><?php echo $strings['Login']?>: </label>
-                        <input type="text" name="login" maxlength="15" size="15" onblur="javascript:void(validarLoginBuscar(this, 15))" ><div id="login" class="oculto" style="display:none"><?php echo $strings['div_Alfanumerico']?></div>
+                        <input type="text" name="login" maxlength="9" size="9" onblur="javascript:void(validarLoginBuscar(this, 9))" ><div id="login" class="oculto" style="display:none"><?php echo $strings['div_Alfanumerico']?></div>
                 </div>
                  <div id="izquierda">
                     <label for="DNI"><?php echo $strings['DNI']?>: </label>
@@ -54,15 +54,15 @@ function render(){
                 </div>
                <div  id="izquierda">
                         <label for="email"><?php echo $strings['Email']?>: </label>
-                         <input type="text" name="email" maxlength="60" size="60" placeholder="<?php echo $strings['ejemplo']?>@email.com"  onblur="javascript:void(validarEmailBuscar(this, 60))" ><div id="email" class="oculto" style="display:none"><?php echo $strings['div_email']?></div> 
+                         <input type="text" name="email" maxlength="40" size="40" placeholder="<?php echo $strings['ejemplo']?>@email.com"  onblur="javascript:void(validarEmailBuscar(this, 40))" ><div id="email" class="oculto" style="display:none"><?php echo $strings['div_email']?></div> 
                 </div>
                 <div  id="izquierda">
                         <label for="direccion"><?php echo $strings['Direccion']?>: </label>
-                         <input type="text" name="direccion" maxlength="60" size="60"><div id="direccion" class="oculto" style="display:none"><?php echo $strings['div_direccion']?></div>
+                         <input type="text" name="direccion" maxlength="60" size="60" onblur="javascript:void(validarDireccionBuscar(this, 60))" ><div id="direccion" class="oculto" style="display:none"><?php echo $strings['div_direccion']?></div>
                 </div>
                 <div class="acciones" style="float: right; margin-left:0%; margin-right: 50%">
                    
-                     <a href="../Controllers/USUARIO_Controller.php?action=SEARCH"><input type="image" name="action" value="SEARCH" action="#" src="../Views/images/search.png" title="<?php echo $strings['Buscar']?>" onclick="" ></a>
+                     <a href="../Controllers/USUARIO_Controller.php?action=SEARCH"><input type="image" name="action" value="SEARCH" action="SEARCH" src="../Views/images/search.png" title="<?php echo $strings['Buscar']?>" onclick="return validar('SEARCH')" ></a>
                 </div>
              </form>  
                    <div class="acciones" style="float: left;">
