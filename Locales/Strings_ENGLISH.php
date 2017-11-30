@@ -229,6 +229,7 @@ array(
 'Mostrar trabajo' => 'Show work',
 'Entregas' => 'Deliveries',
 'Mostrar entrega' => 'Show delivery',
+'div_Ruta_Max' => 'The route of the delivery overcomes the allowed maximum',
 
 
 

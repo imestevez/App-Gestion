@@ -228,6 +228,7 @@ array(
 'Mostrar trabajo' => 'Mostrar traballo',
 'Entregas' => 'Entregas',
 'Mostrar entrega' => 'Mostrar entrega',
+'div_Ruta_Max' => 'A ruta da entrega supera o máximo de caracteres permitidos',
 
 
 
