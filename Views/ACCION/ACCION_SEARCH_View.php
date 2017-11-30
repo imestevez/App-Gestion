@@ -21,7 +21,7 @@ function render(){
 ?>
 
 <script type="text/javascript"> 
-    <?php include '../Views/js/validaciones.js' ?>
+    <?php include '../Views/js/validacionesACCION.js' ?>
 </script>
      <section class="pagina">
 
@@ -34,13 +34,13 @@ function render(){
                 
                  <div id="izquierda">
                      <label for="IdAccion"><?php echo $strings['Id de la accion']?>: </label>
-                        <input type="text" name="IdAccion" maxlength="6" size="6" onblur="javascript:void(validarIdAccionBuscar(this, 100))" ><div id="IdAccion" class="oculto" style="display:none"><?php echo $strings['div_Alfanumerico']?></div> <div id="IdAccionVacio" class="oculto" style="display:none"><?php echo $strings['div_vacio']?></div> 
+                        <input type="text" name="IdAccion" maxlength="6" size="6" onblur="javascript:void(validarIdAccionBuscar(this, 6))" ><div id="IdAccion" class="oculto" style="display:none"><?php echo $strings['div_Alfanumerico']?></div> <div id="IdAccionVacio" class="oculto" style="display:none"><?php echo $strings['div_vacio']?></div> 
 
                 </div>
 
                 <div id="izquierda">
                      <label for="NombreAccion"><?php echo $strings['Nombre de la accion']?>: </label>
-                        <input type="text" name="NombreAccion" maxlength="60" size="60"  onblur="javascript:void(validarNombreAccionBuscar(this, 100))" ><div id="NombreAccion" class="oculto" style="display:none"><?php echo $strings['div_Alfanumerico']?></div> <div id="NombreAccionVacio" class="oculto" style="display:none"><?php echo $strings['div_vacio']?></div> 
+                        <input type="text" name="NombreAccion" maxlength="60" size="60"  onblur="javascript:void(validarNombreAccionBuscar(this, 60))" ><div id="NombreAccion" class="oculto" style="display:none"><?php echo $strings['div_Alfanumerico']?></div> <div id="NombreAccionVacio" class="oculto" style="display:none"><?php echo $strings['div_vacio']?></div> 
                 </div>
 
                 <div id="izquierda">
