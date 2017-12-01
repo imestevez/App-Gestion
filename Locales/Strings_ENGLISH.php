@@ -261,7 +261,7 @@ array(
 	'div_vacio' => 'The field can not be empty',
 	'Funcionalidades' => 'Functionalities',
 	'Id Funcionalidad' => 'Functionality Id',
-	'Nombre Funcionalidad' => 'NFunctionality Name',
+	'Nombre Funcionalidad' => 'Functionality Name',
 	'Descripción Funcionalidad' => 'Functionality Description',
 	'Añadir Funcionalidad' => 'Add Functionality',
 	'Borrar Funcionalidad' => 'Delete Functionality',
