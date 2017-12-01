@@ -1,18 +1,18 @@
 <?php
 /*
 //Clase : ACCION_DELETE
-//Creado el : 15-10-2017
-//Creado por: vugsj4
+//Creado el : 1-12-2017
+//Creado por: SOLFAMIDAS
 //-------------------------------------------------------
 
-Muestra la tabla de borrado del usuario seleccionado
+Muestra la tabla de borrado de la accion seleccionada
 
 */
 class ACCION_DELETE{
 
 	 var $IdAccion; //declaración del atributo IdAccion de la accion
     var $NombreAccion; //declaración del atributo NombreAccion de la accion
-    var $DescripAccion; //declaración del atributo DescripAccion
+    var $DescripAccion; //declaración del atributo DescripAccion de la accion
 
 
 function __construct($tupla){
@@ -25,7 +25,7 @@ function __construct($tupla){
   $this->render();
 }
 
-//funcion que muestra los datos al usuario
+//funcion que muestra los datos
 
 function render(){
     include '../Views/Header.php';
@@ -34,7 +34,7 @@ function render(){
      <section class="pagina" style="min-height: 900px">
 
            <table class="showcurrent">
-             <caption><?php echo $strings['Borrar Usuario'] ?></caption>
+             <caption><?php echo $strings['Borrar Accion'] ?></caption>
                 
                  <tr><th><?php echo $strings['Id de la accion'] ?></th><td><?php echo $this->IdAccion ?></td></tr>
                  <tr><th><?php echo $strings['Nombre de la accion'] ?></th><td><?php echo $this->NombreAccion ?></td></tr>
@@ -50,7 +50,7 @@ function render(){
 
                   <div class="accionesTable" style="margin-left: 0%; float: right; margin-right: 45%">
 
-                    <a href="../Controllers/USUARIOS_Controller.php?action=DELETE&IdAccion=<?php echo $this->IdAccion ?>"><input type="image" name="action" value="DELETE" action="#" src="../Views/images/confirmar.png" title="<?php echo $strings['Borrar Usuario'] ?>" ></a>
+                    <a href="../Controllers/USUARIOS_Controller.php?action=DELETE&IdAccion=<?php echo $this->IdAccion ?>"><input type="image" name="action" value="DELETE" action="#" src="../Views/images/confirmar.png" title="<?php echo $strings['Borrar Accion'] ?>" ></a>
                     </div>
              </form>
 

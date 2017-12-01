@@ -391,7 +391,12 @@ array(
 	'Descripcion de la accion' => 'Descripcion da accion',
 	'Búsqueda de accion' => 'Búsqueda de accion',
 	'Acciones'=> 'Accións',
-	'Búsqueda de acciones' => 'Búsqueda de accións'
+	'Búsqueda de acciones' => 'Búsqueda de accións',
+	'Editar Accion' => 'Editar Accion',
+	'Añadir accion' => 'Engadir accion',
+	'Vista en detalle de accion' => 'Vista en detalle da acción',
+	'Borrar Accion' => 'Borrar Accion'
+
 )
 ;
  ?>
