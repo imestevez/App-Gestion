@@ -381,9 +381,12 @@ array(
 	'Id de la accion' => 'Id de la accion',
 	'Nombre de la accion' => 'Nombre de la accion',
 	'Descripcion de la accion' => 'Descripcion de la accion',
-	'Búsqueda de acciones' => 'Búsqueda de acciones',
 	'Acciones'=> 'Acciones',
-	'Búsqueda de acciones' => 'Búsqueda de acciones'
+	'Búsqueda de acciones' => 'Búsqueda de acciones',
+	'Editar Accion' => 'Editar Accion',
+	'Añadir accion' => 'Añadir accion',
+	'Vista en detalle de accion' => 'Vista en detalle de accion',
+	'Borrar Accion' => 'Borrar Accion'
 
 )
 ;
