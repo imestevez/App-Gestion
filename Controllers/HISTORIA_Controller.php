@@ -29,11 +29,21 @@ include '../Views/MESSAGE_View.php';
 // funcion para coger los datos del formulario
 function get_data_form(){
 
-	$IdTrabajo = $_REQUEST['IdTrabajo'];
-	$IdHistoria = $_REQUEST['IdHistoria'];
-	$TextoHistoria = $_REQUEST['TextoHistoria'];
+	$IdTrabajo = '';
+	$IdHistoria = '';
+	$TextoHistoria = '';
 	
 	$action = $_REQUEST['action'];
+
+	if(isset($_REQUEST['IdTrabajo'])){
+	$IdTrabajo = $_REQUEST['IdTrabajo'];
+	}
+	if(isset($_REQUEST['IdHistoria'])){
+	$IdHistoria = $_REQUEST['IdHistoria'];
+	}
+	if(isset($_REQUEST['TextoHistoria'])){
+	$TextoHistoria = $_REQUEST['TextoHistoria'];
+	}
 
 	$HISTORIA = new HISTORIA_Model(
 		$IdTrabajo, 
@@ -46,11 +56,21 @@ function get_data_form(){
 //Funcion para coger los datos del formulario de un usuario ya almacenado
 function get_data_UserBD(){
 
-	$IdTrabajo = $_REQUEST['IdTrabajo'];
-	$IdHistoria = $_REQUEST['IdHistoria'];
-	$TextoHistoria = $_REQUEST['TextoHistoria'];
+	$IdTrabajo = '';
+	$IdHistoria = '';
+	$TextoHistoria = '';
 
 	$action = $_REQUEST['action'];
+
+	if(isset($_REQUEST['IdTrabajo'])){
+	$IdTrabajo = $_REQUEST['IdTrabajo'];
+	}
+	if(isset($_REQUEST['IdHistoria'])){
+	$IdHistoria = $_REQUEST['IdHistoria'];
+	}
+	if(isset($_REQUEST['TextoHistoria'])){
+	$TextoHistoria = $_REQUEST['TextoHistoria'];
+	}
 
 	$HISTORIA = new HISTORIA_Model(
 		$IdTrabajo, 

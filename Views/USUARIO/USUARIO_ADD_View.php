@@ -24,7 +24,7 @@ include '../Views/Header.php';
 
 <script type="text/javascript">
     
-    <?php include '../Views/js/validaciones.js' ?>
+    <?php include '../Views/js/validacionesUSUARIO.js' ?>
 </script>
      <section class="pagina">
          <fieldset class="add">
@@ -32,7 +32,7 @@ include '../Views/Header.php';
             <form method="post" name="ADD"  action="../Controllers/USUARIO_Controller.php" enctype="multipart/form-data" >
                 <div id="izquierda">
                     <label for="login"><?php echo $strings['Login']?>: </label>
-                        <input type="text" name="login" maxlength="15" size="15" onblur="javascript:void(validarLogin(this, 25))"  ><div id="login" class="oculto" style="display:none"><?php echo $strings['div_Alfanumerico']?></div> <div id="loginVacio" class="oculto" style="display:none"><?php echo $strings['div_login_vacio']?></div> 
+                        <input type="text" name="login" maxlength="9" size="9" onblur="javascript:void(validarLogin(this, 9))"  ><div id="login" class="oculto" style="display:none"><?php echo $strings['div_Alfanumerico']?></div> <div id="loginVacio" class="oculto" style="display:none"><?php echo $strings['div_login_vacio']?></div> 
                 </div>
 
                 <div id="izquierda">
@@ -62,11 +62,11 @@ include '../Views/Header.php';
                 </div>
                <div  id="izquierda">
                         <label for="email"><?php echo $strings['Email']?>: </label>
-                         <input type="email" name="email" maxlength="60" size="60" placeholder="<?php echo $strings['ejemplo']?>@email.com" onblur="javascript:void(validarEmail(this, 60))" ><div id="email" class="oculto" style="display:none"><?php echo $strings['div_email']?></div> <div id="emailVacio" class="oculto" style="display:none"><?php echo $strings['div_email_vacio']?></div> 
+                         <input type="email" name="email" maxlength="40" size="40" placeholder="<?php echo $strings['ejemplo']?>@email.com" onblur="javascript:void(validarEmail(this, 40))" ><div id="email" class="oculto" style="display:none"><?php echo $strings['div_email']?></div> <div id="emailVacio" class="oculto" style="display:none"><?php echo $strings['div_email_vacio']?></div> 
                 </div>
                 <div  id="izquierda">
                         <label for="direccion"><?php echo $strings['Direccion']?>: </label>
-                         <input type="text" name="direccion" maxlength="60" size="60"><div id="direccion" class="oculto" style="display:none"><?php echo $strings['div_direccion']?></div> <div id="direccionVacio" class="oculto" style="display:none"><?php echo $strings['div_direccion_vacio']?></div> 
+                         <input type="text" name="direccion" maxlength="60" size="60" onblur="javascript:void(validarDireccion(this, 60))"><div id="direccion" class="oculto" style="display:none"><?php echo $strings['div_direccion']?></div> <div id="direccionVacio" class="oculto" style="display:none"><?php echo $strings['div_direccion_vacio']?></div> 
                 </div>
                 <div class="acciones" style="float: right; margin-left:0%; margin-right: 50%">
                     <a href="../Controllers/USUARIO_Controller.php?action=ADD"> <input type="image" name="action" value="ADD" src="../Views/images/confirmar.png" title="<?php echo $strings['Enviar Formulario'] ?>" onclick="return validar('ADD') && encriptar() "></a>

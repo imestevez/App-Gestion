@@ -43,7 +43,7 @@ function render(){
 ?>
 
 <script type="text/javascript">  
-    <?php include '../Views/js/validaciones.js' ?>
+    <?php include '../Views/js/validacionesUSUARIO.js' ?>
 </script>
 
     <section class="pagina">
@@ -57,7 +57,7 @@ function render(){
 
                 <div id="izquierda">
                     <label for="login"><?php echo $strings['Login']?>: </label>
-                    <input type="text" name="login" maxlength="15" readonly size="15" value="<?php echo $this->login ?>" >
+                    <input type="text" name="login" maxlength="9" readonly size="9" value="<?php echo $this->login ?>" >
                 </div>
 
                 <div id="izquierda">
@@ -92,15 +92,15 @@ function render(){
                 </div>
                 <div  id="izquierda">
                         <label for="email"><?php echo $strings['Email']?>: </label>
-                        <input type="text" name="email" maxlength="60" size="60" value="<?php echo $this->email ?>"  placeholder="<?php echo $strings['ejemplo']?>@email.com" onblur="javascript:void(validarEmail(this, 60))"  ><div id="email" class="oculto" style="display:none"><?php echo $strings['div_email']?></div> <div id="emailVacio" class="oculto" style="display:none"><?php echo $strings['div_email_vacio']?></div> 
+                        <input type="text" name="email" maxlength="40" size="40" value="<?php echo $this->email ?>"  placeholder="<?php echo $strings['ejemplo']?>@email.com" onblur="javascript:void(validarEmail(this, 40))"  ><div id="email" class="oculto" style="display:none"><?php echo $strings['div_email']?></div> <div id="emailVacio" class="oculto" style="display:none"><?php echo $strings['div_email_vacio']?></div> 
                 </div>
                 <div  id="izquierda">
                         <label for="direccion"><?php echo $strings['Direccion']?>: </label>
-                         <input type="text" name="direccion" maxlength="60" size="60" value="<?php echo $this->direccion ?>"><div id="direccion" class="oculto" style="display:none"><?php echo $strings['div_direccion']?></div> <div id="direccionVacio" class="oculto" style="display:none"><?php echo $strings['div_direccion_vacio']?></div> 
+                         <input type="text" name="direccion" maxlength="60" size="60" value="<?php echo $this->direccion ?>" onblur="javascript:void(validarDireccion(this, 60))" ><div id="direccion" class="oculto" style="display:none"><?php echo $strings['div_direccion']?></div> <div id="direccionVacio" class="oculto" style="display:none"><?php echo $strings['div_direccion_vacio']?></div> 
                 </div>
                     
                 <div class="acciones" style="float: right; margin-left:0%; margin-right: 50%">
-                    <a href="../Controllers/USUARIO_Controller.php?action=EDIT"> <input type="image" name="action" value="EDIT" src="../Views/images/confirmar.png" title="<?php echo $strings['Enviar Formulario'] ?>" onclick=" encriptar()"></a>
+                    <a href="../Controllers/USUARIO_Controller.php?action=EDIT"> <input type="image" name="action" value="EDIT" src="../Views/images/confirmar.png" title="<?php echo $strings['Enviar Formulario'] ?>" onclick="return validar('EDIT') && encriptar()"></a>
                 </div>
              </form>                     
                 <div class="acciones" style="float: left;">

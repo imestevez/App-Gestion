@@ -51,7 +51,7 @@ array(
 	'ejemplo' => 'exemplo',
 	'Direccion' => 'Dirección',
 	/* Divs de validacion*/
-	'div_Alfanumerico' => 'Solo se aceptan letras, números e los caracteres . _ -',
+	'div_Alfanumerico' => 'Solo se aceptan letras, números e os caracteres . _ -',
 	'div_login_vacio' => 'O Login non pode estar vacío',
 	'div_password_vacia' => 'O Contrasinal non pode estar vacío',
 	'div_dni' => 'Solo se aceptan 8 números seguidos de 1 letra',
@@ -216,7 +216,21 @@ array(
 'ERROR: Fallo en la inserción. Ya existe el IdTrabajo' => 'ERROR: Fallo na inserción. Xa existe o ID traballo',
 'ERROR: No existe la entrega que desea borrar en la BD' => 'ERROR: Non existe a entrega que desea borrar na BD',
 'ERROR: No se ha modificado' => 'ERROR: Non se ha modificado',
-
+'Añadir entrega' => 'Añadir entrega',
+'Borrar entrega' => 'Borrar entrega',
+'Buscar entrega' => 'Buscar entrega',
+'Editar entrega' => 'Editar entrega',
+'div_AlfanumericoTexto' => 'Solo se aceptan letras, espacios, números e os caracteres . _ -',
+'div_Ruta_vacia' => 'A ruta non pode estar vacia',
+'Horas' => 'Horas',
+'Ruta' => 'Ruta',
+'Cambiar la ruta' => 'Cambiar a ruta',
+'Mostrar trabajo' => 'Mostrar traballo',
+'Entregas' => 'Entregas',
+'Mostrar entrega' => 'Mostrar entrega',
+'div_Ruta_Max' => 'A ruta da entrega supera o máximo de caracteres permitidos',
+'ERROR: El IdTrabajo no existe' => 'ERROR: O IdTrabajo non existe',
+'ERROR: Fallo en la inserción. Ya existe la entrega' => 'ERROR: Fallo na inserción. Xa existe a entrega',
 
 
 
@@ -320,6 +334,8 @@ array(
 'div_Numerico' => 'Sólo se aceptan números',
 
 'ERROR: No existe ningún trabajo con ese IdTrabajo' => 'ERROR: Non existe ningún traballo con es IdTrabajo',
+'ERROR: Fallo en la inserción. Ya existe una historia con esos parámetros' => 'ERROR: Fallo na inserción. Xa existe unha historia con esos parámetros.',
+'ERROR: No existe la historia que desea borrar en la BD' => 'ERROR: Non existe a historia que desexa borrar na BD',
 
 
 
@@ -372,7 +388,12 @@ array(
 	'Descripcion de la accion' => 'Descripcion da accion',
 	'Búsqueda de accion' => 'Búsqueda de accion',
 	'Acciones'=> 'Accións',
-	'Búsqueda de acciones' => 'Búsqueda de accións'
+	'Búsqueda de acciones' => 'Búsqueda de accións',
+	'Editar Accion' => 'Editar Accion',
+	'Añadir accion' => 'Engadir accion',
+	'Vista en detalle de accion' => 'Vista en detalle da acción',
+	'Borrar Accion' => 'Borrar Accion'
+
 )
 ;
  ?>

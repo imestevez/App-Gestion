@@ -217,13 +217,21 @@ array(
 'ERROR: Fallo en la inserción. Ya existe el IdTrabajo' => 'ERROR: Insertion failed. The ID work already exists ',
 'ERROR: No existe la entrega que desea borrar en la BD' => 'ERROR: The delivery that you wish to delete doesn´t exists in the database',
 'ERROR: No se ha modificado' => 'ERROR: It has not been modified',
-
-
-
-
-
-
-
+'Añadir entrega' => 'Add delivery',
+'Borrar entrega' => 'Delete delivery',
+'Buscar entrega' => 'Search delivery',
+'Editar entrega' => 'Edit delivery',
+'div_AlfanumericoTexto' => 'Only letters, spaces, numbers and the characters . _ - are accepted',
+'div_Ruta_vacia' => 'The route does not has be empty',
+'Horas' => 'Hours',
+'Ruta' => 'Route',
+'Cambiar la ruta' => 'Change the route',
+'Mostrar trabajo' => 'Show work',
+'Entregas' => 'Deliveries',
+'Mostrar entrega' => 'Show delivery',
+'div_Ruta_Max' => 'The route of the delivery overcomes the allowed maximum',
+'ERROR: El IdTrabajo no existe' => 'ERROR: IdTrabajo doesn´t exist',
+'ERROR: Fallo en la inserción. Ya existe la entrega' => 'ERROR: Insertion failed. The delivery already exists',
 
 
 
@@ -251,9 +259,9 @@ array(
 //Funcionalidades
 	'div_vacio' => 'The field can not be empty',
 	'Funcionalidades' => 'Functionalities',
-	'Id Funcionalidad' => 'Id Functionality',
-	'Nombre Funcionalidad' => 'Name Functionality',
-	'Descripción Funcionalidad' => 'Description Functionality',
+	'Id Funcionalidad' => 'Functionality Id',
+	'Nombre Funcionalidad' => 'NFunctionality Name',
+	'Descripción Funcionalidad' => 'Functionality Description',
 	'Añadir Funcionalidad' => 'Add Functionality',
 	'Borrar Funcionalidad' => 'Delete Functionality',
 	'Editar Funcionalidad' => 'Edit Functionality',
@@ -320,6 +328,8 @@ array(
 'div_Numerico' => 'Only numbers accepted',
 
 'ERROR: No existe ningún trabajo con ese IdTrabajo' => 'ERROR: Work not found',
+'ERROR: Fallo en la inserción. Ya existe una historia con esos parámetros' => 'ERROR: Insertion failed. The ID story already exists',
+'ERROR: No existe la historia que desea borrar en la BD' => 'ERROR: The story that you wish to delete doesn´t exists in the database',
 
 
 
@@ -372,7 +382,12 @@ array(
 	'Descripcion de la accion' => 'Action description',
 	'Búsqueda de accion' => 'Action search',
 	'Acciones'=> 'Actions',
-	'Búsqueda de acciones' => 'Search actions'
+	'Búsqueda de acciones' => 'Search actions',
+	'Editar Accion' => 'Edit Action',
+	'Añadir accion' => 'Add Action',
+	'Vista en detalle de accion' => 'Showcurrent Action',
+	'Borrar Accion' => 'Delete Action'
+
 	
  )
 ;

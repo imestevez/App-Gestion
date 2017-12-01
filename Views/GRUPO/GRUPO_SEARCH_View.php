@@ -23,13 +23,13 @@ function render(){
 <script type="text/javascript"> 
     <?php include '../Views/js/validacionesGRUPO.js' ?>
 </script>
-     <section class="pagina">
+     <section class="pagina" style="min-height: 900px">
 
              <fieldset class="search">
                 <legend style="margin-left: 30%"><?php echo $strings['BuscaGrupo']?></legend>
 
          
-            <form method="post" name="SEARCH" action="../Controllers/GRUPO_Controller.php" enctype="multipart/form-data" >
+            <form method="post" name="SEARCH" action="../Controllers/GRUPO_Controller.php" >
                 
                 <div id="izquierda">
                     <label for="IdGrupo"><?php echo $strings['IdGrupo']?>: </label>

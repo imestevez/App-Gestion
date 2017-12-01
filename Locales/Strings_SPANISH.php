@@ -234,6 +234,27 @@ array(
 
 
 
+'ERROR: Fallo en la inserción. Ya existe el IdTrabajo' => 'ERROR: Fallo en la inserción. Ya existe el ID trabajo',
+'ERROR: No existe la entrega que desea borrar en la BD' => 'ERROR: No existe la entrega que desea borrar en la BD',
+'ERROR: No se ha modificado' => 'ERROR: No se ha modificado',
+'Añadir entrega' => 'Añadir entrega',
+'Borrar entrega' => 'Borrar entrega',
+'Buscar entrega' => 'Buscar entrega',
+'Editar entrega' => 'Editar entrega',
+'div_AlfanumericoTexto' => 'Solo se aceptan letras, espacios, números y los caracteres . _ -',
+'div_Ruta_vacia' => 'La ruta no puede estar vacia',
+'Horas' => 'Horas',
+'Ruta' => 'Ruta',
+'Cambiar la ruta' => 'Cambiar la ruta',
+'Mostrar trabajo' => 'Mostrar trabajo',
+'Entregas' => 'Entregas',
+'Mostrar entrega' => 'Mostrar entrega',
+'div_Ruta_Max' => 'La ruta de la entrega supera el máximo de caracteres permitidos',
+'ERROR: El IdTrabajo no existe' => 'ERROR: El IdTrabajo no existe',
+'ERROR: Fallo en la inserción. Ya existe la entrega' => 'ERROR: Fallo en la inserción. Ya existe la entrega',
+
+
+
 
 
 
@@ -320,8 +341,8 @@ array(
 'div_Numerico' => 'Sólo se aceptan números',
 
 'ERROR: No existe ningún trabajo con ese IdTrabajo' => 'ERROR: No existe ningún trabajo con ese IdTrabajo',
-
-
+'ERROR: Fallo en la inserción. Ya existe una historia con esos parámetros' => 'ERROR: Fallo en la inserción. Ya existe una historia con esos parámetros',
+'ERROR: No existe la historia que desea borrar en la BD' => 'ERROR: Fallo en la inserción. Ya existe una historia con esos parámetros',
 
 
 
@@ -373,9 +394,12 @@ array(
 	'Id de la accion' => 'Id de la accion',
 	'Nombre de la accion' => 'Nombre de la accion',
 	'Descripcion de la accion' => 'Descripcion de la accion',
-	'Búsqueda de acciones' => 'Búsqueda de acciones',
 	'Acciones'=> 'Acciones',
-	'Búsqueda de acciones' => 'Búsqueda de acciones'
+	'Búsqueda de acciones' => 'Búsqueda de acciones',
+	'Editar Accion' => 'Editar Accion',
+	'Añadir accion' => 'Añadir accion',
+	'Vista en detalle de accion' => 'Vista en detalle de accion',
+	'Borrar Accion' => 'Borrar Accion'
 
 )
 ;

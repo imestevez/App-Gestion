@@ -66,13 +66,13 @@ function comprobarAlfanumerico(campo, tamaño_max)
 }
 
 
-//Función para comprobar que un campo es alfabético y no supera el tamaño máximo permitido. Acepta todas las letras, mayúsculas y minúsculas, incluida la ñ y ç, además depalabras acentuadas.
+//Función para comprobar que un campo es alfabético (puede tener nº y signos de puntuación también) y no supera el tamaño máximo permitido. Acepta todas las letras, mayúsculas y minúsculas, incluida la ñ y ç, además depalabras acentuadas.
 function comprobarAlfabetico(campo, tamaño_max) 
 {
     var idVacio = campo.name.concat('Vacio'); //concatena al nombre del campo 'Vacio' para acceder a los divs correspondientes a los campos vacios
 
     var expr_alfabet; //Expresión regular para comprobar que solo tiene letras, numeros y(_ - .)
-    expr_alfabet = /^[a-zA-ZñÑáéíóúÁÉÍÓÚçÇ\s]+$/; //solo letras
+    expr_alfabet = /^[0-9a-zA-ZñÑáéíóúÁÉÍÓÚçÇ\s._-]+$/; // admite letras, números y algunos signos de puntuación
     
     if (expr_alfabet.test(campo.value) == false) //Si no cumple la expresión regular
     {

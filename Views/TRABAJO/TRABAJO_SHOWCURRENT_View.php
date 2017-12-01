@@ -52,7 +52,7 @@ function render(){
 ?>
      <section class="pagina">
              <table class="showcurrent">
-             <caption><?php echo $strings['Borrar trabajo'] ?></caption>
+             <caption><?php echo $strings['Mostrar trabajo'] ?></caption>
                   <tr><th><?php echo $strings['Campo'] ?></th><th><?php echo $strings['Valor'] ?></th></tr>
                  <tr><th><?php echo $strings['IdTrabajo'] ?></th><td><?php echo $this->IdTrabajo ?></td></tr>
                  <tr><th><?php echo $strings['NombreTrabajo'] ?></th><td><?php echo $this->NombreTrabajo ?></td></tr>

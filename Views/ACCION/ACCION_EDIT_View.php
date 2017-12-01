@@ -2,10 +2,10 @@
 
 /*
 //Clase : ACCION_EDIT
-//Creado el : 17-10-2017
-//Creado por: vugsj4
+//Creado el : 1-12-2017
+//Creado por: SOLFAMIDAS
 //-----------------
-Muestra el formulario con los datos del usuario indicado permitiendo modificarlos
+Muestra el formulario con los datos de la accion permitiendo modificarlos
 
 */
 class ACCION_EDIT{
@@ -13,7 +13,7 @@ class ACCION_EDIT{
    
     var $IdAccion; //declaración del atributo IdAccion de la accion
     var $NombreAccion; //declaración del atributo NombreAccion de la accion
-    var $DescripAccion; //declaración del atributo DescripAccion
+    var $DescripAccion; //declaración del atributo DescripAccion de la accion
 
 function __construct($tupla){
 
@@ -25,7 +25,7 @@ function __construct($tupla){
   $this->render();
 }
 
-//funcion que muestra los datos al usuario
+//funcion que muestra los datos
 
 function render(){
 
@@ -40,7 +40,7 @@ function render(){
     <section class="pagina">
 
            <fieldset class="edit">
-                <legend style="margin-left: 30%"><?php echo $strings['Editar Usuario'] ?></legend>
+                <legend style="margin-left: 30%"><?php echo $strings['Editar Accion'] ?></legend>
 
 
             <form method="post" name="EDIT" action="../Controllers/ACCION_Controller.php" enctype="multipart/form-data">
@@ -57,7 +57,7 @@ function render(){
             
                 <div id="izquierda">
                      <label for="DescripAccion"><?php echo $strings['Descripcion de la accion']?>: </label>
-                        <input type="text" name="DescripAccion" maxlength="20" size="20" value="<?php echo $this->DescripAccion ?>"  onblur="javascript:void(validarNombre(this, 20))"  ><div id="nombre" class="oculto" style="display:none"><?php echo $strings['div_Alfabetico'] ?></div><div id="nombreVacio" class="oculto" style="display:none"><?php echo $strings['div_nombre_vacio'] ?></div> 
+                        <<textarea name="DescripAccion" maxlength="100" rows="2" cols="50" onblur="javascript:void(validarDescripAccion(this, 100))" style="margin-left: 10px; border-radius: 20px; border-top-left-radius: 0px; border-width: 2px; border-color: darkblue;" ><?php echo $this->DescripAccion?></textarea><div id="DescripAccion" class="oculto" style="display:none"><?php echo $strings['div_Alfanumerico']?></div><div id="DescripAccionVacio" class="oculto" style="display:none"><?php echo $strings['div_vacio']?></div> 
                 </div>
             
             

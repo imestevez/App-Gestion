@@ -202,7 +202,6 @@ function comprobarTextoBuscar(campo, tamaño_max) {
   }
 }
 
-
 //Función para comprobar que un campo solo tiene letras (mayúsculas y minúsculas), números y los caracteres "- . _" para el formulario SEARCH
 function comprobarAlfanumericoBuscar(campo, tamaño_max)
 {

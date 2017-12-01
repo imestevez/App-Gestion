@@ -36,13 +36,13 @@ function render(){
     <?php include '../Views/js/validacionesGRUPO.js' ?>
 </script>
 
-    <section class="pagina">
+    <section class="pagina" style="min-height: 900px">
 
            <fieldset class="edit">
                 <legend style="margin-left: 30%"><?php echo $strings['EditarGrupo'] ?></legend>
 
 
-            <form method="post" name="EDIT" action="../Controllers/GRUPO_Controller.php" enctype="multipart/form-data">
+            <form method="post" name="EDIT" action="../Controllers/GRUPO_Controller.php">
          
 
                 <div id="izquierda">
@@ -61,7 +61,7 @@ function render(){
                 </div>
                     
                 <div class="acciones" style="float: right; margin-left:0%; margin-right: 50%">
-                    <a href="../Controllers/GRUPO_Controller.php?action=EDIT"> <input type="image" name="action" value="EDIT" src="../Views/images/confirmar.png" title="<?php echo $strings['Enviar Formulario'] ?>" onclick=""></a>
+                    <a href="../Controllers/GRUPO_Controller.php?action=EDIT"> <input type="image" name="action" value="EDIT" src="../Views/images/confirmar.png" title="<?php echo $strings['Enviar Formulario'] ?>" onclick="return validar('EDIT')"></a>
                 </div>
              </form>                     
                 <div class="acciones" style="float: left;">
