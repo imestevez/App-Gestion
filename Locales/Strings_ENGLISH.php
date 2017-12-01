@@ -230,6 +230,7 @@ array(
 'Entregas' => 'Deliveries',
 'Mostrar entrega' => 'Show delivery',
 'div_Ruta_Max' => 'The route of the delivery overcomes the allowed maximum',
+'ERROR: El IdTrabajo no existe' => 'ERROR: IdTrabajo doesn´t exist',
 
 
 
