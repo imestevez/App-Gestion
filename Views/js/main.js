@@ -12,18 +12,7 @@ $(document).ready(function(){
         e.preventDefault();
         
         if($(this).hasClass('activado')){
-            $('.menu li ul:has(li)').click(function (o){
-               var id = $(this).attr("id");
-               alert(id);
-            // window.location.href  = '../Controllers/'+id+'_Controller.php';
 
-           });
-       /*   if(".menu li ul:has(li)") {
-
-              if(('.menu li ul li')){
-             window.location.href  = '../Controllers/TRABAJO_Controller.php';
-            }
-          }*/
             $(this).removeClass('activado');
             $(this).children('ul').slideUp();
             
@@ -50,4 +39,16 @@ $(document).ready(function() {
     }
   });
 
+});
+
+$(document).ready(function(){
+
+  $('.submenu').click(function (e){
+        e.preventDefault();
+        
+        var $id = $(this).attr('id');
+        window.location.href  = '../Controllers/'+$id+'_Controller.php';
+         
+  
+  });
 });
