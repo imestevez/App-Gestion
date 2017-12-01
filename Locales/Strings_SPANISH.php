@@ -320,8 +320,8 @@ array(
 'div_Numerico' => 'Sólo se aceptan números',
 
 'ERROR: No existe ningún trabajo con ese IdTrabajo' => 'ERROR: No existe ningún trabajo con ese IdTrabajo',
-
-
+'ERROR: Fallo en la inserción. Ya existe una historia con esos parámetros' => 'ERROR: Fallo en la inserción. Ya existe una historia con esos parámetros',
+'ERROR: No existe la historia que desea borrar en la BD' => 'ERROR: Fallo en la inserción. Ya existe una historia con esos parámetros',
 
 
 
