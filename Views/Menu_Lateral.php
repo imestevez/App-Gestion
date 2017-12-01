@@ -15,10 +15,10 @@
             <li><a href="../Controllers/USUARIO_Controller.php"><i class="icono izquierda fa fa-home"></i><?php echo $strings['Inicio'] ?></a></li>
             <li ><a href="#"><i class="fa fa-archive" aria-hidden="true"></i></i> <?php echo $strings['Gestiones'] ?><i class="icono derecha fa fa-chevron-circle-down" aria-hidden="true"></i></a>
                 <ul>
-                <li id="USUARIO"><a href="../Controllers/USUARIO_Controller.php"><?php echo $strings['Usuarios'] ?></a></li>
-                <li id="TRABAJO"><a href="../Controllers/TRABAJO_Controller.php"><?php echo $strings['Trabajos'] ?></a></li>
-                <li><a href="#">Lamborghini Aventador SV</a></li>
-                <li><a href="#">Ferrari 488 GTB Coupé</a></li>
+                <li class="submenu" id="USUARIO"><a href="../Controllers/USUARIO_Controller.php"><?php echo $strings['Usuarios'] ?></a></li>
+                <li class="submenu" id="TRABAJO"><a href="../Controllers/TRABAJO_Controller.php"><?php echo $strings['Trabajos'] ?></a></li>
+                <li class="submenu" id="HISTORIA"><a href="../Controllers/HISTORIA_Controller.php"><?php echo $strings['Historias'] ?></a></li>
+                 <li class="submenu" id="ENTREGA"><a href="../Controllers/ENTREGA_Controller.php"><?php echo $strings['Entregas'] ?></a></li>
                 </ul>   
             </li>
 
