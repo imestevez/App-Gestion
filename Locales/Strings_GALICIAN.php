@@ -247,11 +247,6 @@ array(
 
 
 
-
-
-
-
-
 // ------------------------ ESPACIO DE TRABAJO PARA PABLO ---------------------------
 //Funcionalidades
 	'div_vacio' => 'O campo non pode estar valeiro.',
@@ -259,19 +254,19 @@ array(
 	'Id Funcionalidad' => 'Id Funcionalidade',
 	'Nombre Funcionalidad' => 'Nome Funcionalidade',
 	'Descripción Funcionalidad' => 'Descripción Funcionalidade',
-	'Añadir Funcionalidad' => 'Añadir Funcionalidade',
+	'Añadir Funcionalidad' => 'Engadir Funcionalidade',
 	'Borrar Funcionalidad' => 'Borrar Funcionalidade',
 	'Editar Funcionalidad' => 'Editar Funcionalidade',
 	'Buscar Funcionalidad' => 'Buscar Funcionalidade',
 	'Funcionalidad' => 'Funcionalidade',
-
-
-
-
-
-
-
-
+//Nota_Trabajo
+	'Añadir Nota' => 'Engadir Nota',
+	'Nota Trabajo' => 'Nota Traballo',
+	'Borrar Nota' => 'Borrar Nota',
+	'Editar Nota' => 'Editar Nota',
+	'Buscar Nota' => 'Buscar Nota',
+	'Nota' => 'Nota',
+	'Notas' => 'Notas',
 
 
 

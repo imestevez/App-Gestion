@@ -247,7 +247,6 @@ array(
 
 
 
-
 // ------------------------ ESPACIO DE TRABAJO PARA PABLO ---------------------------
 //Funcionalidades
 	'div_vacio' => 'The field can not be empty',
@@ -260,14 +259,14 @@ array(
 	'Editar Funcionalidad' => 'Edit Functionality',
 	'Buscar Funcionalidad' => 'Search Functionality',
 	'Funcionalidad' => 'Functionality',
-
-
-
-
-
-
-
-
+//Nota_Trabajo
+	'Añadir Nota' => 'Add Qualification',
+	'Nota Trabajo' => 'Work Qualification',
+	'Borrar Nota' => 'Delete Qualification',
+	'Editar Nota' => 'Edit Qualification',
+	'Buscar Nota' => 'Search Qualification',
+	'Nota' => 'Qualification',
+	'Notas' => 'Qualifications',
 
 
 
