@@ -230,6 +230,7 @@ array(
 'Mostrar entrega' => 'Mostrar entrega',
 'div_Ruta_Max' => 'A ruta da entrega supera o máximo de caracteres permitidos',
 'ERROR: El IdTrabajo no existe' => 'ERROR: O IdTrabajo non existe',
+'ERROR: Fallo en la inserción. Ya existe la entrega' => 'ERROR: Fallo na inserción. Xa existe a entrega',
 
 
 

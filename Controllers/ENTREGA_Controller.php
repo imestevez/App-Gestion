@@ -120,7 +120,6 @@ function get_data_UserBD(){
 	$action = $_REQUEST['action'];
 	}
 
-	echo $Ruta;
 	$ENTREGA = new ENTREGA_Model(
 		$login,
 		$IdTrabajo, 

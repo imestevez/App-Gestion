@@ -59,32 +59,15 @@ function ADD()
 
     if (($this->login <> '') && ($this->IdTrabajo <> '') && ($this->Alias <> '')){ // si el atributos not null no estan vacios
 
-	  $existenciaU = comprobarExistenciaUsuario();
-	  $existenciaT = comprobarExistenciaTrabajo();
-	  $errorConect = 'ERROR: No se ha podido conectar con la base de datos';
+	  $existenciaU = $this->comprobarExistenciaUsuario();
+	  $existenciaT = $this->comprobarExistenciaTrabajo();
+	  $existenciaE = $this->comprobarExistenciaEntrega();
 
-	  if( ($existenciaU == $errorConect) || ($existenciaU == $errorConect) ) {
+	  if( (is_string($existenciaU)) || (is_string($existenciaT) ) || (is_string($existenciaE)) ) {
 	  			$this->lista['mensaje'] = 'ERROR: No se ha podido conectar con la base de datos';
 					return $this->lista; // error en la consulta (no se ha podido conectar con la bd). Devolvemos un mensaje que el controlador manejara
-	  }
-	  if(  ($existenciaU == true) && ($existenciaT == true) ){
-
-		// construimos el sql para buscar esa clave en la tabla
-        $sql = "SELECT * FROM ENTREGA WHERE (login = '$this->login')";
-        $sql2 = "SELECT * FROM ENTREGA WHERE (IdTrabajo = '$this->IdTrabajo')";
-        
-        $result = $this->mysqli->query($sql);
-		$result2 = $this->mysqli->query($sql2);
-		if ( (!$result ) && (!$result2) ) { // si da error la ejecución de la query
-			$this->lista['mensaje'] = 'ERROR: No se ha podido conectar con la base de datos';
-			return $this->lista; // error en la consulta (no se ha podido conectar con la bd). Devolvemos un mensaje que el controlador manejara
-
-		}else { // si la ejecución de la query no da error
-
-			$num_rows = mysqli_num_rows($result);
-			$num_rows2 = mysqli_num_rows($result2);
-
-			if (($num_rows == 0) && ($num_rows2 == 0)){ // miramos si el resultado de la consulta es vacio (no existe el IdTrabajo)
+	  }else{
+		  if(  ($existenciaU == true) && ($existenciaT == true) && ($existenciaE == false) ){
 
 				//construimos la sentencia sql de inserción en la bd
 				$sql = "INSERT INTO ENTREGA(
@@ -97,46 +80,35 @@ function ADD()
 									'$this->IdTrabajo',
 									'$this->Alias',
 									'$this->Horas',
-									'$this->Ruta')";
-				 if (!($result = $this->mysqli->query($sql))){ //si da error la consulta se comrpueba el por que
-        			return 'ERROR: Introduzca todos los valores de todos los campos'; // introduzca un valor para el usuario
-				}
+									'$this->Ruta')";				
 
-    			else{ //si no da error en la insercion devolvemos mensaje de exito
+				if (!$result = $this->mysqli->query($sql)){ // si da error la ejecución de la query
+						$this->lista['mensaje'] = 'ERROR: No se ha podido conectar con la base de datos';
+						return $this->lista; // error en la consulta (no se ha podido conectar con la bd). Devolvemos un mensaje que el controlador manejara
+				}else{ //si no da error en la insercion devolvemos mensaje de exito
+
 					$this->lista['mensaje'] = 'Inserción realizada con éxito';
 					return $this->lista; //operacion de insertado correcta
 				}
-			}else{ //si hay un  igual
+		  }else{
 
-				$sql = "SELECT * FROM ENTREGA WHERE (login = '$this->login')"; //comprobar que no hay claves iguales
+		  	if($existenciaU == false){
+		  		$this->lista['mensaje'] = 'ERROR: El login no existe'; 
+				return $this->lista; 
+		  	}else{
+		  		if($existenciaT == false){
+		  			$this->lista['mensaje'] = 'ERROR: El IdTrabajo no existe'; 
+					return $this->lista; 
+		  		}else{
+		  			$this->lista['mensaje'] = 'ERROR: Fallo en la inserción. Ya existe la entrega'; 
+					return $this->lista; 
+		  		}
+		  	
 
-				if (!$result = $this->mysqli->query($sql)){ // si da error la ejecución de la query
-				$this->lista['mensaje'] = 'ERROR: No se ha podido conectar con la base de datos';
-				return $this->lista; // error en la consulta (no se ha podido conectar con la bd). Devolvemos un mensaje que el controlador manejara
-				}
-				else { // si la ejecución de la query no da error
+		  	}
 
-					$num_rows = mysqli_num_rows($result);
-					if ($num_rows == 0){ 
-			        	$this->lista['mensaje'] = 'ERROR: Fallo en la inserción. Ya existe el IdTrabajo'; 
-						return $this->lista; 
-					}else{
-						$this->lista['mensaje'] = 'ERROR: Fallo en la inserción. Ya existe el login'; 
-						return $this->lista; 
-					}
-				}
-			}
+		  }
 		}
-	  }else{
-	  	if($existenciaU == false){
-	  		$this->lista['mensaje'] =
-	  		return $this->lista;
-	  	}else{
-
-	  	}
-
-	  }
-		 
 	}else{ //Si no se introduce un IdTrabajo
 			return 'ERROR: Introduzca todos los valores de todos los campos'; // introduzca un valor para el usuario
 	}
@@ -158,7 +130,6 @@ function __destruct()
 function SEARCH()
 { 	// construimos la sentencia de busqueda con LIKE y los atributos de la entidad
 
-	echo $this->Ruta;
     $sql = "SELECT  
 					login,
     				IdTrabajo,
@@ -308,25 +279,23 @@ function contarTuplas(){
     $total_tuplas = mysqli_num_rows($datos);
 
     return $total_tuplas;
-}
+
 
 }
 
 function comprobarExistenciaUsuario(){
 
-	$sql = "SELECT FROM USUARIO WHERE (login = $this->login)";
+	$sql = "SELECT * FROM USUARIO WHERE ( login = '$this->login')";
 	
-	$result = $this->mysqli->query($sql);
-
-	if($result){
+  if (!($result = $this->mysqli->query($sql))){
+    	return 'ERROR'; 
+	}else{
 		$num_rows = mysqli_num_rows($result);
 		if($num_rows == 1){
 			return true;
 		}else{
 			return false;
 		}
-	}else{
-		return 'ERROR: No se ha podido conectar con la base de datos';
 	}
 }
 
@@ -334,18 +303,37 @@ function comprobarExistenciaUsuario(){
 function comprobarExistenciaTrabajo(){
 	
 
-	$sql = "SELECT FROM TRABAJO WHERE (IdTrabajo = $this->IdTrabajo)";
-	
-	$result = $this->mysqli->query($sql);
+	$sql = "SELECT * FROM TRABAJO WHERE ( IdTrabajo = '$this->IdTrabajo')";
 
-	if($result){
+  if (!($result = $this->mysqli->query($sql))){
+    	return  'ERROR'; 
+	}else{
+
 		$num_rows = mysqli_num_rows($result);
 		if($num_rows == 1){
 			return true;
 		}else{
 			return false;
 		}
-	}else{
-		return 'ERROR: No se ha podido conectar con la base de datos';
 	}
 }
+
+function comprobarExistenciaEntrega(){
+
+	$sql = "SELECT * FROM ENTREGA WHERE (login = '$this->login' AND IdTrabajo = '$this->IdTrabajo')";
+	
+  if (!($result = $this->mysqli->query($sql))){
+    	return  'ERROR'; 
+	}else{
+
+		$num_rows = mysqli_num_rows($result);
+		if($num_rows == 1){
+			return true;
+		}else{
+			return false;
+		}
+	}
+}
+}//Fin clase
+
+?>
