@@ -2,11 +2,11 @@
 
 /*
 //Clase : ACCION_ADD
-//Creado el : 15-10-2017
-//Creado por: vugsj4
+//Creado el : 1-12-2017
+//Creado por: SOLFAMIDAS
 //-------------------------------------------------------
 
-Muestra el formulario de registro que permite al usuario añadir sus datos al sistema
+Muestra el formulario que permite añadir acciones
 
 */
 class ACCION_ADD {
@@ -14,7 +14,7 @@ class ACCION_ADD {
     $this->render();
    }
 
-//funcion que muestra los datos al usuario
+//funcion que muestra los datos
 
 function render(){
 
@@ -28,7 +28,7 @@ include '../Views/Header.php';
 </script>
      <section class="pagina">
          <fieldset class="add">
-                <legend style="margin-left: 30%"><?php echo $strings['Registro de usuario'] ?></legend>
+                <legend style="margin-left: 30%"><?php echo $strings['Añadir accion'] ?></legend>
             <form method="post" name="ADD"  action="../Controllers/ACCION_Controller.php" enctype="multipart/form-data" >
                 
                 <div id="izquierda">
@@ -45,7 +45,7 @@ include '../Views/Header.php';
                 <div id="izquierda">
 
                     <label for="DescripAccion"><?php echo $strings['Descripcion de la accion']?>:</label>
-                        <input type="text"  name="DescripAccion" maxlength="100"  size="100" onblur="javascript:void(validarDescripAccion(this, 100))" ><div id="DescripAccion" class="oculto" style="display:none"><?php echo $strings['div_Alfanumerico']?></div><div id="DescripAccionVacio" class="oculto" style="display:none"><?php echo $strings['div_vacio']?></div> 
+                        <textarea name="DescripAccion" maxlength="100" rows="2" cols="50" onblur="javascript:void(validarDescripAccion(this, 100))" style="margin-left: 10px; border-radius: 20px; border-top-left-radius: 0px; border-width: 2px; border-color: darkblue;" ></textarea><div id="DescripAccion" class="oculto" style="display:none"><?php echo $strings['div_Alfanumerico']?></div><div id="DescripAccionVacio" class="oculto" style="display:none"><?php echo $strings['div_vacio']?></div> 
                 </div>
                
                 <div class="acciones" style="float: right; margin-left:0%; margin-right: 50%">
