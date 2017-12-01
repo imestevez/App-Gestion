@@ -1,19 +1,19 @@
 <?php
 
 /*
-//Clase : USUARIOS_SEARCH
-//Creado el : 15-10-2017
-//Creado por: vugsj4
+//Clase : ACCION_SEARCH
+//Creado el : 1-12-2017
+//Creado por: SOLFAMIDAS
 //-------------------------------------------------------
 
-Muestra el formulario de búsqueda de usuarios con todos los campos
+Muestra el formulario de búsqueda de acciones con todos los campos
 */
 class ACCION_SEARCH {
    function __construct(){
     $this->render();
    }
 
-//funcion que muestra los datos al usuario
+//funcion que muestra los datos
 function render(){
 
   include '../Views/Header.php';
@@ -45,7 +45,7 @@ function render(){
 
                 <div id="izquierda">
                      <label for="DescripAccion"><?php echo $strings['Descripcion de la accion']?>: </label>
-                        <input type="text" name="DescripAccion" maxlength="100" size="100"  onblur="javascript:void(validarDescripAccionBuscar(this, 100))" ><div id="DescripAccion" class="oculto" style="display:none"><?php echo $strings['div_Alfanumerico']?></div> <div id="DescripAccionVacio" class="oculto" style="display:none"><?php echo $strings['div_vacio']?></div> 
+                        <textarea name="DescripAccion" maxlength="100" rows="2" cols="50" onblur="javascript:void(validarDescripAccionBuscar(this, 100))" style="margin-left: 10px; border-radius: 20px; border-top-left-radius: 0px; border-width: 2px; border-color: darkblue;" ></textarea><div id="DescripAccion" class="oculto" style="display:none"><?php echo $strings['div_Alfanumerico']?></div><div id="DescripAccionVacio" class="oculto" style="display:none"><?php echo $strings['div_vacio']?></div> 
                 </div>
                 
                 <div class="acciones" style="float: right; margin-left:0%; margin-right: 50%">

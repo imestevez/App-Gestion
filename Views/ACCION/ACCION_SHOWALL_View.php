@@ -1,18 +1,18 @@
 <?php
 /*
-//Clase : USUARIOS_SHOWALL
-//Creado el : 16-10-2017
-//Creado por: vugsj4
+//Clase : ACCION_SHOWALL
+//Creado el : 1-12-2017
+//Creado por: SOLFAMIDAS
 //-------------------------------------------------------
     
-    Esta clase es la vista de los usuarios de la BD
+    Esta clase es la vista de las acciones de la BD
 
 */
 class ACCION_SHOWALL{
 
     var $datos;  //tuplas almacenadas en la BD
     var $origen; //Almacena el origen de la orden
-    var $lista; // array para almacenar los datos del usuario
+    var $lista; // array para almacenar los datos de la accion
     var $total_tuplas; //El numero te tuplas del recordset
     var $num_tupla; //Variable para almacenar el número de tuplas mostradas
     var $max_tuplas ; //Máximo de tuplas a mostrar por página
@@ -38,7 +38,7 @@ function __construct($lista, $datos,$num_tupla,$max_tuplas,$totalTuplas,$num_pag
     }
 }
 
-//funcion que muestra los datos al usuario
+//funcion que muestra los datos
 function render(){
 
   include '../Views/Header.php';
