@@ -5,13 +5,26 @@ Creado por: SOLFAMIDAS
 
 Contiene el html de la cabecera de las vistas
 
- -->  
+ --> 
+
+<?php
+    include_once '../Functions/Authentication.php';
+    if (!isset($_SESSION['idioma'])) { //si no tiene idioma la sesion
+        $_SESSION['idioma'] = 'SPANISH';
+        include '../Locales/Strings_' . $_SESSION['idioma'] . '.php';
+    }
+    else{
+        //$_SESSION['idioma'] = 'SPANISH'; // quitar y solucionar el problema de que inicilice el idioma a galego
+        include '../Locales/Strings_' . $_SESSION['idioma'] . '.php';
+    }
+
+?> 
 <!DOCTYPE html>
 <html>
     <head> 
         <meta charset="utf-8">
         
-    <title>WEB</title>  <link rel="icon" href="../Views/images/cabeceraB.png" type="image/png">
+    <title><?php echo $strings['Portal de Gestión'] ?></title>  <link rel="icon" href="../Views/images/cabeceraB.png" type="image/png">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">  
     <link rel="stylesheet" type="text/css" href="../Views/css/estilo.css">
     <link rel="stylesheet" type="text/css" href="../Views/css/tcal.css" />
@@ -26,20 +39,8 @@ Contiene el html de la cabecera de las vistas
     <body>
         
         <header>
-          <h1><strong>WEB</strong></h1>
+          <h1><strong><?php echo $strings['Portal de Gestión'] ?></strong></h1>
             
-    <?php
-    include_once '../Functions/Authentication.php';
-    if (!isset($_SESSION['idioma'])) { //si no tiene idioma la sesion
-        $_SESSION['idioma'] = 'SPANISH';
-        include '../Locales/Strings_' . $_SESSION['idioma'] . '.php';
-    }
-    else{
-        //$_SESSION['idioma'] = 'SPANISH'; // quitar y solucionar el problema de que inicilice el idioma a galego
-        include '../Locales/Strings_' . $_SESSION['idioma'] . '.php';
-    }
-
-?>
         <nav class="menu_derecha">
              <label for="sesion" id="lab_sesion"></label>
 <?php

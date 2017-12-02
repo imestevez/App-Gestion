@@ -232,6 +232,9 @@ array(
 'ERROR: El IdTrabajo no existe' => 'ERROR: O IdTrabajo non existe',
 'ERROR: Fallo en la inserción. Ya existe la entrega' => 'ERROR: Fallo na inserción. Xa existe a entrega',
 'Historia' => 'Historia',
+'Grupo SOLFAMIDAS' => 'Grupo SOLFAMIDAS',
+'Imagen Solfamidas' => 'Solfamidas image',
+'Imagen Solfamidas' => 'Imaxe Solfamidas',
 
 
 

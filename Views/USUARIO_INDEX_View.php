@@ -18,12 +18,25 @@ class Index {
 
 	
 		include_once '../Locales/Strings_SPANISH.php';
-		//include_once '../Views/Header_View.php';
-		include '../Controllers/USUARIO_Controller.php';
+		include_once '../Views/Header.php';
+?>
 
-		//include '../Controllers/TRABAJO_Controller.php';		
-		//include_once '../Views/Footer_View.php';
+		 <section class="pagina" style="min-height: 400px">
 
+		 	   <div class="texto" style=" width: 70%; margin-left: 15%">
+            <h2 style="text-align: center;"><strong><?php echo $strings['Grupo SOLFAMIDAS'] ?></strong></h2><br>
+       
+            <img style="margin-left: 26%;" src="../Views/images/index.jpg" width="380px" height="280px" alt="<?php echo $strings['Imagen Solfamidas'] ?>"><br>
+          
+               
+            </div>
+		 </section>
+
+
+
+
+<?php    		
+		include_once '../Views/Footer.php';
 
 	}
 }

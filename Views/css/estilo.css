@@ -56,14 +56,13 @@ h3{
 /*Clase de la div del texto*/
 .texto{
      margin: 2%;
-    border-radius: 5px;
-    border: solid black;
+    /*border-radius: 5px;
+    border: solid black;*/
     height: auto;
 }
 
 /*estilo de las imágenes del apartado del texto*/
 .texto img{
-    float: right;
     margin-left: 5%;
     margin-bottom: 2%;
     margin-right: 2%;
