@@ -42,7 +42,7 @@ include '../Views/Header.php';
 
                 <div id="izquierda">
                     <label for="DescripGrupo"><?php echo $strings['DescripGrupo']?>: </label>
-                        <input type="text" name="DescripGrupo" maxlength="100" size="100" onblur="javascript:void(validarDescripGrupo(this, 100))"  ><div id="DescripGrupo" class="oculto" style="display:none"><?php echo $strings['div_Alfanumerico']?></div> <div id="DescripGrupoVacio" class="oculto" style="display:none"><?php echo $strings['div_vacio'] ?></div>
+                        <textarea name="DescripGrupo" maxlength="100" rows="2" cols="50" onblur="javascript:void(validarDescripGrupo(this, 100))" style="margin-left: 10px; border-radius: 20px; border-top-left-radius: 0px; border-width: 2px; border-color: darkblue;" ></textarea><div id="DescripGrupo" class="oculto" style="display:none"><?php echo $strings['div_Alfanumerico']?></div> <div id="DescripGrupoVacio" class="oculto" style="display:none"><?php echo $strings['div_vacio'] ?></div>
                 </div>
 
                 <div class="acciones" style="float: right; margin-left:0%; margin-right: 50%">
