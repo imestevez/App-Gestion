@@ -37,9 +37,9 @@ function render(){
                         <input type="text" name="NombreFuncionalidad" maxlength="60" size="60"  onblur="javascript:void(validarNombreFuncionalidadBuscar(this, 60))" ><div id="NombreFuncionalidad" class="oculto" style="display:none"><?php echo $strings['div_Alfanumerico']?></div> <div id="NombreFuncionalidadVacio" class="oculto" style="display:none"><?php echo $strings['div_vacio']?></div> 
                 </div>
 
-                <div id="izquierda">
+                 <div id="izquierda">
                     <label for="DescripFuncionalidad"><?php echo $strings['Descripción Funcionalidad']?>: </label>
-                        <input type="text" name="DescripFuncionalidad" maxlength="100" size="100"  onblur="javascript:void(validarDescripFuncionalidadBuscar(this, 100))" ><div id="DescripFuncionalidad" class="oculto" style="display:none"><?php echo $strings['div_Alfanumerico']?></div> <div id="DescripFuncionalidadVacio" class="oculto" style="display:none"><?php echo $strings['div_vacio']?></div> 
+                        <textarea name="DescripFuncionalidad" maxlength="100" rows="2" cols="50" onblur="javascript:void(validarDescripFuncionalidadBuscar(this, 100))" style="margin-left: 10px; border-radius: 20px; border-top-left-radius: 0px; border-width: 2px; border-color: darkblue;" ></textarea><div id="DescripFuncionalidad" class="oculto" style="display:none"><?php echo $strings['div_Alfanumerico']?></div><div id="DescripFuncionalidadVacio" class="oculto" style="display:none"><?php echo $strings['div_vacio']?></div> 
                 </div>
         
                 <div class="acciones" style="float: right; margin-left:0%; margin-right: 50%">
