@@ -13,6 +13,7 @@
 -------------------------------------------------------------*/
 
 //Comprueba si los campos estan vacios o si solo hay espacios
+
 function comprobarVacio(campo)
 {
     var expr;//Expresión regular para que no estén los campos vacios

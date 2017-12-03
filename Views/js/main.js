@@ -47,8 +47,26 @@ $(document).ready(function(){
         e.preventDefault();
         
         var $id = $(this).attr('id');
-        window.location.href  = '../Controllers/'+$id+'_Controller.php';
-         
-  
+        window.location.href  = '../Controllers/'+$id+'_Controller.php';  
   });
 });
+
+
+function comprobarPermisos(usuario){
+
+$(document).ready(function(){
+
+  if(usuario == 'admin'){
+
+    while($('input').hasClass('lectura')){
+      $('.lectura').removeAttr('readonly');
+      $('.lectura').removeClass('lectura');
+    }
+  }else{
+    $('.lectura').addClass('lectura');
+    $('.lectura').attr('readonly', 'readonly');
+  }
+
+});
+
+}
