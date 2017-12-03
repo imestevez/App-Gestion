@@ -48,24 +48,24 @@ function render(){
 
                 <div id="izquierda">
                     <label for="IdAccion"><?php echo $strings['Id de la accion'] ?>: </label>
-                        <input type="text" class="lectura" name="IdAccion" maxlength="6" size="6" readonly value="<?php echo $this->IdAccion?>" onblur="javascript:void(validarIdAccion(this, 6))" ><div id="IdAccion" class="oculto" style="display:none"><?php echo $strings['div_Alfanumerico']?></div> <div id="IdFuncionalidadVacio" class="oculto" style="display:none"><?php echo $strings['div_vacio']?></div> 
+                        <input type="text" class="lectura" name="IdAccion" maxlength="6" size="6" readonly value="<?php echo $this->IdAccion?>" onblur="javascript:void(validarIdAccion(this, 6))" ><div id="IdAccion" class="oculto" style="display:none"><?php echo $strings['div_Alfanumerico']?></div> <div id="IdAccionVacio" class="oculto" style="display:none"><?php echo $strings['div_vacio']?></div> 
                 </div>
 
                 <div id="izquierda">
                     <label for="NombreAccion"><?php echo $strings['Nombre de la accion']?>: </label>
-                        <input type="text" name="NombreAccion" maxlength="60" size="60" value="<?php echo $this->NombreAccion?>"  onblur="javascript:void(validarNombreAccion(this, 60))" ><div id="NombreAccion" class="oculto" style="display:none"><?php echo $strings['div_Alfanumerico']?></div> <div id="NombreFuncionalidadVacio" class="oculto" style="display:none"><?php echo $strings['div_vacio']?></div> 
+                        <input type="text" name="NombreAccion" maxlength="60" size="60" value="<?php echo $this->NombreAccion?>"  onblur="javascript:void(validarNombreAccion(this, 60))" ><div id="NombreAccion" class="oculto" style="display:none"><?php echo $strings['div_Alfanumerico']?></div> <div id="NombreAccionVacio" class="oculto" style="display:none"><?php echo $strings['div_vacio']?></div> 
                 </div>
 
                  <div id="izquierda">
                     <label for="DescripAccion"><?php echo $strings['Descripcion de la accion']?>: </label>
-                        <textarea name="DescripAccion" maxlength="100" rows="2" cols="50" onblur="javascript:void(validarDescripAccion(this, 100))" style="margin-left: 10px; border-radius: 20px; border-top-left-radius: 0px; border-width: 2px; border-color: darkblue;" ><?php echo $this->DescripAccion?></textarea><div id="DescripAccion" class="oculto" style="display:none"><?php echo $strings['div_Alfanumerico']?></div><div id="DescripFuncionalidadVacio" class="oculto" style="display:none"><?php echo $strings['div_vacio']?></div> 
+                        <textarea name="DescripAccion" maxlength="100" rows="2" cols="50" onblur="javascript:void(validarDescripAccion(this, 100))" style="margin-left: 10px; border-radius: 20px; border-top-left-radius: 0px; border-width: 2px; border-color: darkblue;" ><?php echo $this->DescripAccion?></textarea><div id="DescripAccion" class="oculto" style="display:none"><?php echo $strings['div_Alfanumerico']?></div><div id="DescripAccionVacio" class="oculto" style="display:none"><?php echo $strings['div_vacio']?></div> 
                 </div>
             
             
                
                     
                 <div class="acciones" style="float: right; margin-left:0%; margin-right: 50%">
-                    <a href="../Controllers/ACCION_Controller.php?action=EDIT"> <input type="image" name="action" value="EDIT" src="../Views/images/confirmar.png" title="<?php echo $strings['Enviar Formulario'] ?>" onclick=""></a>
+                    <a href="../Controllers/ACCION_Controller.php?action=EDIT"> <input type="image" name="action" value="EDIT" src="../Views/images/confirmar.png" title="<?php echo $strings['Enviar Formulario'] ?>"  onclick="return validar('EDIT')"></a>
                 </div>
              </form>                     
                 <div class="acciones" style="float: left;">
