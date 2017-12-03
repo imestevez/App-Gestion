@@ -157,11 +157,11 @@ array(
 	'BuscaGrupo' => 'Search Group',
 	'Grupos' => 'Groups',
 	'Vista en detalle de grupo' => 'Show in detail of the group',
-
-
-
-
-
+	'ERROR: Fallo en la inserción. Ya existe el Nombre de Grupo' => 'ERROR: Insertion failed. That Group Name already exists',
+	'ERROR: Fallo en la inserción. Ya existe el ID de Grupo' => 'ERROR: Insertion failed. That GroupID already exists',
+	'ERROR: No existe el grupo que desea borrar en la BD' => 'ERROR: The group that you wish to delete doesn´t exists in the database',
+	'ERROR: Fallo en la modificación. Ya existe el ID de Grupo' => 'ERROR: Modification failed. That GroupID is already in use',
+	'ERROR: El grupo ya existe' => 'ERROR: Group already exists',
 
 
 
