@@ -235,6 +235,7 @@ array(
 'Historia' => 'Story',
 'Grupo SOLFAMIDAS' => 'SOLFAMIDAS Group',
 'Imagen Solfamidas' => 'Solfamidas image',
+'ERROR: Fallo en la modificacion. Ya existe la entrega' => 'ERROR: Modification failed. The delivery already exists',
 
 
 

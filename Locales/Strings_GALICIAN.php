@@ -235,6 +235,7 @@ array(
 'Grupo SOLFAMIDAS' => 'Grupo SOLFAMIDAS',
 'Imagen Solfamidas' => 'Solfamidas image',
 'Imagen Solfamidas' => 'Imaxe Solfamidas',
+'ERROR: Fallo en la modificacion. Ya existe la entrega' => 'ERROR: Fallo na modificacion. Xa existe a entrega',
 
 
 
