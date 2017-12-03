@@ -80,7 +80,7 @@ function ADD()
 				
 				    if ($num_rows > 0)    // si el numero de filas es mayor que 0 es que existe un nombregrupo duplicado
 				    {
-			        	$this->lista['mensaje'] = 'ERROR: Fallo en la inserción. Ya existe el DNI'; 
+			        	$this->lista['mensaje'] = 'ERROR: Fallo en la inserción. Ya existe el Nombre de Grupo'; 
 						return $this->lista; 
 					}
 				
@@ -94,7 +94,7 @@ function ADD()
 				}
 			}else{ //si hay un idgrupo igual
 
-	        	$this->lista['mensaje'] = 'ERROR: Fallo en la inserción. Ya existe el login'; 
+	        	$this->lista['mensaje'] = 'ERROR: Fallo en la inserción. Ya existe el ID de Grupo'; 
 				return $this->lista; 
 			}
 		}
@@ -161,7 +161,7 @@ function DELETE()
 			return $this->lista;
     } // si no existe el idgrupo a borrar se devuelve el mensaje de que no existe
     else{
-    	 $this->lista['mensaje'] = 'ERROR: No existe el usuario que desea borrar en la BD'; 
+    	 $this->lista['mensaje'] = 'ERROR: No existe el grupo que desea borrar en la BD'; 
 			return $this->lista;
 		}	
 } // fin metodo DELETE
@@ -221,7 +221,7 @@ function EDIT()
 			    $row = $result->fetch_array();
 
 			    if( ($num_rows == 1) && ( $row['IdGrupo'] != $this->idgrupo) ){ //Si devuelve 1 tupla y no coinciden los idgrupo
-			    	$this->lista['mensaje'] = 'ERROR: Fallo en la modificación. Ya existe el DNI'; 
+			    	$this->lista['mensaje'] = 'ERROR: Fallo en la modificación. Ya existe el ID de Grupo'; 
 					return $this->lista;
 				}
 
@@ -310,7 +310,7 @@ function comprobarRegistro(){
 		$total_tuplas = mysqli_num_rows($result);
 
 		if ($total_tuplas > 0){  // si hay mas de 0 tuplas, ya existe el grupo
-			$this->lista['mensaje'] = 'ERROR: El usuario ya existe';
+			$this->lista['mensaje'] = 'ERROR: El grupo ya existe';
 			return $this->lista;
 			}
 		else{
