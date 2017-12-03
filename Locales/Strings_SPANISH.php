@@ -157,11 +157,11 @@ array(
 	'BuscaGrupo' => 'Buscar Grupo',
 	'Grupos' => 'Grupos',
 	'Vista en detalle de grupo' => 'Vista en detalle de Grupo',
-
-
-
-
-
+	'ERROR: Fallo en la inserción. Ya existe el Nombre de Grupo' => 'ERROR: Fallo en la inserción. Ya existe el Nombre de Grupo',
+	'ERROR: Fallo en la inserción. Ya existe el ID de Grupo' => 'ERROR: Fallo en la inserción. Ya existe el ID de Grupo',
+	'ERROR: No existe el grupo que desea borrar en la BD' => 'ERROR: No existe el grupo que desea borrar en la BD',
+	'ERROR: Fallo en la modificación. Ya existe el ID de Grupo' => 'ERROR: Fallo en la modificación. Ya existe el ID de Grupo',
+	'ERROR: El grupo ya existe' => 'ERROR: El grupo ya existe',
 
 
 
