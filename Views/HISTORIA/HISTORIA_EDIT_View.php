@@ -37,6 +37,12 @@ include '../Views/Header.php';
 
             </script>
 
+            <script type="text/javascript">
+    
+            <?php include '../Views/js/validacionesS.js'; ?>
+
+            </script>
+
     <section class="pagina">
          <fieldset class="EDIT" >
                 <legend style="margin-left: 30%"><?php echo $strings['Editar historia'] ?></legend>
@@ -44,7 +50,7 @@ include '../Views/Header.php';
                
                 <div id="izquierda">
                     <label for="IdTrabajo"><?php echo $strings['Id del trabajo'] ?>: </label>
-                        <input type="text" name="IdTrabajo" maxlength="6" size="6" onblur="validarIdTrabajo(this,6)" value="<?php echo $this->IdTrabajo?>" readonly ><div id="IdTrabajo" class="oculto" style="display:none"><?php echo $strings['div_Alfanumerico']?></div> <div id="IdTrabajoVacio" class="oculto" style="display:none"><?php echo $strings['div_vacio']?></div> 
+                        <input type="text" name="IdTrabajo" maxlength="6" size="6" onblur="validarIdTrabajo(this,6)" value="<?php echo $this->IdTrabajo?>" ><div id="IdTrabajo" class="oculto" style="display:none"><?php echo $strings['div_Alfanumerico']?></div> <div id="IdTrabajoVacio" class="oculto" style="display:none"><?php echo $strings['div_vacio']?></div> 
                 </div>
 
                 <div id="izquierda">
