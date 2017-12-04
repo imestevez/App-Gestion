@@ -35,7 +35,7 @@ function render(){
      <section class="pagina">
              <table class="showcurrent">
                  <caption><?php echo $strings['Vista en detalle historia'] ?></caption>
-                 <tr><th><?php echo $strings['Campo'] ?></th><th>Valor</th></tr>
+                 <tr><th><?php echo $strings['Campo'] ?></th><th><?php echo $strings['Valor'] ?></th></tr>
                  <tr><th><?php echo $strings['Id del trabajo'] ?></th><td><?php echo $this->IdTrabajo ?></td></tr>
                  <tr><th><?php echo $strings['Id de la historia'] ?></th><td><?php echo $this->IdHistoria ?></td></tr>
                  <tr><th><?php echo $strings['Texto de la historia'] ?></th><td><?php echo $this->TextoHistoria ?></td></tr>

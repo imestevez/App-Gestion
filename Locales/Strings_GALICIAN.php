@@ -318,7 +318,7 @@ array(
 
 // ------------------------ ESPACIO DE TRABAJO PARA CRISTINA ---------------------------
 //Historias de usuario:
-'Añadir historia' => 'Añadir historia',
+'Añadir historia' => 'Engadir historia',
 'Id del trabajo' => 'Id do traballo',
 'Id de la historia' => 'Id da historia',
 'Texto de la historia' => 'Texto da historia',
