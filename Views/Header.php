@@ -36,8 +36,17 @@ Contiene el html de la cabecera de las vistas
     <script src="../Views/js/main.js"></script>
     </head>
     
-    <body lang="javascript" onload="comprobarPermisos( '<?php echo $_SESSION['login'] ?>' );">
-        
+    <body lang="javascript" onload="
+
+<?php
+    
+    if (IsAuthenticated()){//si esta autenticado
+?>
+    comprobarPermisos( '<?php echo $_SESSION['login'] ?>' );
+    <?php
+    }
+    ?>  
+    ">  
         <header>
           <h1><strong><?php echo $strings['Portal de Gestión'] ?></strong></h1>
             
