@@ -2,8 +2,8 @@
 <?php
 /*
 //Clase : USUARIOS_Model.php
-//Creado el : 13-10-2017
-//Creado por: vugsj4
+//Creado el : 27-11-2017
+//Creado por: SOLFAMIDAS
 //-------------------------------------------------------
 
 Modelo de datos de usuarios que accede a la Base de Datos
