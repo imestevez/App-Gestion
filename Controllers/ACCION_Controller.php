@@ -3,8 +3,8 @@
 
 /*
 //Script : ACCION_Controller.php
-//Creado el : 13-10-2017
-//Creado por: vugsj4
+//Creado el : 27-11-2017
+//Creado por: SOLFAMIDAS
 //-------------------------------------------------------
 
 Controlador que recibe las peticiones del usuario y este ejectuta las acciones pertinentes sobre el Model de datos y las vistas
