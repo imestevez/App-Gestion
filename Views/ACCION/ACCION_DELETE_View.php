@@ -35,9 +35,9 @@ function render(){
 
            <table class="showcurrent">
              <caption><?php echo $strings['Borrar Accion'] ?></caption>
-                
-                 <tr><th><?php echo $strings['Id de la accion'] ?></th><td><?php echo $this->IdAccion ?></td></tr>
-                 <tr><th><?php echo $strings['Nombre de la accion'] ?></th><td><?php echo $this->NombreAccion ?></td></tr>
+                <tr><th><?php echo $strings['Campo'] ?></th><th><?php echo $strings['Valor'] ?></th></tr>
+                <tr><th><?php echo $strings['Id de la accion'] ?></th><td><?php echo $this->IdAccion ?></td></tr>
+                <tr><th><?php echo $strings['Nombre de la accion'] ?></th><td><?php echo $this->NombreAccion ?></td></tr>
                 <tr><th><?php echo $strings['Descripcion de la accion'] ?></th><td><?php echo $this->DescripAccion ?></td></tr>
 
                 </table>
