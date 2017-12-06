@@ -36,7 +36,7 @@ function get_data_form(){
 	$Alias = null;
 	$Horas = null;
 	$Ruta = null;
-	
+	$origen = null;
 	$action = null;
 
 	if(isset($_REQUEST['login'])){
@@ -63,11 +63,12 @@ function get_data_form(){
 			$Ruta= '';
 		}
 }
-	if(isset($_REQUEST['action'])){
-	$action = $_REQUEST['action'];
+
+	if(isset($_REQUEST['origen'])){
+	$origen = $_REQUEST['origen'];
 	}
 
-	$ENTREGA = new ENTREGA_Model(
+		$ENTREGA = new ENTREGA_Model(
 		$login,
 		$IdTrabajo, 
 		$Alias, 
@@ -75,6 +76,8 @@ function get_data_form(){
 		$Ruta);
 
 	return $ENTREGA;
+
+
 }
 //Funcion para coger los datos del formulario de un usuario ya almacenado
 function get_data_UserBD(){
@@ -84,8 +87,10 @@ function get_data_UserBD(){
 	$Alias = null;
 	$Horas = null;
 	$Ruta = null;
-	
+	$origen = null;
+
 	$action = null;
+
 
 	if(isset($_REQUEST['login'])){
 	$login = $_REQUEST['login'];
@@ -122,7 +127,7 @@ function get_data_UserBD(){
 
 	$ENTREGA = new ENTREGA_Model(
 		$login,
-		$IdTrabajo, 
+		$IdTrabajo,
 		$Alias, 
 		$Horas, 
 		$Ruta);
@@ -143,11 +148,32 @@ if (!isset($_REQUEST['action'])){
 	Switch ($action){
 		case 'ADD': //Si quiere hacer un ADD
 			if (!$_POST){ //si viene del showall (no es un post)
+				$lista = array('login', 'Nombre','IdTrabajo', 'NombreTrabajo', 'Alias', 'origen');
 
-				$form = new ENTREGA_ADD(); //Crea la vista ADD y muestra formulario para rellenar por el usuario
+				if( (isset($_REQUEST['login'])) && 
+					(isset($_REQUEST['IdTrabajo'])) && 
+					(isset($_REQUEST['origen'])) ) {
+
+					$ENTREGA = get_data_form(); //recibe datos
+					
+					$lista['login'] = $_REQUEST['login'];
+					$lista['IdTrabajo'] = $_REQUEST['IdTrabajo'];
+					$lista = $ENTREGA->rellenarLista();
+					$lista['Alias'] = $ENTREGA->generadorAlias();
+					$lista['origen'] = $_REQUEST['origen'];
+
+					$form = new ENTREGA_ADD($lista); //Crea la vista ADD y muestra formulario para rellenar por el usuario
+				}else{
+					$lista['login'] = '';
+					$lista['origen'] = '../Controllers/ENTREGA_Controller.php';
+					$form = new ENTREGA_ADD($lista); //Crea la vista ADD y muestra formulario para rellenar por el usuario
+				}
 			}
 			else{ //si viene del add 
-
+				/*echo $_REQUEST['login'];
+				echo $_REQUEST['IdTrabajo'];
+				echo $_REQUEST['Alias'];
+*/
 				$ENTREGA = get_data_form(); //recibe datos
 				$lista = $ENTREGA->ADD(); //mete datos en respuesta usuarios despues de ejecutar el add con los de ENTREGA
 				$usuario = new MESSAGE($lista, '../Controllers/ENTREGA_Controller.php'); //muestra el mensaje despues de la sentencia sql
@@ -155,7 +181,7 @@ if (!isset($_REQUEST['action'])){
 			break;
 		case 'DELETE': //Si quiere hacer un DELETE
 			if (!$_POST){ //viene del showall con una clave
-				$ENTREGA = new ENTREGA_Model($_REQUEST['login'],$_REQUEST['IdTrabajo'], '','',''); //crea un un ENTREGA_Model con el IdTrabajo del usuario
+				$ENTREGA = new ENTREGA_Model($_REQUEST['login'],$_REQUEST['IdTrabajo'],'', '',''); //crea un un ENTREGA_Model con el IdTrabajo del usuario
 				$valores = $ENTREGA->RellenaDatos(); //completa el resto de atributos a partir de la clave
 				$usuario = new ENTREGA_DELETE($valores); //Crea la vista de DELETE con los datos del usuario
 			}
@@ -167,7 +193,7 @@ if (!isset($_REQUEST['action'])){
 			break;
 		case 'EDIT': //si el usuario quiere editar	
 			if (!$_POST){
-				$ENTREGA = new ENTREGA_Model($_REQUEST['login'],$_REQUEST['IdTrabajo'], '','', ''); //crea un un ENTREGA_Model con el IdTrabajo del usuario 
+				$ENTREGA = new ENTREGA_Model($_REQUEST['login'],$_REQUEST['IdTrabajo'],'', '',''); //crea un un ENTREGA_Model); //crea un un ENTREGA_Model con el IdTrabajo del usuario 
 				$datos = $ENTREGA->RellenaDatos();  //A partir del IdTrabajo recoge todos los atributos
 				$usuario = new ENTREGA_EDIT($datos); //Crea la vista EDIT con los datos del usuario
 			}
@@ -189,13 +215,16 @@ if (!isset($_REQUEST['action'])){
 			}
 			break;
 		case 'SHOWCURRENT': //si desea ver un usuario en detalle
-			$ENTREGA = new ENTREGA_Model($_REQUEST['login'],$_REQUEST['IdTrabajo'], '','', '');//crea un un ENTREGA_Model con el IdTrabajo del usuario 
-			$tupla = $ENTREGA->RellenaDatos();//A partir del IdTrabajo recoge todos los atributos
-			$usuario = new ENTREGA_SHOWCURRENT($tupla); //Crea la vista SHOWCURRENT del usuario requerido
+			$lista = array('login', 'Nombre','IdTrabajo', 'NombreTrabajo', 'Alias','NotaTrabajo', 'origen');
+			$ENTREGA = new ENTREGA_Model($_REQUEST['login'],$_REQUEST['IdTrabajo'], '', '',''); //crea un un ENTREGA_Model);//crea un un ENTREGA_Model con el IdTrabajo del usuario
+			$lista = $ENTREGA->rellenarLista();
+			echo $lista['login'];
+			//$tupla = $ENTREGA->RellenaDatos();//A partir del IdTrabajo recoge todos los atributos
+			$usuario = new ENTREGA_SHOWCURRENT($lista); //Crea la vista SHOWCURRENT del usuario requerido
 			break;
 		default: //Por defecto, Se muestra la vista SHOWALL
 			if (!$_POST){
-				$ENTREGA = new ENTREGA_Model('','', '','','');//crea un un ENTREGA_Model con el IdTrabajo del usuario 
+				$ENTREGA = new ENTREGA_Model('','','', '','','','','');//crea un un ENTREGA_Model con el IdTrabajo del usuario 
 			}
 			else{
 				$ENTREGA = get_data_form(); //Coge los datos del formulario

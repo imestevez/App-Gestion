@@ -256,10 +256,13 @@ array(
 'Grupo SOLFAMIDAS' => 'Grupo SOLFAMIDAS',
 'Imagen Solfamidas' => 'Imagen Solfamidas',
 'ERROR: Fallo en la modificacion. Ya existe la entrega' => 'ERROR: Fallo en la modificacion. Ya existe la entrega',
-
-
-
-
+'Entrega' => 'Entrega',
+'Nota' => 'Nota',
+'Añadir nota' => 'Añadir nota',
+'Borrar nota' => 'Borrar nota',
+'Buscar nota' => 'Buscar nota',
+'Editar nota' => 'Editar nota',
+'Sin calificar' => 'Sin calificar',
 
 
 

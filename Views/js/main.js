@@ -52,21 +52,3 @@ $(document).ready(function(){
 });
 
 
-function comprobarPermisos(usuario){
-
-$(document).ready(function(){
-
-  if(usuario == 'admin'){
-
-    while($('input').hasClass('lectura')){
-      $('.lectura').removeAttr('readonly');
-      $('.lectura').removeClass('lectura');
-    }
-  }else{
-    $('.lectura').addClass('lectura');
-    $('.lectura').attr('readonly', 'readonly');
-  }
-
-});
-
-}

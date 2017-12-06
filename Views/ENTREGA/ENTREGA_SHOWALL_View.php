@@ -50,7 +50,9 @@ function render(){
                 <caption><?php echo $strings['Entregas']?></caption>
                 <tr>
                 <th><?php echo $strings["Login"]; ?></th>
+                <th><?php echo $strings["Nombre"]; ?></th>
                 <th><?php echo $strings["IdTrabajo"]; ?></th>
+                <th><?php echo $strings["NombreTrabajo"]; ?></th>
                 <th><?php echo $strings["Alias"]; ?></th>
                 <th><?php echo $strings["Horas"]; ?></th>
                 <th><?php echo $strings["Ruta"]; ?></td>
@@ -64,7 +66,9 @@ function render(){
 			while( ($this->num_tupla < $this->max_tuplas) && ($row = mysqli_fetch_array($this->datos)) ) { //Mientras el numero de tuplas no llegue al máximo y haya tuplas en la BD
 ?>
                 <td><?php echo $row["login"]; ?></td>
+                <td><?php echo $row["Nombre"]; ?></td>
                 <td><?php echo $row["IdTrabajo"]; ?></td>
+                <td><?php echo $row["NombreTrabajo"]; ?></td>
                 <td><?php echo $row["Alias"]; ?></td>
                 <td><?php echo $row["Horas"]; ?></td>
                 <td><?php echo $row["Ruta"]; ?></td>
@@ -118,6 +122,7 @@ function renderSearch(){
                  <tr>
                 <th><?php echo $strings["login"]; ?></th>
                 <th><?php echo $strings["IdTrabajo"]; ?></th>
+                <th><?php echo $strings["NombreTrabajo"]; ?></th>
                 <th><?php echo $strings["Alias"]; ?></th>
                 <th><?php echo $strings["Horas"]; ?></th>
                 <th><?php echo $strings["Ruta"]; ?></th>
@@ -132,6 +137,7 @@ function renderSearch(){
 ?>  <tr>
                 <td><?php echo $row["login"]; ?></td>
                 <td><?php echo $row["IdTrabajo"]; ?></td>
+                <td><?php echo $row["NombreTrabajo"]; ?></td>
                 <td><?php echo $row["Alias"]; ?></td>
                 <td><?php echo $row["Horas"]; ?></td>
                 <td><?php echo $row["Ruta"]; ?></td>

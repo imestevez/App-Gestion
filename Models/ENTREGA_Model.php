@@ -38,10 +38,14 @@ function __construct($login,$IdTrabajo, $Alias, $Horas,$Ruta){
 	//lista con los datos del usuario
 	$this->lista = array(
 			"login" => $this->login,
+			"Nombre" => '',
 			"IdTrabajo"=>$this->IdTrabajo,
+			"NombreTrabajo"=>'',
 			"Alias"=>$this->Alias,
 			"Horas"=>$this->Horas,
 			"Ruta" => $this->Ruta,
+			"NotaTrabajo" => '',
+			"origen" => '',
 			"sql" => $this->mysqli, 
 			"mensaje"=> '');
 } // fin del constructor
@@ -55,6 +59,12 @@ function __construct($login,$IdTrabajo, $Alias, $Horas,$Ruta){
 
 function ADD()
 {
+
+	echo $this->login;
+	echo $this->IdTrabajo;
+
+	echo $this->Alias;
+
 
 
     if (($this->login <> '') && ($this->IdTrabajo <> '') && ($this->Alias <> '')){ // si el atributos not null no estan vacios
@@ -103,8 +113,6 @@ function ADD()
 		  			$this->lista['mensaje'] = 'ERROR: Fallo en la inserción. Ya existe la entrega'; 
 					return $this->lista; 
 		  		}
-		  	
-
 		  	}
 
 		  }
@@ -189,7 +197,10 @@ function DELETE()
 // en el atributo de la clase
 function RellenaDatos()
 {	// se construye la sentencia de busqueda de la tupla
-    $sql = "SELECT * FROM ENTREGA WHERE (login = '$this->login' AND IdTrabajo = '$this->IdTrabajo')";
+    $sql = "SELECT * FROM ENTREGA E, TRABAJO T
+    				 WHERE (E.login = '$this->login' AND 
+    				 		T.IdTrabajo = '$this->IdTrabajo' AND
+    				 		E.IdTrabajo = '$this->IdTrabajo')";
     // Si la busqueda no da resultados, se devuelve el mensaje de que no existe
     if (!($resultado = $this->mysqli->query($sql))){
 		$this->lista['mensaje'] = 'ERROR: No existe en la base de datos'; 
@@ -200,6 +211,7 @@ function RellenaDatos()
 		return $result;
 	}
 } // fin del metodo RellenaDatos()
+
 
 // funcion EDIT()
 // Se comprueba que la tupla a modificar exista en base al valor de su clave primaria
@@ -257,8 +269,9 @@ function EDIT()
 
 function SHOWALL($num_tupla,$max_tuplas){
 
-	$sql = "SELECT * FROM ENTREGA LIMIT $num_tupla, $max_tuplas";
-
+	$sql = "SELECT * FROM ENTREGA E, TRABAJO T, USUARIO U
+	WHERE (E.IdTrabajo=T.IdTrabajo AND U.login=E.login )
+	LIMIT $num_tupla, $max_tuplas";
 
 	    // si se produce un error en la busqueda mandamos el mensaje de error en la consulta
     if (!($resultado = $this->mysqli->query($sql))){
@@ -287,14 +300,15 @@ function comprobarExistenciaUsuario(){
 
 	$sql = "SELECT * FROM USUARIO WHERE ( login = '$this->login')";
 	
+//Si se produce un error en la consulta
   if (!($result = $this->mysqli->query($sql))){
     	return 'ERROR'; 
-	}else{
-		$num_rows = mysqli_num_rows($result);
-		if($num_rows == 1){
-			return true;
+	}else{//si no se produce un error
+		$num_rows = mysqli_num_rows($result);//cogemos el numero de tuplas que coinciden con la consulta
+		if($num_rows == 1){ //si hay 1 tupla es que existe algun usuario
+			return true; //existe el usuario
 		}else{
-			return false;
+			return false; //no existe el usuario
 		}
 	}
 }
@@ -305,14 +319,14 @@ function comprobarExistenciaTrabajo(){
 
 	$sql = "SELECT * FROM TRABAJO WHERE ( IdTrabajo = '$this->IdTrabajo')";
 
+	//Si se produce un error en la consulta
   if (!($result = $this->mysqli->query($sql))){
     	return  'ERROR'; 
-	}else{
-
-		$num_rows = mysqli_num_rows($result);
-		if($num_rows == 1){
-			return true;
-		}else{
+	}else{//si no se produce un error
+		$num_rows = mysqli_num_rows($result);//cogemos el numero de tuplas que coinciden con la consulta
+		if($num_rows == 1){//si hay 1 tupla es que existe algun trabajo
+			return true; //existe el trabajo
+		}else{ //no existe ningun trabajo
 			return false;
 		}
 	}
@@ -321,18 +335,132 @@ function comprobarExistenciaTrabajo(){
 function comprobarExistenciaEntrega(){
 
 	$sql = "SELECT * FROM ENTREGA WHERE (login = '$this->login' AND IdTrabajo = '$this->IdTrabajo')";
-	
+	//Si se produce un error en la consulta
   if (!($result = $this->mysqli->query($sql))){
     	return  'ERROR'; 
-	}else{
-
-		$num_rows = mysqli_num_rows($result);
-		if($num_rows == 1){
-			return true;
-		}else{
-			return false;
+	}else{//si no se produce un error
+		$num_rows = mysqli_num_rows($result);//cogemos el numero de tuplas que coinciden con la consulta
+		if($num_rows > 0){ //si hay mas de 0 tuplas es que existe alguna entrega
+			return true; //devolvemos que existe alguna entrega
+		}else{ //si es 0
+			return false; // no existe ninguna entrega
 		}
 	}
+}
+
+function comprobarExistenciaAlias(){
+
+	$sql = "SELECT * FROM ENTREGA WHERE (Alias = '$this->Alias' AND IdTrabajo = '$this->IdTrabajo')";
+	//Si se produce un error en la consulta
+  if (!($result = $this->mysqli->query($sql))){
+    	return  'ERROR'; 
+	}else{//si no se produce un error
+		$num_rows = mysqli_num_rows($result);//cogemos el numero de tuplas que coinciden con la consulta
+		if($num_rows > 0){ //si hay mas de 0 tuplas es que existe alguna entrega
+			return true; //devolvemos que existe alguna entrega
+		}else{ //si es 0
+			return false; // no existe ninguna entrega
+		}
+	}
+}
+
+function rellenarLista(){
+
+	$existenciaNota = $this->comprobarExistenciaNota();
+	if($existenciaNota == 1){
+		$sql = "SELECT * FROM ENTREGA E, USUARIO U, TRABAJO T, NOTA_TRABAJO N 
+						WHERE (U.login = '$this->login' AND
+								T.IdTrabajo = '$this->IdTrabajo' AND
+								E.login = '$this->login' AND E.IdTrabajo = '$this->IdTrabajo' AND
+								N.login = '$this->login' AND N.IdTrabajo = '$this->IdTrabajo'
+						)";
+		if (!($result = $this->mysqli->query($sql))){
+	    	//return  'ERROR'; 
+		}else{
+			$row = mysqli_fetch_array($result);
+			$this->lista['Nombre'] = $row['Nombre'];
+			$this->lista['NombreTrabajo'] = $row['NombreTrabajo'];
+			$this->lista['NotaTrabajo'] = $row['NotaTrabajo'];
+			$this->lista['Alias'] = $row['Alias'];
+
+		}
+
+	}else{
+		$sql = "SELECT * FROM ENTREGA E, USUARIO U, TRABAJO T 
+						WHERE (U.login = '$this->login' AND
+								T.IdTrabajo = '$this->IdTrabajo' AND
+								E.login = '$this->login' AND E.IdTrabajo = '$this->IdTrabajo')";
+echo $sql;
+
+	if (!($result = $this->mysqli->query($sql))){
+	    	//return  'ERROR'; 
+		}else{
+			$row = mysqli_fetch_array($result);
+			$this->lista['Nombre'] = $row['Nombre'];
+			$this->lista['NombreTrabajo'] = $row['NombreTrabajo'];
+			$this->lista['NotaTrabajo'] ='';
+			$this->lista['Alias'] = $row['Alias'];
+
+		}
+
+	}
+	return $this->lista;
+}
+
+function comprobarExistenciaNota(){
+
+	$sql = "SELECT * FROM ENTREGA E, USUARIO U, TRABAJO T, NOTA_TRABAJO N 
+			WHERE (U.login = '$this->login' AND
+					T.IdTrabajo = '$this->IdTrabajo' AND
+					E.login = '$this->login' AND E.IdTrabajo = '$this->IdTrabajo' AND
+					N.login = '$this->login' AND N.IdTrabajo = '$this->IdTrabajo'
+							)";
+
+		if (!($result = $this->mysqli->query($sql))){
+		//return  'ERROR'; 
+		}else{//si no se produce un error
+		$num_rows = mysqli_num_rows($result);//cogemos 
+
+		return $num_rows;
+	}
+}
+
+//Funcion para generar alias
+function generadorAlias() {
+	$length = 9;
+	//Realizamos la greneración de alias mientras no se encuentre un alias unico
+	/* $sql ="SELECT * FROM ENTREGA WHERE (login = '$this->login' AND 
+	 									Alias = '$this->Alias' AND  
+	 									IdTrabajo = '$this->IdTrabajo')";
+
+	 									echo $sql;
+ 	
+ 	 if (($result = $this->mysqli->query($sql))){
+     //si no se produce un error
+		$num_rows = mysqli_num_rows($result); //cogemos el numero de tuplas que coinciden con la consulta
+		if($num_rows > 0){
+			$row = $row = mysqli_fetch_array($this->result);
+			return $row['Alias'] ;
+		}else{
+*/
+		//	do{
+			    $caracteres = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+			    $caracteresLength = strlen($caracteres);
+			    $randomString = '';
+			    
+			    for ($i = 0; $i < $length; $i++) {
+			        $randomString .= $caracteres[rand(0, $caracteresLength - 1)];
+			    }
+			 //    $sql ="SELECT * FROM ENTREGA WHERE (login = '$this->login' AND Alias = '$this->Alias' AND  IdTrabajo = '$this->IdTrabajo'";
+ 	
+ 	 			//if ($result = $this->mysqli->query($sql)){ //si no se produce un error
+				//	$num_rows = mysqli_num_rows($result); 
+				//}
+		  //  }
+		  //  while($num_rows == 0);
+   		 return $randomString;
+		//}	
+	//} 
 }
 }//Fin clase
 

@@ -236,7 +236,13 @@ array(
 'Imagen Solfamidas' => 'Solfamidas image',
 'Imagen Solfamidas' => 'Imaxe Solfamidas',
 'ERROR: Fallo en la modificacion. Ya existe la entrega' => 'ERROR: Fallo na modificacion. Xa existe a entrega',
-
+'Entrega' => 'Entrega',
+'Nota' => 'Nota',
+'Añadir nota' => 'Añadir nota',
+'Borrar nota' => 'Borrar nota',
+'Buscar nota' => 'Buscar nota',
+'Editar nota' => 'Editar nota',
+'Sin calificar' => 'Sen calificar',
 
 
 

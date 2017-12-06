@@ -36,17 +36,8 @@ Contiene el html de la cabecera de las vistas
     <script src="../Views/js/main.js"></script>
     </head>
     
-    <body lang="javascript" onload="
-
-<?php
-    
-    if (IsAuthenticated()){//si esta autenticado
-?>
-    comprobarPermisos( '<?php echo $_SESSION['login'] ?>' );
-    <?php
-    }
-    ?>  
-    ">  
+    <body >  <!--lang="javascript" onload="<?php /* 
+    if (IsAuthenticated()){//si esta autenticado?>comprobarPermisos( '<?php echo $_SESSION['login'] ?>' );<?php } */?>  ">  -->
         <header>
           <h1><strong><?php echo $strings['Portal de Gestión'] ?></strong></h1>
             
@@ -60,12 +51,12 @@ Contiene el html de la cabecera de las vistas
 <?php
         echo $strings['Usuario'] . ' : ' . $_SESSION['login'];
 ?>          
-    </strong></p> &nbsp&nbsp&nbsp
-           <input type="image" id="sesion" alt="Sesion" src="../Views/images/usuario.png" title="<?php echo $strings['Sesión iniciada'] ?>" style="width: 32px; height: 32px" >
+    </strong></p> &nbsp;&nbsp;&nbsp;
+           <a href="../Controllers/USUARIO_Controller.php?action=SHOWCURRENT&login=<?php echo $_SESSION['login'] ?>"><input type="image" id="sesion" alt="Sesion" src="../Views/images/usuario.png" title="<?php echo $strings['Sesión iniciada'] ?>" style="width: 32px; height: 32px" >
 
            <a href='../Functions/Desconectar.php'>
             <input type="image" src="../Views/images/exit.png" title="<?php echo $strings['Desconectar'] ?>">  
-        </a> &nbsp&nbsp&nbsp
+        </a> &nbsp;&nbsp;&nbsp;
         
     </div>
            
@@ -85,7 +76,7 @@ Contiene el html de la cabecera de las vistas
             <input type="image" name="idioma" value="SPANISH" src="../Views/images/espana.png" style="width: 35px; height: 30px">
             <input type="image" name="idioma" value="GALICIAN" src="../Views/images/gal.png" style="width: 35px; height: 30px">
         
-           <label for="idioma">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<strong><?php echo $strings['idiomaSeleccionado'] ?></strong></label>
+           <label for="idioma">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong><?php echo $strings['idiomaSeleccionado'] ?></strong></label>
 
         </form>
     </div>

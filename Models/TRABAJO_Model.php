@@ -117,7 +117,7 @@ function ADD()
 				}
 			}else{ //si hay un IdTrabajo igual
 
-	        	$this->lista['mensaje'] = 'ERROR: Fallo en la inserción. Ya existe el Id'; 
+	        	$this->lista['mensaje'] = 'ERROR: Fallo en la inserción. Ya existe el IdTrabajo'; 
 				return $this->lista; 
 			}
 		}
@@ -244,14 +244,14 @@ function EDIT()
 	        if (!($result = $this->mysqli->query($sql))){
 
 			        		// se construye la sentencia de busqueda de la tupla en la bd
-			    $sql = "SELECT * FROM TRABAJO WHERE (FechaIniTrabajo = '$this->FechaIniTrabajo')";
+			    $sql = "SELECT * FROM TRABAJO WHERE (IdTrabajo = '$this->IdTrabajo')";
 			    // se ejecuta la query
 			    $result = $this->mysqli->query($sql);
 			    $num_rows = mysqli_num_rows($result);
 			    $row = $result->fetch_array();
 
 			    if( ($num_rows == 1) && ( $row['IdTrabajo'] != $this->IdTrabajo) ){ //Si devuelve 1 tupla y no coinciden los IdTrabajo
-			    	$this->lista['mensaje'] = 'ERROR: Fallo en la modificación. Ya existe FechaIniTrabajo'; //añadir a strings
+			    	$this->lista['mensaje'] = 'ERROR: Fallo en la inserción. Ya existe el IdTrabajo'; //añadir a strings
 					return $this->lista;
 				}
 		    }	
