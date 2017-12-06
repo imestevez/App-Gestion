@@ -181,9 +181,16 @@ if (!isset($_REQUEST['action'])){
 			break;
 		case 'DELETE': //Si quiere hacer un DELETE
 			if (!$_POST){ //viene del showall con una clave
-				$ENTREGA = new ENTREGA_Model($_REQUEST['login'],$_REQUEST['IdTrabajo'],'', '',''); //crea un un ENTREGA_Model con el IdTrabajo del usuario
-				$valores = $ENTREGA->RellenaDatos(); //completa el resto de atributos a partir de la clave
-				$usuario = new ENTREGA_DELETE($valores); //Crea la vista de DELETE con los datos del usuario
+				$lista = array('login', 'Nombre','IdTrabajo', 'NombreTrabajo', 'Alias','NotaTrabajo', 'origen');
+				$ENTREGA = new ENTREGA_Model($_REQUEST['login'],$_REQUEST['IdTrabajo'], '', '',''); //crea un 	un ENTREGA_Model);//crea un un ENTREGA_Model con el IdTrabajo del usuario
+				$lista = $ENTREGA->rellenarLista();
+				if(isset($_REQUEST['origen'])){
+					$lista['origen'] = $_REQUEST['origen'];
+				}else{
+					$lista['origen'] ='../Controllers/ENTREGA_Controller.php';
+				}
+				//$tupla = $ENTREGA->RellenaDatos();//A partir del IdTrabajo recoge todos los atributos
+				$usuario = new ENTREGA_DELETE($lista); //Crea la vista de DELETE con los datos del usuario
 			}
 			else{//si viene con un post
 				$ENTREGA = get_data_UserBD(); //coge los datos del formulario del usuario que desea borrar
@@ -194,8 +201,8 @@ if (!isset($_REQUEST['action'])){
 		case 'EDIT': //si el usuario quiere editar	
 			if (!$_POST){
 				$ENTREGA = new ENTREGA_Model($_REQUEST['login'],$_REQUEST['IdTrabajo'],'', '',''); //crea un un ENTREGA_Model); //crea un un ENTREGA_Model con el IdTrabajo del usuario 
-				$datos = $ENTREGA->RellenaDatos();  //A partir del IdTrabajo recoge todos los atributos
-				$usuario = new ENTREGA_EDIT($datos); //Crea la vista EDIT con los datos del usuario
+				$lista = $ENTREGA->rellenarLista();  //A partir del IdTrabajo recoge todos los atributos
+				$usuario = new ENTREGA_EDIT($lista); //Crea la vista EDIT con los datos del usuario
 			}
 			else{
 				$ENTREGA = get_data_UserBD(); //coge los datos del formulario del usuario que desea editar
@@ -218,13 +225,12 @@ if (!isset($_REQUEST['action'])){
 			$lista = array('login', 'Nombre','IdTrabajo', 'NombreTrabajo', 'Alias','NotaTrabajo', 'origen');
 			$ENTREGA = new ENTREGA_Model($_REQUEST['login'],$_REQUEST['IdTrabajo'], '', '',''); //crea un un ENTREGA_Model);//crea un un ENTREGA_Model con el IdTrabajo del usuario
 			$lista = $ENTREGA->rellenarLista();
-			echo $lista['login'];
 			//$tupla = $ENTREGA->RellenaDatos();//A partir del IdTrabajo recoge todos los atributos
 			$usuario = new ENTREGA_SHOWCURRENT($lista); //Crea la vista SHOWCURRENT del usuario requerido
 			break;
 		default: //Por defecto, Se muestra la vista SHOWALL
 			if (!$_POST){
-				$ENTREGA = new ENTREGA_Model('','','', '','','','','');//crea un un ENTREGA_Model con el IdTrabajo del usuario 
+				$ENTREGA = new ENTREGA_Model('','','', '','');//crea un un ENTREGA_Model con el IdTrabajo del usuario 
 			}
 			else{
 				$ENTREGA = get_data_form(); //Coge los datos del formulario
