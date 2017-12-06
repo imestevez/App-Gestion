@@ -11,21 +11,25 @@ Vista para que el  usuario pueda crear editar los tabajos
 */
 class ENTREGA_EDIT{
 
-    var $login; //declaración del atributo login
+   var $login; //declaración del atributo login
+    var $Nombre; //declaración del atributo nombre
     var $IdTrabajo; //atributo IdTrabajo
+    var $NombreTrabajo; //atributo NombreTrabajo
     var $Alias; //atributo Alias
     var $Horas; // declaración del atributo Horas
     var $Ruta; //declaración del atributo Ruta
+    var $lista; // array para almacenar los datos del usuario
+    var $mysqli; // declaración del atributo manejador de la bd
 
-
-function __construct($tupla){
+function __construct($lista){
     //asignación de valores de parámetro a los atributos de la clase
-    $this->login = $tupla['login'];
-    $this->IdTrabajo = $tupla['IdTrabajo'];
-    $this->Alias = $tupla['Alias'];
-    $this->Horas = $tupla['Horas'];
-    $this->Ruta = $tupla['Ruta'];
-
+     $this->login = $lista['login'];
+    $this->Nombre = $lista['Nombre'];
+    $this->IdTrabajo = $lista['IdTrabajo'];
+    $this->NombreTrabajo = $lista['NombreTrabajo'];
+    $this->Alias = $lista['Alias'];
+    $this->Horas = $lista['Horas'];
+    $this->Ruta = $lista['Ruta'];
     $this->render();
 }
 
@@ -51,13 +55,19 @@ include '../Views/Header.php';
             <form method="post" name="EDIT"  action="../Controllers/ENTREGA_Controller.php" enctype="multipart/form-data" >
                  <div id="izquierda">
                     <label for="login"><?php echo $strings['Login'] ?>: </label>
-                        <input type="text" name="login" readonly value="<?php echo $this->login ?>" maxlength="9" size="9"  onblur="validarlogin(this,9)"  ><div id="login" class="oculto" style="display:none"><?php echo $strings['div_Alfanumerico']?></div> <div id="loginVacio" class="oculto" style="display:none"><?php echo $strings['div_vacio']?></div> 
+                        <input type="text" name="login" readonly value="<?php echo $this->login ?>" maxlength="9" size="9">
+                </div>
+                  <div id="izquierda">
+                     <label for="Nombre"><?php echo $strings['Nombre']?>: </label>
+                        <input type="text" name="Nombre" readonly maxlength="30" size="30" value="<?php echo $this->Nombre ?>">
                 </div>
               <div id="izquierda">
                     <label for="IdTrabajo"><?php echo $strings['IdTrabajo'] ?>: </label>
-                        <input type="text" name="IdTrabajo" readonly onload="comprobarPermisos('<?php echo $_SESSION['login'] ?>')"  value="<?php echo $this->IdTrabajo?>" maxlength="6" size="6" onblur="validarIdTrabajo(this,6)"  ><div id="IdTrabajo" class="oculto" style="display:none"><?php echo $strings['div_Alfanumerico']?></div> <div id="IdTrabajoVacio" class="oculto" style="display:none"><?php echo $strings['div_vacio']?></div> 
+                        <input type="text" name="IdTrabajo" readonly value="<?php echo $this->IdTrabajo ?>"> 
                 </div>
-
+                <div id="izquierda">
+                    <label for="NombreTrabajo"><?php echo $strings['NombreTrabajo']?>: </label>
+                        <input type="text" name="NombreTrabajo" readonly maxlength="60" size="60" value="<?php echo $this->NombreTrabajo ?>">
                  <div id="izquierda">
                     <label for="Alias"><?php echo $strings['Alias'] ?>: </label>
                         <input type="text" id="lectura" name="Alias" readonly  value="<?php echo $this->Alias?>"  maxlength="9" size="9" onblur="validarlogin(this,9)"  ><div id="Alias" class="oculto" style="display:none"><?php echo $strings['div_Alfanumerico']?></div> <div id="AliasVacio" class="oculto" style="display:none"><?php echo $strings['div_vacio']?></div> 

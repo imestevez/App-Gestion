@@ -169,9 +169,18 @@ input{
   padding-left: 0px;
   visibility: hidden;
 
+}
 
+.celdaOculta{
+    background-color: white;
+    border-style: none;
+    border: 0px solid black;
+    width: 10%;
 
 }
+
+
+
 /*Cuando se pasa el cursor del raton por encima de los input*/
 input:hover {
   background-color: #CCF;

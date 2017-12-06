@@ -147,6 +147,8 @@ function renderSearch(){
                     <a href="../Controllers/ENTREGA_Controller.php?action=EDIT&login=<?php echo $row["login"]?>&IdTrabajo=<?php echo $row["IdTrabajo"]?>"><input type="image" src="../Views/images/edit.png" name="action" title="<?php echo $strings['Editar'] ?>" value="EDIT"></a>
                     <a href="../Controllers/ENTREGA_Controller.php?action=DELETE&login=<?php echo $row["login"]?>&IdTrabajo=<?php echo $row["IdTrabajo"]?>""><input type="image" src="../Views/images/delete.png" name="action" title="<?php echo $strings['Eliminar'] ?>" value="DELETE"></a>
                 </td>
+
+                
                 </tr>               
            
 <?php

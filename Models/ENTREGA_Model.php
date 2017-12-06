@@ -42,8 +42,8 @@ function __construct($login,$IdTrabajo, $Alias, $Horas,$Ruta){
 			"IdTrabajo"=>$this->IdTrabajo,
 			"NombreTrabajo"=>'',
 			"Alias"=>$this->Alias,
-			"Horas"=>$this->Horas,
-			"Ruta" => $this->Ruta,
+			"Horas"=>'',
+			"Ruta" => '',
 			"NotaTrabajo" => '',
 			"origen" => '',
 			"sql" => $this->mysqli, 
@@ -59,13 +59,6 @@ function __construct($login,$IdTrabajo, $Alias, $Horas,$Ruta){
 
 function ADD()
 {
-
-	echo $this->login;
-	echo $this->IdTrabajo;
-
-	echo $this->Alias;
-
-
 
     if (($this->login <> '') && ($this->IdTrabajo <> '') && ($this->Alias <> '')){ // si el atributos not null no estan vacios
 
@@ -382,7 +375,8 @@ function rellenarLista(){
 			$this->lista['NombreTrabajo'] = $row['NombreTrabajo'];
 			$this->lista['NotaTrabajo'] = $row['NotaTrabajo'];
 			$this->lista['Alias'] = $row['Alias'];
-
+			$this->lista['Horas'] = $row['Horas'];
+			$this->lista['Ruta'] = $row['Ruta'];
 		}
 
 	}else{
@@ -390,7 +384,6 @@ function rellenarLista(){
 						WHERE (U.login = '$this->login' AND
 								T.IdTrabajo = '$this->IdTrabajo' AND
 								E.login = '$this->login' AND E.IdTrabajo = '$this->IdTrabajo')";
-echo $sql;
 
 	if (!($result = $this->mysqli->query($sql))){
 	    	//return  'ERROR'; 
@@ -400,6 +393,8 @@ echo $sql;
 			$this->lista['NombreTrabajo'] = $row['NombreTrabajo'];
 			$this->lista['NotaTrabajo'] ='';
 			$this->lista['Alias'] = $row['Alias'];
+			$this->lista['Horas'] = $row['Horas'];
+			$this->lista['Ruta'] = $row['Ruta'];
 
 		}
 
