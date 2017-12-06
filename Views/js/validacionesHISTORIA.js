@@ -150,7 +150,7 @@ function validarIdTrabajo(IdTrabajo, tamaño_max)
 }
 
 //Función que comprueba que el IdHistoria es de tipo alfanumérico y no supera el maximo permitido
-function validarIdHistoria(IdHistoria, tamaño_max)
+function validarIdHistoria(IdHistoria, min, max)
 {  
 
   if(comprobarVacio(IdHistoria))//Si el campo no está vacio el campo
@@ -281,7 +281,7 @@ function validarIdTrabajoBuscar(IdTrabajo, tamaño_max)
 }
 
 //Función para validar la búsqueda por IdHistoria
-function validarIdHistoriaBuscar(IdHistoria, tamaño_max)
+function validarIdHistoriaBuscar(IdHistoria, min, max)
 {
     if(comprobarVacioBuscar(IdHistoria)){ //Si el IdHistoria no está vacío
         if(comprobarEntero(IdHistoria,0,99)) //Si cumple la expresión regular de campo Alfabético
@@ -348,6 +348,10 @@ function validar(formulario)
     if(alerta == true){ //Si hubo alguna alerta (campo no validado correctamente)
       alert('<?php echo $strings['No se puede enviar el formulario. Revise que todos los campos están correctos'] ?>');
       return false;
+    }
+    else{ //Si todos los campos están correctamente validados
+      alert('<?php echo $strings['Formulario correcto']?>');
+      return true;
     }
       
 }

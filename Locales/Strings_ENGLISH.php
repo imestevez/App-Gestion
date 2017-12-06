@@ -337,6 +337,7 @@ array(
 'ERROR: No existe ningún trabajo con ese IdTrabajo' => 'ERROR: Work not found',
 'ERROR: Fallo en la inserción. Ya existe una historia con esos parámetros' => 'ERROR: Insertion failed. The ID story already exists',
 'ERROR: No existe la historia que desea borrar en la BD' => 'ERROR: The story that you wish to delete doesn´t exists in the database',
+'Nombre del trabajo' => 'Work name',
 
 
 

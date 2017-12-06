@@ -9,15 +9,17 @@
 
 class HISTORIA_Model{ //Declaración de la clase
 
-	var $IdTrabajo; //atributo IdTrabajo
+	var $IdTrabajo;
+	var $NombreTrabajo; //atributo IdTrabajo
 	var $IdHistoria; //atributo IdHistoria
 	var $TextoHistoria; //atributo TextoHistoria
 
 	//Constructor de la clase
 
-function __construct($IdTrabajo, $IdHistoria, $TextoHistoria){
+function __construct($IdTrabajo,  $NombreTrabajo, $IdHistoria, $TextoHistoria){
 	//asignación de valores de parámetro a los atributos de la clase
 	$this->IdTrabajo = $IdTrabajo;
+	$this->NombreTrabajo = $NombreTrabajo;
 	$this->IdHistoria = $IdHistoria;
 	$this->TextoHistoria = $TextoHistoria;
 
@@ -31,6 +33,7 @@ function __construct($IdTrabajo, $IdHistoria, $TextoHistoria){
 	//lista con los datos del usuario
 	$this->lista = array(
 			"IdTrabajo"=>$this->IdTrabajo,
+			"NombreTrabajo"=>$this->NombreTrabajo,
 			"IdHistoria"=>$this->IdHistoria,
 			"TextoHistoria"=>$this->TextoHistoria,
 			"sql" => $this->mysqli, 
@@ -190,10 +193,12 @@ function DELETE()
 // en el atributo de la clase
 function RellenaDatos()
 {	// se construye la sentencia de busqueda de la tupla
-    $sql = "SELECT * FROM HISTORIA WHERE (
-        									(IdTrabajo = '$this->IdTrabajo') AND 
-        									(IdHistoria = '$this->IdHistoria'))";
+    $sql = "SELECT * FROM HISTORIA H, TRABAJO T WHERE (
+        									(T.IdTrabajo = '$this->IdTrabajo') AND 
+        									(IdHistoria = '$this->IdHistoria') AND
+        									(H.IdTrabajo = T.IdTrabajo))";
     // Si la busqueda no da resultados, se devuelve el mensaje de que no existe
+
     if (!($resultado = $this->mysqli->query($sql))){
 		$this->lista['mensaje'] = 'ERROR: No existe en la base de datos'; 
 			return $this->lista; // 
@@ -259,9 +264,9 @@ function SHOWALL($num_tupla,$max_tuplas){
 
 	//$sql = "SELECT * FROM TRABAJO";
 
-	$sql = "SELECT * FROM HISTORIA LIMIT $num_tupla, $max_tuplas";
+	$sql = "SELECT * FROM HISTORIA H, TRABAJO T 
+				WHERE (H.IdTrabajo = T.IdTrabajo) LIMIT $num_tupla, $max_tuplas";
 
-	//echo $sql;
 
 	    // si se produce un error en la busqueda mandamos el mensaje de error en la consulta
     if (!($resultado = $this->mysqli->query($sql))){
@@ -282,6 +287,25 @@ function contarTuplas(){
     $total_tuplas = mysqli_num_rows($datos);
 
     return $total_tuplas;
+}
+
+function rellenarLista(){
+
+		$sql = "SELECT * FROM TRABAJO T, HISTORIA H 
+						WHERE (T.IdTrabajo = H.IdTrabajo)
+						)";
+		if (!($result = $this->mysqli->query($sql))){
+	    	//return  'ERROR'; 
+		}else{
+			$row = mysqli_fetch_array($result);
+			$this->lista['IdTrabajo'] = $row['IdTrabajo'];
+			$this->lista['NombreTrabajo'] = $row['NombreTrabajo'];
+			$this->lista['IdHistoria'] = $row['IdHistoria'];
+			$this->lista['TextoHistoria'] = $row['TextoHistoria'];
+
+		}
+
+	return $this->lista;
 }
 
 }
