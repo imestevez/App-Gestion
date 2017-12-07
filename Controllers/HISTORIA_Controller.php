@@ -102,8 +102,18 @@ if (!isset($_REQUEST['action'])){
 	Switch ($action){
 		case 'ADD': //Si quiere hacer un ADD
 			if (!$_POST){ //si viene del showall (no es un post)
+				$lista = array('IdTrabajo','NombreTrabajo');
+				if((isset($_REQUEST['IdTrabajo']))){
+					$HISTORIA = get_data_form();
 
-				$form = new HISTORIA_ADD(); //Crea la vista ADD y muestra formulario para rellenar por el usuario
+					$lista = $HISTORIA->rellenarLista();
+				
+				$form = new HISTORIA_ADD($lista);
+				}
+				else{
+					$lista['IdTrabajo'] = '';
+					$form = new HISTORIA_ADD($lista);
+				} //Crea la vista ADD y muestra formulario para rellenar por el usuario
 			}
 			else{ //si viene del add 
 
@@ -154,6 +164,7 @@ if (!isset($_REQUEST['action'])){
 			$tupla = $HISTORIA->RellenaDatos();//A partir del IdTrabajo recoge todos los atributos
 			$usuario = new HISTORIA_SHOWCURRENT($tupla); //Crea la vista SHOWCURRENT del usuario requerido
 			break;
+
 		default: //Por defecto, Se muestra la vista SHOWALL
 			if (!$_POST){
 				$HISTORIA = new HISTORIA_Model('', '','','');//crea un un HISTORIA_Model con el IdTrabajo del usuario 

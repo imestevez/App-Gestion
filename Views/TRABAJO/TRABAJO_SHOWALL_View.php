@@ -18,7 +18,6 @@ class TRABAJO_SHOWALL{
     var $max_tuplas ; //Máximo de tuplas a mostrar por página
     var $num_pagina; //Numero de página a mostrar
     var $orden ; //Vista desde la que se envia la orden
-    var $FechaIniTrabajo; // Fecha inicio trabajo
     var $FechaFinTrabajo; // fecha fin trabajo
 
 
@@ -34,7 +33,6 @@ function __construct($lista, $datos,$num_tupla,$max_tuplas,$totalTuplas,$num_pag
     $this->num_pagina = $num_pagina;
     $this->orden = $orden ;
 
-    $this->FechaIniTrabajo;
     $this->FechaFinTrabajo;
 
     
@@ -57,27 +55,21 @@ function render(){
                 <caption><?php echo $strings['Trabajos']?></caption>
                 <tr>
                 <th><?php echo $strings['IdTrabajo']?></th>   
-                <th><?php echo $strings['NombreTrabajo']?></th>                   
-                <th><?php echo $strings['FechaIniTrabajo']?></th>
+                <th><?php echo $strings['NombreTrabajo']?></th>   
                 <th><?php echo $strings['FechaFinTrabajo']?></th>
-                <th><?php echo $strings['PorcentajeNota']?></th>
 
                 <td><a href="../Controllers/TRABAJO_Controller.php?action=SEARCH"><input type="image" src="../Views/images/search.png" name="action" title="<?php echo $strings['Buscar']?>" value="SEARCH"></a>
                     <a href="../Controllers/TRABAJO_Controller.php?action=ADD" ><input type="image" src="../Views/images/anadir.png" name="action" title="<?php echo $strings['Añadir']?>" value="ADD" ></a>
                 </td>
-                 <th><?php echo $strings['Entrega']?></th>
+                <th><?php echo $strings['Entrega']?></th>
+
+                <th><?php echo $strings['Historias']?></th>
                 </tr>
 <?php		
  
 			while( ($this->num_tupla < $this->max_tuplas) && ($row = mysqli_fetch_array($this->datos)) ) { //Mientras el numero de tuplas no llegue al máximo y haya tuplas en la BD
 
-                //si la FechaIniTrabajo  viene vacia la asignamos vacia
-            if ( $row["FechaIniTrabajo"] == ''){
-                $this->FechaIniTrabajo = NULL;
-            }
-            else{ // si no viene vacia 
-                $this->FechaIniTrabajo = date_format(date_create($row["FechaIniTrabajo"]), 'd-m-Y');
-            }
+            
             //si la FechaFinTrabajo  viene vacia la asignamos vacia
             if ($row["FechaFinTrabajo"] == ''){
                 $this->FechaFinTrabajo = NULL;
@@ -89,9 +81,7 @@ function render(){
                 <tr>
                 <td><?php echo $row["IdTrabajo"]; ?></td>
                 <td><?php echo $row["NombreTrabajo"]; ?></td>
-                <td><?php echo $this->FechaIniTrabajo; ?></td>
                 <td><?php echo $this->FechaFinTrabajo; ?></td>
-                <td><?php echo $row["PorcentajeNota"]; ?></td>
 
                 <td class="edit_tabla">
                     <a href="../Controllers/TRABAJO_Controller.php?action=SHOWCURRENT&IdTrabajo=<?php echo $row["IdTrabajo"]?>"><input type="image" src="../Views/images/ojo.png" name="action" title="<?php echo $strings['Mostrar en detalle'] ?>" value="SHOWCURRENT" action=""></a>
@@ -100,6 +90,12 @@ function render(){
                 </td>
                 <td>
                   <a href="../Controllers/ENTREGA_Controller.php?action=ADD&IdTrabajo=<?php echo $row["IdTrabajo"]?>&login=<?php echo $_SESSION['login']?>&origen=../Controllers/TRABAJO_Controller.php"><input type="image" src="../Views/images/anadir.png" name="action" title="<?php echo $strings['Añadir'] ?>" value="ADD"></a>
+                </td>
+
+                <td>
+                    <a href="../Controllers/HISTORIA_Controller.php?action=ADD&IdTrabajo=<?php echo $row["IdTrabajo"]?>&NombreTrabajo=<?php echo $row["NombreTrabajo"]?>" ><input type="image" src="../Views/images/anadir.png" name="action" title="<?php echo $strings['Añadir']?>" value="ADD" ></a>
+                    <a href="../Controllers/TRABAJO_Controller.php?action=SHOWALL_HISTORIAS&IdTrabajo=<?php echo $row["IdTrabajo"]?>&NombreTrabajo=<?php echo $row["NombreTrabajo"]?>"><input type="image" src="../Views/images/ojo.png" name="action" title="<?php echo $strings['Mostrar en detalle'] ?>" value="SHOWCURRENT" action=""></a>
+
                 </td>
 
                 </tr>              
@@ -145,10 +141,8 @@ function renderSearch(){
                  <caption><?php echo $strings['Trabajos']?></caption>
                 <tr>
                 <th><?php echo $strings['IdTrabajo']?></th>   
-                <th><?php echo $strings['NombreTrabajo']?></th>                   
-                <th><?php echo $strings['FechaIniTrabajo']?></th>
+                <th><?php echo $strings['NombreTrabajo']?></th> 
                 <th><?php echo $strings['FechaFinTrabajo']?></th>
-                <th><?php echo $strings['PorcentajeNota']?></th>
              
 
                 <td><a href="../Controllers/TRABAJO_Controller.php?action=SEARCH"><input type="image" src="../Views/images/search.png" name="action" title="<?php echo $strings['Buscar']?>" value="SEARCH"></a>
@@ -157,12 +151,6 @@ function renderSearch(){
                 </tr>
 <?php
             while( $row = mysqli_fetch_array($this->datos)) { //Mientras el numero de tuplas no llegue al máximo y haya tuplas en la BD
-                 if ( $row["FechaIniTrabajo"] == ''){
-                $this->FechaIniTrabajo = NULL;
-            }
-            else{ // si no viene vacia 
-                $this->FechaIniTrabajo = date_format(date_create($row["FechaIniTrabajo"]), 'd-m-Y');
-            }
             //si la FechaFinTrabajo  viene vacia la asignamos vacia
             if ($row["FechaFinTrabajo"] == ''){
                 $this->FechaFinTrabajo = NULL;
@@ -175,9 +163,7 @@ function renderSearch(){
 <tr>
                 <td><?php echo $row["IdTrabajo"]; ?></td>
                 <td><?php echo $row["NombreTrabajo"]; ?></td>
-                <td><?php echo $this->FechaIniTrabajo; ?></td>
                 <td><?php echo $this->FechaFinTrabajo; ?></td>
-                <td><?php echo $row["PorcentajeNota"]; ?></td>
 
             <td class="edit_tabla">
                     <a href="../Controllers/TRABAJO_Controller.php?action=SHOWCURRENT&IdTrabajo=<?php echo $row["IdTrabajo"]?>"><input type="image" src="../Views/images/ojo.png" name="action" title="<?php echo $strings['Mostrar en detalle'] ?>" value="SHOWCURRENT" action=""></a>

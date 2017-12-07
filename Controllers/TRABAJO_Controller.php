@@ -26,6 +26,8 @@ include '../Views/TRABAJO/TRABAJO_SEARCH_View.php';
 include '../Views/TRABAJO/TRABAJO_DELETE_View.php';
 include '../Views/MESSAGE_View.php';
 
+include '../Views/TRABAJO/TRABAJO_SHOWALL_HISTORIAS_View.php';
+
 
 
 // funcion para coger los datos del formulario
@@ -171,6 +173,13 @@ if (!isset($_REQUEST['action'])){
 			$tupla = $TRABAJO->RellenaDatos();//A partir del IdTrabajo recoge todos los atributos
 			$usuario = new TRABAJO_SHOWCURRENT($tupla); //Crea la vista SHOWCURRENT del usuario requerido
 			break;
+
+		case 'SHOWALL_HISTORIAS':
+			$TRABAJO = new TRABAJO_Model($_REQUEST['IdTrabajo'], $_REQUEST['NombreTrabajo'],'','', '');
+			$listaHistorias = $TRABAJO->listarHistorias();
+			$resultado = new TRABAJO_SHOWALL_HISTORIAS($_REQUEST['IdTrabajo'], $_REQUEST['NombreTrabajo'], $listaHistorias);
+			break;
+
 		default: //Por defecto, Se muestra la vista SHOWALL
 			if (!$_POST){
 				$TRABAJO = new TRABAJO_Model('', '','','', '');//crea un un TRABAJO_Model con el IdTrabajo del usuario 

@@ -336,6 +336,14 @@ function validar(formulario)
           alerta = false; //Se le asigna false a la variable alerta 
         }
       }
+    if(formulario == 'ADD_FROM_TRABAJO'){
+        if(  
+          (validarIdHistoriaBuscar(form.IdHistoria, 2)) && 
+          (validarTextoHistoriaBuscar(form.TextoHistoria, 300)) ){
+
+          alerta = false; //Se le asigna false a la variable alerta 
+        }
+    }  
       else{ //si es edit o add
           if( 
             (validarIdTrabajo(form.IdTrabajo, 6)) && 
