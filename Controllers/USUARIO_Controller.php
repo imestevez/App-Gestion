@@ -20,6 +20,7 @@ include '../Models/USUARIO_Model.php';
 
 include '../Views/Registro_View.php';
 include '../Views/USUARIO/USUARIO_SHOWALL_View.php';
+
 include '../Views/USUARIO/USUARIO_SHOWCURRENT_View.php';
 include '../Views/USUARIO/USUARIO_ADD_View.php';
 include '../Views/USUARIO/USUARIO_EDIT_View.php';
@@ -177,6 +178,7 @@ if (!isset($_REQUEST['action'])){
 			$tupla = $USUARIO->RellenaDatos();//A partir del login recoge todos los atributos
 			$usuario = new USUARIO_SHOWCURRENT($tupla); //Crea la vista SHOWCURRENT del usuario requerido
 			break;
+
 		default: //Por defecto, Se muestra la vista SHOWALL
 			if (!$_POST){
 				$USUARIO = new USUARIO_Model('', '','','', '', '', '', '');//crea un un USUARIO_Model con el login del usuario 

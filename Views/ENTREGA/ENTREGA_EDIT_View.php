@@ -91,10 +91,6 @@ include '../Views/Header.php';
                     <input type="file" name="newRuta" maxlength="54" size="54" onblur="javascript:void(validarRuta(this,54))"  ><div id="newRuta" class="oculto" style="display:none"><?php echo $strings['div_Ruta_Max']?></div>  
                 </div>
 
-                 <div id="izquierda">
-                        <input type="text" class="lectura" name="Oldlogin" readonly style="visibility: hidden" value="<?php echo $this->login ?>" maxlength="9" size="9" >
-                        <input type="text" class="lectura" name="OldIdTrabajo" readonly style="visibility: hidden" value="<?php echo $this->IdTrabajo ?>"  > 
-                </div>
                 <div class="acciones" style="float: right; margin-left:0%; margin-right: 50%">
                     <a href="../Controllers/ENTREGA_Controller.php?action=EDIT"> <input type="image" name="action" value="EDIT" src="../Views/images/confirmar.png" title="<?php echo $strings['Enviar Formulario'] ?>" onclick="return validar('EDIT') "></a>
                 </div>
