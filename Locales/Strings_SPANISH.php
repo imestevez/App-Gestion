@@ -265,10 +265,10 @@ array(
 'Sin calificar' => 'Sin calificar',
 'Grupo' => 'Grupo',
 'Mostrar Grupos' => 'Mostrar Grupos',
-
-
-
-
+'Asignar/Desasignar Grupos' => 'Asignar/Desasignar Grupos',
+'Grupos de Usuario' => 'Grupos de Usuario',
+'ERROR: Fallo en la modificación. El login está vacio' => 'ERROR: Fallo en la modificación. El login está vacio',
+'Seleccionar Grupos' => 'Seleccionar Grupos',
 
 
 

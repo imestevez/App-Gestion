@@ -229,6 +229,9 @@ if (!isset($_REQUEST['action'])){
 			$usuario = new ENTREGA_SHOWCURRENT($lista); //Crea la vista SHOWCURRENT del usuario requerido
 			break;
 		default: //Por defecto, Se muestra la vista SHOWALL
+			/*if(isset($_REQUEST["origen"])){
+			header('Location:'.$_REQUEST["origen"]);
+			}*/
 			if (!$_POST){
 				$ENTREGA = new ENTREGA_Model('','','', '','');//crea un un ENTREGA_Model con el IdTrabajo del usuario 
 			}

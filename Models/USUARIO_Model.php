@@ -313,12 +313,14 @@ Devuelve las tuplas de la BD de 10 en 10
 */
 function SHOWALL($num_tupla,$max_tuplas){
 
-	//$sql = "SELECT * FROM USUARIO";
-
-	$sql = "SELECT * FROM USUARIO LIMIT $num_tupla, $max_tuplas";
-
-	//echo $sql;
-
+	$sql = "SELECT * FROM USUARIO
+	LIMIT $num_tupla, $max_tuplas";
+/*
+	$sql = "SELECT * FROM USUARIO U, USU_GRUPO UG, GRUPO G
+					WHERE (U.login = UG.login AND
+							UG.IdGrupo = G.IdGrupo )
+					LIMIT $num_tupla, $max_tuplas";
+*/
 	    // si se produce un error en la busqueda mandamos el mensaje de error en la consulta
     if (!($resultado = $this->mysqli->query($sql))){
     	$this->lista['mensaje'] =  'ERROR: Fallo en la consulta sobre la base de datos'; 
@@ -381,5 +383,55 @@ function comprobarRegistro(){
 		}
 
 	}
+
+function rellenarLista(){
+	$sql ="SELECT * FROM USUARIO WHERE(login = '$this->login')";
+	$result = $this->mysqli->query($sql);
+	$row = mysqli_fetch_array($result);
+	$this->lista['login'] = $row['login'];
+	$this->lista['Nombre'] = $row['Nombre'];
+	$this->lista['Apellidos'] = $row['Apellidos'];
+
+	return $this->lista;
+
+
+
+}
+
+
+
+function contarNumGruposUser(){
+
+	$sql = "SELECT COUNT(*) FROM USU_GRUPO WHERE (login = '$this->login')";
+
+	$result = $this->mysqli->query($sql);
+	$num_rows = mysqli_num_rows($result);
+	return $num_rows;
+	}
+function todosGrupos(){
+		$sql = "SELECT * FROM  GRUPO ";
+
+
+	$result = $this->mysqli->query($sql);
+	/*
+	while($row = mysqli_num_rows($result)){
+		$lista[$row['IdGrupo']] =$row['NombreGrupo'];
+	}*/
+	return $result;
+}
+function rellenarGrupos(){
+	$sql = "SELECT * FROM USU_GRUPO UG, GRUPO G WHERE (UG.login = '$this->login' AND
+														UG.IdGrupo = G.IdGrupo)";
+
+
+	$result = $this->mysqli->query($sql);
+	/*
+	while($row = mysqli_num_rows($result)){
+		$lista[$row['IdGrupo']] =$row['NombreGrupo'];
+	}*/
+	return $result;
+}
+
+
 }
 ?> 

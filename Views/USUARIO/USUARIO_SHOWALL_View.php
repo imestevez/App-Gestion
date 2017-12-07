@@ -53,9 +53,9 @@ function render(){
                 <th><?php echo $strings['DNI']?></th>                   
                 <th><?php echo $strings['Nombre']?></th>
                 <th><?php echo $strings['Apellidos']?></th>
-                <th><?php echo $strings['Telefono']?></th>
                 <th><?php echo $strings['Email']?></th>
-                <th><?php echo $strings['Direccion']?></th>
+                <th > <?php echo $strings['Grupo']?></th>
+
 
                 <td><a href="../Controllers/USUARIO_Controller.php?action=SEARCH"><input type="image" src="../Views/images/search.png" name="action" title="<?php echo $strings['Buscar']?>" value="SEARCH"></a>
                     <a href="../Controllers/USUARIO_Controller.php?action=ADD" ><input type="image" src="../Views/images/anadir.png" name="action" title="<?php echo $strings['Añadir']?>" value="ADD" ></a>
@@ -70,10 +70,11 @@ function render(){
                 <td><?php echo $row["DNI"]; ?></td>
                 <td><?php echo $row["Nombre"]; ?></td>
                 <td><?php echo $row["Apellidos"]; ?></td>
-                <td><?php echo $row["Telefono"]; ?></td>
                 <td><?php echo $row["Correo"]; ?></td>
-                <td><?php echo $row["Direccion"]; ?></td>
-
+                        <td>  <a href="../Controllers/USU_GRUPO_Controller.php?action=SHOWAL&login=<?php echo $row["login"]?>&Nombre=<?php echo $row['Nombre']?>">
+                            <input type="image" src="../Views/images/lista.png" name="action" title="<?php echo $strings['Mostrar Grupos'] ?>" value="SHOWALL_GRUPOS" action=""></a>
+                      </td>
+            
                 <td class="edit_tabla">
                     <a href="../Controllers/USUARIO_Controller.php?action=SHOWCURRENT&login=<?php echo $row["login"]?>"><input type="image" src="../Views/images/ojo.png" name="action" title="<?php echo $strings['Mostrar en detalle'] ?>" value="SHOWCURRENT" action=""></a>
                     <a href="../Controllers/USUARIO_Controller.php?action=EDIT&login=<?php echo $row["login"]?>"><input type="image" src="../Views/images/edit.png" name="action" title="<?php echo $strings['Editar'] ?>" value="EDIT"></a>
@@ -125,9 +126,8 @@ function renderSearch(){
                 <th><?php echo $strings['DNI']?></th>                   
                 <th><?php echo $strings['Nombre']?></th>
                 <th><?php echo $strings['Apellidos']?></th>
-                <th><?php echo $strings['Telefono']?></th>
                 <th><?php echo $strings['Email']?></th>
-                <th><?php echo $strings['Direccion']?></th>
+                <th COLSPAN="2"> <?php echo $strings['Grupo']?></th>
 
                 <td><a href="../Controllers/USUARIO_Controller.php?action=SEARCH"><input type="image" src="../Views/images/search.png" name="action" title="<?php echo $strings['Buscar']?>" value="SEARCH"></a>
                     <a href="../Controllers/USUARIO_Controller.php?action=ADD" ><input type="image" src="../Views/images/anadir.png" name="action" title="<?php echo $strings['Añadir']?>" value="ADD" ></a>
@@ -142,10 +142,12 @@ function renderSearch(){
                 <td><?php echo $row["DNI"]; ?></td>
                 <td><?php echo $row["Nombre"]; ?></td>
                 <td><?php echo $row["Apellidos"]; ?></td>
-                <td><?php echo $row["Telefono"]; ?></td>
                 <td><?php echo $row["Correo"]; ?></td>
-                <td><?php echo $row["Direccion"]; ?></td>
-
+                
+                        <td><?php echo $row['NombreGrupo']?></td>
+                        <td>  <a href="../Controllers/USUARIO_Controller.php?action=SHOWCURRENT&login=<?php echo $row["login"]?>&IdGrupo=<?php echo $row["IdGrupo"] ?>">
+                            <input type="image" src="../Views/images/lista.png" name="action" title="<?php echo $strings['Mostrar Grupos'] ?>" value="SHOWCURRENT" action=""></a>
+                      </td>
             <td class="edit_tabla">
                     <a href="../Controllers/USUARIO_Controller.php?action=SHOWCURRENT&login=<?php echo $row["login"]?>"><input type="image" src="../Views/images/ojo.png" name="action" title="<?php echo $strings['Mostrar en detalle'] ?>" value="SHOWCURRENT" action=""></a>
                     <a href="../Controllers/USUARIO_Controller.php?action=EDIT&login=<?php echo $row["login"]?>"><input type="image" src="../Views/images/edit.png" name="action" title="<?php echo $strings['Editar'] ?>" value="EDIT"></a>
