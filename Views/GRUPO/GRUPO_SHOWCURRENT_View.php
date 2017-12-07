@@ -36,7 +36,7 @@ function render(){
     <section class="pagina">
             <table class="showcurrent">
                 <caption><?php echo $strings['Vista en detalle de grupo'] ?></caption>
-                <tr><th><?php echo $strings['Campo'] ?></th><th>Valor</th></tr>
+                <tr><th><?php echo $strings['Campo'] ?></th><th><?php echo $strings['Valor'] ?></th></tr>
                 <tr><th><?php echo $strings['IdGrupo'] ?></th><td><?php echo $this->IdGrupo ?></td></tr>
                 <tr><th><?php echo $strings['NombreGrupo'] ?></th><td><?php echo $this->NombreGrupo ?></td></tr>
                 <tr><th><?php echo $strings['DescripGrupo'] ?></th><td><?php echo $this->DescripGrupo ?></td></tr>
