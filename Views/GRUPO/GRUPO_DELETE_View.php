@@ -35,7 +35,7 @@ function render(){
 
            <table class="showcurrent">
              <caption><?php echo $strings['BorrarGrupo'] ?></caption>
-                <tr><th><?php echo $strings['Campo'] ?></th><th>Valor</th></tr>
+                <tr><th><?php echo $strings['Campo'] ?></th><th><?php echo $strings['Valor'] ?></th></tr>
                 <tr><th><?php echo $strings['IdGrupo'] ?></th><td><?php echo $this->IdGrupo ?></td></tr>
                 <tr><th><?php echo $strings['NombreGrupo'] ?></th><td><?php echo $this->NombreGrupo ?></td></tr>
                 <tr><th><?php echo $strings['DescripGrupo'] ?></th><td><?php echo $this->DescripGrupo ?></td></tr>

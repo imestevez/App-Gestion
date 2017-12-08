@@ -23,7 +23,7 @@ include '../Views/Header.php'; //header necesita los strings
 
 
 <script type="text/javascript">
-    <?php include '../Views/js/validaciones.js' ?>
+    <?php include '../Views/js/validacionesUSUARIO.js' ?>
 </script>
 
 
@@ -31,7 +31,7 @@ include '../Views/Header.php'; //header necesita los strings
          <fieldset class="add">
                 <legend style="margin-left: 30%"><?php echo $strings['Registro de usuario'] ?></legend>
            
-            <form method="post" name="ADD"  action="../Controllers/Registro_Controller.php" enctype="multipart/form-data" >
+            <form method="post" name="ADD"  action="../Controllers/USUARIO_Controller.php" enctype="multipart/form-data" >
                 
                 <div id="izquierda">
                     <label for="login"><?php echo $strings['Login']?>: </label>

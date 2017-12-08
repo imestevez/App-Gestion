@@ -144,7 +144,7 @@ if (!isset($_REQUEST['action'])){
 				$usuario = new USUARIO_DELETE($valores); //Crea la vista de DELETE con los datos del usuario
 			}
 			else{//si viene con un post
-				$USUARIO = get_data_form_SEARCH(); //coge los datos del formulario del usuario que desea borrar
+				$USUARIO = get_data_form(); //coge los datos del formulario del usuario que desea borrar
 													//utilizamos esta funcion para que no salga el notice de password
 				$respuesta = $USUARIO->DELETE(); //Ejecuta la funcion DELETE() en el USUARIO_Model
 				$mensaje = new MESSAGE($respuesta, '../Controllers/USUARIO_Controller.php'); //muestra el mensaje despues de la sentencia sql

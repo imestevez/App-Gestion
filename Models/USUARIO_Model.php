@@ -97,6 +97,13 @@ function ADD()
 									'$this->email',
 									'$this->direccion'
 								)";
+
+				$sql2 = "INSERT INTO USU_GRUPO(
+				login,
+				IdGrupo) VALUES (
+								'$this->login',
+								'alumns'
+								)";
 				
 				 if (!($result = $this->mysqli->query($sql))){ //si da error la consulta se comrpueba el por que
 
@@ -124,9 +131,13 @@ function ADD()
         			return 'ERROR: Introduzca todos los valores de todos los campos'; // introduzca un valor para el usuario
 				}
 
-    			else{ //si no da error en la insercion devolvemos mensaje de exito
-					$this->lista['mensaje'] = 'Inserción realizada con éxito';
-					return $this->lista; //operacion de insertado correcta
+    			else{ //si no da error en la insercion del usuario, lo añadimos al grupo alumnos y devolvemos mensaje de exito
+    				if($result2 = $this->mysqli->query($sql2)){
+						$this->lista['mensaje'] = 'Inserción realizada con éxito';
+						return $this->lista; //operacion de insertado correcta
+					}else{//si se produce un error al insertarlo en alumnos lanzamos mensaje 
+						$this->lista['mensaje'] = 'Error en la inserción'; 
+					}
 				}
 			}else{ //si hay un login igual
 
