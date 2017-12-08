@@ -1,7 +1,7 @@
 
 <?php
 /*
-//Clase : USUARIOS_Model.php
+//Clase : ACCION_Model.php
 //Creado el : 27-11-2017
 //Creado por: SOLFAMIDAS
 //-------------------------------------------------------
