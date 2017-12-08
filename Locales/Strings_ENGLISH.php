@@ -344,6 +344,15 @@ array(
 'ERROR: No existe la historia que desea borrar en la BD' => 'ERROR: The story that you wish to delete doesn´t exists in the database',
 'Nombre del trabajo' => 'Work name',
 
+//Asignación de QA:
+'Añadir asignación de QA' => 'Add QA assignment',
+'Login del evaluador' => 'Evaluator login',
+'Login del evaluado' => 'Evaluated login',
+'Alias del evaluado' => 'Evaluated alias',
+'Borrar asignación de QA' => 'Delete QA assignment',
+'Buscar asignación de QA' => 'Search QA assignment',
+'Asignación de QAs' => 'QAs assignment',
+'Asignación de QA' => 'QA assignment',
 
 
 

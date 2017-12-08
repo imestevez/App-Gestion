@@ -349,7 +349,19 @@ array(
 'ERROR: No existe la historia que desea borrar en la BD' => 'ERROR: No existe la historia que desea borrar en la BD',
 'Nombre del trabajo' => 'Nombre del trabajo',
 
+//Asignación de QA:
+'Añadir asignación de QA' => 'Añadir asignación de QA',
+'Login del evaluador' => 'Login del evaluador',
+'Login del evaluado' => 'Login del evaluado',
+'Alias del evaluado' => 'Alias del evaluado',
+'Borrar asignación de QA' => 'Borrar asignación de QA',
+'Buscar asignación de QA' => 'Buscar asignación de QA',
+'Asignación de QAs' => 'Asignación de QAs',
+'Asignación de QA' => 'Asignación de QA',
 
+'ERROR: No existe ningún usuario con ese login' => 'ERROR: No existe ningún usuario con ese login',
+'ERROR: No existe ningún usuario con ese alias' => 'ERROR: No existe ningún usuario con ese alias',
+'ERROR: Fallo en la inserción. Ya existe esa asignacióde QA' => 'ERROR: Fallo en la inserción. Ya existe esa asignacióde QA',
 
 
 

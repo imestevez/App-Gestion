@@ -353,7 +353,15 @@ array(
 'ERROR: No existe la historia que desea borrar en la BD' => 'ERROR: Non existe a historia que desexa borrar na BD',
 'Nombre del trabajo' => 'Nome do traballo',
 
-
+//Asignación de QA:
+'Añadir asignación de QA' => 'Engadir aignación de QA',
+'Login del evaluador' => 'Login do evaluador',
+'Login del evaluado' => 'Login do evaluado',
+'Alias del evaluado' => 'Alias do evaluado',
+'Borrar asignación de QA' => 'Borrar asignación de QA',
+'Buscar asignación de QA' => 'Buscar asignación de QA',
+'Asignación de QAs' => 'Asignación de QAs',
+'Asignación de QA' => 'Asignación de QA',
 
 
 
