@@ -408,7 +408,11 @@ array(
 	'Editar Accion' => 'Edit Action',
 	'Añadir accion' => 'Add Action',
 	'Vista en detalle de accion' => 'Showcurrent Action',
-	'Borrar Accion' => 'Delete Action'
+	'Borrar Accion' => 'Delete Action',
+	'Permisos' => 'Permission',
+	'Nombre del grupo' => 'Group name',
+	'Nombre de la funcionalidad' => 'Funcionality name',
+	'Busqueda de permisos' => 'Permission search'
 
 	
  )
