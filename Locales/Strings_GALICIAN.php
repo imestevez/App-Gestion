@@ -407,7 +407,11 @@ array(
 	'Editar Accion' => 'Editar Accion',
 	'Añadir accion' => 'Engadir accion',
 	'Vista en detalle de accion' => 'Vista en detalle da acción',
-	'Borrar Accion' => 'Borrar Accion'
+	'Borrar Accion' => 'Borrar Accion',
+	'Permisos' => 'Permisos',
+	'Nombre del grupo' => 'Nome do grupo',
+	'Nombre de la funcionalidad' => 'Nome da funcionalidad',
+	'Busqueda de permisos' => 'Busqueda de permisos'
 
 )
 ;
