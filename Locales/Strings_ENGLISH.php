@@ -162,23 +162,23 @@ array(
 	'ERROR: No existe el grupo que desea borrar en la BD' => 'ERROR: The group that you wish to delete doesn´t exists in the database',
 	'ERROR: Fallo en la modificación. Ya existe el ID de Grupo' => 'ERROR: Modification failed. That GroupID is already in use',
 	'ERROR: El grupo ya existe' => 'ERROR: Group already exists',
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+		'Añadir evaluacion' => 'Añadir evaluacion',
+	'LoginEvaluador' => 'Evaluator Login',
+	'AliasEvaluado' => 'Evaluated Alias',
+	'div_CorrectoA' => 'Only 1 and 0 are accepted',
+	'CorrectoA' => 'Student Correct',
+	'CorrectoP' => 'Teacher Correct',
+	'ComenIncorrectoA' => 'Incorrect Comment from Student',
+	'ComentIncorrectoP' => 'Incorrect Comment from Teacher',
+	'OK' => 'OK',
+	'Borrar evaluacion' => 'Delete evaluation',
+	'Borrar Evaluacion' => 'Delete Evaluation',
+	'Editar evaluacion' => 'Edit evaluation',
+	'Mostrar evaluacion' => 'Show evaluation',
+	'Buscar evaluacion' => 'Search evaluation',
+	'Evaluaciones' => 'Evaluations',
+	'ERROR: El alias no existe' => 'ERROR: Alias doesn´t exist',
+	'ERROR: No existe la evaluacion que desea borrar en la BD' => 'ERROR: The evaluation that you are trying to delete is not in our Database',
 
 
 
