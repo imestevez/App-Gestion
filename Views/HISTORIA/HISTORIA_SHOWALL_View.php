@@ -47,7 +47,8 @@ function render(){
 				<table class="showAll">
                 <caption><?php echo $strings['Historias']?></caption>
                 <tr>
-                <th><?php echo $strings['Id del trabajo']?></th>   
+                <th><?php echo $strings['Id del trabajo']?></th>  
+                <th><?php echo $strings['Nombre del trabajo']?></th>
                 <th><?php echo $strings['Id de la historia']?></th>                   
                 <th><?php echo $strings['Texto de la historia']?></th>
                 <td><a href="../Controllers/HISTORIA_Controller.php?action=SEARCH"><input type="image" src="../Views/images/search.png" name="action" title="<?php echo $strings['Buscar']?>" value="SEARCH"></a>
@@ -60,6 +61,7 @@ function render(){
 ?>
                 <tr>
                 <td><?php echo $row["IdTrabajo"]; ?></td>
+                <td><?php echo $row["NombreTrabajo"]?></td>
                 <td><?php echo $row["IdHistoria"]; ?></td>
                 <td><?php echo $row["TextoHistoria"]; ?></td>
 
@@ -110,7 +112,8 @@ function renderSearch(){
                 <table class="showAll">
                  <caption><?php echo $strings['Historias']?></caption>
                 <tr>
-                <th><?php echo $strings['Id del trabajo']?></th>   
+                <th><?php echo $strings['Id del trabajo']?></th>
+                <th><?php echo $strings['Nombre del trabajo']?></th>   
                 <th><?php echo $strings['Id de la historia']?></th>                   
                 <th><?php echo $strings['Texto de la historia']?></th>
 
@@ -122,6 +125,7 @@ function renderSearch(){
             while( $row = mysqli_fetch_array($this->datos)) { //Mientras el numero de tuplas no llegue al máximo y haya tuplas en la BD
 ?>  <tr>
                 <td><?php echo $row["IdTrabajo"]; ?></td>
+                <td><?php echo $row['NombreTrabajo']?></td>
                 <td><?php echo $row["IdHistoria"]; ?></td>
                 <td><?php echo $row["TextoHistoria"]; ?></td>
                 

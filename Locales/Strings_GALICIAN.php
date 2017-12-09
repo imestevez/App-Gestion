@@ -351,9 +351,17 @@ array(
 'ERROR: No existe ningún trabajo con ese IdTrabajo' => 'ERROR: Non existe ningún traballo con es IdTrabajo',
 'ERROR: Fallo en la inserción. Ya existe una historia con esos parámetros' => 'ERROR: Fallo na inserción. Xa existe unha historia con esos parámetros.',
 'ERROR: No existe la historia que desea borrar en la BD' => 'ERROR: Non existe a historia que desexa borrar na BD',
+'Nombre del trabajo' => 'Nome do traballo',
 
-
-
+//Asignación de QA:
+'Añadir asignación de QA' => 'Engadir aignación de QA',
+'Login del evaluador' => 'Login do evaluador',
+'Login del evaluado' => 'Login do evaluado',
+'Alias del evaluado' => 'Alias do evaluado',
+'Borrar asignación de QA' => 'Borrar asignación de QA',
+'Buscar asignación de QA' => 'Buscar asignación de QA',
+'Asignación de QAs' => 'Asignación de QAs',
+'Asignación de QA' => 'Asignación de QA',
 
 
 
@@ -407,7 +415,11 @@ array(
 	'Editar Accion' => 'Editar Accion',
 	'Añadir accion' => 'Engadir accion',
 	'Vista en detalle de accion' => 'Vista en detalle da acción',
-	'Borrar Accion' => 'Borrar Accion'
+	'Borrar Accion' => 'Borrar Accion',
+	'Permisos' => 'Permisos',
+	'Nombre del grupo' => 'Nome do grupo',
+	'Nombre de la funcionalidad' => 'Nome da funcionalidad',
+	'Busqueda de permisos' => 'Busqueda de permisos'
 
 )
 ;

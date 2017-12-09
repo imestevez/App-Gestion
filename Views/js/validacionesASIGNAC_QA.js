@@ -1,12 +1,16 @@
 /*
-    script: validacionesHISTORIA.js
-    Creado el: 28/11/2017
+      script: validacionesASIGNAC_QA.js
+    Creado el: 08/12/2017
     Creado por: SOLFAMIDAS;
     
-    El fichero validacionesHISTORIA.js contiene las funciones necesarias para validar los formularios de HISTORIA.
+    El fichero validaciones.js contiene las funciones necesarias para validar los campos de los formularios de la asignación de QAs
 
 */
 
+
+/*------------------------------------------------------------
+---------- Funciones de comprobación propuestas---------------
+-------------------------------------------------------------*/
 
 //Comprueba si los campos estan vacios o si solo hay espacios
 function comprobarVacio(campo)
@@ -16,12 +20,12 @@ function comprobarVacio(campo)
     
     var idVacio = campo.name.concat('Vacio'); //concatena al nombre del campo 'Vacio' para acceder a los divs correspondientes a los campos vacios
 
-  		if ((campo.value == null) || (campo.value.length == 0) )//si el valor del campo es nulo o la longitud es 0
+      if ((campo.value == null) || (campo.value.length == 0) )//si el valor del campo es nulo o la longitud es 0
         {
             document.getElementById(idVacio).style.display ='block';
             document.getElementById(campo.name).style.display ='none';
             return false;
-  		}
+      }
         if(expr.test(campo.value))//si el valor del campo cumple la expresión regular
         {
             document.getElementById(idVacio).style.display ='block';
@@ -29,9 +33,40 @@ function comprobarVacio(campo)
             return false;
         }
         document.getElementById(idVacio).style.display = 'none';
-  			return true;
+        return true;
 }
 
+
+//Función para comprobar que un campo de tipo texto no supera el máximo de caracteres
+function comprobarTexto(campo, tamaño_max) {
+    
+ var idVacio = campo.name.concat('Vacio'); //concatena al nombre del campo 'Vacio' para acceder a los divs correspondientes a los campos vacios
+
+     var expr_alfanum; //Expresión regular para comprobar que un campo (login y contraseña) es alfanumerico y puede incluir caracteres como 
+    expr_alfanum =  /^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚçÇ_.-\s]+$/; //letras y numeros _ . - y espacios
+    
+     if (expr_alfanum.test(campo.value) == false) //Si no cumple la expresión regular
+    { 
+        document.getElementById(idVacio).style.display = 'none';
+        document.getElementById(campo.name).style.display = 'block';      
+        return false;
+    }
+      else //Si cumple la expresión regular
+      {
+        if (campo.value.length > tamaño_max) //Si el tamaño del campo supera el maximo
+        {
+          document.getElementById(idVacio).style.display = 'none';
+          document.getElementById(campo.name).style.display = 'block';
+            return false;
+        }
+        else //si el tamaño del campo no supera el máximo
+        {     
+            document.getElementById(campo.name).style.display = 'none';
+            return true;
+        }
+  }
+    
+}
 
 //Función para comprobar que un campo solo tiene letras (mayúsculas y minúsculas), números y los caracteres "- . _"
 function comprobarAlfanumerico(campo, tamaño_max)
@@ -40,7 +75,7 @@ function comprobarAlfanumerico(campo, tamaño_max)
     var idVacio = campo.name.concat('Vacio'); //concatena al nombre del campo 'Vacio' para acceder a los divs correspondientes a los campos vacios
 
      var expr_alfanum; //Expresión regular para comprobar que un campo (login y contraseña) es alfanumerico y puede incluir caracteres como 
-     expr_alfanum =  /^[a-zA-Z0-9ñÑ_.-]+$/; //letras y numeros _ . -
+    expr_alfanum =  /^[a-zA-Z0-9ñÑ_.-]+$/; //letras y numeros _ . -
     
      if (expr_alfanum.test(campo.value) == false) //Si no cumple la expresión regular
     { 
@@ -65,18 +100,19 @@ function comprobarAlfanumerico(campo, tamaño_max)
     
 }
 
-//Función para comprobar que un campo de tipo texto no supera el máximo de caracteres
-function comprobarTexto(campo, tamaño_max) {
-    
- var idVacio = campo.name.concat('Vacio'); //concatena al nombre del campo 'Vacio' para acceder a los divs correspondientes a los campos vacios
+//Función para comprobar que un campo es alfabético y no supera el tamaño máximo permitido. Acepta todas las letras, mayúsculas y minúsculas, incluida la ñ y ç, además depalabras acentuadas.
+function comprobarAlfabetico(campo, tamaño_max) 
+{
+    var idVacio = campo.name.concat('Vacio'); //concatena al nombre del campo 'Vacio' para acceder a los divs correspondientes a los campos vacios
 
-     var expr_alfanum; //Expresión regular para comprobar que un campo (login y contraseña) es alfanumerico y puede incluir caracteres como 
-    expr_alfanum =  /^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚçÇ_.,-\s]+$/; //letras y numeros _ . - y espacios
+    var expr_alfabet; //Expresión regular para comprobar que solo tiene letras, numeros y(_ - .)
+    expr_alfabet = /^[a-zA-ZñÑáéíóúÁÉÍÓÚçÇ\s]+$/; //solo letras
     
-     if (expr_alfanum.test(campo.value) == false) //Si no cumple la expresión regular
-    { 
+    if (expr_alfabet.test(campo.value) == false) //Si no cumple la expresión regular
+    {
         document.getElementById(idVacio).style.display = 'none';
-        document.getElementById(campo.name).style.display = 'block';      
+        document.getElementById(campo.name).style.display = 'block';
+
         return false;
     }
       else //Si cumple la expresión regular
@@ -84,16 +120,15 @@ function comprobarTexto(campo, tamaño_max) {
         if (campo.value.length > tamaño_max) //Si el tamaño del campo supera el maximo
         {
           document.getElementById(idVacio).style.display = 'none';
-          document.getElementById(campo.name).style.display = 'block';
+            document.getElementById(campo.name).style.display = 'block';
             return false;
         }
-        else //si el tamaño del campo no supera el máximo
-        {     
+          else //Si el tamaño está dentro del rango
+          {
             document.getElementById(campo.name).style.display = 'none';
             return true;
-        }
-  }
-    
+      }
+    }
 }
 
 //Comprueba que el valor de un campo de tipo entero está entre el limite establecido
@@ -126,19 +161,15 @@ function comprobarEntero(campo,valormenor,valormayor)
    }
 }
 
-/*--------------------------------------------------------------------------------------------
--------------Funciones Necesarias para validar el formulario ADD y EDIT-----------------------
---------------------------------------------------------------------------------------------*/
 
-//Función que comprueba que el IdTrabajo es de tipo alfanumérico y no supera el maximo permitido
-function validarIdTrabajo(IdTrabajo, tamaño_max)
-{  
+//Función para validar un id del trabajo
 
-  if(comprobarVacio(IdTrabajo))//Si el campo no está vacio el campo
+function validarIdTrabajo(IdTrabajo, tamaño_max){
+
+   if(comprobarVacio(IdTrabajo))//Si el campo no está vacio el campo
       {
-          if(comprobarAlfanumerico(IdTrabajo,tamaño_max))//Si IdTrabajo cumple la expresión regular de campo Alfabético
+          if(comprobarAlfanumerico(IdTrabajo,tamaño_max))//Si login cumple la expresión regular de campo Alfabético
        {
-
            return true;
        }else{ //Si no cumple la expresión regular
            return false;
@@ -147,17 +178,16 @@ function validarIdTrabajo(IdTrabajo, tamaño_max)
           return false;
       }
 
+
 }
+//Función para validar un nombre del trabajo
 
-//Función que comprueba que el IdHistoria es de tipo alfanumérico y no supera el maximo permitido
-function validarIdHistoria(IdHistoria, min, max)
-{  
-
-  if(comprobarVacio(IdHistoria))//Si el campo no está vacio el campo
+function validarNombreTrabajo(NombreTrabajo, tamaño_max){
+  
+   if(comprobarVacio(NombreTrabajo))//Si el campo no está vacio el campo
       {
-          if(comprobarEntero(IdHistoria,0,99))//Si IdHistoria cumple la expresión regular de campo Alfabético
+          if(comprobarTexto(NombreTrabajo,tamaño_max))//Si login cumple la expresión regular de campo Alfabético
        {
-
            return true;
        }else{ //Si no cumple la expresión regular
            return false;
@@ -166,17 +196,16 @@ function validarIdHistoria(IdHistoria, min, max)
           return false;
       }
 
+
 }
 
-//Función que comprueba que la TextoHistoria es de tipo alfanumérico y no supera el maximo permitido
-function validarTextoHistoria(TextoHistoria, tamaño_max)
-{  
-
-  if(comprobarVacio(TextoHistoria))//Si el campo no está vacio el campo
+//Función para validar un LoginEvaluador 
+function validarLoginEvaluador(LoginEvaluador, tamaño_max)
+{
+      if(comprobarVacio(LoginEvaluador))//Si el campo no está vacio el campo
       {
-          if(comprobarTexto(TextoHistoria,tamaño_max))//Si TextoHistoria cumple la expresión regular de campo Alfabético
+          if(comprobarAlfanumerico(LoginEvaluador,tamaño_max))//Si login cumple la expresión regular de campo Alfabético
        {
-
            return true;
        }else{ //Si no cumple la expresión regular
            return false;
@@ -184,13 +213,39 @@ function validarTextoHistoria(TextoHistoria, tamaño_max)
       }else{//Si está vacio
           return false;
       }
-
 }
 
+//Función para validar un LoginEvaluado 
+function validarLoginEvaluado(LoginEvaluado, tamaño_max)
+{
+      if(comprobarVacio(LoginEvaluado))//Si el campo no está vacio el campo
+      {
+          if(comprobarAlfanumerico(LoginEvaluado,tamaño_max))//Si login cumple la expresión regular de campo Alfabético
+       {
+           return true;
+       }else{ //Si no cumple la expresión regular
+           return false;
+       }
+      }else{//Si está vacio
+          return false;
+      }
+}
 
-/*--------------------------------------------------------------------------------------------
--------------Funciones Necesarias para validar el formulario SEARCH------------------------------
---------------------------------------------------------------------------------------------*/
+//Función para validar un AliasEvaluado 
+function validarAliasEvaluado(AliasEvaluado, tamaño_max)
+{
+      if(comprobarVacio(AliasEvaluado))//Si el campo no está vacio el campo
+      {
+          if(comprobarAlfanumerico(AliasEvaluado,tamaño_max))//Si alias cumple la expresión regular de campo Alfabético
+       {
+           return true;
+       }else{ //Si no cumple la expresión regular
+           return false;
+       }
+      }else{//Si está vacio
+          return false;
+      }
+}
 
 
 //Comprueba si los campos estan vacios o si solo hay espacios para el formulario SEARCH
@@ -208,9 +263,35 @@ function comprobarVacioBuscar(campo)
             document.getElementById(campo.name).style.display = 'none';
             return false;
         }
-         return true;
+      return true;
 }
+//Función para comprobar que un campo es alfabético y no supera el tamaño máximo permitido. Acepta todas las letras, mayúsculas y minúsculas, incluida la ñ y ç, además depalabras acentuadas  para el formulario SEARCH
+function comprobarAlfabeticoBuscar(campo, tamaño_max) 
+{
 
+    var expr_alfabet; //Expresión regular para comprobar que solo tiene letras
+    expr_alfabet = /^[a-zA-ZñÑáéíóúÁÉÍÓÚçÇ\s]+$/; // solo letras
+    
+    if (expr_alfabet.test(campo.value) == false) //Si no cumple la expresión regular
+    {
+        document.getElementById(campo.name).style.display = 'block';
+
+        return false;
+    }
+      else //Si cumple la expresión regular
+      {
+        if (campo.value.length > tamaño_max) //Si el tamaño del campo supera el maximo
+        {
+            document.getElementById(campo.name).style.display = 'block';
+            return false;
+        }
+          else //Si el tamaño está dentro del rango
+          {
+            document.getElementById(campo.name).style.display = 'none';
+            return true;
+      }
+    }
+}
 
 //Función para comprobar que un campo solo tiene letras (mayúsculas y minúsculas), números y los caracteres "- . _" para el formulario SEARCH
 function comprobarAlfanumericoBuscar(campo, tamaño_max)
@@ -231,6 +312,7 @@ function comprobarAlfanumericoBuscar(campo, tamaño_max)
             return false;
         }
           else{// Si no supera el máximo
+            document.getElementById(campo.name).style.display = 'none';
             return true;
       }
   }
@@ -262,12 +344,47 @@ function comprobarTextoBuscar(campo, tamaño_max) {
   }
 }
 
+//Funcion para validar busquedas por ID
+function validarIdTrabajoBuscar(IdTrabajo, tamaño_max){
 
-//Función para validar la búsqueda por IdTrabajo
-function validarIdTrabajoBuscar(IdTrabajo, tamaño_max)
+   if(comprobarVacioBuscar(IdTrabajo) )//Si el campo no está vacio el campo
+      {
+        if(comprobarAlfanumericoBuscar(IdTrabajo,tamaño_max))//Si IdTrabajo cumple la expresión regular de campo Alfabético
+       {
+           return true;
+       }else{ //Si no cumple la expresión regular
+           return false;
+       }
+      }else{//Si está vacio
+          return true;
+      }
+
+
+}
+//Funcion para validar busquedas por nombre
+
+function validarNombreTrabajoBuscar(NombreTrabajo,tamaño_max){
+  
+   if(comprobarVacioBuscar(NombreTrabajo))//Si el campo no está vacio el campo
+      {
+          if(comprobarTextoBuscar(NombreTrabajo, tamaño_max))//Si login cumple la expresión regular de campo Alfabético
+       {
+           return true;
+       }else{ //Si no cumple la expresión regular
+           return false;
+       }
+      }else{//Si está vacio
+          return true;
+      }
+
+
+}
+
+//Funcion para validar busquedas por LoginEvaluador
+function validarLoginEvaluadorBuscar(LoginEvaluador, tamaño_max)
 {
-    if(comprobarVacioBuscar(IdTrabajo)){ //Si el IdTrabajo no está vacío
-        if(comprobarAlfanumericoBuscar(IdTrabajo,tamaño_max)) //Si cumple la expresión regular de campo Alfabético
+  if(comprobarVacioBuscar(LoginEvaluador)){ //Si el login no está vacío
+        if(comprobarAlfanumericoBuscar(LoginEvaluador,tamaño_max)) //Si cumple la expresión regular de campo Alfabético
             {
                 return true;
             }else{ //si no cumple la expresión regular
@@ -277,14 +394,13 @@ function validarIdTrabajoBuscar(IdTrabajo, tamaño_max)
     else{ //Si está vacio
         return true;
     }
-
 }
 
-//Función para validar la búsqueda por IdHistoria
-function validarIdHistoriaBuscar(IdHistoria, min, max)
+//Funcion para validar busquedas por LoginEvaluado
+function validarLoginEvaluadoBuscar(LoginEvaluado, tamaño_max)
 {
-    if(comprobarVacioBuscar(IdHistoria)){ //Si el IdHistoria no está vacío
-        if(comprobarEntero(IdHistoria,0,99)) //Si cumple la expresión regular de campo Alfabético
+  if(comprobarVacioBuscar(LoginEvaluado)){ //Si el login no está vacío
+        if(comprobarAlfanumericoBuscar(LoginEvaluado,tamaño_max)) //Si cumple la expresión regular de campo Alfabético
             {
                 return true;
             }else{ //si no cumple la expresión regular
@@ -294,14 +410,13 @@ function validarIdHistoriaBuscar(IdHistoria, min, max)
     else{ //Si está vacio
         return true;
     }
-
 }
 
-//Función para validar la búsqueda por TextoHistoria
-function validarTextoHistoriaBuscar(TextoHistoria, tamaño_max)
+//Funcion para validar busquedas por AliasEvaluado
+function validarAliasEvaluadoBuscar(AliasEvaluado, tamaño_max)
 {
-    if(comprobarVacioBuscar(TextoHistoria)){ //Si el TextoHistoria no está vacío
-        if(comprobarTextoBuscar(TextoHistoria,tamaño_max)) //Si cumple la expresión regular de campo Alfabético
+  if(comprobarVacioBuscar(AliasEvaluado)){ //Si el alias no está vacío
+        if(comprobarAlfanumericoBuscar(AliasEvaluado,tamaño_max)) //Si cumple la expresión regular de campo Alfabético
             {
                 return true;
             }else{ //si no cumple la expresión regular
@@ -311,8 +426,9 @@ function validarTextoHistoriaBuscar(TextoHistoria, tamaño_max)
     else{ //Si está vacio
         return true;
     }
-
 }
+
+
 
 /*-----------------------------------------------------------------
 --------------VALIDACIONES DE TODO EL FORMULARIO--------------------
@@ -327,37 +443,34 @@ function validar(formulario)
     form =  document.forms[formulario];
     if(formulario == 'SEARCH'){ //Si es el formulario es el de añadir
         //si todos los campos estan correctos y devuelven true
-
         if( 
           (validarIdTrabajoBuscar(form.IdTrabajo, 6)) && 
-          (validarIdHistoriaBuscar(form.IdHistoria, 2)) && 
-          (validarTextoHistoriaBuscar(form.TextoHistoria, 300)) ){
+          (validarNombreTrabajoBuscar(form.NombreTrabajo, 60)) && 
+          (validarLoginEvaluadorBuscar(form.LoginEvaluador, 9)) && 
+          (validarLoginEvaluadoBuscar(form.LoginEvaluado, 9)) && 
+          (validarAliasEvaluadoBuscar(form.AliasEvaluado, 6)) ){
 
           alerta = false; //Se le asigna false a la variable alerta 
         }
-      }
-    if(formulario == 'ADD_FROM_TRABAJO'){
-        if(  
-          (validarIdHistoriaBuscar(form.IdHistoria, 2)) && 
-          (validarTextoHistoriaBuscar(form.TextoHistoria, 300)) ){
+      }else{ //si son EDIT O ADD
+        //si todos los campos estan correctos y devuelven true
+
+         if( 
+          (validarIdTrabajo(form.IdTrabajo, 6)) && 
+          (validarNombreTrabajo(form.NombreTrabajo, 60)) && 
+          (validarLoginEvaluador(form.LoginEvaluador, 9)) && 
+          (validarLoginEvaluado(form.LoginEvaluado,)) && 
+          (validarAliasEvaluado(form.AliasEvaluado, 6))  ){
 
           alerta = false; //Se le asigna false a la variable alerta 
         }
-    }  
-      else{ //si es edit o add
-          if( 
-            (validarIdTrabajo(form.IdTrabajo, 6)) && 
-            (validarIdHistoria(form.IdHistoria, 2)) && 
-            (validarTextoHistoria(form.TextoHistoria, 300)) ){
-
-            alerta = false; //Se le asigna false a la variable alerta 
-          }
+    
     }
+
     if(alerta == true){ //Si hubo alguna alerta (campo no validado correctamente)
       alert('<?php echo $strings['No se puede enviar el formulario. Revise que todos los campos están correctos'] ?>');
       return false;
-    }
-    else{ //Si todos los campos están correctamente validados
+    }else{ //Si todos los campos están correctamente validados
       alert('<?php echo $strings['Formulario correcto']?>');
       return true;
     }

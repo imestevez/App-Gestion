@@ -10,6 +10,7 @@ class HISTORIA_SHOWCURRENT{
 
     var $IdTrabajo; //atributo IdTrabajo
 	var $IdHistoria; //atributo IdHistoria
+    var $NombreTrabajo; 
 	var $TextoHistoria; //atributo TextoHistoria
     var $lista; // array para almacenar los datos del usuario
     var $mysqli; // declaración del atributo manejador de la bd
@@ -18,6 +19,7 @@ function __construct($tupla){
     
     //Asignación de valores de parámetro a los atributos de la clase
 		$this->IdTrabajo =  $tupla['IdTrabajo'];
+        $this->NombreTrabajo =  $tupla['NombreTrabajo'];
 		$this->IdHistoria = $tupla['IdHistoria'];
 		$this->TextoHistoria = $tupla['TextoHistoria'];
 
@@ -37,6 +39,7 @@ function render(){
                  <caption><?php echo $strings['Vista en detalle historia'] ?></caption>
                  <tr><th><?php echo $strings['Campo'] ?></th><th><?php echo $strings['Valor'] ?></th></tr>
                  <tr><th><?php echo $strings['Id del trabajo'] ?></th><td><?php echo $this->IdTrabajo ?></td></tr>
+                 <tr><th><?php echo $strings['Nombre del trabajo'] ?></th><td><?php echo $this->NombreTrabajo ?></td></tr>
                  <tr><th><?php echo $strings['Id de la historia'] ?></th><td><?php echo $this->IdHistoria ?></td></tr>
                  <tr><th><?php echo $strings['Texto de la historia'] ?></th><td><?php echo $this->TextoHistoria ?></td></tr>
                 </table>
