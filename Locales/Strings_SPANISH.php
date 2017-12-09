@@ -162,23 +162,23 @@ array(
 	'ERROR: No existe el grupo que desea borrar en la BD' => 'ERROR: No existe el grupo que desea borrar en la BD',
 	'ERROR: Fallo en la modificación. Ya existe el ID de Grupo' => 'ERROR: Fallo en la modificación. Ya existe el ID de Grupo',
 	'ERROR: El grupo ya existe' => 'ERROR: El grupo ya existe',
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	'Añadir evaluacion' => 'Añadir evaluacion',
+	'LoginEvaluador' => 'Login Evaluador',
+	'AliasEvaluado' => 'Alias Evaluado',
+	'div_CorrectoA' => 'Solo se acepta 1 y 0 como valor',
+	'CorrectoA' => 'Correcto Alumno',
+	'CorrectoP' => 'Correcto Profesor',
+	'ComenIncorrectoA' => 'Comentario Incorrecto del Alumno',
+	'ComentIncorrectoP' => 'Comentario Incorrecto del Profesor',
+	'OK' => 'OK',
+	'Borrar evaluacion' => 'Borrar evaluacion',
+	'Borrar Evaluacion' => 'Borrar Evaluacion',
+	'Editar evaluacion' => 'Editar evaluacion',
+	'Mostrar evaluacion' => 'Mostrar evaluacion',
+	'Buscar evaluacion' => 'Buscar evaluacion',
+	'Evaluaciones' => 'Evaluaciones',
+	'ERROR: El alias no existe' => 'ERROR: El alias no existe',
+	'ERROR: No existe la evaluacion que desea borrar en la BD' => 'ERROR: No existe la evaluacion que desea borrar en la BD',
 
 
 
