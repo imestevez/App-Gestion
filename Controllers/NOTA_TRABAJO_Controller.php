@@ -77,7 +77,7 @@ if (!isset($_REQUEST['action'])){
 					
 					$lista['login'] = $_REQUEST['login'];
 					$lista['IdTrabajo'] = $_REQUEST['IdTrabajo'];
-					$lista = $NOTA_TRABAJO->rellenarLista();
+					$lista = $NOTA_TRABAJO->RellenaDatos();
 
 					$form = new NOTA_TRABAJO_ADD($lista); //Crea la vista ADD y muestra formulario para rellenar por el usuario
 				}else{
@@ -98,7 +98,7 @@ if (!isset($_REQUEST['action'])){
 			if (!$_POST){ //viene del showall con una clave
 				$lista = array('login','IdTrabajo','NotaTrabajo');
 				$NOTA_TRABAJO = new NOTA_TRABAJO_Model($_REQUEST['login'],$_REQUEST['IdTrabajo'],'');//crea un un NOTA_TRABAJO_Model con el IdTrabajo del usuario
-				$lista = $NOTA_TRABAJO->rellenarLista();
+				$lista = $NOTA_TRABAJO->RellenaDatos();
 				//$tupla = $NOTA_TRABAJO->RellenaDatos();//A partir del IdTrabajo recoge todos los atributos
 				$usuario = new NOTA_TRABAJO_DELETE($lista); //Crea la vista de DELETE con los datos del usuario
 			}
@@ -111,7 +111,7 @@ if (!isset($_REQUEST['action'])){
 		case 'EDIT': //si el usuario quiere editar	
 			if (!$_POST){
 				$NOTA_TRABAJO = new NOTA_TRABAJO_Model($_REQUEST['login'],$_REQUEST['IdTrabajo'],''); //crea un un NOTA_TRABAJO_Model con el IdTrabajo del usuario 
-				$lista = $NOTA_TRABAJO->rellenarLista();  //A partir del IdTrabajo recoge todos los atributos
+				$lista = $NOTA_TRABAJO->RellenaDatos();  //A partir del IdTrabajo recoge todos los atributos
 				$usuario = new NOTA_TRABAJO_EDIT($lista); //Crea la vista EDIT con los datos del usuario
 			}
 			else{
@@ -134,7 +134,7 @@ if (!isset($_REQUEST['action'])){
 		case 'SHOWCURRENT': //si desea ver un usuario en detalle
 			$lista = array('login','IdTrabajo','NotaTrabajo');
 			$NOTA_TRABAJO = new NOTA_TRABAJO_Model($_REQUEST['login'],$_REQUEST['IdTrabajo'], '');//crea un un NOTA_TRABAJO_Model con el IdTrabajo del usuario
-			$lista = $NOTA_TRABAJO->rellenarLista();
+			$lista = $NOTA_TRABAJO->RellenaDatos();
 			//$tupla = $NOTA_TRABAJO->RellenaDatos();//A partir del IdTrabajo recoge todos los atributos
 			$usuario = new NOTA_TRABAJO_SHOWCURRENT($lista); //Crea la vista SHOWCURRENT del usuario requerido
 			break;
