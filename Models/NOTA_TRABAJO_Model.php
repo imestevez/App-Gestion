@@ -294,21 +294,6 @@ function comprobarExistenciaTrabajo(){
 }
 
 
-function rellenarLista(){
-	$sql = "SELECT * FROM NOTA_TRABAJO N, USUARIO U, TRABAJO T,
-					WHERE (U.login = '$this->login' AND
-							T.IdTrabajo = '$this->IdTrabajo'
-					)";
-	if (!($result = $this->mysqli->query($sql))){
-    	$this->lista['mensaje'] = 'ERROR: No existe en la base de datos'; 
-			return $this->lista; //
-	}else{
-		$result = $resultado->fetch_array();
-		return $result;
-	}
-}
-
-
 }//Fin clase
 
 ?>
