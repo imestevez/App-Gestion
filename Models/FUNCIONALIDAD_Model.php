@@ -67,14 +67,25 @@ function ADD()
 									'$this->IdFuncionalidad',
 									'$this->NombreFuncionalidad',
 									'$this->DescripFuncionalidad')";
+
+				$sql2 = "INSERT INTO FUNC_ACCION(
+				IdFuncionalidad,
+				IdAccion) VALUES (
+								'$this->IdFuncionalidad',
+								''
+								)";
 				 if (!($result = $this->mysqli->query($sql))){ //si da error la consulta se comrpueba el por que
 					//Si no hay atributos Clave y unique duplicados es que hay campos sin completar
         			return 'ERROR: Introduzca todos los valores de todos los campos'; // introduzca un valor para el usuario
 				}
 
     			else{ //si no da error en la insercion devolvemos mensaje de exito
-					$this->lista['mensaje'] = 'Inserción realizada con éxito';
-					return $this->lista; //operacion de insertado correcta
+					if($result2 = $this->mysqli->query($sql2)){
+						$this->lista['mensaje'] = 'Inserción realizada con éxito';
+						return $this->lista; //operacion de insertado correcta
+					}else{//si se produce un error al insertarlo en alumnos lanzamos mensaje 
+						$this->lista['mensaje'] = 'Error en la inserción'; 
+					}
 				}
 			}else{ //si hay un IdTrabajo igual
 
@@ -145,7 +156,7 @@ function DELETE()
 			return $this->lista;
     } // si no existe el IdTrabajo a borrar se devuelve el mensaje de que no existe
     else{
-    	 $this->lista['mensaje'] = 'ERROR: No existe el usuario que desea borrar en la BD'; 
+    	 $this->lista['mensaje'] = 'ERROR: No existe la funcionalidad que desea borrar en la BD'; 
 			return $this->lista;
 		}	
 } // fin metodo DELETE
@@ -204,7 +215,7 @@ function EDIT()
 			    $row = $result->fetch_array();
 
 			    if( ($num_rows == 1) && ( $row['IdFuncionalidad'] != $this->IdFuncionalidad) ){ //Si devuelve 1 tupla y no coinciden los IdTrabajo
-			    	$this->lista['mensaje'] = 'ERROR: Fallo en la modificación. Ya existe IDFuncionalidad'; //añadir a strings
+			    	$this->lista['mensaje'] = 'ERROR: Fallo en la modificación. Ya existe IdFuncionalidad'; //añadir a strings
 					return $this->lista;
 				}
 		    }	
@@ -256,4 +267,49 @@ function contarTuplas(){
     return $total_tuplas;
 }
 
+function rellenarLista(){
+	$sql ="SELECT * FROM FUNCIONALIDAD WHERE(IdFuncionalidad = '$this->IdFuncionalidad')";
+	$result = $this->mysqli->query($sql);
+	$row = mysqli_fetch_array($result);
+	$this->lista['IdFuncionalidad'] = $row['IdFuncionalidad'];
+	$this->lista['NombreFuncionalidad'] = $row['NombreFuncionalidad'];
+	$this->lista['DescripFuncionalidad'] = $row['DescripFuncionalidad'];
+
+	return $this->lista;
 }
+
+function contarNumAccionesFunc(){
+
+	$sql = "SELECT COUNT(*) FROM FUNC_ACCION WHERE (IdFuncionalidad = '$this->IdFuncionalidad')";
+
+	$result = $this->mysqli->query($sql);
+	$num_rows = mysqli_num_rows($result);
+	return $num_rows;
+	}
+function todosAcciones(){
+		$sql = "SELECT * FROM  ACCION ";
+
+
+	$result = $this->mysqli->query($sql);
+	/*
+	while($row = mysqli_num_rows($result)){
+		$lista[$row['IdGrupo']] =$row['NombreGrupo'];
+	}*/
+	return $result;
+}
+function rellenarAcciones(){
+	$sql = "SELECT * FROM FUNC_ACCION FA, ACCION A WHERE (FA.IdFuncionalidad = '$this->IdFuncionalidad' AND
+														FA.IdAccion = A.IdAccion)";
+
+
+	$result = $this->mysqli->query($sql);
+	/*
+	while($row = mysqli_num_rows($result)){
+		$lista[$row['IdGrupo']] =$row['NombreGrupo'];
+	}*/
+	return $result;
+}
+
+}
+
+?> 
