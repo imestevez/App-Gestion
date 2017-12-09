@@ -359,11 +359,9 @@ array(
 'Asignación de QAs' => 'Asignación de QAs',
 'Asignación de QA' => 'Asignación de QA',
 
-'ERROR: No existe ningún usuario con ese login' => 'ERROR: No existe ningún usuario con ese login',
-'ERROR: No existe ningún usuario con ese alias' => 'ERROR: No existe ningún usuario con ese alias',
-'ERROR: Fallo en la inserción. Ya existe esa asignacióde QA' => 'ERROR: Fallo en la inserción. Ya existe esa asignacióde QA',
-
-
+'ERROR: Fallo en la inserción. Ya existe esa asignación de QA' => 'ERROR: Fallo en la inserción. Ya existe esa asignación de QA',
+'ERROR: No existe esa entrega para evaluar' => 'ERROR: No existe esa entrega para evaluar',
+'ERROR: No existe el usuario con LoginEvaluador'  => 'ERROR: No existe el usuario con LoginEvaluador',
 
 
 
