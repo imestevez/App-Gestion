@@ -29,8 +29,8 @@ function render(){
         <table class="showcurrent">
             <caption><?php echo $strings['Nota'] ?></caption>
                 <tr><th><?php echo $strings['Campo'] ?></th><th><?php echo $strings['Valor'] ?></th></tr>
-                <tr><th><?php echo $strings['Login'] ?></th><td><?php echo $this-login ?></td></tr>
-                <tr><th><?php echo $strings['IdTrabajo'] ?></th><td><?php echo $this-IdTrabajo ?></td></tr>
+                <tr><th><?php echo $strings['Login'] ?></th><td><?php echo $this->login ?></td></tr>
+                <tr><th><?php echo $strings['IdTrabajo'] ?></th><td><?php echo $this->IdTrabajo ?></td></tr>
                 <tr><th><?php echo $strings['Nota Trabajo'] ?></th><td><?php echo $this->NotaTrabajo ?></td></tr>
         </table>
 

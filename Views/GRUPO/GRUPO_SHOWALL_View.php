@@ -52,6 +52,8 @@ function render(){
                 <th><?php echo $strings['IdGrupo']?></th>   
                 <th><?php echo $strings['NombreGrupo']?></th>                   
                 <th><?php echo $strings['DescripGrupo']?></th>
+                <th><?php echo $strings['Permisos']?></th>
+                
                 
 
                 <td><a href="../Controllers/GRUPO_Controller.php?action=SEARCH"><input type="image" src="../Views/images/search.png" name="action" title="<?php echo $strings['Buscar']?>" value="SEARCH"></a>
@@ -66,6 +68,9 @@ function render(){
                 <td><?php echo $row["IdGrupo"]; ?></td>
                 <td><?php echo $row["NombreGrupo"]; ?></td>
                 <td><?php echo $row["DescripGrupo"]; ?></td>
+                <td>  <a href="../Controllers/FUNC_GRUPO_Controller.php?action=SHOWALL&IdGrupo=<?php echo $row["IdGrupo"]?>&NombreGrupo=<?php echo $row['NombreGrupo']?>">
+                            <input type="image" src="../Views/images/lista.png" name="action" title="<?php echo $strings['Mostrar Acciones'] ?>" value="SHOWALL_ACCIONES" action=""></a>
+                </td>
 
                 <td class="edit_tabla">
                     <a href="../Controllers/GRUPO_Controller.php?action=SHOWCURRENT&IdGrupo=<?php echo $row["IdGrupo"]?>"><input type="image" src="../Views/images/ojo.png" name="action" title="<?php echo $strings['Mostrar en detalle'] ?>" value="SHOWCURRENT" action=""></a>

@@ -179,8 +179,8 @@ array(
 	'Evaluaciones' => 'Avaliacións',
 	'ERROR: El alias no existe' => 'ERRO: O alias non existe',
 	'ERROR: No existe la evaluacion que desea borrar en la BD' => 'ERRO: Non existe a avaliación que desexa borrar na BD',
-
-
+	'ERROR: La historia no existe' => 'ERRO: A historia non existe',
+	'ERROR: Fallo en la inserción. Ya existe la evaluacion' => 'ERRO: Fallo na inserción. Xa existe a avaliación',
 
 
 
@@ -296,14 +296,14 @@ array(
 	'Buscar Nota' => 'Buscar Nota',
 	'Nota' => 'Nota',
 	'Notas' => 'Notas',
-
-
-
-
-
-
-
-
+//FUNC_ACCION
+	'Mostrar Acciones' => 'Mostrar Accións',
+	'ERROR: Fallo en la inserción. Ya existe ese IdFuncionalidad' => 'ERRO: Fallo na inserción. Xa existe ese IdFuncionalidade',
+	'Asignar/Desasignar Acciones' => 'Asignar/Desasignar Accións',
+	'Seleccionar Acciones' => 'Seleccionar Accións',
+	'Acciones de Funcionalidad' => 'Accións de Funcionalidade',
+	'ERROR: No existe la funcionalidad que desea borrar en la BD' => 'ERRO: Non existe a funcionalidade que desea borrar na BD',
+	'ERROR: Fallo en la modificación. El IdFuncionalidad está vacio' => 'ERRO: Fallo na modificación. O IdFuncionalidade está valeiro',
 
 
 

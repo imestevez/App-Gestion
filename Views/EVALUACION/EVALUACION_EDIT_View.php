@@ -59,39 +59,39 @@ include '../Views/Header.php';
             <form method="post" name="EDIT"  action="../Controllers/EVALUACION_Controller.php" enctype="multipart/form-data" >
                 <div id="izquierda">
                     <label for="IdTrabajo"><?php echo $strings['IdTrabajo'] ?>: </label>
-                        <input type="text" name="IdTrabajo" maxlength="6" value="<?php echo $this->IdTrabajo ?>" size="6" readonly  >
+                        <input type="text" name="IdTrabajo" maxlength="6" value="<?php echo $this->IdTrabajo ?>" size="6" readonly  ><div id="IdTrabajo" class="oculto" style="display:none"><?php echo $strings['div_Alfanumerico']?></div> <div id="IdTrabajoVacio" class="oculto" style="display:none"><?php echo $strings['div_vacio']?></div>
                 </div>
                 <div id="izquierda">
                     <label for="LoginEvaluador"><?php echo $strings['LoginEvaluador'] ?>: </label>
-                        <input type="text" name="LoginEvaluador" maxlength="9" size="9" readonly value="<?php echo $this->LoginEvaluador ?>"> 
+                        <input type="text" name="LoginEvaluador" maxlength="9" size="9" readonly value="<?php echo $this->LoginEvaluador ?>"><div id="LoginEvaluador" class="oculto" style="display:none"><?php echo $strings['div_Alfanumerico']?></div> <div id="LoginEvaluadorVacio" class="oculto" style="display:none"><?php echo $strings['div_vacio']?></div> 
                 </div>
                 <div id="izquierda">
                     <label for="AliasEvaluado"><?php echo $strings['AliasEvaluado'] ?>: </label>
-                        <input type="text" name="AliasEvaluado" maxlength="9" size="9" readonly value="<?php echo $this->AliasEvaluado ?>"> 
+                        <input type="text" name="AliasEvaluado" maxlength="9" size="9" readonly value="<?php echo $this->AliasEvaluado ?>"><div id="AliasEvaluado" class="oculto" style="display:none"><?php echo $strings['div_Alfanumerico']?></div> <div id="AliasEvaluadoVacio" class="oculto" style="display:none"><?php echo $strings['div_vacio']?></div> 
                 </div>
                 <div id="izquierda">
                     <label for="IdHistoria"><?php echo $strings['IdHistoria']?>:</label>
-                        <input type="number" name="IdHistoria" maxlength="2" size="2" readonly value="<?php echo $this->IdHistoria ?>"> 
+                        <input type="number" name="IdHistoria" maxlength="2" size="2" readonly value="<?php echo $this->IdHistoria ?>"><div id="IdHistoria" class="oculto" style="display:none"><?php echo $strings['div_numeros']?></div> <div id="IdHistoriaMax" class="oculto" style="display:none"><?php echo $strings['div_numerosRango']?> </div><div id="IdHistoriaVacio" class="oculto" style="display:none"><?php echo $strings['div_vacio']?></div>
                 </div>
                 <div  id="izquierda">    
                     <label for="CorrectoA"><?php echo $strings['CorrectoA']?>: </label>
-                    <input type="number" name="CorrectoA" maxlength="1" min="0" max="1" size="1" onblur="validarCorrecto(this,0,1)"  ><div id="CorrectoAMax" class="oculto" style="display:none"><?php echo $strings['div_CorrectoA']?></div>  
+                    <input type="number" name="CorrectoA" maxlength="1" min="0" max="1" size="1" value="<?php echo $this->CorrectoA ?>" onblur="validarCorrecto(this,0,1)"  ><div id="CorrectoA" class="oculto" style="display:none"><?php echo $strings['div_numeros']?></div><div id="CorrectoAMax" class="oculto" style="display:none"><?php echo $strings['div_CorrectoA']?></div><div id="CorrectoAVacio" class="oculto" style="display:none"><?php echo $strings['div_vacio']?></div> 
                 </div>
                 <div  id="izquierda">    
                     <label for="ComenIncorrectoA"><?php echo $strings['ComenIncorrectoA']?>: </label>
-                    <textarea name="ComenIncorrectoA" maxlength="300" rows="6" cols="50" onblur="validarComentIncorrecto(this,300)" style="margin-left: 10px; border-radius: 20px; border-top-left-radius: 0px; border-width: 2px; border-color: darkblue;" ></textarea><div id="ComenIncorrectoAVacio" class="oculto" style="display:none"><?php echo $strings['div_vacio']?></div>  
+                    <textarea name="ComenIncorrectoA" maxlength="300" rows="6" cols="50" onblur="validarComentIncorrecto(this,300)" style="margin-left: 10px; border-radius: 20px; border-top-left-radius: 0px; border-width: 2px; border-color: darkblue;" > <?php echo $this->ComenIncorrectoA ?></textarea><div id="ComenIncorrectoA" class="oculto" style="display:none"><?php echo $strings['div_Alfanumerico']?></div><div id="ComenIncorrectoAVacio" class="oculto" style="display:none"><?php echo $strings['div_vacio']?></div>  
                 </div>
                 <div  id="izquierda">    
                     <label for="CorrectoP"><?php echo $strings['CorrectoP']?>: </label>
-                    <input type="number" name="CorrectoP" maxlength="1" min="0" max="1" size="1" onblur="validarCorrecto(this,0,1)"  ><div id="CorrectoPMax" class="oculto" style="display:none"><?php echo $strings['div_CorrectoA']?></div>  
+                    <input type="number" name="CorrectoP" maxlength="1" min="0" max="1" size="1" value="<?php echo $this->CorrectoP ?>" onblur="validarCorrecto(this,0,1)"  ><div id="CorrectoP" class="oculto" style="display:none"><?php echo $strings['div_numeros']?></div><div id="CorrectoPMax" class="oculto" style="display:none"><?php echo $strings['div_CorrectoA']?></div><div id="CorrectoPVacio" class="oculto" style="display:none"><?php echo $strings['div_vacio']?></div>  
                 </div>
                 <div  id="izquierda">    
                     <label for="ComentIncorrectoP"><?php echo $strings['ComentIncorrectoP']?>: </label>
-                    <textarea name="ComentIncorrectoP" maxlength="300" rows="6" cols="50" onblur="validarComentIncorrecto(this,300)" style="margin-left: 10px; border-radius: 20px; border-top-left-radius: 0px; border-width: 2px; border-color: darkblue;" ></textarea><div id="ComentIncorrectoPVacio" class="oculto" style="display:none"><?php echo $strings['div_vacio']?></div>  
+                    <textarea name="ComentIncorrectoP" maxlength="300" rows="6" cols="50" onblur="validarComentIncorrecto(this,300)" style="margin-left: 10px; border-radius: 20px; border-top-left-radius: 0px; border-width: 2px; border-color: darkblue;" > <?php echo $this->ComentIncorrectoP ?></textarea><div id="ComentIncorrectoP" class="oculto" style="display:none"><?php echo $strings['div_Alfanumerico']?></div><div id="ComentIncorrectoPVacio" class="oculto" style="display:none"><?php echo $strings['div_vacio']?></div>  
                 </div>
                 <div  id="izquierda">    
                     <label for="OK"><?php echo $strings['OK']?>: </label>
-                    <input type="number" name="OK" maxlength="1" min="0" max="1" size="1" onblur="validarOK(this,0,1)"  ><div id="OK" class="oculto" style="display:none"><?php echo $strings['div_CorrectoA']?></div>  
+                    <input type="number" name="OK" maxlength="1" min="0" max="1" size="1" value="<?php echo $this->OK ?>" onblur="validarOK(this,0,1)"  ><div id="OK" class="oculto" style="display:none"><?php echo $strings['div_numeros']?></div><div id="OKMax" class="oculto" style="display:none"><?php echo $strings['div_CorrectoA']?></div><div id="OKVacio" class="oculto" style="display:none"><?php echo $strings['div_vacio']?></div>    
                 </div>
 
                 <div class="acciones" style="float: right; margin-left:0%; margin-right: 50%">

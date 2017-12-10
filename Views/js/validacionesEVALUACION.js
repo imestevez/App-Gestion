@@ -490,7 +490,7 @@ function validarComentIncorrectoBuscar(ComentIncorrecto, tamaño_max)
     else{ //Si está vacio
         return true;
     }
-
+}
 
 //Función para validar la búsqueda por OK
 function validarOKBuscar(OK)
@@ -509,7 +509,7 @@ function validarOKBuscar(OK)
 
 }
 
-}
+
 
 
 /*-----------------------------------------------------------------
@@ -552,7 +552,7 @@ function validar(formulario)
           (validarComentIncorrecto(form.ComenIncorrectoA, 300)) && 
           (validarCorrecto(form.CorrectoP, 0, 1)) && 
           (validarComentIncorrecto(form.ComentIncorrectoP, 300)) && 
-          (validarOK(form.OK,1))  ){
+          (validarOK(form.OK,0,1))  ){
 
           alerta = false; //Se le asigna false a la variable alerta 
         }

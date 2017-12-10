@@ -51,6 +51,7 @@ function render(){
                     <th><?php echo $strings['Id Funcionalidad']?></th>   
                     <th><?php echo $strings['Nombre Funcionalidad']?></th>                   
                     <th><?php echo $strings['Descripción Funcionalidad']?></th>
+                    <th><?php echo $strings['Acciones']?></th>
 
                     <td><a href="../Controllers/FUNCIONALIDAD_Controller.php?action=SEARCH"><input type="image" src="../Views/images/search.png" name="action" title="<?php echo $strings['Buscar']?>" value="SEARCH"></a>
                         <a href="../Controllers/FUNCIONALIDAD_Controller.php?action=ADD" ><input type="image" src="../Views/images/anadir.png" name="action" title="<?php echo $strings['Añadir']?>" value="ADD" ></a>
@@ -64,6 +65,9 @@ function render(){
                 <td><?php echo $row["IdFuncionalidad"]; ?></td>
                 <td><?php echo $row["NombreFuncionalidad"]; ?></td>
                 <td><?php echo $row["DescripFuncionalidad"]; ?></td>
+                <td>  <a href="../Controllers/FUNC_ACCION_Controller.php?action=SHOWAL&IdFuncionalidad=<?php echo $row["IdFuncionalidad"]?>&NombreFuncionalidad=<?php echo $row['NombreFuncionalidad']?>">
+                            <input type="image" src="../Views/images/lista.png" name="action" title="<?php echo $strings['Mostrar Acciones'] ?>" value="SHOWALL_ACCIONES" action=""></a>
+                      </td>
 
                 <td class="edit_tabla">
                     <a href="../Controllers/FUNCIONALIDAD_Controller.php?action=SHOWCURRENT&IdFuncionalidad=<?php echo $row["IdFuncionalidad"]?>"><input type="image" src="../Views/images/ojo.png" name="action" title="<?php echo $strings['Mostrar en detalle'] ?>" value="SHOWCURRENT" action=""></a>
@@ -115,7 +119,7 @@ function renderSearch(){
                     <th><?php echo $strings['Id Funcionalidad']?></th>   
                     <th><?php echo $strings['Nombre Funcionalidad']?></th>                   
                     <th><?php echo $strings['Descripción Funcionalidad']?></th>
-             
+                    <th COLSPAN="2"> <?php echo $strings['Acciones']?></th>
 
                 <td><a href="../Controllers/FUNCIONALIDAD_Controller.php?action=SEARCH"><input type="image" src="../Views/images/search.png" name="action" title="<?php echo $strings['Buscar']?>" value="SEARCH"></a>
                     <a href="../Controllers/FUNCIONALIDAD_Controller.php?action=ADD" ><input type="image" src="../Views/images/anadir.png" name="action" title="<?php echo $strings['Añadir']?>" value="ADD" ></a>
@@ -127,7 +131,10 @@ function renderSearch(){
                 <td><?php echo $row["IdFuncionalidad"]; ?></td>
                 <td><?php echo $row["NombreFuncionalidad"]; ?></td>
                 <td><?php echo $row["DescripFuncionalidad"]; ?></td>
-
+                <td><?php echo $row['NombreAccion']?></td>
+                        <td>  <a href="../Controllers/FUNCIONALIDAD_Controller.php?action=SHOWCURRENT&IdFuncionalidad=<?php echo $row["IdFuncionalidad"]?>&IdAccion=<?php echo $row["IdAccion"] ?>">
+                            <input type="image" src="../Views/images/lista.png" name="action" title="<?php echo $strings['Mostrar Grupos'] ?>" value="SHOWCURRENT" action=""></a>
+                      </td>
 
                 <td class="edit_tabla">
                     <a href="../Controllers/FUNCIONALIDAD_Controller.php?action=SHOWCURRENT&IdFuncionalidad=<?php echo $row["IdFuncionalidad"]?>"><input type="image" src="../Views/images/ojo.png" name="action" title="<?php echo $strings['Mostrar en detalle'] ?>" value="SHOWCURRENT" action=""></a>
