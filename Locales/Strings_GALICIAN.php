@@ -419,7 +419,8 @@ array(
 	'Permisos' => 'Permisos',
 	'Nombre del grupo' => 'Nome do grupo',
 	'Nombre de la funcionalidad' => 'Nome da funcionalidad',
-	'Busqueda de permisos' => 'Busqueda de permisos'
+	'Busqueda de permisos' => 'Busqueda de permisos',
+	'Acciones de Grupo' => 'Accions de grupo'
 
 )
 ;
