@@ -9,9 +9,9 @@ Muestra la tabla en detalle de la funcionalidad seleccionada
 
 */
 class FUNCIONALIDAD_SHOWCURRENT{
-    var $IdFuncionalidad;
-    var $NombreFuncionalidad;
-    var $DescripFuncionalidad; 
+    var $IdFuncionalidad; //declaración del atributo IdFuncionalidad
+    var $NombreFuncionalidad; //declaración del atributo NombreFuncionalidad
+    var $DescripFuncionalidad; //declaración del atributo DescripFuncionalidad
 
 function __construct($tupla){
     $this->IdFuncionalidad = $tupla['IdFuncionalidad'];
