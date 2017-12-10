@@ -64,7 +64,7 @@ function render(){
                 <input class="del" type="email" name="email" size="<?php echo strlen($this->email); ?> " placeholder="ejemplo@email.com" readonly value="<?php echo $this->email?>" >
                 <input class="del" type="text" name="direccion" size="<?php echo strlen($this->direccion); ?>" readonly value="<?php echo $this->direccion ?>">
 
-                  <div class="accionesTable" style="margin-left: 0%; float: right; margin-right: 45%">
+                  <div class="accionesTable" style="margin-left: 0%; float: right; margin-right: 45%; margin-top: 2%;">
 
                     <a href="../Controllers/USUARIO_Controller.php?action=DELETE&login=<?php echo $this->login ?>"><input type="image" name="action" value="DELETE" action="#" src="../Views/images/confirmar.png" title="<?php echo $strings['Borrar Usuario'] ?>" ></a>
                     </div>

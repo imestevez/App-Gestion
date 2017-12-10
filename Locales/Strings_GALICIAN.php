@@ -179,8 +179,8 @@ array(
 	'Evaluaciones' => 'Avaliacións',
 	'ERROR: El alias no existe' => 'ERRO: O alias non existe',
 	'ERROR: No existe la evaluacion que desea borrar en la BD' => 'ERRO: Non existe a avaliación que desexa borrar na BD',
-
-
+	'ERROR: La historia no existe' => 'ERRO: A historia non existe',
+	'ERROR: Fallo en la inserción. Ya existe la evaluacion' => 'ERRO: Fallo na inserción. Xa existe a avaliación',
 
 
 
