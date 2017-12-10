@@ -179,8 +179,8 @@ array(
 	'Evaluaciones' => 'Evaluations',
 	'ERROR: El alias no existe' => 'ERROR: Alias doesn´t exist',
 	'ERROR: No existe la evaluacion que desea borrar en la BD' => 'ERROR: The evaluation that you are trying to delete is not in our Database',
-
-
+	'ERROR: La historia no existe' => 'ERROR: Story doesn´t exist',
+	'ERROR: Fallo en la inserción. Ya existe la evaluacion' => 'ERROR: Insertion failed. Evaluation already exists',
 
 
 
