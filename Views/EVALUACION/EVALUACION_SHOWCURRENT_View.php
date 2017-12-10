@@ -75,8 +75,8 @@ function render(){
                         <td style="border-right-style: collapse; border-right:  5px solid black;"><?php echo $this->ComenIncorrectoA ?></td></tr>
                 <tr><th><?php echo $strings['CorrectoP'] ?></th>
                         <td style="border-right-style: collapse; border-right:  5px solid black;"><?php echo $this->CorrectoP ?></td></tr>
-                <tr><th><?php echo $strings['ComenIncorrectoP'] ?></th>
-                        <td style="border-right-style: collapse; border-right:  5px solid black;"><?php echo $this->ComenIncorrectoP ?></td></tr>
+                <tr><th><?php echo $strings['ComentIncorrectoP'] ?></th>
+                        <td style="border-right-style: collapse; border-right:  5px solid black;"><?php echo $this->ComentIncorrectoP ?></td></tr>
                 <tr><th><?php echo $strings['OK'] ?></th>
                         <td style="border-right-style: collapse; border-right:  5px solid black;"><?php echo $this->OK ?></td></tr>
             </table>
