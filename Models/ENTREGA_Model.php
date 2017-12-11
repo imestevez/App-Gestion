@@ -132,20 +132,21 @@ function SEARCH()
 { 	// construimos la sentencia de busqueda con LIKE y los atributos de la entidad
 
     $sql = "SELECT  
-					login,
-    				IdTrabajo,
-    				Alias,
-    				Horas,
-					Ruta
-       			FROM ENTREGA 
+					E.login,
+    				E.IdTrabajo,
+    				T.NombreTrabajo,
+    				E.Alias,
+    				E.Horas,
+					E.Ruta
+       			FROM ENTREGA E, TRABAJO T
     			WHERE 
     				(
-    				(login LIKE '%$this->login%') &&
-    				(IdTrabajo LIKE '%$this->IdTrabajo%') &&
-    				(Alias LIKE '%$this->Alias%') &&
-    				(Horas LIKE '%$this->Horas%') &&
-	 				(Ruta LIKE '%$this->Ruta%')
-	 				
+    				(E.login LIKE '%$this->login%') &&
+    				(E.IdTrabajo LIKE '%$this->IdTrabajo%') &&
+    				(E.Alias LIKE '%$this->Alias%') &&
+    				(E.Horas LIKE '%$this->Horas%') &&
+	 				(E.Ruta LIKE '%$this->Ruta%') &&
+	 				(E.IdTrabajo = T.IdTrabajo)
 	 				)";
     				
 
