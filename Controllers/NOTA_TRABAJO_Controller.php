@@ -68,22 +68,8 @@ if (!isset($_REQUEST['action'])){
 	Switch ($action){
 		case 'ADD': //Si quiere hacer un ADD
 			if (!$_POST){ //si viene del showall (no es un post)
-				$lista = array('login','IdTrabajo','NotaTrabajo');
 
-				if( (isset($_REQUEST['login'])) && 
-					(isset($_REQUEST['IdTrabajo'])) ) {
-
-					$NOTA_TRABAJO = get_data_form(); //recibe datos
-					
-					$lista['login'] = $_REQUEST['login'];
-					$lista['IdTrabajo'] = $_REQUEST['IdTrabajo'];
-					$lista = $NOTA_TRABAJO->RellenaDatos();
-
-					$form = new NOTA_TRABAJO_ADD($lista); //Crea la vista ADD y muestra formulario para rellenar por el usuario
-				}else{
-					$lista['login'] = '';
-					$form = new NOTA_TRABAJO_ADD($lista); //Crea la vista ADD y muestra formulario para rellenar por el usuario
-				}
+					$form = new NOTA_TRABAJO_ADD(); //Crea la vista ADD y muestra formulario para rellenar por el usuario
 			}
 			else{ //si viene del add 
 				/*echo $_REQUEST['login'];
@@ -98,7 +84,7 @@ if (!isset($_REQUEST['action'])){
 			if (!$_POST){ //viene del showall con una clave
 				$lista = array('login','IdTrabajo','NotaTrabajo');
 				$NOTA_TRABAJO = new NOTA_TRABAJO_Model($_REQUEST['login'],$_REQUEST['IdTrabajo'],'');//crea un un NOTA_TRABAJO_Model con el IdTrabajo del usuario
-				$lista = $NOTA_TRABAJO->RellenaDatos();
+				$lista = $NOTA_TRABAJO->rellenarLista();
 				//$tupla = $NOTA_TRABAJO->RellenaDatos();//A partir del IdTrabajo recoge todos los atributos
 				$usuario = new NOTA_TRABAJO_DELETE($lista); //Crea la vista de DELETE con los datos del usuario
 			}
@@ -111,7 +97,7 @@ if (!isset($_REQUEST['action'])){
 		case 'EDIT': //si el usuario quiere editar	
 			if (!$_POST){
 				$NOTA_TRABAJO = new NOTA_TRABAJO_Model($_REQUEST['login'],$_REQUEST['IdTrabajo'],''); //crea un un NOTA_TRABAJO_Model con el IdTrabajo del usuario 
-				$lista = $NOTA_TRABAJO->RellenaDatos();  //A partir del IdTrabajo recoge todos los atributos
+				$lista = $NOTA_TRABAJO->rellenarLista();  //A partir del IdTrabajo recoge todos los atributos
 				$usuario = new NOTA_TRABAJO_EDIT($lista); //Crea la vista EDIT con los datos del usuario
 			}
 			else{
@@ -134,7 +120,7 @@ if (!isset($_REQUEST['action'])){
 		case 'SHOWCURRENT': //si desea ver un usuario en detalle
 			$lista = array('login','IdTrabajo','NotaTrabajo');
 			$NOTA_TRABAJO = new NOTA_TRABAJO_Model($_REQUEST['login'],$_REQUEST['IdTrabajo'], '');//crea un un NOTA_TRABAJO_Model con el IdTrabajo del usuario
-			$lista = $NOTA_TRABAJO->RellenaDatos();
+			$lista = $NOTA_TRABAJO->rellenarLista();
 			//$tupla = $NOTA_TRABAJO->RellenaDatos();//A partir del IdTrabajo recoge todos los atributos
 			$usuario = new NOTA_TRABAJO_SHOWCURRENT($lista); //Crea la vista SHOWCURRENT del usuario requerido
 			break;
