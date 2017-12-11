@@ -9,14 +9,18 @@ Vista para que el administrador pueda editar las notas
 
 */
 class NOTA_TRABAJO_EDIT{
-    var $login; 
-    var $IdTrabajo; 
-    var $NotaTrabajo; 
+    var $login; //declaración del atributo login
+    var $Nombre; //declaración del atributo Nombre
+    var $IdTrabajo; //declaración del atributo IdTrabajo
+    var $NombreTrabajo; //declaración del atributo NombreTrabajo 
+    var $NotaTrabajo;  //declaración del atributo NotaTrabajo
 
-function __construct($tupla){
-    $this->login = $tupla['login'];
-    $this->IdTrabajo = $tupla['IdTrabajo'];
-    $this->NotaTrabajo = $tupla['NotaTrabajo'];
+function __construct($lista){
+    $this->login = $lista['login'];
+    $this->Nombre = $lista['Nombre'];
+    $this->IdTrabajo = $lista['IdTrabajo'];
+    $this->NombreTrabajo = $lista['NombreTrabajo'];
+    $this->NotaTrabajo = $lista['NotaTrabajo'];
     $this->render();
 }
 
@@ -38,12 +42,22 @@ function render(){
             <form method="post" name="EDIT"  action="../Controllers/NOTA_TRABAJO_Controller.php">
                 <div id="izquierda">
                     <label for="login"><?php echo $strings['Login'] ?>: </label>
-                        <input type="text" name="login" maxlength="9" size="9" readonly value="<?php echo $this->login?>" onblur="javascript:void(validarLogin(this, 9))" ><div id="login" class="oculto" style="display:none"><?php echo $strings['div_Alfanumerico']?></div> <div id="loginVacio" class="oculto" style="display:none"><?php echo $strings['div_vacio']?></div> 
+                        <input type="text" name="login" readonly value="<?php echo $this->login ?>" maxlength="9" size="9">
                 </div>
 
                 <div id="izquierda">
-                    <label for="IdTrabajo"><?php echo $strings['IdTrabajo']?>: </label>
-                        <input type="text" name="IdTrabajo" maxlength="6" size="6" value="<?php echo $this->IdTrabajo?>"  onblur="javascript:void(validarIdTrabajo(this, 6))" ><div id="IdTrabajo" class="oculto" style="display:none"><?php echo $strings['div_Alfanumerico']?></div> <div id="IdTrabajoVacio" class="oculto" style="display:none"><?php echo $strings['div_vacio']?></div> 
+                     <label for="Nombre"><?php echo $strings['Nombre']?>: </label>
+                        <input type="text" name="Nombre" readonly maxlength="30" size="30" value="<?php echo $this->Nombre ?>">
+                </div>
+
+                <div id="izquierda">
+                    <label for="IdTrabajo"><?php echo $strings['IdTrabajo'] ?>: </label>
+                        <input type="text" name="IdTrabajo" readonly maxlength="6" size="6" value="<?php echo $this->IdTrabajo ?>"> 
+                </div>
+
+                <div id="izquierda">
+                    <label for="NombreTrabajo"><?php echo $strings['NombreTrabajo']?>: </label>
+                        <input type="text" name="NombreTrabajo" readonly maxlength="60" size="60" value="<?php echo $this->NombreTrabajo ?>">
                 </div>
 
                 <div id="izquierda">
