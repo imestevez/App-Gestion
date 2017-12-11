@@ -18,10 +18,10 @@ if (!IsAuthenticated()){
 }
 include '../Models/FUNC_GRUPO_Model.php';
 include '../Models/PERMISO_Model.php';
-include '../Models/GRUPO_Model.php';
 
 include '../Views/GRUPO/GRUPO_SHOWALL_View.php';
 include '../Views/FUNC_GRUPO/FUNC_GRUPO_SHOWCURRENT_View.php';
+include '../Views/FUNC_GRUPO/FUNC_GRUPO_EDIT_View.php';
 
 
 include '../Views/MESSAGE_View.php';
@@ -33,7 +33,8 @@ function get_data_form(){
 
 	$IdGrupo = null;
 	$checkbox = null;
-	$lista = null;
+	$listaF = null;
+	$listaA = null;
 	$action = null;
 
 	if(isset($_REQUEST['IdGrupo'])){
@@ -43,18 +44,23 @@ function get_data_form(){
 	if(isset($_REQUEST['checkbox'])){
 		$checkbox = $_REQUEST['checkbox'];
 		$num = count($checkbox);
-
 		for ($i=0; $i<$num;$i++){
-			$lista[$i] = $checkbox[$i]; //inserto en la lista cada uno de los IDS de los checkboxs seleccionados por el usuario
+
+
+			//echo $checkbox[$i];
+
+			$check =explode("+" ,  $checkbox[$i]);
+			$listaF[$i] = $check[0]; //inserto en la lista cada uno de los IDS Funcionalidad de los checkboxs seleccionados por el usuario
+			$listaA[$i] = $check[1]; //inserto en la lista cada uno de los IDS Accion de los checkboxs seleccionados por el usuario
 		}
 	}
 	
 
 	$FUNC_GRUPO = new FUNC_GRUPO_Model(
 		$IdGrupo, 
-		$lista);
-
-	return $FUNC_ACCION;
+		$listaF,
+		$listaA);
+	return $FUNC_GRUPO;
 }
 
 //Si el usuario no elige ninguna opción
@@ -69,18 +75,16 @@ if (!isset($_REQUEST['action'])){
 	
 		case 'EDIT':
 		if (!$_POST){
-			$GRUPO = new GRUPO_Model($_REQUEST['IdFuncionalidad'], '','');//crea un un FUNCIONALIDAD_Model con el IdFUNCIONALIDAD de la funcionalidad
+			$GRUPO = new FUNC_GRUPO_Model($_REQUEST['IdGrupo'], '','');//crea un un FUNCIONALIDAD_Model con el IdFUNCIONALIDAD de la funcionalidad
 			$propios = $GRUPO->rellenarAcciones();
 			$todos = $GRUPO->todosAcciones();
 			$lista = $GRUPO->rellenarLista();
-			$resultado = new FUNC_ACCION_EDIT($lista,$propios,$todos);
+			$resultado = new FUNC_GRUPO_EDIT($lista,$propios,$todos);
 		}else{
 
-			$FUNC_ACCION = get_data_form();
-			$respuesta = $FUNC_ACCION->EDIT();
+			 $FUNC_GRUPO = get_data_form();
+			$respuesta =  $FUNC_GRUPO->EDIT();
 			$mensaje = new MESSAGE($respuesta, '../Controllers/FUNCIONALIDAD_Controller.php'); //muestra el mensaje despues de la sentencia sql
-
-
 		}
 		break;
 		default: //Por defecto, Se muestra la vista SHOWALL
