@@ -49,7 +49,9 @@ function render(){
                 <caption><?php echo $strings['Notas']?></caption>
                 <tr>
                     <th><?php echo $strings['Login']?></th>   
-                    <th><?php echo $strings['IdTrabajo']?></th>                   
+                    <th><?php echo $strings["Nombre"]; ?></th>
+                    <th><?php echo $strings["IdTrabajo"]; ?></th>
+                    <th><?php echo $strings["NombreTrabajo"]; ?></th>                  
                     <th><?php echo $strings['Nota Trabajo']?></th>
 
                     <td><a href="../Controllers/NOTA_TRABAJO_Controller.php?action=SEARCH"><input type="image" src="../Views/images/search.png" name="action" title="<?php echo $strings['Buscar']?>" value="SEARCH"></a>
@@ -62,7 +64,9 @@ function render(){
 ?>
                 <tr>
                 <td><?php echo $row["login"]; ?></td>
+                <td><?php echo $row["Nombre"]; ?></td>
                 <td><?php echo $row["IdTrabajo"]; ?></td>
+                <td><?php echo $row["NombreTrabajo"]; ?></td>
                 <td><?php echo $row["NotaTrabajo"]; ?></td>
 
                 <td class="edit_tabla">
@@ -113,7 +117,9 @@ function renderSearch(){
                 <caption><?php echo $strings['Notas']?></caption>
                 <tr>
                     <th><?php echo $strings['Login']?></th>   
-                    <th><?php echo $strings['IdTrabajo']?></th>                   
+                    <th><?php echo $strings["Nombre"]; ?></th>
+                    <th><?php echo $strings["IdTrabajo"]; ?></th>
+                    <th><?php echo $strings["NombreTrabajo"]; ?></th>                   
                     <th><?php echo $strings['Nota Trabajo']?></th>
              
 
@@ -125,7 +131,9 @@ function renderSearch(){
             while( $row = mysqli_fetch_array($this->datos)) { //Mientras el numero de tuplas no llegue al máximo y haya tuplas en la BD
 ?>  <tr>
                 <td><?php echo $row["login"]; ?></td>
+                <td><?php echo $row["Nombre"]; ?></td>
                 <td><?php echo $row["IdTrabajo"]; ?></td>
+                <td><?php echo $row["NombreTrabajo"]; ?></td>
                 <td><?php echo $row["NotaTrabajo"]; ?></td>
 
 
