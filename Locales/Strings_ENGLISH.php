@@ -413,7 +413,9 @@ array(
 	'Nombre del grupo' => 'Group name',
 	'Nombre de la funcionalidad' => 'Funcionality name',
 	'Busqueda de permisos' => 'Permission search',
-	'Acciones de grupo' => 'Group actions'
+	'Acciones de grupo' => 'Group actions',
+	'ERROR: Fallo en la modificación. El IdGrupo está vacio' => 'ERROR: Modify failed. IdGrupo is empty',
+
 
 	
  )
