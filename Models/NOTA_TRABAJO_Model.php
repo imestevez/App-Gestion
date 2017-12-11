@@ -32,7 +32,9 @@ function __construct($login,$IdTrabajo,$NotaTrabajo){
 	//lista con los datos del usuario
 	$this->lista = array(
 			"login" => $this->login,
-			"IdTrabajo"=> $this->IdTrabajo,
+			"Nombre" => '',
+			"IdTrabajo"=>$this->IdTrabajo,
+			"NombreTrabajo"=>'',
 			"NotaTrabajo" => $this->NotaTrabajo,
 			"sql" => $this->mysqli, 
 			"mensaje"=> '');
@@ -67,7 +69,7 @@ function ADD()
 									'$this->login',
 									'$this->IdTrabajo',
 									'$this->NotaTrabajo')";				
-
+									
 				if (!$result = $this->mysqli->query($sql)){ // si da error la ejecución de la query
 						$this->lista['mensaje'] = 'ERROR: No se ha podido conectar con la base de datos';
 						return $this->lista; // error en la consulta (no se ha podido conectar con la bd). Devolvemos un mensaje que el controlador manejara
@@ -255,6 +257,23 @@ function contarTuplas(){
     return $total_tuplas;
 
 
+}
+function rellenarLista(){
+		$sql = "SELECT * FROM ENTREGA E, USUARIO U, TRABAJO T, NOTA_TRABAJO N 
+						WHERE (U.login = '$this->login' AND
+								T.IdTrabajo = '$this->IdTrabajo' AND
+								N.login = '$this->login' AND N.IdTrabajo = '$this->IdTrabajo' AND
+								E.login = '$this->login' AND E.IdTrabajo = '$this->IdTrabajo'
+						)";
+		if (!($result = $this->mysqli->query($sql))){
+	    	//return  'ERROR'; 
+		}else{
+			$row = mysqli_fetch_array($result);
+			$this->lista['Nombre'] = $row['Nombre'];
+			$this->lista['NombreTrabajo'] = $row['NombreTrabajo'];
+			$this->lista['NotaTrabajo'] = $row['NotaTrabajo'];
+		}
+	return $this->lista;
 }
 
 function comprobarExistenciaUsuario(){
