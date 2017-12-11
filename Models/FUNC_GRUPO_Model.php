@@ -11,15 +11,19 @@ Modelo de datos de usuarios que accede a la Base de Datos
 class FUNC_GRUPO_Model { //declaración de la clase
 
 	var $IdGrupo; //atributo IdGrupo
-	var $lista; // lista de grupos
+	var $lista; //lista de retorno
+	var $listaF; // lista Funcionalidades de grupos
+	var $listaA; //lista de acciones de funionalidades
 
 
 //Constructor de la clase
 
-function __construct($IdGrupo, $lista){
+function __construct($IdGrupo, $listaF, $listaA){
 	//asignación de valores de parámetro a los atributos de la clase
 	$this->IdGrupo = $IdGrupo;
-	$this->lista = $lista;
+	$this->lista = null;
+	$this->listaF = $listaF;
+	$this->listaA = $listaA;
 
 	
 	// incluimos la funcion de acceso a la bd
@@ -63,24 +67,7 @@ function SEARCH()
 // se manda un mensaje de que ese valor de clave no existe
 function DELETE()
 {	// se construye la sentencia sql de busqueda con los atributos de la clase
-    $sql = "SELECT * FROM GRUPO WHERE (IdGrupo = '$this->IdGrupo')";
-    // se ejecuta la query
-    $result = $this->mysqli->query($sql);
-    // si existe una tupla con ese valor de clave
-    if ($result->num_rows == 1)
-    {
-    	// se construye la sentencia sql de borrado
-        $sql = "DELETE FROM GRUPO WHERE (IdGrupo = '$this->IdGrupo')";
-        // se ejecuta la query
-        $this->mysqli->query($sql);
-        // se devuelve el mensaje de borrado correcto
-        $this->lista['mensaje'] = 'Borrado correctamente'; 
-			return $this->lista;
-    } // si no existe el IdGrupo a borrar se devuelve el mensaje de que no existe
-    else{
-    	 $this->lista['mensaje'] = 'ERROR: No existe la funcionalidad que desea borrar en la BD'; 
-			return $this->lista;
-		}	
+  
 } // fin metodo DELETE
 
 // funcion RellenaDatos()
@@ -120,10 +107,10 @@ function EDIT()
 	    	$sql = "DELETE FROM PERMISO WHERE (IdGrupo = '$this->IdGrupo')";
 	    	$result = $this->mysqli->query($sql);
 
-	    	if(count($this->lista) > 0){
-				foreach ($this->lista as $key => $value) {
-
-		    	$sql = "INSERT INTO PERMISO (IdGrupo, IdFuncionalidad, IdAccion)VALUES ('$this->IdGrupo', '$value')";
+	    	if((count($this->listaF) > 0) && (count($this->listaF) ) == (count($this->listaA)) ){
+				foreach ($this->listaF as $key => $value) {
+						$aux = $this->listaA[$key];
+		    	$sql = "INSERT INTO PERMISO (IdGrupo, IdFuncionalidad, IdAccion)VALUES ('$this->IdGrupo', '$value' , '$aux')";
 
 		    	$result = $this->mysqli->query($sql);
 
@@ -137,7 +124,7 @@ function EDIT()
 			return $this->lista; 
 			}
 	}else{ //Si no se introdujeron todos los valores
-		 return 'ERROR: Fallo en la modificación. El IdFuncionalidad está vacio'; 
+		 return 'ERROR: Fallo en la modificación. El IdGrupo está vacio'; 
 
 	}
 } // fin del metodo EDIT
@@ -177,7 +164,7 @@ function contarTuplas(){
     return $total_tuplas;
 }
 
-function rellenarLista(){
+function rellenarlista(){
 	$sql ="SELECT * FROM GRUPO WHERE(IdGrupo = '$this->IdGrupo')";
 	$result = $this->mysqli->query($sql);
 	$row = mysqli_fetch_array($result);
@@ -197,7 +184,9 @@ function contarNumAccionesFunc(){
 	return $num_rows;
 	}
 function todosAcciones(){
-		$sql = "SELECT * FROM  ACCION ";
+		$sql = "SELECT * FROM  FUNC_ACCION FA, ACCION A, FUNCIONALIDAD F
+								WHERE (FA.IdFuncionalidad = F.IdFuncionalidad AND
+										FA.IdAccion = A.IdAccion)";
 
 
 	$result = $this->mysqli->query($sql);
@@ -208,8 +197,13 @@ function todosAcciones(){
 	return $result;
 }
 function rellenarAcciones(){
-	$sql = "SELECT * FROM PERMISO P, FUNC_ACCION F WHERE (P.IdGrupo = '$this->IdGrupo' AND
-														P.IdFuncionalidad = F.IdFuncionalidad)";
+	$sql = "SELECT * FROM PERMISO P, FUNC_ACCION FA, GRUPO G, FUNCIONALIDAD F, ACCION A WHERE (P.IdGrupo = '$this->IdGrupo' AND
+														P.IdFuncionalidad = FA.IdFuncionalidad AND
+														P.IdAccion = FA.IdAccion AND
+														G.IdGrupo = P.IdGrupo AND
+														A.IdAccion = FA.IdAccion AND
+														F.IdFuncionalidad = FA.IdFuncionalidad
+														)";
 
 
 	$result = $this->mysqli->query($sql);
