@@ -421,7 +421,8 @@ array(
 	'Nombre del grupo' => 'Nombre del grupo',
 	'Nombre de la funcionalidad' => 'Nombre de la funcionalidad',
 	'Busqueda de permisos' => 'Busqueda de permisos',
-	'Acciones de grupo' => 'Acciones de grupo'
+	'Acciones de grupo' => 'Acciones de grupo',
+	'ERROR: Fallo en la modificación. El IdGrupo está vacio' => 'ERROR: Fallo en la modificación. El IdGrupo está vacio',
 
 )
 ;
