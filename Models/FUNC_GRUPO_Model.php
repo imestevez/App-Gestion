@@ -135,22 +135,6 @@ Devuelve las tuplas de la BD de 10 en 10
 */
 function SHOWALL($num_tupla,$max_tuplas){
 
-	$sql = "SELECT * FROM FUNCIONALIDAD
-	LIMIT $num_tupla, $max_tuplas";
-/*
-	$sql = "SELECT * FROM FUNCIONALIDAD U, FUNC_ACCION UG, GRUPO G
-					WHERE (U.IdFuncionalidad = UG.IdFuncionalidad AND
-							UG.IdGrupo = G.IdGrupo )
-					LIMIT $num_tupla, $max_tuplas";
-*/
-	    // si se produce un error en la busqueda mandamos el mensaje de error en la consulta
-    if (!($resultado = $this->mysqli->query($sql))){
-    	$this->lista['mensaje'] =  'ERROR: Fallo en la consulta sobre la base de datos'; 
-		return $this->lista; 
-	}
-    else{ // si la busqueda es correcta devolvemos el recordset resultado
-		return $resultado;
-	}
 } // fin metodo SHOWALL
 
 //funcion que devuelve el numero de tuplas de la base de datos
@@ -175,15 +159,8 @@ function rellenarlista(){
 	return $this->lista;
 }
 
-function contarNumAccionesFunc(){
 
-	$sql = "SELECT COUNT(*) FROM FUNC_ACCION WHERE (IdFuncionalidad = '$this->IdFuncionalidad')";
-
-	$result = $this->mysqli->query($sql);
-	$num_rows = mysqli_num_rows($result);
-	return $num_rows;
-	}
-function todosAcciones(){
+function todosPermisos(){
 		$sql = "SELECT * FROM  FUNC_ACCION FA, ACCION A, FUNCIONALIDAD F
 								WHERE (FA.IdFuncionalidad = F.IdFuncionalidad AND
 										FA.IdAccion = A.IdAccion)";
@@ -196,7 +173,7 @@ function todosAcciones(){
 	}*/
 	return $result;
 }
-function rellenarAcciones(){
+function rellenarPermisos(){
 	$sql = "SELECT * FROM PERMISO P, FUNC_ACCION FA, GRUPO G, FUNCIONALIDAD F, ACCION A WHERE (P.IdGrupo = '$this->IdGrupo' AND
 														P.IdFuncionalidad = FA.IdFuncionalidad AND
 														P.IdAccion = FA.IdAccion AND
