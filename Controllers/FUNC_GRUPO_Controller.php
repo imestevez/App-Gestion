@@ -17,7 +17,7 @@ if (!IsAuthenticated()){
 	header('Location:../index.php');
 }
 include '../Models/FUNC_GRUPO_Model.php';
-include '../Models/PERMISO_Model.php';
+
 
 include '../Views/GRUPO/GRUPO_SHOWALL_View.php';
 include '../Views/FUNC_GRUPO/FUNC_GRUPO_SHOWCURRENT_View.php';
@@ -76,8 +76,8 @@ if (!isset($_REQUEST['action'])){
 		case 'EDIT':
 		if (!$_POST){
 			$GRUPO = new FUNC_GRUPO_Model($_REQUEST['IdGrupo'], '','');//crea un un FUNCIONALIDAD_Model con el IdFUNCIONALIDAD de la funcionalidad
-			$propios = $GRUPO->rellenarAcciones();
-			$todos = $GRUPO->todosAcciones();
+			$propios = $GRUPO->rellenarPermisos();
+			$todos = $GRUPO->todosPermisos();
 			$lista = $GRUPO->rellenarLista();
 			$resultado = new FUNC_GRUPO_EDIT($lista,$propios,$todos);
 		}else{
@@ -90,10 +90,10 @@ if (!isset($_REQUEST['action'])){
 		default: //Por defecto, Se muestra la vista SHOWALL
 			$GRUPO = new FUNC_GRUPO_Model($_REQUEST['IdGrupo'], '','');//crea un un FUNCIONALIDAD_Model con el IdFUNCIONALIDAD de la funcionalidad
 			//$num_rows = $GRUPO->contarNumAccionesFunc();
-			$recordset = $GRUPO->rellenarAcciones();
+			$recordset = $GRUPO->rellenarPermisos();
 				$lista = $GRUPO->rellenarLista();
 
-			$resultado = new FUNC_GRUPO_SHOWALL($lista,$recordset);
+			$resultado = new FUNC_GRUPO_SHOWCURRENT($lista,$recordset);
 	}
 
 ?>
