@@ -56,9 +56,9 @@ function render(){
                 <tr><th style="width: 5%"><?php echo $strings['NombreGrupo'] ?></th><td colspan="3" style="border-right-style: collapse; border-right:  5px solid black;"><?php echo $this->NombreGrupo ?></td></tr>
                 <tr><th style="width: 5%"><?php echo $strings['DescripGrupo'] ?></th><td colspan="3" style="border-right-style: collapse; border-right:  5px solid black;"><?php echo $this->DescripGrupo ?></td></tr>
 
-                <tr ><th style="border-top-style: collapse; border-top:  5px solid black; border-right-style: collapse; border-right:  5px solid black;" COLSPAN="2" >&nbsp;&nbsp;<?php echo $strings['Funcionalidades'] ?></th>
-                <th style="border-top-style: collapse; border-top:  5px solid black; border-right-style: collapse; border-right:  5px solid black;" COLSPAN="2" >&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $strings['Acciones'] ?></th></tr>
-                <tr><th style="width: 5%"><?php echo $strings['Id Funcionalidad'] ?></th><th><?php echo $strings['Nombre Funcionalidad'] ?></th> <th style="width: 5%"><?php echo $strings['Id de la accion'] ?></th><th><?php echo $strings['Nombre de la accion'] ?></th> <th style="border-top-style: collapse; border-top:  5px solid black;"><?php echo $strings['Seleccionar Acciones'] ?></th></tr>
+                <tr ><th style="border-top-style: collapse; border-top:  5px solid black; " COLSPAN="2" ><?php echo $strings['Funcionalidades'] ?></th>
+                <th style="border-top-style: collapse; border-top:  5px solid black; border-right-style: collapse; border-right:  5px solid black;" COLSPAN="2" ><?php echo $strings['Acciones'] ?></th></tr>
+                <tr><th style="width: 5%"><?php echo $strings['Id Funcionalidad'] ?></th><th><?php echo $strings['Nombre Funcionalidad'] ?></th> <th style="width: 5%"><?php echo $strings['Id de la accion'] ?></th><th style="border-right-style: collapse; border-right:  5px solid black;"><?php echo $strings['Nombre de la accion'] ?></th> <th style="border-top-style: collapse; border-top:  5px solid black;"><?php echo $strings['Seleccionar Acciones'] ?></th></tr>
 <?php
                 //Si el usuario tiene grupos asignados
                 if(count($this->ListaPropios) > 0){
@@ -69,7 +69,7 @@ function render(){
                 <td style="width: 5%"><?php echo $value[0] ?></td>
                 <td><?php echo $value[1] ?></td>
                 <td style="width: 5%"><?php echo $value[2]  ?></td>
-                <td><?php echo $value[3] ?></td>
+                <td style="border-right-style: collapse; border-right:  5px solid black;"><?php echo $value[3] ?></td>
                 <td ><input type="checkbox" name="checkbox[]" id="<?php echo  $key ?>" value="<?php echo $value[0] . "+" .$value[2] ?>" checked > </td>
 
             </tr>
@@ -87,7 +87,7 @@ function render(){
                 <td style="width: 5%"><?php echo $value[0] ?></td>
                 <td><?php echo $value[1] ?></td>
                 <td style="width: 5%"><?php echo $value[2]  ?></td>
-                <td><?php echo $value[3] ?></td>
+                <td style="border-right-style: collapse; border-right:  5px solid black;"><?php echo $value[3] ?></td>
                 <td ><input type="checkbox" name="checkbox[]" id="<?php echo  $key ?>" value="<?php echo $value[0] . "+" .$value[2] ?>" > </td>
 
             </tr>

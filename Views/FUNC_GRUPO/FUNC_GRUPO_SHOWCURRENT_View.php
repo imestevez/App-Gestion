@@ -8,7 +8,7 @@
     Esta clase es la vista de los usuarios de la BD
 
 */
-    class FUNC_GRUPO_SHOWALL{
+    class FUNC_GRUPO_SHOWCURRENT{
     var $IdGrupo; //declaración del atributo IdFuncionalidad
     var $NombreGrupo; //declaración del atributo NombreFuncionalidad
     var $DescripGrupo; //declaración del atributo DescripFuncionalidad
@@ -36,13 +36,13 @@ function render(){
     <section class="pagina">
             <table class="showcurrent">
                 <caption><?php echo $strings['Acciones de grupo'] ?></caption>
-                <tr><th style="width: 5%"><?php echo $strings['Campo'] ?></th><th><?php echo $strings['Valor'] ?></th><th><?php echo $strings['Acciones'] ?></th></tr>
-                <tr><th style="width: 5%"><?php echo $strings['IdGrupo'] ?></th><td><?php echo $this->IdGrupo ?></td><td style="border-right-style: collapse; border-bottom:  5px solid black;"> <a href="../Controllers/FUNC_GRUPO_Controller.php?action=EDIT&IdGrupo=<?php echo $this->IdGrupo ?>"><input type="image" src="../Views/images/edit.png" name="action" title="<?php echo $strings['Editar'] ?>" value="EDIT"></a></td></tr>
-                <tr><th style="width: 5%"><?php echo $strings['NombreGrupo'] ?></th><td style="border-right-style: collapse; border-right:  5px solid black;"><?php echo $this->NombreGrupo ?></td></tr>
-                <tr><th style="width: 5%"><?php echo $strings['DescripGrupo'] ?></th><td style="border-right-style: collapse; border-right:  5px solid black;"><?php echo $this->DescripGrupo ?></td></tr>
-                <tr><th  style="border-top-style: collapse; width: 20%; border-top:  5px solid black; border-right-style: collapse; border-right:  5px solid black;" COLSPAN="2" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $strings['Funcionalidad'] ?></th><th  style="border-top-style: collapse; width: 20%; border-top:  5px solid black; border-right-style: collapse; border-right:  5px solid black;" COLSPAN="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $strings['Acciones'] ?></th></tr>
+                <tr><th style="width: 5%" ><?php echo $strings['Campo'] ?></th><th COLSPAN="3"><?php echo $strings['Valor'] ?></th><th><?php echo $strings['Acciones'] ?></th></tr>
+                <tr><th style="width: 5%" ><?php echo $strings['IdGrupo'] ?></th><td COLSPAN="3"><?php echo $this->IdGrupo ?></td><td style="border-right-style: collapse; border-bottom:  5px solid black;" > <a href="../Controllers/FUNC_GRUPO_Controller.php?action=EDIT&IdGrupo=<?php echo $this->IdGrupo ?>"><input type="image" src="../Views/images/edit.png" name="action" title="<?php echo $strings['Editar'] ?>" value="EDIT"></a></td></tr>
+                <tr><th style="width: 5%"><?php echo $strings['NombreGrupo'] ?></th><td COLSPAN="3" style="border-right-style: collapse; border-right:  5px solid black;" ><?php echo $this->NombreGrupo ?></td></tr>
+                <tr><th style="width: 5%"><?php echo $strings['DescripGrupo'] ?></th><td COLSPAN="3" style="border-right-style: collapse; border-right:  5px solid black;" ><?php echo $this->DescripGrupo ?></td></tr>
+                <tr><th  style="border-top-style: collapse; width: 20%; border-top:  5px solid black; border-right-style: collapse; border-right:  5px solid black;" COLSPAN="2" ><?php echo $strings['Funcionalidad'] ?></th><th  style="border-top-style: collapse; width: 20%; border-top:  5px solid black; border-right-style: collapse; border-right:  5px solid black;" COLSPAN="2"><?php echo $strings['Acciones'] ?></th></tr>
 
-                <tr><th style="width: 5%"><?php echo $strings['Id Funcionalidad'] ?></th><th style="border-right-style: collapse; border-right:  5px solid black;"><?php echo $strings['Nombre Funcionalidad'] ?></th><th style="width: 5%"><?php echo $strings['Id de la accion'] ?></th><th style="border-right-style: collapse; border-right:  5px solid black;"><?php echo $strings['Nombre de la accion'] ?></th></tr>
+                <tr><th style="width: 5%"><?php echo $strings['Id Funcionalidad'] ?></th><th style="width:5%; border-right-style: collapse; border-right:  5px solid black;"><?php echo $strings['Nombre Funcionalidad'] ?></th><th style="width: 5%"><?php echo $strings['Id de la accion'] ?></th><th style="width:5%;border-right-style: collapse; border-right:  5px solid black;"><?php echo $strings['Nombre de la accion'] ?></th></tr>
 
 <?php
                 while($row = mysqli_fetch_array($this->datos)){
@@ -50,9 +50,9 @@ function render(){
 ?>
                 <tr> 
                 <td style="width: 5%"><?php echo $row['IdFuncionalidad'] ?></td>
-                <td style="border-right-style: collapse; border-right:  5px solid black;"> <?php echo $row['NombreFuncionalidad'] ?></td>
-                <td style="width: 5%"><?php echo $row['IdAccion'] ?></td>
-                <td style="border-right-style: collapse; border-right:  5px solid black;"> <?php echo $row['NombreAccion'] ?></td>
+                <td style="width:5%; border-right-style: collapse; border-right:  5px solid black;"> <?php echo $row['NombreFuncionalidad'] ?></td>
+                <td style=""><?php echo $row['IdAccion'] ?></td>
+                <td style="width:5%;border-right-style: collapse; border-right:  5px solid black;"> <?php echo $row['NombreAccion'] ?></td>
                 </tr>
 <?php
                 }
