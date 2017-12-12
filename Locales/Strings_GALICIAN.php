@@ -249,6 +249,8 @@ array(
 'Grupos de Usuario' => 'Grupos de Usuario',
 'ERROR: Fallo en la modificación. El login está vacio' => 'ERROR: Fallo en la modificación. El login está vacio',
 'Seleccionar Grupos' => 'Seleccionar Grupos',
+'div_Num_Decs' => 'O número máximo de decimales é 2',
+'div_numerosRango10' => 'O numero ten que estar entre 0 e 10',
 
 
 

@@ -232,8 +232,8 @@ array(
 
 
 
-
-
+'div_numerosRango10' => 'El numero tiene que estar entre 0 y 10',
+'div_Num_Decs' => 'El número máximo de decimales es 2',
 'ERROR: Fallo en la inserción. Ya existe el IdTrabajo' => 'ERROR: Fallo en la inserción. Ya existe el ID trabajo',
 'ERROR: No existe la entrega que desea borrar en la BD' => 'ERROR: No existe la entrega que desea borrar en la BD',
 'ERROR: No se ha modificado' => 'ERROR: No se ha modificado',
