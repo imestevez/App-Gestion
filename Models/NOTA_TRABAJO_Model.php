@@ -114,19 +114,20 @@ function SEARCH()
 { 	// construimos la sentencia de busqueda con LIKE y los atributos de la entidad
 
     $sql = "SELECT  
-					login,
-    				IdTrabajo,
-					NotaTrabajo
-       			FROM NOTA_TRABAJO 
+					N.login,
+					U.Nombre,
+    				N.IdTrabajo,
+    				T.NombreTrabajo,
+					N.NotaTrabajo
+       			FROM NOTA_TRABAJO N, USUARIO U, TRABAJO T
     			WHERE 
     				(
-    				(login LIKE '%$this->login%') &&
-    				(IdTrabajo LIKE '%$this->IdTrabajo%') &&
-	 				(NotaTrabajo LIKE '%$this->NotaTrabajo%')
-	 				
+    				(N.login LIKE '%$this->login%') &&
+    				(N.IdTrabajo LIKE '%$this->IdTrabajo%') &&
+	 				(N.NotaTrabajo LIKE '%$this->NotaTrabajo%') &&
+	 				(N.login = U.login) &&
+	 				(N.IdTrabajo = T.IdTrabajo)
 	 				)";
-    				
-
     // si se produce un error en la busqueda mandamos el mensaje de error en la consulta
     if (!($resultado = $this->mysqli->query($sql))){
 			$this->lista['mensaje'] = 'ERROR: Fallo en la consulta sobre la base de datos'; 
