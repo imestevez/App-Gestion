@@ -119,7 +119,7 @@ function renderSearch(){
                     <th><?php echo $strings['Login']?></th>   
                     <th><?php echo $strings["Nombre"]; ?></th>
                     <th><?php echo $strings["IdTrabajo"]; ?></th>
-                    <th><?php echo $strings["NombreTrabajo"]; ?></th>                   
+                    <th><?php echo $strings["NombreTrabajo"]; ?></th>           
                     <th><?php echo $strings['Nota Trabajo']?></th>
              
 
