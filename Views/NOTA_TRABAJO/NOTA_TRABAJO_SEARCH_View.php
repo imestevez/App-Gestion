@@ -28,8 +28,8 @@ function render(){
                 <legend style="margin-left: 30%"><?php echo $strings['Buscar Nota']?></legend>
             <form method="post" name="SEARCH" action="../Controllers/NOTA_TRABAJO_Controller.php">
                 <div id="izquierda">
-                    <label for="login"><?php echo $strings['Login'] ?>: </label>
-                        <input type="text" name="login" maxlength="9" size="9" onblur="javascript:void(validarLoginBuscar(this, 9))" ><div id="login" class="oculto" style="display:none"><?php echo $strings['div_Alfanumerico']?></div> <div id="loginVacio" class="oculto" style="display:none"><?php echo $strings['div_vacio']?></div> 
+                    <label for="login"><?php echo $strings['Login']?>: </label>
+                        <input type="text" name="login" maxlength="9" size="9" onblur="javascript:void(validarLoginBuscar(this, 9))" ><div id="login" class="oculto" style="display:none"><?php echo $strings['div_Alfanumerico']?></div>
                 </div>
 
                 <div id="izquierda">
@@ -39,7 +39,7 @@ function render(){
 
                 <div id="izquierda">
                     <label for="NotaTrabajo"><?php echo $strings['Nota Trabajo']?>: </label>
-                        <input type="text" name="NotaTrabajo" maxlength="4" size="4"  onblur="" ><div id="NotaTrabajo" class="oculto" style="display:none"><?php echo $strings['div_Alfanumerico']?></div> <div id="NotaTrabajoVacio" class="oculto" style="display:none"><?php echo $strings['div_vacio']?></div> 
+                        <input type="text"  name="NotaTrabajo" maxlength="4"  size="4" onblur="validarNotaTrabajoBuscar(this, 2, 0, 10)" ><div id="NotaTrabajoNums" class="oculto" style="display:none"><?php echo $strings['div_numeros']?></div> <div id="NotaTrabajo" class="oculto" style="display:none"><?php echo $strings['div_numerosRango10']?> </div> <div id="NotaTrabajoDecimal" class="oculto" style="display:none"><?php echo $strings['div_Num_Decs']?></div> <div id="NotaTrabajoVacio" class="oculto" style="display:none"><?php echo $strings['div_vacio']?></div>
                 </div>
         
                 <div class="acciones" style="float: right; margin-left:0%; margin-right: 50%">
