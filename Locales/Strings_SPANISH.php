@@ -232,8 +232,8 @@ array(
 
 
 
-
-
+'div_numerosRango10' => 'El numero tiene que estar entre 0 y 10',
+'div_Num_Decs' => 'El número máximo de decimales es 2',
 'ERROR: Fallo en la inserción. Ya existe el IdTrabajo' => 'ERROR: Fallo en la inserción. Ya existe el ID trabajo',
 'ERROR: No existe la entrega que desea borrar en la BD' => 'ERROR: No existe la entrega que desea borrar en la BD',
 'ERROR: No se ha modificado' => 'ERROR: No se ha modificado',
@@ -418,7 +418,9 @@ array(
 	'Permisos' => 'Permisos',
 	'Nombre del grupo' => 'Nombre del grupo',
 	'Nombre de la funcionalidad' => 'Nombre de la funcionalidad',
-	'Busqueda de permisos' => 'Busqueda de permisos'
+	'Busqueda de permisos' => 'Busqueda de permisos',
+	'Acciones de grupo' => 'Acciones de grupo',
+	'ERROR: Fallo en la modificación. El IdGrupo está vacio' => 'ERROR: Fallo en la modificación. El IdGrupo está vacio',
 
 )
 ;

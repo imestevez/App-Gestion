@@ -249,6 +249,8 @@ array(
 'Grupos de Usuario' => 'Groups of User',
 'ERROR: Fallo en la modificación. El login está vacio' => 'ERROR: Modification failed. The login is empty',
 'Seleccionar Grupos' => 'Select groups',
+'div_Num_Decs' => 'The maximum number of decimals are 2',
+'div_numerosRango10' => 'The number has to be between 0 and 10',
 
 
 
@@ -416,7 +418,10 @@ array(
 	'Permisos' => 'Permission',
 	'Nombre del grupo' => 'Group name',
 	'Nombre de la funcionalidad' => 'Funcionality name',
-	'Busqueda de permisos' => 'Permission search'
+	'Busqueda de permisos' => 'Permission search',
+	'Acciones de grupo' => 'Group actions',
+	'ERROR: Fallo en la modificación. El IdGrupo está vacio' => 'ERROR: Modify failed. IdGrupo is empty',
+
 
 	
  )
