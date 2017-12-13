@@ -16,12 +16,12 @@ function comprobarVacio(campo)
     
     var idVacio = campo.name.concat('Vacio'); //concatena al nombre del campo 'Vacio' para acceder a los divs correspondientes a los campos vacios
 
-  		if ((campo.value == null) || (campo.value.length == 0) )//si el valor del campo es nulo o la longitud es 0
+      if ((campo.value == null) || (campo.value.length == 0) )//si el valor del campo es nulo o la longitud es 0
         {
             document.getElementById(idVacio).style.display ='block';
             document.getElementById(campo.name).style.display ='none';
             return false;
-  		}
+      }
         if(expr.test(campo.value))//si el valor del campo cumple la expresión regular
         {
             document.getElementById(idVacio).style.display ='block';
@@ -29,7 +29,7 @@ function comprobarVacio(campo)
             return false;
         }
         document.getElementById(idVacio).style.display = 'none';
-  			return true;
+        return true;
 }
 
 //Función para comprobar que un campo solo tiene letras (mayúsculas y minúsculas), números y los caracteres "- . _"
@@ -67,6 +67,8 @@ function comprobarAlfanumerico(campo, tamaño_max)
 //Comprueba que el valor de un campo de tipo entero está entre el limite establecido
 function comprobarEntero(campo,valormenor,valormayor) 
 {
+
+
     var expr_entero; //Variable para comprobar que se introduce un entero
     expr_entero = /^\d$/;//que contenga solo digitos
 
@@ -90,35 +92,54 @@ function comprobarEntero(campo,valormenor,valormayor)
 //Función para comprobar que un real esta dentro de un rango estblecido y no se supera el número de decimales
 function comprobarReal(campo, numerosdecimales, valormenor, valormayor)
 {
+
     var expr_real; // expresión regular para comprobar que un número es un real con la cantidad de decimales establecida
-    expr_real = /^\d*[.]?\d*$/; //digitos seguidos de 1 o ningun "punto" seguido de digitos
-
+    expr_real = /^\d*[.]{0,1}\d*$/; //digitos seguidos de 1 o ningun "punto" seguido de digitos
+   
     var idVacio = campo.name.concat('Vacio'); //concatena al nombre del campo 'Vacio' para acceder a los divs correspondientes a los campos vacios
-
-    if(expr_real.test(campo.value) == false) //Si cumple la expresión regular
+    var idDec = campo.name.concat('Decimal'); //concatena al nombre del campo 'decimal' para acceder a los divs correspondientes a los campos 
+    var idNums = campo.name.concat('Nums');//concatena al nombre del campo 'nums' para acceder a los divs correspondientes a los campos
+   
+    if(expr_real.test(campo.value)) //Si cumple la expresión regular
     {
+
         if(comprobarEntero(campo, valormenor, valormayor))//Si el valor introducido esta entre los límites
         {
+
             var num; //Almacena los número sin el punto
             num = campo.value.split('.');
             
             if( num[1].length > numerosdecimales ) //Si hay más decimales que el número máximo establecido
             {
+              document.getElementById(idVacio).style.display = 'none';
+              document.getElementById(idDec).style.display = 'block';
+              document.getElementById(campo.name).style.display = 'none';
 
-                document.getElementById(campo.name).style.display = 'block';
                 return false;
             }
             else //Si el numéro de decimales es mnor o igual al establecido
             {
+              document.getElementById(idVacio).style.display = 'none';
+              document.getElementById(campo.name).style.display = 'none';
+              document.getElementById(idDec).style.display = 'none';
                 return true;
             }
+        }else{
+              document.getElementById(idVacio).style.display = 'none';
+              document.getElementById(idDec).style.display = 'none';
+              document.getElementById(campo.name).style.display = 'block';
+              return false;
         }
     }
     else //Si no cumple la expresión regular
     {
-        alert('El formato del campo ' + campo.name + ' no es válido');
+        document.getElementById(idNums).style.display = 'block';
+        document.getElementById(idDec).style.display = 'none';
+        document.getElementById(idVacio).style.display = 'none';
+        
         return false;
-        }      
+        }   
+
 }
 
 /*--------------------------------------------------------------------------------------------
@@ -161,13 +182,11 @@ function validarIdTrabajo(IdTrabajo, tamaño_max){
 
 }
 
-//Función que comprueba que la DescripFuncionalidad es de tipo alfanumérico y no supera el maximo permitido
-function validarDescripFuncionalidad(DescripFuncionalidad, tamaño_max)
-{  
+function validarNotaTrabajo(NotaTrabajo,numerosdecimales, min, max){
 
-  if(comprobarVacio(DescripFuncionalidad))//Si el campo no está vacio el campo
+    if(comprobarVacio(NotaTrabajo))//Si el campo no está vacio el campo
       {
-          if(comprobarTexto(DescripFuncionalidad,tamaño_max))//Si login cumple la expresión regular de campo Alfabético
+          if(comprobarReal(NotaTrabajo,numerosdecimales, min, max))//Si login cumple la expresión regular de campo Alfabético
        {
            return true;
        }else{ //Si no cumple la expresión regular
@@ -178,7 +197,6 @@ function validarDescripFuncionalidad(DescripFuncionalidad, tamaño_max)
       }
 
 }
-
 
 /*--------------------------------------------------------------------------------------------
 -------------Funciones Necesarias para validar el formulario SEARCH------------------------------
@@ -254,10 +272,82 @@ function comprobarAlfanumericoBuscar(campo, tamaño_max)
   }
 }
 
-//Función para validar la búsqueda por IdFuncionalidad
-function validarLoginBuscar(IdFuncionalidad, tamaño_max)
+//Comprueba que el valor de un campo de tipo entero está entre el limite establecido
+function comprobarEnteroBuscar(campo,valormenor,valormayor) 
 {
-    if(comprobarVacioBuscar(login)){ //Si el IdFuncionalidad no está vacío
+
+
+    var expr_entero; //Variable para comprobar que se introduce un entero
+    expr_entero = /^\d$/;//que contenga solo digitos
+
+    if(expr_entero.test(campo.value)){ //Si cumple la expresión regular
+        if((campo.value < valormenor) || (campo.value > valormayor)) //Si el valor del campo es menor al mínimo o si es mayor al máximo
+        {
+            document.getElementById(campo.name).style.display = 'block';
+            return false;
+        }
+        else//Si el valor está dentro del rango establecido
+        {        
+            document.getElementById(campo.name).style.display = 'none';
+            return true;
+        }
+    }else{ //Si no cumple la expresión regular
+        document.getElementById(campo.name).style.display = 'block';
+        return false;
+    }
+}
+
+//Función para comprobar que un real esta dentro de un rango estblecido y no se supera el número de decimales
+function comprobarRealBuscar(campo, numerosdecimales, valormenor, valormayor)
+{
+
+    var expr_real; // expresión regular para comprobar que un número es un real con la cantidad de decimales establecida
+    expr_real = /^\d*[.]{0,1}\d*$/; //digitos seguidos de 1 o ningun "punto" seguido de digitos
+   
+    var idDec = campo.name.concat('Decimal'); //concatena al nombre del campo 'decimal' para acceder a los divs correspondientes a los campos 
+    var idNums = campo.name.concat('Nums');//concatena al nombre del campo 'nums' para acceder a los divs correspondientes a los campos
+   
+    if(expr_real.test(campo.value)) //Si cumple la expresión regular
+    {
+
+        if(comprobarEnteroBuscar(campo, valormenor, valormayor))//Si el valor introducido esta entre los límites
+        {
+
+            var num; //Almacena los número sin el punto
+            num = campo.value.split('.');
+            
+            if( num[1].length > numerosdecimales ) //Si hay más decimales que el número máximo establecido
+            {
+              document.getElementById(idDec).style.display = 'block';
+              document.getElementById(campo.name).style.display = 'none';
+
+                return false;
+            }
+            else //Si el numéro de decimales es mnor o igual al establecido
+            {
+              document.getElementById(campo.name).style.display = 'none';
+              document.getElementById(idDec).style.display = 'none';
+                return true;
+            }
+        }else{
+              document.getElementById(idDec).style.display = 'none';
+              document.getElementById(campo.name).style.display = 'block';
+              return false;
+        }
+    }
+    else //Si no cumple la expresión regular
+    {
+        document.getElementById(idNums).style.display = 'block';
+        document.getElementById(idDec).style.display = 'none';
+        return false;
+        }   
+
+}
+
+//Función para validar la búsqueda por login
+function validarLoginBuscar(login, tamaño_max)
+{
+    if(comprobarVacioBuscar(login)){ //Si el login no está vacío
         if(comprobarAlfanumericoBuscar(login,tamaño_max)) //Si cumple la expresión regular de campo Alfabético
             {
                 return true;
@@ -288,11 +378,12 @@ function validarIdTrabajoBuscar(IdTrabajo, tamaño_max)
 
 }
 
+
 //Función para validar la búsqueda por DescripFuncionalidad
-function validarDescripFuncionalidadBuscar(DescripFuncionalidad, tamaño_max)
-{
-    if(comprobarVacioBuscar(DescripFuncionalidad)){ //Si el IdFuncionalidad no está vacío
-        if(comprobarTextoBuscar(DescripFuncionalidad,tamaño_max)) //Si cumple la expresión regular de campo Alfabético
+function validarNotaTrabajoBuscar(NotaTrabajo, numerosdecimales, min, max){
+
+    if(comprobarVacioBuscar(NotaTrabajo)){ //Si el IdFuncionalidad no está vacío
+        if(comprobarRealBuscar(NotaTrabajo, numerosdecimales, min, max)) //Si cumple la expresión regular de campo Alfabético
             {
                 return true;
             }else{ //si no cumple la expresión regular
@@ -320,9 +411,9 @@ function validar(formulario)
         //si todos los campos estan correctos y devuelven true
 
         if( 
-          (validarIdFuncionalidadBuscar(form.IdFuncionalidad, 6)) && 
-          (validarNombreFuncionalidadBuscar(form.NombreFuncionalidad, 60)) && 
-          (validarDescripFuncionalidadBuscar(form.DescripFuncionalidad, 100)) ){
+          (validarLoginBuscar(form.login, 9)) && 
+          (validarIdTrabajoBuscar(form.IdTrabajo, 6)) && 
+          (validarNotaTrabajoBuscar(form.NotaTrabajo, 2, 0, 10)) ){
 
           alerta = false; //Se le asigna false a la variable alerta 
         }
@@ -332,9 +423,9 @@ function validar(formulario)
         //si todos los campos estan correctos y devuelven true
 
         if( 
-          (validarIdFuncionalidad(form.IdFuncionalidad, 6)) && 
-          (validarNombreFuncionalidad(form.NombreFuncionalidad, 60)) && 
-          (validarDescripFuncionalidad(form.DescripFuncionalidad, 100)) ){
+          (validarLogin(form.login, 9)) && 
+          (validarIdTrabajo(form.IdTrabajo, 6)) && 
+          (validarNotaTrabajo(form.NotaTrabajo, 2, 0, 10)) ){
 
           alerta = false; //Se le asigna false a la variable alerta 
         }
@@ -343,9 +434,9 @@ function validar(formulario)
     if(formulario == 'EDIT'){ //Si es el formulario es el de editar
         //si todos los campos estan correctos y devuelven true
         if( 
-          (validarIdFuncionalidad(form.IdFuncionalidad, 6)) && 
-          (validarNombreFuncionalidad(form.NombreFuncionalidad, 60)) && 
-          (validarDescripFuncionalidad(form.DescripFuncionalidad, 100)) ){
+          (validarLogin(form.login, 9)) && 
+          (validarIdTrabajo(form.IdTrabajo, 6)) && 
+          (validarNotaTrabajo(form.NotaTrabajo, 2,0,10)) ){
 
           alerta = false; //Se le asigna false a la variable alerta 
         }
