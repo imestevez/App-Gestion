@@ -47,86 +47,56 @@ function __construct($IdTrabajo,$NombreTrabajo,$LoginEvaluador, $LoginEvaluado, 
 
 
 
-//Metodo ADD()
-//Inserta en la tabla  de la bd  los valores
-// de los atributos del objeto. Comprueba si la clave/s esta vacia y si 
-//existe ya en la tabla
-function ADD()
-{
+function ADD(){
 
-    if (($this->IdTrabajo <> '') && ($this->LoginEvaluador <> '') && ($this->AliasEvaluado <> '')){ // si el atributo clave de la entidad no esta vacio
-
-    	//Se comprueba si existe un trabajo con IdTrabajo al que asociarle la asignación de QA que se creará
-    	$sql = "SELECT * FROM TRABAJO WHERE (IdTrabajo = '$this->IdTrabajo')";
-
-    	if (!$result = $this->mysqli->query($sql)){ // si da error la ejecución de la query
+	if (($this->IdTrabajo <> '') && ($this->LoginEvaluador <> '') && ($this->AliasEvaluado <> '')){ // si el atributo clave de la entidad no esta vacio
+		$sql = "SELECT * FROM ENTREGA WHERE (IdTrabajo = '$this->IdTrabajo') AND (Alias = '$this->AliasEvaluado')";
+		if (!$result = $this->mysqli->query($sql)){ // si da error la ejecución de la query
 			$this->lista['mensaje'] = 'ERROR: No se ha podido conectar con la base de datos';
 			return $this->lista; // error en la consulta (no se ha podido conectar con la bd). Devolvemos un mensaje que el controlador manejara
 
 		}
-		else { // si la ejecución de la query no da error
-
+		else{ // si la ejecución de la query no da error
 			$num_rows = mysqli_num_rows($result);
 
-			if ($num_rows == 0){ // miramos si el resultado de la consulta es vacio (no existe el IdTrabajo)
-				$this->lista['mensaje'] = 'ERROR: No existe ningún trabajo con ese IdTrabajo';
-				return $this->lista; // error en la consulta (no existe el trabajo). Devolvemos un mensaje que el controlador manejara	
+			if ($num_rows == 0){ // miramos si el resultado de la consulta es vacio (no existe el AliasEvaluado)
+				$this->lista['mensaje'] = 'ERROR: No existe esa entrega para evaluar.';
+				return $this->lista; // error en la consulta (no existe el login). Devolvemos un mensaje que el controlador manejara	
 			}
-			else{
+		    else{//Si existe la entrega comprobamos si existe el usuario al que se le asignará la QA
 
-				//Se comprueba si existe un login con LoginEvaluador al que asociarle la asignación de QA que se creará
 		    	$sql = "SELECT * FROM USUARIO WHERE (login = '$this->LoginEvaluador')";
-
 		    	if (!$result = $this->mysqli->query($sql)){ // si da error la ejecución de la query
 					$this->lista['mensaje'] = 'ERROR: No se ha podido conectar con la base de datos';
 					return $this->lista; // error en la consulta (no se ha podido conectar con la bd). Devolvemos un mensaje que el controlador manejara
 
 				}
-				else { // si la ejecución de la query no da error
-
+				else{ // si la ejecución de la query no da error
 					$num_rows = mysqli_num_rows($result);
 
 					if ($num_rows == 0){ // miramos si el resultado de la consulta es vacio (no existe el LoginEvaluador)
-						$this->lista['mensaje'] = 'ERROR: No existe ningún usuario con ese login';
+						$this->lista['mensaje'] = 'ERROR: No existe el usuario con LoginEvaluador';
 						return $this->lista; // error en la consulta (no existe el login). Devolvemos un mensaje que el controlador manejara	
 					}
-					else{
+		    		else{
 
-						//Se comprueba si existe un alias con AliasEvaluado al que asociarle la asignación de QA que se creará
-				    	$sql = "SELECT * FROM ENTREGA WHERE (Alias = '$this->AliasEvaluado')";
+						// construimos el sql para buscar esa clave en la tabla
+		        		$sql = "SELECT * FROM ASIGNAC_QA WHERE (IdTrabajo = '$this->IdTrabajo') AND (LoginEvaluador = '$this->LoginEvaluador') AND (AliasEvaluado = '$this->AliasEvaluado')"; //comprobar que no hay claves iguales
 
-				    	if (!$result = $this->mysqli->query($sql)){ // si da error la ejecución de la query
+						if (!$result = $this->mysqli->query($sql)){ // si da error la ejecución de la query
 							$this->lista['mensaje'] = 'ERROR: No se ha podido conectar con la base de datos';
 							return $this->lista; // error en la consulta (no se ha podido conectar con la bd). Devolvemos un mensaje que el controlador manejara
 
 						}
-						else{ // si la ejecución de la query no da error
+						else { // si la ejecución de la query no da error
 
 							$num_rows = mysqli_num_rows($result);
 
-							if ($num_rows == 0){ // miramos si el resultado de la consulta es vacio (no existe el AliasEvaluado)
-								$this->lista['mensaje'] = 'ERROR: No existe ningún usuario con ese alias';
-								return $this->lista; // error en la consulta (no existe el login). Devolvemos un mensaje que el controlador manejara	
-							}
-							else{
+							if ($num_rows == 0){ // miramos si el resultado de la consulta es vacio (no existe la asignación de QA)
+								$this->LoginEvaluado = $this->devolverLoginEvaluado();
 
-								// construimos el sql para buscar esa clave en la tabla
-		        				$sql = "SELECT * FROM ASIGNAC_QA WHERE (IdTrabajo = '$this->IdTrabajo') AND (LoginEvaluador = '$this->LoginEvaluador') AND (AliasEvaluado = '$this->AliasEvaluado')"; //comprobar que no hay claves iguales
-
-								if (!$result = $this->mysqli->query($sql)){ // si da error la ejecución de la query
-									$this->lista['mensaje'] = 'ERROR: No se ha podido conectar con la base de datos';
-									return $this->lista; // error en la consulta (no se ha podido conectar con la bd). Devolvemos un mensaje que el controlador manejara
-
-								}
-								else { // si la ejecución de la query no da error
-
-									$num_rows = mysqli_num_rows($result);
-
-									if ($num_rows == 0){ // miramos si el resultado de la consulta es vacio (no existe la asignación de QA)
-										$this->LoginEvaluado = $this->devolverLoginEvaluado();
-
-										//construimos la sentencia sql de inserción en la bd
-										$sql = "INSERT INTO ASIGNAC_QA(
+								//construimos la sentencia sql de inserción en la bd
+								$sql = "INSERT INTO ASIGNAC_QA(
 										IdTrabajo,
 										LoginEvaluador,
 										LoginEvaluado,
@@ -136,37 +106,34 @@ function ADD()
 															'$this->LoginEvaluado',
 															'$this->AliasEvaluado')";
 				
-										if (!($result = $this->mysqli->query($sql))){ //si da error la consulta se comrpueba el por que
+							if (!($result = $this->mysqli->query($sql))){ //si da error la consulta se comrpueba el por que
 
-											//Si no hay atributos Clave y unique duplicados es que hay campos sin completar
-						        			return 'ERROR: Introduzca todos los valores de todos los campos'; // introduzca un valor para el usuario
-										}
-
-						    			else{ //si no da error en la insercion devolvemos mensaje de exito
-											$this->lista['mensaje'] = 'Inserción realizada con éxito';
-											return $this->lista; //operacion de insertado correcta
-										}
-
-									}
-									else{ //si hay un login igua
-									    $this->lista['mensaje'] = 'ERROR: Fallo en la inserción. Ya existe esa asignacióde QA'; 
-										return $this->lista; 
-									}
-								}	 
+								//Si no hay atributos Clave y unique duplicados es que hay campos sin completar
+						       	return 'ERROR: Introduzca todos los valores de todos los campos'; // introduzca un valor para el usuario
 							}
-						}
+
+						    else{ //si no da error en la insercion devolvemos mensaje de exito
+								$this->lista['mensaje'] = 'Inserción realizada con éxito';
+								return $this->lista; //operacion de insertado correcta
+							}
+
+							}
+							else{ //si hay un login igua
+							    $this->lista['mensaje'] = 'ERROR: Fallo en la inserción. Ya existe esa asignación de QA'; 
+								return $this->lista; 
+							}
+						}	 
 					}
-				}
-			}
-        }
+		    	}
+		    }	
+		}    	
 	}
-	else{ //Si no se introduce un login
-			return 'ERROR: Introduzca todos los valores de todos los campos'; // introduzca un valor para el usuario
-	}
-				
-} // fin del metodo ADD
+	else{
+		//Si alguno de los atributos clave es vacío
+			return 'ERROR: Introduzca todos los valores de todos los campos'; // introduzca valores para los campos vacíos
+	}	
 
-
+}// fin del metodo ADD
 
 //funcion de destrucción del objeto: se ejecuta automaticamente
 //al finalizar el script
@@ -236,7 +203,7 @@ function DELETE()
 // en el atributo de la clase
 function RellenaDatos()
 {	// se construye la sentencia de busqueda de la tupla
-    $sql = "SELECT * FROM ASIGNAC_QA A, TRABAJO T WHERE (A.IdTrabajo = '$this->AliasEvaluado') AND (LoginEvaluador = '$this->LoginEvaluador') AND (AliasEvaluado = '$this->AliasEvaluado') AND (A.IdTrabajo = T.IdTrabajo)";
+    $sql = "SELECT * FROM ASIGNAC_QA A, TRABAJO T WHERE (A.IdTrabajo = '$this->IdTrabajo') AND (LoginEvaluador = '$this->LoginEvaluador') AND (AliasEvaluado = '$this->AliasEvaluado') AND (A.IdTrabajo = T.IdTrabajo)";
     // Si la busqueda no da resultados, se devuelve el mensaje de que no existe
     if (!($resultado = $this->mysqli->query($sql))){
 		$this->lista['mensaje'] = 'ERROR: No existe en la base de datos'; 
@@ -306,7 +273,6 @@ function SHOWALL($num_tupla,$max_tuplas){
 				WHERE (T.IdTrabajo = A.IdTrabajo)
 				LIMIT $num_tupla, $max_tuplas";
 
-	//echo $sql;
 
 	    // si se produce un error en la busqueda mandamos el mensaje de error en la consulta
     if (!($resultado = $this->mysqli->query($sql))){
@@ -365,5 +331,85 @@ function devolverLoginEvaluado(){
 		return $result['login'];
 	}
 	}	
+
+//Función con la cual a partir de un IdTrabajo dado, para todas los usuarios que hayan subido una entrega de ese trabajo se le asginan otras cinco para QA
+function asig_QAS($IdTrabajo){
+
+
+	//Selecciona todas las entregas del IdTrabajo
+	$sql = "SELECT * FROM ENTREGA WHERE IdTrabajo = '$IdTrabajo'"; 
+
+
+	// si se produce un error en la busqueda mandamos el mensaje de error en la consulta
+    if (!($resultado = $this->mysqli->query($sql))){
+    	$this->lista['mensaje'] =  'ERROR: Fallo en la consulta sobre la base de datos'; 
+		return $this->lista; 
+	}
+    else{ // si la busqueda es correcta devolvemos el recordset resultado
+    	
+    	$lista; //Matriz que contendrá todas las entregas de un trabajo con los atributos necesarios para la ASIG_QA
+    	$num = 0; //Índice del array
+    	$posiciones = 3; //Número de QA a corregir por cada alumno
+
+    	while ($row = mysqli_fetch_array($resultado)) { //Copiamos el recordset en lista
+    		$lista[$num] = array($row['IdTrabajo'],$row['login'],$row['Alias']);
+    		$num++;
+    	}
+
+    	for ($i = 0; $i < sizeof($lista); $i++) { //Para cada alumno que entregó un trabajo con IdTrabajo
+			
+			$LoginEvaluador = $lista[$i][1]; //Cogemos el login al que se le asignarán las QAs 
+			$aux = $i;	//Comenzamos a recorrer la lista por la posición de esa entrega	
+
+    		for($j = 0; $j < $posiciones; $j++){ //Tantas veces como QAs se le vayan a asignar
+    			
+	   			for($k = 0; $k < $posiciones; $k++){ //Recorremos 5 posiciones 
+
+	   				if($aux >= sizeof($lista)-1){ //Si el índice supera el número máximo de entregas volvemos a empezar por el comienzo de la lista
+	   					$aux = 0;
+	   				}
+	   				else $aux++;
+	   			}
+	   			$AliasEvaluado = $lista[$aux][2]; //Guardamos el alias de la Qa
+	   			$LoginEvaluado = $lista[$aux][1]; //Guardamos el login de la Qa
+
+	   			//Comprobamos si ya existe esa entrega previamente
+	   			$sql = "SELECT * FROM ASIGNAC_QA WHERE IdTrabajo = $IdTrabajo AND 
+	   												LoginEvaluador = $LoginEvaluador AND
+	   												AliasEvaluado = AliasEvaluado";	
+
+	   			if ($result = $this->mysqli->query($sql)) {$num_rows = mysqli_num_rows($result);}
+	   			else {$num_rows = 0;}
+
+	   			while($num_rows == 1 || $LoginEvaluador == $LoginEvaluado){ //Si ya existe la asignación de QA o la QA es del mismo usuario al que se le asigna
+   					
+
+	   				if($aux >= sizeof($lista)-1){
+	   					$aux = 0;
+	   				}
+	   				else {$aux++;}
+
+	   				if($result) {$num_rows = mysqli_num_rows($result);}
+	   				else {$num_rows = 0;}
+
+				}
+							
+	   			$sql = "INSERT INTO ASIGNAC_QA(
+										IdTrabajo,
+										LoginEvaluador,
+										LoginEvaluado,
+										AliasEvaluado) VALUES(
+															'$IdTrabajo',
+															'$LoginEvaluador',
+															'$LoginEvaluado',
+															'$AliasEvaluado')";																				
+				if ($result = $this->mysqli->query($sql)) echo "aquuifg";
+   			}
+		}
+
+	}
+
+}
+
 }
 ?> 

@@ -130,21 +130,25 @@ if (!isset($_REQUEST['action'])){
 			}
 			else{//si viene con un post
 				$ASIGNAC_QA = get_data_form(); //coge los datos del formulario del usuario que desea borrar
-				$respuesta = $FUNCIONALIDAD->DELETE(); //Ejecuta la funcion DELETE() en el ASIGNAC_QA_Model
+				$respuesta = $ASIGNAC_QA->DELETE(); //Ejecuta la funcion DELETE() en el ASIGNAC_QA_Model
 				$mensaje = new MESSAGE($respuesta, '../Controllers/ASIGNAC_QA_Controller.php'); //muestra el mensaje despues de la sentencia sql
 			}
 			break;
 		case 'EDIT': //si el usuario quiere editar	
-			if (!$_POST){
-				$ASIGNAC_QA = new ASIGNAC_QA_Model($_REQUEST['IdTrabajo'],'', $_REQUEST['LoginEvaluador'],'',$_REQUEST['AliasEvaluado']); //crea un un ASIGNAC_QA_Model con el IdFuncionalidad del usuario 
-				$datos = $ASIGNAC_QA->RellenaDatos();  //A partir del IdFuncionalidad recoge todos los atributos
-				$usuario = new ASIGNAC_QA_EDIT($datos); //Crea la vista EDIT con los datos del usuario
-			}
-			else{
-				$ASIGNAC_QA = get_data_form(); //coge los datos del formulario del usuario que desea editar
-				$respuesta = $ASIGNAC_QA->EDIT(); //Ejecuta la funcion EDIT() en el ASIGNAC_QA_Model
-				$mensaje = new MESSAGE($respuesta, '../Controllers/ASIGNAC_QA_Controller.php');//muestra el mensaje despues de la sentencia sql
-			}
+			// if (!$_POST){
+			// 	$ASIGNAC_QA = new ASIGNAC_QA_Model($_REQUEST['IdTrabajo'],'', $_REQUEST['LoginEvaluador'],'',$_REQUEST['AliasEvaluado']); //crea un un ASIGNAC_QA_Model con el IdFuncionalidad del usuario 
+			// 	$datos = $ASIGNAC_QA->RellenaDatos();  //A partir del IdFuncionalidad recoge todos los atributos
+			// 	$usuario = new ASIGNAC_QA_EDIT($datos); //Crea la vista EDIT con los datos del usuario
+			// }
+			// else{
+			// 	$ASIGNAC_QA = get_data_form(); //coge los datos del formulario del usuario que desea editar
+			// 	$respuesta = $ASIGNAC_QA->EDIT(); //Ejecuta la funcion EDIT() en el ASIGNAC_QA_Model
+			// 	$mensaje = new MESSAGE($respuesta, '../Controllers/ASIGNAC_QA_Controller.php');//muestra el mensaje despues de la sentencia sql
+			// }
+			// break;
+			$asigna = new ASIGNAC_QA_Model('','','','','');
+			$respuesta = $asigna->asig_QAS($_REQUEST['IdTrabajo']);
+
 			break;
 		case 'SEARCH': //si desea realizar una busqueda
 			if (!$_POST){
