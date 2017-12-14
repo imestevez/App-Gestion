@@ -26,7 +26,7 @@ function __construct($login,$IdTrabajo, $Alias, $Horas,$Ruta){
 	$this->login = $login;
 	$this->IdTrabajo = $IdTrabajo;
 	$this->Alias = $Alias;
-	if($horas <> ''){
+	if($Horas <> ''){
 	$this->Horas = $Horas;
 }else{
 	$this->Horas = 0;
