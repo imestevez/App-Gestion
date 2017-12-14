@@ -47,7 +47,7 @@ function render(){
                     <td style="border-right-style: collapse; border-bottom:  5px solid black;">
 
 <?php 
-                    foreach ($acciones as $key => $value) {
+                    foreach ($this->acciones as $key => $value) {
                         if($value == 'ASIG'){
                 ?>
                      <a href="../Controllers/FUNC_ACCION_Controller.php?action=ASIG&IdFuncionalidad=<?php echo $this->IdFuncionalidad ?>"><input type="image" src="../Views/images/edit.png" name="action" title="<?php echo $strings['Editar'] ?>" value="ASIG"></a>

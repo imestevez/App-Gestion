@@ -31,7 +31,7 @@ function __construct($lista, $datos,$num_tupla,$max_tuplas,$totalTuplas,$num_pag
     $this->max_tuplas = $max_tuplas;
     $this->num_pagina = $num_pagina;
     $this->orden = $orden ;
-    
+    $this->acciones = $acciones;
     if( $this->orden <>'SEARCH'){ //si no viene del search
         $this->render();
     }else{//si viene del search
