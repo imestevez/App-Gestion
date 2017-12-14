@@ -84,7 +84,7 @@ if (!isset($_REQUEST['action'])){
 
 			 $FUNC_GRUPO = get_data_form();
 			$respuesta =  $FUNC_GRUPO->EDIT();
-			$mensaje = new MESSAGE($respuesta, '../Controllers/FUNCIONALIDAD_Controller.php'); //muestra el mensaje despues de la sentencia sql
+			$mensaje = new MESSAGE($respuesta, '../Controllers/GRUPO_Controller.php'); //muestra el mensaje despues de la sentencia sql
 		}
 		break;
 		default: //Por defecto, Se muestra la vista SHOWALL
