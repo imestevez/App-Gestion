@@ -51,7 +51,18 @@ function render(){
                 <th><?php echo $strings['Nombre Funcionalidad']?></th>      
                 <th><?php echo $strings['Nombre de la accion']?></th>                   
 
-                <td><a href="../Controllers/PERMISO_Controller.php?action=SEARCH"><input type="image" src="../Views/images/search.png" name="action" title="<?php echo $strings['Buscar']?>" value="SEARCH"></a>
+                <td>
+                    <?php
+                     foreach ($this->acciones as $key => $value) {
+                        if($value == 'SEARCH'){
+                            ?>
+                    <a href="../Controllers/PERMISO_Controller.php?action=SEARCH"><input type="image" src="../Views/images/search.png" name="action" title="<?php echo $strings['Buscar']?>" value="SEARCH"></a>
+                               
+                            <?php
+                        }
+                    }
+                    ?>
+
                 </td>
 
                 </tr>
@@ -78,13 +89,13 @@ function render(){
 
         if($this->num_pagina > 0){ // Si la tupla 1 mostrada es la primera de la BD
 ?>
-         <a href="../Controllers/PERMISO_Controller.php?num_pagina=<?php echo $this->num_pagina-1?>&action=SHOWALL"><input type="image" src="../Views/images/prev.png" name="action" title="<?php echo $strings['Anterior'] ?>" value="PREV"></a>
+         <a href="../Controllers/PERMISO_Controller.php?num_pagina=<?php echo $this->num_pagina-1?>&action=ALL"><input type="image" src="../Views/images/prev.png" name="action" title="<?php echo $strings['Anterior'] ?>" value="PREV"></a>
 <?php
         } //Fin del if si es la 1ª tupla
 
         if($this->max_tuplas < $this->total_tuplas){ //Si la tupla mostrada es la última de la BD
 ?>
-        <a href="../Controllers/PERMISO_Controller.php?num_pagina=<?php echo $this->num_pagina+1?>&action=SHOWALL"><input type="image" src="../Views/images/next.png" name="action" title="<?php echo $strings['Siguiente'] ?>" value="NEXT"></a>
+        <a href="../Controllers/PERMISO_Controller.php?num_pagina=<?php echo $this->num_pagina+1?>&action=ALL"><input type="image" src="../Views/images/next.png" name="action" title="<?php echo $strings['Siguiente'] ?>" value="NEXT"></a>
 <?php
         }//Fin del if si es la ultima tupla
 
@@ -110,7 +121,17 @@ function renderSearch(){
                 <th><?php echo $strings['Nombre Funcionalidad']?></th>      
                 <th><?php echo $strings['Nombre de la accion']?></th>                   
 
-                <td><a href="../Controllers/PERMISO_Controller.php?action=SEARCH"><input type="image" src="../Views/images/search.png" name="action" title="<?php echo $strings['Buscar']?>" value="SEARCH"></a>
+                <td>
+                    <?php
+                     foreach ($this->acciones as $key => $value) {
+                        if($value == 'SEARCH'){
+                            ?>
+                    <a href="../Controllers/PERMISO_Controller.php?action=SEARCH"><input type="image" src="../Views/images/search.png" name="action" title="<?php echo $strings['Buscar']?>" value="SEARCH"></a>
+                               
+                            <?php
+                        }
+                    }
+                    ?>
                 </td>
 
                 </tr>
@@ -136,7 +157,7 @@ function renderSearch(){
     if(isset($_REQUEST['action'])){ //si viene de un formulario
         if($_REQUEST['action'] == 'SEARCH'){  //Si se muestra a partir de un SEARCH
 ?>
-           <a href="../Controllers/PERMISO_Controller.php?action=SHOWALL"><input type="image" src="../Views/images/back.png" name="action" title="<?php echo $strings['Volver'] ?>" value="BACK"></a>
+           <a href="../Controllers/PERMISO_Controller.php?action=ALL"><input type="image" src="../Views/images/back.png" name="action" title="<?php echo $strings['Volver'] ?>" value="BACK"></a>
 <?php
         }
     }//Fin del if si es SEARCH

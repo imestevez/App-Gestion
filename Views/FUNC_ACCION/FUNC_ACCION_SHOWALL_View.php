@@ -14,13 +14,17 @@
     var $DescripFuncionalidad; //declaración del atributo DescripFuncionalidad
     var $lista; //lista con los grupos de un usuario
     var $datos;
+    var $acciones; //array de acciones
+
 //constructor de la clase
-function __construct($lista, $datos){
+function __construct($lista, $datos, $acciones){
     //asignación de valores de parámetro a los atributos de la clase
     $this->IdFuncionalidad = $lista['IdFuncionalidad'];
     $this->NombreFuncionalidad = $lista['NombreFuncionalidad'];
     $this->DescripFuncionalidad = $lista['DescripFuncionalidad'];
     $this->datos = $datos;
+    $this->acciones = $acciones ;
+    
 
 
 

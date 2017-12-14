@@ -88,7 +88,7 @@ if (!isset($_REQUEST['action'])){
 	// En funcion de la accion elegida
 	Switch ($action){
 	
-		case 'EDIT':
+		case 'ASIG':
 		if (!$_POST){
 			$USUARIO = new USUARIO_Model($_REQUEST['login'], '','', '', '', '', '', '');//crea un un USUARIO_Model con el login del usuario 
 			$propios = $USUARIO->rellenarGrupos();

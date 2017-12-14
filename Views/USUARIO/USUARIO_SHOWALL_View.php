@@ -115,10 +115,7 @@ function render(){
                     <?php
                         }
                     }
-                    ?>
-
-
-                        
+                    ?>                    
             
                   
                 </td>
@@ -172,8 +169,27 @@ function renderSearch(){
                  <th > <?php echo $strings['Grupo']?></th>
 
 
-                <td><a href="../Controllers/USUARIO_Controller.php?action=SEARCH"><input type="image" src="../Views/images/search.png" name="action" title="<?php echo $strings['Buscar']?>" value="SEARCH"></a>
-                    <a href="../Controllers/USUARIO_Controller.php?action=ADD" ><input type="image" src="../Views/images/anadir.png" name="action" title="<?php echo $strings['Añadir']?>" value="ADD" ></a>
+                <td>
+                 <?php 
+
+                foreach ($this->acciones as $key => $value) {
+                    if($value == 'SEARCH'){
+                        ?>
+                           <a href="../Controllers/USUARIO_Controller.php?action=SEARCH"><input type="image" src="../Views/images/search.png" name="action" title="<?php echo $strings['Buscar']?>" value="SEARCH"></a>
+                        <?php
+                    }
+
+                     if($value == 'ADD'){
+                        ?>
+
+                <a href="../Controllers/USUARIO_Controller.php?action=ADD" ><input type="image" src="../Views/images/anadir.png" name="action" title="<?php echo $strings['Añadir']?>" value="ADD" ></a>
+                <?php
+                    }
+                }
+                    ?>
+                </td>
+
+                </tr>
                 </td>
                 </tr>
 <?php
@@ -191,9 +207,28 @@ function renderSearch(){
                             <input type="image" src="../Views/images/lista.png" name="action" title="<?php echo $strings['Mostrar Grupos'] ?>" value="SHOW" action=""></a>
                       </td>
             <td class="edit_tabla">
-                    <a href="../Controllers/USUARIO_Controller.php?action=SHOW&login=<?php echo $row["login"]?>"><input type="image" src="../Views/images/ojo.png" name="action" title="<?php echo $strings['Mostrar en detalle'] ?>" value="SHOW" action=""></a>
+                    <?php 
+
+                    foreach ($this->acciones as $key => $value) {
+                        if($value == 'SHOW'){
+                            ?>
+                                 <a href="../Controllers/USUARIO_Controller.php?action=SHOW&login=<?php echo $row["login"]?>"><input type="image" src="../Views/images/ojo.png" name="action" title="<?php echo $strings['Mostrar en detalle'] ?>" value="SHOW" action=""></a>
+                            <?php
+                        }
+
+                         if($value == 'EDIT'){
+                            ?>
                     <a href="../Controllers/USUARIO_Controller.php?action=EDIT&login=<?php echo $row["login"]?>"><input type="image" src="../Views/images/edit.png" name="action" title="<?php echo $strings['Editar'] ?>" value="EDIT"></a>
+                    <?php
+                        }
+                           if($value == 'DELETE'){
+                            ?>
+                    
                     <a href="../Controllers/USUARIO_Controller.php?action=DELETE&login=<?php echo $row["login"]?>""><input type="image" src="../Views/images/delete.png" name="action" title="<?php echo $strings['Eliminar'] ?>" value="DELETE"></a>
+                    <?php
+                        }
+                    }
+                    ?>           
                 </td>
                 </tr>               
            
