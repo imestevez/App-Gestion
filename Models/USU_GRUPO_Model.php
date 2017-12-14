@@ -12,6 +12,7 @@ class USU_GRUPO_Model { //declaración de la clase
 
 	var $login; //atributo login
 	var $lista; // lista de grupos
+	VAR $IdGrupo; //ID 	del grupo
 
 
 //Constructor de la clase
@@ -267,6 +268,15 @@ function rellenarGrupos(){
 	return $result;
 }
 
+function grupoUsuario(){
+	$sql = "SELECT * FROM USU_GRUPO WHERE (login = '$this->login')";
+	$result = $this->mysqli->query($sql);
+	while ($row = mysqli_fetch_array($result)) {
+		$this->IdGrupo =  $row['IdGrupo'];
 
+	}
+	return $this->IdGrupo;
+
+}
 }
 ?> 

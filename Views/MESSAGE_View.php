@@ -39,7 +39,7 @@ function render(){
 			<br><p  style="margin-left: 25%; margin-top: 2%"> <?php echo $strings[$this->mensaje]?></p>
 			</div>
             <div class="acciones" style="margin-top: 20%">
-			<a href= "<?php echo $this->origen?>" ><input type="image" name="" type="image" name="action" src="../Views/images/back.png" value="volver" title="<?php echo $strings['Volver'] ?>" ></a>
+			<a href= "<?php echo $this->origen?>" ><input type="image" name="BACK" type="image" name="action" src="../Views/images/back.png" value="volver" title="<?php echo $strings['Volver'] ?>" ></a>
 			</div>
 
 	</section>

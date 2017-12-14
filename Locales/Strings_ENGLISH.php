@@ -251,6 +251,7 @@ array(
 'Seleccionar Grupos' => 'Select groups',
 'div_Num_Decs' => 'The maximum number of decimals are 2',
 'div_numerosRango10' => 'The number has to be between 0 and 10',
+'No tienes permisos para realizar esta accion' => 'You do not have permission to perform this action',
 
 
 

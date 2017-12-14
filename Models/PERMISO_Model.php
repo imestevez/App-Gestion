@@ -10,19 +10,20 @@ Modelo de datos de usuarios que accede a la Base de Datos
 */
 class PERMISO_Model { //declaración de la clase
 
-	var $NombreGrupo; //declaración del atributo NombreGrupo de la accion
-    var $NombreFuncionalidad; //declaración del atributo NombreFuncionalidad de la accion
-    var $NombreAccion; //declaración del atributo NombreAccion
+	var $IdGrupo; //declaración del atributo IdGrupo de la accion
+    var $IdFuncionalidad; //declaración del atributo IdFuncionalidad de la accion
+    var $IdAccion; //declaración del atributo IdAccion
     var $lista; // array para almacenar los datos del usuario
 	var $mysqli; // declaración del atributo manejador de la bd
 
 //Constructor de la clase
 
-function __construct($NombreGrupo, $NombreFuncionalidad, $NombreAccion){
+function __construct($IdGrupo, $IdFuncionalidad, $IdAccion){
 	//asignación de valores de parámetro a los atributos de la clase
-	$this->NombreGrupo = $NombreGrupo;
-	$this->NombreFuncionalidad = $NombreFuncionalidad;
-	$this->NombreAccion = $NombreAccion;
+
+	$this->IdGrupo = $IdGrupo;
+	$this->IdFuncionalidad = $IdFuncionalidad;
+	$this->IdAccion = $IdAccion;
 
 	// incluimos la funcion de acceso a la bd
 	include_once '../Functions/Access_DB.php';
@@ -31,9 +32,9 @@ function __construct($NombreGrupo, $NombreFuncionalidad, $NombreAccion){
 
 	//lista con los datos del usuario
 	$this->lista = array(
-			"NombreGrupo"=>$this->NombreGrupo,
-			"NombreFuncionalidad"=>$this->NombreFuncionalidad,
-			"NombreAccion"=>$this->NombreAccion,
+			"IdGrupo"=>$this->IdGrupo,
+			"IdFuncionalidad"=>$this->IdFuncionalidad,
+			"IdAccion"=>$this->IdAccion,
 			"sql" => $this->mysqli, 
 			"mensaje"=> '');
 } // fin del constructor
@@ -63,15 +64,15 @@ function __destruct()
 //los datos proporcionados. Si van vacios devuelve todos
 function SEARCH()
 { 	// construimos la sentencia de busqueda con LIKE y los atributos de la entidad
-    $sql = "SELECT  NombreGrupo,
-    				NombreFuncionalidad,
-    				NombreAccion
+    $sql = "SELECT  IdGrupo,
+    				IdFuncionalidad,
+    				IdAccion
        			FROM PERMISO P, GRUPO G, FUNCIONALIDAD F, ACCION A
     			WHERE P.IdGrupo=G.IdGrupo AND P.IdFuncionalidad=F.IdFuncionalidad AND P.IdAccion=A.IdAccion AND
     				(
-    				(NombreGrupo LIKE '%$this->NombreGrupo%') &&
-    				(NombreFuncionalidad LIKE '%$this->NombreFuncionalidad%') &&
-    				(NombreAccion LIKE '%$this->NombreAccion%') 
+    				(IdGrupo LIKE '%$this->IdGrupo%') &&
+    				(IdFuncionalidad LIKE '%$this->IdFuncionalidad%') &&
+    				(IdAccion LIKE '%$this->IdAccion%') 
 	 				)";
     				
     // si se produce un error en la busqueda mandamos el mensaje de error en la consulta
@@ -127,14 +128,13 @@ function SHOWALL($num_tupla,$max_tuplas){
 
 	//$sql = "SELECT * FROM USUARIO";
 
-	$sql = "SELECT 	NombreGrupo,
-    				NombreFuncionalidad,
-    				NombreAccion
+	$sql = "SELECT 	IdGrupo,
+    				IdFuncionalidad,
+    				IdAccion
     				FROM PERMISO P, GRUPO G, FUNCIONALIDAD F, ACCION A
     				WHERE P.IdGrupo=G.IdGrupo AND P.IdFuncionalidad=F.IdFuncionalidad AND P.IdAccion=A.IdAccion
     				LIMIT $num_tupla, $max_tuplas";
 
-	//echo $sql;
 
 	    // si se produce un error en la busqueda mandamos el mensaje de error en la consulta
     if (!($resultado = $this->mysqli->query($sql))){
@@ -155,6 +155,32 @@ function contarTuplas(){
     $total_tuplas = mysqli_num_rows($datos);
 
     return $total_tuplas;
+}
+
+function permisosGrupo(){
+	$sql = "SELECT * FROM PERMISO WHERE (IdGrupo = '$this->IdGrupo')";
+
+	$resultado = $this->mysqli->query($sql);
+
+	
+    return $resultado;
+}
+function funcionalidadesGrupo(){
+	$sql = "SELECT DISTINCT IdFuncionalidad FROM PERMISO WHERE (IdGrupo = '$this->IdGrupo')";
+
+	$resultado = $this->mysqli->query($sql);
+
+	
+    return $resultado;
+}
+
+function accionesGrupo(){
+	$sql = "SELECT DISTINCT IdAccion FROM PERMISO WHERE (IdGrupo = '$this->IdGrupo' AND IdFuncionalidad = '$this->IdFuncionalidad')";
+
+	$resultado = $this->mysqli->query($sql);
+
+	
+    return $resultado;
 }
 
 }

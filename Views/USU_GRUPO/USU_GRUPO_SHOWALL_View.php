@@ -13,13 +13,16 @@
     var $nombre; //declaración del atributo nombre
     var $apellidos; //declaración del atributo apellidos
     var $lista; //lista con los grupos de un usuario
+    var $acciones; //acciones que puede realizar el usuario
     var $datos;
 //constructor de la clase
-function __construct($lista, $datos){
+function __construct($lista, $datos,$acciones){
     //asignación de valores de parámetro a los atributos de la clase
     $this->login = $lista['login'];
     $this->nombre = $lista['Nombre'];
     $this->apellidos = $lista['Apellidos'];
+    $this->acciones = $acciones;
+
     $this->datos = $datos;
 
 
@@ -37,7 +40,23 @@ function render(){
             <table class="showcurrent">
                 <caption><?php echo $strings['Grupos de Usuario'] ?></caption>
                 <tr><th style="width: 5%"><?php echo $strings['Campo'] ?></th><th><?php echo $strings['Valor'] ?></th><th><?php echo $strings['Acciones'] ?></th></tr>
-                <tr><th style="width: 5%"><?php echo $strings['Login'] ?></th><td><?php echo $this->login ?></td><td style="border-right-style: collapse; border-bottom:  5px solid black;"> <a href="../Controllers/USU_GRUPO_Controller.php?action=EDIT&login=<?php echo $this->login ?>"><input type="image" src="../Views/images/edit.png" name="action" title="<?php echo $strings['Editar'] ?>" value="EDIT"></a></td></tr>
+                <tr><th style="width: 5%"><?php echo $strings['Login'] ?></th><td><?php echo $this->login ?></td>
+
+
+                <td style="border-right-style: collapse; border-bottom:  5px solid black;">
+
+                <?php 
+                    foreach ($acciones as $key => $value) {
+                        if($value == 'ASIG'){
+                ?>
+                    <a href="../Controllers/USU_GRUPO_Controller.php?action=ASIG&login=<?php echo $this->login ?>"><input type="image" src="../Views/images/edit.png" name="action" title="<?php echo $strings['Editar'] ?>" value="ASIG"></a>
+                    <?php
+                }
+
+                    }
+                ?>
+                 
+             </td></tr>
                 <tr><th style="width: 5%"><?php echo $strings['Nombre'] ?></th><td style="border-right-style: collapse; border-right:  5px solid black;"><?php echo $this->nombre ?></td></tr>
                 <tr><th style="width: 5%"><?php echo $strings['Apellidos'] ?></th><td style="border-right-style: collapse; border-right:  5px solid black;"><?php echo $this->apellidos ?></td></tr>
                 <tr ><th  style="border-top-style: collapse; border-top:  5px solid black; border-right-style: collapse; border-right:  5px solid black;" COLSPAN="2" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $strings['Grupos'] ?></th></tr>

@@ -12,19 +12,41 @@ Controlador que recibe las acciones relacionadas con EVALUACION
 session_start(); //solicito trabajar con la session
 
 include_once '../Functions/Authentication.php';
+include_once '../Functions/ACL.php';
+include_once '../Views/MESSAGE_View.php';
 
 if (!IsAuthenticated()){
 	header('Location:../index.php');
-}
-include '../Models/EVALUACION_Model.php';
+}else{
 
-include '../Views/EVALUACION/EVALUACION_SHOWALL_View.php';
-include '../Views/EVALUACION/EVALUACION_SHOWCURRENT_View.php';
-include '../Views/EVALUACION/EVALUACION_ADD_View.php';
-include '../Views/EVALUACION/EVALUACION_EDIT_View.php';
-include '../Views/EVALUACION/EVALUACION_SEARCH_View.php';
-include '../Views/EVALUACION/EVALUACION_DELETE_View.php';
-include '../Views/MESSAGE_View.php';
+if(isset($_REQUEST["action"]))  {
+	$action = $_REQUEST["action"];
+}else{
+
+	$action = '';
+}
+
+//Si no tiene permisos para acceder a este controlador con la accion que trae
+if(!HavePermissions(10, $action)) {
+	//new MESSAGE('No tienes permisos para realizar esta accion', '../index.php');
+	header('Location:../index.php'); //vuelve al index
+}
+//almacenamos un array de permidos del grupo
+$permisos = listaPermisos();
+$acciones = listaAcciones(10);
+
+//Pnemos la variabla acceso  a false con la que se controla si el usuario puede ver un showall o no
+$acceso=false;
+
+include_once '../Models/EVALUACION_Model.php';
+
+include_once '../Views/EVALUACION/EVALUACION_SHOWALL_View.php';
+include_once '../Views/EVALUACION/EVALUACION_SHOWCURRENT_View.php';
+include_once '../Views/EVALUACION/EVALUACION_ADD_View.php';
+include_once '../Views/EVALUACION/EVALUACION_EDIT_View.php';
+include_once '../Views/EVALUACION/EVALUACION_SEARCH_View.php';
+include_once '../Views/EVALUACION/EVALUACION_DELETE_View.php';
+include_once '../Views/MESSAGE_View.php';
 
 
 
@@ -266,7 +288,8 @@ if (!isset($_REQUEST['action'])){
 			$totalTuplas = $EVALUACION->contarTuplas(); //Cuenta el número de tuplas que hay en la BD
 			$datos = $EVALUACION->SHOWALL($num_tupla,$max_tuplas); //Ejecuta la funcion SHOWALL() en el EVALUACION_Model
 			$lista = array('IdTrabajo', 'LoginEvaluador', 'AliasEvaluado', 'IdHistoria', 'CorrectoA', 'ComenIncorrectoA', 'CorrectoP', 'ComentIncorrectoP', 'OK');
-			$UsuariosBD = new EVALUACION_SHOWALL($lista, $datos, $num_tupla, $max_tuplas, $totalTuplas, $num_pagina, 'SHOWALL', '../Controllers/EVALUACION_Controller.php'); //Crea la vista SHOWALL de los usuarios de la BD	
+			$UsuariosBD = new EVALUACION_SHOWALL($lista, $datos, $num_tupla, $max_tuplas, $totalTuplas, $num_pagina, 'SHOWALL', '../Controllers/EVALUACION_Controller.php',$acciones); //Crea la vista SHOWALL de los usuarios de la BD	
+	}
 	}
 
 ?>

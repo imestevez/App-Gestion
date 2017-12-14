@@ -70,7 +70,7 @@ include '../Views/Header.php';
                         <input type="text" name="NombreTrabajo" readonly maxlength="60" size="60" value="<?php echo $this->NombreTrabajo ?>">
                  <div id="izquierda">
                     <label for="Alias"><?php echo $strings['Alias'] ?>: </label>
-                        <input type="text" id="lectura" name="Alias" readonly  value="<?php echo $this->Alias?>"  maxlength="9" size="9" onblur="validarlogin(this,9)"  ><div id="Alias" class="oculto" style="display:none"><?php echo $strings['div_Alfanumerico']?></div> <div id="AliasVacio" class="oculto" style="display:none"><?php echo $strings['div_vacio']?></div> 
+                        <input type="text" id="lectura" name="Alias" readonly  value="<?php echo $this->Alias?>"  maxlength="6" size="6" onblur="validarlogin(this,6)"  ><div id="Alias" class="oculto" style="display:none"><?php echo $strings['div_Alfanumerico']?></div> <div id="AliasVacio" class="oculto" style="display:none"><?php echo $strings['div_vacio']?></div> 
                 </div>
 
 
