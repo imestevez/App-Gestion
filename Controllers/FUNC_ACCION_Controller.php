@@ -4,7 +4,7 @@
 /*
 //Script : FUNC_ACCION_Controller.php
 //Creado el : 9-12-2017
-//Creado por: solfamidas
+//Creado por: SOLFAMIDAS
 //-------------------------------------------------------
 
 Controlador que recibe las peticiones del usuario y este ejectuta las acciones pertinentes sobre el Model de datos y las vistas
@@ -12,18 +12,40 @@ Controlador que recibe las peticiones del usuario y este ejectuta las acciones p
 session_start(); //solicito trabajar con la session
 
 include_once '../Functions/Authentication.php';
+include_once '../Functions/ACL.php';
+include_once '../Views/MESSAGE_View.php';
 
 if (!IsAuthenticated()){
 	header('Location:../index.php');
+}else{
+
+if(isset($_REQUEST["action"]))  {
+	$action = $_REQUEST["action"];
+}else{
+
+	$action = '';
 }
-include '../Models/FUNC_ACCION_Model.php';
-include '../Models/FUNCIONALIDAD_Model.php';
 
-include '../Views/FUNCIONALIDAD/FUNCIONALIDAD_SHOWALL_View.php';
-include '../Views/FUNC_ACCION/FUNC_ACCION_SHOWCURRENT_View.php';
-include '../Views/FUNC_ACCION/FUNC_ACCION_EDIT_View.php';
+//Si no tiene permisos para acceder a este controlador con la accion que trae
+if(!HavePermissions(3, $action)) {
+	//new MESSAGE('No tienes permisos para realizar esta accion', '../index.php');
+	header('Location:../index.php'); //vuelve al index
+}
+//almacenamos un array de permidos del grupo
+$permisos = listaPermisos();
+$acciones = listaAcciones(3);
 
-include '../Views/MESSAGE_View.php';
+//Pnemos la variabla acceso  a false con la que se controla si el usuario puede ver un showall o no
+$acceso=false;
+
+include_once '../Models/FUNC_ACCION_Model.php';
+include_once '../Models/FUNCIONALIDAD_Model.php';
+
+include_once '../Views/FUNCIONALIDAD/FUNCIONALIDAD_SHOWALL_View.php';
+include_once '../Views/FUNC_ACCION/FUNC_ACCION_SHOWALL_View.php';
+include_once '../Views/FUNC_ACCION/FUNC_ACCION_EDIT_View.php';
+
+include_once '../Views/MESSAGE_View.php';
 
 
 
@@ -66,7 +88,7 @@ if (!isset($_REQUEST['action'])){
 	// En funcion de la accion elegida
 	Switch ($action){
 	
-		case 'EDIT':
+		case 'ASIG':
 		if (!$_POST){
 			$FUNCIONALIDAD = new FUNCIONALIDAD_Model($_REQUEST['IdFuncionalidad'], '','');//crea un un FUNCIONALIDAD_Model con el IdFUNCIONALIDAD de la funcionalidad
 			$propios = $FUNCIONALIDAD->rellenarAcciones();
@@ -88,7 +110,8 @@ if (!isset($_REQUEST['action'])){
 			$recordset = $FUNCIONALIDAD->rellenarAcciones();
 				$lista = $FUNCIONALIDAD->rellenarLista();
 
-			$resultado = new FUNC_ACCION_SHOWALL($lista,$recordset);
+			$resultado = new FUNC_ACCION_SHOWALL($lista,$recordset,$acciones);
+	}
 	}
 
 ?>

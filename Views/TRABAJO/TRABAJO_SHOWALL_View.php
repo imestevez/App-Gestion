@@ -148,6 +148,9 @@ function renderSearch(){
                 <td><a href="../Controllers/TRABAJO_Controller.php?action=SEARCH"><input type="image" src="../Views/images/search.png" name="action" title="<?php echo $strings['Buscar']?>" value="SEARCH"></a>
                     <a href="../Controllers/TRABAJO_Controller.php?action=ADD" ><input type="image" src="../Views/images/anadir.png" name="action" title="<?php echo $strings['Añadir']?>" value="ADD" ></a>
                 </td>
+                   <th><?php echo $strings['Entrega']?></th>
+
+                <th><?php echo $strings['Historias']?></th>
                 </tr>
 <?php
             while( $row = mysqli_fetch_array($this->datos)) { //Mientras el numero de tuplas no llegue al máximo y haya tuplas en la BD
@@ -164,13 +167,22 @@ function renderSearch(){
                 <td><?php echo $row["IdTrabajo"]; ?></td>
                 <td><?php echo $row["NombreTrabajo"]; ?></td>
                 <td><?php echo $this->FechaFinTrabajo; ?></td>
-
-            <td class="edit_tabla">
+                <td class="edit_tabla">
                     <a href="../Controllers/TRABAJO_Controller.php?action=SHOWCURRENT&IdTrabajo=<?php echo $row["IdTrabajo"]?>"><input type="image" src="../Views/images/ojo.png" name="action" title="<?php echo $strings['Mostrar en detalle'] ?>" value="SHOWCURRENT" action=""></a>
                     <a href="../Controllers/TRABAJO_Controller.php?action=EDIT&IdTrabajo=<?php echo $row["IdTrabajo"]?>"><input type="image" src="../Views/images/edit.png" name="action" title="<?php echo $strings['Editar'] ?>" value="EDIT"></a>
-                    <a href="../Controllers/TRABAJO_Controller.php?action=DELETE&IdTrabajo=<?php echo $row["IdTrabajo"]?>""><input type="image" src="../Views/images/delete.png" name="action" title="<?php echo $strings['Eliminar'] ?>" value="DELETE"></a>
+                    <a href="../Controllers/TRABAJO_Controller.php?action=DELETE&IdTrabajo=<?php echo $row["IdTrabajo"]?>"><input type="image" src="../Views/images/delete.png" name="action" title="<?php echo $strings['Eliminar'] ?>" value="DELETE"></a>
                 </td>
-                </tr>               
+                <td>
+                  <a href="../Controllers/ENTREGA_Controller.php?action=ADD&IdTrabajo=<?php echo $row["IdTrabajo"]?>&login=<?php echo $_SESSION['login']?>&origen=../Controllers/TRABAJO_Controller.php"><input type="image" src="../Views/images/anadir.png" name="action" title="<?php echo $strings['Añadir'] ?>" value="ADD"></a>
+                </td>
+
+                <td>
+                    <a href="../Controllers/HISTORIA_Controller.php?action=ADD&IdTrabajo=<?php echo $row["IdTrabajo"]?>&NombreTrabajo=<?php echo $row["NombreTrabajo"]?>" ><input type="image" src="../Views/images/anadir.png" name="action" title="<?php echo $strings['Añadir']?>" value="ADD" ></a>
+                    <a href="../Controllers/TRABAJO_Controller.php?action=SHOWALL_HISTORIAS&IdTrabajo=<?php echo $row["IdTrabajo"]?>&NombreTrabajo=<?php echo $row["NombreTrabajo"]?>"><input type="image" src="../Views/images/ojo.png" name="action" title="<?php echo $strings['Mostrar en detalle'] ?>" value="SHOWCURRENT" action=""></a>
+
+                </td>
+
+                </tr>                     
            
 <?php
     }

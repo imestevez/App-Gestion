@@ -269,7 +269,7 @@ array(
 'Grupos de Usuario' => 'Grupos de Usuario',
 'ERROR: Fallo en la modificación. El login está vacio' => 'ERROR: Fallo en la modificación. El login está vacio',
 'Seleccionar Grupos' => 'Seleccionar Grupos',
-
+'No tienes permisos para realizar esta accion' => 'No tienes permisos para realizar esta accion',
 
 
 // ------------------------ ESPACIO DE TRABAJO PARA PABLO ---------------------------

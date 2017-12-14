@@ -45,7 +45,7 @@ include '../Views/Header.php';
 
                  <div id="izquierda">
                     <label for="Alias"><?php echo $strings['Alias'] ?>: </label>
-                        <input type="text" name="Alias" maxlength="9" size="9" onblur="validarAliasBuscar(this,9)"  ><div id="Alias" class="oculto" style="display:none"><?php echo $strings['div_Alfanumerico']?></div> 
+                        <input type="text" name="Alias" maxlength="6" size="6" onblur="validarAliasBuscar(this,9)"  ><div id="Alias" class="oculto" style="display:none"><?php echo $strings['div_Alfanumerico']?></div> 
                 </div>
 
 

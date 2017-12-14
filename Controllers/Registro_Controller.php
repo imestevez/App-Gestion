@@ -12,12 +12,12 @@ session_start();
 include_once '../Locales/Strings_'.$_SESSION['idioma'].'.php'; //se incluye los ficheros para el multidioma
 
 if(!isset($_POST['login'])){ //si no se introdujo el login
-	include '../Views/Registro_View.php';
+	include_once '../Views/Registro_View.php';
 	$register = new Register();//muestra la vista de registro
 }
 else{
 		
-	include '../Models/USUARIO_Model.php'; //incluye el modelo de usuarios
+	include_once '../Models/USUARIO_Model.php'; //incluye el modelo de usuarios
 
 	if($_REQUEST['action'] == 'BACK'){ //si el usuario pulsa en volver
 		header('Location: ./Login_Controller.php'); //lo redirige al controlador de login
@@ -48,7 +48,7 @@ else{
 
 	if ($respuesta == 'true'){ //si estan correctamente
 		$respuesta = $USUARIOS->ADD(); //añade al usuaurio en la BD
-		include '../Views/MESSAGE_View.php';
+		include_once '../Views/MESSAGE_View.php';
 		new MESSAGE($respuesta['mensaje'], 'Login_Controller.php');
 		}	
 	}
