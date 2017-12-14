@@ -243,7 +243,7 @@ if (!isset($_REQUEST['action'])){
 				$resultado = new ENTREGA_SHOWALL($lista, $datos, 0, 0, 0, 0, 'SEARCH', '../Controllers/ENTREGA_Controller.php');//Crea la vista SHOWALL y muestra los usuarios que cumplen los parámetros de búsqueda 
 			}
 			break;
-		case 'SHOWCURRENT': //si desea ver un usuario en detalle
+		case 'SHOW': //si desea ver un usuario en detalle
 			$lista = array('login', 'Nombre','IdTrabajo', 'NombreTrabajo', 'Alias','NotaTrabajo', 'origen');
 			$ENTREGA = new ENTREGA_Model($_REQUEST['login'],$_REQUEST['IdTrabajo'], '', '',''); //crea un un ENTREGA_Model);//crea un un ENTREGA_Model con el IdTrabajo del usuario
 			$lista = $ENTREGA->rellenarLista();
@@ -254,25 +254,52 @@ if (!isset($_REQUEST['action'])){
 			/*if(isset($_REQUEST["origen"])){
 			header('Location:'.$_REQUEST["origen"]);
 			}*/
-			if (!$_POST){
-				$ENTREGA = new ENTREGA_Model('','','', '','');//crea un un ENTREGA_Model con el IdTrabajo del usuario 
+			//recorremos el array de permisos
+			foreach ($acciones as $key => $value) {
+				if($value == 'ALL'){ //si puede ver el showall
+					$acceso = true; //acceso a true
+				}
 			}
-			else{
-				$ENTREGA = get_data_form(); //Coge los datos del formulario
-			}
+			if($acceso == true){ //si tiene acceso, mostramos el showall
+				if (!$_POST){
+					$ENTREGA = new ENTREGA_Model('','','', '','');//crea un un ENTREGA_Model con el IdTrabajo del usuario 
+				}
+				else{
+					$ENTREGA = get_data_form(); //Coge los datos del formulario
+				}
 
-			if(!isset($_REQUEST['num_pagina'])){ //Si es la 1a página del showall a mostrar
-				$num_pagina = 0;
-			}else{ //Si es otra página
-				$num_pagina = $_REQUEST['num_pagina']; //coge el numero de página del formulario
+				if(!isset($_REQUEST['num_pagina'])){ //Si es la 1a página del showall a mostrar
+					$num_pagina = 0;
+				}else{ //Si es otra página
+					$num_pagina = $_REQUEST['num_pagina']; //coge el numero de página del formulario
+				}
+				$num_tupla = $num_pagina*10; //número de la 1º tupla a mostrar
+				$max_tuplas = $num_tupla+10; // el número de tuplas a mostrar por página
+				$totalTuplas = $ENTREGA->contarTuplas(); //Cuenta el número de tuplas que hay en la BD
+				$datos = $ENTREGA->SHOWALL($num_tupla,$max_tuplas); //Ejecuta la funcion SHOWALL() en el ENTREGA_Model
+				$lista = array('login','IdTrabajo', 'Alias', 'Horas','Ruta');
+				$UsuariosBD = new ENTREGA_SHOWALL($lista, $datos, $num_tupla, $max_tuplas, $totalTuplas, $num_pagina, 'SHOWALL', '../Controllers/ENTREGA_Controller.php',$acciones); //Crea la vista SHOWALL de los usuarios de la BD	
+			}else{
+				if (!$_POST){
+					$ENTREGA = new ENTREGA_Model('','','', '','');//crea un un ENTREGA_Model con el IdTrabajo del usuario 
+				}
+				else{
+					$ENTREGA = get_data_form(); //Coge los datos del formulario
+				}
+
+				if(!isset($_REQUEST['num_pagina'])){ //Si es la 1a página del showall a mostrar
+					$num_pagina = 0;
+				}else{ //Si es otra página
+					$num_pagina = $_REQUEST['num_pagina']; //coge el numero de página del formulario
+				}
+				$num_tupla = $num_pagina*10; //número de la 1º tupla a mostrar
+				$max_tuplas = $num_tupla+10; // el número de tuplas a mostrar por página
+				$totalTuplas = $ENTREGA->contarTuplas(); //Cuenta el número de tuplas que hay en la BD
+				$datos = $ENTREGA->SHOWALL_User($num_tupla,$max_tuplas); //Ejecuta la funcion SHOWALL() en el ENTREGA_Model
+				$lista = array('login','IdTrabajo', 'Alias', 'Horas','Ruta');
+				$UsuariosBD = new ENTREGA_SHOWALL($lista, $datos, $num_tupla, $max_tuplas, $totalTuplas, $num_pagina, 'ALL', '../Controllers/ENTREGA_Controller.php',$acciones); //Crea la vista SHOWALL de los usuarios de la BD	
 			}
-			$num_tupla = $num_pagina*10; //número de la 1º tupla a mostrar
-			$max_tuplas = $num_tupla+10; // el número de tuplas a mostrar por página
-			$totalTuplas = $ENTREGA->contarTuplas(); //Cuenta el número de tuplas que hay en la BD
-			$datos = $ENTREGA->SHOWALL($num_tupla,$max_tuplas); //Ejecuta la funcion SHOWALL() en el ENTREGA_Model
-			$lista = array('login','IdTrabajo', 'Alias', 'Horas','Ruta');
-			$UsuariosBD = new ENTREGA_SHOWALL($lista, $datos, $num_tupla, $max_tuplas, $totalTuplas, $num_pagina, 'SHOWALL', '../Controllers/ENTREGA_Controller.php',$acciones); //Crea la vista SHOWALL de los usuarios de la BD	
-	}
+		}
 	}
 
 ?>

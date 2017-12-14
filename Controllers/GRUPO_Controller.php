@@ -138,31 +138,57 @@ if (!isset($_REQUEST['action'])){
 				$resultado = new GRUPO_SHOWALL($lista, $datos, 0, 0, 0, 0, 'SEARCH', '../Controllers/GRUPO_Controller.php');//Crea la vista SHOWALL y muestra los grupos que cumplen los parámetros de búsqueda 
 			}
 			break;
-		case 'SHOWCURRENT': //si desea ver un grupo en detalle
+		case 'SHOW': //si desea ver un grupo en detalle
 			$GRUPO = new GRUPO_Model($_REQUEST['IdGrupo'], '','');//crea un GRUPO_Model con el IdGrupo del grupo 
 			$tupla = $GRUPO->RellenaDatos();//A partir del IdGrupo recoge todos los atributos
 			$grupo = new GRUPO_SHOWCURRENT($tupla); //Crea la vista SHOWCURRENT del grupo en cuestión
 			break;
 		default: //Por defecto, Se muestra la vista SHOWALL
-			if (!$_POST){
-				$GRUPO = new GRUPO_Model('', '','');//crea un GRUPO_Model con el IdGrupo del grupo 
+			foreach ($acciones as $key => $value) {
+				if($value == 'ALL'){ //si puede ver el showall
+					$acceso = true; //acceso a true
+				}
 			}
-			else{
-				$GRUPO = get_data_form(); //Coge los datos del formulario
-			}
+			if($acceso == true){ //si tiene acceso, mostramos el showall
+				if (!$_POST){
+					$GRUPO = new GRUPO_Model('', '','');//crea un GRUPO_Model con el IdGrupo del grupo 
+				}
+				else{
+					$GRUPO = get_data_form(); //Coge los datos del formulario
+				}
 
-			if(!isset($_REQUEST['num_pagina'])){ //Si es la 1a página del showall a mostrar
-				$num_pagina = 0;
-			}else{ //Si es otra página
-				$num_pagina = $_REQUEST['num_pagina']; //coge el numero de página del formulario
-			}
-			$num_tupla = $num_pagina*10; //número de la 1º tupla a mostrar
-			$max_tuplas = $num_tupla+10; // el número de tuplas a mostrar por página
-			$totalTuplas = $GRUPO->contarTuplas(); //Cuenta el número de tuplas que hay en la BD
-			$datos = $GRUPO->SHOWALL($num_tupla,$max_tuplas); //Ejecuta la funcion SHOWALL() en el GRUPO_Model
-			$lista = array('IdGrupo', 'NombreGrupo', 'DescripGrupo');
-			$GruposBD = new GRUPO_SHOWALL($lista, $datos, $num_tupla, $max_tuplas, $totalTuplas, $num_pagina, 'SHOWALL', '../Controllers/GRUPO_Controller.php',$acciones); //Crea la vista SHOWALL de los grupos de la BD	
-	}
+				if(!isset($_REQUEST['num_pagina'])){ //Si es la 1a página del showall a mostrar
+					$num_pagina = 0;
+				}else{ //Si es otra página
+					$num_pagina = $_REQUEST['num_pagina']; //coge el numero de página del formulario
+				}
+				$num_tupla = $num_pagina*10; //número de la 1º tupla a mostrar
+				$max_tuplas = $num_tupla+10; // el número de tuplas a mostrar por página
+				$totalTuplas = $GRUPO->contarTuplas(); //Cuenta el número de tuplas que hay en la BD
+				$datos = $GRUPO->SHOWALL($num_tupla,$max_tuplas); //Ejecuta la funcion SHOWALL() en el GRUPO_Model
+				$lista = array('IdGrupo', 'NombreGrupo', 'DescripGrupo');
+				$GruposBD = new GRUPO_SHOWALL($lista, $datos, $num_tupla, $max_tuplas, $totalTuplas, $num_pagina, 'SHOWALL', '../Controllers/GRUPO_Controller.php',$acciones); //Crea la vista SHOWALL de los grupos de la BD
+			}else{
+				if (!$_POST){
+					$GRUPO = new GRUPO_Model('', '','');//crea un GRUPO_Model con el IdGrupo del grupo 
+				}
+				else{
+					$GRUPO = get_data_form(); //Coge los datos del formulario
+				}
+
+				if(!isset($_REQUEST['num_pagina'])){ //Si es la 1a página del showall a mostrar
+					$num_pagina = 0;
+				}else{ //Si es otra página
+					$num_pagina = $_REQUEST['num_pagina']; //coge el numero de página del formulario
+				}
+				$num_tupla = $num_pagina*10; //número de la 1º tupla a mostrar
+				$max_tuplas = $num_tupla+10; // el número de tuplas a mostrar por página
+				$totalTuplas = $GRUPO->contarTuplas(); //Cuenta el número de tuplas que hay en la BD
+				$datos = $GRUPO->SHOWALL_User($num_tupla,$max_tuplas); //Ejecuta la funcion SHOWALL() en el GRUPO_Model
+				$lista = array('IdGrupo', 'NombreGrupo', 'DescripGrupo');
+				$GruposBD = new GRUPO_SHOWALL($lista, $datos, $num_tupla, $max_tuplas, $totalTuplas, $num_pagina, 'ALL', '../Controllers/GRUPO_Controller.php',$acciones); //Crea la vista SHOWALL de los grupos de la BD
+			}	
+		}
 	}
 
 ?>
