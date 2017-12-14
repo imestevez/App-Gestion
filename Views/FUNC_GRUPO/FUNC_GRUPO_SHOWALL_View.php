@@ -8,19 +8,22 @@
     Esta clase es la vista de los usuarios de la BD
 
 */
-    class FUNC_GRUPO_SHOWCURRENT{
+    class FUNC_GRUPO_SHOWALL{
     var $IdGrupo; //declaración del atributo IdFuncionalidad
     var $NombreGrupo; //declaración del atributo NombreFuncionalidad
     var $DescripGrupo; //declaración del atributo DescripFuncionalidad
     var $lista; //lista con los grupos de un usuario
     var $datos;
+    var $acciones; //array de acciones
+
 //constructor de la clase
-function __construct($lista, $datos){
+function __construct($lista, $datos, $acciones){
     //asignación de valores de parámetro a los atributos de la clase
     $this->IdGrupo = $lista['IdGrupo'];
     $this->NombreGrupo = $lista['NombreGrupo'];
     $this->DescripGrupo = $lista['DescripGrupo'];
     $this->datos = $datos;
+    $this->acciones = $acciones;
 
 
 
