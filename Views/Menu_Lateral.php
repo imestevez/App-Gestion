@@ -22,6 +22,7 @@ $num=0;
             <li ><a href="#"><i class="fa fa-archive" aria-hidden="true"></i></i> <?php echo $strings['Gestiones'] ?><i class="icono derecha fa fa-chevron-circle-down" aria-hidden="true"></i></a>
                 <ul>
                 <?php
+                if($funcionalidades <> null){
                 foreach ($funcionalidades as $key => $value) {
               
                     if ($value == 1) {
@@ -84,6 +85,7 @@ $num=0;
                     <?php
                     }
                     $num++;
+                }
                 }
            ?>
               
