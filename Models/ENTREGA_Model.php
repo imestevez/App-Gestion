@@ -26,7 +26,11 @@ function __construct($login,$IdTrabajo, $Alias, $Horas,$Ruta){
 	$this->login = $login;
 	$this->IdTrabajo = $IdTrabajo;
 	$this->Alias = $Alias;
+	if($horas <> ''){
 	$this->Horas = $Horas;
+}else{
+	$this->Horas = 0;
+}
     $this->Ruta = $Ruta;
 
 
@@ -423,7 +427,7 @@ function comprobarExistenciaNota(){
 
 //Funcion para generar alias
 function generadorAlias() {
-	$length = 9;
+	$length = 6;
 	//Realizamos la greneración de alias mientras no se encuentre un alias unico
 	/* $sql ="SELECT * FROM ENTREGA WHERE (login = '$this->login' AND 
 	 									Alias = '$this->Alias' AND  
