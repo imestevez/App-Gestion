@@ -12,19 +12,41 @@ Controlador que recibe las peticiones del usuario y este ejecuta las acciones pe
 session_start(); //solicito trabajar con la session
 
 include_once '../Functions/Authentication.php';
+include_once '../Functions/ACL.php';
+include_once '../Views/MESSAGE_View.php';
 
 if (!IsAuthenticated()){
 	header('Location:../index.php');
-}
-include '../Models/GRUPO_Model.php';
+}else{
 
-include '../Views/GRUPO/GRUPO_SHOWALL_View.php';
-include '../Views/GRUPO/GRUPO_SHOWCURRENT_View.php';
-include '../Views/GRUPO/GRUPO_ADD_View.php';
-include '../Views/GRUPO/GRUPO_EDIT_View.php';
-include '../Views/GRUPO/GRUPO_SEARCH_View.php';
-include '../Views/GRUPO/GRUPO_DELETE_View.php';
-include '../Views/MESSAGE_View.php';
+if(isset($_REQUEST["action"]))  {
+	$action = $_REQUEST["action"];
+}else{
+
+	$action = '';
+}
+
+//Si no tiene permisos para acceder a este controlador con la accion que trae
+if(!HavePermissions(2, $action)) {
+	//new MESSAGE('No tienes permisos para realizar esta accion', '../index.php');
+	header('Location:../index.php'); //vuelve al index
+}
+//almacenamos un array de permidos del grupo
+$permisos = listaPermisos();
+$acciones = listaAcciones(2);
+
+//Pnemos la variabla acceso  a false con la que se controla si el usuario puede ver un showall o no
+$acceso=false;
+
+include_once '../Models/GRUPO_Model.php';
+
+include_once '../Views/GRUPO/GRUPO_SHOWALL_View.php';
+include_once '../Views/GRUPO/GRUPO_SHOWCURRENT_View.php';
+include_once '../Views/GRUPO/GRUPO_ADD_View.php';
+include_once '../Views/GRUPO/GRUPO_EDIT_View.php';
+include_once '../Views/GRUPO/GRUPO_SEARCH_View.php';
+include_once '../Views/GRUPO/GRUPO_DELETE_View.php';
+include_once '../Views/MESSAGE_View.php';
 
 
 
@@ -69,7 +91,7 @@ if (!isset($_REQUEST['action'])){
 }
 	// En funcion de la accion elegida
 	Switch ($action){
-		case 'ADD': //Si quiere hacer un ADD
+		case 'ASIG': //Si quiere hacer un ADD
 			if (!$_POST){ //si viene del showall (no es un post)
 
 				$form = new GRUPO_ADD(); //Crea la vista ADD y muestra formulario para rellenar por el usuario
@@ -139,7 +161,8 @@ if (!isset($_REQUEST['action'])){
 			$totalTuplas = $GRUPO->contarTuplas(); //Cuenta el número de tuplas que hay en la BD
 			$datos = $GRUPO->SHOWALL($num_tupla,$max_tuplas); //Ejecuta la funcion SHOWALL() en el GRUPO_Model
 			$lista = array('IdGrupo', 'NombreGrupo', 'DescripGrupo');
-			$GruposBD = new GRUPO_SHOWALL($lista, $datos, $num_tupla, $max_tuplas, $totalTuplas, $num_pagina, 'SHOWALL', '../Controllers/GRUPO_Controller.php'); //Crea la vista SHOWALL de los grupos de la BD	
+			$GruposBD = new GRUPO_SHOWALL($lista, $datos, $num_tupla, $max_tuplas, $totalTuplas, $num_pagina, 'SHOWALL', '../Controllers/GRUPO_Controller.php',$acciones); //Crea la vista SHOWALL de los grupos de la BD	
+	}
 	}
 
 ?>

@@ -11,18 +11,40 @@ Controlador que recibe las peticiones del usuario y este ejectuta las acciones p
 */
 session_start(); //solicito trabajar con la session
 
+
 include_once '../Functions/Authentication.php';
+include_once '../Functions/ACL.php';
+include_once '../Views/MESSAGE_View.php';
 
 if (!IsAuthenticated()){
 	header('Location:../index.php');
+}else{
+
+if(isset($_REQUEST["action"]))  {
+	$action = $_REQUEST["action"];
+}else{
+
+	$action = '';
 }
 
-include '../Models/ACCION_Model.php';
-include '../Models/PERMISO_Model.php';
+//Si no tiene permisos para acceder a este controlador con la accion que trae
+if(!HavePermissions(5, $action)) {
+	//new MESSAGE('No tienes permisos para realizar esta accion', '../index.php');
+	header('Location:../index.php'); //vuelve al index
+}
+//almacenamos un array de permidos del grupo
+$permisos = listaPermisos();
+$acciones = listaAcciones(5);
 
-include '../Views/PERMISO/PERMISO_SHOWALL_View.php';
-include '../Views/PERMISO/PERMISO_SEARCH_View.php';
-include '../Views/MESSAGE_View.php';
+//Pnemos la variabla acceso  a false con la que se controla si el usuario puede ver un showall o no
+$acceso=false;
+
+include_once '../Models/ACCION_Model.php';
+include_once '../Models/PERMISO_Model.php';
+
+include_once '../Views/PERMISO/PERMISO_SHOWALL_View.php';
+include_once '../Views/PERMISO/PERMISO_SEARCH_View.php';
+include_once '../Views/MESSAGE_View.php';
 
 
 
@@ -100,7 +122,8 @@ if (!isset($_REQUEST['action'])){
 			$totalTuplas = $PERMISOS->contarTuplas(); //Cuenta el número de tuplas que hay en la BD
 			$datos = $PERMISOS->SHOWALL($num_tupla,$max_tuplas); //Ejecuta la funcion SHOWALL() en el USUARIOS_Model
 			$lista = array('NombreGrupo','NombreFuncionalidad','NombreAccion');
-			$AccionesBD = new PERMISO_SHOWALL($lista, $datos, $num_tupla, $max_tuplas, $totalTuplas, $num_pagina, 'SHOWALL', '../Controllers/PERMISO_Controller.php'); //Crea la vista SHOWALL de los usuarios de la BD	
+			$AccionesBD = new PERMISO_SHOWALL($lista, $datos, $num_tupla, $max_tuplas, $totalTuplas, $num_pagina, 'SHOWALL', '../Controllers/PERMISO_Controller.php',$acciones); //Crea la vista SHOWALL de los usuarios de la BD	
+	}
 	}
 
 ?>

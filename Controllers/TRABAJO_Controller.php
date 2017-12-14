@@ -12,21 +12,42 @@ Controlador que recibe las acciones relacionadas con TRABAJO
 session_start(); //solicito trabajar con la session
 
 include_once '../Functions/Authentication.php';
+include_once '../Functions/ACL.php';
+include_once '../Views/MESSAGE_View.php';
 
 if (!IsAuthenticated()){
 	header('Location:../index.php');
+}else{
+
+if(isset($_REQUEST["action"]))  {
+	$action = $_REQUEST["action"];
+}else{
+
+	$action = '';
 }
-include '../Models/TRABAJO_Model.php';
 
-include '../Views/TRABAJO/TRABAJO_SHOWALL_View.php';
-include '../Views/TRABAJO/TRABAJO_SHOWCURRENT_View.php';
-include '../Views/TRABAJO/TRABAJO_ADD_View.php';
-include '../Views/TRABAJO/TRABAJO_EDIT_View.php';
-include '../Views/TRABAJO/TRABAJO_SEARCH_View.php';
-include '../Views/TRABAJO/TRABAJO_DELETE_View.php';
-include '../Views/MESSAGE_View.php';
+//Si no tiene permisos para acceder a este controlador con la accion que trae
+if(!HavePermissions(6, $action)) {
+	//new MESSAGE('No tienes permisos para realizar esta accion', '../index.php');
+	header('Location:../index.php'); //vuelve al index
+}
+//almacenamos un array de permidos del grupo
+$permisos = listaPermisos();
+$acciones = listaAcciones(6);
 
-include '../Views/TRABAJO/TRABAJO_SHOWALL_HISTORIAS_View.php';
+//Pnemos la variabla acceso  a false con la que se controla si el usuario puede ver un showall o no
+$acceso=false;
+include_once '../Models/TRABAJO_Model.php';
+
+include_once '../Views/TRABAJO/TRABAJO_SHOWALL_View.php';
+include_once '../Views/TRABAJO/TRABAJO_SHOWCURRENT_View.php';
+include_once '../Views/TRABAJO/TRABAJO_ADD_View.php';
+include_once '../Views/TRABAJO/TRABAJO_EDIT_View.php';
+include_once '../Views/TRABAJO/TRABAJO_SEARCH_View.php';
+include_once '../Views/TRABAJO/TRABAJO_DELETE_View.php';
+include_once '../Views/MESSAGE_View.php';
+
+include_once '../Views/TRABAJO/TRABAJO_SHOWALL_HISTORIAS_View.php';
 
 
 
@@ -198,7 +219,8 @@ if (!isset($_REQUEST['action'])){
 			$totalTuplas = $TRABAJO->contarTuplas(); //Cuenta el número de tuplas que hay en la BD
 			$datos = $TRABAJO->SHOWALL($num_tupla,$max_tuplas); //Ejecuta la funcion SHOWALL() en el TRABAJO_Model
 			$lista = array('IdTrabajo', 'NombreTrabajo', 'FechaIniTrabajo','FechaFinTrabajo','PorcentajeNota');
-			$UsuariosBD = new TRABAJO_SHOWALL($lista, $datos, $num_tupla, $max_tuplas, $totalTuplas, $num_pagina, 'SHOWALL', '../Controllers/TRABAJO_Controller.php'); //Crea la vista SHOWALL de los usuarios de la BD	
+			$UsuariosBD = new TRABAJO_SHOWALL($lista, $datos, $num_tupla, $max_tuplas, $totalTuplas, $num_pagina, 'SHOWALL', '../Controllers/TRABAJO_Controller.php',$acciones); //Crea la vista SHOWALL de los usuarios de la BD	
+	}
 	}
 
 ?>

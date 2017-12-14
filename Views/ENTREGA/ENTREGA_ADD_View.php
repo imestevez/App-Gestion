@@ -63,7 +63,7 @@ include '../Views/Header.php';
 
                  <div id="izquierda">
                     <label for="Alias"><?php echo $strings['Alias'] ?>: </label>
-                        <input type="text" name="Alias" maxlength="9" size="9" onblur="validarAlias(this,9)"  ><div id="Alias" class="oculto" style="display:none"><?php echo $strings['div_Alfanumerico']?></div> <div id="AliasVacio" class="oculto" style="display:none"><?php echo $strings['div_vacio']?></div> 
+                        <input type="text" name="Alias" maxlength="6" size="6" onblur="validarAlias(this,9)"  ><div id="Alias" class="oculto" style="display:none"><?php echo $strings['div_Alfanumerico']?></div> <div id="AliasVacio" class="oculto" style="display:none"><?php echo $strings['div_vacio']?></div> 
                 </div>
 
 

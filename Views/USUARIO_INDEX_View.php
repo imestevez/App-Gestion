@@ -27,7 +27,7 @@ class Index {
             <h2 style="text-align: center;"><strong><?php echo $strings['Grupo SOLFAMIDAS'] ?></strong></h2><br>
        
             <img style="margin-left: 26%;" src="../Views/images/index.jpg" width="380px" height="280px" alt="<?php echo $strings['Imagen Solfamidas'] ?>"><br>
-          
+          <script type='text/javascript' src='http://www.aemet.es/es/eltiempo/prediccion/municipios/launchwidget/ourense-id32054?w=g4p01110001ohmffffffw890z190x4f86d9t95b6e9r1s8n2'></script><noscript><a target='_blank' style='font-weight: bold;font-size: 1.20em;' href='http://www.aemet.es/es/eltiempo/prediccion/municipios/ourense-id32054'>El Tiempo. Consulte la predicción de la AEMET para Ourense</a></noscript>
                
             </div>
 		 </section>
