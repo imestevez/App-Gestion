@@ -39,7 +39,7 @@ function render(){
 
                 <div id="izquierda">
                     <label for="NotaTrabajo"><?php echo $strings['Nota Trabajo']?>: </label>
-                        <input type="text"  name="NotaTrabajo" maxlength="4"  size="4" onblur="validarNotaTrabajoBuscar(this, 2, 0, 10)" ><div id="NotaTrabajoNums" class="oculto" style="display:none"><?php echo $strings['div_numeros']?></div> <div id="NotaTrabajo" class="oculto" style="display:none"><?php echo $strings['div_numerosRango10']?> </div> <div id="NotaTrabajoDecimal" class="oculto" style="display:none"><?php echo $strings['div_Num_Decs']?></div> <div id="NotaTrabajoVacio" class="oculto" style="display:none"><?php echo $strings['div_vacio']?></div>
+                        <input type="text"  name="NotaTrabajo" maxlength="5"  size="5" onblur="validarNotaTrabajoBuscar(this, 2, 0, 10)" ><div id="NotaTrabajoNums" class="oculto" style="display:none"><?php echo $strings['div_numeros']?></div> <div id="NotaTrabajo" class="oculto" style="display:none"><?php echo $strings['div_numerosRango10']?> </div> <div id="NotaTrabajoDecimal" class="oculto" style="display:none"><?php echo $strings['div_Num_Decs']?></div> <div id="NotaTrabajoVacio" class="oculto" style="display:none"><?php echo $strings['div_vacio']?></div><!--maxlength=5 porque incluye el .-->
                 </div>
         
                 <div class="acciones" style="float: right; margin-left:0%; margin-right: 50%">
