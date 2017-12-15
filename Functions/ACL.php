@@ -74,6 +74,7 @@ function HavePermissions($IdFuncionalidad, $IdAccion){
 function listaPermisos(){
 
 	$lista = null;
+	$num=0;
 	$USU_GRUPO = new USU_GRUPO_Model($_SESSION["login"], '');
 	$listaGrupos = $USU_GRUPO->listagrupoUsuario();
 	if($listaGrupos == null){
@@ -85,15 +86,17 @@ function listaPermisos(){
 		$PERMISO = new PERMISO_Model($IdGrupo, '', '');
 		$resultado = $PERMISO->permisosGrupo();
 		$num_rows = mysqli_num_rows($resultado);
-		if($num_rows == 0){
-			return null;
-		}
+		if($num_rows > 0){
+			
 		while($row = mysqli_fetch_array($resultado)){
-			$lista[$IdGrupo] = array($row["IdGrupo"],$row["IdFuncionalidad"],$row["IdAccion"] );
+			$lista[$num] = array($row["IdGrupo"],$row["IdFuncionalidad"],$row["IdAccion"] );
+			$num++;
+		}
+		return $lista;
 		}
 	}
 
-	return $lista;
+	return $null;
 }
 
 function listaFuncionalidades(){
@@ -144,6 +147,7 @@ function listaAcciones($IdFuncionalidad){
 	}
 }
 	return null;
-
 }
+
+
 ?>
