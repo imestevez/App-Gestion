@@ -366,6 +366,7 @@ array(
 'Asignación de QAs' => 'Asignación de QAs',
 'Asignación de QA' => 'Asignación de QA',
 'Editar asignación de QA' => 'Editar asignación de QA',
+'Resultado de búsqueda: Asignación de QAs' => 'Resultado da búsqueda: Asignación de QAs',
 
 'ERROR: Fallo en la inserción. Ya existe esa asignación de QA' => 'ERROR: Fallo na inserción. Xa existe esa asignación de QA',
 'ERROR: No existe esa entrega para evaluar' => 'ERROR: Non existe esa entrega para evaluar',

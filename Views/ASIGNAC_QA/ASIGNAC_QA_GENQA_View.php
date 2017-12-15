@@ -6,7 +6,7 @@
 
 */
 
-	class ASIGNAC_QA_GEN{
+	class ASIGNAC_QA_GENQA{
 
 		function __construct(){
 
@@ -22,7 +22,7 @@
 			<section class="pagina" style="min-height: 900px" >
        		<fieldset class="edit" style="width: 70%; margin-left: 15%">
                 <legend style="margin-left: 30%"><?php echo $strings['Asignación automática de QAs'] ?></legend>
-            <form method="post" name="GEN"  action="../Controllers/ASIGNAC_QA_Controller.php">
+            <form method="post" name="GENQA"  action="../Controllers/ASIGNAC_QA_Controller.php">
 
                 <div id="izquierda">
                     <label for="IdTrabajo"><?php echo $strings['Id del trabajo'] ?>: </label>
@@ -36,7 +36,7 @@
 
                  
             <div class="acciones" style="float: right; margin-left:0%; margin-right: 50%">
-                    <a href="../Controllers/ASIGNAC_QA_Controller.php?action=GEN&IdTrabajo=<?php echo $this->IdTrabajo?>&numEntregas=<?php echo $this->numEntregas?>"> <input type="image" name="action" value="GEN" src="../Views/images/confirmar.png" title="<?php echo $strings['Enviar Formulario'] ?>" onclick="return validar('ADD')"></a>
+                    <a href="../Controllers/ASIGNAC_QA_Controller.php?action=GENQA&IdTrabajo=<?php echo $this->IdTrabajo?>&numEntregas=<?php echo $this->numEntregas?>"> <input type="image" name="action" value="GENQA" src="../Views/images/confirmar.png" title="<?php echo $strings['Enviar Formulario'] ?>" onclick="return validar('ADD')"></a>
                 </div>
             </form>                     
             <div class="acciones" style="float: left;">

@@ -58,7 +58,7 @@ function render(){
                 </td>
                     <th><?php echo $strings['Asignación auto. de QAs']?></th>
                     <td>
-                        <a href="../Controllers/ASIGNAC_QA_Controller.php?action=GEN" ><input type="image" src="../Views/images/flecha-reproducir.png" name="action" title="<?php echo $strings['Asignación automática de QAs']?>" value="GEN" ></a>
+                        <a href="../Controllers/ASIGNAC_QA_Controller.php?action=GENQA" ><input type="image" src="../Views/images/flecha-reproducir.png" name="action" title="<?php echo $strings['Asignación automática de QAs']?>" value="GENQA" ></a>
                     </td>    
                 </tr>
                 <tr>

@@ -42,7 +42,7 @@ include_once '../Views/ASIGNAC_QA/ASIGNAC_QA_ADD_View.php';
 include_once '../Views/ASIGNAC_QA/ASIGNAC_QA_EDIT_View.php';
 include_once '../Views/ASIGNAC_QA/ASIGNAC_QA_SEARCH_View.php';
 include_once '../Views/ASIGNAC_QA/ASIGNAC_QA_DELETE_View.php';
-include_once '../Views/ASIGNAC_QA/ASIGNAC_QA_GEN_View.php';
+include_once '../Views/ASIGNAC_QA/ASIGNAC_QA_GENQA_View.php';
 include_once '../Views/ASIGNAC_QA/ASIGNAC_QA_GENEV_View.php';
 include_once '../Views/MESSAGE_View.php';
 
@@ -183,15 +183,15 @@ if (!isset($_REQUEST['action'])){
 				$resultado = new ASIGNAC_QA_SHOWALL($lista, $datos, 0, 0, 0, 0, 'SEARCH', '../Controllers/ASIGNAC_QA_Controller.php');//Crea la vista SHOWALL y muestra los usuarios que cumplen los parámetros de búsqueda 
 			}
 			break;
-		case 'SHOWCURRENT': //si desea ver un usuario en detalle
+		case 'SHOW': //si desea ver un usuario en detalle
 			$ASIGNAC_QA = new ASIGNAC_QA_Model($_REQUEST['IdTrabajo'],'', $_REQUEST['LoginEvaluador'],'',$_REQUEST['AliasEvaluado']);//crea un un ASIGNAC_QA_Model con el IdFuncionalidad del usuario 
 			$tupla = $ASIGNAC_QA->RellenaDatos();//A partir del IdFuncionalidad recoge todos los atributos
 			$usuario = new ASIGNAC_QA_SHOWCURRENT($tupla); //Crea la vista SHOWCURRENT del usuario requerido
 			break;
 
-		case 'GEN':
+		case 'GENQA':
 			if (!$_POST){
-				$form = new ASIGNAC_QA_GEN(); //Muestra el formmulario para la asignación automática
+				$form = new ASIGNAC_QA_GENQA(); //Muestra el formmulario para la asignación automática
 			}
 			else{
 				$ASIGNAC_QA = new ASIGNAC_QA_Model('','','','','');
