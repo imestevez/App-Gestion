@@ -136,7 +136,7 @@ if (!isset($_REQUEST['action'])){
 				$NOTA_TRABAJO = get_data_form(); //coge los datos del formulario del usuario que desea buscar
 				$datos = $NOTA_TRABAJO->SEARCH();//Ejecuta la funcion SEARCH() en el NOTA_TRABAJO_Model
 				$lista = array('login', 'IdTrabajo','NotaTrabajo');
-				$resultado = new NOTA_TRABAJO_SHOWALL($lista, $datos, 0, 0, 0, 0, 'SEARCH', '../Controllers/NOTA_TRABAJO_Controller.php');//Crea la vista SHOWALL y muestra los usuarios que cumplen los parámetros de búsqueda 
+				$resultado = new NOTA_TRABAJO_SHOWALL($lista, $datos, 0, 0, 0, 0, 'SEARCH', '../Controllers/NOTA_TRABAJO_Controller.php',$acciones);//Crea la vista SHOWALL y muestra los usuarios que cumplen los parámetros de búsqueda 
 			}
 			break;
 		case 'SHOW': //si desea ver un usuario en detalle

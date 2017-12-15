@@ -163,7 +163,7 @@ function renderSearch(){
                     <th><?php echo $strings['Id Funcionalidad']?></th>   
                     <th><?php echo $strings['Nombre Funcionalidad']?></th>                   
                     <th><?php echo $strings['Descripción Funcionalidad']?></th>
-                    <th COLSPAN="2"> <?php echo $strings['Acciones']?></th>
+                    <th> <?php echo $strings['Acciones']?></th>
 
                 <td>
                      <?php 
@@ -193,9 +193,8 @@ function renderSearch(){
                 <td><?php echo $row["IdFuncionalidad"]; ?></td>
                 <td><?php echo $row["NombreFuncionalidad"]; ?></td>
                 <td><?php echo $row["DescripFuncionalidad"]; ?></td>
-                <td><?php echo $row['NombreAccion']?></td>
-                        <td>  <a href="../Controllers/FUNCIONALIDAD_Controller.php?action=SHOW&IdFuncionalidad=<?php echo $row["IdFuncionalidad"]?>&IdAccion=<?php echo $row["IdAccion"] ?>">
-                            <input type="image" src="../Views/images/lista.png" name="action" title="<?php echo $strings['Mostrar Grupos'] ?>" value="SHOW" action=""></a>
+                        <td>  <a href="../Controllers/FUNC_ACCION_Controller.php?action=SHOWALL&IdFuncionalidad=<?php echo $row["IdFuncionalidad"]?>&NombreFuncionalidad=<?php echo $row['NombreFuncionalidad']?>">
+                            <input type="image" src="../Views/images/lista.png" name="action" title="<?php echo $strings['Mostrar Acciones'] ?>" value="SHOW" action=""></a>
                       </td>
 
                 <td class="edit_tabla">

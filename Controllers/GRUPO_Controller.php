@@ -135,7 +135,7 @@ if (!isset($_REQUEST['action'])){
 				$GRUPO = get_data_GroupBD(); //coge los datos del formulario del grupo que desea buscar
 				$datos = $GRUPO->SEARCH();//Ejecuta la funcion SEARCH() en el GRUPO_Model
 				$lista = array('IdGrupo','NombreGrupo','DescripGrupo');
-				$resultado = new GRUPO_SHOWALL($lista, $datos, 0, 0, 0, 0, 'SEARCH', '../Controllers/GRUPO_Controller.php');//Crea la vista SHOWALL y muestra los grupos que cumplen los parámetros de búsqueda 
+				$resultado = new GRUPO_SHOWALL($lista, $datos, 0, 0, 0, 0, 'SEARCH', '../Controllers/GRUPO_Controller.php',$acciones);//Crea la vista SHOWALL y muestra los grupos que cumplen los parámetros de búsqueda 
 			}
 			break;
 		case 'SHOW': //si desea ver un grupo en detalle
