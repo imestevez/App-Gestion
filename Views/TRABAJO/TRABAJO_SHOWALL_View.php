@@ -233,26 +233,48 @@ function renderSearch(){
                      <?php 
 
                     foreach ($this->acciones as $key => $value) {
-                        if($value == 'SEARCH'){
+        
+
+                        if($value =='SEARCH'){
                             ?>
                                <a href="../Controllers/TRABAJO_Controller.php?action=SEARCH"><input type="image" src="../Views/images/search.png" name="action" title="<?php echo $strings['Buscar']?>" value="SEARCH"></a>
                             <?php
                         }
 
-                         if($value == 'ADD'){
+                         if($value =='ADD'){
                             ?>
 
-                    <a href="../Controllers/TRABAJO_Controller.php?action=ADD" ><input type="image" src="../Views/images/anadir.png" name="action" title="<?php echo $strings['Añadir']?>" value="ADD" ></a>
+                          <a href="../Controllers/TRABAJO_Controller.php?action=ADD" ><input type="image" src="../Views/images/anadir.png" name="action" title="<?php echo $strings['Añadir']?>" value="ADD" ></a>
                     <?php
                         }
                     }
-                    ?>
+            ?>
                 </td>
-                   <th><?php echo $strings['Entrega']?></th>
+                  <?php 
+                
+                if($this->admin == false){
+                ?>
 
+                <th><?php echo $strings['Entrega']?></th>
+
+                <?php
+            }
+                $historia = false;
+
+            foreach ($this->permisos as $key => $value) {
+                # code...
+             if($value[1] == 7) {
+                $historia = true;
+            }
+        }
+        if($historia == true){
+                ?>
                 <th><?php echo $strings['Historias']?></th>
+            <?php
+            }
+        ?>
                 </tr>
-<?php
+    <?php
             while( $row = mysqli_fetch_array($this->datos)) { //Mientras el numero de tuplas no llegue al máximo y haya tuplas en la BD
             //si la FechaFinTrabajo  viene vacia la asignamos vacia
             if ($row["FechaFinTrabajo"] == ''){
@@ -268,11 +290,12 @@ function renderSearch(){
                 <td><?php echo $row["NombreTrabajo"]; ?></td>
                 <td><?php echo $this->FechaFinTrabajo; ?></td>
                 <td class="edit_tabla">
-              <?php 
+                    <?php 
+
                     foreach ($this->acciones as $key => $value) {
                         if($value == 'SHOW'){
                             ?>
-                         <a href="../Controllers/TRABAJO_Controller.php?action=SHOW&IdTrabajo=<?php echo $row["IdTrabajo"]?>"><input type="image" src="../Views/images/ojo.png" name="action" title="<?php echo $strings['Mostrar en detalle'] ?>" value="SHOW" action=""></a>
+                                 <a href="../Controllers/TRABAJO_Controller.php?action=SHOW&IdTrabajo=<?php echo $row["IdTrabajo"]?>"><input type="image" src="../Views/images/ojo.png" name="action" title="<?php echo $strings['Mostrar en detalle'] ?>" value="SHOW" action=""></a>
                             <?php
                         }
 
@@ -288,18 +311,31 @@ function renderSearch(){
                     <?php
                         }
                     }
-                    ?> 
+                    ?>     
                 </td>
+            <?php
+                if($this->admin == false){
+                ?>
                 <td>
                   <a href="../Controllers/ENTREGA_Controller.php?action=ADD&IdTrabajo=<?php echo $row["IdTrabajo"]?>&login=<?php echo $_SESSION['login']?>&origen=../Controllers/TRABAJO_Controller.php"><input type="image" src="../Views/images/anadir.png" name="action" title="<?php echo $strings['Añadir'] ?>" value="ADD"></a>
                 </td>
+            <?php
+        }
 
+       foreach ($this->permisos as $key => $value) {
+                # code...
+             if( ($value[1] == 7)  && ($value[2] == 'ADD') ){
+            ?>
                 <td>
                     <a href="../Controllers/HISTORIA_Controller.php?action=ADD&IdTrabajo=<?php echo $row["IdTrabajo"]?>&NombreTrabajo=<?php echo $row["NombreTrabajo"]?>" ><input type="image" src="../Views/images/anadir.png" name="action" title="<?php echo $strings['Añadir']?>" value="ADD" ></a>
+
                     <a href="../Controllers/TRABAJO_Controller.php?action=SHOWALL_HISTORIAS&IdTrabajo=<?php echo $row["IdTrabajo"]?>&NombreTrabajo=<?php echo $row["NombreTrabajo"]?>"><input type="image" src="../Views/images/ojo.png" name="action" title="<?php echo $strings['Mostrar en detalle'] ?>" value="SHOWCURRENT" action=""></a>
 
                 </td>
-
+        <?php
+            }
+        }
+            ?>
                 </tr>                     
            
 <?php
