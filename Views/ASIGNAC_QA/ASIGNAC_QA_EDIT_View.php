@@ -46,19 +46,19 @@ function render(){
                         <input type="text" name="IdTrabajo" maxlength="6" size="6" readonly value="<?php echo $this->IdTrabajo?>">
                 </div>
 
-               <div id="izquierda">
-                    <label for="IdTrabajo"><?php echo $strings['Id del trabajo'] ?>: </label>
-                        <input type="text" name="IdTrabajo" maxlength="6" size="6" readonly ><div id="IdTrabajo" class="oculto" style="display:none"><?php echo $strings['div_Alfanumerico']?></div> <div id="IdFuncionalidadVacio" class="oculto" style="display:none"><?php echo $strings['div_vacio']?></div> 
+                <div id="izquierda">
+                    <label for="LoginEvaluador"><?php echo $strings['Login del evaluador']?>: </label>
+                        <input type="text" name="LoginEvaluador" maxlength="9" size="9" readonly value="<?php echo $this->LoginEvaluador?>" ><div id="LoginEvaluador" class="oculto" style="display:none"><?php echo $strings['div_Alfanumerico']?></div> <div id="LoginEvaluadorVacio" class="oculto" style="display:none"><?php echo $strings['div_vacio']?></div> 
                 </div>
 
                 <div id="izquierda">
-                    <label for="LoginEvaluador"><?php echo $strings['Login del evaluador']?>: </label>
-                        <input type="text" name="LoginEvaluador" maxlength="9" size="9" readonly ><div id="LoginEvaluador" class="oculto" style="display:none"><?php echo $strings['div_Alfanumerico']?></div> <div id="LoginEvaluadorVacio" class="oculto" style="display:none"><?php echo $strings['div_vacio']?></div> 
+                    <label for="LoginEvaluado"><?php echo $strings['Login del evaluado']?>: </label>
+                        <input type="text" name="LoginEvaluado" maxlength="9" size="9" value="<?php echo $this->LoginEvaluado?>" onblur="javascript:void(validarLoginEvaluador(this, 9))" ><div id="LoginEvaluado" class="oculto" style="display:none"><?php echo $strings['div_Alfanumerico']?></div> <div id="LoginEvaluadoVacio" class="oculto" style="display:none"><?php echo $strings['div_vacio']?></div> 
                 </div>
 
                  <div id="izquierda">
                     <label for="AliasEvaluado"><?php echo $strings['Alias del evaluado']?>: </label>
-                        <input type="text" name="AliasEvaluado" maxlength="6" size="6" readonly ><div id="AliasEvaluado" class="oculto" style="display:none"><?php echo $strings['div_Alfanumerico']?></div> <div id="AliasEvaluadoVacio" class="oculto" style="display:none"><?php echo $strings['div_vacio']?></div> 
+                        <input type="text" name="AliasEvaluado" maxlength="6" size="6" readonly value="<?php echo $this->AliasEvaluado?>" ><div id="AliasEvaluado" class="oculto" style="display:none"><?php echo $strings['div_Alfanumerico']?></div> <div id="AliasEvaluadoVacio" class="oculto" style="display:none"><?php echo $strings['div_vacio']?></div> 
                 </div>
                 
         

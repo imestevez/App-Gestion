@@ -34,7 +34,6 @@ $acciones = listaAcciones(9);
 
 //Pnemos la variabla acceso  a false con la que se controla si el usuario puede ver un showall o no
 $acceso=false;
-session_start(); //solicito trabajar con la session
 include_once '../Models/ASIGNAC_QA_Model.php';
 
 include_once '../Views/ASIGNAC_QA/ASIGNAC_QA_SHOWALL_View.php';
@@ -43,6 +42,8 @@ include_once '../Views/ASIGNAC_QA/ASIGNAC_QA_ADD_View.php';
 include_once '../Views/ASIGNAC_QA/ASIGNAC_QA_EDIT_View.php';
 include_once '../Views/ASIGNAC_QA/ASIGNAC_QA_SEARCH_View.php';
 include_once '../Views/ASIGNAC_QA/ASIGNAC_QA_DELETE_View.php';
+include_once '../Views/ASIGNAC_QA/ASIGNAC_QA_GEN_View.php';
+include_once '../Views/ASIGNAC_QA/ASIGNAC_QA_GENEV_View.php';
 include_once '../Views/MESSAGE_View.php';
 
 
@@ -156,17 +157,17 @@ if (!isset($_REQUEST['action'])){
 			}
 			break;
 		case 'EDIT': //si el usuario quiere editar	
-			// if (!$_POST){
-			// 	$ASIGNAC_QA = new ASIGNAC_QA_Model($_REQUEST['IdTrabajo'],'', $_REQUEST['LoginEvaluador'],'',$_REQUEST['AliasEvaluado']); //crea un un ASIGNAC_QA_Model con el IdFuncionalidad del usuario 
-			// 	$datos = $ASIGNAC_QA->RellenaDatos();  //A partir del IdFuncionalidad recoge todos los atributos
-			// 	$usuario = new ASIGNAC_QA_EDIT($datos); //Crea la vista EDIT con los datos del usuario
-			// }
-			// else{
-			// 	$ASIGNAC_QA = get_data_form(); //coge los datos del formulario del usuario que desea editar
-			// 	$respuesta = $ASIGNAC_QA->EDIT(); //Ejecuta la funcion EDIT() en el ASIGNAC_QA_Model
-			// 	$mensaje = new MESSAGE($respuesta, '../Controllers/ASIGNAC_QA_Controller.php');//muestra el mensaje despues de la sentencia sql
-			// }
-			// break;
+			if (!$_POST){
+				$ASIGNAC_QA = new ASIGNAC_QA_Model($_REQUEST['IdTrabajo'],'', $_REQUEST['LoginEvaluador'], '',$_REQUEST['AliasEvaluado']); //crea un un ASIGNAC_QA_Model 
+				$datos = $ASIGNAC_QA->RellenaDatos();  //A partir del IdFuncionalidad recoge todos los atributos
+				$usuario = new ASIGNAC_QA_EDIT($datos); //Crea la vista EDIT con los datos del usuario
+			}
+			else{
+				$ASIGNAC_QA = get_data_form(); //coge los datos del formulario del usuario que desea editar
+				$respuesta = $ASIGNAC_QA->EDIT(); //Ejecuta la funcion EDIT() en el ASIGNAC_QA_Model
+				$mensaje = new MESSAGE($respuesta, '../Controllers/ASIGNAC_QA_Controller.php');//muestra el mensaje despues de la sentencia sql
+			}
+			break;
 			$asigna = new ASIGNAC_QA_Model('','','','','');
 			$respuesta = $asigna->asig_QAS($_REQUEST['IdTrabajo']);
 
@@ -187,6 +188,27 @@ if (!isset($_REQUEST['action'])){
 			$tupla = $ASIGNAC_QA->RellenaDatos();//A partir del IdFuncionalidad recoge todos los atributos
 			$usuario = new ASIGNAC_QA_SHOWCURRENT($tupla); //Crea la vista SHOWCURRENT del usuario requerido
 			break;
+
+		case 'GEN':
+			if (!$_POST){
+				$form = new ASIGNAC_QA_GEN(); //Muestra el formmulario para la asignación automática
+			}
+			else{
+				$ASIGNAC_QA = new ASIGNAC_QA_Model('','','','','');
+				$lista = $ASIGNAC_QA->asig_QAS($_REQUEST['IdTrabajo'],$_REQUEST['numEntregas']); //mete datos en respuesta usuarios despues de ejecutar el add con los de funcionalidad
+				$usuario = new MESSAGE($lista, '../Controllers/ASIGNAC_QA_Controller.php'); //muestra el mensaje despues de la sentencia sql
+			}
+			break;	
+		case 'GENEV':
+			if (!$_POST){
+				$form = new ASIGNAC_QA_GENEV(); //Muestra el formmulario para la generación de historias a evaluar
+			}
+			else{
+				$ASIGNAC_QA = new ASIGNAC_QA_Model('','','','','');
+				$lista = $ASIGNAC_QA->historiasEvaluación($_REQUEST['IdTrabajo']); 
+				$usuario = new MESSAGE($lista, '../Controllers/ASIGNAC_QA_Controller.php'); //muestra el mensaje despues de la sentencia sql
+			}
+			break;	
 		default: //Por defecto, Se muestra la vista SHOWALL
 			if (!$_POST){
 				$ASIGNAC_QA = new ASIGNAC_QA_Model('', '','', '', '');//crea un un ASIGNAC_QA_Model  
