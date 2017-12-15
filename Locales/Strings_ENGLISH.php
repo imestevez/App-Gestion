@@ -356,8 +356,26 @@ array(
 'Buscar asignación de QA' => 'Search QA assignment',
 'Asignación de QAs' => 'QAs assignment',
 'Asignación de QA' => 'QA assignment',
+'Editar asignación de QA' => 'Edit QA assignment',
+'Resultado de búsqueda: Asignación de QAs' => 'Search result: QAs assignment',
 
+'ERROR: Fallo en la inserción. Ya existe esa asignación de QA' => 'ERROR: Insertion failed. That QA assignment already exists',
+'ERROR: No existe esa entrega para evaluar' => 'ERROR: There is no such delivery to evaluate',
+'ERROR: No existe el usuario con LoginEvaluador'  => 'ERROR: There is no user with LoginEvaluador',
 
+//Generación de asignación automática de QAs:
+'Asignación auto. de QAs' => 'Auto. QA assignment',
+'Asignación automática de QAs' => 'Automatic QA assignment',
+'Asignación automática de QAs realizada correctamente' => 'Automatic QAs assignment performed correctly',
+'ERROR: La Asignación automática de QAs no ha sido realizada correctamente' => 'ERROR: Automatic QA assignment has not been performed correctly',
+'Número de QAs a corregir por alumno' => 'Number of QAs to correct',
+'ERROR: El número de entregas no es suficiente para realizar la asignacion de QA' => 'Delivery number isn`t enough to do the QA assignment',
+
+//Generación de historias de usuario a evaluar:
+'Generación de historias a evaluar realizada correctamente' => 'Generation of stories to evaluate performed correctly',
+'ERROR: La generación de historias a evaluar no ha sido realizada correctamente' => 'ERROR: Generation of stories to evaluate has not been performed correctly',
+'Generación de historias a evaluar' => 'Generation of stories to evaluate',
+'Gen. historias evaluación' => 'Gen. stories to evaluate',
 
 
 
