@@ -91,7 +91,7 @@ if (!isset($_REQUEST['action'])){
 }
 	// En funcion de la accion elegida
 	Switch ($action){
-		case 'ASIG': //Si quiere hacer un ADD
+		case 'ADD': //Si quiere hacer un ADD
 			if (!$_POST){ //si viene del showall (no es un post)
 
 				$form = new GRUPO_ADD(); //Crea la vista ADD y muestra formulario para rellenar por el usuario
