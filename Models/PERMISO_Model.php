@@ -206,7 +206,6 @@ function accionesGrupo(){
 
 	$resultado = $this->mysqli->query($sql);
 
-	
     return $resultado;
 }
 

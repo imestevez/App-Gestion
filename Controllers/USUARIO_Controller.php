@@ -30,7 +30,6 @@ if(isset($_REQUEST["action"]))  {
 if(!HavePermissions(1, $action)) {
 	new MESSAGE('No tienes permisos para realizar esta accion', '../index.php');
 	//header('Location:../index.php'); //vuelve al index
-
 	exit();
 
 }

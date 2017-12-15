@@ -13,7 +13,6 @@
 <?php
 include_once '../Functions/ACL.php';
 $funcionalidades = listaFuncionalidades();
-$num=0;
 ?>
 
 <div class="contenedor-menu">    
@@ -84,7 +83,6 @@ $num=0;
          
                     <?php
                     }
-                    $num++;
                 }
                 }
            ?>
