@@ -139,7 +139,7 @@ if (!isset($_REQUEST['action'])){
 				$FUNCIONALIDAD = get_data_form(); //coge los datos del formulario del usuario que desea buscar
 				$datos = $FUNCIONALIDAD->SEARCH();//Ejecuta la funcion SEARCH() en el FUNCIONALIDAD_Model
 				$lista = array('IdFuncionalidad','NombreFuncionalidad','DescripFuncionalidad');
-				$resultado = new FUNCIONALIDAD_SHOWALL($lista, $datos, 0, 0, 0, 0, 'SEARCH', '../Controllers/FUNCIONALIDAD_Controller.php');//Crea la vista SHOWALL y muestra los usuarios que cumplen los parámetros de búsqueda 
+				$resultado = new FUNCIONALIDAD_SHOWALL($lista, $datos, 0, 0, 0, 0, 'SEARCH', '../Controllers/FUNCIONALIDAD_Controller.php',$acciones);//Crea la vista SHOWALL y muestra los usuarios que cumplen los parámetros de búsqueda 
 			}
 			break;
 		case 'SHOW': //si desea ver un usuario en detalle

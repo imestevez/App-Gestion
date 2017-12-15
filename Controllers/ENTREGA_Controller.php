@@ -240,7 +240,7 @@ if (!isset($_REQUEST['action'])){
 				$ENTREGA = get_data_UserBD(); //coge los datos del formulario del usuario que desea buscar
 				$datos = $ENTREGA->SEARCH();//Ejecuta la funcion SEARCH() en el ENTREGA_Model
 				$lista = array('login', 'IdTrabajo','Alias','Horas','Ruta');
-				$resultado = new ENTREGA_SHOWALL($lista, $datos, 0, 0, 0, 0, 'SEARCH', '../Controllers/ENTREGA_Controller.php');//Crea la vista SHOWALL y muestra los usuarios que cumplen los parámetros de búsqueda 
+				$resultado = new ENTREGA_SHOWALL($lista, $datos, 0, 0, 0, 0, 'SEARCH', '../Controllers/ENTREGA_Controller.php',$acciones);//Crea la vista SHOWALL y muestra los usuarios que cumplen los parámetros de búsqueda 
 			}
 			break;
 		case 'SHOW': //si desea ver un usuario en detalle

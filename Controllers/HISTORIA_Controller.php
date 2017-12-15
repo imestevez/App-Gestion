@@ -177,7 +177,7 @@ if (!isset($_REQUEST['action'])){
 				$HISTORIA = get_data_UserBD(); //coge los datos del formulario del usuario que desea buscar
 				$datos = $HISTORIA->SEARCH();//Ejecuta la funcion SEARCH() en el HISTORIA_Model
 				$lista = array('IdTrabajo','NombreTrabajo','IdHistoria','TextoHistoria');
-				$resultado = new HISTORIA_SHOWALL($lista, $datos, 0, 0, 0, 0, 'SEARCH', '../Controllers/HISTORIA_Controller.php');//Crea la vista SHOWALL y muestra los usuarios que cumplen los parámetros de búsqueda 
+				$resultado = new HISTORIA_SHOWALL($lista, $datos, 0, 0, 0, 0, 'SEARCH', '../Controllers/HISTORIA_Controller.php',$acciones);//Crea la vista SHOWALL y muestra los usuarios que cumplen los parámetros de búsqueda 
 			}
 			break;
 		case 'SHOW': //si desea ver un usuario en detalle

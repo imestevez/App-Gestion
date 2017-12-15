@@ -186,7 +186,7 @@ if (!isset($_REQUEST['action'])){
 				$TRABAJO = get_data_UserBD(); //coge los datos del formulario del usuario que desea buscar
 				$datos = $TRABAJO->SEARCH();//Ejecuta la funcion SEARCH() en el TRABAJO_Model
 				$lista = array('IdTrabajo','NombreTrabajo','FechaIniTrabajo','FechaFinTrabajo','PorcentajeNota');
-				$resultado = new TRABAJO_SHOWALL($lista, $datos, 0, 0, 0, 0, 'SEARCH', '../Controllers/TRABAJO_Controller.php');//Crea la vista SHOWALL y muestra los usuarios que cumplen los parámetros de búsqueda 
+				$resultado = new TRABAJO_SHOWALL($lista, $datos, 0, 0, 0, 0, 'SEARCH', '../Controllers/TRABAJO_Controller.php',$acciones);//Crea la vista SHOWALL y muestra los usuarios que cumplen los parámetros de búsqueda 
 			}
 			break;
 		case 'SHOW': //si desea ver un usuario en detalle
