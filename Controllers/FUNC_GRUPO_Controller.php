@@ -115,7 +115,7 @@ if (!isset($_REQUEST['action'])){
 			$recordset = $GRUPO->rellenarPermisos();
 				$lista = $GRUPO->rellenarLista();
 
-			$resultado = new FUNC_GRUPO_SHOWCURRENT($lista,$recordset,$acciones);
+			$resultado = new FUNC_GRUPO_SHOWALL($lista,$recordset,$acciones);
 	}
 	}
 

@@ -139,34 +139,61 @@ if (!isset($_REQUEST['action'])){
 				$FUNCIONALIDAD = get_data_form(); //coge los datos del formulario del usuario que desea buscar
 				$datos = $FUNCIONALIDAD->SEARCH();//Ejecuta la funcion SEARCH() en el FUNCIONALIDAD_Model
 				$lista = array('IdFuncionalidad','NombreFuncionalidad','DescripFuncionalidad');
-				$resultado = new FUNCIONALIDAD_SHOWALL($lista, $datos, 0, 0, 0, 0, 'SEARCH', '../Controllers/FUNCIONALIDAD_Controller.php');//Crea la vista SHOWALL y muestra los usuarios que cumplen los parámetros de búsqueda 
+				$resultado = new FUNCIONALIDAD_SHOWALL($lista, $datos, 0, 0, 0, 0, 'SEARCH', '../Controllers/FUNCIONALIDAD_Controller.php',$acciones);//Crea la vista SHOWALL y muestra los usuarios que cumplen los parámetros de búsqueda 
 			}
 			break;
-		case 'SHOWCURRENT': //si desea ver un usuario en detalle
+		case 'SHOW': //si desea ver un usuario en detalle
 			$FUNCIONALIDAD = new FUNCIONALIDAD_Model($_REQUEST['IdFuncionalidad'], '','');//crea un un FUNCIONALIDAD_Model con el IdFuncionalidad del usuario 
 			$tupla = $FUNCIONALIDAD->RellenaDatos();//A partir del IdFuncionalidad recoge todos los atributos
 			$usuario = new FUNCIONALIDAD_SHOWCURRENT($tupla); //Crea la vista SHOWCURRENT del usuario requerido
 			break;
 		default: //Por defecto, Se muestra la vista SHOWALL
-			if (!$_POST){
-				$FUNCIONALIDAD = new FUNCIONALIDAD_Model('', '','');//crea un un FUNCIONALIDAD_Model con el IdFuncionalidad del usuario 
+		//recorremos el array de permisos
+			foreach ($acciones as $key => $value) {
+				if($value == 'ALL'){ //si puede ver el showall
+					$acceso = true; //acceso a true
+				}
 			}
-			else{
-				$FUNCIONALIDAD = get_data_form(); //Coge los datos del formulario
-			}
+			if($acceso == true){ //si tiene acceso, mostramos el showall
+				if (!$_POST){
+					$FUNCIONALIDAD = new FUNCIONALIDAD_Model('', '','');//crea un un FUNCIONALIDAD_Model con el IdFuncionalidad del usuario 
+				}
+				else{
+					$FUNCIONALIDAD = get_data_form(); //Coge los datos del formulario
+				}
 
-			if(!isset($_REQUEST['num_pagina'])){ //Si es la 1a página del showall a mostrar
-				$num_pagina = 0;
-			}else{ //Si es otra página
-				$num_pagina = $_REQUEST['num_pagina']; //coge el numero de página del formulario
+				if(!isset($_REQUEST['num_pagina'])){ //Si es la 1a página del showall a mostrar
+					$num_pagina = 0;
+				}else{ //Si es otra página
+					$num_pagina = $_REQUEST['num_pagina']; //coge el numero de página del formulario
+				}
+				$num_tupla = $num_pagina*10; //número de la 1º tupla a mostrar
+				$max_tuplas = $num_tupla+10; // el número de tuplas a mostrar por página
+				$totalTuplas = $FUNCIONALIDAD->contarTuplas(); //Cuenta el número de tuplas que hay en la BD
+				$datos = $FUNCIONALIDAD->SHOWALL($num_tupla,$max_tuplas); //Ejecuta la funcion SHOWALL() en el FUNCIONALIDAD_Model
+				$lista = array('IdFuncionalidad','NombreFuncionalidad','DescripFuncionalidad');
+				$UsuariosBD = new FUNCIONALIDAD_SHOWALL($lista, $datos, $num_tupla, $max_tuplas, $totalTuplas, $num_pagina, 'SHOWALL', '../Controllers/FUNCIONALIDAD_Controller.php',$acciones); //Crea la vista SHOWALL de los usuarios de la BD	
+			}else{
+				if (!$_POST){
+					$FUNCIONALIDAD = new FUNCIONALIDAD_Model('', '','');//crea un un FUNCIONALIDAD_Model con el IdFuncionalidad del usuario 
+				}
+				else{
+					$FUNCIONALIDAD = get_data_form(); //Coge los datos del formulario
+				}
+
+				if(!isset($_REQUEST['num_pagina'])){ //Si es la 1a página del showall a mostrar
+					$num_pagina = 0;
+				}else{ //Si es otra página
+					$num_pagina = $_REQUEST['num_pagina']; //coge el numero de página del formulario
+				}
+				$num_tupla = $num_pagina*10; //número de la 1º tupla a mostrar
+				$max_tuplas = $num_tupla+10; // el número de tuplas a mostrar por página
+				$totalTuplas = $FUNCIONALIDAD->contarTuplas(); //Cuenta el número de tuplas que hay en la BD
+				$datos = $FUNCIONALIDAD->SHOWALL_User($num_tupla,$max_tuplas); //Ejecuta la funcion SHOWALL() en el FUNCIONALIDAD_Model
+				$lista = array('IdFuncionalidad','NombreFuncionalidad','DescripFuncionalidad');
+				$UsuariosBD = new FUNCIONALIDAD_SHOWALL($lista, $datos, $num_tupla, $max_tuplas, $totalTuplas, $num_pagina, 'ALL', '../Controllers/FUNCIONALIDAD_Controller.php',$acciones); //Crea la vista SHOWALL de los usuarios de la BD	
 			}
-			$num_tupla = $num_pagina*10; //número de la 1º tupla a mostrar
-			$max_tuplas = $num_tupla+10; // el número de tuplas a mostrar por página
-			$totalTuplas = $FUNCIONALIDAD->contarTuplas(); //Cuenta el número de tuplas que hay en la BD
-			$datos = $FUNCIONALIDAD->SHOWALL($num_tupla,$max_tuplas); //Ejecuta la funcion SHOWALL() en el FUNCIONALIDAD_Model
-			$lista = array('IdFuncionalidad','NombreFuncionalidad','DescripFuncionalidad');
-			$UsuariosBD = new FUNCIONALIDAD_SHOWALL($lista, $datos, $num_tupla, $max_tuplas, $totalTuplas, $num_pagina, 'SHOWALL', '../Controllers/FUNCIONALIDAD_Controller.php',$acciones); //Crea la vista SHOWALL de los usuarios de la BD	
-	}
+		}
 	}
 
 ?>

@@ -28,9 +28,12 @@ if(isset($_REQUEST["action"]))  {
 
 //Si no tiene permisos para acceder a este controlador con la accion que trae
 if(!HavePermissions(1, $action)) {
-	//new MESSAGE('No tienes permisos para realizar esta accion', '../index.php');
-	header('Location:../index.php'); //vuelve al index
+	new MESSAGE('No tienes permisos para realizar esta accion', '../index.php');
+	//header('Location:../index.php'); //vuelve al index
+	exit();
+
 }
+
 //almacenamos un array de permidos del grupo
 $permisos = listaPermisos();
 $acciones = listaAcciones(1);
@@ -190,7 +193,7 @@ if (!isset($_REQUEST['action'])){
 				$USUARIO = get_data_form(); //coge los datos del formulario del usuario que desea buscar
 				$datos = $USUARIO->SEARCH();//Ejecuta la funcion SEARCH() en el USUARIO_Model
 				$lista = array('login','password','DNI','nombre','apellidos','telefono','email','direccion');
-				$resultado = new USUARIO_SHOWALL($lista, $datos, 0, 0, 0, 0, 'SEARCH', '../Controllers/USUARIO_Controller.php');//Crea la vista SHOWALL y muestra los usuarios que cumplen los parámetros de búsqueda 
+				$resultado = new USUARIO_SHOWALL($lista, $datos, 0, 0, 0, 0, 'SEARCH', '../Controllers/USUARIO_Controller.php',$acciones);//Crea la vista SHOWALL y muestra los usuarios que cumplen los parámetros de búsqueda 
 			}
 			break;
 		case 'SHOW': //si desea ver un usuario en detalle

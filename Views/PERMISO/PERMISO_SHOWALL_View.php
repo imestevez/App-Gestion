@@ -17,8 +17,9 @@
     var $max_tuplas ; //Máximo de tuplas a mostrar por página
     var $num_pagina; //Numero de página a mostrar
     var $orden ; //Vista desde la que se envia la orden
+    var $acciones; //acciones
 //constructor de la clase
-function __construct($lista, $datos,$num_tupla,$max_tuplas,$totalTuplas,$num_pagina, $orden, $origen){
+function __construct($lista, $datos,$num_tupla,$max_tuplas,$totalTuplas,$num_pagina, $orden, $origen,$acciones){
     //asignación de valores de parámetro a los atributos de la clase
     $this->datos = $datos;
     $this->origen = $origen;
@@ -28,6 +29,7 @@ function __construct($lista, $datos,$num_tupla,$max_tuplas,$totalTuplas,$num_pag
     $this->max_tuplas = $max_tuplas;
     $this->num_pagina = $num_pagina;
     $this->orden = $orden ;
+    $this->acciones =$acciones;
     
     if( $this->orden <>'SEARCH'){ //si no viene del search
         $this->render();

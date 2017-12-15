@@ -203,7 +203,7 @@ function renderSearch(){
                 <td><?php echo $row["Apellidos"]; ?></td>
                 <td><?php echo $row["Correo"]; ?></td>
                 
-                        <td>  <a href="../Controllers/USUARIO_Controller.php?action=SHOW&login=<?php echo $row["login"]?>&IdGrupo=<?php echo $row["IdGrupo"] ?>">
+                        <td>  <a href="../Controllers/USU_GRUPO_Controller.php?action=SHOW&login=<?php echo $row["login"]?>&Nombre=<?php echo $row["Nombre"] ?>">
                             <input type="image" src="../Views/images/lista.png" name="action" title="<?php echo $strings['Mostrar Grupos'] ?>" value="SHOW" action=""></a>
                       </td>
             <td class="edit_tabla">

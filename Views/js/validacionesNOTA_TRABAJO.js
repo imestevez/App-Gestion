@@ -66,25 +66,32 @@ function comprobarAlfanumerico(campo, tamaño_max)
 
 //Comprueba que el valor de un campo de tipo entero está entre el limite establecido
 function comprobarEntero(campo,valormenor,valormayor) 
-{
-
+{   
+    var num; //Almacena los número sin el punto
+            num = campo.value.split('.');
+    var idNums = campo.name.concat('Nums');//concatena al nombre del campo 'nums' para acceder a los divs correspondientes a los campos
 
     var expr_entero; //Variable para comprobar que se introduce un entero
-    expr_entero = /^\d$/;//que contenga solo digitos
+    expr_entero = /^\d{1,2}$/;//que contenga solo digitos
 
-    if(expr_entero.test(campo.value)){ //Si cumple la expresión regular
-        if((campo.value < valormenor) || (campo.value > valormayor)) //Si el valor del campo es menor al mínimo o si es mayor al máximo
+    if(expr_entero.test(num[0])){ //Si cumple la expresión regular
+        if((num[0] < valormenor) || (num[0] > valormayor)) //Si el valor del campo es menor al mínimo o si es mayor al máximo
         {
             document.getElementById(campo.name).style.display = 'block';
             return false;
         }
         else//Si el valor está dentro del rango establecido
         {        
-            document.getElementById(campo.name).style.display = 'none';
+          document.getElementById(campo.name).style.display = 'none';
+          document.getElementById(idNums).style.display = 'none';
+
             return true;
         }
     }else{ //Si no cumple la expresión regular
-        document.getElementById(campo.name).style.display = 'block';
+
+        document.getElementById(campo.name).style.display = 'none';
+        document.getElementById(idNums).style.display = 'block';
+
         return false;
     }
 }
@@ -94,7 +101,7 @@ function comprobarReal(campo, numerosdecimales, valormenor, valormayor)
 {
 
     var expr_real; // expresión regular para comprobar que un número es un real con la cantidad de decimales establecida
-    expr_real = /^\d*[.]{0,1}\d*$/; //digitos seguidos de 1 o ningun "punto" seguido de digitos
+    expr_real = /^\d{1,2}[.]{0,1}\d{0,2}$/; //digitos seguidos de 1 o ningun "punto" seguido de digitos
    
     var idVacio = campo.name.concat('Vacio'); //concatena al nombre del campo 'Vacio' para acceder a los divs correspondientes a los campos vacios
     var idDec = campo.name.concat('Decimal'); //concatena al nombre del campo 'decimal' para acceder a los divs correspondientes a los campos 
@@ -102,32 +109,33 @@ function comprobarReal(campo, numerosdecimales, valormenor, valormayor)
    
     if(expr_real.test(campo.value)) //Si cumple la expresión regular
     {
-
+        
         if(comprobarEntero(campo, valormenor, valormayor))//Si el valor introducido esta entre los límites
         {
-
             var num; //Almacena los número sin el punto
             num = campo.value.split('.');
-            
-            if( num[1].length > numerosdecimales ) //Si hay más decimales que el número máximo establecido
-            {
-              document.getElementById(idVacio).style.display = 'none';
-              document.getElementById(idDec).style.display = 'block';
-              document.getElementById(campo.name).style.display = 'none';
-
+            if((num[0]>=valormayor) && (num[1]>0)){ //Si el número entero es 10 y los  decimales no son 0 retorna false
+                document.getElementById(campo.name).style.display = 'block';
                 return false;
-            }
-            else //Si el numéro de decimales es mnor o igual al establecido
-            {
-              document.getElementById(idVacio).style.display = 'none';
-              document.getElementById(campo.name).style.display = 'none';
-              document.getElementById(idDec).style.display = 'none';
-                return true;
-            }
+            }else{
+                if( num[1].length > numerosdecimales ) //Si hay más decimales que el número máximo establecido
+                {
+                  document.getElementById(idVacio).style.display = 'none';
+                  document.getElementById(idDec).style.display = 'block';
+                  document.getElementById(campo.name).style.display = 'none';
+
+                    return false;
+                }
+                else //Si el numéro de decimales es mnor o igual al establecido
+                {
+                  document.getElementById(idVacio).style.display = 'none';
+                  document.getElementById(campo.name).style.display = 'none';
+                  document.getElementById(idDec).style.display = 'none';
+                    return true;
+                }
+            }    
         }else{
-              document.getElementById(idVacio).style.display = 'none';
-              document.getElementById(idDec).style.display = 'none';
-              document.getElementById(campo.name).style.display = 'block';
+        
               return false;
         }
     }
@@ -272,16 +280,20 @@ function comprobarAlfanumericoBuscar(campo, tamaño_max)
   }
 }
 
+
+
 //Comprueba que el valor de un campo de tipo entero está entre el limite establecido
 function comprobarEnteroBuscar(campo,valormenor,valormayor) 
 {
 
 
     var expr_entero; //Variable para comprobar que se introduce un entero
-    expr_entero = /^\d$/;//que contenga solo digitos
-
-    if(expr_entero.test(campo.value)){ //Si cumple la expresión regular
-        if((campo.value < valormenor) || (campo.value > valormayor)) //Si el valor del campo es menor al mínimo o si es mayor al máximo
+    expr_entero = /^\d{1,2}$/;//que contenga solo digitos
+    var num; //Almacena los número sin el punto
+            num = campo.value.split('.');
+    var idNums = campo.name.concat('Nums');//concatena al nombre del campo 'nums' para acceder a los divs correspondientes a los campos
+    if(expr_entero.test(num[0])){ //Si cumple la expresión regular
+        if((num[0] < valormenor) || (num[0] > valormayor)) //Si el valor del campo es menor al mínimo o si es mayor al máximo
         {
             document.getElementById(campo.name).style.display = 'block';
             return false;
@@ -289,10 +301,12 @@ function comprobarEnteroBuscar(campo,valormenor,valormayor)
         else//Si el valor está dentro del rango establecido
         {        
             document.getElementById(campo.name).style.display = 'none';
+            document.getElementById(idNums).style.display = 'none';
             return true;
         }
     }else{ //Si no cumple la expresión regular
         document.getElementById(campo.name).style.display = 'block';
+        document.getElementById(idNums).style.display = 'block';
         return false;
     }
 }
@@ -302,8 +316,7 @@ function comprobarRealBuscar(campo, numerosdecimales, valormenor, valormayor)
 {
 
     var expr_real; // expresión regular para comprobar que un número es un real con la cantidad de decimales establecida
-    expr_real = /^\d*[.]{0,1}\d*$/; //digitos seguidos de 1 o ningun "punto" seguido de digitos
-   
+    expr_real = /^\d{1,2}[.]{0,1}\d{0,2}$/; //digitos seguidos de 1 o ningun "punto" seguido de digitos
     var idDec = campo.name.concat('Decimal'); //concatena al nombre del campo 'decimal' para acceder a los divs correspondientes a los campos 
     var idNums = campo.name.concat('Nums');//concatena al nombre del campo 'nums' para acceder a los divs correspondientes a los campos
    
@@ -315,23 +328,25 @@ function comprobarRealBuscar(campo, numerosdecimales, valormenor, valormayor)
 
             var num; //Almacena los número sin el punto
             num = campo.value.split('.');
-            
-            if( num[1].length > numerosdecimales ) //Si hay más decimales que el número máximo establecido
-            {
-              document.getElementById(idDec).style.display = 'block';
-              document.getElementById(campo.name).style.display = 'none';
-
+            if((num[0]>=valormayor) && (num[1]>0)){ //Si el número entero es 10 y los  decimales no son 0 retorna false
+                document.getElementById(campo.name).style.display = 'block';
                 return false;
-            }
-            else //Si el numéro de decimales es mnor o igual al establecido
-            {
-              document.getElementById(campo.name).style.display = 'none';
-              document.getElementById(idDec).style.display = 'none';
-                return true;
+            }else{
+                if( num[1].length > numerosdecimales ) //Si hay más decimales que el número máximo establecido
+                {
+                  document.getElementById(idDec).style.display = 'block';
+                  document.getElementById(campo.name).style.display = 'none';
+
+                    return false;
+                }
+                else //Si el numéro de decimales es mnor o igual al establecido
+                {
+                  document.getElementById(campo.name).style.display = 'none';
+                  document.getElementById(idDec).style.display = 'none';
+                    return true;
+                }
             }
         }else{
-              document.getElementById(idDec).style.display = 'none';
-              document.getElementById(campo.name).style.display = 'block';
               return false;
         }
     }
@@ -343,6 +358,7 @@ function comprobarRealBuscar(campo, numerosdecimales, valormenor, valormayor)
         }   
 
 }
+
 
 //Función para validar la búsqueda por login
 function validarLoginBuscar(login, tamaño_max)

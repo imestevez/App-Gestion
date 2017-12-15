@@ -25,8 +25,6 @@ function __construct($lista, $datos, $acciones){
     $this->datos = $datos;
     $this->acciones = $acciones;
 
-
-
     $this->render();
 }
 
@@ -45,7 +43,7 @@ function render(){
                     <td style="border-right-style: collapse; border-bottom:  5px solid black;" > 
 
 <?php 
-                    foreach ($acciones as $key => $value) {
+                    foreach ($this->acciones as $key => $value) {
                         if($value == 'ASIG'){
                 ?>
                         <a href="../Controllers/FUNC_GRUPO_Controller.php?action=ASIG&IdGrupo=<?php echo $this->IdGrupo ?>"><input type="image" src="../Views/images/edit.png" name="action" title="<?php echo $strings['Editar'] ?>" value="ASIG"></a>

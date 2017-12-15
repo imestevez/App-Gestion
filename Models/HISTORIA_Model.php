@@ -278,6 +278,33 @@ function SHOWALL($num_tupla,$max_tuplas){
 	}
 } // fin metodo SHOWALL
 
+
+function SHOWALL_User($num_tupla,$max_tuplas){
+	$login = $_SESSION['login'];
+	$sql = "SELECT * 
+			FROM USUARIO U, ENTREGA E, TRABAJO T, HISTORIA H
+			WHERE  (U.login = '$login' AND
+					E.login = U.login AND
+					E.IdTrabajo = T.IdTrabajo AND
+					E.IdTrabajo = H.IdTrabajo
+					)
+			LIMIT $num_tupla, $max_tuplas";
+/*
+	$sql = "SELECT * FROM USUARIO U, USU_GRUPO UG, GRUPO G
+					WHERE (U.login = UG.login AND
+							UG.IdGrupo = G.IdGrupo )
+					LIMIT $num_tupla, $max_tuplas";
+*/
+	    // si se produce un error en la busqueda mandamos el mensaje de error en la consulta
+    if (!($resultado = $this->mysqli->query($sql))){
+    	$this->lista['mensaje'] =  'ERROR: Fallo en la consulta sobre la base de datos'; 
+		return $this->lista; 
+	}
+    else{ // si la busqueda es correcta devolvemos el recordset resultado
+		return $resultado;
+	}
+} // fin metodo SHOWALL
+
 //funcion que devuelve el numero de tuplas de la base de datos
 function contarTuplas(){
 	$sql = "SELECT * FROM HISTORIA";

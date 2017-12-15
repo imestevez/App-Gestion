@@ -128,14 +128,41 @@ function SHOWALL($num_tupla,$max_tuplas){
 
 	//$sql = "SELECT * FROM USUARIO";
 
-	$sql = "SELECT 	IdGrupo,
-    				IdFuncionalidad,
-    				IdAccion
+	$sql = "SELECT 	P.IdGrupo,
+    				P.IdFuncionalidad,
+    				P.IdAccion
     				FROM PERMISO P, GRUPO G, FUNCIONALIDAD F, ACCION A
     				WHERE P.IdGrupo=G.IdGrupo AND P.IdFuncionalidad=F.IdFuncionalidad AND P.IdAccion=A.IdAccion
     				LIMIT $num_tupla, $max_tuplas";
 
+	    // si se produce un error en la busqueda mandamos el mensaje de error en la consulta
+    if (!($resultado = $this->mysqli->query($sql))){
+    	$this->lista['mensaje'] =  'ERROR: Fallo en la consulta sobre la base de datos'; 
+		return $this->lista; 
+	}
+    else{ // si la busqueda es correcta devolvemos el recordset resultado
+		return $resultado;
+	}
+} // fin metodo SHOWALL
 
+function SHOWALL_User($num_tupla,$max_tuplas){
+	$login = $_SESSION['login'];
+	$sql = "SELECT * 
+			FROM USUARIO U, USU_GRUPO UG, GRUPO G, FUNCIONALIDAD F, ACCION A, PERMISO P
+			WHERE  (U.login = '$login' AND
+					UG.login = U.login AND
+					UG.IdGrupo = G.IdGrupo AND
+					UG.IdGrupo = P.IdGrupo AND
+					P.IdFuncionalidad = F.IdFuncionalidad AND
+					P.IdAccion = A.IdAccion 
+					)
+			LIMIT $num_tupla, $max_tuplas";
+/*
+	$sql = "SELECT * FROM USUARIO U, USU_GRUPO UG, GRUPO G
+					WHERE (U.login = UG.login AND
+							UG.IdGrupo = G.IdGrupo )
+					LIMIT $num_tupla, $max_tuplas";
+*/
 	    // si se produce un error en la busqueda mandamos el mensaje de error en la consulta
     if (!($resultado = $this->mysqli->query($sql))){
     	$this->lista['mensaje'] =  'ERROR: Fallo en la consulta sobre la base de datos'; 
@@ -179,7 +206,6 @@ function accionesGrupo(){
 
 	$resultado = $this->mysqli->query($sql);
 
-	
     return $resultado;
 }
 

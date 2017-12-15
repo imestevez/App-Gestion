@@ -278,5 +278,19 @@ function grupoUsuario(){
 	return $this->IdGrupo;
 
 }
+
+function listagrupoUsuario(){
+
+	$sql = "SELECT * FROM USU_GRUPO WHERE (login = '$this->login')";
+	$result = $this->mysqli->query($sql);
+	$num=0;
+	$lista=null;
+	while ($row = mysqli_fetch_array($result)) {
+		$lista[$num] =  $row['IdGrupo'];
+		$num++;
+	}
+	return $lista;
+
+}
 }
 ?> 

@@ -93,7 +93,7 @@ function render(){
 
                 <input type="text" name="login" value="<?php echo $this->login?>" style="visibility: hidden;" >
                 <div  style="float: right; margin-left: 0%; margin-right: 50% ; margin-top: 2%">
-                    <a href="../Controllers/USU_GRUPO_Controller.php?action=EDIT"> <input type="image" name="action" value="EDIT" src="../Views/images/confirmar.png" title="<?php echo $strings['Enviar Formulario'] ?>" "></a>
+                    <a href="../Controllers/USU_GRUPO_Controller.php?action=ASIG"> <input type="image" name="action" value="ASIG" src="../Views/images/confirmar.png" title="<?php echo $strings['Enviar Formulario'] ?>" "></a>
                 </div>
 
         </form>

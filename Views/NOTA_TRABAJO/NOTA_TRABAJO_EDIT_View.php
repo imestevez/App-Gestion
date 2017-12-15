@@ -63,8 +63,8 @@ function render(){
               
                  <div id="izquierda">
                     <label for="NotaTrabajo"><?php echo $strings['Nota Trabajo']?>: </label>
-                        <input type="text"  name="NotaTrabajo" maxlength="4"  size="4" value="<?php echo $this->NotaTrabajo?>" onblur="validarNotaTrabajo(this, 2, 0, 10)" ><div id="NotaTrabajoNums" class="oculto" style="display:none"><?php echo $strings['div_numeros']?></div> <div id="NotaTrabajo" class="oculto" style="display:none"><?php echo $strings['div_numerosRango10']?> </div> <div id="NotaTrabajoDecimal" class="oculto" style="display:none"><?php echo $strings['div_Num_Decs']?></div> <div id="NotaTrabajoVacio" class="oculto" style="display:none"><?php echo $strings['div_vacio']?></div>
-                </div>
+                        <input type="text"  name="NotaTrabajo" maxlength="5"  size="5" value="<?php echo $this->NotaTrabajo?>" onblur="validarNotaTrabajo(this, 2, 0, 10)" ><div id="NotaTrabajoNums" class="oculto" style="display:none"><?php echo $strings['div_numeros']?></div> <div id="NotaTrabajo" class="oculto" style="display:none"><?php echo $strings['div_numerosRango10']?> </div> <div id="NotaTrabajoDecimal" class="oculto" style="display:none"><?php echo $strings['div_Num_Decs']?></div> <div id="NotaTrabajoVacio" class="oculto" style="display:none"><?php echo $strings['div_vacio']?></div>
+                </div><!--maxlength=5 porque incluye el .-->
         
                 <div class="acciones" style="float: right; margin-left:0%; margin-right: 50%">
                     <a href="../Controllers/NOTA_TRABAJO_Controller.php?action=EDIT"> <input type="image" name="action" value="EDIT" src="../Views/images/confirmar.png" title="<?php echo $strings['Enviar Formulario'] ?>" onclick="return validar('EDIT')"></a>

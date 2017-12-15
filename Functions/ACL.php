@@ -29,103 +29,121 @@ include '../Models/USUARIO_Model.php';
 function HavePermissions($IdFuncionalidad, $IdAccion){
 
 	$USU_GRUPO = new USU_GRUPO_Model($_SESSION["login"], '');
-	$IdGrupo = $USU_GRUPO->grupoUsuario();
-	if($IdGrupo == null){
+	$listaGrupos = $USU_GRUPO->listagrupoUsuario();
+	if($listaGrupos == null){
 		return false;
 	}
 
-	if($IdGrupo == 'ADMIN'){
-		return true;
-	}else{
-		if(($IdAccion == '') || ($IdAccion == 'ALL') || ($IdAccion == 'SHOWALL')){
+	foreach ($listaGrupos as $key => $IdGrupo) {
+
+		if($IdGrupo == 'ADMIN'){
+			return true;
+		}else{
+			if(($IdAccion == '') || ($IdAccion == 'ALL') || ($IdAccion == 'SHOWALL')){
+				$PERMISO = new PERMISO_Model($IdGrupo, '', '');
+				$resultado = $PERMISO->permisosGrupo();
+				$num_rows = mysqli_num_rows($resultado);
+				if($num_rows > 0){
+					while($row = mysqli_fetch_array($resultado)){
+						if(($row["IdFuncionalidad"] == $IdFuncionalidad)){
+							return true;
+					}
+				}
+
+			}
+
+			}else{
 			$PERMISO = new PERMISO_Model($IdGrupo, '', '');
 			$resultado = $PERMISO->permisosGrupo();
 			$num_rows = mysqli_num_rows($resultado);
-			if($num_rows == 0){
-				return false;
-			}
-			
+			if($num_rows > 0){
 
-			while($row = mysqli_fetch_array($resultado)){
-
-				if(($row["IdFuncionalidad"] == $IdFuncionalidad)){
-					return true;
-			}
-		}
-		return false;
-
-		}else{
-		$PERMISO = new PERMISO_Model($IdGrupo, '', '');
-		$resultado = $PERMISO->permisosGrupo();
-		$num_rows = mysqli_num_rows($resultado);
-			if($num_rows == 0){
-				return false;
+				while($row = mysqli_fetch_array($resultado)){
+					if(($row["IdFuncionalidad"] == $IdFuncionalidad) && ($row["IdAccion"] == $IdAccion) ){
+						return true;
+					}
+				}
 			}
 
-		while($row = mysqli_fetch_array($resultado)){
-			if(($row["IdFuncionalidad"] == $IdFuncionalidad) && ($row["IdAccion"] == $IdAccion) ){
-				return true;
 			}
-		}
-		return false;
 		}
 	}
+	return false;
 }
 
 function listaPermisos(){
 
 	$lista = null;
 	$USU_GRUPO = new USU_GRUPO_Model($_SESSION["login"], '');
-	$IdGrupo = $USU_GRUPO->grupoUsuario();
-	$PERMISO = new PERMISO_Model($IdGrupo, '', '');
-	$resultado = $PERMISO->permisosGrupo();
-	$num_rows = mysqli_num_rows($resultado);
-	if($num_rows == 0){
-				return null;
+	$listaGrupos = $USU_GRUPO->listagrupoUsuario();
+	if($listaGrupos == null){
+		return false;
 	}
-	$num=0;
-	while($row = mysqli_fetch_array($resultado)){
-		$lista[$num] = array($row["IdGrupo"],$row["IdFuncionalidad"],$row["IdAccion"] );
-		$num++;
+
+	foreach ($listaGrupos as $key => $IdGrupo) {
+
+		$PERMISO = new PERMISO_Model($IdGrupo, '', '');
+		$resultado = $PERMISO->permisosGrupo();
+		$num_rows = mysqli_num_rows($resultado);
+		if($num_rows == 0){
+			return null;
+		}
+		while($row = mysqli_fetch_array($resultado)){
+			$lista[$IdGrupo] = array($row["IdGrupo"],$row["IdFuncionalidad"],$row["IdAccion"] );
+		}
 	}
+
 	return $lista;
 }
 
 function listaFuncionalidades(){
 	$lista = null;
-	$USU_GRUPO = new USU_GRUPO_Model($_SESSION["login"], '');
-	$IdGrupo = $USU_GRUPO->grupoUsuario();
-	$PERMISO = new PERMISO_Model($IdGrupo, '', '');
-	$resultado = $PERMISO->funcionalidadesGrupo();
-	$num_rows = mysqli_num_rows($resultado);
-	if($num_rows == 0){
-				return null;
-	}
 	$num=0;
-	while($row = mysqli_fetch_array($resultado)){
-		$lista[$num] =$row["IdFuncionalidad"];
-		$num++;
+	$USU_GRUPO = new USU_GRUPO_Model($_SESSION["login"], '');
+	$listaGrupos = $USU_GRUPO->listagrupoUsuario();
+	if($listaGrupos == null){
+		return false;
 	}
-	return $lista;
+	foreach ($listaGrupos as $key => $IdGrupo) {
+
+		$PERMISO = new PERMISO_Model($IdGrupo, '', '');
+		$resultado = $PERMISO->funcionalidadesGrupo();
+		$num_rows = mysqli_num_rows($resultado);
+		if($num_rows > 0){
+			while($row = mysqli_fetch_array($resultado)){
+				$lista[$num] =$row["IdFuncionalidad"];
+				$num++;
+			}
+		return $lista;
+		}
+	}
+	return null;
 
 }
 
+
+
 function listaAcciones($IdFuncionalidad){
 	$lista = null;
+	$num =0;
 	$USU_GRUPO = new USU_GRUPO_Model($_SESSION["login"], '');
-	$IdGrupo = $USU_GRUPO->grupoUsuario();
-	$PERMISO = new PERMISO_Model($IdGrupo, $IdFuncionalidad, '');
-	$resultado = $PERMISO->accionesGrupo();
-	$num_rows = mysqli_num_rows($resultado);
-	if($num_rows == 0){
-				return null;
+	$listaGrupos = $USU_GRUPO->listagrupoUsuario();
+
+	foreach ($listaGrupos as $key => $IdGrupo) {
+		$PERMISO = new PERMISO_Model($IdGrupo, $IdFuncionalidad, '');
+		$resultado = $PERMISO->accionesGrupo();
+		$num_rows = mysqli_num_rows($resultado);
+
+		if($num_rows > 0){
+
+		while($row = mysqli_fetch_array($resultado)){
+			$lista[$num] =$row["IdAccion"];
+			$num++;
+		}
+		return $lista;
 	}
-	$num=0;
-	while($row = mysqli_fetch_array($resultado)){
-		$lista[$num] =$row["IdAccion"];
-		$num++;
-	}
-	return $lista;
+}
+	return null;
 
 }
 ?>

@@ -247,6 +247,32 @@ function SHOWALL($num_tupla,$max_tuplas){
 	}
 } // fin metodo SHOWALL
 
+function SHOWALL_User($num_tupla,$max_tuplas){
+	$login = $_SESSION['login'];
+	$sql = "SELECT * 
+			FROM USUARIO U, NOTA_TRABAJO N, TRABAJO T
+			WHERE  (U.login = '$login' AND
+					N.login = U.login AND
+					N.IdTrabajo = T.IdTrabajo
+					)
+			LIMIT $num_tupla, $max_tuplas";
+			
+/*
+	$sql = "SELECT * FROM USUARIO U, USU_GRUPO UG, GRUPO G
+					WHERE (U.login = UG.login AND
+							UG.IdGrupo = G.IdGrupo )
+					LIMIT $num_tupla, $max_tuplas";
+*/
+	    // si se produce un error en la busqueda mandamos el mensaje de error en la consulta
+    if (!($resultado = $this->mysqli->query($sql))){
+    	$this->lista['mensaje'] =  'ERROR: Fallo en la consulta sobre la base de datos'; 
+		return $this->lista; 
+	}
+    else{ // si la busqueda es correcta devolvemos el recordset resultado
+		return $resultado;
+	}
+} // fin metodo SHOWALL
+
 //funcion que devuelve el numero de tuplas de la base de datos
 function contarTuplas(){
 	$sql = "SELECT * FROM NOTA_TRABAJO";
@@ -260,11 +286,10 @@ function contarTuplas(){
 
 }
 function rellenarLista(){
-		$sql = "SELECT * FROM ENTREGA E, USUARIO U, TRABAJO T, NOTA_TRABAJO N 
+		$sql = "SELECT * FROM USUARIO U, TRABAJO T, NOTA_TRABAJO N 
 						WHERE (U.login = '$this->login' AND
 								T.IdTrabajo = '$this->IdTrabajo' AND
-								N.login = '$this->login' AND N.IdTrabajo = '$this->IdTrabajo' AND
-								E.login = '$this->login' AND E.IdTrabajo = '$this->IdTrabajo'
+								N.login = '$this->login' AND N.IdTrabajo = '$this->IdTrabajo' 
 						)";
 		if (!($result = $this->mysqli->query($sql))){
 	    	//return  'ERROR'; 
