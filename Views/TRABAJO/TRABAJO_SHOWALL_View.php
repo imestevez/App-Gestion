@@ -108,19 +108,19 @@ function render(){
                     foreach ($this->acciones as $key => $value) {
                         if($value == 'SHOW'){
                             ?>
-                                 <a href="../Controllers/TRABAJO_Controller.php?action=SHOW&login=<?php echo $row["login"]?>"><input type="image" src="../Views/images/ojo.png" name="action" title="<?php echo $strings['Mostrar en detalle'] ?>" value="SHOW" action=""></a>
+                                 <a href="../Controllers/TRABAJO_Controller.php?action=SHOW&IdTrabajo=<?php echo $row["IdTrabajo"]?>"><input type="image" src="../Views/images/ojo.png" name="action" title="<?php echo $strings['Mostrar en detalle'] ?>" value="SHOW" action=""></a>
                             <?php
                         }
 
                          if($value == 'EDIT'){
                             ?>
-                    <a href="../Controllers/TRABAJO_Controller.php?action=EDIT&login=<?php echo $row["login"]?>"><input type="image" src="../Views/images/edit.png" name="action" title="<?php echo $strings['Editar'] ?>" value="EDIT"></a>
+                    <a href="../Controllers/TRABAJO_Controller.php?action=EDIT&IdTrabajo=<?php echo $row["IdTrabajo"]?>"><input type="image" src="../Views/images/edit.png" name="action" title="<?php echo $strings['Editar'] ?>" value="EDIT"></a>
                     <?php
                         }
                            if($value == 'DELETE'){
                             ?>
                     
-                    <a href="../Controllers/TRABAJO_Controller.php?action=DELETE&login=<?php echo $row["login"]?>""><input type="image" src="../Views/images/delete.png" name="action" title="<?php echo $strings['Eliminar'] ?>" value="DELETE"></a>
+                    <a href="../Controllers/TRABAJO_Controller.php?action=DELETE&IdTrabajo=<?php echo $row["IdTrabajo"]?>""><input type="image" src="../Views/images/delete.png" name="action" title="<?php echo $strings['Eliminar'] ?>" value="DELETE"></a>
                     <?php
                         }
                     }
@@ -226,19 +226,19 @@ function renderSearch(){
                     foreach ($this->acciones as $key => $value) {
                         if($value == 'SHOW'){
                             ?>
-                         <a href="../Controllers/TRABAJO_Controller.php?action=SHOW&login=<?php echo $row["login"]?>"><input type="image" src="../Views/images/ojo.png" name="action" title="<?php echo $strings['Mostrar en detalle'] ?>" value="SHOW" action=""></a>
+                         <a href="../Controllers/TRABAJO_Controller.php?action=SHOW&IdTrabajo=<?php echo $row["IdTrabajo"]?>"><input type="image" src="../Views/images/ojo.png" name="action" title="<?php echo $strings['Mostrar en detalle'] ?>" value="SHOW" action=""></a>
                             <?php
                         }
 
                          if($value == 'EDIT'){
                             ?>
-                    <a href="../Controllers/TRABAJO_Controller.php?action=EDIT&login=<?php echo $row["login"]?>"><input type="image" src="../Views/images/edit.png" name="action" title="<?php echo $strings['Editar'] ?>" value="EDIT"></a>
+                    <a href="../Controllers/TRABAJO_Controller.php?action=EDIT&IdTrabajo=<?php echo $row["IdTrabajo"]?>"><input type="image" src="../Views/images/edit.png" name="action" title="<?php echo $strings['Editar'] ?>" value="EDIT"></a>
                     <?php
                         }
                            if($value == 'DELETE'){
                             ?>
                     
-                    <a href="../Controllers/TRABAJO_Controller.php?action=DELETE&login=<?php echo $row["login"]?>""><input type="image" src="../Views/images/delete.png" name="action" title="<?php echo $strings['Eliminar'] ?>" value="DELETE"></a>
+                    <a href="../Controllers/TRABAJO_Controller.php?action=DELETE&IdTrabajo=<?php echo $row["IdTrabajo"]?>""><input type="image" src="../Views/images/delete.png" name="action" title="<?php echo $strings['Eliminar'] ?>" value="DELETE"></a>
                     <?php
                         }
                     }
