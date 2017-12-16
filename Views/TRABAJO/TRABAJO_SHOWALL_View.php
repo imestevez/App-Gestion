@@ -94,8 +94,27 @@ function render(){
                    
                 </td>
                 <?php 
-                
-                if($this->admin == false){
+                $entrega = false;
+                $historia = false;
+                   foreach ($this->permisos as $key => $value) {
+                     if($value[1] == 7){
+                        switch ($value[2]) {
+                            case 'ADD':
+                                $historia =true; 
+                                break;
+                            case 'SHOW':
+                                $historia =true; 
+                                break;
+                            default:
+                                $historia =false;
+                                break;
+                        }
+                 }
+             if(($value[1] == 8)  && ($value[2] == 'ADDAL') ) {
+                $entrega = true;
+            }
+        }
+                if($entrega == true){
                 ?>
 
                 <th><?php echo $strings['Entrega']?></th>
@@ -104,12 +123,7 @@ function render(){
             }
                 $historia = false;
 
-            foreach ($this->permisos as $key => $value) {
-                # code...
-             if($value[1] == 7) {
-                $historia = true;
-            }
-        }
+        
         if($historia == true){
                 ?>
                 <th><?php echo $strings['Historias']?></th>
@@ -160,15 +174,16 @@ function render(){
                     ?>     
                 </td>
             <?php
-                if($this->admin == false){
+
+                if($entrega == true){
                 ?>
                 <td>
-                  <a href="../Controllers/ENTREGA_Controller.php?action=ADD&IdTrabajo=<?php echo $row["IdTrabajo"]?>&login=<?php echo $_SESSION['login']?>&origen=../Controllers/TRABAJO_Controller.php"><input type="image" src="../Views/images/anadir.png" name="action" title="<?php echo $strings['Añadir'] ?>" value="ADD"></a>
+                  <a href="../Controllers/ENTREGA_Controller.php?action=ADDAL&IdTrabajo=<?php echo $row["IdTrabajo"]?>&login=<?php echo $_SESSION['login']?>&origen=../Controllers/TRABAJO_Controller.php"><input type="image" src="../Views/images/anadir.png" name="action" title="<?php echo $strings['Añadir'] ?>" value="ADD"></a>
                 </td>
             <?php
         }
-
        foreach ($this->permisos as $key => $value) {
+
                 # code...
              if( ($value[1] == 7)  && ($value[2] == 'ADD') ){
             ?>

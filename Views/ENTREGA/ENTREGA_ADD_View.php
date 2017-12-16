@@ -27,7 +27,6 @@ class ENTREGA_ADD {
         $this->NombreTrabajo = $lista['NombreTrabajo'];
         $this->Alias = $lista['Alias'];
         $this->origen = $lista['origen'];
-        $this->renderLogin();
     }else{
            $this->render();
     }
@@ -83,7 +82,7 @@ include '../Views/Header.php';
                 </div>
              </form>                     
                 <div class="acciones" style="float: left;">
-                     <a href="../Controllers/ENTREGA_Controller.php?action=SHOWALL"><input type="image" src="../Views/images/back.png" title="<?php echo $strings['Volver']?>"></a>
+                     <a href="<?php echo $this->origen?>"><input type="image" src="../Views/images/back.png" title="<?php echo $strings['Volver']?>"></a>
                 </div>
          </fieldset> 
     </section>
@@ -135,11 +134,11 @@ include '../Views/Header.php';
                 </div>
 
                 <div class="acciones" style="float: right; margin-left:0%; margin-right: 50%">
-                    <a href="../Controllers/ENTREGA_Controller.php?action=ADD"> <input type="image" name="action" value="ADD" src="../Views/images/confirmar.png" title="<?php echo $strings['Enviar Formulario'] ?>" onclick="return validar('ADD') "></a>
+                    <a href="../Controllers/ENTREGA_Controller.php?action=ADDAL"> <input type="image" name="action" value="ADDAL" src="../Views/images/confirmar.png" title="<?php echo $strings['Enviar Formulario'] ?>" onclick="return validar('ADD') "></a>
                 </div>
              </form>                     
                 <div class="acciones" style="float: left;">
-                     <a href="<?php echo $this->origen ?>"><input type="image" src="../Views/images/back.png" title="<?php echo $strings['Volver']?>"></a>
+                     <a href="<?php echo $this->origen?>"><input type="image" src="../Views/images/back.png" title="<?php echo $strings['Volver']?>"></a>
                 </div>
          </fieldset> 
     </section>

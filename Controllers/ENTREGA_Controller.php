@@ -16,7 +16,8 @@ include_once '../Functions/ACL.php';
 include_once '../Views/MESSAGE_View.php';
 
 if (!IsAuthenticated()){
-	header('Location:../index.php');
+	exit();
+
 }else{
 
 if(isset($_REQUEST["action"]))  {
@@ -28,8 +29,10 @@ if(isset($_REQUEST["action"]))  {
 
 //Si no tiene permisos para acceder a este controlador con la accion que trae
 if(!HavePermissions(8, $action)) {
-	//new MESSAGE('No tienes permisos para realizar esta accion', '../index.php');
-	header('Location:../index.php'); //vuelve al index
+		new MESSAGE('No tienes permisos para realizar esta accion', '../index.php');
+	//header('Location:../index.php'); //vuelve al index
+	exit();
+
 }
 //almacenamos un array de permidos del grupo
 $permisos = listaPermisos();
@@ -266,6 +269,39 @@ if (!isset($_REQUEST['action'])){
 			//$tupla = $ENTREGA->RellenaDatos();//A partir del IdTrabajo recoge todos los atributos
 			$usuario = new ENTREGA_SHOWCURRENT($lista); //Crea la vista SHOWCURRENT del usuario requerido
 			break;
+
+		case 'ADDAL': //Añadir una entrega como alumno
+		if (!$_POST){ //si viene del showall (no es un post)
+				$lista = array('login', 'Nombre','IdTrabajo', 'NombreTrabajo', 'Alias', 'origen');
+
+				if( (isset($_REQUEST['login'])) && 
+					(isset($_REQUEST['IdTrabajo'])) && 
+					(isset($_REQUEST['origen'])) ) {
+
+					$ENTREGA = get_data_form(); //recibe datos
+					
+					$lista['login'] = $_REQUEST['login'];
+					$lista['IdTrabajo'] = $_REQUEST['IdTrabajo'];
+					$lista = $ENTREGA->rellenarLista();
+					$lista['Alias'] = $ENTREGA->generadorAlias();
+					$lista['origen'] = $_REQUEST['origen'];
+
+					$form = new ENTREGA_ADD($lista); //Crea la vista ADD y muestra formulario para rellenar por el usuario
+					$form->renderLogin();
+					exit();
+				}else{
+					$lista['login'] = '';
+					$lista['origen'] = '../Controllers/TRABAJO_Controller.php';
+					$form = new ENTREGA_ADD($lista); //Crea la vista ADD y muestra formulario para rellenar por el usuario
+				}
+			}else{ //si viene del add 
+				$ENTREGA = get_data_form(); //recibe datos
+				$lista = $ENTREGA->ADD(); //mete datos en respuesta usuarios despues de ejecutar el add con los de ENTREGA
+				$usuario = new MESSAGE($lista, '../Controllers/TRABAJO_Controller.php'); //muestra el mensaje despues de la sentencia sql
+				exit();
+
+			}
+
 		default: //Por defecto, Se muestra la vista SHOWALL
 			/*if(isset($_REQUEST["origen"])){
 			header('Location:'.$_REQUEST["origen"]);
