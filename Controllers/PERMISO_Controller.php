@@ -93,35 +93,6 @@ function get_data_form(){
 	return $PERMISOS;
 }
 
-//Funcion para coger los datos del formulario de un usuario ya almacenado
-function get_data_form_buscar(){
-
-	$NombreGrupo = '';
-	$NombreFuncionalidad = '';
-	$NombreAccion = '';
-	$action = '';
-
-	if(isset($_REQUEST['NombreGrupo'])){
-	$NombreGrupo = $_REQUEST['NombreGrupo'];
-	}
-	if(isset($_REQUEST['NombreFuncionalidad'])){
-	$NombreFuncionalidad = $_REQUEST['NombreFuncionalidad'];
-	}
-	if(isset($_REQUEST['NombreAccion'])){
-	$NombreAccion = $_REQUEST['NombreAccion'];
-	}
-	if(isset($_REQUEST['action'])){
-	$action = $_REQUEST['action'];
-	}
-
-	$PERMISOS = new PERMISO_Model(
-		$NombreGrupo, 
-		$NombreFuncionalidad, 
-		$NombreAccion);
-
-	return $PERMISOS;
-	
-}
 
 //Si el usuario no elige ninguna opción
 if (!isset($_REQUEST['action'])){
@@ -137,7 +108,7 @@ if (!isset($_REQUEST['action'])){
 				$PERMISOS = new PERMISO_SEARCH();//Crea la vista SEARCH y muestra formulario para rellenar por el usuario
 			}
 			else{
-				$PERMISOS = get_data_form_buscar(); //coge los datos del formulario del usuario que desea buscar
+				$PERMISOS = get_data_form(); //coge los datos del formulario del usuario que desea buscar
 				$datos = $PERMISOS->SEARCH();//Ejecuta la funcion SEARCH() en el USUARIOS_Model
 				$lista = array('NombreGrupo','NombreFuncionalidad','NombreAccion');
 				$resultado = new PERMISO_SHOWALL($lista, $datos, 0, 0, 0, 0, 'SEARCH', '../Controllers/ACCION_Controller.php',$acciones);//Crea la vista SHOWALL y muestra los usuarios que cumplen los parámetros de búsqueda 
