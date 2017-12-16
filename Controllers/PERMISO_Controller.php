@@ -55,6 +55,9 @@ function get_data_form(){
 	$IdGrupo = '';
 	$IdFuncionalidad = '';
 	$IdAccion = '';
+	$NombreGrupo = '';
+	$NombreFuncionalidad = '';
+	$NombreAccion = '';
 	$action = '';
 
 	if(isset($_REQUEST['IdGrupo'])){
@@ -69,11 +72,23 @@ function get_data_form(){
 	if(isset($_REQUEST['action'])){
 	$action = $_REQUEST['action'];
 	}
+	if(isset($_REQUEST['NombreGrupo'])){
+	$NombreGrupo = $_REQUEST['NombreGrupo'];
+	}
+	if(isset($_REQUEST['NombreFuncionalidad'])){
+	$NombreFuncionalidad = $_REQUEST['NombreFuncionalidad'];
+	}
+	if(isset($_REQUEST['NombreAccion'])){
+	$NombreAccion = $_REQUEST['NombreAccion'];
+	}
 
 	$PERMISOS = new PERMISO_Model(
 		$IdGrupo, 
 		$IdFuncionalidad, 
-		$IdAccion);
+		$IdAccion,
+		$NombreGrupo,
+		$NombreFuncionalidad,
+		$NombreAccion);
 
 	return $PERMISOS;
 }
@@ -137,7 +152,7 @@ if (!isset($_REQUEST['action'])){
 			}
 			if($acceso == true){ //si tiene acceso, mostramos el showall
 				if (!$_POST){
-					$PERMISOS = new PERMISO_Model('','','');//crea un un USUARIOS_Model con el login del usuario 
+					$PERMISOS = new PERMISO_Model('','','','','','');//crea un un USUARIOS_Model con el login del usuario 
 				}
 				else{
 					$PERMISOS = get_data_form(); //Coge los datos del formulario
@@ -156,7 +171,7 @@ if (!isset($_REQUEST['action'])){
 				$AccionesBD = new PERMISO_SHOWALL($lista, $datos, $num_tupla, $max_tuplas, $totalTuplas, $num_pagina, 'SHOWALL', '../Controllers/PERMISO_Controller.php',$acciones); //Crea la vista SHOWALL de los usuarios de la BD
 			}else{
 				if (!$_POST){
-					$PERMISOS = new PERMISO_Model('','','');//crea un un USUARIOS_Model con el login del usuario 
+					$PERMISOS = new PERMISO_Model('','','','','','');//crea un un USUARIOS_Model con el login del usuario 
 				}
 				else{
 					$PERMISOS = get_data_form(); //Coge los datos del formulario
