@@ -339,4 +339,26 @@ function contarTuplas(){
     return $total_tuplas;
 }
 
+function comprobarEntrega(){
+	$login = $_SESSION['login'];
+	$lista = null;
+
+	$sql = "SELECT E.IdTrabajo FROM ENTREGA E, TRABAJO T
+						WHERE(	E.IdTrabajo = T.IdTrabajo AND
+								E.login = '$login'
+					)";
+	$datos = $this->mysqli->query($sql);
+	$num_rows = mysqli_num_rows($datos);
+	if($num_rows > 0){
+
+		while($row = mysqli_fetch_array($datos)){
+			$lista[$row['IdTrabajo']] =true;
+		}
+		return $lista;
+
+	}else{
+		return $lista;
+	}
 }
+}
+?>

@@ -462,22 +462,20 @@ function comprobarExistenciaNota(){
 //Funcion para generar alias
 function generadorAlias() {
 	$length = 6;
+
 	//Realizamos la greneración de alias mientras no se encuentre un alias unico
-	/* $sql ="SELECT * FROM ENTREGA WHERE (login = '$this->login' AND 
-	 									Alias = '$this->Alias' AND  
+	$sql ="SELECT * FROM ENTREGA WHERE (login = '$this->login' AND 
 	 									IdTrabajo = '$this->IdTrabajo')";
 
-	 									echo $sql;
  	
  	 $result = $this->mysqli->query($sql);
-     //si no se produce un error
-		$num_rows = mysqli_num_rows($result); //cogemos el numero de tuplas que coinciden con la consulta
+	$num_rows = mysqli_num_rows($result); //cogemos el numero de tuplas que coinciden con la consulta
 		if($num_rows > 0){
-			$row = $row = mysqli_fetch_array($this->result);
+			$row = mysqli_fetch_array($this->result);
 			return $row['Alias'] ;
 		}else{
-*/
-		//	do{
+			do{
+
 			    $caracteres = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 			    $caracteresLength = strlen($caracteres);
 			    $randomString = '';
@@ -485,16 +483,15 @@ function generadorAlias() {
 			    for ($i = 0; $i < $length; $i++) {
 			        $randomString .= $caracteres[rand(0, $caracteresLength - 1)];
 			    }
-			 //    $sql ="SELECT * FROM ENTREGA WHERE (login = '$this->login' AND Alias = '$this->Alias' AND  IdTrabajo = '$this->IdTrabajo'";
+			     $sql ="SELECT * FROM ENTREGA WHERE ( Alias = '$randomString')";
  	
- 	 			//if ($result = $this->mysqli->query($sql)){ //si no se produce un error
-				//	$num_rows = mysqli_num_rows($result); 
-				//}
-		  //  }
-		  //  while($num_rows == 0);
+ 	 			$result = $this->mysqli->query($sql); //si no se produce un error
+				$rows = mysqli_num_rows($result); 
+			
+		   }
+		 while($rows > 0);
    		 return $randomString;
-		//}	
-	//} 
+	} 
 }
 }//Fin clase
 

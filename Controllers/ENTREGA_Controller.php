@@ -267,7 +267,7 @@ if (!isset($_REQUEST['action'])){
 			$ENTREGA = new ENTREGA_Model($_REQUEST['login'],$_REQUEST['IdTrabajo'], '', '','','',''); //crea un un ENTREGA_Model);//crea un un ENTREGA_Model con el IdTrabajo del usuario
 			$lista = $ENTREGA->rellenarLista();
 			//$tupla = $ENTREGA->RellenaDatos();//A partir del IdTrabajo recoge todos los atributos
-			$usuario = new ENTREGA_SHOWCURRENT($lista); //Crea la vista SHOWCURRENT del usuario requerido
+			$usuario = new ENTREGA_SHOWCURRENT($lista,$permisos); //Crea la vista SHOWCURRENT del usuario requerido
 			break;
 
 		case 'ADDAL': //Añadir una entrega como alumno

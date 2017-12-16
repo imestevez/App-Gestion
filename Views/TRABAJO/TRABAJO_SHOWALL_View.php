@@ -21,12 +21,13 @@ class TRABAJO_SHOWALL{
     var $FechaFinTrabajo; // fecha fin trabajo
     var $acciones; //array de acciones
     var $permisos; //array de permisos
+    var $entregaExiste; //para saber si el usuario tiene una entrega sobre un trabajo
     var $admin; //para saber si es administrador
 
 
 
 //constructor de la clase
-function __construct($lista, $datos,$num_tupla,$max_tuplas,$totalTuplas,$num_pagina, $orden, $origen, $permisos,$acciones){
+function __construct($lista, $datos,$num_tupla,$max_tuplas,$totalTuplas,$num_pagina, $orden, $origen, $permisos,$acciones,$entregaExiste){
     //asignación de valores de parámetro a los atributos de la clase
     $this->datos = $datos;
     $this->origen = $origen;
@@ -38,6 +39,7 @@ function __construct($lista, $datos,$num_tupla,$max_tuplas,$totalTuplas,$num_pag
     $this->orden = $orden ;
     $this->acciones = $acciones;
     $this->permisos = $permisos;
+    $this->entregaExiste = $entregaExiste;
     $this->admin = false;
     foreach ($this->permisos as $key => $value) {
         if($value[0] == 'ADMIN'){
@@ -177,9 +179,19 @@ function render(){
                 if($entrega == true){
                 ?>
                 <td>
-                  <a href="../Controllers/ENTREGA_Controller.php?action=ADDAL&IdTrabajo=<?php echo $row["IdTrabajo"]?>&login=<?php echo $_SESSION['login']?>&origen=../Controllers/TRABAJO_Controller.php"><input type="image" src="../Views/images/anadir.png" name="action" title="<?php echo $strings['Añadir'] ?>" value="ADD"></a>
+                    <?php
+                    if(!array_key_exists($row["IdTrabajo"], $this->entregaExiste)){
+
+                    ?>
+                  <a href="../Controllers/ENTREGA_Controller.php?action=ADDAL&IdTrabajo=<?php echo $row["IdTrabajo"]?>&login=<?php echo $_SESSION['login']?>&origen=../Controllers/TRABAJO_Controller.php"><input type="image" src="../Views/images/anadir.png" name="action" title="<?php echo $strings['Editar'] ?>" value="ADD"></a>
                 </td>
             <?php
+        }else{
+            ?>
+              <a href="../Controllers/ENTREGA_Controller.php?action=EDIT&IdTrabajo=<?php echo $row["IdTrabajo"]?>&login=<?php echo $_SESSION['login']?>&origen=../Controllers/TRABAJO_Controller.php"><input type="image" src="../Views/images/edit.png" name="action" title="<?php echo $strings['Añadir'] ?>" value="ADD"></a>
+                </td>
+        <?php
+        }
         }
        foreach ($this->permisos as $key => $value) {
 

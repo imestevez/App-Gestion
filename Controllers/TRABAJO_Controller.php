@@ -226,8 +226,9 @@ if (!isset($_REQUEST['action'])){
 				$max_tuplas = $num_tupla+10; // el número de tuplas a mostrar por página
 				$totalTuplas = $TRABAJO->contarTuplas(); //Cuenta el número de tuplas que hay en la BD
 				$datos = $TRABAJO->SHOWALL($num_tupla,$max_tuplas); //Ejecuta la funcion SHOWALL() en el TRABAJO_Model
+				$entrega = $TRABAJO->comprobarEntrega();
 				$lista = array('IdTrabajo', 'NombreTrabajo', 'FechaIniTrabajo','FechaFinTrabajo','PorcentajeNota');
-				$UsuariosBD = new TRABAJO_SHOWALL($lista, $datos, $num_tupla, $max_tuplas, $totalTuplas, $num_pagina, 'SHOWALL', '../Controllers/TRABAJO_Controller.php',$permisos, $acciones); //Crea la vista SHOWALL de los usuarios de la BD
+				$UsuariosBD = new TRABAJO_SHOWALL($lista, $datos, $num_tupla, $max_tuplas, $totalTuplas, $num_pagina, 'SHOWALL', '../Controllers/TRABAJO_Controller.php',$permisos, $acciones,$entrega); //Crea la vista SHOWALL de los usuarios de la BD
 			}else{
 				if (!$_POST){
 					$TRABAJO = new TRABAJO_Model('', '','','', '');//crea un un TRABAJO_Model con el IdTrabajo del usuario 
@@ -246,7 +247,8 @@ if (!isset($_REQUEST['action'])){
 				$totalTuplas = $TRABAJO->contarTuplas(); //Cuenta el número de tuplas que hay en la BD
 				$datos = $TRABAJO->SHOWALL($num_tupla,$max_tuplas); //Ejecuta la funcion SHOWALL() en el TRABAJO_Model
 				$lista = array('IdTrabajo', 'NombreTrabajo', 'FechaIniTrabajo','FechaFinTrabajo','PorcentajeNota');
-				$UsuariosBD = new TRABAJO_SHOWALL($lista, $datos, $num_tupla, $max_tuplas, $totalTuplas, $num_pagina, 'ALL', '../Controllers/TRABAJO_Controller.php',$permisos,$acciones); //Crea la vista SHOWALL de los usuarios de la BD
+				$entrega = $TRABAJO->comprobarEntrega();
+				$UsuariosBD = new TRABAJO_SHOWALL($lista, $datos, $num_tupla, $max_tuplas, $totalTuplas, $num_pagina, 'ALL', '../Controllers/TRABAJO_Controller.php',$permisos,$acciones,$entrega); //Crea la vista SHOWALL de los usuarios de la BD
 			}	
 		}
 	}
