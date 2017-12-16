@@ -69,7 +69,7 @@ function render(){
                 <td><?php echo $row["AliasEvaluado"]; ?></td>
 
                 <td class="edit_tabla">
-                    <a href="../Controllers/EVALUACION_Controller.php?action=SHOWCURRENT&LoginEvaluador=<?php echo $row["LoginEvaluador"]?>&IdTrabajo=<?php echo $row["IdTrabajo"]?>&AliasEvaluado=<?php echo $row["AliasEvaluado"] ?>"><input type="image" src="../Views/images/ojo.png" name="action" title="<?php echo $strings['Mostrar en detalle'] ?>" value="SHOWCURRENT" action="">
+                    <a href="../Controllers/EVALUACION_Controller.php?action=SHOW&LoginEvaluador=<?php echo $row["LoginEvaluador"]?>&IdTrabajo=<?php echo $row["IdTrabajo"]?>&AliasEvaluado=<?php echo $row["AliasEvaluado"] ?>"><input type="image" src="../Views/images/ojo.png" name="action" title="<?php echo $strings['Mostrar en detalle'] ?>" value="SHOW" action="">
                     </a>
                 </td>               
             </tr>
@@ -85,13 +85,13 @@ function render(){
 
         if($this->num_pagina > 0){ // Si la tupla 1 mostrada es la primera de la BD
 ?>
-         <a href="../Controllers/EVALUACION_Controller.php?num_pagina=<?php echo $this->num_pagina-1?>&action=SHOWALL"><input type="image" src="../Views/images/prev.png" name="action" title="<?php echo $strings['Anterior'] ?>" value="PREV"></a>
+         <a href="../Controllers/EVALUACION_Controller.php?num_pagina=<?php echo $this->num_pagina-1?>&action=ALL"><input type="image" src="../Views/images/prev.png" name="action" title="<?php echo $strings['Anterior'] ?>" value="PREV"></a>
 <?php
         } //Fin del if si es la 1ª tupla
 
         if($this->max_tuplas < $this->total_tuplas){ //Si la tupla mostrada es la última de la BD
 ?>
-        <a href="../Controllers/EVALUACION_Controller.php?num_pagina=<?php echo $this->num_pagina+1?>&action=SHOWALL"><input type="image" src="../Views/images/next.png" name="action" title="<?php echo $strings['Siguiente'] ?>" value="NEXT"></a>
+        <a href="../Controllers/EVALUACION_Controller.php?num_pagina=<?php echo $this->num_pagina+1?>&action=ALL"><input type="image" src="../Views/images/next.png" name="action" title="<?php echo $strings['Siguiente'] ?>" value="NEXT"></a>
 <?php
         }//Fin del if si es la ultima tupla
 
@@ -133,7 +133,7 @@ function renderSearch(){
                 
 
             <td class="edit_tabla">
-                    <a href="../Controllers/EVALUACION_Controller.php?action=SHOWCURRENT&LoginEvaluador=<?php echo $row["LoginEvaluador"]?>&IdTrabajo=<?php echo $row["IdTrabajo"]?>&AliasEvaluado=<?php echo $row["AliasEvaluado"] ?>"><input type="image" src="../Views/images/ojo.png" name="action" title="<?php echo $strings['Mostrar en detalle'] ?>" value="SHOWCURRENT" action=""></a>
+                    <a href="../Controllers/EVALUACION_Controller.php?action=SHOW&LoginEvaluador=<?php echo $row["LoginEvaluador"]?>&IdTrabajo=<?php echo $row["IdTrabajo"]?>&AliasEvaluado=<?php echo $row["AliasEvaluado"] ?>"><input type="image" src="../Views/images/ojo.png" name="action" title="<?php echo $strings['Mostrar en detalle'] ?>" value="SHOW" action=""></a>
                     <a href="../Controllers/EVALUACION_Controller.php?action=EDIT&LoginEvaluador=<?php echo $row["LoginEvaluador"]?>&IdTrabajo=<?php echo $row["IdTrabajo"]?>&AliasEvaluado=<?php echo $row["AliasEvaluado"] ?>"><input type="image" src="../Views/images/edit.png" name="action" title="<?php echo $strings['Editar'] ?>" value="EDIT"></a>
                     <a href="../Controllers/EVALUACION_Controller.php?action=DELETE&LoginEvaluador=<?php echo $row["LoginEvaluador"]?>&IdTrabajo=<?php echo $row["IdTrabajo"]?>&AliasEvaluado=<?php echo $row["AliasEvaluado"] ?>"><input type="image" src="../Views/images/delete.png" name="action" title="<?php echo $strings['Eliminar'] ?>" value="DELETE"></a>
                 </td>
@@ -152,7 +152,7 @@ function renderSearch(){
     if(isset($_REQUEST['action'])){ //si viene de un formulario
         if($_REQUEST['action'] == 'SEARCH'){  //Si se muestra a partir de un SEARCH
 ?>
-           <a href="../Controllers/EVALUACION_Controller.php?action=SHOWALL"><input type="image" src="../Views/images/back.png" name="action" title="<?php echo $strings['Volver'] ?>" value="BACK"></a>
+           <a href="../Controllers/EVALUACION_Controller.php?action=ALL"><input type="image" src="../Views/images/back.png" name="action" title="<?php echo $strings['Volver'] ?>" value="BACK"></a>
 <?php
         }
     }//Fin del if si es SEARCH

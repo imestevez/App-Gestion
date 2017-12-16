@@ -12,7 +12,7 @@ Controlador que recibe las acciones relacionadas con EVALUACION
 session_start(); //solicito trabajar con la session
 
 include_once '../Functions/Authentication.php';
-//include_once '../Functions/ACL.php';
+include_once '../Functions/ACL.php';
 include_once '../Views/MESSAGE_View.php';
 
 if (!IsAuthenticated()){
@@ -27,16 +27,17 @@ if(isset($_REQUEST["action"]))  {
 }
 
 //Si no tiene permisos para acceder a este controlador con la accion que trae
-//if(!HavePermissions(10, $action)) {
-	//new MESSAGE('No tienes permisos para realizar esta accion', '../index.php');
-//	header('Location:../index.php'); //vuelve al index
-//}
+if(!HavePermissions(10, $action)) {
+	new MESSAGE('No tienes permisos para realizar esta accion', '../index.php');
+	//header('Location:../index.php'); //vuelve al index
+	exit();
+}
 //almacenamos un array de permidos del grupo
-//$permisos = listaPermisos();
-//$acciones = listaAcciones(10);
+$permisos = listaPermisos();
+$acciones = listaAcciones(10);
 
 //Pnemos la variabla acceso  a false con la que se controla si el usuario puede ver un showall o no
-//$acceso=false;
+$acceso=false;
 
 include_once '../Models/EVALUACION_Model.php';
 
@@ -254,14 +255,16 @@ if (!isset($_REQUEST['action'])){
 			break;
 		case 'SEARCH': //si desea realizar una busqueda
 			if (!$_POST){
-				//$IdTrabajo = 'ET1';
-				//$AliasEvaluado = 'efgh';
-				//$EVALUACION = new EVALUACION_Model($IdTrabajo, '', '', '', '', '', '', '', ''); //crea una EVALUACION_Model con los campos clave del usuario y del trabajo
-				//$lista = $EVALUACION->rellenarLista();
-				//$listaHistorias = $EVALUACION->listarHistorias();
+				$IdTrabajo = 'ET1';
+				$AliasEvaluado = 'efgh';
+				$EVALUACION = new EVALUACION_Model($IdTrabajo, '', '', '', '', '', '', '', ''); //crea una EVALUACION_Model con los campos clave del usuario y del trabajo
+				$contar = $EVALUACION->contar();
+				$contarHistorias = $EVALUACION->contarHistorias();
+				$lista = $EVALUACION->rellenarLista();
+				$listaHistorias = $EVALUACION->listarHistorias();
 				//$listaLoginEvaluadores = $EVALUACION->listarLoginEvaluadores();  
 				//$listaComentarios = $EVALUACION->listarComentarios();
-				//$usuario = new EVALUACION_CALIFICAR($lista, $listaHistorias);
+				$usuario = new EVALUACION_CALIFICAR($lista, $listaHistorias, $contar, $contarHistorias);
 
 
 
@@ -269,7 +272,7 @@ if (!isset($_REQUEST['action'])){
 
 
 
-				$EVALUACION = new EVALUACION_SEARCH();//Crea la vista SEARCH y muestra formulario para rellenar por el usuario
+				//$EVALUACION = new EVALUACION_SEARCH();//Crea la vista SEARCH y muestra formulario para rellenar por el usuario
 			}
 			else{
 				$EVALUACION = get_data_UserBD(); //coge los datos del formulario del usuario que desea buscar
@@ -278,7 +281,7 @@ if (!isset($_REQUEST['action'])){
 				$resultado = new EVALUACION_SHOWALL($lista, $datos, 0, 0, 0, 0, 'SEARCH', '../Controllers/EVALUACION_Controller.php');//Crea la vista SHOWALL y muestra los usuarios que cumplen los parámetros de búsqueda 
 			}
 			break;
-		case 'SHOWCURRENT': //si desea ver un usuario en detalle
+		case 'SHOW': //si desea ver un usuario en detalle
 
 			if(!$_POST){
 				$lista = array('IdTrabajo', 'LoginEvaluador', 'AliasEvaluado', 'IdHistoria', 'CorrectoA', 'ComenIncorrectoA', 'CorrectoP', 'ComentIncorrectoP', 'OK', 'origen');
@@ -315,7 +318,7 @@ if (!isset($_REQUEST['action'])){
 			$totalTuplas = $EVALUACION->contarTuplas(); //Cuenta el número de tuplas que hay en la BD
 			$datos = $EVALUACION->SHOWALL($num_tupla,$max_tuplas); //Ejecuta la funcion SHOWALL() en el EVALUACION_Model
 			$lista = array('IdTrabajo', 'NombreTrabajo', 'LoginEvaluador', 'AliasEvaluado', 'IdHistoria', 'TextoHistoria', 'CorrectoA', 'ComenIncorrectoA', 'CorrectoP', 'ComentIncorrectoP', 'OK');
-			$UsuariosBD = new EVALUACION_SHOWALL($lista, $datos, $num_tupla, $max_tuplas, $totalTuplas, $num_pagina, 'SHOWALL', '../Controllers/EVALUACION_Controller.php'); //Crea la vista SHOWALL de los usuarios de la BD	
+			$UsuariosBD = new EVALUACION_SHOWALL($lista, $datos, $num_tupla, $max_tuplas, $totalTuplas, $num_pagina, 'ALL', '../Controllers/EVALUACION_Controller.php'); //Crea la vista SHOWALL de los usuarios de la BD	
 	}
 	}
 

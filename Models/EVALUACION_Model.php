@@ -478,13 +478,15 @@ function rellenarLista(){
 //Nos devuelve un recordset con todas las historias de una evaluacion
 function listarHistorias(){
 
-	$sql = "SELECT E.IdHistoria, H.TextoHistoria, E.ComenIncorrectoA, E.CorrectoA, E.ComentIncorrectoP, E.CorrectoP, E.OK FROM EVALUACION E, TRABAJO T, HISTORIA H
+	$sql = "SELECT E.IdHistoria, H.TextoHistoria, E.LoginEvaluador, E.ComenIncorrectoA, E.CorrectoA, E.ComentIncorrectoP, E.CorrectoP, E.OK FROM EVALUACION E, TRABAJO T, HISTORIA H
 						 WHERE (
+						 		
 						 		E.IdTrabajo = '$this->IdTrabajo' AND
 						 		E.IdTrabajo = T.IdTrabajo AND
 						 		E.IdTrabajo = H.IdTrabajo AND 
 						 		E.IdHistoria = H.IdHistoria
-															)"; 
+															) ORDER BY 1"; 
+			
 	    // si se produce un error en la busqueda mandamos el mensaje de error en la consulta
 
     if (!($resultado = $this->mysqli->query($sql))){
@@ -494,6 +496,31 @@ function listarHistorias(){
     else{ // si la busqueda es correcta devolvemos el recordset resultado
 		return $resultado;
 	}
+}
+
+//Nos devuelve un recordset con todas las historias de una evaluacion
+function rellenarHistorias(){
+	$lista = null;
+	$sql = "SELECT E.IdHistoria, H.TextoHistoria FROM EVALUACION E, TRABAJO T, HISTORIA H
+						 WHERE (
+						 		
+						 		E.IdTrabajo = '$this->IdTrabajo' AND
+						 		E.IdTrabajo = T.IdTrabajo AND
+						 		E.IdTrabajo = H.IdTrabajo AND 
+						 		E.IdHistoria = H.IdHistoria
+															) ORDER BY 1"; 
+			
+	    // si se produce un error en la busqueda mandamos el mensaje de error en la consulta
+		$resultado = $this->mysqli->query($sql);
+		$num=0;
+		while ($row = mysqli_fetch_array($resultado)) {
+			$lista[$num] = array($row['IdHistoria'], $row['TextoHistoria']);
+			$num++;
+		}
+		return $lista;
+		    
+    
+
 }
 
 
@@ -597,6 +624,66 @@ function generarEvaluaciones(){
 	}
 }//Fin generarEvaluaciones()
 
+//Obtiene una tupla de EVALUACION para calificar
+function listarEvaluadores(){
+
+	$sql = "SELECT * FROM EVALUACION E, ASIGNAC_QA A
+					WHERE (
+							A.AliasEvaluado = '$this->AliasEvaluado' AND
+							A.LoginEvaluador = E.LoginEvaluador AND
+							A.IdTrabajo = T.IdTrabajo 
+
+
+										)";
+
+	$result = $this->mysqli->query($sql);
+	$num_rows = mysqli_num_rows($result);
+
+	if($num_rows > 0){
+		$num = 0;
+		while($row=mysqli_fetch_array($result)){
+			$lista[$num] = array ($row["LoginEvaluador"] = array ($row["ComenIncorrectoA"], $row["CorrectoA"], $row["ComentIncorrectoP"], $row["CorrectoP"], $row["OK"]));
+		}
+	}
+}
+
+
+function contar(){
+	$aux = 0;
+	$sql = "SELECT COUNT(*) 
+					FROM ASIGNAC_QA
+							WHERE IdTrabajo = '$this->IdTrabajo'
+								GROUP BY LoginEvaluador";
+
+	$result = $this->mysqli->query($sql);
+	
+	$row=mysqli_fetch_array($result);
+	$aux= $row['COUNT(*)'];
+	
+
+	return $aux;
+	
+
+}
+
+
+function contarHistorias(){
+	$aux = 0;
+	$sql = "SELECT COUNT(*) 
+					FROM EVALUACION
+							WHERE IdTrabajo = '$this->IdTrabajo'
+								GROUP BY IdHistoria";
+
+	$result = $this->mysqli->query($sql);
+	
+	$row=mysqli_fetch_array($result);
+	$aux= $row['COUNT(*)'];
+	
+
+	return $aux;
+	
+
+}
 
 
 }//Fin clase

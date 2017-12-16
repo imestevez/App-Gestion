@@ -461,7 +461,7 @@ function historiasEvaluación($IdTrabajo){
 
 		$result = $this->mysqli->query($sql);
 		$num_rows = mysqli_num_rows($result);
-
+		
 		//Contador de evaluaciones creadas con éxito
 		$cont_exito = 0;
 
@@ -493,11 +493,11 @@ function historiasEvaluación($IdTrabajo){
 									                '0',
 									                 '',
 									                  '0')";	
-
+									                  
 			if ($result_insert = $this->mysqli->query($sql)){
 				$cont_exito++;	
 			}
-			if (!$result_insert = $this->mysqli->query($sql)){
+			else{
 				$this->lista['mensaje'] =  'ERROR: La generación de historias a evaluar no ha sido realizada correctamente'; 
 				return $this->lista;	
 			}						                  					                  
