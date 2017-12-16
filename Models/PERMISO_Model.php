@@ -27,9 +27,9 @@ function __construct($IdGrupo, $IdFuncionalidad, $IdAccion, $NombreGrupo, $Nombr
 	$this->IdGrupo = $IdGrupo;
 	$this->IdFuncionalidad = $IdFuncionalidad;
 	$this->IdAccion = $IdAccion;
-	$this->NombreGrupo;
-	$this->NombreFuncionalidad;
-	$this->NombreAccion;
+	$this->NombreGrupo= $NombreGrupo;
+	$this->NombreFuncionalidad = $NombreFuncionalidad;
+	$this->NombreAccion = $NombreAccion;
 
 	// incluimos la funcion de acceso a la bd
 	include_once '../Functions/Access_DB.php';
@@ -76,10 +76,12 @@ function SEARCH()
        			FROM PERMISO P, GRUPO G, FUNCIONALIDAD F, ACCION A
     			WHERE P.IdGrupo=G.IdGrupo AND P.IdFuncionalidad=F.IdFuncionalidad AND P.IdAccion=A.IdAccion AND
     				(
-    				(G.NombreGrupo LIKE '%$this->IdGrupo%') &&
-    				(F.NombreFuncionalidad LIKE '%$this->IdFuncionalidad%') &&
-    				(A.NombreAccion LIKE '%$this->IdAccion%') 
+    				(G.NombreGrupo LIKE '%$this->NombreGrupo%') &&
+    				(F.NombreFuncionalidad LIKE '%$this->NombreFuncionalidad%') &&
+    				(A.NombreAccion LIKE '%$this->NombreAccion%') 
 	 				)";
+
+	 				echo $sql;
     				
     // si se produce un error en la busqueda mandamos el mensaje de error en la consulta
     if (!($resultado = $this->mysqli->query($sql))){
