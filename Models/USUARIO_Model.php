@@ -126,14 +126,13 @@ function ADD()
 				}
 
     			else{ //si no da error en la insercion del usuario, lo añadimos al grupo alumnos y devolvemos mensaje de exito
-    				$grupoDefault = $this->devolverIdGrupoAlumnos(); //Obtenemos el IdGrupo de ALUMNOS mediante la función
 
     				//Creamos la sentencia sql
     				$sql2 = "INSERT INTO USU_GRUPO(
 												login,
 												IdGrupo) VALUES (
 															'$this->login',
-															'$this->grupoDefault')";
+															'ALUMNO')";
 
     				if($result2 = $this->mysqli->query($sql2)){
 						$this->lista['mensaje'] = 'Inserción realizada con éxito';
@@ -468,23 +467,6 @@ function rellenarGrupos(){
 		$lista[$row['IdGrupo']] =$row['NombreGrupo'];
 	}*/
 	return $result;
-}
-
-//Devuelve el IdGrupo del grupo ALUMNOS, para poder insertar a los usuarios en el grupo ALUMNOS por defecto, según se registran
-function devolverIdGrupoAlumnos(){
-
-	$sql = "SELECT * FROM GRUPO WHERE (NombreGrupo = 'ALUMNOS')"; //Creamos la sentencia sql
-	$resultado = $this->mysqli->query($sql); //Ejecutamos la query sobre la BD
-	$num_rows = mysqli_num_rows($resultado); //Almacenamos el número de tuplas que tiene el recordset
-
-	if($num_rows == 0){ //Si no existe el grupo ALUMNOS lanzamos un mensaje de error
-		$this->lista['mensaje'] = 'ERROR: El grupo por defecto ALUMNOS no ha sido encontrado';
-		return $this->lista;
-	}else{ //Si existe, cogemos la tupla y devolvemos el IdGrupo de ALUMNOS
-		$row = mysqli_fetch_array($resultado); //Tupla del grupo ALUMNOS
-		return $row['IdGrupo']; //Devuelve el IdGrupo de ALUMNOS
-	}
-
 }
 
 }
