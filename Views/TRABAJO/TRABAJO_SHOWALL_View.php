@@ -98,7 +98,7 @@ function render(){
                 $historia = false;
                    foreach ($this->permisos as $key => $value) {
                      if($value[1] == 7){
-                        switch ($value[2]) {
+                        Switch ($value[2]) {
                             case 'ADD':
                                 $historia =true; 
                                 break;
@@ -106,6 +106,7 @@ function render(){
                                 $historia =true; 
                                 break;
                             default:
+
                                 $historia =false;
                                 break;
                         }
@@ -121,8 +122,6 @@ function render(){
 
                 <?php
             }
-                $historia = false;
-
         
         if($historia == true){
                 ?>
