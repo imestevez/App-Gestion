@@ -488,14 +488,18 @@ function historiasEvaluación($IdTrabajo){
 									           '$LoginEvaluador',
 									            '$AliasEvaluado',
 									             '$IdHistoria',
-									              '',
+									              '0',
 									               '',
-									                '',
+									                '0',
 									                 '',
-									                  '')";	
+									                  '0')";	
 
 			if ($result_insert = $this->mysqli->query($sql)){
 				$cont_exito++;	
+			}
+			if (!$result_insert = $this->mysqli->query($sql)){
+				$this->lista['mensaje'] =  'ERROR: La generación de historias a evaluar no ha sido realizada correctamente'; 
+				return $this->lista;	
 			}						                  					                  
 		}	
 
