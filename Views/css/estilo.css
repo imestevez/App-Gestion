@@ -151,7 +151,21 @@ input{
     width: auto;
     padding-left: 10px;
 }
+textarea:hover {
+  background-color: #CCF;
+  padding-left: 10px;
+  border-radius: 10px;
 
+}
+textarea{
+       font: 16px sans-serif;
+    border-color: darkblue;  
+    border-radius: 20px;
+    color: darkblue;
+    width: auto;
+    padding-left: 10px;
+
+}
 .del{
   background-color: aliceblue;
   border: 0 none;
