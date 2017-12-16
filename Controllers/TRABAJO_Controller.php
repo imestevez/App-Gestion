@@ -28,8 +28,10 @@ if(isset($_REQUEST["action"]))  {
 
 //Si no tiene permisos para acceder a este controlador con la accion que trae
 if(!HavePermissions(6, $action)) {
-	//new MESSAGE('No tienes permisos para realizar esta accion', '../index.php');
-	header('Location:../index.php'); //vuelve al index
+	new MESSAGE('No tienes permisos para realizar esta accion', '../index.php');
+	//header('Location:../index.php'); //vuelve al index
+	exit();
+
 }
 //almacenamos un array de permidos del grupo
 $permisos = listaPermisos();
@@ -186,7 +188,9 @@ if (!isset($_REQUEST['action'])){
 				$TRABAJO = get_data_UserBD(); //coge los datos del formulario del usuario que desea buscar
 				$datos = $TRABAJO->SEARCH();//Ejecuta la funcion SEARCH() en el TRABAJO_Model
 				$lista = array('IdTrabajo','NombreTrabajo','FechaIniTrabajo','FechaFinTrabajo','PorcentajeNota');
-				$resultado = new TRABAJO_SHOWALL($lista, $datos, 0, 0, 0, 0, 'SEARCH', '../Controllers/TRABAJO_Controller.php',$acciones);//Crea la vista SHOWALL y muestra los usuarios que cumplen los parámetros de búsqueda 
+				$entrega = $TRABAJO->comprobarEntrega();
+				$lista = array('IdTrabajo', 'NombreTrabajo', 'FechaIniTrabajo','FechaFinTrabajo','PorcentajeNota');
+				$resultado = new TRABAJO_SHOWALL($lista, $datos, 0, 0, 0, 0, 'SEARCH', '../Controllers/TRABAJO_Controller.php',$permisos, $acciones,$entrega); //Crea la vista SHOWALL de los usuarios de la BD 
 			}
 			break;
 		case 'SHOW': //si desea ver un usuario en detalle
@@ -224,8 +228,9 @@ if (!isset($_REQUEST['action'])){
 				$max_tuplas = $num_tupla+10; // el número de tuplas a mostrar por página
 				$totalTuplas = $TRABAJO->contarTuplas(); //Cuenta el número de tuplas que hay en la BD
 				$datos = $TRABAJO->SHOWALL($num_tupla,$max_tuplas); //Ejecuta la funcion SHOWALL() en el TRABAJO_Model
+				$entrega = $TRABAJO->comprobarEntrega();
 				$lista = array('IdTrabajo', 'NombreTrabajo', 'FechaIniTrabajo','FechaFinTrabajo','PorcentajeNota');
-				$UsuariosBD = new TRABAJO_SHOWALL($lista, $datos, $num_tupla, $max_tuplas, $totalTuplas, $num_pagina, 'SHOWALL', '../Controllers/TRABAJO_Controller.php',$acciones); //Crea la vista SHOWALL de los usuarios de la BD
+				$resultado = new TRABAJO_SHOWALL($lista, $datos, $num_tupla, $max_tuplas, $totalTuplas, $num_pagina, 'SHOWALL', '../Controllers/TRABAJO_Controller.php',$permisos, $acciones,$entrega); //Crea la vista SHOWALL de los usuarios de la BD
 			}else{
 				if (!$_POST){
 					$TRABAJO = new TRABAJO_Model('', '','','', '');//crea un un TRABAJO_Model con el IdTrabajo del usuario 
@@ -242,9 +247,10 @@ if (!isset($_REQUEST['action'])){
 				$num_tupla = $num_pagina*10; //número de la 1º tupla a mostrar
 				$max_tuplas = $num_tupla+10; // el número de tuplas a mostrar por página
 				$totalTuplas = $TRABAJO->contarTuplas(); //Cuenta el número de tuplas que hay en la BD
-				$datos = $TRABAJO->SHOWALL_User($num_tupla,$max_tuplas); //Ejecuta la funcion SHOWALL() en el TRABAJO_Model
+				$datos = $TRABAJO->SHOWALL($num_tupla,$max_tuplas); //Ejecuta la funcion SHOWALL() en el TRABAJO_Model
 				$lista = array('IdTrabajo', 'NombreTrabajo', 'FechaIniTrabajo','FechaFinTrabajo','PorcentajeNota');
-				$UsuariosBD = new TRABAJO_SHOWALL($lista, $datos, $num_tupla, $max_tuplas, $totalTuplas, $num_pagina, 'ALL', '../Controllers/TRABAJO_Controller.php',$acciones); //Crea la vista SHOWALL de los usuarios de la BD
+				$entrega = $TRABAJO->comprobarEntrega();
+				$UsuariosBD = new TRABAJO_SHOWALL($lista, $datos, $num_tupla, $max_tuplas, $totalTuplas, $num_pagina, 'ALL', '../Controllers/TRABAJO_Controller.php',$permisos,$acciones,$entrega); //Crea la vista SHOWALL de los usuarios de la BD
 			}	
 		}
 	}

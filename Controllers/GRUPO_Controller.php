@@ -28,8 +28,9 @@ if(isset($_REQUEST["action"]))  {
 
 //Si no tiene permisos para acceder a este controlador con la accion que trae
 if(!HavePermissions(2, $action)) {
-	//new MESSAGE('No tienes permisos para realizar esta accion', '../index.php');
-	header('Location:../index.php'); //vuelve al index
+	new MESSAGE('No tienes permisos para realizar esta accion', '../index.php');
+	//header('Location:../index.php'); //vuelve al index
+	exit();
 }
 //almacenamos un array de permidos del grupo
 $permisos = listaPermisos();
@@ -91,7 +92,7 @@ if (!isset($_REQUEST['action'])){
 }
 	// En funcion de la accion elegida
 	Switch ($action){
-		case 'ASIG': //Si quiere hacer un ADD
+		case 'ADD': //Si quiere hacer un ADD
 			if (!$_POST){ //si viene del showall (no es un post)
 
 				$form = new GRUPO_ADD(); //Crea la vista ADD y muestra formulario para rellenar por el usuario
@@ -144,6 +145,7 @@ if (!isset($_REQUEST['action'])){
 			$grupo = new GRUPO_SHOWCURRENT($tupla); //Crea la vista SHOWCURRENT del grupo en cuestión
 			break;
 		default: //Por defecto, Se muestra la vista SHOWALL
+
 			foreach ($acciones as $key => $value) {
 				if($value == 'ALL'){ //si puede ver el showall
 					$acceso = true; //acceso a true

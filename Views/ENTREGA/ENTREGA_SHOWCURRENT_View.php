@@ -1,6 +1,6 @@
 <?php
 /*
-//Clase : ENTREGA_SHOWCURRENT
+//Clase : ENTREGA_SHOW
 //Creado el : 26-11-2017
 //Creado por: SOLFAMIDAS
 //-------------------------------------------------------
@@ -17,10 +17,11 @@ class ENTREGA_SHOWCURRENT{
     var $Horas; // declaración del atributo Horas
     var $Ruta; //declaración del atributo Ruta
     var $NotaTrabajo; //decalaracion de la nota de trabajo
+    var $permisos; //permisos
     var $lista; // array para almacenar los datos del usuario
     var $mysqli; // declaración del atributo manejador de la bd
 
-function __construct($lista){
+function __construct($lista, $permisos){
     //asignación de valores de parámetro a los atributos de la clase
     $this->login = $lista['login'];
     $this->Nombre = $lista['Nombre'];
@@ -30,6 +31,7 @@ function __construct($lista){
     $this->Horas = $lista['Horas'];
     $this->Ruta = $lista['Ruta'];
    $this->NotaTrabajo = $lista['NotaTrabajo'];
+   $this->permisos = $permisos;
   //$this->NotaTrabajo = 8;
 
 
@@ -47,11 +49,31 @@ function render(){
      <section class="pagina">
              <table class="showcurrent" style="width: 70%; margin-left: 15%">
              <caption><?php echo $strings['Mostrar entrega'] ?></caption>
-                  <tr><th><?php echo $strings['Campo'] ?></th><th><?php echo $strings['Valor'] ?></th><th><?php echo $strings['Acciones'] ?></th></tr>
+                  <tr><th><?php echo $strings['Campo'] ?></th><th style="border-right-style: collapse; border-right:  5px solid black"><?php echo $strings['Valor'] ?></th></tr>
                  <tr><th><?php echo $strings['login'] ?></th><td><?php echo $this->login ?></td>
 
-                    <td style="border-bottom-style: collapse; border-bottom:  5px solid black;">
-                    <a href="../Controllers/USUARIO_Controller.php?action=SHOWCURRENT&login=<?php echo $this->login ?>&origen=../Controllers/ENTREGA_Controller.php?action=SHOWCURRENT&login=<?php echo $this->login ?>&IdTrabajo=<?php echo $this->IdTrabajo ?>"><input type="image" src="../Views/images/ojo.png" name="action" title="<?php echo $strings['Mostrar en detalle'] ?>" value="SHOWCURRENT" action=""></a>
+                    <?php
+                        $usuario = false;
+                        $trabajo = false;
+                        foreach ($this->permisos as $key => $value) {
+                            if(($value[1] == 1) && ($value[2] == 'SHOW')){
+                                $usuario = true;
+                            }
+                            if(($value[1] == 6) && ($value[2] == 'SHOW')){
+                                $trabajo = true;
+                            }
+                        }
+
+                        if($usuario == true){
+
+                    ?>
+
+                    <td style="border-bottom-style: collapse; border-bottom:  5px solid black; border-top-style: collapse; border-top:  5px solid black">
+                    <a href="../Controllers/USUARIO_Controller.php?action=SHOW&login=<?php echo $this->login ?>&origen=../Controllers/ENTREGA_Controller.php?action=SHOW&login=<?php echo $this->login ?>&IdTrabajo=<?php echo $this->IdTrabajo ?>"><input type="image" src="../Views/images/ojo.png" name="action" title="<?php echo $strings['Mostrar en detalle'] ?>" value="SHOW" action=""></a>
+                <?php
+                }
+
+                ?>
                   
                 </td>
                  <tr><th><?php echo $strings['Nombre'] ?></th><td style="border-right-style: collapse; border-right:  5px solid black;"><?php echo $this->Nombre ?></td>
@@ -61,10 +83,19 @@ function render(){
                  </tr>
                  <tr><th><?php echo $strings['IdTrabajo'] ?></th><td><?php echo $this->IdTrabajo ?>
                  </td>
+                  <?php
+
+                    if($trabajo == true){
+
+                ?>
                      <td  style="border-bottom-style: collapse; border-bottom:  5px solid black;border-top:  5px solid black;" >
-                    <a href="../Controllers/TRABAJO_Controller.php?action=SHOWCURRENT&IdTrabajo=<?php echo $this->IdTrabajo ?>&origen=../Controllers/ENTREGA_Controller.php?action=SHOWCURRENT&login=<?php echo $this->login ?>&IdTrabajo=<?php echo $this->IdTrabajo ?>"><input type="image" src="../Views/images/ojo.png" name="action" title="<?php echo $strings['Mostrar en detalle'] ?>" value="SHOWCURRENT" action=""></a>
+                    <a href="../Controllers/TRABAJO_Controller.php?action=SHOW&IdTrabajo=<?php echo $this->IdTrabajo ?>&origen=../Controllers/ENTREGA_Controller.php?action=SHOW&login=<?php echo $this->login ?>&IdTrabajo=<?php echo $this->IdTrabajo ?>"><input type="image" src="../Views/images/ojo.png" name="action" title="<?php echo $strings['Mostrar en detalle'] ?>" value="SHOW" action=""></a>
                   
                 </td>
+                 <?php
+                    }
+
+                ?>
 
 
                  </tr>
@@ -78,11 +109,7 @@ function render(){
                         <td style="border-right-style: collapse; border-right:  5px solid black;"><a type="download" href="<?php echo $this->Ruta ?>"><?php echo $this->Ruta ?></a></td></tr>
 
                     <tr><th><?php echo $strings['NotaTrabajo'] ?></th>
-                        <td > <?php if($this->NotaTrabajo <> ''){ echo $this->NotaTrabajo; } else{ echo $strings['Sin calificar']; } ?> </td>
-
-                        <td style="border-right-style: collapse; border-right:  5px solid black;border-top:  5px solid black;"> <?php if($this->NotaTrabajo <> ''){ ?> <a href="../Controllers/NOTA_TRABAJO_Controller.php?action=EDIT&IdTrabajo=<?php echo $this->IdTrabajo?>&login=<?php echo $this->login?>&origen=../Controllers/TRABAJO_Controller.php"> <input type="image" style="margin-bottom: 2%" src="../Views/images/edit.png" name="action" title="<?php echo $strings['Editar'] ?>" value="EDIT"></a>  <?php } else{ ?> <a href="../Controllers/NOTA_TRABAJO_Controller.php?action=ADD&IdTrabajo=<?php echo $this->IdTrabajo?>&login=<?php echo $this->login?>&origen=../Controllers/TRABAJO_Controller.php"> <input type="image" style="margin-bottom: 2%" src="../Views/images/anadir.png" name="action" title="<?php echo $strings['Añadir'] ?>" value="ADD"></a><?php } ?> </td>
-
-
+                        <td style="border-right-style: collapse; border-right:  5px solid black;" > <?php if($this->NotaTrabajo <> ''){ echo $this->NotaTrabajo; } else{ echo $strings['Sin calificar']; } ?> </td>
                     </tr>
                 </table>
 

@@ -15,17 +15,22 @@ class ENTREGA_Model { //declaración de la clase
 	var $IdTrabajo; //atributo IdTrabajo
 	var $Alias; //atributo Alias
 	var $Horas; // declaración del atributo Horas
+	var $Nombre; //nombre usuario
+	var $NombreTrabajo; //nombre trabajo
 	var $Ruta; //declaración del atributo Ruta
 	var $lista; // array para almacenar los datos del usuario
 	var $mysqli; // declaración del atributo manejador de la bd
 
 //Constructor de la clase
 
-function __construct($login,$IdTrabajo, $Alias, $Horas,$Ruta){
+function __construct($login,$IdTrabajo, $Alias, $Horas,$Ruta, $Nombre,$NombreTrabajo){
 	//asignación de valores de parámetro a los atributos de la clase
 	$this->login = $login;
 	$this->IdTrabajo = $IdTrabajo;
 	$this->Alias = $Alias;
+	$this->Nombre = $Nombre;
+	$this->NombreTrabajo = $NombreTrabajo;
+
 	if($Horas <> ''){
 	$this->Horas = $Horas;
 }else{
@@ -138,11 +143,12 @@ function SEARCH()
     $sql = "SELECT  
 					E.login,
     				E.IdTrabajo,
+    				U.Nombre,
     				T.NombreTrabajo,
     				E.Alias,
     				E.Horas,
 					E.Ruta
-       			FROM ENTREGA E, TRABAJO T
+       			FROM ENTREGA E, TRABAJO T, USUARIO U
     			WHERE 
     				(
     				(E.login LIKE '%$this->login%') &&
@@ -150,9 +156,11 @@ function SEARCH()
     				(E.Alias LIKE '%$this->Alias%') &&
     				(E.Horas LIKE '%$this->Horas%') &&
 	 				(E.Ruta LIKE '%$this->Ruta%') &&
-	 				(E.IdTrabajo = T.IdTrabajo)
+	 				(E.IdTrabajo = T.IdTrabajo) &&
+	 				(E.login = U.login) &&
+	 				(U.Nombre LIKE '%$this->Nombre%') &&
+	 				(T.NombreTrabajo LIKE '%$this->NombreTrabajo%')
 	 				)";
-    				
 
     // si se produce un error en la busqueda mandamos el mensaje de error en la consulta
     if (!($resultado = $this->mysqli->query($sql))){
@@ -454,22 +462,20 @@ function comprobarExistenciaNota(){
 //Funcion para generar alias
 function generadorAlias() {
 	$length = 6;
+
 	//Realizamos la greneración de alias mientras no se encuentre un alias unico
-	/* $sql ="SELECT * FROM ENTREGA WHERE (login = '$this->login' AND 
-	 									Alias = '$this->Alias' AND  
+	$sql ="SELECT * FROM ENTREGA WHERE (login = '$this->login' AND 
 	 									IdTrabajo = '$this->IdTrabajo')";
 
-	 									echo $sql;
  	
- 	 if (($result = $this->mysqli->query($sql))){
-     //si no se produce un error
-		$num_rows = mysqli_num_rows($result); //cogemos el numero de tuplas que coinciden con la consulta
+ 	 $result = $this->mysqli->query($sql);
+	$num_rows = mysqli_num_rows($result); //cogemos el numero de tuplas que coinciden con la consulta
 		if($num_rows > 0){
-			$row = $row = mysqli_fetch_array($this->result);
+			$row = mysqli_fetch_array($this->result);
 			return $row['Alias'] ;
 		}else{
-*/
-		//	do{
+			do{
+
 			    $caracteres = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 			    $caracteresLength = strlen($caracteres);
 			    $randomString = '';
@@ -477,16 +483,15 @@ function generadorAlias() {
 			    for ($i = 0; $i < $length; $i++) {
 			        $randomString .= $caracteres[rand(0, $caracteresLength - 1)];
 			    }
-			 //    $sql ="SELECT * FROM ENTREGA WHERE (login = '$this->login' AND Alias = '$this->Alias' AND  IdTrabajo = '$this->IdTrabajo'";
+			     $sql ="SELECT * FROM ENTREGA WHERE ( Alias = '$randomString')";
  	
- 	 			//if ($result = $this->mysqli->query($sql)){ //si no se produce un error
-				//	$num_rows = mysqli_num_rows($result); 
-				//}
-		  //  }
-		  //  while($num_rows == 0);
+ 	 			$result = $this->mysqli->query($sql); //si no se produce un error
+				$rows = mysqli_num_rows($result); 
+			
+		   }
+		 while($rows > 0);
    		 return $randomString;
-		//}	
-	//} 
+	} 
 }
 }//Fin clase
 

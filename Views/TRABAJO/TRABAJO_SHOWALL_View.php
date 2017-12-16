@@ -20,10 +20,14 @@ class TRABAJO_SHOWALL{
     var $orden ; //Vista desde la que se envia la orden
     var $FechaFinTrabajo; // fecha fin trabajo
     var $acciones; //array de acciones
+    var $permisos; //array de permisos
+    var $entregaExiste; //para saber si el usuario tiene una entrega sobre un trabajo
+    var $admin; //para saber si es administrador
+
 
 
 //constructor de la clase
-function __construct($lista, $datos,$num_tupla,$max_tuplas,$totalTuplas,$num_pagina, $orden, $origen, $acciones){
+function __construct($lista, $datos,$num_tupla,$max_tuplas,$totalTuplas,$num_pagina, $orden, $origen, $permisos,$acciones,$entregaExiste){
     //asignación de valores de parámetro a los atributos de la clase
     $this->datos = $datos;
     $this->origen = $origen;
@@ -34,8 +38,17 @@ function __construct($lista, $datos,$num_tupla,$max_tuplas,$totalTuplas,$num_pag
     $this->num_pagina = $num_pagina;
     $this->orden = $orden ;
     $this->acciones = $acciones;
-
+    $this->permisos = $permisos;
+    $this->entregaExiste = $entregaExiste;
+    $this->admin = false;
+    foreach ($this->permisos as $key => $value) {
+        if($value[0] == 'ADMIN'){
+            $this->admin = true;
+        }
+    }
     $this->FechaFinTrabajo;
+
+
 
     
     if( $this->orden <>'SEARCH'){ //si no viene del search
@@ -64,29 +77,64 @@ function render(){
                     <?php 
 
                     foreach ($this->acciones as $key => $value) {
-                        if($value == 'SEARCH'){
+        
+
+                        if($value =='SEARCH'){
                             ?>
                                <a href="../Controllers/TRABAJO_Controller.php?action=SEARCH"><input type="image" src="../Views/images/search.png" name="action" title="<?php echo $strings['Buscar']?>" value="SEARCH"></a>
                             <?php
                         }
 
-                         if($value == 'ADD'){
+                         if($value =='ADD'){
                             ?>
 
-                    <a href="../Controllers/TRABAJO_Controller.php?action=ADD" ><input type="image" src="../Views/images/anadir.png" name="action" title="<?php echo $strings['Añadir']?>" value="ADD" ></a>
+                          <a href="../Controllers/TRABAJO_Controller.php?action=ADD" ><input type="image" src="../Views/images/anadir.png" name="action" title="<?php echo $strings['Añadir']?>" value="ADD" ></a>
                     <?php
                         }
                     }
-                    ?>
+            ?>
+                   
                 </td>
+                <?php 
+                $entrega = false;
+                $historia = false;
+                   foreach ($this->permisos as $key => $value) {
+                     if($value[1] == 7){
+                        Switch ($value[2]) {
+                            case 'ADD':
+                                $historia =true; 
+                                break;
+                            case 'SHOW':
+                                $historia =true; 
+                                break;
+                            default:
+
+                                $historia =false;
+                                break;
+                        }
+                 }
+             if(($value[1] == 8)  && ($value[2] == 'ADDAL') ) {
+                $entrega = true;
+            }
+        }
+                if($entrega == true){
+                ?>
+
                 <th><?php echo $strings['Entrega']?></th>
 
+                <?php
+            }
+        
+        if($historia == true){
+                ?>
                 <th><?php echo $strings['Historias']?></th>
+            <?php
+            }
+        ?>
                 </tr>
-<?php		
- 
+    <?php
+            
 			while( ($this->num_tupla < $this->max_tuplas) && ($row = mysqli_fetch_array($this->datos)) ) { //Mientras el numero de tuplas no llegue al máximo y haya tuplas en la BD
-
             
             //si la FechaFinTrabajo  viene vacia la asignamos vacia
             if ($row["FechaFinTrabajo"] == ''){
@@ -126,16 +174,43 @@ function render(){
                     }
                     ?>     
                 </td>
+            <?php
+                
+                if($entrega == true){
+                ?>
                 <td>
-                  <a href="../Controllers/ENTREGA_Controller.php?action=ADD&IdTrabajo=<?php echo $row["IdTrabajo"]?>&login=<?php echo $_SESSION['login']?>&origen=../Controllers/TRABAJO_Controller.php"><input type="image" src="../Views/images/anadir.png" name="action" title="<?php echo $strings['Añadir'] ?>" value="ADD"></a>
-                </td>
+                   <?php
+                    if($this->entregaExiste <> null){
+                        if(array_key_exists($row["IdTrabajo"], $this->entregaExiste)){
+                ?>
+                           <a href="../Controllers/ENTREGA_Controller.php?action=EDIT&IdTrabajo=<?php echo $row["IdTrabajo"]?>&login=<?php echo $_SESSION['login']?>&origen=../Controllers/TRABAJO_Controller.php"><input type="image" src="../Views/images/edit.png" name="action" title="<?php echo $strings['Editar'] ?>" value="ADD"></a>      </td>
+                <?php
+                             }else{
+                ?>
+                            <a href="../Controllers/ENTREGA_Controller.php?action=ADDAL&IdTrabajo=<?php echo $row["IdTrabajo"]?>&login=<?php echo $_SESSION['login']?>&origen=../Controllers/TRABAJO_Controller.php"><input type="image" src="../Views/images/anadir.png" name="action" title="<?php echo $strings['Añadir'] ?>" value="ADD"></a>  </td> 
+                <?php       
+                             }
+                        }else{
+                        ?>
+                        <a href="../Controllers/ENTREGA_Controller.php?action=ADDAL&IdTrabajo=<?php echo $row["IdTrabajo"]?>&login=<?php echo $_SESSION['login']?>&origen=../Controllers/TRABAJO_Controller.php"><input type="image" src="../Views/images/anadir.png" name="action" title="<?php echo $strings['Añadir'] ?>" value="ADD"></a>  </td>                
+                    <?php
+                        }
+                }
+       foreach ($this->permisos as $key => $value) {
 
+                # code...
+             if( ($value[1] == 7)  && ($value[2] == 'ADD') ){
+            ?>
                 <td>
                     <a href="../Controllers/HISTORIA_Controller.php?action=ADD&IdTrabajo=<?php echo $row["IdTrabajo"]?>&NombreTrabajo=<?php echo $row["NombreTrabajo"]?>" ><input type="image" src="../Views/images/anadir.png" name="action" title="<?php echo $strings['Añadir']?>" value="ADD" ></a>
+
                     <a href="../Controllers/TRABAJO_Controller.php?action=SHOWALL_HISTORIAS&IdTrabajo=<?php echo $row["IdTrabajo"]?>&NombreTrabajo=<?php echo $row["NombreTrabajo"]?>"><input type="image" src="../Views/images/ojo.png" name="action" title="<?php echo $strings['Mostrar en detalle'] ?>" value="SHOWCURRENT" action=""></a>
 
                 </td>
-
+        <?php
+            }
+        }
+            ?>
                 </tr>              
            
 <?php
@@ -184,29 +259,66 @@ function renderSearch(){
              
 
                 <td>
-                     <?php 
+             <?php 
 
                     foreach ($this->acciones as $key => $value) {
-                        if($value == 'SEARCH'){
+        
+
+                        if($value =='SEARCH'){
                             ?>
                                <a href="../Controllers/TRABAJO_Controller.php?action=SEARCH"><input type="image" src="../Views/images/search.png" name="action" title="<?php echo $strings['Buscar']?>" value="SEARCH"></a>
                             <?php
                         }
 
-                         if($value == 'ADD'){
+                         if($value =='ADD'){
                             ?>
 
-                    <a href="../Controllers/TRABAJO_Controller.php?action=ADD" ><input type="image" src="../Views/images/anadir.png" name="action" title="<?php echo $strings['Añadir']?>" value="ADD" ></a>
+                          <a href="../Controllers/TRABAJO_Controller.php?action=ADD" ><input type="image" src="../Views/images/anadir.png" name="action" title="<?php echo $strings['Añadir']?>" value="ADD" ></a>
                     <?php
                         }
                     }
-                    ?>
+            ?>
+                   
                 </td>
-                   <th><?php echo $strings['Entrega']?></th>
+                <?php 
+                $entrega = false;
+                $historia = false;
+                   foreach ($this->permisos as $key => $value) {
+                     if($value[1] == 7){
+                        Switch ($value[2]) {
+                            case 'ADD':
+                                $historia =true; 
+                                break;
+                            case 'SHOW':
+                                $historia =true; 
+                                break;
+                            default:
 
+                                $historia =false;
+                                break;
+                        }
+                 }
+             if(($value[1] == 8)  && ($value[2] == 'ADDAL') ) {
+                $entrega = true;
+            }
+        }
+                if($entrega == true){
+                ?>
+
+                <th><?php echo $strings['Entrega']?></th>
+
+                <?php
+            }
+        
+        if($historia == true){
+                ?>
                 <th><?php echo $strings['Historias']?></th>
+            <?php
+            }
+        ?>
+           
                 </tr>
-<?php
+    <?php
             while( $row = mysqli_fetch_array($this->datos)) { //Mientras el numero de tuplas no llegue al máximo y haya tuplas en la BD
             //si la FechaFinTrabajo  viene vacia la asignamos vacia
             if ($row["FechaFinTrabajo"] == ''){
@@ -222,11 +334,13 @@ function renderSearch(){
                 <td><?php echo $row["NombreTrabajo"]; ?></td>
                 <td><?php echo $this->FechaFinTrabajo; ?></td>
                 <td class="edit_tabla">
-              <?php 
+                   
+                        <?php 
+
                     foreach ($this->acciones as $key => $value) {
                         if($value == 'SHOW'){
                             ?>
-                         <a href="../Controllers/TRABAJO_Controller.php?action=SHOW&IdTrabajo=<?php echo $row["IdTrabajo"]?>"><input type="image" src="../Views/images/ojo.png" name="action" title="<?php echo $strings['Mostrar en detalle'] ?>" value="SHOW" action=""></a>
+                                 <a href="../Controllers/TRABAJO_Controller.php?action=SHOW&IdTrabajo=<?php echo $row["IdTrabajo"]?>"><input type="image" src="../Views/images/ojo.png" name="action" title="<?php echo $strings['Mostrar en detalle'] ?>" value="SHOW" action=""></a>
                             <?php
                         }
 
@@ -242,18 +356,45 @@ function renderSearch(){
                     <?php
                         }
                     }
-                    ?> 
+                    ?>     
                 </td>
-                <td>
-                  <a href="../Controllers/ENTREGA_Controller.php?action=ADD&IdTrabajo=<?php echo $row["IdTrabajo"]?>&login=<?php echo $_SESSION['login']?>&origen=../Controllers/TRABAJO_Controller.php"><input type="image" src="../Views/images/anadir.png" name="action" title="<?php echo $strings['Añadir'] ?>" value="ADD"></a>
-                </td>
+            <?php
 
+                if($entrega == true){
+                ?>
+                <td>
+                   <?php
+                    if($this->entregaExiste <> null){
+                        if(array_key_exists($row["IdTrabajo"], $this->entregaExiste)){
+                ?>
+                           <a href="../Controllers/ENTREGA_Controller.php?action=EDIT&IdTrabajo=<?php echo $row["IdTrabajo"]?>&login=<?php echo $_SESSION['login']?>&origen=../Controllers/TRABAJO_Controller.php"><input type="image" src="../Views/images/edit.png" name="action" title="<?php echo $strings['Editar'] ?>" value="ADD"></a>      </td>
+                <?php
+                             }else{
+                ?>
+                            <a href="../Controllers/ENTREGA_Controller.php?action=ADDAL&IdTrabajo=<?php echo $row["IdTrabajo"]?>&login=<?php echo $_SESSION['login']?>&origen=../Controllers/TRABAJO_Controller.php"><input type="image" src="../Views/images/anadir.png" name="action" title="<?php echo $strings['Añadir'] ?>" value="ADD"></a>  </td> 
+                <?php       
+                             }
+                        }else{
+                        ?>
+                        <a href="../Controllers/ENTREGA_Controller.php?action=ADDAL&IdTrabajo=<?php echo $row["IdTrabajo"]?>&login=<?php echo $_SESSION['login']?>&origen=../Controllers/TRABAJO_Controller.php"><input type="image" src="../Views/images/anadir.png" name="action" title="<?php echo $strings['Añadir'] ?>" value="ADD"></a>  </td>                
+                    <?php
+                        }
+                }
+       foreach ($this->permisos as $key => $value) {
+
+                # code...
+             if( ($value[1] == 7)  && ($value[2] == 'ADD') ){
+            ?>
                 <td>
                     <a href="../Controllers/HISTORIA_Controller.php?action=ADD&IdTrabajo=<?php echo $row["IdTrabajo"]?>&NombreTrabajo=<?php echo $row["NombreTrabajo"]?>" ><input type="image" src="../Views/images/anadir.png" name="action" title="<?php echo $strings['Añadir']?>" value="ADD" ></a>
+
                     <a href="../Controllers/TRABAJO_Controller.php?action=SHOWALL_HISTORIAS&IdTrabajo=<?php echo $row["IdTrabajo"]?>&NombreTrabajo=<?php echo $row["NombreTrabajo"]?>"><input type="image" src="../Views/images/ojo.png" name="action" title="<?php echo $strings['Mostrar en detalle'] ?>" value="SHOWCURRENT" action=""></a>
 
                 </td>
-
+        <?php
+            }
+        }
+            ?>
                 </tr>                     
            
 <?php

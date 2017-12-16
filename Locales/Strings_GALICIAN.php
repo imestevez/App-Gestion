@@ -365,10 +365,26 @@ array(
 'Buscar asignación de QA' => 'Buscar asignación de QA',
 'Asignación de QAs' => 'Asignación de QAs',
 'Asignación de QA' => 'Asignación de QA',
+'Editar asignación de QA' => 'Editar asignación de QA',
+'Resultado de búsqueda: Asignación de QAs' => 'Resultado da búsqueda: Asignación de QAs',
 
+'ERROR: Fallo en la inserción. Ya existe esa asignación de QA' => 'ERROR: Fallo na inserción. Xa existe esa asignación de QA',
+'ERROR: No existe esa entrega para evaluar' => 'ERROR: Non existe esa entrega para evaluar',
+'ERROR: No existe el usuario con LoginEvaluador'  => 'ERROR: Non existe ningún usuario con LoginEvaluador',
 
+//Generación de asignación automática de QAs:
+'Asignación auto. de QAs' => 'Asignación auto. de QAs',
+'Asignación automática de QAs' => 'Asignación automática de QAs',
+'Asignación automática de QAs realizada correctamente' => 'Asignación automática de QAs realizada correctamente',
+'ERROR: La Asignación automática de QAs no ha sido realizada correctamente' => 'ERROR: A asignación automática de QAs non foi realizada correctamente',
+'Número de QAs a corregir por alumno' => 'Número de QAs a correxir por alumno',
+'ERROR: El número de entregas no es suficiente para realizar la asignacion de QA' => 'ERROR: O número de entregas non e suficiente para realizar a asignación de QA',
 
-
+//Generación de historias de usuario a evaluar:
+'Generación de historias a evaluar realizada correctamente' => 'Xeración de historias a evaluar realizada correctamente',
+'ERROR: La generación de historias a evaluar no ha sido realizada correctamente' => 'ERROR: A xeración de historias a evaluar non foi realizada correctamente',
+'Generación de historias a evaluar' => 'Xeración de historias a evaluar',
+'Gen. historias evaluación' => 'Xer. historias evaluación',
 
 
 

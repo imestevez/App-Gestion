@@ -47,14 +47,25 @@ function render(){
 				<table class="showAll">
                 <caption><?php echo $strings['Asignación de QAs']?></caption>
                 <tr>
-                <th><?php echo $strings['Id del trabajo']?></th> 
-                <th><?php echo $strings['Nombre del trabajo']?></th>  
-                <th><?php echo $strings['Login del evaluador']?></th>
-                <th><?php echo $strings['Login del evaluado']?></th>
-                <th><?php echo $strings['Alias del evaluado']?></th>      
-                <td><a href="../Controllers/ASIGNAC_QA_Controller.php?action=SEARCH"><input type="image" src="../Views/images/search.png" name="action" title="<?php echo $strings['Buscar']?>" value="SEARCH"></a>
+                <th rowspan="2"><?php echo $strings['Id del trabajo']?></th> 
+                <th rowspan="2"><?php echo $strings['Nombre del trabajo']?></th>  
+                <th rowspan="2"><?php echo $strings['Login del evaluador']?></th>
+                <th rowspan="2"><?php echo $strings['Login del evaluado']?></th>
+                <th rowspan="2"><?php echo $strings['Alias del evaluado']?></th>      
+                <td rowspan="2">
+                    <a href="../Controllers/ASIGNAC_QA_Controller.php?action=SEARCH"><input type="image" src="../Views/images/search.png" name="action" title="<?php echo $strings['Buscar']?>" value="SEARCH"></a>
                     <a href="../Controllers/ASIGNAC_QA_Controller.php?action=ADD" ><input type="image" src="../Views/images/anadir.png" name="action" title="<?php echo $strings['Añadir']?>" value="ADD" ></a>
                 </td>
+                    <th><?php echo $strings['Asignación auto. de QAs']?></th>
+                    <td>
+                        <a href="../Controllers/ASIGNAC_QA_Controller.php?action=GENQA" ><input type="image" src="../Views/images/flecha-reproducir.png" name="action" title="<?php echo $strings['Asignación automática de QAs']?>" value="GENQA" ></a>
+                    </td>    
+                </tr>
+                <tr>
+                    <th><?php echo $strings['Gen. historias evaluación']?></th>
+                    <td>
+                        <a href="../Controllers/ASIGNAC_QA_Controller.php?action=GENEV" ><input type="image" src="../Views/images/flecha-reproducir.png" name="action" title="<?php echo $strings['Generación de historias a evaluar']?>" value="GENEV" ></a>
+                    </td> 
                 </tr>
 <?php		
  
@@ -112,7 +123,7 @@ function renderSearch(){
 ?>
      <section class="pagina"  style="min-height: 500px; height: 100%;">
                 <table class="showAll">
-                 <caption><?php echo $strings['Asignación de QAs']?></caption>
+                 <caption><?php echo $strings['Resultado de búsqueda: Asignación de QAs']?></caption>
                 <tr>
                 <th><?php echo $strings['Id del trabajo']?></th> 
                 <th><?php echo $strings['Nombre del trabajo']?></th>  
