@@ -80,8 +80,6 @@ function SEARCH()
     				(F.NombreFuncionalidad LIKE '%$this->NombreFuncionalidad%') &&
     				(A.NombreAccion LIKE '%$this->NombreAccion%') 
 	 				)";
-
-	 				echo $sql;
     				
     // si se produce un error en la busqueda mandamos el mensaje de error en la consulta
     if (!($resultado = $this->mysqli->query($sql))){
