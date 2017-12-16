@@ -12,7 +12,7 @@ Controlador que recibe las acciones relacionadas con EVALUACION
 session_start(); //solicito trabajar con la session
 
 include_once '../Functions/Authentication.php';
-include_once '../Functions/ACL.php';
+//include_once '../Functions/ACL.php';
 include_once '../Views/MESSAGE_View.php';
 
 if (!IsAuthenticated()){
@@ -27,16 +27,16 @@ if(isset($_REQUEST["action"]))  {
 }
 
 //Si no tiene permisos para acceder a este controlador con la accion que trae
-if(!HavePermissions(10, $action)) {
+//if(!HavePermissions(10, $action)) {
 	//new MESSAGE('No tienes permisos para realizar esta accion', '../index.php');
-	header('Location:../index.php'); //vuelve al index
-}
+//	header('Location:../index.php'); //vuelve al index
+//}
 //almacenamos un array de permidos del grupo
-$permisos = listaPermisos();
-$acciones = listaAcciones(10);
+//$permisos = listaPermisos();
+//$acciones = listaAcciones(10);
 
 //Pnemos la variabla acceso  a false con la que se controla si el usuario puede ver un showall o no
-$acceso=false;
+//$acceso=false;
 
 include_once '../Models/EVALUACION_Model.php';
 
@@ -49,6 +49,7 @@ include_once '../Views/EVALUACION/EVALUACION_DELETE_View.php';
 include_once '../Views/MESSAGE_View.php';
 
 
+include_once '../Views/EVALUACION/EVALUACION_CALIFICAR_View.php';
 
 // funcion para coger los datos del formulario
 function get_data_form(){
@@ -242,7 +243,7 @@ if (!isset($_REQUEST['action'])){
 		case 'EDIT': //si el usuario quiere editar	
 			if (!$_POST){
 				$EVALUACION = new EVALUACION_Model($_REQUEST['IdTrabajo'], $_REQUEST['LoginEvaluador'], $_REQUEST['AliasEvaluado'], $_REQUEST['IdHistoria'], '', '', '', '', ''); //crea una EVALUACION_Model con los campos clave del usuario y del trabajo
-				$lista = $EVALUACION->rellenarLista();  //Recoge todos los atributos
+				$lista = $EVALUACION->rellenarListaIdHistoria();  //Recoge todos los atributos
 				$usuario = new EVALUACION_EDIT($lista); //Crea la vista EDIT con los datos del usuario
 			}
 			else{
@@ -253,6 +254,21 @@ if (!isset($_REQUEST['action'])){
 			break;
 		case 'SEARCH': //si desea realizar una busqueda
 			if (!$_POST){
+				//$IdTrabajo = 'ET1';
+				//$AliasEvaluado = 'efgh';
+				//$EVALUACION = new EVALUACION_Model($IdTrabajo, '', '', '', '', '', '', '', ''); //crea una EVALUACION_Model con los campos clave del usuario y del trabajo
+				//$lista = $EVALUACION->rellenarLista();
+				//$listaHistorias = $EVALUACION->listarHistorias();
+				//$listaLoginEvaluadores = $EVALUACION->listarLoginEvaluadores();  
+				//$listaComentarios = $EVALUACION->listarComentarios();
+				//$usuario = new EVALUACION_CALIFICAR($lista, $listaHistorias);
+
+
+
+
+
+
+
 				$EVALUACION = new EVALUACION_SEARCH();//Crea la vista SEARCH y muestra formulario para rellenar por el usuario
 			}
 			else{
@@ -263,11 +279,22 @@ if (!isset($_REQUEST['action'])){
 			}
 			break;
 		case 'SHOWCURRENT': //si desea ver un usuario en detalle
-			$lista = array('IdTrabajo', 'LoginEvaluador', 'AliasEvaluado', 'IdHistoria', 'CorrectoA', 'ComenIncorrectoA', 'CorrectoP', 'ComentIncorrectoP', 'OK', 'origen');
-			$EVALUACION = new EVALUACION_Model($_REQUEST['IdTrabajo'], $_REQUEST['LoginEvaluador'], $_REQUEST['AliasEvaluado'], $_REQUEST['IdHistoria'], '', '', '', '', ''); //crea una EVALUACION_Model con los campos clave del usuario y del trabajo
-			$lista = $EVALUACION->rellenarLista();
 
-			$usuario = new EVALUACION_SHOWCURRENT($lista); //Crea la vista SHOWCURRENT del usuario requerido
+			if(!$_POST){
+				$lista = array('IdTrabajo', 'LoginEvaluador', 'AliasEvaluado', 'IdHistoria', 'CorrectoA', 'ComenIncorrectoA', 'CorrectoP', 'ComentIncorrectoP', 'OK', 'origen');
+				$EVALUACION = new EVALUACION_Model($_REQUEST['IdTrabajo'], $_REQUEST['LoginEvaluador'], $_REQUEST['AliasEvaluado'], '', '', '', '', '', ''); //crea una EVALUACION_Model con los campos clave del usuario y del trabajo
+				$listaHistorias = $EVALUACION->listarHistorias();
+				$lista = $EVALUACION->rellenarLista();
+
+				$usuario = new EVALUACION_SHOWCURRENT($lista, $listaHistorias); //Crea la vista SHOWCURRENT del usuario requerido
+			}else{
+				$EVALUACION = get_data_UserBD(); //coge los datos del formulario del usuario que desea editar
+				$respuesta = $EVALUACION->EDIT(); //Ejecuta la funcion EDIT() en el EVALUACION_Model
+				$listaHistorias = $EVALUACION->listarHistorias();
+				$lista = $EVALUACION->rellenarLista();
+
+				$usuario = new EVALUACION_SHOWCURRENT($lista, $listaHistorias); //Crea la vista SHOWCURRENT del usuario requerido
+			}
 			break;
 		default: //Por defecto, Se muestra la vista SHOWALL
 			
@@ -287,8 +314,8 @@ if (!isset($_REQUEST['action'])){
 			$max_tuplas = $num_tupla+10; // el número de tuplas a mostrar por página
 			$totalTuplas = $EVALUACION->contarTuplas(); //Cuenta el número de tuplas que hay en la BD
 			$datos = $EVALUACION->SHOWALL($num_tupla,$max_tuplas); //Ejecuta la funcion SHOWALL() en el EVALUACION_Model
-			$lista = array('IdTrabajo', 'LoginEvaluador', 'AliasEvaluado', 'IdHistoria', 'CorrectoA', 'ComenIncorrectoA', 'CorrectoP', 'ComentIncorrectoP', 'OK');
-			$UsuariosBD = new EVALUACION_SHOWALL($lista, $datos, $num_tupla, $max_tuplas, $totalTuplas, $num_pagina, 'SHOWALL', '../Controllers/EVALUACION_Controller.php',$acciones); //Crea la vista SHOWALL de los usuarios de la BD	
+			$lista = array('IdTrabajo', 'NombreTrabajo', 'LoginEvaluador', 'AliasEvaluado', 'IdHistoria', 'TextoHistoria', 'CorrectoA', 'ComenIncorrectoA', 'CorrectoP', 'ComentIncorrectoP', 'OK');
+			$UsuariosBD = new EVALUACION_SHOWALL($lista, $datos, $num_tupla, $max_tuplas, $totalTuplas, $num_pagina, 'SHOWALL', '../Controllers/EVALUACION_Controller.php'); //Crea la vista SHOWALL de los usuarios de la BD	
 	}
 	}
 

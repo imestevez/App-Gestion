@@ -21,6 +21,7 @@ class EVALUACION_Model { //declaración de la clase
     var $ComentIncorrectoP; //atributo para almacenar el comentario incorrecto del profesor
     var $OK; //atributo para almacenar el resultado (1 - 0) de la evaluacion de la QA
 	var $lista; // array para almacenar los datos del usuario
+	var $listaIdHistoria;
 	var $mysqli; // declaración del atributo manejador de la bd
 
 //Constructor de la clase
@@ -158,29 +159,27 @@ function __destruct()
 function SEARCH()
 { 	// construimos la sentencia de busqueda con LIKE y los atributos de la entidad
 
-    $sql = "SELECT  
-					IdTrabajo,
-					LoginEvaluador,
-					AliasEvaluado,
-					IdHistoria,
-					CorrectoA,
-					ComenIncorrectoA,
-					CorrectoP,
-					ComentIncorrectoP,
-					OK
-       			FROM EVALUACION 
+    $sql = "SELECT DISTINCT
+					E.IdTrabajo,
+					T.NombreTrabajo,					
+					E.LoginEvaluador,
+					E.AliasEvaluado
+							
+       			FROM EVALUACION E, TRABAJO T, HISTORIA H
     			WHERE 
     				(
-    				(IdTrabajo LIKE '%$this->IdTrabajo%') &&
-    				(LoginEvaluador LIKE '%$this->LoginEvaluador%') &&
-    				(AliasEvaluado LIKE '%$this->AliasEvaluado%') &&
-    				(IdHistoria LIKE '%$this->IdHistoria%') &&
-    				(CorrectoA LIKE '%$this->CorrectoA%') &&
-    				(ComenIncorrectoA LIKE '%$this->ComenIncorrectoA%') &&
-    				(CorrectoP LIKE '%$this->CorrectoP%') &&
-    				(ComentIncorrectoP LIKE '%$this->ComentIncorrectoP%') &&
-	 				(OK LIKE '%$this->OK%')
-	 				
+    				(E.IdTrabajo LIKE '%$this->IdTrabajo%') &&
+    				(E.LoginEvaluador LIKE '%$this->LoginEvaluador%') &&
+    				(E.AliasEvaluado LIKE '%$this->AliasEvaluado%') &&
+    				(E.IdHistoria LIKE '%$this->IdHistoria%') &&
+    				(E.CorrectoA LIKE '%$this->CorrectoA%') &&
+    				(E.ComenIncorrectoA LIKE '%$this->ComenIncorrectoA%') &&
+    				(E.CorrectoP LIKE '%$this->CorrectoP%') &&
+    				(E.ComentIncorrectoP LIKE '%$this->ComentIncorrectoP%') &&
+	 				(E.OK LIKE '%$this->OK%') &&
+	 				(E.IdTrabajo = T.IdTrabajo) &&
+	 				(E.IdTrabajo = H.IdTrabajo) &&
+	 				(E.IdHistoria = H.IdHistoria)
 	 				)";
     				
 
@@ -190,6 +189,7 @@ function SEARCH()
 			return $this->lista; //
 	}
     else{ // si la busqueda es correcta devolvemos el recordset resultado
+
 		return $resultado;
 	}
 } // fin metodo SEARCH
@@ -260,18 +260,30 @@ function EDIT()
 
 	    if ($num_rows == 1)
 	    {	// se construye la sentencia de modificacion en base a los atributos de la clase
-			$sql = "UPDATE EVALUACION SET 
-						IdTrabajo = '$this->IdTrabajo',
-						LoginEvaluador = '$this->LoginEvaluador',
-						AliasEvaluado = '$this->AliasEvaluado',
-						IdHistoria = '$this->IdHistoria',
-						CorrectoA = '$this->CorrectoA',
-						ComenIncorrectoA = '$this->ComenIncorrectoA',
-						CorrectoP = '$this->CorrectoP',
-						ComentIncorrectoP = '$this->ComentIncorrectoP',
-						OK = '$this->OK'
-					WHERE (IdTrabajo = '$this->IdTrabajo' AND LoginEvaluador = '$this->LoginEvaluador' AND AliasEvaluado = '$this->AliasEvaluado' AND IdHistoria = '$this->IdHistoria')";
-					
+			if(($this->CorrectoP <> '') && ($this->ComentIncorrectoP <> '') && ($this->OK <> '')){
+
+				$sql = "UPDATE EVALUACION SET 
+							IdTrabajo = '$this->IdTrabajo',
+							LoginEvaluador = '$this->LoginEvaluador',
+							AliasEvaluado = '$this->AliasEvaluado',
+							IdHistoria = '$this->IdHistoria',
+							CorrectoA = '$this->CorrectoA',
+							ComenIncorrectoA = '$this->ComenIncorrectoA',
+							CorrectoP = '$this->CorrectoP',
+							ComentIncorrectoP = '$this->ComentIncorrectoP',
+							OK = '$this->OK'
+						WHERE (IdTrabajo = '$this->IdTrabajo' AND LoginEvaluador = '$this->LoginEvaluador' AND AliasEvaluado = '$this->AliasEvaluado' AND IdHistoria = '$this->IdHistoria')";
+			}else{
+
+				$sql = "UPDATE EVALUACION SET 
+							IdTrabajo = '$this->IdTrabajo',
+							LoginEvaluador = '$this->LoginEvaluador',
+							AliasEvaluado = '$this->AliasEvaluado',
+							IdHistoria = '$this->IdHistoria',
+							CorrectoA = '$this->CorrectoA',
+							ComenIncorrectoA = '$this->ComenIncorrectoA'
+						WHERE (IdTrabajo = '$this->IdTrabajo' AND LoginEvaluador = '$this->LoginEvaluador' AND AliasEvaluado = '$this->AliasEvaluado' AND IdHistoria = '$this->IdHistoria')";
+			}			
 			// si hay un problema con la query se envia un mensaje de error en la modificacion
 	        if (!($result = $this->mysqli->query($sql))){
 	        		$this->lista['mensaje'] =  'ERROR: No se ha modificado'; 
@@ -299,8 +311,9 @@ function EDIT()
 
 function SHOWALL($num_tupla,$max_tuplas){
 
-	$sql = "SELECT * FROM EVALUACION E, TRABAJO T, USUARIO U
-	WHERE (E.IdTrabajo=T.IdTrabajo AND U.login=E.LoginEvaluador )
+	$sql = "SELECT DISTINCT E.IdTrabajo, T.NombreTrabajo, E.LoginEvaluador, E.AliasEvaluado
+					 FROM EVALUACION E, TRABAJO T, HISTORIA H
+						WHERE (E.IdTrabajo=T.IdTrabajo AND E.IdTrabajo=H.IdTrabajo AND H.IdHistoria=E.IdHistoria )
 	LIMIT $num_tupla, $max_tuplas";
 
 	    // si se produce un error en la busqueda mandamos el mensaje de error en la consulta
@@ -397,14 +410,49 @@ function comprobarExistenciaHistoria(){
 }
 
 //Rellenamos la lista con los datos de la entidad
+function rellenarListaIdHistoria(){
+
+	$sql = "SELECT  E.IdHistoria, E.IdTrabajo, T.NombreTrabajo, E.LoginEvaluador, E.AliasEvaluado, E.CorrectoA, E.ComenIncorrectoA, E.CorrectoP, E.ComentIncorrectoP, E.OK FROM EVALUACION E, TRABAJO T, HISTORIA H  
+						WHERE (
+								E.IdTrabajo = '$this->IdTrabajo' AND	
+								E.LoginEvaluador = '$this->LoginEvaluador' AND
+								E.AliasEvaluado = '$this->AliasEvaluado' AND 
+								E.IdHistoria = '$this->IdHistoria'
+
+							)";
+
+	if (!($result = $this->mysqli->query($sql))){
+	    	$this->lista['mensaje'] =  'ERROR: No existe en la base de datos'; 
+	    	return $this->lista;
+		}else{
+			$row = mysqli_fetch_array($result);
+			$this->listaIdHistoria['IdTrabajo'] = $row['IdTrabajo'];
+			$this->listaIdHistoria['LoginEvaluador'] = $row['LoginEvaluador'];
+			$this->listaIdHistoria['AliasEvaluado'] = $row['AliasEvaluado'];
+			$this->listaIdHistoria['IdHistoria'] = $row['IdHistoria'];
+			$this->listaIdHistoria['CorrectoA'] = $row['CorrectoA'];
+			$this->listaIdHistoria['ComenIncorrectoA'] = $row['ComenIncorrectoA'];
+			$this->listaIdHistoria['CorrectoP'] = $row['CorrectoP'];
+			$this->listaIdHistoria['ComentIncorrectoP'] = $row['ComentIncorrectoP'];
+			$this->listaIdHistoria['OK'] = $row['OK'];
+
+			return $this->listaIdHistoria;
+		}
+
+	
+}
+
+
+//Rellenamos la lista con los datos de la entidad
 function rellenarLista(){
 
-	$sql = "SELECT * FROM EVALUACION E  
+	$sql = "SELECT * FROM EVALUACION E, TRABAJO T, HISTORIA H  
 						WHERE (
-								E.IdTrabajo = '$this->IdTrabajo' AND								
+								E.IdTrabajo = '$this->IdTrabajo' AND	
 								E.LoginEvaluador = '$this->LoginEvaluador' AND
-								E.AliasEvaluado = '$this->AliasEvaluado' AND
-								E.IdHistoria = '$this->IdHistoria')";
+								E.AliasEvaluado = '$this->AliasEvaluado' 
+
+							)";
 
 	if (!($result = $this->mysqli->query($sql))){
 	    	$this->lista['mensaje'] =  'ERROR: No existe en la base de datos'; 
@@ -426,6 +474,129 @@ function rellenarLista(){
 
 	
 }
+
+//Nos devuelve un recordset con todas las historias de una evaluacion
+function listarHistorias(){
+
+	$sql = "SELECT E.IdHistoria, H.TextoHistoria, E.ComenIncorrectoA, E.CorrectoA, E.ComentIncorrectoP, E.CorrectoP, E.OK FROM EVALUACION E, TRABAJO T, HISTORIA H
+						 WHERE (
+						 		E.IdTrabajo = '$this->IdTrabajo' AND
+						 		E.IdTrabajo = T.IdTrabajo AND
+						 		E.IdTrabajo = H.IdTrabajo AND 
+						 		E.IdHistoria = H.IdHistoria
+															)"; 
+	    // si se produce un error en la busqueda mandamos el mensaje de error en la consulta
+
+    if (!($resultado = $this->mysqli->query($sql))){
+    	$this->lista['mensaje'] =  'ERROR: Fallo en la consulta sobre la base de datos'; 
+		return $this->lista; 
+	}
+    else{ // si la busqueda es correcta devolvemos el recordset resultado
+		return $resultado;
+	}
+}
+
+
+//Nos devuelve un recordset con todos los comentarios, correctoA de todas las evaluaciones
+function listarComentarios(){
+
+	$sql = "SELECT E.CorrectoA, E.ComenIncorrectoA FROM EVALUACION E, TRABAJO T, HISTORIA H, ASIGNAC_QA A
+						 WHERE (
+						 		E.IdTrabajo = '$this->IdTrabajo' AND
+						 		E.IdTrabajo = T.IdTrabajo AND
+						 		E.IdTrabajo = H.IdTrabajo AND 
+						 		E.IdTrabajo = A.IdTrabajo AND
+						 		E.AliasEvaluado = '$this->AliasEvaluado' AND
+						 		E.AliasEvaluado = A.AliasEvaluado AND
+						 		E.IdHistoria = H.IdHistoria
+															)"; 
+	    // si se produce un error en la busqueda mandamos el mensaje de error en la consulta
+
+    if (!($resultado = $this->mysqli->query($sql))){
+    	$this->lista['mensaje'] =  'ERROR: Fallo en la consulta sobre la base de datos'; 
+		return $this->lista; 
+	}
+    else{ // si la busqueda es correcta devolvemos el recordset resultado
+		return $resultado;
+	}
+}
+
+
+
+//Genera automáticamente todas las evaluaciones para un trabajo determinado.
+function generarEvaluaciones(){
+
+	$sql = "SELECT * FROM TRABAJO WHERE (IdTrabajo = '$this->IdTrabajo')"; //comprobar que hay un trabajo con ese id
+    $result = $this->mysqli->query($sql);// se ejecuta la query
+
+    // si existe una tupla con ese valor de clave
+    if ($result->num_rows == 1){
+		$sql = "SELECT * FROM ASIGNAC_QA WHERE (IdTrabajo = '$this->IdTrabajo')";//accedemos a ASIGNAC_QA
+		$result = $this->mysqli->query($sql);// se ejecuta la query
+
+		//si hay tuplas en ASIGNAC_QA
+		if($result->num_rows > 0){
+
+			$sql2 = "SELECT * FROM HISTORIA WHERE (IdTrabajo = '$this->IdTrabajo')";//accedemos a HISTORIA
+			$result2 = $this->mysqli->query($sql2);// se ejecuta la query
+
+
+			while ($row = mysqli_fetch_array($result)) {//mientras haya tuplas en ASIGNAC_QA
+				
+				$this->LoginEvaluador = $row['LoginEvaluador'];
+				$this->AliasEvaluado = $row['AliasEvaluado'];
+
+				while ($row2 = mysqli_fetch_array($result2)) {//mientras haya historias asignadas al trabajo en cuestion
+					
+					$this->IdHistoria = $row2['IdHistoria'];
+
+					//construimos la sentencia sql de inserción en la BD
+					$sql = "INSERT INTO EVALUACION(
+					IdTrabajo,
+					LoginEvaluador,
+					AliasEvaluado,
+					IdHistoria,
+					CorrectoA,
+					ComenIncorrectoA,
+					CorrectoP,
+					ComentIncorrectoP,
+					OK) VALUES(
+									'$this->IdTrabajo',
+									'$this->LoginEvaluador',
+									'$this->AliasEvaluado',
+									'$this->IdHistoria',
+									'0',
+									'	',
+									'0',
+									'	',
+									'0')";	
+
+
+					if (!$result3 = $this->mysqli->query($sql)){ // si da error la ejecución de la query
+						$this->lista['mensaje'] = 'ERROR: No se ha podido conectar con la base de datos';
+						return $this->lista; // error en la consulta (no se ha podido conectar con la bd). Devolvemos un mensaje que el controlador manejara
+					}
+
+				}//fin while2
+
+			}//fin while1
+			
+			$this->lista['mensaje'] = 'Inserción realizada con éxito';
+			return $this->lista; //operacion de insertado correcta
+			
+
+		}else{//no hay tuplas en ASIGNAC_QA
+			$this->lista['mensaje'] =  'ERROR: No hay asignaciones de QAs';
+			return $this->lista;
+		}
+
+		
+	}else{//no existe el IdTrabajo en la BD
+		$this->lista['mensaje'] =  'ERROR: El IdTrabajo no existe';
+		return $this->lista; 
+	}
+}//Fin generarEvaluaciones()
+
 
 
 }//Fin clase

@@ -44,6 +44,12 @@ function render(){
   include '../Views/Header.php';
 
 ?>
+
+<script type="text/javascript">
+    
+    <?php include '../Views/js/validacionesCheckbox.js' ?>
+
+</script>
     <section class="pagina">
         
         <form method="post" name="EDIT" action="../Controllers/USU_GRUPO_Controller.php" enctype="multipart/form-data">
@@ -61,7 +67,7 @@ function render(){
                 //Si el usuario tiene grupos asignados
                 if(count($this->ListaPropios) > 0){
                 foreach ($this->ListaPropios as $key => $value) { //recorremos la lista de sus grupos
-
+echo "jdhasñjdhs";
 ?>
                 <tr> 
                 <td style="width: 5%"><?php echo $key ?></td>
@@ -93,7 +99,7 @@ function render(){
 
                 <input type="text" name="login" value="<?php echo $this->login?>" style="visibility: hidden;" >
                 <div  style="float: right; margin-left: 0%; margin-right: 50% ; margin-top: 2%">
-                    <a href="../Controllers/USU_GRUPO_Controller.php?action=ASIG"> <input type="image" name="action" value="ASIG" src="../Views/images/confirmar.png" title="<?php echo $strings['Enviar Formulario'] ?>" "></a>
+                    <a href="../Controllers/USU_GRUPO_Controller.php?action=ASIG"> <input type="image" name="action" onclick="return validarCheck('EDIT');" value="ASIG" src="../Views/images/confirmar.png" title="<?php echo $strings['Enviar Formulario'] ?>" ></a>
                 </div>
 
         </form>

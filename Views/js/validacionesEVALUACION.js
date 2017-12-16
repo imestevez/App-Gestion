@@ -253,21 +253,15 @@ function validarCorrecto(Correcto, min, max){
 }
 
 //Función que comprueba el ComentarioIncorrecto y no supera el maximo permitido
-function validarComentIncorrecto(ComentIncorrecto, tamaño_max)
-{  
+function validarComentIncorrecto(ComentIncorrecto, tamaño_max){  
 
-  if(comprobarVacio(ComentIncorrecto))//Si el campo no está vacio el campo
-      {
-          if(comprobarTexto(ComentIncorrecto,tamaño_max))//Si ComentIncorrecto cumple la expresión regular 
-       {
+  if(comprobarTexto(ComentIncorrecto,tamaño_max))//Si ComentIncorrecto cumple la expresión regular 
+  {
+    return true;
+  }else{ //Si no cumple la expresión regular
+    return false;
+  }
 
-           return true;
-       }else{ //Si no cumple la expresión regular
-           return false;
-       }
-      }else{//Si está vacio
-          return false;
-      }
 
 }
 
@@ -524,7 +518,7 @@ function validar(formulario)
 
     var form;// almacena el formulario que se pase por parámetro del HMTL
     form =  document.forms[formulario];
-    if(formulario == 'SEARCH'){ //Si es el formulario es el de añadir
+    if(formulario == 'SEARCH'){ //Si es el formulario de SEARCH
         //si todos los campos estan correctos y devuelven true
 
         if( 
@@ -542,21 +536,32 @@ function validar(formulario)
         }
       }else{ //si son EDIT O ADD
         //si todos los campos estan correctos y devuelven true
+        if(formulario == 'EDIT'){
+          if( 
+            (validarIdTrabajo(form.IdTrabajo, 6)) && 
+            (validarlogin(form.LoginEvaluador, 9)) && 
+            (validarAlias(form.AliasEvaluado, 9)) &&  
+            (validarIdHistoria(form.IdHistoria)) &&  
+            (validarComentIncorrecto(form.ComenIncorrectoA, 300))
+             ){
 
-         if( 
-          (validarIdTrabajo(form.IdTrabajo, 6)) && 
-          (validarlogin(form.LoginEvaluador, 9)) && 
-          (validarAlias(form.AliasEvaluado, 9)) &&  
-          (validarIdHistoria(form.IdHistoria)) && 
-          (validarCorrecto(form.CorrectoA, 0, 1)) && 
-          (validarComentIncorrecto(form.ComenIncorrectoA, 300)) && 
-          (validarCorrecto(form.CorrectoP, 0, 1)) && 
-          (validarComentIncorrecto(form.ComentIncorrectoP, 300)) && 
-          (validarOK(form.OK,0,1))  ){
+            alerta = false; //Se le asigna false a la variable alerta 
+          }
+        }else{
+           if( 
+            ((validarIdTrabajo(form.IdTrabajo, 6)) && 
+            (validarlogin(form.LoginEvaluador, 9)) && 
+            (validarAlias(form.AliasEvaluado, 9)) &&  
+            (validarIdHistoria(form.IdHistoria)) && 
+            (validarCorrecto(form.CorrectoA, 0, 1)) && 
+            (validarComentIncorrecto(form.ComenIncorrectoA, 300)) && 
+            (validarCorrecto(form.CorrectoP, 0, 1)) && 
+            (validarComentIncorrecto(form.ComentIncorrectoP, 300)) && 
+            (validarOK(form.OK,0,1)) ){
 
-          alerta = false; //Se le asigna false a la variable alerta 
+            alerta = false; //Se le asigna false a la variable alerta 
+          }
         }
-    
     }
 
     if(alerta == true){ //Si hubo alguna alerta (campo no validado correctamente)

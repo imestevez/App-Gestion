@@ -46,47 +46,36 @@ function render(){
 ?>
     <section class="pagina" style="min-height: 800px; height: 100%;" >
 
-				<table class="showAll">
+                <table class="showAll">
                 <caption><?php echo $strings['Evaluaciones']?></caption>
                 <tr>
                     <th><?php echo $strings["IdTrabajo"]; ?></th>
+                    <th><?php echo $strings["NombreTrabajo"]; ?></th>
                     <th><?php echo $strings["LoginEvaluador"]; ?></th>
-                    <th><?php echo $strings["AliasEvaluado"]; ?></th>                                       
-                    <th><?php echo $strings["IdHistoria"]; ?></th>
-                    <th><?php echo $strings["CorrectoA"]; ?></th>
-                    <th><?php echo $strings["ComenIncorrectoA"]; ?></td>
-                    <th><?php echo $strings["CorrectoP"]; ?></th>
-                    <th><?php echo $strings["ComentIncorrectoP"]; ?></td>
-                    <th><?php echo $strings["OK"]; ?></th>    
+                    <th><?php echo $strings["AliasEvaluado"]; ?></th>                                         
 
                     <td><a href="../Controllers/EVALUACION_Controller.php?action=SEARCH"><input type="image" src="../Views/images/search.png" name="action" title="<?php echo $strings['Buscar']?>" value="SEARCH"></a>
                         <a href="../Controllers/EVALUACION_Controller.php?action=ADD" ><input type="image" src="../Views/images/anadir.png" name="action" title="<?php echo $strings['Añadir']?>" value="ADD" ></a>
                     </td>
                 </tr>
-<?php		
+<?php       
  
-			while( ($this->num_tupla < $this->max_tuplas) && ($row = mysqli_fetch_array($this->datos)) ) { //Mientras el numero de tuplas no llegue al máximo y haya tuplas en la BD
+            while( ($this->num_tupla < $this->max_tuplas) && ($row = mysqli_fetch_array($this->datos)) ) { //Mientras el numero de tuplas no llegue al máximo y haya tuplas en la BD
 ?>
+            <tr>
                 <td><?php echo $row["IdTrabajo"]; ?></td>
+                <td><?php echo $row["NombreTrabajo"]; ?></td>
                 <td><?php echo $row["LoginEvaluador"]; ?></td>
                 <td><?php echo $row["AliasEvaluado"]; ?></td>
-                <td><?php echo $row["IdHistoria"]; ?></td>
-                <td><?php echo $row["CorrectoA"]; ?></td>
-                <td><?php echo $row["ComenIncorrectoA"]; ?></td>
-                <td><?php echo $row["CorrectoP"]; ?></td>
-                <td><?php echo $row["ComentIncorrectoP"]; ?></td>
-                <td><?php echo $row["OK"]; ?></td>
 
-                  <td class="edit_tabla">
-                    <a href="../Controllers/EVALUACION_Controller.php?action=SHOWCURRENT&LoginEvaluador=<?php echo $row["LoginEvaluador"]?>&IdTrabajo=<?php echo $row["IdTrabajo"]?>&IdHistoria=<?php echo $row["IdHistoria"] ?>&AliasEvaluado=<?php echo $row["AliasEvaluado"] ?>"><input type="image" src="../Views/images/ojo.png" name="action" title="<?php echo $strings['Mostrar en detalle'] ?>" value="SHOWCURRENT" action=""></a>
-                    <a href="../Controllers/EVALUACION_Controller.php?action=EDIT&LoginEvaluador=<?php echo $row["LoginEvaluador"]?>&IdTrabajo=<?php echo $row["IdTrabajo"]?>&IdHistoria=<?php echo $row["IdHistoria"] ?>&AliasEvaluado=<?php echo $row["AliasEvaluado"] ?>"><input type="image" src="../Views/images/edit.png" name="action" title="<?php echo $strings['Editar'] ?>" value="EDIT"></a>
-                    <a href="../Controllers/EVALUACION_Controller.php?action=DELETE&LoginEvaluador=<?php echo $row["LoginEvaluador"]?>&IdTrabajo=<?php echo $row["IdTrabajo"]?>&IdHistoria=<?php echo $row["IdHistoria"] ?>&AliasEvaluado=<?php echo $row["AliasEvaluado"] ?>"><input type="image" src="../Views/images/delete.png" name="action" title="<?php echo $strings['Eliminar'] ?>" value="DELETE"></a>
-                </td>
-                </tr>               
-           
+                <td class="edit_tabla">
+                    <a href="../Controllers/EVALUACION_Controller.php?action=SHOWCURRENT&LoginEvaluador=<?php echo $row["LoginEvaluador"]?>&IdTrabajo=<?php echo $row["IdTrabajo"]?>&AliasEvaluado=<?php echo $row["AliasEvaluado"] ?>"><input type="image" src="../Views/images/ojo.png" name="action" title="<?php echo $strings['Mostrar en detalle'] ?>" value="SHOWCURRENT" action="">
+                    </a>
+                </td>               
+            </tr>
 <?php
-	$this->num_tupla++;//incremento del numero de tupla
-	}//fin del while
+    $this->num_tupla++;//incremento del numero de tupla
+    }//fin del while
 ?>
      </table>
     <div class="acciones">
@@ -114,7 +103,7 @@ function render(){
 <?php
   include '../Views/Footer.php';
     
-	}//fin render()
+    }//fin render()
 
 function renderSearch(){
   include '../Views/Header.php';
@@ -125,14 +114,10 @@ function renderSearch(){
                 <caption><?php echo $strings['Evaluaciones']?></caption>
                     <tr>
                         <th><?php echo $strings["IdTrabajo"]; ?></th>
+                        <th><?php echo $strings["NombreTrabajo"]; ?></th>
                         <th><?php echo $strings["LoginEvaluador"]; ?></th>
                         <th><?php echo $strings["AliasEvaluado"]; ?></th>
-                        <th><?php echo $strings["IdHistoria"]; ?></th>
-                        <th><?php echo $strings["CorrectoA"]; ?></th>
-                        <th><?php echo $strings["ComenIncorrectoA"]; ?></th>
-                        <th><?php echo $strings["CorrectoP"]; ?></th>
-                        <th><?php echo $strings["ComentIncorrectoP"]; ?></th>
-                        <th><?php echo $strings["OK"]; ?></th>
+                        
 
                         <td><a href="../Controllers/EVALUACION_Controller.php?action=SEARCH"><input type="image" src="../Views/images/search.png" name="action" title="<?php echo $strings['Buscar']?>" value="SEARCH"></a>
                         <a href="../Controllers/EVALUACION_Controller.php?action=ADD" ><input type="image" src="../Views/images/anadir.png" name="action" title="<?php echo $strings['Añadir']?>" value="ADD" ></a>
@@ -142,19 +127,15 @@ function renderSearch(){
             while( $row = mysqli_fetch_array($this->datos)) { //Mientras el numero de tuplas no llegue al máximo y haya tuplas en la BD
 ?>  <tr>
                 <td><?php echo $row["IdTrabajo"]; ?></td>
+                <td><?php echo $row["NombreTrabajo"]; ?></td>
                 <td><?php echo $row["LoginEvaluador"]; ?></td>
                 <td><?php echo $row["AliasEvaluado"]; ?></td>
-                <td><?php echo $row["IdHistoria"]; ?></td>
-                <td><?php echo $row["CorrectoA"]; ?></td>
-                <td><?php echo $row["ComenIncorrectoA"]; ?></td>
-                <td><?php echo $row["CorrectoP"]; ?></td>
-                <td><?php echo $row["ComentIncorrectoP"]; ?></td>
-                <td><?php echo $row["OK"]; ?></td>
+                
 
             <td class="edit_tabla">
-                    <a href="../Controllers/EVALUACION_Controller.php?action=SHOWCURRENT&LoginEvaluador=<?php echo $row["LoginEvaluador"]?>&IdTrabajo=<?php echo $row["IdTrabajo"]?>&IdHistoria=<?php echo $row["IdHistoria"] ?>&AliasEvaluado=<?php echo $row["AliasEvaluado"] ?>"><input type="image" src="../Views/images/ojo.png" name="action" title="<?php echo $strings['Mostrar en detalle'] ?>" value="SHOWCURRENT" action=""></a>
-                    <a href="../Controllers/EVALUACION_Controller.php?action=EDIT&LoginEvaluador=<?php echo $row["LoginEvaluador"]?>&IdTrabajo=<?php echo $row["IdTrabajo"]?>&IdHistoria=<?php echo $row["IdHistoria"] ?>&AliasEvaluado=<?php echo $row["AliasEvaluado"] ?>"><input type="image" src="../Views/images/edit.png" name="action" title="<?php echo $strings['Editar'] ?>" value="EDIT"></a>
-                    <a href="../Controllers/EVALUACION_Controller.php?action=DELETE&LoginEvaluador=<?php echo $row["LoginEvaluador"]?>&IdTrabajo=<?php echo $row["IdTrabajo"]?>&IdHistoria=<?php echo $row["IdHistoria"] ?>&AliasEvaluado=<?php echo $row["AliasEvaluado"] ?>"><input type="image" src="../Views/images/delete.png" name="action" title="<?php echo $strings['Eliminar'] ?>" value="DELETE"></a>
+                    <a href="../Controllers/EVALUACION_Controller.php?action=SHOWCURRENT&LoginEvaluador=<?php echo $row["LoginEvaluador"]?>&IdTrabajo=<?php echo $row["IdTrabajo"]?>&AliasEvaluado=<?php echo $row["AliasEvaluado"] ?>"><input type="image" src="../Views/images/ojo.png" name="action" title="<?php echo $strings['Mostrar en detalle'] ?>" value="SHOWCURRENT" action=""></a>
+                    <a href="../Controllers/EVALUACION_Controller.php?action=EDIT&LoginEvaluador=<?php echo $row["LoginEvaluador"]?>&IdTrabajo=<?php echo $row["IdTrabajo"]?>&AliasEvaluado=<?php echo $row["AliasEvaluado"] ?>"><input type="image" src="../Views/images/edit.png" name="action" title="<?php echo $strings['Editar'] ?>" value="EDIT"></a>
+                    <a href="../Controllers/EVALUACION_Controller.php?action=DELETE&LoginEvaluador=<?php echo $row["LoginEvaluador"]?>&IdTrabajo=<?php echo $row["IdTrabajo"]?>&AliasEvaluado=<?php echo $row["AliasEvaluado"] ?>"><input type="image" src="../Views/images/delete.png" name="action" title="<?php echo $strings['Eliminar'] ?>" value="DELETE"></a>
                 </td>
 
                 

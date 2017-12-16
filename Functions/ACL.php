@@ -40,7 +40,7 @@ function HavePermissions($IdFuncionalidad, $IdAccion){
 			return true;
 		}else{
 			if(($IdAccion == '') || ($IdAccion == 'ALL') || ($IdAccion == 'SHOWALL')){
-				$PERMISO = new PERMISO_Model($IdGrupo, '', '');
+				$PERMISO = new PERMISO_Model($IdGrupo, '', '', '', '','');
 				$resultado = $PERMISO->permisosGrupo();
 				$num_rows = mysqli_num_rows($resultado);
 				if($num_rows > 0){
@@ -53,7 +53,7 @@ function HavePermissions($IdFuncionalidad, $IdAccion){
 			}
 
 			}else{
-			$PERMISO = new PERMISO_Model($IdGrupo, '', '');
+			$PERMISO = new PERMISO_Model($IdGrupo, '', '', '', '', '', '','');
 			$resultado = $PERMISO->permisosGrupo();
 			$num_rows = mysqli_num_rows($resultado);
 			if($num_rows > 0){
@@ -74,6 +74,7 @@ function HavePermissions($IdFuncionalidad, $IdAccion){
 function listaPermisos(){
 
 	$lista = null;
+	$num=0;
 	$USU_GRUPO = new USU_GRUPO_Model($_SESSION["login"], '');
 	$listaGrupos = $USU_GRUPO->listagrupoUsuario();
 	if($listaGrupos == null){
@@ -82,18 +83,20 @@ function listaPermisos(){
 
 	foreach ($listaGrupos as $key => $IdGrupo) {
 
-		$PERMISO = new PERMISO_Model($IdGrupo, '', '');
+		$PERMISO = new PERMISO_Model($IdGrupo, '', '', '', '', '', '','');
 		$resultado = $PERMISO->permisosGrupo();
 		$num_rows = mysqli_num_rows($resultado);
-		if($num_rows == 0){
-			return null;
-		}
+		if($num_rows > 0){
+			
 		while($row = mysqli_fetch_array($resultado)){
-			$lista[$IdGrupo] = array($row["IdGrupo"],$row["IdFuncionalidad"],$row["IdAccion"] );
+			$lista[$num] = array($row["IdGrupo"],$row["IdFuncionalidad"],$row["IdAccion"] );
+			$num++;
+		}
+		return $lista;
 		}
 	}
 
-	return $lista;
+	return $null;
 }
 
 function listaFuncionalidades(){
@@ -106,7 +109,7 @@ function listaFuncionalidades(){
 	}
 	foreach ($listaGrupos as $key => $IdGrupo) {
 
-		$PERMISO = new PERMISO_Model($IdGrupo, '', '');
+		$PERMISO = new PERMISO_Model($IdGrupo, '', '', '', '', '', '','');
 		$resultado = $PERMISO->funcionalidadesGrupo();
 		$num_rows = mysqli_num_rows($resultado);
 		if($num_rows > 0){
@@ -130,7 +133,7 @@ function listaAcciones($IdFuncionalidad){
 	$listaGrupos = $USU_GRUPO->listagrupoUsuario();
 
 	foreach ($listaGrupos as $key => $IdGrupo) {
-		$PERMISO = new PERMISO_Model($IdGrupo, $IdFuncionalidad, '');
+		$PERMISO = new PERMISO_Model($IdGrupo, $IdFuncionalidad, '', '', '', '', '','');
 		$resultado = $PERMISO->accionesGrupo();
 		$num_rows = mysqli_num_rows($resultado);
 
@@ -144,6 +147,7 @@ function listaAcciones($IdFuncionalidad){
 	}
 }
 	return null;
-
 }
+
+
 ?>

@@ -16,7 +16,8 @@ include_once '../Functions/ACL.php';
 include_once '../Views/MESSAGE_View.php';
 
 if (!IsAuthenticated()){
-	header('Location:../index.php');
+	exit();
+
 }else{
 
 if(isset($_REQUEST["action"]))  {
@@ -28,8 +29,10 @@ if(isset($_REQUEST["action"]))  {
 
 //Si no tiene permisos para acceder a este controlador con la accion que trae
 if(!HavePermissions(8, $action)) {
-	//new MESSAGE('No tienes permisos para realizar esta accion', '../index.php');
-	header('Location:../index.php'); //vuelve al index
+		new MESSAGE('No tienes permisos para realizar esta accion', '../index.php');
+	//header('Location:../index.php'); //vuelve al index
+	exit();
+
 }
 //almacenamos un array de permidos del grupo
 $permisos = listaPermisos();
@@ -60,6 +63,8 @@ function get_data_form(){
 	$Ruta = null;
 	$origen = null;
 	$action = null;
+	$Nombre = null;
+	$NombreTrabajo = null;
 
 	if(isset($_REQUEST['login'])){
 	$login = $_REQUEST['login'];
@@ -72,6 +77,12 @@ function get_data_form(){
 	}
 	if(isset($_REQUEST['Horas'])){
 	$Horas = $_REQUEST['Horas'];
+	}
+	if(isset($_REQUEST['Nombre'])){
+	$Nombre = $_REQUEST['Nombre'];
+	}
+	if(isset($_REQUEST['NombreTrabajo'])){
+	$NombreTrabajo = $_REQUEST['NombreTrabajo'];
 	}
 	if(isset($_FILES['Ruta'])){
 		if($_FILES['Ruta']['tmp_name'] <> ''){ //Si  fich tiene una ruta origen
@@ -95,7 +106,9 @@ function get_data_form(){
 		$IdTrabajo, 
 		$Alias, 
 		$Horas, 
-		$Ruta);
+		$Ruta,
+		$Nombre,
+		$NombreTrabajo);
 
 	return $ENTREGA;
 
@@ -110,6 +123,8 @@ function get_data_UserBD(){
 	$Horas = null;
 	$Ruta = null;
 	$origen = null;
+	$Nombre = null;
+	$NombreTrabajo = null;
 
 	$action = null;
 
@@ -125,6 +140,12 @@ function get_data_UserBD(){
 	}
 	if(isset($_REQUEST['Horas'])){
 	$Horas = $_REQUEST['Horas'];
+	}
+	if(isset($_REQUEST['Nombre'])){
+	$Nombre = $_REQUEST['Nombre'];
+	}
+	if(isset($_REQUEST['NombreTrabajo'])){
+	$NombreTrabajo = $_REQUEST['NombreTrabajo'];
 	}
 	if(isset($_FILES['newRuta']) && isset($_REQUEST['Ruta'])){ //si viene del formulario edit
 		if($_FILES['newRuta']['tmp_name'] <> ''){ //Si la fich tiene una ruta origen
@@ -143,16 +164,18 @@ function get_data_UserBD(){
 			$Ruta= $_REQUEST['Ruta'];
 		}
 	}
-	if(isset($_REQUEST['action'])){
-	$action = $_REQUEST['action'];
+	if(isset($_REQUEST['origen'])){
+	$origen = $_REQUEST['origen'];
 	}
 
-	$ENTREGA = new ENTREGA_Model(
+		$ENTREGA = new ENTREGA_Model(
 		$login,
-		$IdTrabajo,
+		$IdTrabajo, 
 		$Alias, 
 		$Horas, 
-		$Ruta);
+		$Ruta,
+		$Nombre,
+		$NombreTrabajo);
 
 	return $ENTREGA;
 }
@@ -192,10 +215,6 @@ if (!isset($_REQUEST['action'])){
 				}
 			}
 			else{ //si viene del add 
-				/*echo $_REQUEST['login'];
-				echo $_REQUEST['IdTrabajo'];
-				echo $_REQUEST['Alias'];
-*/
 				$ENTREGA = get_data_form(); //recibe datos
 				$lista = $ENTREGA->ADD(); //mete datos en respuesta usuarios despues de ejecutar el add con los de ENTREGA
 				$usuario = new MESSAGE($lista, '../Controllers/ENTREGA_Controller.php'); //muestra el mensaje despues de la sentencia sql
@@ -204,7 +223,7 @@ if (!isset($_REQUEST['action'])){
 		case 'DELETE': //Si quiere hacer un DELETE
 			if (!$_POST){ //viene del showall con una clave
 				$lista = array('login', 'Nombre','IdTrabajo', 'NombreTrabajo', 'Alias','NotaTrabajo', 'origen');
-				$ENTREGA = new ENTREGA_Model($_REQUEST['login'],$_REQUEST['IdTrabajo'], '', '',''); //crea un 	un ENTREGA_Model);//crea un un ENTREGA_Model con el IdTrabajo del usuario
+				$ENTREGA = new ENTREGA_Model($_REQUEST['login'],$_REQUEST['IdTrabajo'], '', '','','',''); //crea un 	un ENTREGA_Model);//crea un un ENTREGA_Model con el IdTrabajo del usuario
 				$lista = $ENTREGA->rellenarLista();
 				if(isset($_REQUEST['origen'])){
 					$lista['origen'] = $_REQUEST['origen'];
@@ -222,7 +241,7 @@ if (!isset($_REQUEST['action'])){
 			break;
 		case 'EDIT': //si el usuario quiere editar	
 			if (!$_POST){
-				$ENTREGA = new ENTREGA_Model($_REQUEST['login'],$_REQUEST['IdTrabajo'],'', '',''); //crea un un ENTREGA_Model); //crea un un ENTREGA_Model con el IdTrabajo del usuario 
+				$ENTREGA = new ENTREGA_Model($_REQUEST['login'],$_REQUEST['IdTrabajo'],'', '','','',''); //crea un un ENTREGA_Model); //crea un un ENTREGA_Model con el IdTrabajo del usuario 
 				$lista = $ENTREGA->rellenarLista();  //A partir del IdTrabajo recoge todos los atributos
 				$usuario = new ENTREGA_EDIT($lista); //Crea la vista EDIT con los datos del usuario
 			}
@@ -245,11 +264,44 @@ if (!isset($_REQUEST['action'])){
 			break;
 		case 'SHOW': //si desea ver un usuario en detalle
 			$lista = array('login', 'Nombre','IdTrabajo', 'NombreTrabajo', 'Alias','NotaTrabajo', 'origen');
-			$ENTREGA = new ENTREGA_Model($_REQUEST['login'],$_REQUEST['IdTrabajo'], '', '',''); //crea un un ENTREGA_Model);//crea un un ENTREGA_Model con el IdTrabajo del usuario
+			$ENTREGA = new ENTREGA_Model($_REQUEST['login'],$_REQUEST['IdTrabajo'], '', '','','',''); //crea un un ENTREGA_Model);//crea un un ENTREGA_Model con el IdTrabajo del usuario
 			$lista = $ENTREGA->rellenarLista();
 			//$tupla = $ENTREGA->RellenaDatos();//A partir del IdTrabajo recoge todos los atributos
-			$usuario = new ENTREGA_SHOWCURRENT($lista); //Crea la vista SHOWCURRENT del usuario requerido
+			$usuario = new ENTREGA_SHOWCURRENT($lista,$permisos); //Crea la vista SHOWCURRENT del usuario requerido
 			break;
+
+		case 'ADDAL': //Añadir una entrega como alumno
+		if (!$_POST){ //si viene del showall (no es un post)
+				$lista = array('login', 'Nombre','IdTrabajo', 'NombreTrabajo', 'Alias', 'origen');
+
+				if( (isset($_REQUEST['login'])) && 
+					(isset($_REQUEST['IdTrabajo'])) && 
+					(isset($_REQUEST['origen'])) ) {
+
+					$ENTREGA = get_data_form(); //recibe datos
+					
+					$lista['login'] = $_REQUEST['login'];
+					$lista['IdTrabajo'] = $_REQUEST['IdTrabajo'];
+					$lista = $ENTREGA->rellenarLista();
+					$lista['Alias'] = $ENTREGA->generadorAlias();
+					$lista['origen'] = $_REQUEST['origen'];
+
+					$form = new ENTREGA_ADD($lista); //Crea la vista ADD y muestra formulario para rellenar por el usuario
+					$form->renderLogin();
+					exit();
+				}else{
+					$lista['login'] = '';
+					$lista['origen'] = '../Controllers/TRABAJO_Controller.php';
+					$form = new ENTREGA_ADD($lista); //Crea la vista ADD y muestra formulario para rellenar por el usuario
+				}
+			}else{ //si viene del add 
+				$ENTREGA = get_data_form(); //recibe datos
+				$lista = $ENTREGA->ADD(); //mete datos en respuesta usuarios despues de ejecutar el add con los de ENTREGA
+				$usuario = new MESSAGE($lista, '../Controllers/TRABAJO_Controller.php'); //muestra el mensaje despues de la sentencia sql
+				exit();
+
+			}
+
 		default: //Por defecto, Se muestra la vista SHOWALL
 			/*if(isset($_REQUEST["origen"])){
 			header('Location:'.$_REQUEST["origen"]);
@@ -262,7 +314,7 @@ if (!isset($_REQUEST['action'])){
 			}
 			if($acceso == true){ //si tiene acceso, mostramos el showall
 				if (!$_POST){
-					$ENTREGA = new ENTREGA_Model('','','', '','');//crea un un ENTREGA_Model con el IdTrabajo del usuario 
+					$ENTREGA = new ENTREGA_Model('','','', '','','','');//crea un un ENTREGA_Model con el IdTrabajo del usuario 
 				}
 				else{
 					$ENTREGA = get_data_form(); //Coge los datos del formulario
@@ -281,7 +333,7 @@ if (!isset($_REQUEST['action'])){
 				$UsuariosBD = new ENTREGA_SHOWALL($lista, $datos, $num_tupla, $max_tuplas, $totalTuplas, $num_pagina, 'SHOWALL', '../Controllers/ENTREGA_Controller.php',$acciones); //Crea la vista SHOWALL de los usuarios de la BD	
 			}else{
 				if (!$_POST){
-					$ENTREGA = new ENTREGA_Model('','','', '','');//crea un un ENTREGA_Model con el IdTrabajo del usuario 
+					$ENTREGA = new ENTREGA_Model('','','', '','','','');//crea un un ENTREGA_Model con el IdTrabajo del usuario 
 				}
 				else{
 					$ENTREGA = get_data_form(); //Coge los datos del formulario

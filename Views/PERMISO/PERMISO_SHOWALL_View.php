@@ -53,19 +53,21 @@ function render(){
                 <th><?php echo $strings['Nombre Funcionalidad']?></th>      
                 <th><?php echo $strings['Nombre de la accion']?></th>                   
 
-                <td>
                     <?php
                      foreach ($this->acciones as $key => $value) {
                         if($value == 'SEARCH'){
                             ?>
-                    <a href="../Controllers/PERMISO_Controller.php?action=SEARCH"><input type="image" src="../Views/images/search.png" name="action" title="<?php echo $strings['Buscar']?>" value="SEARCH"></a>
+                <td style="border-bottom-style: collapse; border-bottom:  5px solid black">
+
+                    <a href="../Controllers/PERMISO_Controller.php?action=SEARCH"><input type="image" src="../Views/images/search.png" name="action" title="<?php echo $strings['Buscar']?>" value="SEARCH"></a> 
+                </td>
+
                                
                             <?php
                         }
                     }
                     ?>
 
-                </td>
 
                 </tr>
 <?php       
@@ -76,7 +78,7 @@ function render(){
 
                 <td><?php echo $row["NombreGrupo"]; ?></td>
                 <td><?php echo $row["NombreFuncionalidad"]; ?></td>
-                <td><?php echo $row["NombreAccion"]; ?></td>
+                <td style="border-right-style: collapse; border-right:  5px solid black"><?php echo $row["NombreAccion"]; ?></td>
                 </tr>              
            
 <?php
@@ -123,18 +125,20 @@ function renderSearch(){
                 <th><?php echo $strings['Nombre Funcionalidad']?></th>      
                 <th><?php echo $strings['Nombre de la accion']?></th>                   
 
-                <td>
-                    <?php
+                  <?php
                      foreach ($this->acciones as $key => $value) {
                         if($value == 'SEARCH'){
                             ?>
-                    <a href="../Controllers/PERMISO_Controller.php?action=SEARCH"><input type="image" src="../Views/images/search.png" name="action" title="<?php echo $strings['Buscar']?>" value="SEARCH"></a>
+                <td style="border-bottom-style: collapse; border-bottom:  5px solid black">
+
+                    <a href="../Controllers/PERMISO_Controller.php?action=SEARCH"><input type="image" src="../Views/images/search.png" name="action" title="<?php echo $strings['Buscar']?>" value="SEARCH"></a> 
+                </td>
+                    
                                
                             <?php
                         }
                     }
                     ?>
-                </td>
 
                 </tr>
 <?php
@@ -145,7 +149,7 @@ function renderSearch(){
                 <tr>
                 <td><?php echo $row["NombreGrupo"]; ?></td>
                 <td><?php echo $row["NombreFuncionalidad"]; ?></td>
-                <td><?php echo $row["NombreAccion"]; ?></td>
+                <td style="border-right-style: collapse; border-right:  5px solid black"><?php echo $row["NombreAccion"]; ?></td>
                 </tr>            
            
 <?php
