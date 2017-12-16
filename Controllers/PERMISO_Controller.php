@@ -52,6 +52,35 @@ include_once '../Views/MESSAGE_View.php';
 function get_data_form(){
 
 
+	$IdGrupo = '';
+	$IdFuncionalidad = '';
+	$IdAccion = '';
+	$action = '';
+
+	if(isset($_REQUEST['IdGrupo'])){
+	$IdGrupo = $_REQUEST['IdGrupo'];
+	}
+	if(isset($_REQUEST['IdFuncionalidad'])){
+	$IdFuncionalidad = $_REQUEST['IdFuncionalidad'];
+	}
+	if(isset($_REQUEST['IdAccion'])){
+	$IdAccion = $_REQUEST['IdAccion'];
+	}
+	if(isset($_REQUEST['action'])){
+	$action = $_REQUEST['action'];
+	}
+
+	$PERMISOS = new PERMISO_Model(
+		$IdGrupo, 
+		$IdFuncionalidad, 
+		$IdAccion);
+
+	return $PERMISOS;
+}
+
+//Funcion para coger los datos del formulario de un usuario ya almacenado
+function get_data_form_buscar(){
+
 	$NombreGrupo = '';
 	$NombreFuncionalidad = '';
 	$NombreAccion = '';
@@ -76,11 +105,6 @@ function get_data_form(){
 		$NombreAccion);
 
 	return $PERMISOS;
-}
-
-//Funcion para coger los datos del formulario de un usuario ya almacenado
-function get_data_UserBD(){
-
 	
 }
 
@@ -98,10 +122,10 @@ if (!isset($_REQUEST['action'])){
 				$PERMISOS = new PERMISO_SEARCH();//Crea la vista SEARCH y muestra formulario para rellenar por el usuario
 			}
 			else{
-				$PERMISOS = get_data_form(); //coge los datos del formulario del usuario que desea buscar
+				$PERMISOS = get_data_form_buscar(); //coge los datos del formulario del usuario que desea buscar
 				$datos = $PERMISOS->SEARCH();//Ejecuta la funcion SEARCH() en el USUARIOS_Model
 				$lista = array('NombreGrupo','NombreFuncionalidad','NombreAccion');
-				$resultado = new PERMISO_SHOWALL($lista, $datos, 0, 0, 0, 0, 'SEARCH', '../Controllers/ACCION_Controller.php');//Crea la vista SHOWALL y muestra los usuarios que cumplen los parámetros de búsqueda 
+				$resultado = new PERMISO_SHOWALL($lista, $datos, 0, 0, 0, 0, 'SEARCH', '../Controllers/ACCION_Controller.php',$acciones);//Crea la vista SHOWALL y muestra los usuarios que cumplen los parámetros de búsqueda 
 			}
 			break;
 		default: //Por defecto, Se muestra la vista SHOWALL
@@ -128,7 +152,7 @@ if (!isset($_REQUEST['action'])){
 				$max_tuplas = $num_tupla+10; // el número de tuplas a mostrar por página
 				$totalTuplas = $PERMISOS->contarTuplas(); //Cuenta el número de tuplas que hay en la BD
 				$datos = $PERMISOS->SHOWALL($num_tupla,$max_tuplas); //Ejecuta la funcion SHOWALL() en el USUARIOS_Model
-				$lista = array('NombreGrupo','NombreFuncionalidad','NombreAccion');
+				$lista = array('IdGrupo','IdFuncionalidad','IdAccion');
 				$AccionesBD = new PERMISO_SHOWALL($lista, $datos, $num_tupla, $max_tuplas, $totalTuplas, $num_pagina, 'SHOWALL', '../Controllers/PERMISO_Controller.php',$acciones); //Crea la vista SHOWALL de los usuarios de la BD
 			}else{
 				if (!$_POST){
