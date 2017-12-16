@@ -64,15 +64,15 @@ function __destruct()
 //los datos proporcionados. Si van vacios devuelve todos
 function SEARCH()
 { 	// construimos la sentencia de busqueda con LIKE y los atributos de la entidad
-    $sql = "SELECT  IdGrupo,
-    				IdFuncionalidad,
-    				IdAccion
+    $sql = "SELECT  G.NombreGrupo,
+    				F.NombreFuncionalidad,
+    				A.NombreAccion
        			FROM PERMISO P, GRUPO G, FUNCIONALIDAD F, ACCION A
     			WHERE P.IdGrupo=G.IdGrupo AND P.IdFuncionalidad=F.IdFuncionalidad AND P.IdAccion=A.IdAccion AND
     				(
-    				(IdGrupo LIKE '%$this->IdGrupo%') &&
-    				(IdFuncionalidad LIKE '%$this->IdFuncionalidad%') &&
-    				(IdAccion LIKE '%$this->IdAccion%') 
+    				(G.NombreGrupo LIKE '%$this->IdGrupo%') &&
+    				(F.NombreFuncionalidad LIKE '%$this->IdFuncionalidad%') &&
+    				(A.NombreAccion LIKE '%$this->IdAccion%') 
 	 				)";
     				
     // si se produce un error en la busqueda mandamos el mensaje de error en la consulta
@@ -128,9 +128,10 @@ function SHOWALL($num_tupla,$max_tuplas){
 
 	//$sql = "SELECT * FROM USUARIO";
 
-	$sql = "SELECT 	P.IdGrupo,
-    				P.IdFuncionalidad,
-    				P.IdAccion
+	$sql = "SELECT 	G.NombreGrupo,
+    				F.NombreFuncionalidad,
+    				A.NombreAccion
+
     				FROM PERMISO P, GRUPO G, FUNCIONALIDAD F, ACCION A
     				WHERE P.IdGrupo=G.IdGrupo AND P.IdFuncionalidad=F.IdFuncionalidad AND P.IdAccion=A.IdAccion
     				LIMIT $num_tupla, $max_tuplas";
@@ -206,6 +207,7 @@ function accionesGrupo(){
 
 	$resultado = $this->mysqli->query($sql);
 
+	
     return $resultado;
 }
 
