@@ -256,7 +256,7 @@ function renderSearch(){
              
 
                 <td>
-                     <?php 
+             <?php 
 
                     foreach ($this->acciones as $key => $value) {
         
@@ -275,30 +275,45 @@ function renderSearch(){
                         }
                     }
             ?>
+                   
                 </td>
-                  <?php 
-                
-                if($this->admin == false){
+                <?php 
+                $entrega = false;
+                $historia = false;
+                   foreach ($this->permisos as $key => $value) {
+                     if($value[1] == 7){
+                        Switch ($value[2]) {
+                            case 'ADD':
+                                $historia =true; 
+                                break;
+                            case 'SHOW':
+                                $historia =true; 
+                                break;
+                            default:
+
+                                $historia =false;
+                                break;
+                        }
+                 }
+             if(($value[1] == 8)  && ($value[2] == 'ADDAL') ) {
+                $entrega = true;
+            }
+        }
+                if($entrega == true){
                 ?>
 
                 <th><?php echo $strings['Entrega']?></th>
 
                 <?php
             }
-                $historia = false;
-
-            foreach ($this->permisos as $key => $value) {
-                # code...
-             if($value[1] == 7) {
-                $historia = true;
-            }
-        }
+        
         if($historia == true){
                 ?>
                 <th><?php echo $strings['Historias']?></th>
             <?php
             }
         ?>
+           
                 </tr>
     <?php
             while( $row = mysqli_fetch_array($this->datos)) { //Mientras el numero de tuplas no llegue al máximo y haya tuplas en la BD
@@ -316,7 +331,8 @@ function renderSearch(){
                 <td><?php echo $row["NombreTrabajo"]; ?></td>
                 <td><?php echo $this->FechaFinTrabajo; ?></td>
                 <td class="edit_tabla">
-                    <?php 
+                   
+                        <?php 
 
                     foreach ($this->acciones as $key => $value) {
                         if($value == 'SHOW'){
@@ -340,15 +356,26 @@ function renderSearch(){
                     ?>     
                 </td>
             <?php
-                if($this->admin == false){
+
+                if($entrega == true){
                 ?>
                 <td>
-                  <a href="../Controllers/ENTREGA_Controller.php?action=ADD&IdTrabajo=<?php echo $row["IdTrabajo"]?>&login=<?php echo $_SESSION['login']?>&origen=../Controllers/TRABAJO_Controller.php"><input type="image" src="../Views/images/anadir.png" name="action" title="<?php echo $strings['Añadir'] ?>" value="ADD"></a>
+                    <?php
+                    if(!array_key_exists($row["IdTrabajo"], $this->entregaExiste)){
+
+                    ?>
+                  <a href="../Controllers/ENTREGA_Controller.php?action=ADDAL&IdTrabajo=<?php echo $row["IdTrabajo"]?>&login=<?php echo $_SESSION['login']?>&origen=../Controllers/TRABAJO_Controller.php"><input type="image" src="../Views/images/anadir.png" name="action" title="<?php echo $strings['Editar'] ?>" value="ADD"></a>
                 </td>
             <?php
+        }else{
+            ?>
+              <a href="../Controllers/ENTREGA_Controller.php?action=EDIT&IdTrabajo=<?php echo $row["IdTrabajo"]?>&login=<?php echo $_SESSION['login']?>&origen=../Controllers/TRABAJO_Controller.php"><input type="image" src="../Views/images/edit.png" name="action" title="<?php echo $strings['Añadir'] ?>" value="ADD"></a>
+                </td>
+        <?php
         }
-
+        }
        foreach ($this->permisos as $key => $value) {
+
                 # code...
              if( ($value[1] == 7)  && ($value[2] == 'ADD') ){
             ?>

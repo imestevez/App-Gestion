@@ -188,7 +188,9 @@ if (!isset($_REQUEST['action'])){
 				$TRABAJO = get_data_UserBD(); //coge los datos del formulario del usuario que desea buscar
 				$datos = $TRABAJO->SEARCH();//Ejecuta la funcion SEARCH() en el TRABAJO_Model
 				$lista = array('IdTrabajo','NombreTrabajo','FechaIniTrabajo','FechaFinTrabajo','PorcentajeNota');
-				$resultado = new TRABAJO_SHOWALL($lista, $datos, 0, 0, 0, 0, 'SEARCH', '../Controllers/TRABAJO_Controller.php',$permisos,$acciones);//Crea la vista SHOWALL y muestra los usuarios que cumplen los parámetros de búsqueda 
+				$entrega = $TRABAJO->comprobarEntrega();
+				$lista = array('IdTrabajo', 'NombreTrabajo', 'FechaIniTrabajo','FechaFinTrabajo','PorcentajeNota');
+				$resultado = new TRABAJO_SHOWALL($lista, $datos, 0, 0, 0, 0, 'SEARCH', '../Controllers/TRABAJO_Controller.php',$permisos, $acciones,$entrega); //Crea la vista SHOWALL de los usuarios de la BD 
 			}
 			break;
 		case 'SHOW': //si desea ver un usuario en detalle
@@ -228,7 +230,7 @@ if (!isset($_REQUEST['action'])){
 				$datos = $TRABAJO->SHOWALL($num_tupla,$max_tuplas); //Ejecuta la funcion SHOWALL() en el TRABAJO_Model
 				$entrega = $TRABAJO->comprobarEntrega();
 				$lista = array('IdTrabajo', 'NombreTrabajo', 'FechaIniTrabajo','FechaFinTrabajo','PorcentajeNota');
-				$UsuariosBD = new TRABAJO_SHOWALL($lista, $datos, $num_tupla, $max_tuplas, $totalTuplas, $num_pagina, 'SHOWALL', '../Controllers/TRABAJO_Controller.php',$permisos, $acciones,$entrega); //Crea la vista SHOWALL de los usuarios de la BD
+				$resultado = new TRABAJO_SHOWALL($lista, $datos, $num_tupla, $max_tuplas, $totalTuplas, $num_pagina, 'SHOWALL', '../Controllers/TRABAJO_Controller.php',$permisos, $acciones,$entrega); //Crea la vista SHOWALL de los usuarios de la BD
 			}else{
 				if (!$_POST){
 					$TRABAJO = new TRABAJO_Model('', '','','', '');//crea un un TRABAJO_Model con el IdTrabajo del usuario 
