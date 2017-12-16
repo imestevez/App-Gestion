@@ -181,9 +181,9 @@ array(
 	'ERROR: No existe la evaluacion que desea borrar en la BD' => 'ERROR: The evaluation that you are trying to delete is not in our Database',
 	'ERROR: La historia no existe' => 'ERROR: Story doesn´t exist',
 	'ERROR: Fallo en la inserción. Ya existe la evaluacion' => 'ERROR: Insertion failed. Evaluation already exists',
-
-
-
+	'ComentarioInc' => 'Incorrect Comment',
+	'ERROR: No hay asignaciones de QAs' => 'ERROR: QAs are not assigned yet',
+	'Calificar evaluacion' => 'Grade evaluation',
 
 
 
