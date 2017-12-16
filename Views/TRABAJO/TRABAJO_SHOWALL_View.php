@@ -175,23 +175,23 @@ function render(){
                     ?>     
                 </td>
             <?php
-
-                if($entrega == true){
+                 if($entrega == true){
                 ?>
                 <td>
-                <?php
+                   <?php
                     if($this->entregaExiste <> null){
-                        if(!array_key_exists($row["IdTrabajo"], $this->entregaExiste)){
+                        if(array_key_exists($row["IdTrabajo"], $this->entregaExiste)){
                 ?>
-                          <a href="../Controllers/ENTREGA_Controller.php?action=ADDAL&IdTrabajo=<?php echo $row["IdTrabajo"]?>&login=<?php echo $_SESSION['login']?>&origen=../Controllers/TRABAJO_Controller.php"><input type="image" src="../Views/images/anadir.png" name="action" title="<?php echo $strings['Editar'] ?>" value="ADD"></a>  </td>
+                           <a href="../Controllers/ENTREGA_Controller.php?action=EDIT&IdTrabajo=<?php echo $row["IdTrabajo"]?>&login=<?php echo $_SESSION['login']?>&origen=../Controllers/TRABAJO_Controller.php"><input type="image" src="../Views/images/edit.png" name="action" title="<?php echo $strings['Añadir'] ?>" value="ADD"></a>      </td>
                 <?php
+                             }
+
                         }else{
-                ?>
-                          <a href="../Controllers/ENTREGA_Controller.php?action=EDIT&IdTrabajo=<?php echo $row["IdTrabajo"]?>&login=<?php echo $_SESSION['login']?>&origen=../Controllers/TRABAJO_Controller.php"><input type="image" src="../Views/images/edit.png" name="action" title="<?php echo $strings['Añadir'] ?>" value="ADD"></a>      </td>
+                        ?>
+                        <a href="../Controllers/ENTREGA_Controller.php?action=ADDAL&IdTrabajo=<?php echo $row["IdTrabajo"]?>&login=<?php echo $_SESSION['login']?>&origen=../Controllers/TRABAJO_Controller.php"><input type="image" src="../Views/images/anadir.png" name="action" title="<?php echo $strings['Editar'] ?>" value="ADD"></a>  </td>                
                     <?php
-                        }
-                }
-         }
+                     }
+                    }
        foreach ($this->permisos as $key => $value) {
 
                 # code...
@@ -361,17 +361,18 @@ function renderSearch(){
                 <td>
                    <?php
                     if($this->entregaExiste <> null){
-                        if(!array_key_exists($row["IdTrabajo"], $this->entregaExiste)){
+                        if(array_key_exists($row["IdTrabajo"], $this->entregaExiste)){
                 ?>
-                          <a href="../Controllers/ENTREGA_Controller.php?action=ADDAL&IdTrabajo=<?php echo $row["IdTrabajo"]?>&login=<?php echo $_SESSION['login']?>&origen=../Controllers/TRABAJO_Controller.php"><input type="image" src="../Views/images/anadir.png" name="action" title="<?php echo $strings['Editar'] ?>" value="ADD"></a>  </td>
+                           <a href="../Controllers/ENTREGA_Controller.php?action=EDIT&IdTrabajo=<?php echo $row["IdTrabajo"]?>&login=<?php echo $_SESSION['login']?>&origen=../Controllers/TRABAJO_Controller.php"><input type="image" src="../Views/images/edit.png" name="action" title="<?php echo $strings['Añadir'] ?>" value="ADD"></a>      </td>
                 <?php
+                             }
+
                         }else{
-                ?>
-                          <a href="../Controllers/ENTREGA_Controller.php?action=EDIT&IdTrabajo=<?php echo $row["IdTrabajo"]?>&login=<?php echo $_SESSION['login']?>&origen=../Controllers/TRABAJO_Controller.php"><input type="image" src="../Views/images/edit.png" name="action" title="<?php echo $strings['Añadir'] ?>" value="ADD"></a>      </td>
+                        ?>
+                        <a href="../Controllers/ENTREGA_Controller.php?action=ADDAL&IdTrabajo=<?php echo $row["IdTrabajo"]?>&login=<?php echo $_SESSION['login']?>&origen=../Controllers/TRABAJO_Controller.php"><input type="image" src="../Views/images/anadir.png" name="action" title="<?php echo $strings['Editar'] ?>" value="ADD"></a>  </td>                
                     <?php
                         }
                 }
-         }
        foreach ($this->permisos as $key => $value) {
 
                 # code...
