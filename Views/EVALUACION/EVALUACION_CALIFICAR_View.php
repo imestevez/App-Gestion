@@ -25,8 +25,9 @@ class EVALUACION_CALIFICAR{
     var $datos;
     var $contar;
     var $contarHistorias;
+    var $rellenarHistorias;
 
-function __construct($lista, $listaHistorias, $contar, $contarHistorias){
+function __construct($lista, $listaHistorias, $contar, $contarHistorias, $rellenarHistorias){
     //asignación de valores de parámetro a los atributos de la clase
     //$this->IdTrabajo = $lista['IdTrabajo'];
     //$this->LoginEvaluador = $lista['LoginEvaluador'];
@@ -41,6 +42,7 @@ function __construct($lista, $listaHistorias, $contar, $contarHistorias){
     $this->listaHistorias = $listaHistorias;
     $this->contar = $contar;
     $this->contarHistorias = $contarHistorias;
+    $this->rellenarHistorias = $rellenarHistorias;
     $this->rellenarLista();
 
 
@@ -69,27 +71,50 @@ include '../Views/Header.php';
             <form method="post" name="EDIT"  action="../Controllers/EVALUACION_Controller.php" enctype="multipart/form-data" >
 
             <table>
-                <tr>
+                
                    
+                    
+                    <?php
+                    for ($j=0; $j < $this->contarHistorias ; $j++) { 
+                     
+                    ?>   
+                        <tr> 
+                            <td><?php echo $this->rellenarHistorias[$j][0]?></td> 
+                            <td><?php echo $this->rellenarHistorias[$j][1]?></td>
+                        </tr>
+
+                    <?php
+                       // echo $lista[$j][0] //id
+                       // echo $lista[$j][1] //texto 
+                    ?>
                         
-                        <?php
-                         //   for ($j=0; $j < $this->contarHistorias ; $j++) { 
-                            echo $lista[$j][0] //id
-                            echo $lista[$j][1] //texto 
-                        ?>
-                        <td>
                         <?php
                             for ($i=0; $i < $this->contar ; $i++) { 
                             ?>
-                              <input type="text" readonly name="LoginEvaluador" value="<?php echo $this->datos[$i][1] ?>"> 
+                            <tr>
+                                <td>
+                                    <input type="text" readonly size="10" name="LoginEvaluador" value="<?php echo $this->datos[$i][1] ?>"> 
+                                </td>
+                            
+                                <td>
+                                    <input type="text" readonly size="1" name="CorrectoA" value="<?php echo $this->datos[$i][2] ?>"> 
+                                </td>
+                            
+                                <td>
+                                    <input type="text" readonly name="ComenIncorrectoA" value="<?php echo $this->datos[$i][3] ?>"> 
+                                </td>
+                                <td>
+                                    <input type="text" readonly size="1" name="OK" value="<?php echo $this->datos[$i][6] ?>"> 
+                                </td>
+                            </tr>
                             <?php
                               
                             }
 
                         ?>
-                              </td>
+                        
                         <?php
-                  //  }
+                    }
                 ?>
 
 
@@ -134,12 +159,12 @@ include '../Views/Header.php';
                         <option value="0">0</option>
                         <option value="1">1</option>
                           
-                    </select -->
+                    </select 
                 </div>
                  <div  id="izquierda">    
-                    <label for="ComentIncorrectoP"><?php echo $strings['ComentIncorrectoP']?>: </label>
-                    <textarea name="ComentIncorrectoP" maxlength="300" rows="6" cols="50" onblur="" style="margin-left: 10px; border-radius: 20px; border-top-left-radius: 0px; border-width: 2px; border-color: darkblue;" > <?php echo $row['ComentIncorrectoP'] ?></textarea><div id="ComentIncorrectoP" class="oculto" style="display:none"><?php echo $strings['div_Alfanumerico']?></div> 
-                </div>
+                    <label for="ComentIncorrectoP"><?php //echo $strings['ComentIncorrectoP']?>: </label>
+                    <textarea name="ComentIncorrectoP" maxlength="300" rows="6" cols="50" onblur="" style="margin-left: 10px; border-radius: 20px; border-top-left-radius: 0px; border-width: 2px; border-color: darkblue;" > <?php// echo $row['ComentIncorrectoP'] ?></textarea><div id="ComentIncorrectoP" class="oculto" style="display:none"><?php// echo $strings['div_Alfanumerico']?></div> 
+                </div>-->
 
         </table>
 

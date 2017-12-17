@@ -257,14 +257,15 @@ if (!isset($_REQUEST['action'])){
 			if (!$_POST){
 				$IdTrabajo = 'ET1';
 				$AliasEvaluado = 'efgh';
-				$EVALUACION = new EVALUACION_Model($IdTrabajo, '', '', '', '', '', '', '', ''); //crea una EVALUACION_Model con los campos clave del usuario y del trabajo
+				$EVALUACION = new EVALUACION_Model($IdTrabajo, '', $AliasEvaluado, '', '', '', '', '', ''); //crea una EVALUACION_Model con los campos clave del usuario y del trabajo
 				$contar = $EVALUACION->contar();
 				$contarHistorias = $EVALUACION->contarHistorias();
 				$lista = $EVALUACION->rellenarLista();
 				$listaHistorias = $EVALUACION->listarHistorias();
+				$rellenarHistorias = $EVALUACION->rellenarHistorias();
 				//$listaLoginEvaluadores = $EVALUACION->listarLoginEvaluadores();  
 				//$listaComentarios = $EVALUACION->listarComentarios();
-				$usuario = new EVALUACION_CALIFICAR($lista, $listaHistorias, $contar, $contarHistorias);
+				$usuario = new EVALUACION_CALIFICAR($lista, $listaHistorias, $contar, $contarHistorias, $rellenarHistorias);
 
 
 

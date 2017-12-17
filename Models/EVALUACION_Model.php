@@ -501,7 +501,7 @@ function listarHistorias(){
 //Nos devuelve un recordset con todas las historias de una evaluacion
 function rellenarHistorias(){
 	$lista = null;
-	$sql = "SELECT E.IdHistoria, H.TextoHistoria FROM EVALUACION E, TRABAJO T, HISTORIA H
+	$sql = "SELECT DISTINCT E.IdHistoria, H.TextoHistoria FROM EVALUACION E, TRABAJO T, HISTORIA H
 						 WHERE (
 						 		
 						 		E.IdTrabajo = '$this->IdTrabajo' AND
@@ -671,8 +671,9 @@ function contarHistorias(){
 	$aux = 0;
 	$sql = "SELECT COUNT(*) 
 					FROM EVALUACION
-							WHERE IdTrabajo = '$this->IdTrabajo'
-								GROUP BY IdHistoria";
+							WHERE IdTrabajo = '$this->IdTrabajo' AND 
+									AliasEvaluado = '$this->AliasEvaluado'
+								GROUP BY LoginEvaluador";
 
 	$result = $this->mysqli->query($sql);
 	
