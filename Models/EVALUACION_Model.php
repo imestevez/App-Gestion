@@ -199,15 +199,15 @@ function SEARCH()
 // se manda un mensaje de que ese valor de clave no existe
 function DELETE()
 {	// se construye la sentencia sql de busqueda con los atributos de la clase
-    $sql = "SELECT * FROM EVALUACION WHERE (LoginEvaluador = '$this->LoginEvaluador' AND IdTrabajo = '$this->IdTrabajo' AND AliasEvaluado = '$this->AliasEvaluado' AND IdHistoria = '$this->IdHistoria')"; //comprobar que no hay claves iguales
+    $sql = "SELECT * FROM EVALUACION WHERE (IdTrabajo = '$this->IdTrabajo' AND AliasEvaluado = '$this->AliasEvaluado')"; //comprobar que no hay claves iguales
 
     // se ejecuta la query
     $result = $this->mysqli->query($sql);
     // si existe una tupla con ese valor de clave
-    if ($result->num_rows == 1)
+    if ($result->num_rows > 0)
     {
     	// se construye la sentencia sql de borrado
-        $sql = "DELETE FROM EVALUACION WHERE (LoginEvaluador = '$this->LoginEvaluador' AND IdTrabajo = '$this->IdTrabajo' AND AliasEvaluado = '$this->AliasEvaluado' AND IdHistoria = '$this->IdHistoria')";
+        $sql = "DELETE FROM EVALUACION WHERE (IdTrabajo = '$this->IdTrabajo' AND AliasEvaluado = '$this->AliasEvaluado')";
         // se ejecuta la query
         $this->mysqli->query($sql);
         // se devuelve el mensaje de borrado correcto
