@@ -40,6 +40,7 @@ $acciones = listaAcciones(10);
 $acceso=false;
 
 include_once '../Models/EVALUACION_Model.php';
+//include_once '../Models/Calificacion_Model.php';
 
 include_once '../Views/EVALUACION/EVALUACION_SHOWALL_View.php';
 include_once '../Views/EVALUACION/EVALUACION_SHOWCURRENT_View.php';
@@ -185,9 +186,10 @@ if (!isset($_REQUEST['action'])){
 
 function getCalificarChecbox(){
 	$numHistorias = 0;
+	$numEvaluadores = 0;
 	$IdTrabajo = null;
 	$listaEvaluadores = null;
-	$listaEvaluados = null;
+	$listaEvaluado = null;
 	$evaluadores = null;
 	$evaluados = null;
 
@@ -199,6 +201,9 @@ function getCalificarChecbox(){
 	if(isset($_REQUEST['numHistorias'])){
 		$numHistorias = $_REQUEST['numHistorias'];
 	}
+	if(isset($_REQUEST['numEvaluadores'])){
+		$numEvaluadores = $_REQUEST['numEvaluadores'];
+	}
 	//Si existen los evaluadores
 	if(isset($_REQUEST['evaluadores'])){
 		$listaEvaluadores = $_REQUEST['evaluadores'];
@@ -206,8 +211,9 @@ function getCalificarChecbox(){
 		for ($i=0; $i<$num;$i++){
 			//echo $evaluadores[$i];
 			$check =explode("+" ,  $evaluadores[$i]);
-			$lista[$i] = array($check[0], $check[1] ,$check[2], $check[3], $check[4] , $check[5] ); //inserto en la lista cada uno de los IDS Funcionalidad de los checkboxs seleccionados por el usuario
+			$listaEvaluadores[$i] = array($check[0], $check[1] ,$check[2], $check[3], $check[4] ); //inserto en la lista cada uno de los IDS Funcionalidad de los checkboxs seleccionados por el usuario
 		}
+	}
 	//Si existen los evaluados
 	if(isset($_REQUEST['evaluados'])){
 		$evaluados = $_REQUEST['evaluados'];
@@ -215,8 +221,19 @@ function getCalificarChecbox(){
 		for ($i=0; $i<$num;$i++){
 			//echo $evaluados[$i];
 			$check =explode("+" ,  $evaluados[$i]);
-			$listaEvaluados[$i] = array($check[0], $check[1] ,$check[2], $check[3] ); //inserto en la lista cada uno de los IDS Funcionalidad de los checkboxs seleccionados por el usuario
+			$listaEvaluado[$check[0]] = array($check[1] ,$check[2] ); //inserto en la lista cada uno de los IDS Funcionalidad de los checkboxs seleccionados por el usuario
 		}
+	}
+
+		$CALIFIACION = new Calificacion_Model(
+		$IdTrabajo, 
+		$AliasEvaluado, 
+		$listaEvaluadores, 
+		$listaEvaluado,
+		$numHistorias,
+		$numEvaluadores);
+
+	return $CALIFIACION;
 
 }
 
@@ -225,7 +242,23 @@ function getCalificarChecbox(){
 	Switch ($action){
 
 		case 'CALIF': //si es una calificacion
+				if(!$_POST){
+					$IdTrabajo = 'ET1';
+				$AliasEvaluado = 'efgh';
+				$EVALUACION = new EVALUACION_Model($IdTrabajo, '', $AliasEvaluado, '', '', '', '', '', ''); //crea una EVALUACION_Model con los campos clave del usuario y del trabajo
+				$contar = $EVALUACION->contar();
+				$contarHistorias = $EVALUACION->contarHistorias();
+				$lista = $EVALUACION->rellenarLista();
+				$listaHistorias = $EVALUACION->listarHistorias();
+				$rellenarHistorias = $EVALUACION->rellenarHistorias();
+				//$listaLoginEvaluadores = $EVALUACION->listarLoginEvaluadores();  
+				//$listaComentarios = $EVALUACION->listarComentarios();
+				$usuario = new EVALUACION_CALIFICAR($lista, $listaHistorias, $contar, $contarHistorias, $rellenarHistorias);
 
+				}else{
+					$CALIFIACION =  getCalificarChecbox();
+					$calif = $CALIFIACION->CALIF();
+				}
 
 			break;
 		case 'ADD': //Si quiere hacer un ADD
@@ -298,7 +331,7 @@ function getCalificarChecbox(){
 		case 'SEARCH': //si desea realizar una busqueda
 			if (!$_POST){
 				$IdTrabajo = 'ET1';
-				$AliasEvaluado = 'efgh';
+				$AliasEvaluado = 'pablo';
 				$EVALUACION = new EVALUACION_Model($IdTrabajo, '', $AliasEvaluado, '', '', '', '', '', ''); //crea una EVALUACION_Model con los campos clave del usuario y del trabajo
 				$contar = $EVALUACION->contar();
 				$contarHistorias = $EVALUACION->contarHistorias();
@@ -325,7 +358,7 @@ function getCalificarChecbox(){
 			if(!$_POST){
 				$lista = array('IdTrabajo', 'LoginEvaluador', 'AliasEvaluado', 'IdHistoria', 'CorrectoA', 'ComenIncorrectoA', 'CorrectoP', 'ComentIncorrectoP', 'OK', 'origen');
 				$EVALUACION = new EVALUACION_Model($_REQUEST['IdTrabajo'], $_REQUEST['LoginEvaluador'], $_REQUEST['AliasEvaluado'], '', '', '', '', '', ''); //crea una EVALUACION_Model con los campos clave del usuario y del trabajo
-				$listaHistorias = $EVALUACION->listarHistorias();
+				$listaHistorias = $EVALUACION->listarHistoriasSHOWCURRENT();
 				$lista = $EVALUACION->rellenarLista();
 
 				$usuario = new EVALUACION_SHOWCURRENT($lista, $listaHistorias); //Crea la vista SHOWCURRENT del usuario requerido
