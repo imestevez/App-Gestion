@@ -104,7 +104,8 @@ include '../Views/Header.php';
                                     <input class="calificar" type="text" readonly size="1" name="CorrectoA" value="<?php echo $this->datos[$i][2] ?>"> 
                                 
                                     <input class="calificar" type="text" readonly size="1" name="OK" value="<?php echo $this->datos[$i][6] ?>"> 
-                                    <input type="checkbox" name="evaluadores[]" id="<?php echo $this->rellenarHistorias[$j][0] ?>" value="<?php echo $this->datos[$i][0]. "+" .$this->datos[$i][1]. "+" .$this->datos[$i][2]. "+" .$this->datos[$i][6]. "+" .$this->datos[$i][3]. "+" .$this->datos[$i][5] ?>" > 
+
+                                    <input type="checkbox" name="evaluadores[]" id="<?php echo $this->rellenarHistorias[$j][0] ?>" value="<?php echo $this->datos[$i][0]. "?" .$this->datos[$i][1]. "?" .$this->datos[$i][2]. "?" .$this->datos[$i][6]. "?" .$this->datos[$i][3]. "?" .$this->datos[$i][5] ?>" > 
                                 </td>
                             </tr>
                             <?php
@@ -133,7 +134,7 @@ include '../Views/Header.php';
                                 </td>
                                 <td>
                                     <input class="calificar" type="text" readonly size="1" name="CorrectoP" value="<?php echo $this->datos[$i][4] ?>">
-                                    <input type="checkbox" name="evaluado[]" id="<?php echo $this->rellenarHistorias[$j][0] ?>" value="<?php echo $this->datos[$i][0]. "+" .$this->datos[$i][4]. "+" .$this->datos[$i][5] ?>" >
+                                    <input type="checkbox" name="evaluado[]" id="<?php echo $this->rellenarHistorias[$j][0] ?>" value="<?php echo $this->datos[$i][0]. "?" .$this->datos[$i][4]. "?" .$this->datos[$i][5] ?>" >
                                 </td>
                             </tr>
 
