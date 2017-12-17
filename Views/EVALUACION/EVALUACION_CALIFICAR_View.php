@@ -70,20 +70,20 @@ include '../Views/Header.php';
                 <legend style="margin-left: 30%"><?php echo $strings['Calificar evaluacion'] ?></legend>
             <form method="post" name="EDIT"  action="../Controllers/EVALUACION_Controller.php" enctype="multipart/form-data" >
 
-            <table>
-                
-                   
+            <table class="tablaCalif">
+                 
                     
-                    <?php
-                    $init = 0;
-                    $fin = $init + $this->contar;
+                <?php
+
+                    $init = 0; //variable de inicio para for1
+                    $fin = $init + $this->contar; //variable de fin para for1
 
                     $init2 = 0;
                     $fin2 = $init2 + $this->contar;
 
-                    for ($j=0; $j < $this->contarHistorias ; $j++) { 
+                    for ($j=0; $j < $this->contarHistorias ; $j++) { //mientras haya historias
                      
-                    ?>   
+                ?>   
                         <tr>
                             <td><?php echo $strings['IdHistoria']?></td>
                             <td><?php echo $strings['Texto de la historia'] ?></td>
@@ -117,8 +117,7 @@ include '../Views/Header.php';
                             <?php
                               
                             }//fin for2
-                            $init = $i;
-                            $fin = $init + $this->contar;
+                            
 
                         ?>
                         
@@ -149,10 +148,12 @@ include '../Views/Header.php';
                                     <input type="checkbox" name="evaluado[]" id="<?php echo $this->rellenarHistorias[$j][0] ?>" value="<?php echo $this->rellenarHistorias[$j][0]. "?" .$this->datos[$i][4]. "?" . $this->datos[$indiceComentarioP][5] ?>" >
 
                                 </td>
-                            </tr>
+                        </tr>
 
                         <?php
                     }// fin for1
+                    $init = $i;
+                    $fin = $init + $this->contar;
                 ?>
 
         </table>
