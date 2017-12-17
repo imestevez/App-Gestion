@@ -71,6 +71,7 @@ function render(){
                 <td class="edit_tabla">
                     <a href="../Controllers/EVALUACION_Controller.php?action=SHOW&LoginEvaluador=<?php echo $row["LoginEvaluador"]?>&IdTrabajo=<?php echo $row["IdTrabajo"]?>&AliasEvaluado=<?php echo $row["AliasEvaluado"] ?>"><input type="image" src="../Views/images/ojo.png" name="action" title="<?php echo $strings['Mostrar en detalle'] ?>" value="SHOW" action="">
                     </a>
+                    <a href="../Controllers/EVALUACION_Controller.php?action=CALIF&IdTrabajo=<?php echo $row["IdTrabajo"]?>&AliasEvaluado=<?php echo $row["AliasEvaluado"] ?>"><input type="image" src="../Views/images/evaluacion.png" name="action" title="<?php echo $strings['Calif']?>" value="CALIF"></a>
                 </td>               
             </tr>
 <?php

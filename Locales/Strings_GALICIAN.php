@@ -184,7 +184,7 @@ array(
 	'ComentarioInc' => 'Comentario Incorrecto',
 	'ERROR: No hay asignaciones de QAs' => 'ERRO: Non hai asignacións de QAs',
 	'Calificar evaluacion' => 'Calificar avaliación',
-
+	'Calif' => 'Calificar',
 
 
 

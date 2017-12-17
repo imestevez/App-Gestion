@@ -184,7 +184,7 @@ array(
 	'ComentarioInc' => 'Incorrect Comment',
 	'ERROR: No hay asignaciones de QAs' => 'ERROR: QAs are not assigned yet',
 	'Calificar evaluacion' => 'Grade evaluation',
-
+	'Calif' => 'Qualification',
 
 
 
