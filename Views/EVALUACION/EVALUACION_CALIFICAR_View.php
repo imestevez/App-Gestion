@@ -193,7 +193,7 @@ include '../Views/Header.php';
         </table>
 
                 <div class="acciones" style="float: right; margin-left:0%; margin-right: 50%">
-                    <a href="../Controllers/EVALUACION_Controller.php?action=SHOW&IdTrabajo=<?php echo $this->IdTrabajo ?>&AliasEvaluado=<?php echo $this->AliasEvaluado ?>&numHistorias=<?php echo $this->contarHistorias ?>&numEvaluadores=<?php echo $this->contar ?>"> <input type="image" name="action" value="SHOW" src="../Views/images/confirmar.png" title="<?php echo $strings['Enviar Formulario'] ?>"></a>
+                    <a href="../Controllers/EVALUACION_Controller.php?action=CALIF&IdTrabajo=<?php echo $this->IdTrabajo ?>&AliasEvaluado=<?php echo $this->AliasEvaluado ?>&numHistorias=<?php echo $this->contarHistorias ?>&numEvaluadores=<?php echo $this->contar ?>"> <input type="image" name="action" value="CALIF" src="../Views/images/confirmar.png" title="<?php echo $strings['Enviar Formulario'] ?>"></a>
                 </div>
              </form>                     
                 <div class="acciones" style="float: left;">
