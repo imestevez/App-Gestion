@@ -145,7 +145,7 @@ include '../Views/Header.php';
                                 </td>
                                 <td>
                                     <input class="calificar" type="text" readonly size="1" name="CorrectoP" value="<?php echo $this->datos[$indiceComentarioP][4] ?>">
-                                    <input type="checkbox" name="evaluado[]" id="<?php echo $this->rellenarHistorias[$j][0] ?>" value="<?php echo $this->rellenarHistorias[$j][0]. "?" .$this->datos[$i][4]. "?" . $this->datos[$indiceComentarioP][5] ?>" >
+                                    <input type="checkbox" name="evaluado[]" id="<?php echo $this->rellenarHistorias[$j][0] ?>" value="<?php echo $this->rellenarHistorias[$j][0]. "?" .$this->datos[$indiceComentarioP][4]. "?" . $this->datos[$indiceComentarioP][5] ?>" >
 
                                 </td>
                         </tr>
@@ -180,6 +180,7 @@ function rellenarLista(){
     $num = 0;
     while ($row = mysqli_fetch_array($this->listaHistorias)) {
         $this->datos[$num] = array($row['IdHistoria'], $row['LoginEvaluador'], $row['CorrectoA'], $row['ComenIncorrectoA'], $row['CorrectoP'], $row['ComentIncorrectoP'], $row['OK']);
+
         $num++;
     }
 

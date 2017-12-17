@@ -193,17 +193,15 @@ function getCalificarChecbox(){
 	$evaluadores = null;
 	$evaluado = null;
 	$AliasEvaluado = null;
-	$lista = null;
+	$listaComentarios = null;
 
 		//Si existen los evaluadores
 	if(isset($_REQUEST['ComentIncorrectoP'])){
 		$ComentIncorrectoP = $_REQUEST['ComentIncorrectoP'];
 		$num = count($ComentIncorrectoP);
 		foreach ($ComentIncorrectoP as $key => $value) {
-			$lista[$key] = $value;
-			echo $key;
-			echo $value;
-		}
+			$listaComentarios[$key] = $value;
+			}
 			
 	}
 
@@ -238,11 +236,7 @@ function getCalificarChecbox(){
 
 			//echo $evaluados[$i];
 			$check =explode("?" ,  $evaluado[$i]);
-			echo $check[2];
-			$listaEvaluado[$check[0]] = array( $check[1], $check[2]); //inserto en la lista cada uno de los IDS Funcionalidad de los checkboxs seleccionados por el usuario
-		/*	echo $check[0]."<---IdHistoria   ------";
-			echo $listaEvaluado[$check[0]] ."<---lusta";
-			*/
+			$listaEvaluado[$check[0]] = $check[1]; //inserto en la lista cada uno de los IDS Funcionalidad de los checkboxs seleccionados por el usuario
 		}
 	}
 
@@ -251,6 +245,7 @@ function getCalificarChecbox(){
 		$AliasEvaluado, 
 		$listaEvaluadores, 
 		$listaEvaluado,
+		$listaComentarios,
 		$numHistorias,
 		$numEvaluadores);
 
