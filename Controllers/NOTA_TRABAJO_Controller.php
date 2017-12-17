@@ -146,6 +146,11 @@ if (!isset($_REQUEST['action'])){
 			//$tupla = $NOTA_TRABAJO->RellenaDatos();//A partir del IdTrabajo recoge todos los atributos
 			$usuario = new NOTA_TRABAJO_SHOWCURRENT($lista); //Crea la vista SHOWCURRENT del usuario requerido
 			break;
+		case 'GENNOT':
+				$NOTA_TRABAJO = new NOTA_TRABAJO_Model('','','');
+				$lista = $NOTA_TRABAJO->genAutoNota(); //mete datos en respuesta usuarios despues de ejecutar el add con los de funcionalidad
+				$usuario = new MESSAGE($lista, '../Controllers/NOTA_TRABAJO_Controller.php'); //muestra el mensaje despues de la sentencia sql
+			break;
 		default: //Por defecto, Se muestra la vista SHOWALL
 			foreach ($acciones as $key => $value) {
 				if($value == 'ALL'){ //si puede ver el showall
@@ -168,9 +173,15 @@ if (!isset($_REQUEST['action'])){
 				$num_tupla = $num_pagina*10; //número de la 1º tupla a mostrar
 				$max_tuplas = $num_tupla+10; // el número de tuplas a mostrar por página
 				$totalTuplas = $NOTA_TRABAJO->contarTuplas(); //Cuenta el número de tuplas que hay en la BD
-				$datos = $NOTA_TRABAJO->SHOWALL($num_tupla,$max_tuplas); //Ejecuta la funcion SHOWALL() en el ENTREGA_Model
+				$datos = $NOTA_TRABAJO->SHOWALL(); //Ejecuta la funcion SHOWALL() en el ENTREGA_Model
+				$datos = $NOTA_TRABAJO->adaptarRecorsetParaShowAll($datos);
 				$lista = array('login','IdTrabajo','NotaTrabajo');
-				$UsuariosBD = new NOTA_TRABAJO_SHOWALL($lista, $datos, $num_tupla, $max_tuplas, $totalTuplas, $num_pagina, 'SHOWALL', '../Controllers/NOTA_TRABAJO_Controller.php',$acciones); //Crea la vista SHOWALL de los usuarios de la BD	
+				$trabajos = $NOTA_TRABAJO->getTrabajos();
+				$trabajosNota = $NOTA_TRABAJO->getTrabajosArray();
+				$alumnos = $NOTA_TRABAJO->getAlumnos();
+				$num_trabajos = $NOTA_TRABAJO->getNumTrabajos();
+				$notas = $NOTA_TRABAJO->calcNotaF();
+				$UsuariosBD = new NOTA_TRABAJO_SHOWALL($lista, $datos, $num_tupla, $max_tuplas, $totalTuplas, $num_pagina, 'SHOWALL', '../Controllers/NOTA_TRABAJO_Controller.php',$acciones, $trabajos, $num_trabajos, $trabajosNota, $alumnos, $notas); //Crea la vista SHOWALL de los usuarios de la BD	
 			}else{
 				if (!$_POST){
 					$NOTA_TRABAJO = new NOTA_TRABAJO_Model('','','');//crea un NOTA_TRABAJO_Model
@@ -187,9 +198,15 @@ if (!isset($_REQUEST['action'])){
 				$num_tupla = $num_pagina*10; //número de la 1º tupla a mostrar
 				$max_tuplas = $num_tupla+10; // el número de tuplas a mostrar por página
 				$totalTuplas = $NOTA_TRABAJO->contarTuplas(); //Cuenta el número de tuplas que hay en la BD
-				$datos = $NOTA_TRABAJO->SHOWALL_User($num_tupla,$max_tuplas); //Ejecuta la funcion SHOWALL() en el ENTREGA_Model
+				$datos = $NOTA_TRABAJO->SHOWALL_User(); //Ejecuta la funcion SHOWALL() en el ENTREGA_Model
+				$datos = $NOTA_TRABAJO->adaptarRecorsetParaShowAll($datos);
 				$lista = array('login','IdTrabajo','NotaTrabajo');
-				$UsuariosBD = new NOTA_TRABAJO_SHOWALL($lista, $datos, $num_tupla, $max_tuplas, $totalTuplas, $num_pagina, 'ALL', '../Controllers/NOTA_TRABAJO_Controller.php',$acciones); //Crea la vista SHOWALL de los usuarios de la BD	
+				$trabajos = $NOTA_TRABAJO->getTrabajos();
+				$trabajosNota = $NOTA_TRABAJO->getTrabajosArray();
+				$alumnos = $NOTA_TRABAJO->getAlumnos();
+				$num_trabajos = $NOTA_TRABAJO->getNumTrabajos();
+				$notas = $NOTA_TRABAJO->calcNotaF();
+				$UsuariosBD = new NOTA_TRABAJO_SHOWALL($lista, $datos, $num_tupla, $max_tuplas, $totalTuplas, $num_pagina, 'ALL', '../Controllers/NOTA_TRABAJO_Controller.php',$acciones, $trabajos, $num_trabajos, $trabajosNota, $alumnos, $notas); //Crea la vista SHOWALL de los usuarios de la BD	
 			}
 		}
 	}
