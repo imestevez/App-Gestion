@@ -191,10 +191,21 @@ function getCalificarChecbox(){
 	$listaEvaluadores = null;
 	$listaEvaluado = null;
 	$evaluadores = null;
-	$evaluados = null;
+	$evaluado = null;
 	$AliasEvaluado = null;
+	$lista = null;
 
-
+		//Si existen los evaluadores
+	if(isset($_REQUEST['ComentIncorrectoP'])){
+		$ComentIncorrectoP = $_REQUEST['ComentIncorrectoP'];
+		$num = count($ComentIncorrectoP);
+		foreach ($ComentIncorrectoP as $key => $value) {
+			$lista[$key] = $value;
+			echo $key;
+			echo $value;
+		}
+			
+	}
 
 	if(isset($_REQUEST['IdTrabajo'])){
 		$IdTrabajo = $_REQUEST['IdTrabajo'];
@@ -210,26 +221,32 @@ function getCalificarChecbox(){
 	}
 	//Si existen los evaluadores
 	if(isset($_REQUEST['evaluadores'])){
-		$listaEvaluadores = $_REQUEST['evaluadores'];
+		$evaluadores = $_REQUEST['evaluadores'];
 		$num = count($evaluadores);
 		for ($i=0; $i<$num;$i++){
 			//echo $evaluadores[$i];
-			$check =explode("+" ,  $evaluadores[$i]);
+			$check =explode("?" ,  $evaluadores[$i]);
 			$listaEvaluadores[$i] = array($check[0], $check[1] ,$check[2], $check[3], $check[4],$check[5] ); //inserto en la lista cada uno de los IDS Funcionalidad de los checkboxs seleccionados por el usuario
 		}
 	}
 	//Si existen los evaluados
-	if(isset($_REQUEST['evaluados'])){
-		$evaluados = $_REQUEST['evaluados'];
-		$num = count($evaluados);
+	if(isset($_REQUEST['evaluado'])){
+		$evaluado = $_REQUEST['evaluado'];
+		$num = count($evaluado);
 		for ($i=0; $i<$num;$i++){
+			//echo $i ."<--for";
+
 			//echo $evaluados[$i];
-			$check =explode("+" ,  $evaluados[$i]);
-			$listaEvaluado[$check[0]] = array($check[1] ,$check[2] ); //inserto en la lista cada uno de los IDS Funcionalidad de los checkboxs seleccionados por el usuario
+			$check =explode("?" ,  $evaluado[$i]);
+			echo $check[2];
+			$listaEvaluado[$check[0]] = array( $check[1], $check[2]); //inserto en la lista cada uno de los IDS Funcionalidad de los checkboxs seleccionados por el usuario
+		/*	echo $check[0]."<---IdHistoria   ------";
+			echo $listaEvaluado[$check[0]] ."<---lusta";
+			*/
 		}
 	}
 
-		$CALIFIACION = new Calificacion_Model(
+		$CALIFICACION = new Calificacion_Model(
 		$IdTrabajo, 
 		$AliasEvaluado, 
 		$listaEvaluadores, 
@@ -237,7 +254,7 @@ function getCalificarChecbox(){
 		$numHistorias,
 		$numEvaluadores);
 
-	return $CALIFIACION;
+	return $CALIFICACION;
 
 }
 
@@ -261,15 +278,16 @@ function getCalificarChecbox(){
 				$lista = $EVALUACION->rellenarLista();
 				$lista['IdTrabajo'] = $IdTrabajo;
 				$lista['AliasEvaluado'] = $AliasEvaluado;
-				$listaHistorias = $EVALUACION->listarHistorias();
+				$listaHistorias = $EVALUACION->listarHistoriasSHOWCURRENT();
 				$rellenarHistorias = $EVALUACION->rellenarHistorias();
 				//$listaLoginEvaluadores = $EVALUACION->listarLoginEvaluadores();  
 				//$listaComentarios = $EVALUACION->listarComentarios();
 				$usuario = new EVALUACION_CALIFICAR($lista, $listaHistorias, $contar, $contarHistorias, $rellenarHistorias);
 
 				}else{
-					$CALIFIACION =  getCalificarChecbox();
-					$calif = $CALIFIACION->CALIF();
+					$CALIFICACION =  getCalificarChecbox();
+					$calif = $CALIFICACION->CALIF();
+					exit();
 
 				}
 

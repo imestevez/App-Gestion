@@ -486,7 +486,6 @@ function listarHistorias(){
 						 		E.IdTrabajo = H.IdTrabajo AND 
 						 		E.IdHistoria = H.IdHistoria
 															) ORDER BY 1"; 
-			
 	    // si se produce un error en la busqueda mandamos el mensaje de error en la consulta
 
     if (!($resultado = $this->mysqli->query($sql))){
@@ -509,8 +508,10 @@ function listarHistoriasSHOWCURRENT(){
 						 		E.IdTrabajo = '$this->IdTrabajo' AND
 						 		E.IdTrabajo = T.IdTrabajo AND
 						 		E.IdTrabajo = H.IdTrabajo AND 
-						 		E.IdHistoria = H.IdHistoria
-															) GROUP BY E.IdHistoria ORDER BY 1"; 
+						 		E.IdHistoria = H.IdHistoria AND
+						 		E.AliasEvaluado = '$this->AliasEvaluado'
+															)  ORDER BY 1"; 
+
 			
 	    // si se produce un error en la busqueda mandamos el mensaje de error en la consulta
 

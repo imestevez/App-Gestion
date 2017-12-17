@@ -75,6 +75,12 @@ include '../Views/Header.php';
                    
                     
                     <?php
+                    $init = 0;
+                    $fin = $init + $this->contar;
+
+                    $init2 = 0;
+                    $fin2 = $init2 + $this->contar;
+
                     for ($j=0; $j < $this->contarHistorias ; $j++) { 
                      
                     ?>   
@@ -93,7 +99,7 @@ include '../Views/Header.php';
                     ?>
                         
                         <?php
-                            for ($i=0; $i < $this->contar ; $i++) { 
+                            for ($i=$init; $i < $fin ; $i++) { 
                             ?>
                             <tr>
                                 <td>
@@ -111,30 +117,36 @@ include '../Views/Header.php';
                             <?php
                               
                             }//fin for2
+                            $init = $i;
+                            $fin = $init + $this->contar;
 
                         ?>
                         
                         <?php
-                            for ($k=0; $k < $this->contar ; $k++) { 
+                            for ($k=$init2; $k < $fin2 ; $k++) { 
                             ?>
                             <tr>
                                 <td>
-                                    <input class="calificar" type="text" readonly size="20" name="ComenIncorrectoA" value="<?php echo $this->datos[$i][3] ?>"> 
+                                    <input class="calificar" type="text" readonly size="20" name="ComenIncorrectoA" value="<?php echo $this->datos[$k][3] ?>"> 
                                 </td>
                             </tr>
                             <?php
                               
                             }//fin for3
+                            $init2 = $k;
+                            $fin2 = $init2 + $this->contar;
+
+                            $indiceComentarioP = $j* $this->contar;
 
                         ?>
 
                         <tr>
                                 <td>
-                                    <input class="calificar" type="text" size="20" name="ComentIncorrectoP" value="<?php echo $this->datos[$i][5] ?>"> 
+                                    <input class="calificar" type="text" size="20" name="ComentIncorrectoP[<?php echo $this->rellenarHistorias[$j][0]?>]" value="<?php echo $this->datos[$indiceComentarioP][5] ?>"> 
                                 </td>
                                 <td>
-                                    <input class="calificar" type="text" readonly size="1" name="CorrectoP" value="<?php echo $this->datos[$i][4] ?>">
-                                    <input type="checkbox" name="evaluado[]" id="<?php echo $this->rellenarHistorias[$j][0] ?>" value="<?php echo $this->rellenarHistorias[$j][0]. "?" .$this->datos[$i][4]. "?" .$this->datos[$i][5] ?>" >
+                                    <input class="calificar" type="text" readonly size="1" name="CorrectoP" value="<?php echo $this->datos[$indiceComentarioP][4] ?>">
+                                    <input type="checkbox" name="evaluado[]" id="<?php echo $this->rellenarHistorias[$j][0] ?>" value="<?php echo $this->rellenarHistorias[$j][0]. "?" .$this->datos[$i][4]. "?" . $this->datos[$indiceComentarioP][5] ?>" >
 
                                 </td>
                             </tr>
@@ -142,55 +154,6 @@ include '../Views/Header.php';
                         <?php
                     }// fin for1
                 ?>
-
-
-                        <!--div id="izquierda">
-                            <label for="IdHistoria"><?php// echo $strings['IdHistoria']?>:</label>
-                                <input type="number" name="IdHistoria" maxlength="2" size="2" readonly value="<?php //echo $row['IdHistoria'] ?>"><div id="IdHistoria" class="oculto" style="display:none"><?php// echo $strings['div_numeros']?></div> <div id="IdHistoriaMax" class="oculto" style="display:none"><?php //echo $strings['div_numerosRango']?> </div><div id="IdHistoriaVacio" class="oculto" style="display:none"><?php// echo $strings['div_vacio']?></div>
-                        </div>
-                    </td>
-                    <td>
-                        <div id="izquierda">
-                            <label for="TextoHistoria"><?php // echo $strings['Texto de la historia'] ?>: </label>
-                                <textarea name="TextoHistoria" maxlength="300" rows="6" cols="50" readonly style="margin-left: 10px; border-radius: 20px; border-top-left-radius: 0px; border-width: 2px; border-color: darkblue;" ><?php// echo $row['TextoHistoria'] ?></textarea> 
-                        </div>
-                    </td>   
-                </tr>
-                <div  id="izquierda">    
-                    <label for="CorrectoA"><?php //echo $strings['CorrectoA']?>: </label> 
-                    <select name="CorrectoA" style="margin-left: 2%">
-                        <option value="<?php //echo $row['CorrectoA'] ?>" selected><?php //echo //$row['CorrectoA'] ?></option>
-                        <option value="0">0</option>
-                        <option value="1">1</option>
-                          
-                    </select>
-                </div>
-                <div  id="izquierda">    
-                    <label for="ComenIncorrectoA"><?php //echo $strings['ComenIncorrectoA']?>: </label>
-                    <textarea name="ComenIncorrectoA" maxlength="300" rows="6" cols="50" onblur="" style="margin-left: 10px; border-radius: 20px; border-top-left-radius: 0px; border-width: 2px; border-color: darkblue;" > <?php //echo $row['ComenIncorrectoA'] ?></textarea><div id="ComenIncorrectoA" class="oculto" style="display:none"><?php// echo $strings['div_Alfanumerico']?></div> 
-                </div>
-                <div  id="izquierda">    
-                    <label for="OK"><?php //echo $strings['OK']?>: </label> 
-                    <select name="OK" style="margin-left: 2%">
-                        <option value="<?php //echo $row['OK'] ?>" selected><?php //echo //$row['OK'] ?></option>
-                        <option value="0">0</option>
-                        <option value="1">1</option>
-                          
-                    </select>
-                </div>
-                <div  id="izquierda">    
-                    <label for="CorrectoP"><?php// echo $strings['CorrectoP']?>: </label> 
-                    <select name="CorrectoP" style="margin-left: 2%">
-                        <option value="<?php// echo $row['CorrectoP'] ?>" selected><?php //echo $row['CorrectoP'] ?></option>
-                        <option value="0">0</option>
-                        <option value="1">1</option>
-                          
-                    </select 
-                </div>
-                 <div  id="izquierda">    
-                    <label for="ComentIncorrectoP"><?php //echo $strings['ComentIncorrectoP']?>: </label>
-                    <textarea name="ComentIncorrectoP" maxlength="300" rows="6" cols="50" onblur="" style="margin-left: 10px; border-radius: 20px; border-top-left-radius: 0px; border-width: 2px; border-color: darkblue;" > <?php// echo $row['ComentIncorrectoP'] ?></textarea><div id="ComentIncorrectoP" class="oculto" style="display:none"><?php// echo $strings['div_Alfanumerico']?></div> 
-                </div>-->
 
         </table>
                 <input type="text" name="IdTrabajo" class="del" value="<?php echo $this->IdTrabajo ?>">

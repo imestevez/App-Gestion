@@ -38,7 +38,6 @@ function __construct($IdTrabajo, $AliasEvaluado, $listaEvaluadores, $listaEvalua
 	$this->numHistorias = $numHistorias;
 	$this->$numEvaluadores = $numEvaluadores;
 
-
 	// incluimos la funcion de acceso a la bd
 	include_once '../Functions/Access_DB.php';
 	// conectamos con la bd y guardamos el manejador en un atributo de la clase
@@ -51,6 +50,7 @@ function __construct($IdTrabajo, $AliasEvaluado, $listaEvaluadores, $listaEvalua
 // si existe se modifica
 function CALIF()
 {
+
 	//Si todos los campos tienen valor
 	if(
 		 
@@ -58,19 +58,23 @@ function CALIF()
 		$this->AliasEvaluado <> '' &&
 		$this->numHistorias <> '' ){
 
+
 		// se construye la sentencia de busqueda de la tupla en la bd
 
-		if(($this->numHistorias > 0) && ($this->numEvaluadores > 0)){
+		if(($this->numHistorias > 0) ){//&& ($this->numEvaluadores > 0)){
 
-			if((count($this->listaEvaluado) > 0) ){
-				foreach ($this->listaEvaluado as $key => $value) {
+
+			if((count($this->listaEvaluadores) > 0) ){
+
+				foreach ($this->listaEvaluadores as $key => $value) {
+
 					$this->IdHistoria = $value[0];
 					$this->LoginEvaluador = $value[1];
 					$this->CorrectoA = $value[2];
 					$this->OK = $value[3];
 					$this->ComenIncorrectoA = $value[4];
 					$this->ComentIncorrectoP = $value[5];
-					$this->CorrectoP = $this->listaEvaluado[$this->IdHistoria];
+					$this->CorrectoP = $this->listaEvaluado[$this->IdHistoria][0];
 					
 					if($this->CorrectoP == 0){
 						$this->CorrectoP = 1;
@@ -96,69 +100,49 @@ function CALIF()
 							OK = '$this->OK'
 						WHERE (IdTrabajo = '$this->IdTrabajo' AND LoginEvaluador = '$this->LoginEvaluador' AND AliasEvaluado = '$this->AliasEvaluado' AND IdHistoria = '$this->IdHistoria')";
 
-
+						echo $sql;
 		    	$result = $this->mysqli->query($sql);
 		   			 }
 
+			}else{
+				foreach ($this->listaEvaluado as $key => $value) {
+
+					$this->IdHistoria = $key;
+					$this->ComentIncorrectoP = $value[1];
+					$this->CorrectoP = $value[0];
+					
+					if($this->CorrectoP == 0){
+						$this->CorrectoP = 1;
+					}else{
+						$this->CorrectoP = 0;
+					}
+					/*
+					if($this->OK == 0){
+						$this->OK =1;
+					}else{
+						$this->OK = 0;
+					}
+*/
+
+					$sql = "UPDATE EVALUACION SET 
+							IdTrabajo = '$this->IdTrabajo',
+							AliasEvaluado = '$this->AliasEvaluado',
+							IdHistoria = '$this->IdHistoria',
+							CorrectoP = '$this->CorrectoP',
+							ComentIncorrectoP = '$this->ComentIncorrectoP',
+						WHERE (IdTrabajo = '$this->IdTrabajo'AND AliasEvaluado = '$this->AliasEvaluado' AND IdHistoria = '$this->IdHistoria')";
+
+
 			}
 
+
+				}
+		}
+		} else{
+			echo "algo viene vacio";
 
 
 		}
-/*
-	    $sql = "SELECT * FROM EVALUACION WHERE (IdTrabajo = '$this->IdTrabajo' AND LoginEvaluador = '$this->LoginEvaluador' AND AliasEvaluado = '$this->AliasEvaluado' AND IdHistoria = '$this->IdHistoria' )";
-	    // se ejecuta la query
-	    $result = $this->mysqli->query($sql);
-	    $num_rows = mysqli_num_rows($result);
-	    // si el numero de filas es igual a uno es que lo encuentra
-
-	    if ($num_rows == 1)
-	    {	// se construye la sentencia de modificacion en base a los atributos de la clase
-			if(($this->CorrectoP <> '') && ($this->ComentIncorrectoP <> '') && ($this->OK <> '')){
-
-				$sql = "UPDATE EVALUACION SET 
-							IdTrabajo = '$this->IdTrabajo',
-							LoginEvaluador = '$this->LoginEvaluador',
-							AliasEvaluado = '$this->AliasEvaluado',
-							IdHistoria = '$this->IdHistoria',
-							CorrectoA = '$this->CorrectoA',
-							ComenIncorrectoA = '$this->ComenIncorrectoA',
-							CorrectoP = '$this->CorrectoP',
-							ComentIncorrectoP = '$this->ComentIncorrectoP',
-							OK = '$this->OK'
-						WHERE (IdTrabajo = '$this->IdTrabajo' AND LoginEvaluador = '$this->LoginEvaluador' AND AliasEvaluado = '$this->AliasEvaluado' AND IdHistoria = '$this->IdHistoria')";
-			}else{
-
-				$sql = "UPDATE EVALUACION SET 
-							IdTrabajo = '$this->IdTrabajo',
-							LoginEvaluador = '$this->LoginEvaluador',
-							AliasEvaluado = '$this->AliasEvaluado',
-							IdHistoria = '$this->IdHistoria',
-							CorrectoA = '$this->CorrectoA',
-							ComenIncorrectoA = '$this->ComenIncorrectoA'
-						WHERE (IdTrabajo = '$this->IdTrabajo' AND LoginEvaluador = '$this->LoginEvaluador' AND AliasEvaluado = '$this->AliasEvaluado' AND IdHistoria = '$this->IdHistoria')";
-			}			
-			// si hay un problema con la query se envia un mensaje de error en la modificacion
-	        if (!($result = $this->mysqli->query($sql))){
-	        		$this->lista['mensaje'] =  'ERROR: No se ha modificado'; 
-					return $this->lista; 
-		    	}
-		    
-			else{ // si no hay problemas con la modificación se indica que se ha modificado
-				$this->lista['mensaje'] =  'Modificado correctamente'; 
-				return $this->lista; 
-			}
-	    }
-	    else {// si no se encuentra la tupla se manda el mensaje de que no existe la tupla
-	    	$this->lista['mensaje'] =  'ERROR: No existe en la base de datos'; 
-			return $this->lista; 
-			}
-	}else{ //Si no se introdujeron todos los valores
-		 return 'ERROR: Fallo en la modificación. Introduzca todos los valores'; 
-
-	}
-	*/
-} // fin del metodo EDIT
 }
 }
 ?>
