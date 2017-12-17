@@ -40,7 +40,7 @@ $acciones = listaAcciones(10);
 $acceso=false;
 
 include_once '../Models/EVALUACION_Model.php';
-//include_once '../Models/Calificacion_Model.php';
+include_once '../Models/Calificacion_Model.php';
 
 include_once '../Views/EVALUACION/EVALUACION_SHOWALL_View.php';
 include_once '../Views/EVALUACION/EVALUACION_SHOWCURRENT_View.php';
@@ -192,6 +192,7 @@ function getCalificarChecbox(){
 	$listaEvaluado = null;
 	$evaluadores = null;
 	$evaluados = null;
+	$AliasEvaluado = null;
 
 
 
@@ -204,6 +205,9 @@ function getCalificarChecbox(){
 	if(isset($_REQUEST['numEvaluadores'])){
 		$numEvaluadores = $_REQUEST['numEvaluadores'];
 	}
+	if(isset($_REQUEST['AliasEvaluado'])){
+		$AliasEvaluado = $_REQUEST['AliasEvaluado'];
+	}
 	//Si existen los evaluadores
 	if(isset($_REQUEST['evaluadores'])){
 		$listaEvaluadores = $_REQUEST['evaluadores'];
@@ -211,7 +215,7 @@ function getCalificarChecbox(){
 		for ($i=0; $i<$num;$i++){
 			//echo $evaluadores[$i];
 			$check =explode("+" ,  $evaluadores[$i]);
-			$listaEvaluadores[$i] = array($check[0], $check[1] ,$check[2], $check[3], $check[4] ); //inserto en la lista cada uno de los IDS Funcionalidad de los checkboxs seleccionados por el usuario
+			$listaEvaluadores[$i] = array($check[0], $check[1] ,$check[2], $check[3], $check[4],$check[5] ); //inserto en la lista cada uno de los IDS Funcionalidad de los checkboxs seleccionados por el usuario
 		}
 	}
 	//Si existen los evaluados
@@ -251,7 +255,6 @@ function getCalificarChecbox(){
 						$IdTrabajo = $_REQUEST['IdTrabajo'];
 						$AliasEvaluado = $_REQUEST['AliasEvaluado'];
 					}
-					
 				$EVALUACION = new EVALUACION_Model($IdTrabajo, '', $AliasEvaluado, '', '', '', '', '', ''); //crea una EVALUACION_Model con los campos clave del usuario y del trabajo
 				$contar = $EVALUACION->contar();
 				$contarHistorias = $EVALUACION->contarHistorias();
@@ -267,6 +270,7 @@ function getCalificarChecbox(){
 				}else{
 					$CALIFIACION =  getCalificarChecbox();
 					$calif = $CALIFIACION->CALIF();
+
 				}
 
 			break;
@@ -338,6 +342,7 @@ function getCalificarChecbox(){
 			}
 			break;
 		case 'SEARCH': //si desea realizar una busqueda
+	
 			if (!$_POST){
 				
 				$EVALUACION = new EVALUACION_SEARCH();//Crea la vista SEARCH y muestra formulario para rellenar por el usuario
@@ -361,7 +366,7 @@ function getCalificarChecbox(){
 			}else{
 				$EVALUACION = get_data_UserBD(); //coge los datos del formulario del usuario que desea editar
 				$respuesta = $EVALUACION->EDIT(); //Ejecuta la funcion EDIT() en el EVALUACION_Model
-				$listaHistorias = $EVALUACION->listarHistorias();
+				$listaHistorias = $EVALUACION->listarHistoriasSHOWCURRENT();
 				$lista = $EVALUACION->rellenarLista();
 
 				$usuario = new EVALUACION_SHOWCURRENT($lista, $listaHistorias); //Crea la vista SHOWCURRENT del usuario requerido
