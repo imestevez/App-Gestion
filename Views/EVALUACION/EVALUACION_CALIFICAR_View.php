@@ -142,7 +142,7 @@ include '../Views/Header.php';
                         </tr>
                         <tr>
                                 <td>
-                                    <textarea name="ComentIncorrectoP" maxlength="300" rows="6" cols="50" style="margin-left: 10px; border-radius: 20px; border-top-left-radius: 0px; border-width: 2px; border-color: darkblue; width: 100%;" ><?php echo $this->datos[$indiceComentarioP][5] ?></textarea>  
+                                    <textarea name="ComentIncorrectoP[]" maxlength="300" rows="6" cols="50" style="margin-left: 10px; border-radius: 20px; border-top-left-radius: 0px; border-width: 2px; border-color: darkblue; width: 100%;" ><?php echo $this->datos[$indiceComentarioP][5] ?></textarea>  
                                 </td>
                                 <td>
                                     <input class="calificar" type="text" readonly size="1" name="CorrectoP" value="<?php echo $this->datos[$indiceComentarioP][4] ?>">
@@ -162,7 +162,7 @@ include '../Views/Header.php';
                 <input type="text" name="numHistorias" class="del" value="<?php echo $this->contarHistorias ?>">
                 <input type="text" name="numEvaluadores" class="del" value="<?php echo $this->contar ?>">
                 <div class="acciones" style="float: right; margin-left:0%; margin-right: 50%">
-                    <a href="../Controllers/EVALUACION_Controller.php?action=CALIF"> <input type="image" name="action" value="CALIF" src="../Views/images/confirmar.png" title="<?php echo $strings['Enviar Formulario'] ?>" onclick="return validar('CALIF')"></a>
+                    <a href="../Controllers/EVALUACION_Controller.php?action=CALIF"> <input type="image" name="action" value="CALIF" src="../Views/images/confirmar.png" title="<?php echo $strings['Enviar Formulario'] ?>"></a>
                 </div>
              </form>                     
                 <div class="acciones" style="float: left;">
