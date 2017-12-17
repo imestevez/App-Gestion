@@ -378,6 +378,9 @@ array(
 'Generación de historias a evaluar' => 'Generation of stories to evaluate',
 'Gen. historias evaluación' => 'Gen. stories to evaluate',
 
+//Generación automática de notas
+'La generación automática de notas se ha realizado correctamente para todos los trabajos de la BD' => 'Qualification automatic generation has been successfully performed for all BD jobs',
+'ERROR: La generación automática de notas ha fallado' => 'ERROR: Qualification automatic generation has failed',
 
 
 

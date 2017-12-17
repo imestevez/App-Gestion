@@ -20,7 +20,15 @@ class NOTA_TRABAJO_SHOWALL{
     var $orden ; //Vista desde la que se envia la orden
     var $acciones; //acciones del usuario
 
-function __construct($lista, $datos,$num_tupla,$max_tuplas,$totalTuplas,$num_pagina, $orden, $origen,$acciones){
+    var $trabajos; //Todos los trabajos existentes en la BD
+    var $num_trabajos; //Número de trabajos
+
+    var $trabajosNota;
+    var $alumnos;
+
+    var $notas;
+
+function __construct($lista, $datos,$num_tupla,$max_tuplas,$totalTuplas,$num_pagina, $orden, $origen,$acciones,$trabajos,$num_trabajos, $trabajosNota, $alumnos, $notas){
     //asignación de valores de parámetro a los atributos de la clase
     $this->datos = $datos;
     $this->origen = $origen;
@@ -32,6 +40,11 @@ function __construct($lista, $datos,$num_tupla,$max_tuplas,$totalTuplas,$num_pag
     $this->orden = $orden ;
     $this->acciones = $acciones ;
 
+    $this->trabajos = $trabajos;
+    $this->num_trabajos = $num_trabajos;
+    $this->trabajosNota = $trabajosNota;
+    $this->alumnos = $alumnos;
+    $this->notas = $notas;
     
     if( $this->orden <>'SEARCH'){ //si no viene del search
         $this->render();
@@ -51,13 +64,12 @@ function render(){
 				<table class="showAll">
                 <caption><?php echo $strings['Notas']?></caption>
                 <tr>
-                    <th><?php echo $strings['Login']?></th>   
-                    <th><?php echo $strings["Nombre"]; ?></th>
-                    <th><?php echo $strings["IdTrabajo"]; ?></th>
-                    <th><?php echo $strings["NombreTrabajo"]; ?></th>                  
-                    <th><?php echo $strings['Nota Trabajo']?></th>
-
-                    <td>
+                
+                    <th rowspan="2"><?php echo $strings['Login']?></th>   
+                    <th rowspan="2"><?php echo $strings["Nombre"]; ?></th>
+                    <th colspan="<?php echo (($this->num_trabajos)+1)?>"><?php echo $strings['Nota Trabajo']?></th>
+                    <th rowspan="2"><?php echo $strings['Nota Total']; ?></th> 
+                    <td rowspan="2">
                      <?php 
 
                     foreach ($this->acciones as $key => $value) {
@@ -76,20 +88,34 @@ function render(){
                         }
                     }
                     ?>
-                    
+                        <a href="../Controllers/NOTA_TRABAJO_Controller.php?action=GENNOT" ><input type="image" src="../Views/images/flecha.png" name="action" title="<?php echo $strings['Generación automática de notas']?>" value="GENNOT" ></a>
                     </td>
-                </tr>
-<?php		
- 
-			while( ($this->num_tupla < $this->max_tuplas) && ($row = mysqli_fetch_array($this->datos)) ) { //Mientras el numero de tuplas no llegue al máximo y haya tuplas en la BD
+                </tr>    
+                <tr>  
+                    <th style="width: 5%; padding: 2px"><?php echo $strings["IdTrabajo"]; ?></th>
+                    <?php 
+                        while($row = mysqli_fetch_array($this->trabajos)){
+                    ?>
+                        <td><?php echo $row['IdTrabajo']; ?></td>
+                    <?php        
+                        }
+                    ?>
+                </tr>   
+                
+                
+<?php		 
+			while($row = mysqli_fetch_array($this->alumnos)) { //Mientras el numero de tuplas no llegue al máximo y haya tuplas en la BD
 ?>
                 <tr>
-                <td><?php echo $row["login"]; ?></td>
-                <td><?php echo $row["Nombre"]; ?></td>
-                <td><?php echo $row["IdTrabajo"]; ?></td>
-                <td><?php echo $row["NombreTrabajo"]; ?></td>
-                <td><?php echo $row["NotaTrabajo"]; ?></td>
-
+                <td><?php echo $this->datos[$row['login']]["login"]; ?></td>
+                <td><?php echo $this->datos[$row['login']]["Nombre"]; ?></td>
+                <th></th>
+                <?php
+                    for($i = 0; $i < sizeof($this->trabajosNota); $i++){
+                ?>
+                    <td><?php echo $this->datos[$row['login']][$this->trabajosNota[$i]]; ?></td>
+                <?php } ?>
+                <td><?php if($this->notas <> false ) echo $this->notas[$row['login']]; ?></td>
                 <td class="edit_tabla">
 
                      <?php 
@@ -119,7 +145,6 @@ function render(){
                 </tr>              
            
 <?php
-	$this->num_tupla++;//incremento del numero de tupla
 	}//fin del while
 ?>
      </table>

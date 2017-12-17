@@ -386,7 +386,9 @@ array(
 'Generación de historias a evaluar' => 'Xeración de historias a evaluar',
 'Gen. historias evaluación' => 'Xer. historias evaluación',
 
-
+//Generación automática de notas
+'La generación automática de notas se ha realizado correctamente para todos los trabajos de la BD' => 'A xeración automática de notas foi realizada correctamente para todos os traballos da BD',
+'ERROR: La generación automática de notas ha fallado' => 'ERROR: A xeración automática de notas fallou.',
 
 
 

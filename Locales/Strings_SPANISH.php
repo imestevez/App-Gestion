@@ -380,6 +380,12 @@ array(
 'Generación de historias a evaluar' => 'Generación de historias a evaluar',
 'Gen. historias evaluación' => 'Gen. historias evaluación',
 
+//Generación automática de notas
+'La generación automática de notas se ha realizado correctamente para todos los trabajos de la BD' => 'La generación automática de notas se ha realizado correctamente para todos los trabajos de la BD',
+'ERROR: La generación automática de notas ha fallado' => 'ERROR: La generación automática de notas ha fallado',
+'Nota Total' => 'Nota Total',
+'Generación automática de notas' => 'Generación automática de notas',
+
 
 
 

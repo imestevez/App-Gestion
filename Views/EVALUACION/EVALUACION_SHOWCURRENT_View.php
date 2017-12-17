@@ -20,8 +20,10 @@ class EVALUACION_SHOWCURRENT{
     var $ComentIncorrectoP; //atributo para almacenar el comentario incorrecto del profesor
     var $OK; //atributo para almacenar el resultado (1 - 0) de la evaluacion de la QA
     var $listaHistorias; //atributo para almacenar el recordset de historias de una evaluacion
+    var $acciones;
 
-function __construct($lista, $listaHistorias){
+
+function __construct($lista, $listaHistorias,$acciones){
     //asignación de valores de parámetro a los atributos de la clase
     $this->IdTrabajo = $lista['IdTrabajo'];
     $this->LoginEvaluador = $lista['LoginEvaluador'];
@@ -33,6 +35,8 @@ function __construct($lista, $listaHistorias){
     $this->ComentIncorrectoP = $lista['ComentIncorrectoP'];
     $this->OK = $lista['OK'];
     $this->listaHistorias = $listaHistorias;
+    $this->acciones = $acciones;
+
 
     $this->render();
 }
@@ -56,10 +60,22 @@ function render(){
                     <th colspan="2"><?php echo $strings['IdTrabajo'] ?></th>
                     <td style="border-right-style: collapse; border-right:  5px solid black;"><?php echo $this->IdTrabajo ?></td>     
                 </tr>
+
+                     <?php 
+
+                    foreach ($this->acciones as $key => $value) {
+                        if($value == 'ALL'){
+                            ?>
                 <tr>
-                    <th colspan="2"><?php echo $strings['LoginEvaluador'] ?></th>
+                       <th colspan="2"><?php echo $strings['LoginEvaluador'] ?></th>
                     <td style="border-right-style: collapse; border-right:  5px solid black;"><?php echo $this->LoginEvaluador ?></td>
-                </tr>
+                </tr>     
+                            
+                <?php
+            }
+        }
+        ?>
+                    
                 <tr>
                     <th colspan="2"><?php echo $strings['AliasEvaluado'] ?></th>
                     <td style="border-right-style: collapse; border-right:  5px solid black;"><?php echo $this->AliasEvaluado ?></td>
@@ -90,7 +106,19 @@ function render(){
                     <td colspan="2"><?php echo $row["ComenIncorrectoA"]; ?></td>
                     <td colspan="2"><?php echo $row["CorrectoA"]; ?></td>
                     <td>
+
+                          <?php 
+
+                    foreach ($this->acciones as $key => $value) {
+                        if($value == 'EDIT'){
+                            ?>
                         <a href="../Controllers/EVALUACION_Controller.php?action=EDIT&LoginEvaluador=<?php echo $this->LoginEvaluador ?>&IdTrabajo=<?php echo $this->IdTrabajo ?>&IdHistoria=<?php echo $row["IdHistoria"] ?>&AliasEvaluado=<?php echo $this->AliasEvaluado ?>"><input type="image" src="../Views/images/edit.png" name="action" title="<?php echo $strings['Editar'] ?>" value="EDIT"></a>
+                        
+                        
+                            <?php
+                        }
+                    }
+                    ?>
                     </td>
                 </tr>              
            
