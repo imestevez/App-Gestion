@@ -118,7 +118,8 @@ include '../Views/Header.php';
                               
                             }//fin for2
                             
-
+                    $init = $i;
+                    $fin = $init + $this->contar;
                         ?>
                         
                         <?php
@@ -152,8 +153,7 @@ include '../Views/Header.php';
 
                         <?php
                     }// fin for1
-                    $init = $i;
-                    $fin = $init + $this->contar;
+                  
                 ?>
 
         </table>
@@ -180,6 +180,7 @@ function rellenarLista(){
     $num = 0;
     while ($row = mysqli_fetch_array($this->listaHistorias)) {
         $this->datos[$num] = array($row['IdHistoria'], $row['LoginEvaluador'], $row['CorrectoA'], $row['ComenIncorrectoA'], $row['CorrectoP'], $row['ComentIncorrectoP'], $row['OK']);
+
 
         $num++;
     }
