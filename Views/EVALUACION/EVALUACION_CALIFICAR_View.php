@@ -125,7 +125,7 @@ include '../Views/Header.php';
                             <tr>
                                 <td>
                                    <!-- <textarea name="ComenIncorrectoA" maxlength="300" rows="6" cols="50" onblur="" style="margin-left: 10px; border-radius: 20px; border-top-left-radius: 0px; border-width: 2px; border-color: darkblue; width: 100%;" ><?php //echo $this->datos[$k][3] ?></textarea> -->
-                                    <input class="calificar" type="text" name="ComenIncorrectoA" size="<?php strlen($this->datos[$k][3])?>" readonly > 
+                                    <input class="calificar" type="text" name="ComenIncorrectoA" readonly value="<?php echo $this->datos[$k][3]?>" > 
                                 </td>
                             </tr>
                             <?php
@@ -142,7 +142,8 @@ include '../Views/Header.php';
                         </tr>
                         <tr>
                                 <td>
-                                    <textarea name="ComentIncorrectoP[]" maxlength="300" rows="6" cols="50" style="margin-left: 10px; border-radius: 20px; border-top-left-radius: 0px; border-width: 2px; border-color: darkblue; width: 100%;" ><?php echo $this->datos[$indiceComentarioP][5] ?></textarea>  
+                                    <!--<textarea name="ComentIncorrectoP[]" maxlength="300" rows="6" cols="50" style="margin-left: 10px; border-radius: 20px; border-top-left-radius: 0px; border-width: 2px; border-color: darkblue; width: 100%;" ><?php //echo $this->datos[$indiceComentarioP][5] ?></textarea>--> 
+                                    <input type="text" name="ComentIncorrectoP[]" readonly value="<?php echo $this->datos[$indiceComentarioP][5] ?>" > 
                                 </td>
                                 <td>
                                     <input class="calificar" type="text" readonly size="1" name="CorrectoP" value="<?php echo $this->datos[$indiceComentarioP][4] ?>">
