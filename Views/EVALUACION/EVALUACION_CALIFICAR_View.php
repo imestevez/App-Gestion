@@ -191,10 +191,10 @@ include '../Views/Header.php';
                 </div>-->
 
         </table>
-                <input type="text" name="IdTrabajo" class="oculto" value="<?php echo $this->IdTrabajo ?>">
-                <input type="text" name="AliasEvaluado" class="oculto" value="<?php echo $this->AliasEvaluado ?>">
-                <input type="text" name="numHistorias" class="oculto" value="<?php echo $this->contarHistorias ?>">
-                <input type="text" name="numEvaluadores" class="oculto" value="<?php echo $this->contar ?>">
+                <input type="text" name="IdTrabajo" class="del" value="<?php echo $this->IdTrabajo ?>">
+                <input type="text" name="AliasEvaluado" class="del" value="<?php echo $this->AliasEvaluado ?>">
+                <input type="text" name="numHistorias" class="del" value="<?php echo $this->contarHistorias ?>">
+                <input type="text" name="numEvaluadores" class="del" value="<?php echo $this->contar ?>">
                 <div class="acciones" style="float: right; margin-left:0%; margin-right: 50%">
                     <a href="../Controllers/EVALUACION_Controller.php?action=CALIF"> <input type="image" name="action" value="CALIF" src="../Views/images/confirmar.png" title="<?php echo $strings['Enviar Formulario'] ?>"></a>
                 </div>
