@@ -74,7 +74,7 @@ function CALIF()
 					$this->CorrectoA = $value[2];
 					$this->OK = $value[3];
 					$this->ComenIncorrectoA = $value[4];
-					$this->ComentIncorrectoP =  $this->listaComentarios[$this->IdHistoria];
+					//$this->ComentIncorrectoP =  $this->listaComentarios[$this->IdHistoria];
 					$this->CorrectoP = $this->listaEvaluado[$this->IdHistoria][0];
 					
 					if($this->CorrectoP == 0){
@@ -102,14 +102,14 @@ function CALIF()
 										return $this->lista; 
 				    	}
 				    }
+				}
 
-			}else{
 				if(count($this->listaEvaluado) > 0){
 
 					foreach ($this->listaEvaluado as $key => $value) {
 
 						$this->IdHistoria = $key;
-						$this->ComentIncorrectoP = $this->listaComentarios[$this->IdHistoria];
+						//$this->ComentIncorrectoP = $this->listaComentarios[$this->IdHistoria];
 						$this->CorrectoP = $value[0];
 
 						if($this->CorrectoP == 0){
@@ -132,14 +132,13 @@ function CALIF()
 
 
 			}
-		}
 				
 		if(count($this->listaComentarios) > 0){
 			foreach ($this->listaComentarios as $key => $value) {
 
 			$this->IdHistoria = $key;
-			$this->ComentIncorrectoP = $value;						
-	
+			$this->ComentIncorrectoP = $value;
+
 			$sql = "UPDATE EVALUACION SET 
 					ComentIncorrectoP = '$this->ComentIncorrectoP'
 				WHERE (IdTrabajo = '$this->IdTrabajo' AND AliasEvaluado = '$this->AliasEvaluado' AND IdHistoria = '$this->IdHistoria')";

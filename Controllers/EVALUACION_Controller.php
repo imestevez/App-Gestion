@@ -273,7 +273,7 @@ function getCalificarChecbox(){
 				$lista = $EVALUACION->rellenarLista();
 				$lista['IdTrabajo'] = $IdTrabajo;
 				$lista['AliasEvaluado'] = $AliasEvaluado;
-				$listaHistorias = $EVALUACION->listarHistoriasSHOWCURRENT();
+				$listaHistorias = $EVALUACION->listarHistoriasCalificar();
 				$rellenarHistorias = $EVALUACION->rellenarHistorias();
 				//$listaLoginEvaluadores = $EVALUACION->listarLoginEvaluadores();  
 				//$listaComentarios = $EVALUACION->listarComentarios();

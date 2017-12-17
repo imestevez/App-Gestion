@@ -143,7 +143,7 @@ include '../Views/Header.php';
                         <tr>
                                 <td>
                                     <!--<textarea name="ComentIncorrectoP[]" maxlength="300" rows="6" cols="50" style="margin-left: 10px; border-radius: 20px; border-top-left-radius: 0px; border-width: 2px; border-color: darkblue; width: 100%;" ><?php //echo $this->datos[$indiceComentarioP][5] ?></textarea>--> 
-                                    <input type="text" name="ComentIncorrectoP[]" value="<?php echo $this->datos[$indiceComentarioP][5] ?>" > 
+                                    <input type="text" name="ComentIncorrectoP[<?php echo $this->rellenarHistorias[$j][0] ?>]" value="<?php echo $this->datos[$indiceComentarioP][5] ?>" > 
                                 </td>
                                 <td>
                                     <input class="calificar" type="text" readonly size="1" name="CorrectoP" value="<?php echo $this->datos[$indiceComentarioP][4] ?>">
