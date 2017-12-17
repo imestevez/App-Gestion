@@ -183,9 +183,51 @@ if (!isset($_REQUEST['action'])){
 
 }
 
+function getCalificarChecbox(){
+	$numHistorias = 0;
+	$IdTrabajo = null;
+	$listaEvaluadores = null;
+	$listaEvaluados = null;
+	$evaluadores = null;
+	$evaluados = null;
+
+
+
+	if(isset($_REQUEST['IdTrabajo'])){
+		$IdTrabajo = $_REQUEST['IdTrabajo'];
+	}
+	if(isset($_REQUEST['numHistorias'])){
+		$numHistorias = $_REQUEST['numHistorias'];
+	}
+	//Si existen los evaluadores
+	if(isset($_REQUEST['evaluadores'])){
+		$listaEvaluadores = $_REQUEST['evaluadores'];
+		$num = count($evaluadores);
+		for ($i=0; $i<$num;$i++){
+			//echo $evaluadores[$i];
+			$check =explode("+" ,  $evaluadores[$i]);
+			$lista[$i] = array($check[0], $check[1] ,$check[2], $check[3], $check[4] , $check[5] ); //inserto en la lista cada uno de los IDS Funcionalidad de los checkboxs seleccionados por el usuario
+		}
+	//Si existen los evaluados
+	if(isset($_REQUEST['evaluados'])){
+		$evaluados = $_REQUEST['evaluados'];
+		$num = count($evaluados);
+		for ($i=0; $i<$num;$i++){
+			//echo $evaluados[$i];
+			$check =explode("+" ,  $evaluados[$i]);
+			$listaEvaluados[$i] = array($check[0], $check[1] ,$check[2], $check[3] ); //inserto en la lista cada uno de los IDS Funcionalidad de los checkboxs seleccionados por el usuario
+		}
+
+}
+
 
 	// En funcion de la accion elegida
 	Switch ($action){
+
+		case 'CALIF': //si es una calificacion
+
+
+			break;
 		case 'ADD': //Si quiere hacer un ADD
 			if (!$_POST){ //si viene del showall (no es un post)
 				$lista = array('IdTrabajo', 'LoginEvaluador', 'AliasEvaluado', 'IdHistoria', 'CorrectoA', 'ComenIncorrectoA', 'CorrectoP', 'ComentIncorrectoP', 'OK', 'origen');
@@ -266,10 +308,6 @@ if (!isset($_REQUEST['action'])){
 				//$listaLoginEvaluadores = $EVALUACION->listarLoginEvaluadores();  
 				//$listaComentarios = $EVALUACION->listarComentarios();
 				$usuario = new EVALUACION_CALIFICAR($lista, $listaHistorias, $contar, $contarHistorias, $rellenarHistorias);
-
-
-
-
 
 
 
