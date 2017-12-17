@@ -185,9 +185,9 @@ array(
 	'ERROR: No hay asignaciones de QAs' => 'ERROR: No hay asignaciones de QAs',
 	'Calificar evaluacion' => 'Calificar evaluacion',
 	'Calif' => 'Calificar',
-
-
-
+	'ComentIncorrectoPCP' => 'Comentario Profesor y Correcto Profesor',
+	'ComenIncorrectoAlumnos' => 'Comentarios de los Evaluadores',
+	'CorrectoAOK' => 'Correcto Alumno y OK',
 
 
 
