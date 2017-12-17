@@ -67,7 +67,6 @@ function render(){
                 //Si el usuario tiene grupos asignados
                 if(count($this->ListaPropios) > 0){
                 foreach ($this->ListaPropios as $key => $value) { //recorremos la lista de sus grupos
-echo "jdhasñjdhs";
 ?>
                 <tr> 
                 <td style="width: 5%"><?php echo $key ?></td>
