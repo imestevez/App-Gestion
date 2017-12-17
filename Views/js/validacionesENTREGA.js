@@ -360,6 +360,24 @@ function validarloginBuscar(login, tamaño_max){
 
 }
 
+//Función para validar la búsqueda por nombre
+function validarNombreBuscar(nombre, tamaño_max)
+{
+      if(comprobarVacioBuscar(nombre))//Si el campo no está vacio el campo
+      {
+             if(comprobarAlfabeticoBuscar(nombre,tamaño_max))//Si nombre es alfabético no supera el tamaño maximo
+                 {
+                     return true;
+                 }else{ //si no es alfabético o supera el máximo
+                     return false;
+                 }
+      }
+      else{//Si está vacío
+          return true;
+      }
+    
+}
+
 //Funcion para validar busquedas por ID
 function validarIdTrabajoBuscar(IdTrabajo, tamaño_max){
 
@@ -374,6 +392,24 @@ function validarIdTrabajoBuscar(IdTrabajo, tamaño_max){
       }else{//Si está vacio
           return true;
       }
+}
+//Funcion para validar busquedas por nombre
+
+function validarNombreTrabajoBuscar(NombreTrabajo, min, max){
+  
+   if(comprobarVacioBuscar(NombreTrabajo))//Si el campo no está vacio el campo
+      {
+          if(comprobarTextoBuscar(NombreTrabajo,min, max))//Si login cumple la expresión regular de campo Alfabético
+       {
+           return true;
+       }else{ //Si no cumple la expresión regular
+           return false;
+       }
+      }else{//Si está vacio
+          return true;
+      }
+
+
 }
 
 //Función para validar un alias
@@ -446,8 +482,10 @@ function validar(formulario)
         //si todos los campos estan correctos y devuelven true
 
         if( 
-          (validarloginBuscar(form.login, 9)) && 
+          (validarloginBuscar(form.login, 9)) &&
+          (validarNombreBuscar(form.nombre, 30)) && 
           (validarIdTrabajoBuscar(form.IdTrabajo, 6)) && 
+          (validarNombreTrabajoBuscar(form.NombreTrabajo, 60)) && 
           (validarAliasBuscar(form.Alias, 9)) && 
           (validarHorasBuscar(form.Horas, 0,99)) && 
           (validarRutaBuscar(form.Ruta,54))  ){
