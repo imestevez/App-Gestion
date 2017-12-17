@@ -184,7 +184,7 @@ array(
 	'ComentarioInc' => 'Comentario Incorrecto',
 	'ERROR: No hay asignaciones de QAs' => 'ERROR: No hay asignaciones de QAs',
 	'Calificar evaluacion' => 'Calificar evaluacion',
-
+	'Calif' => 'Calificar',
 
 
 
@@ -270,7 +270,7 @@ array(
 'ERROR: Fallo en la modificación. El login está vacio' => 'ERROR: Fallo en la modificación. El login está vacio',
 'Seleccionar Grupos' => 'Seleccionar Grupos',
 'No tienes permisos para realizar esta accion' => 'No tienes permisos para realizar esta accion',
-
+'Debe de seleccionar al menos 1 campo' => 'Debe de seleccionar al menos 1 campo',
 
 // ------------------------ ESPACIO DE TRABAJO PARA PABLO ---------------------------
 //Funcionalidades

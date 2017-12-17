@@ -30,12 +30,7 @@ function __construct($login,$IdTrabajo, $Alias, $Horas,$Ruta, $Nombre,$NombreTra
 	$this->Alias = $Alias;
 	$this->Nombre = $Nombre;
 	$this->NombreTrabajo = $NombreTrabajo;
-
-	if($Horas <> ''){
 	$this->Horas = $Horas;
-}else{
-	$this->Horas = 0;
-}
     $this->Ruta = $Ruta;
 
 
@@ -47,12 +42,12 @@ function __construct($login,$IdTrabajo, $Alias, $Horas,$Ruta, $Nombre,$NombreTra
 	//lista con los datos del usuario
 	$this->lista = array(
 			"login" => $this->login,
-			"Nombre" => '',
+			"Nombre" => $this->Nombre,
 			"IdTrabajo"=>$this->IdTrabajo,
-			"NombreTrabajo"=>'',
+			"NombreTrabajo"=>$this->NombreTrabajo,
 			"Alias"=>$this->Alias,
-			"Horas"=>'',
-			"Ruta" => '',
+			"Horas"=>$this->Horas,
+			"Ruta" =>  $this->Ruta,
 			"NotaTrabajo" => '',
 			"origen" => '',
 			"sql" => $this->mysqli, 
@@ -81,6 +76,8 @@ function ADD()
 	  }else{
 		  if(  ($existenciaU == true) && ($existenciaT == true) && ($existenciaE == false) ){
 
+		  	if($this->Horas <> ''){
+
 				//construimos la sentencia sql de inserción en la bd
 				$sql = "INSERT INTO ENTREGA(
 				login,
@@ -92,7 +89,22 @@ function ADD()
 									'$this->IdTrabajo',
 									'$this->Alias',
 									'$this->Horas',
-									'$this->Ruta')";				
+									'$this->Ruta')";
+			}else{
+				//construimos la sentencia sql de inserción en la bd
+				$sql = "INSERT INTO ENTREGA(
+				login,
+				IdTrabajo,
+				Alias,
+				Horas,
+				Ruta) VALUES(
+									'$this->login',
+									'$this->IdTrabajo',
+									'$this->Alias',
+									0,
+									'$this->Ruta')";
+
+			}				
 
 				if (!$result = $this->mysqli->query($sql)){ // si da error la ejecución de la query
 						$this->lista['mensaje'] = 'ERROR: No se ha podido conectar con la base de datos';
@@ -366,7 +378,7 @@ function comprobarExistenciaTrabajo(){
 
 function comprobarExistenciaEntrega(){
 
-	$sql = "SELECT * FROM ENTREGA WHERE (login = '$this->login' AND IdTrabajo = '$this->IdTrabajo')";
+	$sql = "SELECT * FROM ENTREGA WHERE (login = '$this->login' AND IdTrabajo = '$this->IdTrabajo' )";
 	//Si se produce un error en la consulta
   if (!($result = $this->mysqli->query($sql))){
     	return  'ERROR'; 

@@ -28,9 +28,9 @@ if(isset($_REQUEST["action"]))  {
 
 //Si no tiene permisos para acceder a este controlador con la accion que trae
 if(!HavePermissions(1, $action)) {
-	new MESSAGE('No tienes permisos para realizar esta accion', '../index.php');
+	new MESSAGE('No tienes permisos para realizar esta accion', '../index.php');exit();
 	//header('Location:../index.php'); //vuelve al index
-	exit();
+	
 
 }
 

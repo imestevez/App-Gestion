@@ -70,14 +70,14 @@ function HavePermissions($IdFuncionalidad, $IdAccion){
 	}
 	return false;
 }
-
+//DEvuelve la lista de permisos de un grupo
 function listaPermisos(){
 
-	$lista = null;
-	$num=0;
+	$lista = null; //array para almacenar los permisos
+	$num=0; //variable para indexar el array lista
 	$USU_GRUPO = new USU_GRUPO_Model($_SESSION["login"], '');
 	$listaGrupos = $USU_GRUPO->listagrupoUsuario();
-	if($listaGrupos == null){
+	if($listaGrupos == null){ //si no tiene ningun grupo
 		return false;
 	}
 
@@ -86,7 +86,7 @@ function listaPermisos(){
 		$PERMISO = new PERMISO_Model($IdGrupo, '', '', '', '', '', '','');
 		$resultado = $PERMISO->permisosGrupo();
 		$num_rows = mysqli_num_rows($resultado);
-		if($num_rows > 0){
+		if($num_rows > 0){ //si hay alguna tupla
 			
 		while($row = mysqli_fetch_array($resultado)){
 			$lista[$num] = array($row["IdGrupo"],$row["IdFuncionalidad"],$row["IdAccion"] );
@@ -99,9 +99,10 @@ function listaPermisos(){
 	return $null;
 }
 
+//DEvuelve la lista de funcionalidades de un grupo
 function listaFuncionalidades(){
-	$lista = null;
-	$num=0;
+	$lista = null;//array para almacenar las funcionalidades
+	$num=0;   //variable para indexar el array lista
 	$USU_GRUPO = new USU_GRUPO_Model($_SESSION["login"], '');
 	$listaGrupos = $USU_GRUPO->listagrupoUsuario();
 	if($listaGrupos == null){
@@ -125,10 +126,10 @@ function listaFuncionalidades(){
 }
 
 
-
+//DEvuelve la lista de acciones de una funcionalidad
 function listaAcciones($IdFuncionalidad){
-	$lista = null;
-	$num =0;
+	$lista = null;//array para almacenar las acciones
+	$num =0;//variable para indexar el array lista
 	$USU_GRUPO = new USU_GRUPO_Model($_SESSION["login"], '');
 	$listaGrupos = $USU_GRUPO->listagrupoUsuario();
 
