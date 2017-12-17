@@ -29,9 +29,9 @@ class EVALUACION_CALIFICAR{
 
 function __construct($lista, $listaHistorias, $contar, $contarHistorias, $rellenarHistorias){
     //asignación de valores de parámetro a los atributos de la clase
-    //$this->IdTrabajo = $lista['IdTrabajo'];
+    $this->IdTrabajo = $lista['IdTrabajo'];
     //$this->LoginEvaluador = $lista['LoginEvaluador'];
-    //$this->AliasEvaluado = $lista['AliasEvaluado'];
+    $this->AliasEvaluado = $lista['AliasEvaluado'];
     //$this->IdHistoria = $lista['IdHistoria'];
     //$this->CorrectoA = $lista['CorrectoA'];
     //$this->ComenIncorrectoA = $lista['ComenIncorrectoA'];
@@ -104,7 +104,7 @@ include '../Views/Header.php';
                                     <input class="calificar" type="text" readonly size="1" name="CorrectoA" value="<?php echo $this->datos[$i][2] ?>"> 
                                 
                                     <input class="calificar" type="text" readonly size="1" name="OK" value="<?php echo $this->datos[$i][6] ?>"> 
-                                    <input type="checkbox" name="evaluadores[]" id="<?php echo $this->rellenarHistorias[$j][0] ?>" value="<?php echo $this->datos[$i][0]. "+" .$this->datos[$i][1]. "+" .$this->datos[$i][2]. "+" .$this->datos[$i][6]. "+" .$this->datos[$i][5] ?>" > 
+                                    <input type="checkbox" name="evaluadores[]" id="<?php echo $this->rellenarHistorias[$j][0] ?>" value="<?php echo $this->datos[$i][0]. "+" .$this->datos[$i][1]. "+" .$this->datos[$i][2]. "+" .$this->datos[$i][6]. "+" .$this->datos[$i][3]. "+" .$this->datos[$i][5] ?>" > 
                                 </td>
                             </tr>
                             <?php

@@ -247,12 +247,20 @@ function getCalificarChecbox(){
 
 		case 'CALIF': //si es una calificacion
 				if(!$_POST){
-					$IdTrabajo = 'ET1';
-				$AliasEvaluado = 'pablo';
+
+					$IdTrabajo = null;
+					$AliasEvaluado = null;
+
+					if ((isset($_REQUEST['IdTrabajo'])) && (isset($_REQUEST['AliasEvaluado']))) {
+						$IdTrabajo = $_REQUEST['IdTrabajo'];
+						$AliasEvaluado = $_REQUEST['AliasEvaluado'];
+					}
 				$EVALUACION = new EVALUACION_Model($IdTrabajo, '', $AliasEvaluado, '', '', '', '', '', ''); //crea una EVALUACION_Model con los campos clave del usuario y del trabajo
 				$contar = $EVALUACION->contar();
 				$contarHistorias = $EVALUACION->contarHistorias();
 				$lista = $EVALUACION->rellenarLista();
+				$lista['IdTrabajo'] = $IdTrabajo;
+				$lista['AliasEvaluado'] = $AliasEvaluado;
 				$listaHistorias = $EVALUACION->listarHistorias();
 				$rellenarHistorias = $EVALUACION->rellenarHistorias();
 				//$listaLoginEvaluadores = $EVALUACION->listarLoginEvaluadores();  
@@ -334,22 +342,10 @@ function getCalificarChecbox(){
 			}
 			break;
 		case 'SEARCH': //si desea realizar una busqueda
-			if (!$_POST){/*
-				$IdTrabajo = 'ET1';
-				$AliasEvaluado = 'pablo';
-				$EVALUACION = new EVALUACION_Model($IdTrabajo, '', $AliasEvaluado, '', '', '', '', '', ''); //crea una EVALUACION_Model con los campos clave del usuario y del trabajo
-				$contar = $EVALUACION->contar();
-				$contarHistorias = $EVALUACION->contarHistorias();
-				$lista = $EVALUACION->rellenarLista();
-				$listaHistorias = $EVALUACION->listarHistorias();
-				$rellenarHistorias = $EVALUACION->rellenarHistorias();
-				//$listaLoginEvaluadores = $EVALUACION->listarLoginEvaluadores();  
-				//$listaComentarios = $EVALUACION->listarComentarios();
-				$usuario = new EVALUACION_CALIFICAR($lista, $listaHistorias, $contar, $contarHistorias, $rellenarHistorias);
-
-*/
-
-				//$EVALUACION = new EVALUACION_SEARCH();//Crea la vista SEARCH y muestra formulario para rellenar por el usuario
+	
+			if (!$_POST){
+				
+				$EVALUACION = new EVALUACION_SEARCH();//Crea la vista SEARCH y muestra formulario para rellenar por el usuario
 			}
 			else{
 				$EVALUACION = get_data_UserBD(); //coge los datos del formulario del usuario que desea buscar
