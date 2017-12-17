@@ -98,7 +98,6 @@ function CALIF()
 							OK = '$this->OK'
 						WHERE (IdTrabajo = '$this->IdTrabajo' AND LoginEvaluador = '$this->LoginEvaluador' AND AliasEvaluado = '$this->AliasEvaluado' AND IdHistoria = '$this->IdHistoria')";
 
-						echo $sql;
 		    	$result = $this->mysqli->query($sql);
 		   			 }
 
@@ -130,9 +129,11 @@ function CALIF()
 				}
 
 
-				}else{
+				}
+		}
+				
+
 					if(count($this->listaComentarios) > 0){
-						echo "3";
 						foreach ($this->listaComentarios as $key => $value) {
 
 						$this->IdHistoria = $key;
@@ -145,11 +146,10 @@ function CALIF()
 
 		    	$result = $this->mysqli->query($sql);
 
-				}
+				
 			}
 
 				}
-		}
 		} else{
 			echo "algo viene vacio";
 
