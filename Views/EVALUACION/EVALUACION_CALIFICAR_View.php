@@ -78,6 +78,10 @@ include '../Views/Header.php';
                     for ($j=0; $j < $this->contarHistorias ; $j++) { 
                      
                     ?>   
+                        <tr>
+                            <td><?php echo $strings['IdHistoria']?></td>
+                            <td><?php echo $strings['Texto de la historia'] ?></td>
+                        </tr>
                         <tr> 
                             <td><?php echo $this->rellenarHistorias[$j][0]?></td> 
                             <td><?php echo $this->rellenarHistorias[$j][1]?></td>
@@ -93,28 +97,48 @@ include '../Views/Header.php';
                             ?>
                             <tr>
                                 <td>
-                                    <input type="text" readonly size="10" name="LoginEvaluador" value="<?php echo $this->datos[$i][1] ?>"> 
+                                    <input class="calificar" type="text" readonly size="10" name="LoginEvaluador" value="<?php echo $this->datos[$i][1] ?>"> 
                                 </td>
                             
                                 <td>
-                                    <input type="text" readonly size="1" name="CorrectoA" value="<?php echo $this->datos[$i][2] ?>"> 
-                                </td>
-                            
-                                <td>
-                                    <input type="text" readonly name="ComenIncorrectoA" value="<?php echo $this->datos[$i][3] ?>"> 
-                                </td>
-                                <td>
-                                    <input type="text" readonly size="1" name="OK" value="<?php echo $this->datos[$i][6] ?>"> 
+                                    <input class="calificar" type="text" readonly size="1" name="CorrectoA" value="<?php echo $this->datos[$i][2] ?>"> 
+                                
+                                    <input class="calificar" type="text" readonly size="1" name="OK" value="<?php echo $this->datos[$i][6] ?>"> 
+                                    <input type="checkbox" name="evaluadores[]" id="<?php echo $this->rellenarHistorias[$j][0] ?>" value="<?php echo $this->datos[$i][0]. "+" .$this->datos[$i][1]. "+" .$this->datos[$i][2]. "+" .$this->datos[$i][6]. "+" .$this->datos[$i][5] ?>" > 
                                 </td>
                             </tr>
                             <?php
                               
-                            }
+                            }//fin for2
 
                         ?>
                         
                         <?php
-                    }
+                            for ($k=0; $k < $this->contar ; $k++) { 
+                            ?>
+                            <tr>
+                                <td>
+                                    <input class="calificar" type="text" readonly size="20" name="ComenIncorrectoA" value="<?php echo $this->datos[$i][3] ?>"> 
+                                </td>
+                            </tr>
+                            <?php
+                              
+                            }//fin for3
+
+                        ?>
+
+                        <tr>
+                                <td>
+                                    <input class="calificar" type="text" size="20" name="ComentIncorrectoP" value="<?php echo $this->datos[$i][5] ?>"> 
+                                </td>
+                                <td>
+                                    <input class="calificar" type="text" readonly size="1" name="CorrectoP" value="<?php echo $this->datos[$i][4] ?>">
+                                    <input type="checkbox" name="evaluado[]" id="<?php echo $this->rellenarHistorias[$j][0] ?>" value="<?php echo $this->datos[$i][0]. "+" .$this->datos[$i][4]. "+" .$this->datos[$i][5] ?>" >
+                                </td>
+                            </tr>
+
+                        <?php
+                    }// fin for1
                 ?>
 
 
@@ -169,11 +193,11 @@ include '../Views/Header.php';
         </table>
 
                 <div class="acciones" style="float: right; margin-left:0%; margin-right: 50%">
-                    <a href="../Controllers/EVALUACION_Controller.php?action=SHOW&LoginEvaluador=<?php echo $this->LoginEvaluador ?>&IdTrabajo=<?php echo $this->IdTrabajo ?>&IdHistoria=<?php echo $this->IdHistoria ?>&AliasEvaluado=<?php echo $this->AliasEvaluado ?>"> <input type="image" name="action" value="SHOW" src="../Views/images/confirmar.png" title="<?php echo $strings['Enviar Formulario'] ?>" onclick=""></a>
+                    <a href="../Controllers/EVALUACION_Controller.php?action=SHOW&IdTrabajo=<?php echo $this->IdTrabajo ?>&AliasEvaluado=<?php echo $this->AliasEvaluado ?>&numHistorias=<?php echo $this->contarHistorias ?>&numEvaluadores=<?php echo $this->contar ?>"> <input type="image" name="action" value="SHOW" src="../Views/images/confirmar.png" title="<?php echo $strings['Enviar Formulario'] ?>"></a>
                 </div>
              </form>                     
                 <div class="acciones" style="float: left;">
-                     <a href="../Controllers/EVALUACION_Controller.php?action=SHOW&LoginEvaluador=<?php echo $this->LoginEvaluador ?>&IdTrabajo=<?php echo $this->IdTrabajo ?>&IdHistoria=<?php echo $this->IdHistoria ?>&AliasEvaluado=<?php echo $this->AliasEvaluado ?>"><input type="image" src="../Views/images/back.png" title="<?php echo $strings['Volver']?>"></a>
+                     <a href="../Controllers/EVALUACION_Controller.php?action=ALL"><input type="image" src="../Views/images/back.png" title="<?php echo $strings['Volver']?>"></a>
                 </div>
          </fieldset> 
     </section>

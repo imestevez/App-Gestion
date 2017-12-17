@@ -498,6 +498,31 @@ function listarHistorias(){
 	}
 }
 
+
+
+//Nos devuelve un recordset con todas las historias de una evaluacion
+function listarHistoriasSHOWCURRENT(){
+
+	$sql = "SELECT E.IdHistoria, H.TextoHistoria, E.LoginEvaluador, E.ComenIncorrectoA, E.CorrectoA, E.ComentIncorrectoP, E.CorrectoP, E.OK FROM EVALUACION E, TRABAJO T, HISTORIA H
+						 WHERE (
+						 		
+						 		E.IdTrabajo = '$this->IdTrabajo' AND
+						 		E.IdTrabajo = T.IdTrabajo AND
+						 		E.IdTrabajo = H.IdTrabajo AND 
+						 		E.IdHistoria = H.IdHistoria
+															) GROUP BY E.IdHistoria ORDER BY 1"; 
+			
+	    // si se produce un error en la busqueda mandamos el mensaje de error en la consulta
+
+    if (!($resultado = $this->mysqli->query($sql))){
+    	$this->lista['mensaje'] =  'ERROR: Fallo en la consulta sobre la base de datos'; 
+		return $this->lista; 
+	}
+    else{ // si la busqueda es correcta devolvemos el recordset resultado
+		return $resultado;
+	}
+}
+
 //Nos devuelve un recordset con todas las historias de una evaluacion
 function rellenarHistorias(){
 	$lista = null;
