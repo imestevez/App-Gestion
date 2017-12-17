@@ -136,7 +136,6 @@ include '../Views/Header.php';
                                     <input class="calificar" type="text" readonly size="1" name="CorrectoP" value="<?php echo $this->datos[$i][4] ?>">
                                     <input type="checkbox" name="evaluado[]" id="<?php echo $this->rellenarHistorias[$j][0] ?>" value="<?php echo $this->rellenarHistorias[$j][0]. "?" .$this->datos[$i][4]. "?" .$this->datos[$i][5] ?>" >
 
-                                    <?php echo $j;
                                 </td>
                             </tr>
 
