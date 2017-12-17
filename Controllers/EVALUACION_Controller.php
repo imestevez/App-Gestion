@@ -282,7 +282,7 @@ function getCalificarChecbox(){
 				}else{
 					$CALIFICACION =  getCalificarChecbox();
 					$calif = $CALIFICACION->CALIF();
-					exit();
+					$mensaje = new MESSAGE($calif, '../Controllers/EVALUACION_Controller.php'); //muestra el mensaje despues de la sentencia sql
 
 				}
 
