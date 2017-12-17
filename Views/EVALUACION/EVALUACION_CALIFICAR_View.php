@@ -30,14 +30,7 @@ class EVALUACION_CALIFICAR{
 function __construct($lista, $listaHistorias, $contar, $contarHistorias, $rellenarHistorias){
     //asignación de valores de parámetro a los atributos de la clase
     $this->IdTrabajo = $lista['IdTrabajo'];
-    //$this->LoginEvaluador = $lista['LoginEvaluador'];
     $this->AliasEvaluado = $lista['AliasEvaluado'];
-    //$this->IdHistoria = $lista['IdHistoria'];
-    //$this->CorrectoA = $lista['CorrectoA'];
-    //$this->ComenIncorrectoA = $lista['ComenIncorrectoA'];
-    //$this->CorrectoP = $lista['CorrectoP'];
-    //$this->ComentIncorrectoP = $lista['ComentIncorrectoP'];
-    //$this->OK = $lista['OK'];
     $this->lista = $lista;
     $this->listaHistorias = $listaHistorias;
     $this->contar = $contar;
@@ -57,10 +50,6 @@ include '../Views/Header.php';
 ?>
 
 <script type="text/javascript">
-    
-    <?php 
-        //include '../Views/js/validacionesEVALUACION.js'; 
-    ?>
 
 </script>
 
@@ -85,17 +74,22 @@ include '../Views/Header.php';
                      
                 ?>   
                         <tr>
-                            <td><?php echo $strings['IdHistoria']?></td>
-                            <td><?php echo $strings['Texto de la historia'] ?></td>
+                            <td class="InicialIzq"><?php echo $strings['IdHistoria']?></td>
+                            <td class="InicialDer"><?php echo $strings['Texto de la historia'] ?></td>
                         </tr>
                         <tr> 
-                            <td><?php echo $this->rellenarHistorias[$j][0]?></td> 
-                            <td><?php echo $this->rellenarHistorias[$j][1]?></td>
+                            <td class="TstringsIzq"><?php echo $this->rellenarHistorias[$j][0]?></td> 
+                            <td class="TstringsDer"><?php echo $this->rellenarHistorias[$j][1]?></td>
+                        </tr>
+                        <tr>
+                            <td class="TstringsIzq"><?php echo $strings['LoginEvaluador']?></td>
+                            <td class="TstringsDer">
+                                <?php echo $strings['CorrectoAOK'] ?>  
+                            </td>
                         </tr>
 
                     <?php
-                       // echo $lista[$j][0] //id
-                       // echo $lista[$j][1] //texto 
+                       
                     ?>
                         
                         <?php
@@ -103,7 +97,7 @@ include '../Views/Header.php';
                             ?>
                             <tr>
                                 <td>
-                                    <input class="calificar" type="text" readonly size="10" name="LoginEvaluador" value="<?php echo $this->datos[$i][1] ?>"> 
+                                    <input class="calificar" type="text" readonly size="9" name="LoginEvaluador" value="<?php echo $this->datos[$i][1] ?>"> 
                                 </td>
                             
                                 <td>
@@ -120,14 +114,18 @@ include '../Views/Header.php';
                             
                     $init = $i;
                     $fin = $init + $this->contar;
+
                         ?>
-                        
+                        <tr>
+                                <td class="Comments" colspan="2"><?php echo $strings['ComenIncorrectoAlumnos']?></td>
+                        </tr>
                         <?php
                             for ($k=$init2; $k < $fin2 ; $k++) { 
                             ?>
                             <tr>
                                 <td>
-                                    <input class="calificar" type="text" readonly size="20" name="ComenIncorrectoA" value="<?php echo $this->datos[$k][3] ?>"> 
+                                   <!-- <textarea name="ComenIncorrectoA" maxlength="300" rows="6" cols="50" onblur="" style="margin-left: 10px; border-radius: 20px; border-top-left-radius: 0px; border-width: 2px; border-color: darkblue; width: 100%;" ><?php //echo $this->datos[$k][3] ?></textarea> -->
+                                    <input class="calificar" type="text" name="ComenIncorrectoA" size="<?php strlen($this->datos[$k][3])?>" readonly > 
                                 </td>
                             </tr>
                             <?php
@@ -139,10 +137,12 @@ include '../Views/Header.php';
                             $indiceComentarioP = $j* $this->contar;
 
                         ?>
-
+                        <tr>
+                                <td class="Comments" colspan="2"><?php echo $strings['ComentIncorrectoPCP']?></td>
+                        </tr>
                         <tr>
                                 <td>
-                                    <input class="calificar" type="text" size="20" name="ComentIncorrectoP[<?php echo $this->rellenarHistorias[$j][0]?>]" value="<?php echo $this->datos[$indiceComentarioP][5] ?>"> 
+                                    <textarea name="ComentIncorrectoP" maxlength="300" rows="6" cols="50" style="margin-left: 10px; border-radius: 20px; border-top-left-radius: 0px; border-width: 2px; border-color: darkblue; width: 100%;" ><?php echo $this->datos[$indiceComentarioP][5] ?></textarea>  
                                 </td>
                                 <td>
                                     <input class="calificar" type="text" readonly size="1" name="CorrectoP" value="<?php echo $this->datos[$indiceComentarioP][4] ?>">
@@ -162,7 +162,7 @@ include '../Views/Header.php';
                 <input type="text" name="numHistorias" class="del" value="<?php echo $this->contarHistorias ?>">
                 <input type="text" name="numEvaluadores" class="del" value="<?php echo $this->contar ?>">
                 <div class="acciones" style="float: right; margin-left:0%; margin-right: 50%">
-                    <a href="../Controllers/EVALUACION_Controller.php?action=CALIF"> <input type="image" name="action" value="CALIF" src="../Views/images/confirmar.png" title="<?php echo $strings['Enviar Formulario'] ?>"></a>
+                    <a href="../Controllers/EVALUACION_Controller.php?action=CALIF"> <input type="image" name="action" value="CALIF" src="../Views/images/confirmar.png" title="<?php echo $strings['Enviar Formulario'] ?>" onclick="return validar('CALIF')"></a>
                 </div>
              </form>                     
                 <div class="acciones" style="float: left;">

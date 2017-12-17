@@ -549,7 +549,7 @@ function validar(formulario)
           }
         }else{
            if( 
-            ((validarIdTrabajo(form.IdTrabajo, 6)) && 
+            (validarIdTrabajo(form.IdTrabajo, 6)) && 
             (validarlogin(form.LoginEvaluador, 9)) && 
             (validarAlias(form.AliasEvaluado, 9)) &&  
             (validarIdHistoria(form.IdHistoria)) && 
