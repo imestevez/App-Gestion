@@ -294,6 +294,8 @@ array(
 	'Buscar Nota' => 'Buscar Nota',
 	'Nota' => 'Nota',
 	'Notas' => 'Notas',
+	'Nota Parcial' => 'Nota Parcial',
+	'Ver correccion' => 'Ver correccion',
 //FUNC_ACCION
 	'Mostrar Acciones' => 'Mostrar Acciones',
 	'ERROR: Fallo en la inserción. Ya existe ese IdFuncionalidad' => 'ERROR: Fallo en la inserción. Ya existe ese IdFuncionalidad',
@@ -302,8 +304,6 @@ array(
 	'Acciones de Funcionalidad' => 'Acciones de Funcionalidad',
 	'ERROR: No existe la funcionalidad que desea borrar en la BD' => 'ERROR: No existe la funcionalidad que desea borrar en la BD',
 	'ERROR: Fallo en la modificación. El IdFuncionalidad está vacio' => 'ERROR: Fallo en la modificación. El IdFuncionalidad está vacio',
-
-
 
 
 
