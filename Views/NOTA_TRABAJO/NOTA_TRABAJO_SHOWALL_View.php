@@ -96,7 +96,7 @@ function render(){
                     <?php 
                         while($row = mysqli_fetch_array($this->trabajos)){
                     ?>
-                        <td><?php echo $row['IdTrabajo']; ?></td>
+                        <th><?php echo $row['IdTrabajo']; ?></th>
                     <?php        
                         }
                     ?>
