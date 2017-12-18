@@ -210,6 +210,7 @@ if (!isset($_REQUEST['action'])){
 			}
 			break;	
 		default: //Por defecto, Se muestra la vista SHOWALL
+		
 			if (!$_POST){
 				$ASIGNAC_QA = new ASIGNAC_QA_Model('', '','', '', '');//crea un un ASIGNAC_QA_Model  
 			}
