@@ -86,9 +86,13 @@ function render(){
 
                     <?php
                         }
-                    }
-                    ?>
+                         if($value == 'GENNOT'){
+                        ?>
                         <a href="../Controllers/NOTA_TRABAJO_Controller.php?action=GENNOT" ><input type="image" src="../Views/images/flecha.png" name="action" title="<?php echo $strings['Generación automática de notas']?>" value="GENNOT" ></a>
+                        <?php
+                          }
+                      }
+                    ?>
                     </td>
                 </tr>    
                 <tr>  
@@ -121,18 +125,7 @@ function render(){
                      <?php 
 
                     foreach ($this->acciones as $key => $value) {
-                        if($value == 'SHOW'){
-                            ?>
-                    <a href="../Controllers/NOTA_TRABAJO_Controller.php?action=SHOW&login=<?php echo $row["login"]?>&IdTrabajo=<?php echo $row["IdTrabajo"]?>"><input type="image" src="../Views/images/ojo.png" name="action" title="<?php echo $strings['Mostrar en detalle'] ?>" value="SHOW" action=""></a>                    
-                            <?php
-                        }
-
-                         if($value == 'EDIT'){
-                            ?>
-                    <a href="../Controllers/NOTA_TRABAJO_Controller.php?action=EDIT&login=<?php echo $row["login"]?>&IdTrabajo=<?php echo $row["IdTrabajo"]?>"><input type="image" src="../Views/images/edit.png" name="action" title="<?php echo $strings['Editar'] ?>" value="EDIT"></a>
-                    
-                    <?php
-                        }
+                
                            if($value == 'DELETE'){
                             ?>
                     <a href="../Controllers/NOTA_TRABAJO_Controller.php?action=DELETE&login=<?php echo $row["login"]?>&IdTrabajo=<?php echo $row["IdTrabajo"]?>"><input type="image" src="../Views/images/delete.png" name="action" title="<?php echo $strings['Eliminar'] ?>" value="DELETE"></a>
@@ -207,9 +200,13 @@ function renderSearch(){
 
                     <?php
                         }
-                    }
+                         if($value == 'GENNOT'){
+                        ?>
+                        <a href="../Controllers/NOTA_TRABAJO_Controller.php?action=GENNOT" ><input type="image" src="../Views/images/flecha.png" name="action" title="<?php echo $strings['Generación automática de notas']?>" value="GENNOT" ></a>
+                        <?php
+                          }
+                      }
                     ?>
-                    
 
 
                 </td>
@@ -230,18 +227,7 @@ function renderSearch(){
                      <?php 
 
                     foreach ($this->acciones as $key => $value) {
-                        if($value == 'SHOW'){
-                            ?>
-                    <a href="../Controllers/NOTA_TRABAJO_Controller.php?action=SHOW&login=<?php echo $row["login"]?>&IdTrabajo=<?php echo $row["IdTrabajo"]?>"><input type="image" src="../Views/images/ojo.png" name="action" title="<?php echo $strings['Mostrar en detalle'] ?>" value="SHOW" action=""></a>                    
-                            <?php
-                        }
-
-                         if($value == 'EDIT'){
-                            ?>
-                    <a href="../Controllers/NOTA_TRABAJO_Controller.php?action=EDIT&login=<?php echo $row["login"]?>&IdTrabajo=<?php echo $row["IdTrabajo"]?>"><input type="image" src="../Views/images/edit.png" name="action" title="<?php echo $strings['Editar'] ?>" value="EDIT"></a>
-                    
-                    <?php
-                        }
+    
                            if($value == 'DELETE'){
                             ?>
                     <a href="../Controllers/NOTA_TRABAJO_Controller.php?action=DELETE&login=<?php echo $row["login"]?>&IdTrabajo=<?php echo $row["IdTrabajo"]?>"><input type="image" src="../Views/images/delete.png" name="action" title="<?php echo $strings['Eliminar'] ?>" value="DELETE"></a>
