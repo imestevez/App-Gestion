@@ -105,7 +105,7 @@ if (!isset($_REQUEST['action'])){
 		case 'DELETE': //Si quiere hacer un DELETE
 			if (!$_POST){ //viene del showall con una clave
 				$lista = array('login','IdTrabajo','NotaTrabajo');
-				$NOTA_TRABAJO = new NOTA_TRABAJO_Model($_REQUEST['login'],$_REQUEST['IdTrabajo'],'');//crea un un NOTA_TRABAJO_Model con el IdTrabajo del usuario
+				$NOTA_TRABAJO = new NOTA_TRABAJO_Model($_REQUEST['login'],'','');//crea un un NOTA_TRABAJO_Model con el IdTrabajo del usuario
 				$lista = $NOTA_TRABAJO->rellenarLista();
 				//$tupla = $NOTA_TRABAJO->RellenaDatos();//A partir del IdTrabajo recoge todos los atributos
 				$usuario = new NOTA_TRABAJO_DELETE($lista); //Crea la vista de DELETE con los datos del usuario
@@ -135,8 +135,14 @@ if (!isset($_REQUEST['action'])){
 			else{
 				$NOTA_TRABAJO = get_data_form(); //coge los datos del formulario del usuario que desea buscar
 				$datos = $NOTA_TRABAJO->SEARCH();//Ejecuta la funcion SEARCH() en el NOTA_TRABAJO_Model
+				$datos = $NOTA_TRABAJO->adaptarRecorsetParaShowAll($datos);
 				$lista = array('login', 'IdTrabajo','NotaTrabajo');
-				$resultado = new NOTA_TRABAJO_SHOWALL($lista, $datos, 0, 0, 0, 0, 'SEARCH', '../Controllers/NOTA_TRABAJO_Controller.php',$acciones);//Crea la vista SHOWALL y muestra los usuarios que cumplen los parámetros de búsqueda 
+				$trabajos = $NOTA_TRABAJO->getTrabajos();
+				$trabajosNota = $NOTA_TRABAJO->getTrabajosArray();
+				$alumnos = $NOTA_TRABAJO->getAlumnos();
+				$num_trabajos = $NOTA_TRABAJO->getNumTrabajos();
+				$notas = $NOTA_TRABAJO->calcNotaF();
+				$resultado = new NOTA_TRABAJO_SHOWALL($lista, $datos, 0, 0, 0, 0, 'SEARCH', '../Controllers/NOTA_TRABAJO_Controller.php',$acciones,$trabajos, $num_trabajos, $trabajosNota, $alumnos, $notas);//Crea la vista SHOWALL y muestra los usuarios que cumplen los parámetros de búsqueda 
 			}
 			break;
 		case 'SHOW': //si desea ver un usuario en detalle

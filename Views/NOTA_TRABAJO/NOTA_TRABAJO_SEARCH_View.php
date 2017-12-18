@@ -33,9 +33,18 @@ function render(){
                 </div>
 
                 <div id="izquierda">
+                    <label for="Nombre"><?php echo $strings['Nombre']?>: </label>
+                        <input type="text" name="Nombre" maxlength="30" size="30" onblur="javascript:void(validarNombreBuscar(this, 30))" ><div id="login" class="oculto" style="display:none"><?php echo $strings['div_Alfanumerico']?></div>
+                </div>
+
+                <div id="izquierda">
                     <label for="IdTrabajo"><?php echo $strings['IdTrabajo']?>: </label>
                         <input type="text" name="IdTrabajo" maxlength="6" size="6"  onblur="javascript:void(validarIdTrabajoBuscar(this, 6))" ><div id="IdTrabajo" class="oculto" style="display:none"><?php echo $strings['div_Alfanumerico']?></div> <div id="IdTrabajoVacio" class="oculto" style="display:none"><?php echo $strings['div_vacio']?></div> 
                 </div>
+                <div id="izquierda">
+                    <label for="NombreTrabajo"><?php echo $strings['Nombre del trabajo']?>: </label>
+                        <input type="text" name="NombreTrabajo" maxlength="60" size="60" onblur="javascript:void(validarNombreTrabajoBuscar(this, 30))"><div id="IdTrabajo" class="oculto" style="display:none"><?php echo $strings['div_Alfanumerico']?></div> <div id="IdTrabajoVacio" class="oculto" style="display:none"><?php echo $strings['div_vacio']?></div> 
+                </div
 
                 <div id="izquierda">
                     <label for="NotaTrabajo"><?php echo $strings['Nota Trabajo']?>: </label>

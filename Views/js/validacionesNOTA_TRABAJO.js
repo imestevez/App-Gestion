@@ -206,6 +206,41 @@ function validarNotaTrabajo(NotaTrabajo,numerosdecimales, min, max){
 
 }
 
+//Función que comprueba que el nombre es de tipo alfabético y no supera el maximo permitido
+function validarNombre(nombre, tamaño_max)
+{
+    if(comprobarVacio(nombre))//Si el campo no está vacio el campo
+    {
+        if(comprobarAlfabetico(nombre,tamaño_max))//Si nombre es alfabético no supera el tamaño maximo
+            {
+                return true;
+            }else{ //Si no es alfabético
+               return false; 
+            }
+    }else{ //si está vacio
+        return false;
+    }
+}
+
+//Función para validar un nombre del trabajo
+
+function validarNombreTrabajo(NombreTrabajo, tamaño_max){
+  
+   if(comprobarVacio(NombreTrabajo))//Si el campo no está vacio el campo
+      {
+          if(comprobarTexto(NombreTrabajo,tamaño_max))//Si login cumple la expresión regular de campo Alfabético
+       {
+           return true;
+       }else{ //Si no cumple la expresión regular
+           return false;
+       }
+      }else{//Si está vacio
+          return false;
+      }
+
+
+}
+
 /*--------------------------------------------------------------------------------------------
 -------------Funciones Necesarias para validar el formulario SEARCH------------------------------
 --------------------------------------------------------------------------------------------*/
@@ -280,7 +315,33 @@ function comprobarAlfanumericoBuscar(campo, tamaño_max)
   }
 }
 
+//Función para comprobar que un campo es alfabético y no supera el tamaño máximo permitido. Acepta todas las letras, mayúsculas y minúsculas, incluida la ñ y ç, además depalabras acentuadas  para el formulario SEARCH
+function comprobarAlfabeticoBuscar(campo, tamaño_max) 
+{
 
+    var expr_alfabet; //Expresión regular para comprobar que solo tiene letras
+    expr_alfabet = /^[a-zA-ZñÑáéíóúÁÉÍÓÚçÇ\s]+$/; // solo letras
+    
+    if (expr_alfabet.test(campo.value) == false) //Si no cumple la expresión regular
+    {
+        document.getElementById(campo.name).style.display = 'block';
+
+        return false;
+    }
+      else //Si cumple la expresión regular
+      {
+        if (campo.value.length > tamaño_max) //Si el tamaño del campo supera el maximo
+        {
+            document.getElementById(campo.name).style.display = 'block';
+            return false;
+        }
+          else //Si el tamaño está dentro del rango
+          {
+            document.getElementById(campo.name).style.display = 'none';
+            return true;
+      }
+    }
+}
 
 //Comprueba que el valor de un campo de tipo entero está entre el limite establecido
 function comprobarEnteroBuscar(campo,valormenor,valormayor) 
@@ -412,6 +473,43 @@ function validarNotaTrabajoBuscar(NotaTrabajo, numerosdecimales, min, max){
 
 }
 
+//Funcion para validar busquedas por nombre
+
+function validarNombreTrabajoBuscar(NombreTrabajo, tamaño_max){
+  
+   if(comprobarVacioBuscar(NombreTrabajo))//Si el campo no está vacio el campo
+      {
+          if(comprobarTextoBuscar(NombreTrabajo,tamaño_max))//Si login cumple la expresión regular de campo Alfabético
+       {
+           return true;
+       }else{ //Si no cumple la expresión regular
+           return false;
+       }
+      }else{//Si está vacio
+          return true;
+      }
+
+
+}
+
+//Función para validar la búsqueda por nombre
+function validarNombreBuscar(nombre, tamaño_max)
+{
+      if(comprobarVacioBuscar(nombre))//Si el campo no está vacio el campo
+      {
+             if(comprobarAlfabeticoBuscar(nombre,tamaño_max))//Si nombre es alfabético no supera el tamaño maximo
+                 {
+                     return true;
+                 }else{ //si no es alfabético o supera el máximo
+                     return false;
+                 }
+      }
+      else{//Si está vacío
+          return true;
+      }
+    
+}
+
 /*-----------------------------------------------------------------
 --------------VALIDACIONES DE TODO EL FORMULARIO--------------------
 -----------------------------------------------------------------*/
@@ -428,7 +526,9 @@ function validar(formulario)
 
         if( 
           (validarLoginBuscar(form.login, 9)) && 
+          (validarNombreBuscar(nombre, 30)) &&
           (validarIdTrabajoBuscar(form.IdTrabajo, 6)) && 
+          (validarNombreTrabajoBuscar(form.login, 30)) &&
           (validarNotaTrabajoBuscar(form.NotaTrabajo, 2, 0, 10)) ){
 
           alerta = false; //Se le asigna false a la variable alerta 

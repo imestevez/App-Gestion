@@ -160,6 +160,24 @@ function DELETE()
     } // si no existe el IdTrabajo a borrar se devuelve el mensaje de que no existe	
 } // fin metodo DELETE
 
+function DELETE_LOG(){
+	$sql = "SELECT * FROM NOTA_TRABAJO WHERE login = '$this->login'"; //comprobar que no hay claves iguales
+
+    // se ejecuta la query
+    $result = $this->mysqli->query($sql);
+    // si existe una tupla con ese valor de clave
+    if ($result->num_rows == 1)
+    {
+    	// se construye la sentencia sql de borrado
+        $sql = "DELETE FROM NOTA_TRABAJO WHERE login = '$this->login'";
+        // se ejecuta la query
+        $this->mysqli->query($sql);
+        // se devuelve el mensaje de borrado correcto
+        $this->lista['mensaje'] = 'Borrado correctamente'; 
+			return $this->lista;
+    } // si no existe el IdTrabajo a borrar se devuelve el mensaje de que no existe
+}
+
 // funcion RellenaDatos()
 // Esta función obtiene de la entidad de la bd todos los atributos a partir del valor de la clave que esta
 // en el atributo de la clase
@@ -339,92 +357,104 @@ function comprobarExistenciaTrabajo(){
 //Función para cualificar todas las entregas de un IdTrabajo
 function genAutoNotasET($IdTrabajo){
 
-	//Cogemos todas las historias que pertenecen a ese trabajo
-	$sql_hist = "SELECT * FROM HISTORIA WHERE IdTrabajo = '$IdTrabajo'";
-	$historias = $this->mysqli->query($sql_hist);
-	$num_historias = mysqli_num_rows($historias);
+	//Comprobamos si existen evaluaciones asociadas con ese IdTrabajo
+	$sql_cmp_ev = "SELECT * FROM EVALUACION WHERE IdTrabajo = '$IdTrabajo'";
+	$cmp_ev = $this->mysqli->query($sql_cmp_ev);
+	$num_cmp_ev = mysqli_num_rows($cmp_ev);
 
-	//Cogemos todas las entregas de ese trabajo
-	$sql_et = "SELECT * FROM ENTREGA WHERE IdTrabajo = '$IdTrabajo'";
+	if($num_cmp_ev > 0){
 
-	$entregas = $this->mysqli->query($sql_et);
-	$num_entregas = mysqli_num_rows($entregas);
-
-	$cont_exitos = 0; //Cuenta las inserciones realizadas con éxito
-
-	while ($row_et = mysqli_fetch_array($entregas)) {
-					
-		$Alias = $row_et['Alias'];
-		$login = $row_et['login'];
-
-
-		$num_histCorrectas = 0;
+		//Cogemos todas las historias que pertenecen a ese trabajo
+		$sql_hist = "SELECT * FROM HISTORIA WHERE IdTrabajo = '$IdTrabajo'";
 		$historias = $this->mysqli->query($sql_hist);
+		$num_historias = mysqli_num_rows($historias);
 
-		while ($row_hist = mysqli_fetch_array($historias)) {
-			$IdHistoria = $row_hist['IdHistoria'];
+		//Cogemos todas las entregas de ese trabajo
+		$sql_et = "SELECT * FROM ENTREGA WHERE IdTrabajo = '$IdTrabajo'";
 
-			//Cogemos las evaluaciones de esa historia para ese usuario de los demás usuarios
-			$sql_ev = "SELECT * FROM EVALUACION 
-								WHERE IdTrabajo = '$IdTrabajo' AND
-										AliasEvaluado = '$Alias' AND
-										 IdHistoria = '$IdHistoria'";			 
+		$entregas = $this->mysqli->query($sql_et);
+		$num_entregas = mysqli_num_rows($entregas);
 
-			if($evaluaciones = $this->mysqli->query($sql_ev)){
+		$cont_exitos = 0; //Cuenta las inserciones realizadas con éxito
 
-				$num_evaluaciones = mysqli_num_rows($evaluaciones);
+		while ($row_et = mysqli_fetch_array($entregas)) {
+						
+			$Alias = $row_et['Alias'];
+			$login = $row_et['login'];
 
-				$num_correctos = 0; //Contará las historias que están correctas sobre la entrega del login					
 
-				while($row_ev = mysqli_fetch_array($evaluaciones)){
-					$correcto = $row_ev['CorrectoP'];
+			$num_histCorrectas = 0;
+			$historias = $this->mysqli->query($sql_hist);
 
-					if($correcto == 1) $num_correctos++;
-				} 
+			while ($row_hist = mysqli_fetch_array($historias)) {
+				$IdHistoria = $row_hist['IdHistoria'];
 
-				$correcto = $num_correctos/$num_evaluaciones;
-				if($correcto == 1) $num_histCorrectas++;
+				//Cogemos las evaluaciones de esa historia para ese usuario de los demás usuarios
+				$sql_ev = "SELECT * FROM EVALUACION 
+									WHERE IdTrabajo = '$IdTrabajo' AND
+											AliasEvaluado = '$Alias' AND
+											 IdHistoria = '$IdHistoria'";
+										 			 
+
+				if($evaluaciones = $this->mysqli->query($sql_ev)){
+
+					$num_evaluaciones = mysqli_num_rows($evaluaciones);
+
+					if($num_evaluaciones > 0){
+
+						$num_correctos = 0; //Contará las historias que están correctas sobre la entrega del login					
+
+						while($row_ev = mysqli_fetch_array($evaluaciones)){
+							$correcto = $row_ev['CorrectoP'];
+
+							if($correcto == 1) $num_correctos++;
+						} 	
+						$correcto = $num_correctos/$num_evaluaciones;
+						if($correcto == 1) $num_histCorrectas++;
+					}
+				}
+				else{
+					$this->lista['mensaje'] = 'ERROR: La generación automática de notas ha fallado (EVALUACION-ET)';
+					return $this->lista;
+				}	
+
+			}
+
+			//Calculamos la nota total de un trabajo para un alumno, según las historias que tiene correctas y el total y lo pasamos a base 10
+			$nota = (($num_histCorrectas/$num_historias)*10);
+
+			$sql_existe = "SELECT * FROM NOTA_TRABAJO WHERE IdTrabajo = '$IdTrabajo' AND login = '$login'";
+
+			$existe = $this->mysqli->query($sql_existe);
+
+			$num_rows_existe = mysqli_num_rows($existe);
+
+			if($num_rows_existe == 0){
+				//Insertamos la nota calculada en la BD
+				$sql_insert = "INSERT INTO NOTA_TRABAJO(
+											login,
+											IdTrabajo,
+											NotaTrabajo) VALUES(
+															'$login',
+															'$IdTrabajo',
+											                '$nota')";
+
+				if ($result_insert = $this->mysqli->query($sql_insert)) $cont_exitos++;
 			}
 			else{
-				$this->lista['mensaje'] = 'ERROR: La generación automática de notas ha fallado (EVALUACION-ET)';
-				return $this->lista;
-			}	
+			//Actualizamos la nota para el usuario
+			$sql_update = "UPDATE NOTA_TRABAJO SET NotaTrabajo = $nota  WHERE IdTrabajo = '$IdTrabajo' AND login = '$login'";
 
+			if ($result_insert = $this->mysqli->query($sql_update)) $cont_exitos++;
+			}
+																	                
 		}
 
-		//Calculamos la nota total de un trabajo para un alumno, según las historias que tiene correctas y el total y lo pasamos a base 10
-		$nota = (($num_histCorrectas/$num_historias)*10);
-
-		$sql_existe = "SELECT * FROM NOTA_TRABAJO WHERE IdTrabajo = '$IdTrabajo' AND login = '$login'";
-
-		$existe = $this->mysqli->query($sql_existe);
-
-		$num_rows_existe = mysqli_num_rows($existe);
-
-		if($num_rows_existe == 0){
-			//Insertamos la nota calculada en la BD
-			$sql_insert = "INSERT INTO NOTA_TRABAJO(
-										login,
-										IdTrabajo,
-										NotaTrabajo) VALUES(
-														'$login',
-														'$IdTrabajo',
-										                '$nota')";
-
-			if ($result_insert = $this->mysqli->query($sql_insert)) $cont_exitos++;
-		}
-		else{
-		//Actualizamos la nota para el usuario
-		$sql_update = "UPDATE NOTA_TRABAJO SET NotaTrabajo = $nota  WHERE IdTrabajo = '$IdTrabajo' AND login = '$login'";
-
-		if ($result_insert = $this->mysqli->query($sql_update)) $cont_exitos++;
-		}
-																                
+		//Si NO se ha realizado una inserción de nota para todos los usuarios que han efectuado una entrega para ese IdTrabajo
+		if($cont_exitos == $num_entregas && $cont_exitos <> 0) return true;
+		else return false;
 	}
-
-	//Si NO se ha realizado una inserción de nota para todos los usuarios que han efectuado una entrega para ese IdTrabajo
-	if($cont_exitos == $num_entregas && $cont_exitos <> 0) return true;
-	else return false;
+	else true;	
 
 }//Fin genAutoNotasET()
 
@@ -452,58 +482,68 @@ function genAutoNotaQA($IdTrabajoQA){
 	while ($row_qas = mysqli_fetch_array($qas)) {
 
 		$IdTrabajoET = $row_qas['IdTrabajo'];
-		
-		$LoginEvaluador = $row_qas['login'];
 
-		$num_correctos = 0; //Contará las historias que el LoginEvaluador ha corregido de acuerdo con la corrección propuesta
+		$sql_cmp_ev = "SELECT * FROM EVALUACION WHERE IdTrabajo = '$IdTrabajoET'";
+		$cmp_ev = $this->mysqli->query($sql_cmp_ev);
+		$num_cmp_ev = mysqli_num_rows($cmp_ev);
 
-		$historias = $this->mysqli->query($sql_hist);
+		if($num_cmp_ev > 0){
+			
+			$LoginEvaluador = $row_qas['login'];
 
-		while ($row_hist = mysqli_fetch_array($historias)) {
+			$num_correctos = 0; //Contará las historias que el LoginEvaluador ha corregido de acuerdo con la corrección propuesta
 
-			$IdHistoria = $row_hist['IdHistoria'];
+			$historias = $this->mysqli->query($sql_hist);
 
-			//Cogemos las evaluaciones de esa historia que ha hecho ese login como LoginEvaluador
-			$sql_evs = "SELECT * FROM EVALUACION 
-						WHERE IdTrabajo = '$IdTrabajoET' AND
-								LoginEvaluador = '$LoginEvaluador' AND
-								 IdHistoria = '$IdHistoria'";
+			while ($row_hist = mysqli_fetch_array($historias)) {
 
-			$evaluaciones = $this->mysqli->query($sql_evs );
-			//Número de Qas realizadas por alumno sobre el IdTrabajo
-			$num_evaluaciones = mysqli_num_rows($evaluaciones);
+				$IdHistoria = $row_hist['IdHistoria'];
 
-			while($row_ev = mysqli_fetch_array($evaluaciones)){
-				if($row_ev['OK'] == 1) $num_correctos++;
+				//Cogemos las evaluaciones de esa historia que ha hecho ese login como LoginEvaluador
+				$sql_evs = "SELECT * FROM EVALUACION 
+							WHERE IdTrabajo = '$IdTrabajoET' AND
+									LoginEvaluador = '$LoginEvaluador' AND
+									 IdHistoria = '$IdHistoria'";
+
+				$evaluaciones = $this->mysqli->query($sql_evs );
+				//Número de Qas realizadas por alumno sobre el IdTrabajo
+				$num_evaluaciones = mysqli_num_rows($evaluaciones);
+
+				while($row_ev = mysqli_fetch_array($evaluaciones)){
+					if($row_ev['OK'] == 1) $num_correctos++;
+				}
 			}
-		}
 
-		//Calculamos la nota de QA del IdTrabajo del alumno con LoginEvaluador en base 10
-		$nota = ($num_correctos/($num_historias*$num_evaluaciones))*10;
+			//Calculamos la nota de QA del IdTrabajo del alumno con LoginEvaluador en base 10
+			$nota = ($num_correctos/($num_historias*$num_evaluaciones))*10;
 
-		$sql_existe = "SELECT * FROM NOTA_TRABAJO WHERE IdTrabajo = '$IdTrabajoQA' AND login = '$LoginEvaluador'";
+			$sql_existe = "SELECT * FROM NOTA_TRABAJO WHERE IdTrabajo = '$IdTrabajoQA' AND login = '$LoginEvaluador'";
 
-		$existe = $this->mysqli->query($sql_existe);
+			$existe = $this->mysqli->query($sql_existe);
 
-		$num_rows_existe = mysqli_num_rows($existe);
+			$num_rows_existe = mysqli_num_rows($existe);
 
-		if($num_rows_existe == 0){
-			//Insertamos la nota calculada en la BD
-			$sql_insert = "INSERT INTO NOTA_TRABAJO(
-										login,
-										IdTrabajo,
-										NotaTrabajo) VALUES(
-														'$LoginEvaluador',
-														'$IdTrabajoQA',
-										                '$nota')";
+			if($num_rows_existe == 0){
+				//Insertamos la nota calculada en la BD
+				$sql_insert = "INSERT INTO NOTA_TRABAJO(
+											login,
+											IdTrabajo,
+											NotaTrabajo) VALUES(
+															'$LoginEvaluador',
+															'$IdTrabajoQA',
+											                '$nota')";
 
-			if ($result_insert = $this->mysqli->query($sql_insert)) $cont_exitos++;
+				if ($result_insert = $this->mysqli->query($sql_insert)) $cont_exitos++;
+			}
+			else{
+				//Actualizamos la nota para el usuario
+				$sql_update = "UPDATE NOTA_TRABAJO SET NotaTrabajo = $nota  WHERE IdTrabajo = '$IdTrabajoQA' AND login = '$LoginEvaluador'";
+
+				if ($result_insert = $this->mysqli->query($sql_update)) $cont_exitos++;
+			}	
 		}
 		else{
-			//Actualizamos la nota para el usuario
-			$sql_update = "UPDATE NOTA_TRABAJO SET NotaTrabajo = $nota  WHERE IdTrabajo = '$IdTrabajoQA' AND login = '$LoginEvaluador'";
-
-			if ($result_insert = $this->mysqli->query($sql_update)) $cont_exitos++;
+			return true;
 		}	
 	}
 
@@ -606,7 +646,7 @@ function adaptarRecorsetParaShowAll($datos){
 
 function getAlumnos(){
 
-	$sql = "SELECT DISTINCT login FROM NOTA_TRABAJO";
+	$sql = "SELECT DISTINCT login FROM NOTA_TRABAJO WHERE login <> 'admin'";
 
 	$alumnos = $this->mysqli->query($sql);
 	return $alumnos;
@@ -722,6 +762,7 @@ function existeNota(){
 	
 function getAlumno(){
 	$login = $_SESSION['login'];
+
 	$sql = "SELECT DISTINCT login FROM NOTA_TRABAJO WHERE login = '$login'";
 
 	$alumnos = $this->mysqli->query($sql);

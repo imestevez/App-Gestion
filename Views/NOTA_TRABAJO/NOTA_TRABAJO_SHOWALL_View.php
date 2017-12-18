@@ -107,59 +107,47 @@ function render(){
                 </tr>   
                 
                 
-<?php		 
-			while($row = mysqli_fetch_array($this->alumnos)) { //Mientras el numero de tuplas no llegue al máximo y haya tuplas en la BD
-?>
-                <tr>
-                <td><?php echo $this->datos[$row['login']]["login"]; ?></td>
-                <td><?php echo $this->datos[$row['login']]["Nombre"]; ?></td>
-                <th></th>
-                <?php
-                    for($i = 0; $i < sizeof($this->trabajosNota); $i++){
-                ?>
-                    <td><a href="../Controllers/NOTA_TRABAJO_Controller.php?action=SHOW&login=<?php echo $this->datos[$row['login']]["login"]; ?>&IdTrabajo=<?php  echo $this->trabajosNota[$i]; ?>"><?php echo $this->datos[$row['login']][$this->trabajosNota[$i]]; ?></a></td>
-                <?php } ?>
-                <td><?php if($this->notas <> false ) echo $this->notas[$row['login']]; ?></td>
-                <td class="edit_tabla">
+<?php		
+            //Mientras el numero de tuplas no llegue al máximo y haya tuplas en la BD
+			while($row = mysqli_fetch_array($this->alumnos)) {
 
-                     <?php 
-
-                    foreach ($this->acciones as $key => $value) {
+                //echo "o ".$row['login'];
+                if($row['login'] <> ''){
                 
-                           if($value == 'DELETE'){
-                            ?>
-                    <a href="../Controllers/NOTA_TRABAJO_Controller.php?action=DELETE&login=<?php echo $row["login"]?>&IdTrabajo=<?php echo $row["IdTrabajo"]?>"><input type="image" src="../Views/images/delete.png" name="action" title="<?php echo $strings['Eliminar'] ?>" value="DELETE"></a>
-                    
+?>          
+                    <tr>
+                    <td><?php echo $this->datos[$row['login']]["login"]; ?></td>
+                    <td><?php echo $this->datos[$row['login']]["Nombre"]; ?></td>
+                    <th></th>
                     <?php
+                        for($i = 0; $i < sizeof($this->trabajosNota); $i++){
+                    ?>
+                        <td><a href="../Controllers/NOTA_TRABAJO_Controller.php?action=SHOW&login=<?php echo $this->datos[$row['login']]["login"]; ?>&IdTrabajo=<?php  echo $this->trabajosNota[$i]; ?>"><?php echo $this->datos[$row['login']][$this->trabajosNota[$i]]; ?></a></td>
+                    <?php } ?>
+                    <td><?php if($this->notas <> false ) echo $this->notas[$row['login']]; ?></td>
+                    <td class="edit_tabla">
+
+                         <?php 
+
+                        foreach ($this->acciones as $key => $value) {
+                    
+                               if($value == 'DELETE'){
+                                ?>
+                        <a href="../Controllers/NOTA_TRABAJO_Controller.php?action=DELETE_LOG&login=<?php echo $this->datos[$row['login']]["login"]?>"><input type="image" src="../Views/images/delete.png" name="action" title="<?php echo $strings['Eliminar'] ?>" value="DELETE_LOG"></a>
+                        
+                        <?php
+                            }
                         }
-                    }
-                    ?>   
-                </td>
-                </tr>              
+                        ?>   
+                    </td>
+                    </tr>              
            
 <?php
+        }
 	}//fin del while
 ?>
      </table>
-    <div class="acciones">
-
-<?php
-
-
-        if($this->num_pagina > 0){ // Si la tupla 1 mostrada es la primera de la BD
-?>
-         <a href="../Controllers/NOTA_TRABAJO_Controller.php?num_pagina=<?php echo $this->num_pagina-1?>&action=ALL"><input type="image" src="../Views/images/prev.png" name="action" title="<?php echo $strings['Anterior'] ?>" value="PREV"></a>
-<?php
-        } //Fin del if si es la 1ª tupla
-
-        if($this->max_tuplas < $this->total_tuplas){ //Si la tupla mostrada es la última de la BD
-?>
-        <a href="../Controllers/NOTA_TRABAJO_Controller.php?num_pagina=<?php echo $this->num_pagina+1?>&action=ALL"><input type="image" src="../Views/images/next.png" name="action" title="<?php echo $strings['Siguiente'] ?>" value="NEXT"></a>
-<?php
-        }//Fin del if si es la ultima tupla
-
-?>
-    </div>
+    
 </section>
 
 
@@ -176,19 +164,16 @@ function renderSearch(){
                 <table class="showAll">
                 <caption><?php echo $strings['Notas']?></caption>
                 <tr>
-                    <th><?php echo $strings['Login']?></th>   
-                    <th><?php echo $strings["Nombre"]; ?></th>
-                    <th><?php echo $strings["IdTrabajo"]; ?></th>
-                    <th><?php echo $strings["NombreTrabajo"]; ?></th>           
-                    <th><?php echo $strings['Nota Trabajo']?></th>
-             
-
-                <td>
+                    <th rowspan="2"><?php echo $strings['Login']?></th>   
+                    <th rowspan="2"><?php echo $strings["Nombre"]; ?></th>
+                    <th colspan="<?php echo (($this->num_trabajos)+1)?>"><?php echo $strings['Nota Trabajo']?></th>
+                    <th rowspan="2"><?php echo $strings['Nota Total']; ?></th> 
+                    <td rowspan="2">
                      <?php 
 
                     foreach ($this->acciones as $key => $value) {
                         if($value == 'SEARCH'){
-                            ?>
+                    ?>
                         <a href="../Controllers/NOTA_TRABAJO_Controller.php?action=SEARCH"><input type="image" src="../Views/images/search.png" name="action" title="<?php echo $strings['Buscar']?>" value="SEARCH"></a>
 
                             <?php
@@ -211,20 +196,37 @@ function renderSearch(){
 
                 </td>
                 </tr>
-<?php
-            while( $row = mysqli_fetch_array($this->datos)) { //Mientras el numero de tuplas no llegue al máximo y haya tuplas en la BD
-?>  <tr>
-                <td><?php echo $row["login"]; ?></td>
-                <td><?php echo $row["Nombre"]; ?></td>
-                <td><?php echo $row["IdTrabajo"]; ?></td>
-                <td><?php echo $row["NombreTrabajo"]; ?></td>
-                <td><?php echo $row["NotaTrabajo"]; ?></td>
+                <tr>  
+                    <th style="width: 5%; padding: 2px"><?php echo $strings["IdTrabajo"]; ?></th>
+                    <?php 
+                        while($row = mysqli_fetch_array($this->trabajos)){
+                    ?>
+                        <th><?php echo $row['IdTrabajo']; ?></th>
+                    <?php        
+                        }
+                    ?>
+                </tr> 
+<?php       
+            //Mientras el numero de tuplas no llegue al máximo y haya tuplas en la BD
+            while($row = mysqli_fetch_array($this->alumnos)) {
 
+                //echo "o ".$row['login'];
+                if(($row['login'] <> '') && (array_key_exists($row['login'], $this->datos))){
+                
+?>          
+                    <tr>
+                    <td><?php echo $this->datos[$row['login']]["login"]; ?></td>
+                    <td><?php echo $this->datos[$row['login']]["Nombre"]; ?></td>
+                    <th></th>
+                    <?php
+                        for($i = 0; $i < sizeof($this->trabajosNota); $i++){
+                    ?>
+                        <td><a href="../Controllers/NOTA_TRABAJO_Controller.php?action=SHOW&login=<?php echo $this->datos[$row['login']]["login"]; ?>&IdTrabajo=<?php  echo $this->trabajosNota[$i]; ?>"?><?php echo $this->datos[$row['login']][$this->trabajosNota[$i]]; ?></a></td>
+                    <?php } ?>
+                    <td><?php if($this->notas <> false ) echo $this->notas[$row['login']]; ?></td>
+                    <td class="edit_tabla">
 
-                <td class="edit_tabla">
-                    
-                    
-                     <?php 
+                         <?php
 
                     foreach ($this->acciones as $key => $value) {
     
@@ -241,6 +243,7 @@ function renderSearch(){
            
 <?php
     }
+}
 ?>
      </table>
     <div class="acciones">
