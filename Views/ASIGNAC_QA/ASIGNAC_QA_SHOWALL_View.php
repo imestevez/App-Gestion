@@ -84,18 +84,23 @@ function render(){
                         <td>
                             <a href="../Controllers/ASIGNAC_QA_Controller.php?action=GENQA" ><input type="image" src="../Views/images/flecha.png" name="action" title="<?php echo $strings['Asignación automática de QAs']?>" value="GENQA" ></a>
                         </td> 
+                            </tr>
                                 
                             <?php
                         }
+                    }
+                    foreach ($this->acciones as $key => $value) {
 
                          if($value == 'GENEV'){
                             ?>
-                           
+                            <tr>
+
                     <th><?php echo $strings['Gen. historias evaluación']?></th>
                     <td>
                         <a href="../Controllers/ASIGNAC_QA_Controller.php?action=GENEV" ><input type="image" src="../Views/images/flecha.png" name="action" title="<?php echo $strings['Generación de historias a evaluar']?>" value="GENEV" ></a>
                     </td> 
-                </tr>
+                            </tr>
+
                             
                     <?php
                         }
@@ -103,7 +108,6 @@ function render(){
                     ?>
                     
                 </tr>
-                <tr>
 
 
 <?php		
