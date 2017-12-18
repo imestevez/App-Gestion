@@ -199,7 +199,7 @@ if (!isset($_REQUEST['action'])){
 			$usuario = new TRABAJO_SHOWCURRENT($tupla); //Crea la vista SHOWCURRENT del usuario requerido
 			break;
 
-		case 'SHOWALL_HISTORIAS':
+		case 'SHOWH':
 			$TRABAJO = new TRABAJO_Model($_REQUEST['IdTrabajo'], $_REQUEST['NombreTrabajo'],'','', '');
 			$listaHistorias = $TRABAJO->listarHistorias();
 			$resultado = new TRABAJO_SHOWALL_HISTORIAS($_REQUEST['IdTrabajo'], $_REQUEST['NombreTrabajo'], $listaHistorias);
