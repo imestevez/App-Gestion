@@ -23,6 +23,7 @@ class TRABAJO_SHOWALL{
     var $permisos; //array de permisos
     var $entregaExiste; //para saber si el usuario tiene una entrega sobre un trabajo
     var $admin; //para saber si es administrador
+    var $IdTrabajo; //id del trabajo
 
 
 
@@ -145,7 +146,7 @@ function render(){
             }
 ?>
                 <tr>
-                <td><?php echo $row["IdTrabajo"]; ?></td>
+                <td><?php echo $row["IdTrabajo"]; ?></td> <?php $this->IdTrabajo = $row["IdTrabajo"]; ?>
                 <td><?php echo $row["NombreTrabajo"]; ?></td>
                 <td><?php echo $this->FechaFinTrabajo; ?></td>
 
@@ -180,6 +181,7 @@ function render(){
                 ?>
                 <td>
                    <?php
+                   if(($this->IdTrabajo[0] <>'Q') && ($this->IdTrabajo[0] <>'q'))  {
                     if($this->entregaExiste <> null){
                         if(array_key_exists($row["IdTrabajo"], $this->entregaExiste)){
                 ?>
@@ -196,6 +198,7 @@ function render(){
                     <?php
                         }
                 }
+            }
        foreach ($this->permisos as $key => $value) {
 
                 # code...
@@ -204,7 +207,7 @@ function render(){
                 <td>
                     <a href="../Controllers/HISTORIA_Controller.php?action=ADD&IdTrabajo=<?php echo $row["IdTrabajo"]?>&NombreTrabajo=<?php echo $row["NombreTrabajo"]?>" ><input type="image" src="../Views/images/anadir.png" name="action" title="<?php echo $strings['Añadir']?>" value="ADD" ></a>
 
-                    <a href="../Controllers/TRABAJO_Controller.php?action=SHOWALL_HISTORIAS&IdTrabajo=<?php echo $row["IdTrabajo"]?>&NombreTrabajo=<?php echo $row["NombreTrabajo"]?>"><input type="image" src="../Views/images/ojo.png" name="action" title="<?php echo $strings['Mostrar en detalle'] ?>" value="SHOWCURRENT" action=""></a>
+                    <a href="../Controllers/TRABAJO_Controller.php?action=SHOWH&IdTrabajo=<?php echo $row["IdTrabajo"]?>&NombreTrabajo=<?php echo $row["NombreTrabajo"]?>"><input type="image" src="../Views/images/lista.png" name="action" title="<?php echo $strings['Mostrar en detalle'] ?>" value="SHOWH" action=""></a>
 
                 </td>
         <?php
