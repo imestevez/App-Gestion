@@ -49,7 +49,7 @@ else{
 	if ($respuesta == 'true'){ //si estan correctamente
 		$respuesta = $USUARIOS->ADD(); //añade al usuaurio en la BD
 		include_once '../Views/MESSAGE_View.php';
-		new MESSAGE($respuesta['mensaje'], 'Login_Controller.php');
+		new MESSAGE($respuesta['mensaje'], '../index.php');
 		}	
 	}
 }

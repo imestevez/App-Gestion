@@ -115,9 +115,9 @@ include '../Views/Header.php';
                             for ($k=$init2; $k < $fin2 ; $k++) { 
                             ?>
                             <tr>
-                                <td>
-                                   <!-- <textarea name="ComenIncorrectoA" maxlength="300" rows="6" cols="50" onblur="" style="margin-left: 10px; border-radius: 20px; border-top-left-radius: 0px; border-width: 2px; border-color: darkblue; width: 100%;" ><?php //echo $this->datos[$k][3] ?></textarea> -->
-                                    <input class="calificar" type="text" name="ComenIncorrectoA" readonly value="<?php echo $this->datos[$k][3]?>" > 
+                                <td colspan="2">
+                                   <textarea name="ComenIncorrectoA" readonly maxlength="300" rows="6" cols="50" onblur="" style="margin-left: 10px; border-radius: 20px; border-top-left-radius: 0px; border-width: 2px; border-color: darkblue; width: 90%;" ><?php echo $this->datos[$k][3] ?></textarea> 
+                                    <!--<input class="calificar" type="text" name="ComenIncorrectoA" readonly value="<?php //echo $this->datos[$k][3]?>" > -->
                                 </td>
                             </tr>
                             <?php
@@ -132,12 +132,23 @@ include '../Views/Header.php';
                         <tr>
                                 <td class="Comments" colspan="2"><?php echo $strings['ComentIncorrectoPCP']?></td>
                         </tr>
-                        <tr>
-                                <td>
-                                    <!--<textarea name="ComentIncorrectoP[]" maxlength="300" rows="6" cols="50" style="margin-left: 10px; border-radius: 20px; border-top-left-radius: 0px; border-width: 2px; border-color: darkblue; width: 100%;" ><?php //echo $this->datos[$indiceComentarioP][5] ?></textarea>--> 
-                                    <input type="text" name="ComentIncorrectoP[<?php echo $this->rellenarHistorias[$j][0] ?>]" value="<?php echo $this->datos[$indiceComentarioP][5] ?>" > 
+                        
+                        <tr >
+                                <td colspan="2">
+                                    <textarea name="ComentIncorrectoP[<?php echo $this->rellenarHistorias[$j][0] ?>]" maxlength="300" rows="6" cols="50" style="margin-left: 10px; border-radius: 20px; border-top-left-radius: 0px; border-width: 2px; border-color: darkblue; width: 90%;" value="<?php echo $this->datos[$indiceComentarioP][5] ?>" ><?php echo $this->datos[$indiceComentarioP][5] ?></textarea>
+
+
+
+                                    <!--<input type="text" name="ComentIncorrectoP[<?php //echo $this->rellenarHistorias[$j][0] ?>]" value="<?php //echo $this->datos[$indiceComentarioP][5] ?>" >  -->
+
+
+                                    
+
+
                                 </td>
-                                <td>
+                        </tr>
+                        <tr>
+                                <td colspan="2">
                                     <input class="calificar" type="text" readonly size="1" name="CorrectoP" value="<?php echo $this->datos[$indiceComentarioP][4] ?>">
                                     <input type="checkbox" name="evaluado[]" id="<?php echo $this->rellenarHistorias[$j][0] ?>" value="<?php echo $this->rellenarHistorias[$j][0]. "?" .$this->datos[$indiceComentarioP][4]. "?" . $this->datos[$indiceComentarioP][5] ?>" >
 
