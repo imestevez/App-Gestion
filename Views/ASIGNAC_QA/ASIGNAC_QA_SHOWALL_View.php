@@ -16,9 +16,10 @@ class ASIGNAC_QA_SHOWALL{
     var $max_tuplas ; //Máximo de tuplas a mostrar por página
     var $num_pagina; //Numero de página a mostrar
     var $orden ; //Vista desde la que se envia la orden
+    var $acciones; //acciones
 
 //constructor de la clase
-function __construct($lista, $datos,$num_tupla,$max_tuplas,$totalTuplas,$num_pagina, $orden, $origen){
+function __construct($lista, $datos,$num_tupla,$max_tuplas,$totalTuplas,$num_pagina, $orden, $origen, $acciones){
     //asignación de valores de parámetro a los atributos de la clase
     $this->datos = $datos;
     $this->origen = $origen;
@@ -28,6 +29,7 @@ function __construct($lista, $datos,$num_tupla,$max_tuplas,$totalTuplas,$num_pag
     $this->max_tuplas = $max_tuplas;
     $this->num_pagina = $num_pagina;
     $this->orden = $orden ;
+    $this->acciones = $acciones;
     
     if( $this->orden <>'SEARCH'){ //si no viene del search
         $this->render();
@@ -53,20 +55,57 @@ function render(){
                 <th rowspan="2"><?php echo $strings['Login del evaluado']?></th>
                 <th rowspan="2"><?php echo $strings['Alias del evaluado']?></th>      
                 <td rowspan="2">
-                    <a href="../Controllers/ASIGNAC_QA_Controller.php?action=SEARCH"><input type="image" src="../Views/images/search.png" name="action" title="<?php echo $strings['Buscar']?>" value="SEARCH"></a>
-                    <a href="../Controllers/ASIGNAC_QA_Controller.php?action=ADD" ><input type="image" src="../Views/images/anadir.png" name="action" title="<?php echo $strings['Añadir']?>" value="ADD" ></a>
+
+                     <?php 
+
+                    foreach ($this->acciones as $key => $value) {
+                        if($value == 'SEARCH'){
+                            ?>
+                             <a href="../Controllers/ASIGNAC_QA_Controller.php?action=SEARCH"><input type="image" src="../Views/images/search.png" name="action" title="<?php echo $strings['Buscar']?>" value="SEARCH"></a>
+                            
+                            <?php
+                        }
+
+                         if($value == 'ADD'){
+                            ?>
+                            <a href="../Controllers/ASIGNAC_QA_Controller.php?action=ADD" ><input type="image" src="../Views/images/anadir.png" name="action" title="<?php echo $strings['Añadir']?>" value="ADD" ></a>
+                            
+                    <?php
+                        }
+                    }
+                    ?>
                 </td>
-                    <th><?php echo $strings['Asignación auto. de QAs']?></th>
-                    <td>
-                        <a href="../Controllers/ASIGNAC_QA_Controller.php?action=GENQA" ><input type="image" src="../Views/images/flecha-reproducir.png" name="action" title="<?php echo $strings['Asignación automática de QAs']?>" value="GENQA" ></a>
-                    </td>    
-                </tr>
-                <tr>
+                  <?php 
+
+                    foreach ($this->acciones as $key => $value) {
+                        if($value == 'GENQA'){
+                            ?>
+                                <th><?php echo $strings['Asignación auto. de QAs']?></th>
+                        <td>
+                            <a href="../Controllers/ASIGNAC_QA_Controller.php?action=GENQA" ><input type="image" src="../Views/images/flecha.png" name="action" title="<?php echo $strings['Asignación automática de QAs']?>" value="GENQA" ></a>
+                        </td> 
+                                
+                            <?php
+                        }
+
+                         if($value == 'GENEV'){
+                            ?>
+                           
                     <th><?php echo $strings['Gen. historias evaluación']?></th>
                     <td>
-                        <a href="../Controllers/ASIGNAC_QA_Controller.php?action=GENEV" ><input type="image" src="../Views/images/flecha-reproducir.png" name="action" title="<?php echo $strings['Generación de historias a evaluar']?>" value="GENEV" ></a>
+                        <a href="../Controllers/ASIGNAC_QA_Controller.php?action=GENEV" ><input type="image" src="../Views/images/flecha.png" name="action" title="<?php echo $strings['Generación de historias a evaluar']?>" value="GENEV" ></a>
                     </td> 
                 </tr>
+                            
+                    <?php
+                        }
+                    }
+                    ?>
+                    
+                </tr>
+                <tr>
+
+
 <?php		
  
 			while( ($this->num_tupla < $this->max_tuplas) && ($row = mysqli_fetch_array($this->datos)) ) { //Mientras el numero de tuplas no llegue al máximo y haya tuplas en la BD
@@ -131,11 +170,57 @@ function renderSearch(){
                 <th><?php echo $strings['Login del evaluado']?></th>
                 <th><?php echo $strings['Alias del evaluado']?></th> 
 
-                <td><a href="../Controllers/ASIGNAC_QA_Controller.php?action=SEARCH"><input type="image" src="../Views/images/search.png" name="action" title="<?php echo $strings['Buscar']?>" value="SEARCH"></a>
-                    <a href="../Controllers/ASIGNAC_QA_Controller.php?action=ADD" ><input type="image" src="../Views/images/anadir.png" name="action" title="<?php echo $strings['Añadir']?>" value="ADD" ></a>
+                     <?php 
+
+                    foreach ($this->acciones as $key => $value) {
+                        if($value == 'SEARCH'){
+                            ?>
+                             <a href="../Controllers/ASIGNAC_QA_Controller.php?action=SEARCH"><input type="image" src="../Views/images/search.png" name="action" title="<?php echo $strings['Buscar']?>" value="SEARCH"></a>
+                            
+                            <?php
+                        }
+
+                         if($value == 'ADD'){
+                            ?>
+                            <a href="../Controllers/ASIGNAC_QA_Controller.php?action=ADD" ><input type="image" src="../Views/images/anadir.png" name="action" title="<?php echo $strings['Añadir']?>" value="ADD" ></a>
+                            
+                    <?php
+                        }
+                    }
+                    ?>
                 </td>
+                  <?php 
+
+                    foreach ($this->acciones as $key => $value) {
+                        if($value == 'GENQA'){
+                            ?>
+                                <th><?php echo $strings['Asignación auto. de QAs']?></th>
+                        <td>
+                            <a href="../Controllers/ASIGNAC_QA_Controller.php?action=GENQA" ><input type="image" src="../Views/images/flecha.png" name="action" title="<?php echo $strings['Asignación automática de QAs']?>" value="GENQA" ></a>
+                        </td> 
+                                
+                            <?php
+                        }
+
+                         if($value == 'GENEV'){
+                            ?>
+                           
+                    <th><?php echo $strings['Gen. historias evaluación']?></th>
+                    <td>
+                        <a href="../Controllers/ASIGNAC_QA_Controller.php?action=GENEV" ><input type="image" src="../Views/images/flecha.png" name="action" title="<?php echo $strings['Generación de historias a evaluar']?>" value="GENEV" ></a>
+                    </td> 
                 </tr>
-<?php
+                            
+                    <?php
+                        }
+                    }
+                    ?>
+                    
+                </tr>
+                <tr>
+
+
+<?php   
             while( $row = mysqli_fetch_array($this->datos)) { //Mientras el numero de tuplas no llegue al máximo y haya tuplas en la BD
 ?>  <tr>
                 <td><?php echo $row["IdTrabajo"]; ?></td>

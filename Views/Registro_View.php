@@ -31,7 +31,7 @@ include '../Views/Header.php'; //header necesita los strings
          <fieldset class="add">
                 <legend style="margin-left: 30%"><?php echo $strings['Registro de usuario'] ?></legend>
            
-            <form method="post" name="ADD"  action="../Controllers/USUARIO_Controller.php" enctype="multipart/form-data" >
+            <form method="post" name="ADD"  action="../Controllers/Registro_Controller.php" enctype="multipart/form-data" >
                 
                 <div id="izquierda">
                     <label for="login"><?php echo $strings['Login']?>: </label>
@@ -76,7 +76,7 @@ include '../Views/Header.php'; //header necesita los strings
                 </div>
              </form>                     
                 <div class="acciones" style="float: left;">
-                     <a href="../Controllers/USUARIO_Controller.php?action=BACK"><input type="image" src="../Views/images/back.png" title="<?php echo $strings['Volver']?>"></a>
+                     <a href="../Controllers/Index_Controller.php?action=BACK"><input type="image" src="../Views/images/back.png" title="<?php echo $strings['Volver']?>"></a>
                 </div>
          </fieldset>
    
