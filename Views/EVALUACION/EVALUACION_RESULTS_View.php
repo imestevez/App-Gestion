@@ -53,7 +53,6 @@ include '../Views/Header.php';
 
 </script>
 
-    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
      <section class="pagina">
          <fieldset class="edit" style="width: 70%; margin-left: 15%">
                 <legend style="margin-left: 30%"><?php echo $strings['Calificar evaluacion'] ?></legend>

@@ -52,7 +52,7 @@ include_once '../Views/MESSAGE_View.php';
 
 
 include_once '../Views/EVALUACION/EVALUACION_CALIFICAR_View.php';
-
+include_once '../Views/EVALUACION/EVALUACION_RESULTS_View.php';
 // funcion para coger los datos del formulario
 function get_data_form(){
 
@@ -257,6 +257,28 @@ function getCalificarChecbox(){
 	// En funcion de la accion elegida
 	Switch ($action){
 
+	//	case 'RESUL': //si un alumno quiere visualizar sus resultados
+
+	//		$IdTrabajo = null;
+	//		$AliasEvaluado = null;
+
+	//		if ((isset($_REQUEST['IdTrabajo'])) && (isset($_REQUEST['AliasEvaluado']))) {
+	//			$IdTrabajo = $_REQUEST['IdTrabajo'];
+	//			$AliasEvaluado = $_REQUEST['AliasEvaluado'];
+	//		}
+
+	//		$EVALUACION = new EVALUACION_Model($IdTrabajo, '', $AliasEvaluado, '', '', '', '', '', ''); //crea una EVALUACION_Model con los campos clave del usuario y del trabajo
+	//		$contar = $EVALUACION->contar(); //contamos los login evaluadores
+	//		$contarHistorias = $EVALUACION->contarHistorias(); //contamos las historias
+	//		$lista = $EVALUACION->rellenarLista();
+	//		$lista['IdTrabajo'] = $IdTrabajo;
+	//		$lista['AliasEvaluado'] = $AliasEvaluado;
+	//		$listaHistorias = $EVALUACION->listarHistoriasCalificar();
+	//		$rellenarHistorias = $EVALUACION->rellenarHistorias();
+
+	//		$usuario = new EVALUACION_RESULTS($lista, $listaHistorias, $contar, $contarHistorias, $rellenarHistorias);
+
+	//	break;
 		case 'CALIF': //si es una calificacion
 				if(!$_POST){
 
