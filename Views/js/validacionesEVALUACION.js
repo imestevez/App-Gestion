@@ -252,10 +252,37 @@ function validarCorrecto(Correcto, min, max){
 
 }
 
+//Función para comprobar que un campo de tipo texto no supera el máximo de caracteres
+function comprobarTextoComent(campo, tamaño_max) {
+
+     var expr_alfanum; //Expresión regular para comprobar que un campo es alfanumerico y puede incluir caracteres como 
+    expr_alfanum =  /^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚçÇ_.-\s]+$/; //letras y numeros _ . - y espacios
+    
+     if (expr_alfanum.test(campo.value) == false) //Si no cumple la expresión regular
+    { 
+        document.getElementById(campo.name).style.display = 'block';      
+        return false;
+    }
+      else //Si cumple la expresión regular
+      {
+        if (campo.value.length > tamaño_max) //Si el tamaño del campo supera el maximo
+        {
+          document.getElementById(campo.name).style.display = 'block';
+            return false;
+        }
+        else //si el tamaño del campo no supera el máximo
+        {     
+            document.getElementById(campo.name).style.display = 'none';
+            return true;
+        }
+  }
+    
+}
+
 //Función que comprueba el ComentarioIncorrecto y no supera el maximo permitido
 function validarComentIncorrecto(ComentIncorrecto, tamaño_max){  
 
-  if(comprobarTexto(ComentIncorrecto,tamaño_max))//Si ComentIncorrecto cumple la expresión regular 
+  if(comprobarTextoComent(ComentIncorrecto,tamaño_max))//Si ComentIncorrecto cumple la expresión regular 
   {
     return true;
   }else{ //Si no cumple la expresión regular
@@ -548,19 +575,36 @@ function validar(formulario)
             alerta = false; //Se le asigna false a la variable alerta 
           }
         }else{
-           if( 
-            (validarIdTrabajo(form.IdTrabajo, 6)) && 
-            (validarlogin(form.LoginEvaluador, 9)) && 
-            (validarAlias(form.AliasEvaluado, 9)) &&  
-            (validarIdHistoria(form.IdHistoria)) && 
-            (validarCorrecto(form.CorrectoA, 0, 1)) && 
-            (validarComentIncorrecto(form.ComenIncorrectoA, 300)) && 
-            (validarCorrecto(form.CorrectoP, 0, 1)) && 
-            (validarComentIncorrecto(form.ComentIncorrectoP, 300)) && 
-            (validarOK(form.OK,0,1)) ){
 
-            alerta = false; //Se le asigna false a la variable alerta 
-          }
+            if(formulario == 'EDITP'){
+               if( 
+                (validarIdTrabajo(form.IdTrabajo, 6)) && 
+                (validarlogin(form.LoginEvaluador, 9)) && 
+                (validarAlias(form.AliasEvaluado, 9)) &&  
+                (validarIdHistoria(form.IdHistoria)) && 
+                (validarCorrecto(form.CorrectoA, 0, 1)) && 
+                (validarComentIncorrecto(form.ComenIncorrectoA, 300)) && 
+                (validarCorrecto(form.CorrectoP, 0, 1)) && 
+                (validarComentIncorrecto(form.ComentIncorrectoP, 300)) && 
+                (validarOK(form.OK,0,1)) ){
+
+                alerta = false; //Se le asigna false a la variable alerta 
+              }
+            }else{
+              if( 
+                (validarIdTrabajo(form.IdTrabajo, 6)) && 
+                (validarlogin(form.LoginEvaluador, 9)) && 
+                (validarAlias(form.AliasEvaluado, 9)) &&  
+                (validarIdHistoria(form.IdHistoria)) && 
+                (validarCorrecto(form.CorrectoA, 0, 1)) && 
+                (validarComentIncorrecto(form.ComenIncorrectoA, 300)) && 
+                (validarCorrecto(form.CorrectoP, 0, 1)) && 
+                (validarComentIncorrecto(form.ComentIncorrectoP, 300)) && 
+                (validarOK(form.OK,0,1)) ){
+
+                alerta = false; //Se le asigna false a la variable alerta 
+              }
+            }
         }
     }
 

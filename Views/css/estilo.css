@@ -488,6 +488,7 @@ a{
 
 .tablaRESULTS td{
     text-align: center;
+    margin: auto;
 }
 
 .tdRESULTS {
@@ -502,4 +503,10 @@ a{
     text-align: left;
     border-collapse: separate;
     border: 1px solid black;
+}
+
+
+
+.comenP{
+    word-break: break-all;
 }

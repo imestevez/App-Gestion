@@ -197,7 +197,7 @@ function getCalificarChecbox(){
 
 		//Si existen los evaluadores
 	if(isset($_REQUEST['ComentIncorrectoP'])){
-		$ComentIncorrectoP = $_REQUEST['ComentIncorrectoP'];
+		$ComentIncorrectoP = $_POST['ComentIncorrectoP'];
 		$num = count($ComentIncorrectoP);
 		foreach ($ComentIncorrectoP as $key => $value) {
 			$listaComentarios[$key] = $value;
