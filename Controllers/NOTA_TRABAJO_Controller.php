@@ -151,6 +151,7 @@ if (!isset($_REQUEST['action'])){
 				$lista = $NOTA_TRABAJO->genAutoNota(); //mete datos en respuesta usuarios despues de ejecutar el add con los de funcionalidad
 				$usuario = new MESSAGE($lista, '../Controllers/NOTA_TRABAJO_Controller.php'); //muestra el mensaje despues de la sentencia sql
 			break;
+
 		default: //Por defecto, Se muestra la vista SHOWALL
 			foreach ($acciones as $key => $value) {
 				if($value == 'ALL'){ //si puede ver el showall
@@ -203,7 +204,7 @@ if (!isset($_REQUEST['action'])){
 				$lista = array('login','IdTrabajo','NotaTrabajo');
 				$trabajos = $NOTA_TRABAJO->getTrabajos();
 				$trabajosNota = $NOTA_TRABAJO->getTrabajosArray();
-				$alumnos = $NOTA_TRABAJO->getAlumnos();
+				$alumnos = $NOTA_TRABAJO->getAlumno();
 				$num_trabajos = $NOTA_TRABAJO->getNumTrabajos();
 				$notas = $NOTA_TRABAJO->calcNotaF();
 				$UsuariosBD = new NOTA_TRABAJO_SHOWALL($lista, $datos, $num_tupla, $max_tuplas, $totalTuplas, $num_pagina, 'ALL', '../Controllers/NOTA_TRABAJO_Controller.php',$acciones, $trabajos, $num_trabajos, $trabajosNota, $alumnos, $notas); //Crea la vista SHOWALL de los usuarios de la BD	

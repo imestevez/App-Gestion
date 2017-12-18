@@ -246,15 +246,14 @@ function SHOWALL(){
 	}
 } // fin metodo SHOWALL
 
-function SHOWALL_User($num_tupla,$max_tuplas){
+function SHOWALL_User(){
 	$login = $_SESSION['login'];
 	$sql = "SELECT * 
 			FROM USUARIO U, NOTA_TRABAJO N, TRABAJO T
 			WHERE  (U.login = '$login' AND
 					N.login = U.login AND
 					N.IdTrabajo = T.IdTrabajo
-					)
-			LIMIT $num_tupla, $max_tuplas";
+					)";
 			
 /*
 	$sql = "SELECT * FROM USUARIO U, USU_GRUPO UG, GRUPO G
@@ -718,6 +717,15 @@ function existeNota(){
 		
 	}
 
+}
+
+	
+function getAlumno(){
+	$login = $_SESSION['login'];
+	$sql = "SELECT DISTINCT login FROM NOTA_TRABAJO WHERE login = '$login'";
+
+	$alumnos = $this->mysqli->query($sql);
+	return $alumnos;
 }
 
 }//Fin clase

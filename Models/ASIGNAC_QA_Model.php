@@ -320,6 +320,15 @@ function devolverLoginEvaluado(){
 //Función con la cual a partir de un IdTrabajo dado, para todas los usuarios que hayan subido una entrega de ese trabajo se le asginan otras cinco para QA
 function asig_QAS($IdTrabajo, $numEntregas){
 
+	//Comprobamos si ya se ha realizado la generación automática de evaluaciones
+	$sql_cmp_reset = "SELECT * FROM ASIGNAC_QA WHERE IdTrabajo = '$IdTrabajo'";
+	$cmp_reset = $this->mysqli->query($sql_cmp_reset);
+	$num_cmp_reset = mysqli_num_rows($cmp_reset);
+	if($num_cmp_reset > 0){
+			$sql_reset = "DELETE FROM ASIGNAC_QA WHERE IdTrabajo = '$IdTrabajo'";
+			$cmp_reset = $this->mysqli->query($sql_reset);
+	}
+
 	$sql = "SELECT * FROM TRABAJO WHERE IdTrabajo = '$IdTrabajo'";
 
 	$result = $this->mysqli->query($sql);
@@ -447,80 +456,102 @@ function numEntregasTrabajo($IdTrabajo){
 //Función para la generción automática de historias de usuario a evaluar en EVALUACIÓN
 function historiasEvaluación($IdTrabajo){
 
-	$sql = "SELECT * FROM TRABAJO WHERE IdTrabajo = '$IdTrabajo'";
+	//Comprobamos que se hayan generado primero las asignaciones de qas para ese trabajo
+	$sql_cmp_asig = "SELECT * FROM ASIGNAC_QA WHERE IdTrabajo = '$IdTrabajo'";
+	$cmp_asig = $this->mysqli->query($sql_cmp_asig);
+	$num_cmp_asig = mysqli_num_rows($cmp_asig);
 
-	$result = $this->mysqli->query($sql);
-	$num_rows = mysqli_num_rows($result);
+	if($num_cmp_asig > 0){
+	
 
-	if($num_rows > 0){
+		//Comprobamos si ya se ha realizado la generación automática de evaluaciones
+		$sql_cmp_reset = "SELECT * FROM EVALUACION WHERE IdTrabajo = '$IdTrabajo'";
+		$cmp_reset = $this->mysqli->query($sql_cmp_reset);
+		$num_cmp_reset = mysqli_num_rows($cmp_reset);
+		if($num_cmp_reset > 0){
+			$sql_reset = "DELETE FROM EVALUACION WHERE IdTrabajo = '$IdTrabajo'";
+			$cmp_reset = $this->mysqli->query($sql_reset);
+		}
 
-		//Cogemos todas las asignaciones generadas para un trabajo y las juntamos con las historias del mismo
-		$sql = "SELECT * FROM HISTORIA H, ASIGNAC_QA A
-					WHERE (H.IdTrabajo = A.IdTrabajo AND
-							 H.IdTrabajo = '$IdTrabajo')";
+		$sql = "SELECT * FROM TRABAJO WHERE IdTrabajo = '$IdTrabajo'";
 
 		$result = $this->mysqli->query($sql);
 		$num_rows = mysqli_num_rows($result);
-		
-		//Contador de evaluaciones creadas con éxito
-		$cont_exito = 0;
 
-		while($row = mysqli_fetch_array($result)){
+		if($num_rows > 0){
 
-			$LoginEvaluador = $row['LoginEvaluador'];
-			$AliasEvaluado = $row['AliasEvaluado'];
-			$IdHistoria = $row['IdHistoria'];
+			//Cogemos todas las asignaciones generadas para un trabajo y las juntamos con las historias del mismo
+			$sql = "SELECT * FROM HISTORIA H, ASIGNAC_QA A
+						WHERE (H.IdTrabajo = A.IdTrabajo AND
+								 H.IdTrabajo = '$IdTrabajo')";
 
-			//Creamos una evaluación de la historia para una determinada asignación de QAs
+			$result = $this->mysqli->query($sql);
+			$num_rows = mysqli_num_rows($result);
+			
+			//Contador de evaluaciones creadas con éxito
+			$cont_exito = 0;
 
-			$sql = "INSERT INTO EVALUACION 
-									(IdTrabajo, 
-									 LoginEvaluador,
-									  AliasEvaluado,
-									   IdHistoria,
-									    CorrectoA,
-									     ComenIncorrectoA,
-									      CorrectoP,
-									       ComentIncorrectoP,
-									        OK)
-									         VALUES 
-									         ('$IdTrabajo',
-									           '$LoginEvaluador',
-									            '$AliasEvaluado',
-									             '$IdHistoria',
-									              '0',
-									               '',
-									                '0',
-									                 '',
-									                  '0')";	
-									                  
-			if ($result_insert = $this->mysqli->query($sql)){
-				$cont_exito++;	
+			while($row = mysqli_fetch_array($result)){
+
+				$LoginEvaluador = $row['LoginEvaluador'];
+				$AliasEvaluado = $row['AliasEvaluado'];
+				$IdHistoria = $row['IdHistoria'];
+
+				//Creamos una evaluación de la historia para una determinada asignación de QAs
+
+				$sql = "INSERT INTO EVALUACION 
+										(IdTrabajo, 
+										 LoginEvaluador,
+										  AliasEvaluado,
+										   IdHistoria,
+										    CorrectoA,
+										     ComenIncorrectoA,
+										      CorrectoP,
+										       ComentIncorrectoP,
+										        OK)
+										         VALUES 
+										         ('$IdTrabajo',
+										           '$LoginEvaluador',
+										            '$AliasEvaluado',
+										             '$IdHistoria',
+										              '0',
+										               '',
+										                '0',
+										                 '',
+										                  '0')";	
+										                  
+				if ($result_insert = $this->mysqli->query($sql)){
+					$cont_exito++;	
+				}
+				else{
+					$this->lista['mensaje'] =  'ERROR: La generación de historias a evaluar no ha sido realizada correctamente'; 
+					return $this->lista;	
+				}						                  					                  
+			}	
+
+			$sql = "SELECT * FROM EVALUACION WHERE IdTrabajo = '$IdTrabajo'";
+			$result = $this->mysqli->query($sql);
+			$num_rows = mysqli_num_rows($result);
+			if($num_rows == $cont_exito){
+
+				$this->lista['mensaje'] =  'Generación de historias a evaluar realizada correctamente'; 
+					return $this->lista; 
 			}
 			else{
+
 				$this->lista['mensaje'] =  'ERROR: La generación de historias a evaluar no ha sido realizada correctamente'; 
-				return $this->lista;	
-			}						                  					                  
-		}	
-
-		$sql = "SELECT * FROM EVALUACION WHERE IdTrabajo = '$IdTrabajo'";
-		$result = $this->mysqli->query($sql);
-		$num_rows = mysqli_num_rows($result);
-		if($num_rows == $cont_exito){
-
-			$this->lista['mensaje'] =  'Generación de historias a evaluar realizada correctamente'; 
 				return $this->lista; 
+			}
+
 		}
 		else{
-
-			$this->lista['mensaje'] =  'ERROR: La generación de historias a evaluar no ha sido realizada correctamente'; 
-			return $this->lista; 
-		}
-
+			$this->lista['mensaje'] =  'ERROR: No existe ningún trabajo con ese IdTrabajo'; 
+			return $this->lista;
+		}	
 	}
 	else{
-		$this->lista['mensaje'] =  'ERROR: No existe ningún trabajo con ese IdTrabajo'; 
-		return $this->lista;
+		$this->lista['mensaje'] =  'ERROR: No hay asignaciones de qas para este trabajo'; 
+			return $this->lista;
 	}	
 }
 
