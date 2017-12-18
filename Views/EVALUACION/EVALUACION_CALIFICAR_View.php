@@ -12,20 +12,12 @@ Vista para que el  usuario pueda crear editar los tabajos
 class EVALUACION_CALIFICAR{
 
     var $IdTrabajo; //atributo para almacenar el IdTrabajo de un trabajo
-    var $LoginEvaluador; //atributo para almacenar el LoginEvaluador del evaluador
     var $AliasEvaluado; //atributo para almacenar el AliasEvaluado del usuario evaluado
-    var $IdHistoria; //atributo para almacenar el IdHistoria de la historia en cuestion
-    var $CorrectoA; //atributo para almacenar el valor Correcto del alumno evaluador
-    var $ComenIncorrectoA; //atributo para almacenar el comentario incorrecto del alumno evaluador
-    var $CorrectoP; //atributo para almacenar el valor Correcto del profesor
-    var $ComentIncorrectoP; //atributo para almacenar el comentario incorrecto del profesor
-    var $OK; //atributo para almacenar el resultado (1 - 0) de la evaluacion de la QA
-    var $listaHistorias;
-    var $listaComentarios;
-    var $datos;
-    var $contar;
-    var $contarHistorias;
-    var $rellenarHistorias;
+    var $listaHistorias; //atributo para almacenar la lista de historiasdel trabajo del usuario evaluado
+    var $datos; //atributo para almacenar los datos que necesitamos
+    var $contar; //atributo para almacenar el número de evaluadores que evalúan a este alias
+    var $contarHistorias; //atributo para almacenar el número de historias que tiene el trabajo del alias a evaluar
+    var $rellenarHistorias; //atributo para almacenar los atributos de las historias
 
 function __construct($lista, $listaHistorias, $contar, $contarHistorias, $rellenarHistorias){
     //asignación de valores de parámetro a los atributos de la clase
