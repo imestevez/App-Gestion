@@ -36,11 +36,11 @@
 
                  
             <div class="acciones" style="float: right; margin-left:0%; margin-right: 50%">
-                    <a href="../Controllers/ASIGNAC_QA_Controller.php?action=GENQA&IdTrabajo=<?php echo $this->IdTrabajo?>&numEntregas=<?php echo $this->numEntregas?>"> <input type="image" name="action" value="GENQA" src="../Views/images/confirmar.png" title="<?php echo $strings['Enviar Formulario'] ?>" onclick="return validar('ADD')"></a>
+                    <a href="../Controllers/ASIGNAC_QA_Controller.php?action=GENQA"> <input type="image" name="action" value="GENQA" src="../Views/images/confirmar.png" title="<?php echo $strings['Enviar Formulario'] ?>" onclick="return validar('ADD')"></a>
                 </div>
             </form>                     
             <div class="acciones" style="float: left;">
-                <a href="../Controllers/ASIGNAC_QA_Controller.php?action=SHOWALL"><input type="image" src="../Views/images/back.png" title="<?php echo $strings['Volver']?>"></a>
+                <a href="../Controllers/ASIGNAC_QA_Controller.php?action=ALL"><input type="image" src="../Views/images/back.png" title="<?php echo $strings['Volver']?>"></a>
             </div>
         </fieldset>
     </section>

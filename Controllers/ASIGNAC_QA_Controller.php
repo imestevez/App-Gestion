@@ -25,8 +25,8 @@ if(isset($_REQUEST["action"]))  {
 
 //Si no tiene permisos para acceder a este controlador con la accion que trae
 if(!HavePermissions(9, $action)) {
-	//new MESSAGE('No tienes permisos para realizar esta accion', '../index.php');
-	header('Location:../index.php'); //vuelve al index
+	new MESSAGE('No tienes permisos para realizar esta accion', '../index.php');exit();
+	//header('Location:../index.php'); //vuelve al index
 }
 //almacenamos un array de permidos del grupo
 $permisos = listaPermisos();
@@ -180,7 +180,7 @@ if (!isset($_REQUEST['action'])){
 				$ASIGNAC_QA = get_data_form(); //coge los datos del formulario del usuario que desea buscar
 				$datos = $ASIGNAC_QA->SEARCH();//Ejecuta la funcion SEARCH() en el ASIGNAC_QA_Model
 				$lista = array('IdTrabajo','NombreTrabajo','LoginEvaluador','LoginEvaluado','AliasEvaluado');
-				$resultado = new ASIGNAC_QA_SHOWALL($lista, $datos, 0, 0, 0, 0, 'SEARCH', '../Controllers/ASIGNAC_QA_Controller.php');//Crea la vista SHOWALL y muestra los usuarios que cumplen los parámetros de búsqueda 
+				$resultado = new ASIGNAC_QA_SHOWALL($lista, $datos, 0, 0, 0, 0, 'SEARCH', '../Controllers/ASIGNAC_QA_Controller.php',$acciones);//Crea la vista SHOWALL y muestra los usuarios que cumplen los parámetros de búsqueda 
 			}
 			break;
 		case 'SHOW': //si desea ver un usuario en detalle
