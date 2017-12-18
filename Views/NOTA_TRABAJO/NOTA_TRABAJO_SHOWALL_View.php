@@ -117,7 +117,7 @@ function render(){
                 <?php
                     for($i = 0; $i < sizeof($this->trabajosNota); $i++){
                 ?>
-                    <td><?php echo $this->datos[$row['login']][$this->trabajosNota[$i]]; ?></td>
+                    <td><a href="../Controllers/NOTA_TRABAJO_Controller.php?action=SHOW&login=<?php echo $this->datos[$row['login']]["login"]; ?>&IdTrabajo=<?php  echo $this->trabajosNota[$i]; ?>"><?php echo $this->datos[$row['login']][$this->trabajosNota[$i]]; ?></a></td>
                 <?php } ?>
                 <td><?php if($this->notas <> false ) echo $this->notas[$row['login']]; ?></td>
                 <td class="edit_tabla">
