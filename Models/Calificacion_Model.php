@@ -65,7 +65,6 @@ function CALIF()
 
 		if(($this->numHistorias > 0) ){//&& ($this->numEvaluadores > 0)){
 
-
 			if((count($this->listaEvaluadores) > 0) ){
 
 				foreach ($this->listaEvaluadores as $key => $value) {
@@ -75,7 +74,7 @@ function CALIF()
 					$this->CorrectoA = $value[2];
 					$this->OK = $value[3];
 					$this->ComenIncorrectoA = $value[4];
-					$this->ComentIncorrectoP =  $this->listaComentarios[$this->IdHistoria];
+					//$this->ComentIncorrectoP =  $this->listaComentarios[$this->IdHistoria];
 					$this->CorrectoP = $this->listaEvaluado[$this->IdHistoria][0];
 					
 					if($this->CorrectoP == 0){
@@ -97,22 +96,22 @@ function CALIF()
 							ComentIncorrectoP = '$this->ComentIncorrectoP',
 							OK = '$this->OK'
 						WHERE (IdTrabajo = '$this->IdTrabajo' AND LoginEvaluador = '$this->LoginEvaluador' AND AliasEvaluado = '$this->AliasEvaluado' AND IdHistoria = '$this->IdHistoria')";
+					  
+					  if (!($result = $this->mysqli->query($sql))){
+						        		$this->lista['mensaje'] =  'ERROR: No se ha modificado'; 
+										return $this->lista; 
+				    	}
+				    }
+				}
 
-						echo $sql;
-		    	$result = $this->mysqli->query($sql);
-		   			 }
-
-			}else{
 				if(count($this->listaEvaluado) > 0){
 
 					foreach ($this->listaEvaluado as $key => $value) {
 
 						$this->IdHistoria = $key;
-						$this->ComentIncorrectoP = $this->listaComentarios[$this->IdHistoria];
+						//$this->ComentIncorrectoP = $this->listaComentarios[$this->IdHistoria];
 						$this->CorrectoP = $value[0];
 
-						echo $this->CorrectoP;
-						
 						if($this->CorrectoP == 0){
 							$this->CorrectoP = 1;
 						}else{
@@ -123,39 +122,43 @@ function CALIF()
 								CorrectoP = '$this->CorrectoP',
 								ComentIncorrectoP = '$this->ComentIncorrectoP'
 							WHERE (IdTrabajo = '$this->IdTrabajo' AND AliasEvaluado = '$this->AliasEvaluado' AND IdHistoria = '$this->IdHistoria')";
-						echo $sql;
 
-		    	$result = $this->mysqli->query($sql);
-
-				}
-
-
-				}else{
-					if(count($this->listaComentarios) > 0){
-						echo "3";
-						foreach ($this->listaComentarios as $key => $value) {
-
-						$this->IdHistoria = $key;
-						$this->ComentIncorrectoP = $value;						
-				
-						$sql = "UPDATE EVALUACION SET 
-								ComentIncorrectoP = '$this->ComentIncorrectoP'
-							WHERE (IdTrabajo = '$this->IdTrabajo' AND AliasEvaluado = '$this->AliasEvaluado' AND IdHistoria = '$this->IdHistoria')";
-						echo $sql;
-
-		    	$result = $this->mysqli->query($sql);
+			    	  if (!($result = $this->mysqli->query($sql))){
+		        		$this->lista['mensaje'] =  'ERROR: No se ha modificado'; 
+						return $this->lista; 
+			    	}
 
 				}
+
+
 			}
+				
+		if(count($this->listaComentarios) > 0){
+			foreach ($this->listaComentarios as $key => $value) {
 
+			$this->IdHistoria = $key;
+			$this->ComentIncorrectoP = $value;
+
+			$sql = "UPDATE EVALUACION SET 
+					ComentIncorrectoP = '$this->ComentIncorrectoP'
+				WHERE (IdTrabajo = '$this->IdTrabajo' AND AliasEvaluado = '$this->AliasEvaluado' AND IdHistoria = '$this->IdHistoria')";
+
+			  if (!($result = $this->mysqli->query($sql))){
+					$this->lista['mensaje'] =  'ERROR: No se ha modificado'; 
+					return $this->lista; 
 				}
+	
+			}
 		}
-		} else{
-			echo "algo viene vacio";
 
-
-		}
+		$this->lista['mensaje'] =  'Modificado correctamente'; 
+		return $this->lista; 
 	}
+}else{
+	$this->lista['mensaje'] = 'ERROR: Fallo en la modificación. Introduzca todos los valores';
+	return $this->lista; 
+
+}
 }
 }
 ?>

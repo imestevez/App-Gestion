@@ -21,6 +21,8 @@ function __construct($lista){
     $this->IdTrabajo = $lista['IdTrabajo'];
     $this->NombreTrabajo = $lista['NombreTrabajo'];
     $this->NotaTrabajo = $lista['NotaTrabajo'];
+    $this->PorcentajeNota = $lista['PorcentajeNota'];
+
     $this->render();
 }
 
@@ -38,6 +40,9 @@ function render(){
                 <tr><th><?php echo $strings['IdTrabajo'] ?></th><td><?php echo $this->IdTrabajo ?></td></tr>
                 <tr><th><?php echo $strings['NombreTrabajo'] ?></th><td><?php echo $this->NombreTrabajo ?></td></tr>
                 <tr><th><?php echo $strings['Nota Trabajo'] ?></th><td><?php echo $this->NotaTrabajo ?></td></tr>
+                <tr><th><?php echo $strings['PorcentajeNota'] ?></th><td><?php echo $this->PorcentajeNota ?></td></tr>
+                <tr><th><?php echo $strings['Nota Parcial'] ?></th><td><?php $aux = $this->NotaTrabajo*$this->PorcentajeNota; echo $aux  ?></td></tr>
+                <a href="../Controllers/NOTA_TRABAJO_Controller.php?action=RESUL&login=<?php echo $lista["login"]?>&IdTrabajo=<?php echo $lista["IdTrabajo"]?>"><input type="image" name="action" value="SHOWALL" src="../Views/images/resultado.png" title="<?php echo $strings['Ver correccion'] ?>"></a>
         </table>
 
         <div class="accionesTable">

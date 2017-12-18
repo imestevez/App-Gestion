@@ -325,7 +325,29 @@ function SHOWALL($num_tupla,$max_tuplas){
 		return $resultado;
 	}
 } // fin metodo SHOWALL
+function SHOWALL_User($num_tupla,$max_tuplas){
+	$login = $_SESSION['login'];
 
+	$sql = "SELECT Alias FROM ENTREGA WHERE login = '$login'";
+
+	$resultado = $this->mysqli->query($sql);
+	$row = mysqli_fetch_array($resultado);
+	$alias = $row['Alias'];
+
+	$sql = "SELECT DISTINCT E.IdTrabajo, T.NombreTrabajo, E.LoginEvaluador, E.AliasEvaluado
+					 FROM EVALUACION E, TRABAJO T, HISTORIA H
+						WHERE (E.IdTrabajo=T.IdTrabajo AND E.IdTrabajo=H.IdTrabajo AND H.IdHistoria=E.IdHistoria AND  E.LoginEvaluador = '$login'   )
+	LIMIT $num_tupla, $max_tuplas";
+
+	    // si se produce un error en la busqueda mandamos el mensaje de error en la consulta
+    if (!($resultado = $this->mysqli->query($sql))){
+    	$this->lista['mensaje'] =  'ERROR: Fallo en la consulta sobre la base de datos'; 
+		return $this->lista; 
+	}
+    else{ // si la busqueda es correcta devolvemos el recordset resultado
+		return $resultado;
+	}
+} // fin metodo SHOWALL
 //funcion que devuelve el numero de tuplas de la base de datos
 function contarTuplas(){
 	$sql = "SELECT * FROM EVALUACION";
@@ -500,7 +522,7 @@ function listarHistorias(){
 
 
 //Nos devuelve un recordset con todas las historias de una evaluacion
-function listarHistoriasSHOWCURRENT(){
+function listarHistoriasCalificar(){
 
 	$sql = "SELECT E.IdHistoria, H.TextoHistoria, E.LoginEvaluador, E.ComenIncorrectoA, E.CorrectoA, E.ComentIncorrectoP, E.CorrectoP, E.OK FROM EVALUACION E, TRABAJO T, HISTORIA H
 						 WHERE (
@@ -510,6 +532,33 @@ function listarHistoriasSHOWCURRENT(){
 						 		E.IdTrabajo = H.IdTrabajo AND 
 						 		E.IdHistoria = H.IdHistoria AND
 						 		E.AliasEvaluado = '$this->AliasEvaluado'
+															)  ORDER BY 1"; 
+
+			
+	    // si se produce un error en la busqueda mandamos el mensaje de error en la consulta
+
+    if (!($resultado = $this->mysqli->query($sql))){
+    	$this->lista['mensaje'] =  'ERROR: Fallo en la consulta sobre la base de datos'; 
+		return $this->lista; 
+	}
+    else{ // si la busqueda es correcta devolvemos el recordset resultado
+		return $resultado;
+	}
+}
+
+//Nos devuelve un recordset con todas las historias de una evaluacion
+function listarHistoriasSHOWCURRENT(){
+
+	$sql = "SELECT E.IdHistoria, H.TextoHistoria, E.LoginEvaluador, E.ComenIncorrectoA, E.CorrectoA, E.ComentIncorrectoP, E.CorrectoP, E.OK FROM EVALUACION E, TRABAJO T, HISTORIA H
+						 WHERE (
+						 		
+						 		E.IdTrabajo = '$this->IdTrabajo' AND
+						 		E.IdTrabajo = T.IdTrabajo AND
+						 		E.IdTrabajo = H.IdTrabajo AND 
+						 		E.IdHistoria = H.IdHistoria AND
+						 		E.AliasEvaluado = '$this->AliasEvaluado' AND
+						 		E.LoginEvaluador = '$this->LoginEvaluador'
+
 															)  ORDER BY 1"; 
 
 			

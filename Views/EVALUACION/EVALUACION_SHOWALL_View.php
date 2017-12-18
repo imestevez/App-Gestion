@@ -17,10 +17,11 @@ class EVALUACION_SHOWALL{
     var $num_tupla; //Variable para almacenar el número de tuplas mostradas
     var $max_tuplas ; //Máximo de tuplas a mostrar por página
     var $num_pagina; //Numero de página a mostrar
+    var $acciones;
     var $orden ; //Vista desde la que se envia la orden
 
 //constructor de la clase
-function __construct($lista, $datos,$num_tupla,$max_tuplas,$totalTuplas,$num_pagina, $orden, $origen){
+function __construct($lista, $datos,$num_tupla,$max_tuplas,$totalTuplas,$num_pagina, $orden, $origen, $acciones){
     //asignación de valores de parámetro a los atributos de la clase
     $this->datos = $datos;
     $this->origen = $origen;
@@ -29,6 +30,7 @@ function __construct($lista, $datos,$num_tupla,$max_tuplas,$totalTuplas,$num_pag
     $this->num_tupla = $num_tupla;
     $this->max_tuplas = $max_tuplas;
     $this->num_pagina = $num_pagina;
+    $this->acciones = $acciones;
     $this->orden = $orden ;
     
     if( $this->orden <>'SEARCH'){ //si no viene del search
@@ -51,11 +53,40 @@ function render(){
                 <tr>
                     <th><?php echo $strings["IdTrabajo"]; ?></th>
                     <th><?php echo $strings["NombreTrabajo"]; ?></th>
-                    <th><?php echo $strings["LoginEvaluador"]; ?></th>
-                    <th><?php echo $strings["AliasEvaluado"]; ?></th>                                         
 
-                    <td><a href="../Controllers/EVALUACION_Controller.php?action=SEARCH"><input type="image" src="../Views/images/search.png" name="action" title="<?php echo $strings['Buscar']?>" value="SEARCH"></a>
+                     <?php 
+
+                    foreach ($this->acciones as $key => $value) {
+                        if($value == 'ALL'){
+                            ?>
+                    <th><?php echo $strings["LoginEvaluador"]; ?></th>
+                            
+                <?php
+            }
+        }
+        ?>
+                    <th><?php echo $strings["AliasEvaluado"]; ?></th> 
+                    <td>
+                    <?php 
+
+                    foreach ($this->acciones as $key => $value) {
+                        if($value == 'SEARCH'){
+                            ?>
+                    <a href="../Controllers/EVALUACION_Controller.php?action=SEARCH"><input type="image" src="../Views/images/search.png" name="action" title="<?php echo $strings['Buscar']?>" value="SEARCH"></a>
+                        
+                        
+                            <?php
+                        }
+
+                         if($value == 'ADD'){
+                    ?>
                         <a href="../Controllers/EVALUACION_Controller.php?action=ADD" ><input type="image" src="../Views/images/anadir.png" name="action" title="<?php echo $strings['Añadir']?>" value="ADD" ></a>
+
+                    <?php
+                        }
+                    }
+                    ?>                                       
+
                     </td>
                 </tr>
 <?php       
@@ -65,13 +96,47 @@ function render(){
             <tr>
                 <td><?php echo $row["IdTrabajo"]; ?></td>
                 <td><?php echo $row["NombreTrabajo"]; ?></td>
+                 <?php 
+
+                    foreach ($this->acciones as $key => $value) {
+                        if($value == 'ALL'){
+                            ?>
                 <td><?php echo $row["LoginEvaluador"]; ?></td>
+                <?php
+            }
+        }
+        ?>
                 <td><?php echo $row["AliasEvaluado"]; ?></td>
 
                 <td class="edit_tabla">
+
+                       <?php 
+
+                    foreach ($this->acciones as $key => $value) {
+                        if($value == 'SHOW'){
+                            ?>
                     <a href="../Controllers/EVALUACION_Controller.php?action=SHOW&LoginEvaluador=<?php echo $row["LoginEvaluador"]?>&IdTrabajo=<?php echo $row["IdTrabajo"]?>&AliasEvaluado=<?php echo $row["AliasEvaluado"] ?>"><input type="image" src="../Views/images/ojo.png" name="action" title="<?php echo $strings['Mostrar en detalle'] ?>" value="SHOW" action="">
-                    </a>
+                    
+                    
+                            <?php
+                        }
+
+                         if($value == 'CALIF'){
+                            ?>
                     <a href="../Controllers/EVALUACION_Controller.php?action=CALIF&IdTrabajo=<?php echo $row["IdTrabajo"]?>&AliasEvaluado=<?php echo $row["AliasEvaluado"] ?>"><input type="image" src="../Views/images/evaluacion.png" name="action" title="<?php echo $strings['Calif']?>" value="CALIF"></a>
+                        
+                    
+                     <?php
+                        }
+                           if($value == 'DELETE'){
+                            ?>
+                    <a href="../Controllers/EVALUACION_Controller.php?action=DELETE&LoginEvaluador=<?php echo $row["LoginEvaluador"]?>&IdTrabajo=<?php echo $row["IdTrabajo"]?>&AliasEvaluado=<?php echo $row["AliasEvaluado"] ?>"><input type="image" src="../Views/images/delete.png" name="action" title="<?php echo $strings['Eliminar'] ?>" value="DELETE"></a>
+                    
+                   
+                    <?php
+                        }
+                    }
+                    ?>      
                 </td>               
             </tr>
 <?php
@@ -120,8 +185,26 @@ function renderSearch(){
                         <th><?php echo $strings["AliasEvaluado"]; ?></th>
                         
 
-                        <td><a href="../Controllers/EVALUACION_Controller.php?action=SEARCH"><input type="image" src="../Views/images/search.png" name="action" title="<?php echo $strings['Buscar']?>" value="SEARCH"></a>
+                        <td> 
+                         <?php 
+
+                    foreach ($this->acciones as $key => $value) {
+                        if($value == 'SEARCH'){
+                            ?>
+                    <a href="../Controllers/EVALUACION_Controller.php?action=SEARCH"><input type="image" src="../Views/images/search.png" name="action" title="<?php echo $strings['Buscar']?>" value="SEARCH"></a>
+                        
+                        
+                            <?php
+                        }
+
+                         if($value == 'ADD'){
+                    ?>
                         <a href="../Controllers/EVALUACION_Controller.php?action=ADD" ><input type="image" src="../Views/images/anadir.png" name="action" title="<?php echo $strings['Añadir']?>" value="ADD" ></a>
+
+                    <?php
+                        }
+                    }
+                    ?>  
                         </td>
                     </tr>
 <?php
@@ -134,9 +217,33 @@ function renderSearch(){
                 
 
             <td class="edit_tabla">
-                    <a href="../Controllers/EVALUACION_Controller.php?action=SHOW&LoginEvaluador=<?php echo $row["LoginEvaluador"]?>&IdTrabajo=<?php echo $row["IdTrabajo"]?>&AliasEvaluado=<?php echo $row["AliasEvaluado"] ?>"><input type="image" src="../Views/images/ojo.png" name="action" title="<?php echo $strings['Mostrar en detalle'] ?>" value="SHOW" action=""></a>
-                    <a href="../Controllers/EVALUACION_Controller.php?action=EDIT&LoginEvaluador=<?php echo $row["LoginEvaluador"]?>&IdTrabajo=<?php echo $row["IdTrabajo"]?>&AliasEvaluado=<?php echo $row["AliasEvaluado"] ?>"><input type="image" src="../Views/images/edit.png" name="action" title="<?php echo $strings['Editar'] ?>" value="EDIT"></a>
+                         <?php 
+
+                    foreach ($this->acciones as $key => $value) {
+                        if($value == 'SHOW'){
+                            ?>
+                    <a href="../Controllers/EVALUACION_Controller.php?action=SHOW&LoginEvaluador=<?php echo $row["LoginEvaluador"]?>&IdTrabajo=<?php echo $row["IdTrabajo"]?>&AliasEvaluado=<?php echo $row["AliasEvaluado"] ?>"><input type="image" src="../Views/images/ojo.png" name="action" title="<?php echo $strings['Mostrar en detalle'] ?>" value="SHOW" action="">
+                    
+                    
+                            <?php
+                        }
+
+                         if($value == 'CALIF'){
+                            ?>
+                    <a href="../Controllers/EVALUACION_Controller.php?action=CALIF&IdTrabajo=<?php echo $row["IdTrabajo"]?>&AliasEvaluado=<?php echo $row["AliasEvaluado"] ?>"><input type="image" src="../Views/images/evaluacion.png" name="action" title="<?php echo $strings['Calif']?>" value="CALIF"></a>
+                        
+                    
+                    <?php
+                        }
+                           if($value == 'DELETE'){
+                            ?>
                     <a href="../Controllers/EVALUACION_Controller.php?action=DELETE&LoginEvaluador=<?php echo $row["LoginEvaluador"]?>&IdTrabajo=<?php echo $row["IdTrabajo"]?>&AliasEvaluado=<?php echo $row["AliasEvaluado"] ?>"><input type="image" src="../Views/images/delete.png" name="action" title="<?php echo $strings['Eliminar'] ?>" value="DELETE"></a>
+                    
+                   
+                    <?php
+                        }
+                    }
+                    ?> 
                 </td>
 
                 

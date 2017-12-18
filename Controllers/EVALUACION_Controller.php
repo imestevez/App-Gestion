@@ -52,7 +52,7 @@ include_once '../Views/MESSAGE_View.php';
 
 
 include_once '../Views/EVALUACION/EVALUACION_CALIFICAR_View.php';
-
+include_once '../Views/EVALUACION/EVALUACION_RESULTS_View.php';
 // funcion para coger los datos del formulario
 function get_data_form(){
 
@@ -257,6 +257,28 @@ function getCalificarChecbox(){
 	// En funcion de la accion elegida
 	Switch ($action){
 
+	//	case 'RESUL': //si un alumno quiere visualizar sus resultados
+
+	//		$IdTrabajo = null;
+	//		$AliasEvaluado = null;
+
+	//		if ((isset($_REQUEST['IdTrabajo'])) && (isset($_REQUEST['AliasEvaluado']))) {
+	//			$IdTrabajo = $_REQUEST['IdTrabajo'];
+	//			$AliasEvaluado = $_REQUEST['AliasEvaluado'];
+	//		}
+
+	//		$EVALUACION = new EVALUACION_Model($IdTrabajo, '', $AliasEvaluado, '', '', '', '', '', ''); //crea una EVALUACION_Model con los campos clave del usuario y del trabajo
+	//		$contar = $EVALUACION->contar(); //contamos los login evaluadores
+	//		$contarHistorias = $EVALUACION->contarHistorias(); //contamos las historias
+	//		$lista = $EVALUACION->rellenarLista();
+	//		$lista['IdTrabajo'] = $IdTrabajo;
+	//		$lista['AliasEvaluado'] = $AliasEvaluado;
+	//		$listaHistorias = $EVALUACION->listarHistoriasCalificar();
+	//		$rellenarHistorias = $EVALUACION->rellenarHistorias();
+
+	//		$usuario = new EVALUACION_RESULTS($lista, $listaHistorias, $contar, $contarHistorias, $rellenarHistorias);
+
+	//	break;
 		case 'CALIF': //si es una calificacion
 				if(!$_POST){
 
@@ -273,7 +295,7 @@ function getCalificarChecbox(){
 				$lista = $EVALUACION->rellenarLista();
 				$lista['IdTrabajo'] = $IdTrabajo;
 				$lista['AliasEvaluado'] = $AliasEvaluado;
-				$listaHistorias = $EVALUACION->listarHistoriasSHOWCURRENT();
+				$listaHistorias = $EVALUACION->listarHistoriasCalificar();
 				$rellenarHistorias = $EVALUACION->rellenarHistorias();
 				//$listaLoginEvaluadores = $EVALUACION->listarLoginEvaluadores();  
 				//$listaComentarios = $EVALUACION->listarComentarios();
@@ -282,7 +304,7 @@ function getCalificarChecbox(){
 				}else{
 					$CALIFICACION =  getCalificarChecbox();
 					$calif = $CALIFICACION->CALIF();
-					exit();
+					$mensaje = new MESSAGE($calif, '../Controllers/EVALUACION_Controller.php'); //muestra el mensaje despues de la sentencia sql
 
 				}
 
@@ -364,7 +386,7 @@ function getCalificarChecbox(){
 				$EVALUACION = get_data_UserBD(); //coge los datos del formulario del usuario que desea buscar
 				$datos = $EVALUACION->SEARCH();//Ejecuta la funcion SEARCH() en el EVALUACION_Model
 				$lista = array('IdTrabajo', 'LoginEvaluador', 'AliasEvaluado', 'IdHistoria', 'CorrectoA', 'ComenIncorrectoA', 'CorrectoP', 'ComentIncorrectoP', 'OK');
-				$resultado = new EVALUACION_SHOWALL($lista, $datos, 0, 0, 0, 0, 'SEARCH', '../Controllers/EVALUACION_Controller.php');//Crea la vista SHOWALL y muestra los usuarios que cumplen los parámetros de búsqueda 
+				$resultado = new EVALUACION_SHOWALL($lista, $datos, 0, 0, 0, 0, 'SEARCH', '../Controllers/EVALUACION_Controller.php',$acciones);//Crea la vista SHOWALL y muestra los usuarios que cumplen los parámetros de búsqueda 
 			}
 			break;
 		case 'SHOW': //si desea ver un usuario en detalle
@@ -375,19 +397,25 @@ function getCalificarChecbox(){
 				$listaHistorias = $EVALUACION->listarHistoriasSHOWCURRENT();
 				$lista = $EVALUACION->rellenarLista();
 
-				$usuario = new EVALUACION_SHOWCURRENT($lista, $listaHistorias); //Crea la vista SHOWCURRENT del usuario requerido
+				$usuario = new EVALUACION_SHOWCURRENT($lista, $listaHistorias, $acciones); //Crea la vista SHOWCURRENT del usuario requerido
 			}else{
 				$EVALUACION = get_data_UserBD(); //coge los datos del formulario del usuario que desea editar
 				$respuesta = $EVALUACION->EDIT(); //Ejecuta la funcion EDIT() en el EVALUACION_Model
 				$listaHistorias = $EVALUACION->listarHistoriasSHOWCURRENT();
 				$lista = $EVALUACION->rellenarLista();
 
-				$usuario = new EVALUACION_SHOWCURRENT($lista, $listaHistorias); //Crea la vista SHOWCURRENT del usuario requerido
+				$usuario = new EVALUACION_SHOWCURRENT($lista, $listaHistorias,$acciones); //Crea la vista SHOWCURRENT del usuario requerido
 			}
 			break;
 		default: //Por defecto, Se muestra la vista SHOWALL
 			
-			if (!$_POST){
+			foreach ($acciones as $key => $value) {
+				if($value == 'ALL'){ //si puede ver el showall
+					$acceso = true; //acceso a true
+				}
+			}
+			if($acceso == true){ //si tiene acceso, mostramos el showall
+				if (!$_POST){
 				$EVALUACION = new EVALUACION_Model('', '', '', '', '', '', '', '', '');//crea una EVALUACION_Model
 			}
 			else{
@@ -404,8 +432,28 @@ function getCalificarChecbox(){
 			$totalTuplas = $EVALUACION->contarTuplas(); //Cuenta el número de tuplas que hay en la BD
 			$datos = $EVALUACION->SHOWALL($num_tupla,$max_tuplas); //Ejecuta la funcion SHOWALL() en el EVALUACION_Model
 			$lista = array('IdTrabajo', 'NombreTrabajo', 'LoginEvaluador', 'AliasEvaluado', 'IdHistoria', 'TextoHistoria', 'CorrectoA', 'ComenIncorrectoA', 'CorrectoP', 'ComentIncorrectoP', 'OK');
-			$UsuariosBD = new EVALUACION_SHOWALL($lista, $datos, $num_tupla, $max_tuplas, $totalTuplas, $num_pagina, 'ALL', '../Controllers/EVALUACION_Controller.php'); //Crea la vista SHOWALL de los usuarios de la BD	
-	}
+			$UsuariosBD = new EVALUACION_SHOWALL($lista, $datos, $num_tupla, $max_tuplas, $totalTuplas, $num_pagina, 'ALL', '../Controllers/EVALUACION_Controller.php',$acciones ); //Crea la vista SHOWALL de los usuarios de la BD	
+			}else{
+				if (!$_POST){
+					$EVALUACION = new EVALUACION_Model('', '', '', '', '', '', '', '', '');//crea una EVALUACION_Model
+				}
+				else{
+					$EVALUACION = get_data_form(); //Coge los datos del formulario
+				}
+
+				if(!isset($_REQUEST['num_pagina'])){ //Si es la 1a página del showall a mostrar
+					$num_pagina = 0;
+				}else{ //Si es otra página
+					$num_pagina = $_REQUEST['num_pagina']; //coge el numero de página del formulario
+				}
+				$num_tupla = $num_pagina*10; //número de la 1º tupla a mostrar
+				$max_tuplas = $num_tupla+10; // el número de tuplas a mostrar por página
+				$totalTuplas = $EVALUACION->contarTuplas(); //Cuenta el número de tuplas que hay en la BD
+				$datos = $EVALUACION->SHOWALL_User($num_tupla,$max_tuplas); //Ejecuta la funcion SHOWALL() en el EVALUACION_Model
+				$lista = array('IdTrabajo', 'NombreTrabajo', 'LoginEvaluador', 'AliasEvaluado', 'IdHistoria', 'TextoHistoria', 'CorrectoA', 'ComenIncorrectoA', 'CorrectoP', 'ComentIncorrectoP', 'OK');
+				$GruposBD = new EVALUACION_SHOWALL($lista, $datos, $num_tupla, $max_tuplas, $totalTuplas, $num_pagina, 'ALL', '../Controllers/GRUPO_Controller.php',$acciones); //Crea la vista SHOWALL de los grupos de la BD
+			}	
+		}
 	}
 
 ?>
