@@ -339,7 +339,6 @@ function comprobarExistenciaTrabajo(){
 
 //Función para cualificar todas las entregas de un IdTrabajo
 function genAutoNotasET($IdTrabajo){
-	echo "aqui";
 
 	//Cogemos todas las historias que pertenecen a ese trabajo
 	$sql_hist = "SELECT * FROM HISTORIA WHERE IdTrabajo = '$IdTrabajo'";
@@ -398,7 +397,6 @@ function genAutoNotasET($IdTrabajo){
 		$nota = (($num_histCorrectas/$num_historias)*10);
 
 		$sql_existe = "SELECT * FROM NOTA_TRABAJO WHERE IdTrabajo = '$IdTrabajo' AND login = '$login'";
-		echo $sql_existe;
 
 		$existe = $this->mysqli->query($sql_existe);
 
@@ -551,7 +549,7 @@ function genAutoNota(){
 			}
 		}	
 
-		//$this->existeNota();
+		$this->existeNota();
 
 		if($exito){
 			$this->lista['mensaje'] = 'La generación automática de notas se ha realizado correctamente para todos los trabajos de la BD';
@@ -691,7 +689,9 @@ function existeNota(){
 
 	$log_trab = $this->mysqli->query($sql_nota);
 
-	while ($row_log_trab = mysqli_num_rows($log_trab)) {
+	while ($row_log_trab = mysqli_fetch_array($log_trab)) {
+
+
 		
 		$login = $row_log_trab['login'];
 		$IdTrabajo = $row_log_trab['IdTrabajo'];
@@ -705,13 +705,15 @@ function existeNota(){
 
 		if($num_rows_buscar == 0){
 
-			$sql = "INSERT INTO NOTA_TRABAJO(
+			$sql_cero = "INSERT INTO NOTA_TRABAJO(
 									login,
 									IdTrabajo,
 									NotaTrabajo) VALUES(
 													'$login',
 													'$IdTrabajo',
-									                0)";						                
+									                0)";
+			$buscar = $this->mysqli->query($sql_cero);						                
+
 		}
 		
 	}
