@@ -109,8 +109,6 @@ function render(){
                                 $historia =true; 
                                 break;
                             default:
-
-                                $historia =false;
                                 break;
                         }
                  }
