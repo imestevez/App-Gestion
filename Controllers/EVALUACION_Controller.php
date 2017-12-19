@@ -375,7 +375,7 @@ function getCalificarChecbox(){
 
 
 
-				$result = 
+				
 
 			break;
 		case 'SEARCH': //si desea realizar una busqueda
