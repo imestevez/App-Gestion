@@ -6,6 +6,6 @@ Creado por: SOLFAMIDAS
 Contiene el html del pie de página de las vistas
 
  -->       
-       <footer><?php echo $strings['Fecha de creación'] ?>: 28/9/2017   <?php echo $strings['Alias'] ?>: SOLFAMIDAS</footer>
+       <footer><?php echo $strings['Fecha de creación'] ?>: 28/9/2017   <?php echo $strings['Alias'] ?> <a href="../Views/Informacion_View.php">SOLFAMIDAS</a></footer>
     </body>
 </html>

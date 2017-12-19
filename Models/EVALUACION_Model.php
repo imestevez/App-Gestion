@@ -762,6 +762,16 @@ function contarHistorias(){
 }
 
 
+function obtenerAlias($login){
+	$sql = "SELECT DISTINCT E.AliasEvaluado 
+						FROM EVALUACION E, ENTREGA A
+						 	WHERE (E.AliasEvaluado = A.Alias AND A.login = '$login')";
+
+	$result = $this->mysqli->query($sql);
+	return $result;	
+}
+
+
 }//Fin clase
 
 ?>
