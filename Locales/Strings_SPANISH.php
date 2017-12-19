@@ -188,7 +188,7 @@ array(
 	'ComentIncorrectoPCP' => 'Comentario Profesor y Correcto Profesor',
 	'ComenIncorrectoAlumnos' => 'Comentarios de los Evaluadores',
 	'CorrectoAOK' => 'Correcto Alumno y OK',
-
+	'Resultados' => 'Resultados',
 
 
 
