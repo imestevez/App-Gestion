@@ -34,7 +34,6 @@ function __construct($lista){
     $this->ComentIncorrectoP = $lista['ComentIncorrectoP'];
     $this->OK = $lista['OK'];
 
-    $this->render();
 }
 
 //funcion que muestra los datos al usuario

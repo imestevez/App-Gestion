@@ -51,14 +51,7 @@ function render(){
             <caption><?php echo $strings['Borrar evaluacion'] ?></caption>
               <tr><th><?php echo $strings['Campo'] ?></th><th><?php echo $strings['Valor'] ?></th></tr>
               <tr><th><?php echo $strings['IdTrabajo'] ?></th><td><?php echo $this->IdTrabajo ?></td></tr>  
-              <tr><th><?php echo $strings['LoginEvaluador'] ?></th><td><?php echo $this->LoginEvaluador ?></td></tr>
               <tr><th><?php echo $strings['AliasEvaluado'] ?></th><td><?php echo $this->AliasEvaluado ?></td></tr>
-              <tr><th><?php echo $strings['IdHistoria'] ?></th><td><?php echo $this->IdHistoria ?></td></tr>
-              <tr><th><?php echo $strings['CorrectoA'] ?></th><td><?php echo $this->CorrectoA ?></td></tr>
-              <tr><th><?php echo $strings['ComenIncorrectoA'] ?></th><td><?php echo $this->ComenIncorrectoA ?></td></tr>   
-              <tr><th><?php echo $strings['CorrectoP'] ?></th><td><?php echo $this->CorrectoP ?></td></tr>
-              <tr><th><?php echo $strings['ComentIncorrectoP'] ?></th><td><?php echo $this->ComentIncorrectoP ?></td></tr>  
-              <tr><th><?php echo $strings['OK'] ?></th><td><?php echo $this->OK ?></td></tr>
                   
           </table>
 
@@ -66,18 +59,11 @@ function render(){
        <form method="post" name="DELETE" action="../Controllers/EVALUACION_Controller.php" enctype="multipart/form-data" >
 
             <input class="del" type="text" name="IdTrabajo" size="<?php echo strlen($this->IdTrabajo); ?>" readonly value="<?php echo $this->IdTrabajo ?>" >
-            <input class="del" type="text" name="LoginEvaluador" size="<?php echo strlen($this->LoginEvaluador); ?>" readonly  value="<?php echo $this->LoginEvaluador ?>">
             <input class="del" type="text" name="AliasEvaluado" size="<?php echo strlen($this->AliasEvaluado); ?>" readonly value="<?php echo $this->AliasEvaluado ?>">
-            <input class="del" type="text" name="IdHistoria" size="<?php echo strlen($this->IdHistoria); ?>" readonly  value="<?php echo $this->IdHistoria ?>">
-            <input class="del" type="text" name="CorrectoA"  size="<?php echo strlen($this->CorrectoA); ?>" readonly value="<?php echo $this->CorrectoA ?>">    
-            <input class="del" type="text"  name="ComenIncorrectoA" size="<?php echo strlen($this->ComenIncorrectoA); ?>" readonly value="<?php echo $this->ComenIncorrectoA ?>" >
-            <input class="del" type="text" name="CorrectoP" size="<?php echo strlen($this->CorrectoP); ?>" readonly value="<?php echo $this->CorrectoP ?>" >
-            <input class="del" type="text"  name="ComentIncorrectoP" size="<?php echo strlen($this->ComentIncorrectoP); ?>" readonly value="<?php echo $this->ComentIncorrectoP ?>" >    
-            <input class="del" type="text" name="OK" size="<?php echo strlen($this->OK); ?>" readonly  value="<?php echo $this->OK ?>">
 
-                  <div class="accionesTable" style="margin-left: 0%; float: right; margin-right: 45%;">
+                  <div class="accionesTable" style="margin-left: 0%; float: right; margin-right: 45%; margin-top: 2%">
 
-                    <a href="../Controllers/EVALUACION_Controller.php?action=DELETE&IdTrabajo=<?php echo $this->IdTrabajo ?>"><input type="image" name="action" value="DELETE" action="#" src="../Views/images/confirmar.png" title="<?php echo $strings['Borrar Evaluacion'] ?>" ></a>
+                      <a href="../Controllers/EVALUACION_Controller.php?action=DELETE&IdTrabajo=<?php echo $this->IdTrabajo ?>"><input type="image" name="action" value="DELETE" action="#" src="../Views/images/confirmar.png" title="<?php echo $strings['Borrar Evaluacion'] ?>" ></a>
                     </div>
              </form>
 

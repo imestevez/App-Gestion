@@ -205,7 +205,7 @@ function DELETE()
     $resultado = $this->mysqli->query($sql);
     $num_rows = mysqli_num_rows($resultado);
     // si existe una tupla con ese valor de clave
-    if ($num_rows == 1)
+    if ($num_rows > 0)
     {
 
     	 $sql = "SELECT * FROM USUARIO WHERE (Alias = '$this->AliasEvaluado')";
