@@ -484,6 +484,7 @@ function genAutoNotaQA($IdTrabajoQA){
 
 		$IdTrabajoET = $row_qas['IdTrabajo'];
 
+		//Se comprueba si existen evaluaciones sobre esas entregas
 		$sql_cmp_ev = "SELECT * FROM EVALUACION WHERE IdTrabajo = '$IdTrabajoET'";
 		$cmp_ev = $this->mysqli->query($sql_cmp_ev);
 		$num_cmp_ev = mysqli_num_rows($cmp_ev);
@@ -539,7 +540,6 @@ function genAutoNotaQA($IdTrabajoQA){
 			else{
 				//Actualizamos la nota para el usuario
 				$sql_update = "UPDATE NOTA_TRABAJO SET NotaTrabajo = $nota  WHERE IdTrabajo = '$IdTrabajoQA' AND login = '$LoginEvaluador'";
-
 				if ($result_insert = $this->mysqli->query($sql_update)) $cont_exitos++;
 			}	
 		}
@@ -549,7 +549,7 @@ function genAutoNotaQA($IdTrabajoQA){
 	}
 
 	//Si NO se ha realizado una inserción de nota para todos los usuarios que han efectuado una QA para un IdTrabajo
-	if($cont_exitos == $num_qas && $cont_exitos <> 0) return true;
+	if($cont_exitos == $num_qas && $cont_exitos == 0) return true;
 	else return false;
 
 }//Fin genAutoNotaQA()
@@ -584,12 +584,10 @@ function genAutoNota(){
 
 			}
 			else{
-				$this->lista['mensaje'] = 'ERROR: La generación automática de notas ha fallado (ENTREGA)';
+				$this->lista['mensaje'] = 'ERROR: La generación automática de notas ha fallado';
 				return $this->lista;
 			}
 		}	
-
-		$this->existeNota();
 
 		if($exito){
 			$this->lista['mensaje'] = 'La generación automática de notas se ha realizado correctamente para todos los trabajos de la BD';

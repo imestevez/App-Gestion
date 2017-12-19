@@ -121,9 +121,21 @@ function render(){
                     <th></th>
                     <?php
                         for($i = 0; $i < sizeof($this->trabajosNota); $i++){
+                            $datos_log = $this->datos[$row['login']];
+
+                            if(array_key_exists($this->trabajosNota[$i], $datos_log)) {
+
                     ?>
                         <td><a href="../Controllers/NOTA_TRABAJO_Controller.php?action=SHOW&login=<?php echo $this->datos[$row['login']]["login"]; ?>&IdTrabajo=<?php  echo $this->trabajosNota[$i]; ?>"><?php echo $this->datos[$row['login']][$this->trabajosNota[$i]]; ?></a></td>
-                    <?php } ?>
+                    <?php 
+                            }
+                        else{
+                    ?>
+                        <td></td>
+                    <?php            
+                            } 
+                        }    
+                    ?>
                     <td><?php if($this->notas <> false ) echo $this->notas[$row['login']]; ?></td>
                     <td class="edit_tabla">
 
@@ -208,6 +220,8 @@ function renderSearch(){
                 </tr> 
 <?php       
             //Mientras el numero de tuplas no llegue al máximo y haya tuplas en la BD
+
+echo "LOGIN: ".$this->datos[$row['login']];
             while($row = mysqli_fetch_array($this->alumnos)) {
 
                 //echo "o ".$row['login'];
@@ -220,9 +234,21 @@ function renderSearch(){
                     <th></th>
                     <?php
                         for($i = 0; $i < sizeof($this->trabajosNota); $i++){
+                            $datos_log = $this->datos[$row['login']];
+
+                            if(array_key_exists($this->trabajosNota[$i], $datos_log)) {
+
                     ?>
                         <td><a href="../Controllers/NOTA_TRABAJO_Controller.php?action=SHOW&login=<?php echo $this->datos[$row['login']]["login"]; ?>&IdTrabajo=<?php  echo $this->trabajosNota[$i]; ?>"?><?php echo $this->datos[$row['login']][$this->trabajosNota[$i]]; ?></a></td>
-                    <?php } ?>
+                    <?php
+                            }
+                            else{
+                    ?>
+                        <td></td>
+                    <?php            
+                            } 
+                        } 
+                    ?>
                     <td><?php if($this->notas <> false ) echo $this->notas[$row['login']]; ?></td>
                     <td class="edit_tabla">
 
