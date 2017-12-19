@@ -292,6 +292,139 @@ ALTER TABLE `FUNC_ACCION`
 ALTER TABLE `PERMISO`
   ADD PRIMARY KEY (`IdGrupo`,`IdFuncionalidad`,`IdAccion`);
 
+
+  INSERT INTO USUARIO(login,password, DNI,Nombre,Apellidos,Telefono,Correo,Direccion)   
+                              VALUES  ('admin','21232f297a57a5a743894a0e4a801fc3','30199743F','Pepe','Rodriguez Sanchez','679889767','admin@gmail.com','Ourense'),
+                                  ('user','ee11cbb19052e40b07aac0ca060c23ee','20449860P','Carlos','Perez Nunez','671806776','user@gmail.com','Celanova'),
+                                  ('juan','a94652aa97c7211ba8954dd15a3cf838', '79149090H','Juan','Vazquez Perez','674566982', 'juan@gmail.com','Ourense'),
+                                  ('pablo','7e4b64eb65e34fdfad79e623c44abd94','15428244M','Pablo','Mazaira Viso','671913475', 'pablo@gmail.com','Ourense'),
+                                  ('raul','bc7a844476607e1a59d8eb1b1f311830', '89524943L','Raul', 'Fuentes Lopez','676166982', 'raul@gmail.com','Ourense'),
+                                  ('marta','a763a66f984948ca463b081bf0f0e6d0','34264616K','Marta','Castro Valero','674560382', 'marta@gmail.com','Ourense');
+                                  
+INSERT INTO `GRUPO`(`IdGrupo`, `NombreGrupo`, `DescripGrupo`) VALUES  ('ADMIN','Administradores','Grupo formado por los administradores de la web'),
+                                    ('ALUMNO','Alumnos','Grupo formado por los alumnos de IU');
+
+
+INSERT INTO `ACCION`(`IdAccion`, `NombreAccion`, `DescripAccion`) VALUES  ('ADD','Anadir','Permite anadir'),
+                                      ('EDIT','Modificar','Permite modificar'),
+                                      ('SHOW','Mostrar Detalle','Muestra en detalle'),
+                                      ('DELETE','Eliminar','Permite eliminar'),
+                                      ('SEARCH','Buscar','Permite buscar'),
+                                      ('ALL','Mostrar Todo','Permite mostrar todos'),
+                                      ('ASIG','Asignar','Permite asignar'),
+                                      ('GENEV','Generar Evaluaciones','Permite generar Evaluaciones'),
+                                      ('GENQA','Generar QA','Permite generar QAs'),
+                                      ('ADDAL', 'Anadir Entrega', 'Permite anadir entrega'),
+                                      ('CALIF', 'Calificar', 'Permite calificar Evaluaciones'),
+                                      ('SHOWH', 'Mostrar Historias', 'Mostrar historias de un trabajo'),
+                                      ('RESULT', 'Resultados QA', 'Mostrar resultados de una QA'),
+                                      ('GENNOT', 'Generar Notas', 'Generar Notas');
+
+INSERT INTO `FUNCIONALIDAD` (`IdFuncionalidad`, `NombreFuncionalidad`, `DescripFuncionalidad`)
+                                VALUES  (1, 'Gestión Usuarios', 'Funcionalidad que permite realizar una gestion de usuarios'),
+                                    (2, 'Gestión Grupos', 'Funcionalidad que permite realizar una gestion de grupos'),
+                                    (3, 'Gestión Funcionalidades', 'Funcionalidad que permite realizar una gestion de funcionalidades'),
+                                    (4, 'Gestión Acciones', 'Funcionalidad que permite realizar una gestion de acciones'),
+                                    (5, 'Gestión Permisos', 'Funcionalidad que permite realizar una gestion de permisos'),
+                                    (6, 'Gestión Trabajos', 'Funcionalidad que permite realizar una gestion de trabajos'),
+                                    (7, 'Gestión Historias', 'Funcionalidad que permite realizar una gestion de historias'),
+                                    (8, 'Gestión Entregas', 'Funcionalidad que permite realizar una gestion de entregas'),
+                                    (9, 'Gestión Asignacion QAs', 'Funcionalidad que permite realizar una gestion de asignacion de QAs'),
+                                    (10, 'Gestión Evaluaciones', 'Funcionalidad que permite realizar una gestion de evaluaciones'),
+                                    (11, 'Gestión Notas', 'Funcionalidad que permite realizar una gestion de notas');
+
+
+INSERT INTO `FUNC_ACCION` (`IdFuncionalidad`, `IdAccion`) VALUES  (1, 'ADD'), (1, 'EDIT'), (1, 'SEARCH'), (1, 'DELETE'), (1, 'ALL'), (1, 'SHOW'), (1, 'ASIG'), 
+                                  (2, 'ADD'), (2, 'EDIT'), (2, 'SEARCH'), (2, 'DELETE'), (2, 'ALL'), (2, 'SHOW'), (2, 'ASIG'), 
+                                  (3, 'ADD'), (3, 'EDIT'), (3, 'SEARCH'), (3, 'DELETE'), (3, 'ALL'), (3, 'SHOW'), (3, 'ASIG'), 
+                                  (4, 'ADD'), (4, 'EDIT'), (4, 'SEARCH'), (4, 'DELETE'), (4, 'ALL'), (4, 'SHOW'), 
+                                  (5, 'SEARCH'),(5, 'ALL'),
+                                  (6, 'ADD'), (6, 'EDIT'), (6, 'SEARCH'), (6, 'DELETE'), (6, 'ALL'), (6, 'SHOW'), 
+                                  (7, 'ADD'), (7, 'EDIT'), (7, 'SEARCH'), (7, 'DELETE'), (7, 'ALL'), (7, 'SHOW'), (7,'SHOWH'),
+                                  (8, 'ADD'), (8, 'EDIT'), (8, 'SEARCH'), (8, 'DELETE'), (8, 'ALL'), (8, 'SHOW'), (8,'ADDAL'),
+                                  (9, 'ADD'), (9, 'EDIT'), (9, 'SEARCH'), (9, 'DELETE'), (9, 'ALL'), (9, 'SHOW'), (9, 'GENQA'),(9, 'GENEV'),
+                                  (10, 'ADD'), (10, 'EDIT'), (10, 'SEARCH'), (10, 'DELETE'), (10, 'ALL'), (10, 'SHOW'), (10,'CALIF'),
+                                  (11, 'ADD'), (11, 'EDIT'), (11, 'SEARCH'), (11, 'DELETE'), (11, 'ALL'), (11, 'SHOW'), (11,'GENNOT'),(10,'RESUL');
+
+                                  
+INSERT INTO `USU_GRUPO` (`login`, `IdGrupo`) VALUES ('admin', 'ADMIN'), ('user', 'ALUMNO'),('pablo','ALUMNO'),('lucia','ALUMNO'),('juan','ALUMNO'),('marta','ALUMNO'),('raul','ALUMNO');
+
+INSERT INTO `PERMISO`(`IdGrupo`,`IdFuncionalidad`,`IdAccion`) VALUES  ('ADMIN',1,'ADD'),('ADMIN',1,'EDIT'),('ADMIN',1,'SHOW'),('ADMIN',1,'DELETE'), ('ADMIN',1,'SEARCH'),('ADMIN',1,'ALL'), ('ADMIN',1,'ASIG'),
+                                    ('ADMIN',2,'ADD'),('ADMIN',2,'EDIT'),('ADMIN',2,'SHOW'),('ADMIN',2,'DELETE'), ('ADMIN',2,'SEARCH'),('ADMIN',2,'ALL'), ('ADMIN',2,'ASIG'),
+                                    ('ADMIN',3,'ADD'),('ADMIN',3,'EDIT'),('ADMIN',3,'SHOW'),('ADMIN',3,'DELETE'), ('ADMIN',3,'SEARCH'),('ADMIN',3,'ALL'), ('ADMIN',3,'ASIG'),
+                                    ('ADMIN',4,'ADD'),('ADMIN',4,'EDIT'),('ADMIN',4,'SHOW'),('ADMIN',4,'DELETE'), ('ADMIN',4,'SEARCH'),('ADMIN',4,'ALL'),
+                                    ('ADMIN',5,'SEARCH'),('ADMIN',5,'ALL'),
+                                    ('ADMIN',6,'ADD'),('ADMIN',6,'EDIT'),('ADMIN',6,'SHOW'),('ADMIN',6,'DELETE'), ('ADMIN',6,'SEARCH'),('ADMIN',6,'ALL'),
+                                    ('ADMIN',7,'ADD'),('ADMIN',7,'EDIT'),('ADMIN',7,'SHOW'),('ADMIN',7,'DELETE'), ('ADMIN',7,'SEARCH'),('ADMIN',7,'ALL'),('ADMIN',7,'SHOWH'),
+                                    ('ADMIN',8,'ADD'),('ADMIN',8,'EDIT'),('ADMIN',8,'SHOW'),('ADMIN',8,'DELETE'), ('ADMIN',8,'SEARCH'),('ADMIN',8,'ALL'),
+                                    ('ADMIN',9,'ADD'),('ADMIN',9,'EDIT'),('ADMIN',9,'SHOW'),('ADMIN',9,'DELETE'), ('ADMIN',9,'SEARCH'),('ADMIN',9,'ALL'),('ADMIN',9, 'GENQA'),('ADMIN',9, 'GENEV'),
+                                    ('ADMIN',10,'ADD'),('ADMIN',10,'SHOW'),('ADMIN',10,'DELETE'), ('ADMIN',10,'SEARCH'),('ADMIN',10,'ALL'),('ADMIN',10, 'CALIF'),('ADMIN',10, 'EDIT'),
+                                    ('ADMIN',11,'ADD'),('ADMIN',11,'EDIT'),('ADMIN',11,'SHOW'),('ADMIN',11,'DELETE'), ('ADMIN',11,'SEARCH'),('ADMIN',11,'ALL'),('ADMIN',11,'GENNOT'),('ADMIN',11, 'RESUL'),
+                                    ('ALUMNO',6,'SHOW'),
+                                    ('ALUMNO',8,'EDIT'),('ALUMNO',8,'SHOW'),('ALUMNO',8,'ADDAL'),
+                                    ('ALUMNO',10,'EDIT'),('ALUMNO',10,'SHOW'),
+                                    ('ALUMNO',11,'SHOW'),('ALUMNO',11, 'RESUL');
+
+INSERT INTO `TRABAJO` ( `IdTrabajo`, `NombreTrabajo`, `FechaIniTrabajo`, `FechaFinTrabajo` , `PorcentajeNota`)
+                                VALUES  ('ET1', 'Trabajo de Formularios', '2017-09-05', '2017-09-15', 25),
+                                    ('ET2', 'Trabajo de Pagina Web', '2017-09-25', '2017-10-05', 23),
+                                    ('ET3', 'Trabajo en Equipo', '2017-10-15', '2017-10-25', 31),
+                                    ('QA1', 'QA de ET1', '2017-9-15', '2017-9-25', 7),
+                                    ('QA2', 'QA de ET2', '2017-10-05', '2017-10-15', 7),
+                                    ('QA3', 'QA de ET3', '2017-10-25', '2017-10-25', 7);
+                                    
+                                    
+INSERT INTO `HISTORIA` ( `IdTrabajo`, `IdHistoria`, `TextoHistoria`) 
+                  VALUES  ('ET1', 01, 'El diseno sigue la estructura solicitada'),
+                      ('ET1', 02, 'El diseno tiene todos los elementos solicitados'),
+                      ('ET1', 03, 'El diseno mantiene coherencia visual entre los elementos de la página'),
+                      ('ET1', 04, 'El diseno de los formularios es coherente entre los mismos'),
+                      ('ET1', 05, 'El diseno de las tablas de muestra de datos es coherente entre las tablas'),
+                      ('ET2', 01, 'El diseno sigue la estructura solicitada'),
+                      ('ET2', 02, 'El diseno tiene todos los elementos solicitados'),
+                      ('ET2', 03, 'El diseno mantiene coherencia visual entre los elementos de la página'),
+                      ('ET2', 04, 'El diseno de los formularios es coherente entre los mismos'),
+                      ('ET2', 05, 'El diseno de las tablas de muestra de datos es coherente entre las tablas'),
+                      ('ET2', 06, 'Realiza correctamente insercciones en la BD'),
+                      ('ET2', 07, 'No se envia información al navegador desde el modelo de datos'),
+                      ('ET3', 01, 'El diseno sigue la estructura solicitada'),
+                      ('ET3', 02, 'El diseno tiene todos los elementos solicitados'),
+                      ('ET3', 03, 'El diseno mantiene coherencia visual entre los elementos de la página'),
+                      ('ET3', 04, 'El diseno de los formularios es coherente entre los mismos'),
+                      ('ET3', 05, 'El diseno de las tablas de muestra de datos es coherente entre las tablas'),
+                      ('ET3', 06, 'Realiza correctamente insercciones en la BD'),
+                      ('ET3', 07, 'No se envia información al navegador desde el modelo de datos'),
+                      ('ET3', 08, 'Tiene ACL'),
+                      ('ET3', 09, 'Quita los iconos cuando no hay permisos'),                                 
+                      ('QA1', 01, 'El diseno sigue la estructura solicitada'),
+                      ('QA1', 02, 'El diseno tiene todos los elementos solicitados'),
+                      ('QA1', 03, 'El diseno mantiene coherencia visual entre los elementos de la página'),
+                      ('QA1', 04, 'El diseno de los formularios es coherente entre los mismos'),
+                      ('QA1', 05, 'El diseno de las tablas de muestra de datos es coherente entre las tablas'),
+                      ('QA2', 01, 'El diseno sigue la estructura solicitada'),
+                      ('QA2', 02, 'El diseno tiene todos los elementos solicitados'),
+                      ('QA2', 03, 'El diseno mantiene coherencia visual entre los elementos de la página'),
+                      ('QA2', 04, 'El diseno de los formularios es coherente entre los mismos'),
+                      ('QA2', 05, 'El diseno de las tablas de muestra de datos es coherente entre las tablas'),
+                      ('QA2', 06, 'Realiza correctamente insercciones en la BD'),
+                      ('QA2', 07, 'No se envia información al navegador desde el modelo de datos'),
+                      ('QA3', 01, 'El diseno sigue la estructura solicitada'),
+                      ('QA3', 02, 'El diseno tiene todos los elementos solicitados'),
+                      ('QA3', 03, 'El diseno mantiene coherencia visual entre los elementos de la página'),
+                      ('QA3', 04, 'El diseno de los formularios es coherente entre los mismos'),
+                      ('QA3', 05, 'El diseno de las tablas de muestra de datos es coherente entre las tablas'),
+                      ('QA3', 06, 'Realiza correctamente insercciones en la BD'),
+                      ('QA3', 07, 'No se envia información al navegador desde el modelo de datos'),
+                      ('QA3', 08, 'Tiene ACL');
+
+
+INSERT INTO `ENTREGA`(`login`, `IdTrabajo`, `Alias`, `Horas`, `Ruta`)
+                                VALUES  ('user', 'ET1', 'asdfgh', '0',''),
+                                    ('juan', 'ET1', 'zxcvbn', '0',''),
+                                    ('marta', 'ET1', 'poiuyt', '0',''),
+                                    ('pablo', 'ET1', 'mnbvcx', '0',''),
+                                    ('raul', 'ET1', 'lkjhgf', '0','');    
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

@@ -1,4 +1,3 @@
-md5.js
 /*
     script: md5.js
     Creado el: 6/11/2017
