@@ -220,7 +220,7 @@ function DELETE()
 	        // se ejecuta la query
 	        $result = $this->mysqli->query($sql);
     	}
-   
+   	}
 
     	// se construye la sentencia sql de borrado
         $sql = "DELETE FROM EVALUACION WHERE (IdTrabajo = '$this->IdTrabajo' AND AliasEvaluado = '$this->AliasEvaluado')";
