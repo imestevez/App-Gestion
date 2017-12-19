@@ -271,7 +271,7 @@ array(
 'Seleccionar Grupos' => 'Seleccionar Grupos',
 'No tienes permisos para realizar esta accion' => 'No tienes permisos para realizar esta accion',
 'Debe de seleccionar al menos 1 campo' => 'Debe de seleccionar al menos 1 campo',
-
+'ERROR: No existe el trabajo que desea borrar en la BD' => 'ERROR: No existe el trabajo que desea borrar en la BD',
 // ------------------------ ESPACIO DE TRABAJO PARA PABLO ---------------------------
 //Funcionalidades
 	'div_vacio' => 'El campo no puede estar vacío.',
