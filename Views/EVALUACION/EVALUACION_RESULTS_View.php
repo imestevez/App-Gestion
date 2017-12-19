@@ -55,7 +55,7 @@ include '../Views/Header.php';
 
      <section class="pagina">
          <fieldset class="edit" style="width: 70%; margin-left: 15%">
-                <legend style="margin-left: 30%"><?php echo $strings['Calificar evaluacion'] ?></legend>
+                <legend style="margin-left: 30%"><?php echo $strings['Resultados'] ?></legend>
 
             <table class="tablaRESULTS">
                  
@@ -123,7 +123,7 @@ include '../Views/Header.php';
 
                                     <textarea name="ComenIncorrectoA" readonly maxlength="300" rows="6" cols="50" onblur="" style="margin-left: 10px; border-radius: 20px; border-top-left-radius: 0px; border-width: 2px; border-color: darkblue; width: 90%;" ><?php echo $this->datos[$k][3] ?></textarea>
 
-                                    
+
                                     <?php //echo $this->datos[$k][3]?> 
                                 </td>
                             </tr>
@@ -167,7 +167,7 @@ include '../Views/Header.php';
         </table>
                           
                 <div class="acciones" style="float: left;">
-                     <a href="../Controllers/EVALUACION_Controller.php?action=ALL"><input type="image" src="../Views/images/back.png" title="<?php echo $strings['Volver']?>"></a>
+                     <a href="../Controllers/NOTA_TRABAJO_Controller.php?action=ALL"><input type="image" src="../Views/images/back.png" title="<?php echo $strings['Volver']?>"></a>
                 </div>
          </fieldset> 
     </section>
