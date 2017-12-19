@@ -302,7 +302,7 @@ function contarTuplas(){
 
 }
 function rellenarLista(){
-		$sql = "SELECT * FROM USUARIO U, TRABAJO T, NOTA_TRABAJO N 
+		$sql = "SELECT * FROM USUARIO U, TRABAJO T, NOTA_TRABAJO N
 						WHERE (U.login = '$this->login' AND
 								T.IdTrabajo = '$this->IdTrabajo' AND
 								N.login = '$this->login' AND N.IdTrabajo = '$this->IdTrabajo' 
@@ -314,6 +314,7 @@ function rellenarLista(){
 			$this->lista['Nombre'] = $row['Nombre'];
 			$this->lista['NombreTrabajo'] = $row['NombreTrabajo'];
 			$this->lista['NotaTrabajo'] = $row['NotaTrabajo'];
+			$this->lista['PorcentajeNota'] = $row['PorcentajeNota'];
 		}
 	return $this->lista;
 }
