@@ -505,6 +505,26 @@ function generadorAlias() {
    		 return $randomString;
 	} 
 }
+
+//devuelve el alias asociado a un login e idtrabajo
+function obtenerAlias(){
+	$sql = "SELECT DISTINCT E.AliasEvaluado 
+						FROM EVALUACION E, ENTREGA A
+						 	WHERE (E.AliasEvaluado = A.Alias AND A.login = '$this->login')";
+
+	// si se produce un error en la busqueda mandamos el mensaje de error en la consulta
+    if (!($resultado = $this->mysqli->query($sql))){
+    	$this->lista['mensaje'] =  'ERROR: Fallo en la consulta sobre la base de datos'; 
+		return $this->lista; 
+	}
+    else{ // si la busqueda es correcta devolvemos el recordset resultado
+		return $resultado;
+	}
+}
+
+
+
+
 }//Fin clase
 
 ?>

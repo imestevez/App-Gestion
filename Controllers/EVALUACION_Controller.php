@@ -40,6 +40,7 @@ $acciones = listaAcciones(10);
 $acceso=false;
 
 include_once '../Models/EVALUACION_Model.php';
+include_once '../Models/ENTREGA_Model.php';
 include_once '../Models/Calificacion_Model.php';
 
 include_once '../Views/EVALUACION/EVALUACION_SHOWALL_View.php';
@@ -267,8 +268,8 @@ function getCalificarChecbox(){
 				$IdTrabajo = $_REQUEST['IdTrabajo'];
 				$login = $_REQUEST['login'];
 			}
-			$EVALUACIONP = new EVALUACION_Model('', '', '', '', '', '', '', '', '');
-			$AliasEvaluado = $EVALUACIONP->obtenerAlias($login);
+			$EV = new EVALUACION_Model('', '', '', '', '', '', '', '', '');
+			$AliasEvaluado = $EV->obtenerAlias($login);
 
 			$EVALUACION = new EVALUACION_Model($IdTrabajo, '', $AliasEvaluado, '', '', '', '', '', ''); //crea una EVALUACION_Model con los campos clave del usuario y del trabajo
 			$contar = $EVALUACION->contar(); //contamos los login evaluadores
