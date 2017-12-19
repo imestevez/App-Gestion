@@ -206,13 +206,69 @@ function DELETE()
     $sql = "SELECT * FROM USUARIO WHERE (login = '$this->login')";
     // se ejecuta la query
     $result = $this->mysqli->query($sql);
+    $num_rows = mysqli_num_rows($result);
     // si existe una tupla con ese valor de clave
-    if ($result->num_rows == 1)
+    if ($num_rows == 1)
     {
-    	// se construye la sentencia sql de borrado
-        $sql = "DELETE FROM USUARIO WHERE (login = '$this->login')";
-        // se ejecuta la query
-        $this->mysqli->query($sql);
+    	 $sql = "SELECT * FROM ENTREGA WHERE (login = '$this->login')";
+      	if($resultado =  $this->mysqli->query($sql)){
+	    	$row = mysqli_fetch_array($resultado);
+	       	$Alias = $row['Alias'];
+	       	$sql = "DELETE FROM ENTREGA WHERE (login = '$this->login')";
+        	// se ejecuta la query
+       		$resultado =  $this->mysqli->query($sql);
+
+	    	 $sql = "SELECT * FROM EVALUACION WHERE (LoginEvaluador = '$this->login')";
+	    	 	if($resultado =  $this->mysqli->query($sql)){
+	    	 		$sql = "DELETE FROM EVALUACION WHERE (loginEvaluador = '$this->login')";
+	       		 // se ejecuta la query
+	       			$resultado = $this->mysqli->query($sql);
+	        	}
+	    	 $sql = "SELECT * FROM EVALUACION WHERE (AliasEvaluado = '$Alias')";
+				if($resultado =  $this->mysqli->query($sql)){
+		        	$sql = "DELETE FROM EVALUACION WHERE (AliasEvaluado = '$Alias')";
+	       		 	// se ejecuta la query
+	       			$resultado = $this->mysqli->query($sql);
+	       		}
+	       		 $sql = "SELECT * FROM ASIGNAC_QA WHERE (LoginEvaluador = '$this->login')";
+	    	 	if($resultado =  $this->mysqli->query($sql)){
+	    	 		$sql = "DELETE FROM ASIGNAC_QA WHERE (loginEvaluador = '$this->login')";
+	       		 // se ejecuta la query
+	       			$resultado = $this->mysqli->query($sql);
+	        	}
+	    	 $sql = "SELECT * FROM ASIGNAC_QA WHERE (LoginEvaluado = '$this->login')";
+				if($resultado =  $this->mysqli->query($sql)){
+		        	$sql = "DELETE FROM ASIGNAC_QA WHERE (LoginEvaluado = '$this->login')";
+	       		 	// se ejecuta la query
+	       			$resultado = $this->mysqli->query($sql);
+	       		}
+	       		 $sql = "SELECT * FROM ASIGNAC_QA WHERE (AliasEvaluado = '$Alias')";
+				if($resultado =  $this->mysqli->query($sql)){
+		        	$sql = "DELETE FROM ASIGNAC_QA WHERE (AliasEvaluado = '$Alias')";
+	       		 	// se ejecuta la query
+	       			$resultado = $this->mysqli->query($sql);
+	       		}
+
+   			$sql = "SELECT * FROM NOTA_TRABAJO WHERE (login = '$this->login')";
+				if($resultado =  $this->mysqli->query($sql)){
+			        $sql = "DELETE FROM NOTA_TRABAJO WHERE (login = '$this->login')";
+
+			        // se ejecuta la query
+			       $resultado =  $this->mysqli->query($sql);
+			    }
+	        
+	        $sql = "SELECT FROM USU_GRUPO WHERE (login = '$this->login')";	
+				if($resultado =  $this->mysqli->query($sql)){
+			        
+			        $sql = "DELETE FROM USU_GRUPO WHERE (login = '$this->login')";
+
+			        // se ejecuta la query
+			        $resultado = $this->mysqli->query($sql);
+			    }
+			        $sql = "DELETE FROM USUARIO WHERE (login = '$this->login')";
+			        // se ejecuta la query
+			        $resultado = $this->mysqli->query($sql);
+	       }
         // se devuelve el mensaje de borrado correcto
         $this->lista['mensaje'] = 'Borrado correctamente'; 
 			return $this->lista;

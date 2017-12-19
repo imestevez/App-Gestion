@@ -44,7 +44,7 @@ function render(){
                 <div id="izquierda">
                     <label for="NombreTrabajo"><?php echo $strings['Nombre del trabajo']?>: </label>
                         <input type="text" name="NombreTrabajo" maxlength="60" size="60" onblur="javascript:void(validarNombreTrabajoBuscar(this, 30))"><div id="IdTrabajo" class="oculto" style="display:none"><?php echo $strings['div_Alfanumerico']?></div> <div id="IdTrabajoVacio" class="oculto" style="display:none"><?php echo $strings['div_vacio']?></div> 
-                </div
+                </div>
 
                 <div id="izquierda">
                     <label for="NotaTrabajo"><?php echo $strings['Nota Trabajo']?>: </label>

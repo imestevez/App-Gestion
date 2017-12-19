@@ -253,7 +253,7 @@ array(
 'div_numerosRango10' => 'The number has to be between 0 and 10',
 'No tienes permisos para realizar esta accion' => 'You do not have permission to perform this action',
 'Debe de seleccionar al menos 1 campo' => 'Must be selected 1 field',
-
+'ERROR: No existe el trabajo que desea borrar en la BD' => 'ERROR: The work that you wish to delete doesn´t exists in the database',
 
 
 

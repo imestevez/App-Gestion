@@ -321,17 +321,17 @@ INSERT INTO `ACCION`(`IdAccion`, `NombreAccion`, `DescripAccion`) VALUES  ('ADD'
                                       ('GENNOT', 'Generar Notas', 'Generar Notas');
 
 INSERT INTO `FUNCIONALIDAD` (`IdFuncionalidad`, `NombreFuncionalidad`, `DescripFuncionalidad`)
-                                VALUES  (1, 'Gestión Usuarios', 'Funcionalidad que permite realizar una gestion de usuarios'),
-                                    (2, 'Gestión Grupos', 'Funcionalidad que permite realizar una gestion de grupos'),
-                                    (3, 'Gestión Funcionalidades', 'Funcionalidad que permite realizar una gestion de funcionalidades'),
-                                    (4, 'Gestión Acciones', 'Funcionalidad que permite realizar una gestion de acciones'),
-                                    (5, 'Gestión Permisos', 'Funcionalidad que permite realizar una gestion de permisos'),
-                                    (6, 'Gestión Trabajos', 'Funcionalidad que permite realizar una gestion de trabajos'),
-                                    (7, 'Gestión Historias', 'Funcionalidad que permite realizar una gestion de historias'),
-                                    (8, 'Gestión Entregas', 'Funcionalidad que permite realizar una gestion de entregas'),
-                                    (9, 'Gestión Asignacion QAs', 'Funcionalidad que permite realizar una gestion de asignacion de QAs'),
-                                    (10, 'Gestión Evaluaciones', 'Funcionalidad que permite realizar una gestion de evaluaciones'),
-                                    (11, 'Gestión Notas', 'Funcionalidad que permite realizar una gestion de notas');
+                                VALUES  (1, 'Gestion Usuarios', 'Funcionalidad que permite realizar una gestion de usuarios'),
+                                    (2, 'Gestion Grupos', 'Funcionalidad que permite realizar una gestion de grupos'),
+                                    (3, 'Gestion Funcionalidades', 'Funcionalidad que permite realizar una gestion de funcionalidades'),
+                                    (4, 'Gestion Acciones', 'Funcionalidad que permite realizar una gestion de acciones'),
+                                    (5, 'Gestion Permisos', 'Funcionalidad que permite realizar una gestion de permisos'),
+                                    (6, 'Gestion Trabajos', 'Funcionalidad que permite realizar una gestion de trabajos'),
+                                    (7, 'Gestion Historias', 'Funcionalidad que permite realizar una gestion de historias'),
+                                    (8, 'Gestion Entregas', 'Funcionalidad que permite realizar una gestion de entregas'),
+                                    (9, 'Gestion Asignacion QAs', 'Funcionalidad que permite realizar una gestion de asignacion de QAs'),
+                                    (10, 'Gestion Evaluaciones', 'Funcionalidad que permite realizar una gestion de evaluaciones'),
+                                    (11, 'Gestion Notas', 'Funcionalidad que permite realizar una gestion de notas');
 
 
 INSERT INTO `FUNC_ACCION` (`IdFuncionalidad`, `IdAccion`) VALUES  (1, 'ADD'), (1, 'EDIT'), (1, 'SEARCH'), (1, 'DELETE'), (1, 'ALL'), (1, 'SHOW'), (1, 'ASIG'), 
