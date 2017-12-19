@@ -117,7 +117,7 @@ if (!isset($_REQUEST['action'])){
 			}
 			break;
 		case 'EDIT': //si el usuario quiere editar	
-			if (!$_POST){
+			if (isset($_REQUEST['case'])){
 				$NOTA_TRABAJO = new NOTA_TRABAJO_Model($_REQUEST['login'],$_REQUEST['IdTrabajo'],''); //crea un un NOTA_TRABAJO_Model con el IdTrabajo del usuario 
 				$lista = $NOTA_TRABAJO->rellenarLista();  //A partir del IdTrabajo recoge todos los atributos
 				$usuario = new NOTA_TRABAJO_EDIT($lista); //Crea la vista EDIT con los datos del usuario
