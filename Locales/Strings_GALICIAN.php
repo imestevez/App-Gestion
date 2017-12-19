@@ -253,6 +253,7 @@ array(
 'div_numerosRango10' => 'O numero ten que estar entre 0 e 10',
 'No tienes permisos para realizar esta accion' => 'Non tes permisos para realizar esta accion',
 'Debe de seleccionar al menos 1 campo' => 'Debe de seleccionar polo menos 1 campo',
+'ERROR: No existe el trabajo que desea borrar en la BD' => 'ERROR: Non existe o traballo que desea borrar en la BD',
 
 
 
@@ -443,6 +444,7 @@ array(
 	'Busqueda de permisos' => 'Busqueda de permisos',
 	'Acciones de Grupo' => 'Accions de grupo',
 	'ERROR: Fallo en la modificación. El IdGrupo está vacio' => 'ERROR: Fallo na modificación. O IdGrupo está vacio',
+	'Componentes del grupo SOLFAMIDAS' => 'Componentes do grupo SOLFAMIDAS'
 
 
 )

@@ -271,7 +271,7 @@ array(
 'Seleccionar Grupos' => 'Seleccionar Grupos',
 'No tienes permisos para realizar esta accion' => 'No tienes permisos para realizar esta accion',
 'Debe de seleccionar al menos 1 campo' => 'Debe de seleccionar al menos 1 campo',
-
+'ERROR: No existe el trabajo que desea borrar en la BD' => 'ERROR: No existe el trabajo que desea borrar en la BD',
 // ------------------------ ESPACIO DE TRABAJO PARA PABLO ---------------------------
 //Funcionalidades
 	'div_vacio' => 'El campo no puede estar vacío.',
@@ -440,6 +440,7 @@ array(
 	'Busqueda de permisos' => 'Busqueda de permisos',
 	'Acciones de grupo' => 'Acciones de grupo',
 	'ERROR: Fallo en la modificación. El IdGrupo está vacio' => 'ERROR: Fallo en la modificación. El IdGrupo está vacio',
+	'Componentes del grupo SOLFAMIDAS' => 'Componentes del grupo SOLFAMIDAS'
 
 )
 ;

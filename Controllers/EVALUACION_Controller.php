@@ -257,28 +257,31 @@ function getCalificarChecbox(){
 	// En funcion de la accion elegida
 	Switch ($action){
 
-	//	case 'RESUL': //si un alumno quiere visualizar sus resultados
+		case 'RESUL': //si un alumno quiere visualizar sus resultados
 
-	//		$IdTrabajo = null;
-	//		$AliasEvaluado = null;
+			$IdTrabajo = null;
+			$login = null;
+			$AliasEvaluado = null;
 
-	//		if ((isset($_REQUEST['IdTrabajo'])) && (isset($_REQUEST['AliasEvaluado']))) {
-	//			$IdTrabajo = $_REQUEST['IdTrabajo'];
-	//			$AliasEvaluado = $_REQUEST['AliasEvaluado'];
-	//		}
+			if ((isset($_REQUEST['IdTrabajo'])) && (isset($_REQUEST['login']))) {
+				$IdTrabajo = $_REQUEST['IdTrabajo'];
+				$login = $_REQUEST['login'];
+			}
+			$EVALUACIONP = new EVALUACION_Model('', '', '', '', '', '', '', '', '');
+			$AliasEvaluado = $EVALUACIONP->obtenerAlias($login);
 
-	//		$EVALUACION = new EVALUACION_Model($IdTrabajo, '', $AliasEvaluado, '', '', '', '', '', ''); //crea una EVALUACION_Model con los campos clave del usuario y del trabajo
-	//		$contar = $EVALUACION->contar(); //contamos los login evaluadores
-	//		$contarHistorias = $EVALUACION->contarHistorias(); //contamos las historias
-	//		$lista = $EVALUACION->rellenarLista();
-	//		$lista['IdTrabajo'] = $IdTrabajo;
-	//		$lista['AliasEvaluado'] = $AliasEvaluado;
-	//		$listaHistorias = $EVALUACION->listarHistoriasCalificar();
-	//		$rellenarHistorias = $EVALUACION->rellenarHistorias();
+			$EVALUACION = new EVALUACION_Model($IdTrabajo, '', $AliasEvaluado, '', '', '', '', '', ''); //crea una EVALUACION_Model con los campos clave del usuario y del trabajo
+			$contar = $EVALUACION->contar(); //contamos los login evaluadores
+			$contarHistorias = $EVALUACION->contarHistorias(); //contamos las historias
+			$lista = $EVALUACION->rellenarLista();
+			$lista['IdTrabajo'] = $IdTrabajo;
+			$lista['AliasEvaluado'] = $AliasEvaluado;
+			$listaHistorias = $EVALUACION->listarHistoriasCalificar();
+			$rellenarHistorias = $EVALUACION->rellenarHistorias();
 
-	//		$usuario = new EVALUACION_RESULTS($lista, $listaHistorias, $contar, $contarHistorias, $rellenarHistorias);
+			$usuario = new EVALUACION_RESULTS($lista, $listaHistorias, $contar, $contarHistorias, $rellenarHistorias);
 
-	//	break;
+		break;
 		case 'CALIF': //si es una calificacion
 				if(!$_POST){
 
@@ -365,16 +368,15 @@ function getCalificarChecbox(){
 			}
 			break;
 		case 'EDIT': //si el usuario quiere editar	
-			if (!$_POST){
+			
 				$EVALUACION = new EVALUACION_Model($_REQUEST['IdTrabajo'], $_REQUEST['LoginEvaluador'], $_REQUEST['AliasEvaluado'], $_REQUEST['IdHistoria'], '', '', '', '', ''); //crea una EVALUACION_Model con los campos clave del usuario y del trabajo
 				$lista = $EVALUACION->rellenarListaIdHistoria();  //Recoge todos los atributos
 				$usuario = new EVALUACION_EDIT($lista); //Crea la vista EDIT con los datos del usuario
-			}
-			else{
-				$EVALUACION = get_data_UserBD(); //coge los datos del formulario del usuario que desea editar
-				$respuesta = $EVALUACION->EDIT(); //Ejecuta la funcion EDIT() en el EVALUACION_Model
-				$mensaje = new MESSAGE($respuesta, '../Controllers/EVALUACION_Controller.php');//muestra el mensaje despues de la sentencia sql
-			}
+
+
+
+				
+
 			break;
 		case 'SEARCH': //si desea realizar una busqueda
 	
