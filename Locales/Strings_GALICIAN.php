@@ -443,6 +443,7 @@ array(
 	'Busqueda de permisos' => 'Busqueda de permisos',
 	'Acciones de Grupo' => 'Accions de grupo',
 	'ERROR: Fallo en la modificación. El IdGrupo está vacio' => 'ERROR: Fallo na modificación. O IdGrupo está vacio',
+	'Componentes del grupo SOLFAMIDAS' => 'Componentes do grupo SOLFAMIDAS'
 
 
 )

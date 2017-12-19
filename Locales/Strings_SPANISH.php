@@ -440,6 +440,7 @@ array(
 	'Busqueda de permisos' => 'Busqueda de permisos',
 	'Acciones de grupo' => 'Acciones de grupo',
 	'ERROR: Fallo en la modificación. El IdGrupo está vacio' => 'ERROR: Fallo en la modificación. El IdGrupo está vacio',
+	'Componentes del grupo SOLFAMIDAS' => 'Componentes del grupo SOLFAMIDAS'
 
 )
 ;
