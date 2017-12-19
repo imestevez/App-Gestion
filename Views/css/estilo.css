@@ -510,3 +510,24 @@ a{
 .comenP{
     word-break: break-all;
 }
+
+
+.results1{
+    float: left;
+    margin-left: 43%;
+    text-align: center;
+    
+
+
+    
+}
+
+
+.results2{
+    float: right;
+    margin-right: 42%;
+    text-align: center;
+
+
+    
+}

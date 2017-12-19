@@ -57,17 +57,21 @@ function render(){
             <input class="del" type="text" name="Nota Parcial"  size="<?php echo strlen($this->aux); ?>" readonly value="<?php echo $this->aux ?>">
             <input class="del" type="text" name="case" size="<?php echo strlen($this->case); ?>" readonly value="<?php echo $this->case ?>">
 
-            <div class="accionesTable" style="margin-left: 0%; float: right; margin-right: 35%; width:25%">
+            <div class="results1">
                 <a href="../Controllers/NOTA_TRABAJO_Controller.php?action=EDIT&login=<?php echo $this->login?>&IdTrabajo=<?php echo $this->IdTrabajo?>&case=<?php echo $this->case?>"><input type="image" src="../Views/images/edit.png" name="action" title="<?php echo $strings['Editar'] ?>" value="EDIT"></a>
+                
                 <a href="../Controllers/NOTA_TRABAJO_Controller.php?action=DELETE&login=<?php echo $this->login?>&IdTrabajo=<?php echo $this->IdTrabajo?>"><input type="image" src="../Views/images/delete.png" name="action" title="<?php echo $strings['Eliminar'] ?>" value="DELETE"></a>
             </div>
         </form>
-        <div class="accionesTable" style="float:left">
-            <a href="../Controllers/NOTA_TRABAJO_Controller.php?action=SHOWALL"><input type="image" name="action" value="SHOWALL" src="../Views/images/back.png" title="<?php echo $strings['Volver'] ?>"></a>
+        <div class="results2">
 
             <a href="../Controllers/EVALUACION_Controller.php?action=RESUL&login=<?php echo $this->login?>&IdTrabajo=<?php echo $this->IdTrabajo?>"><input type="image" name="action" value="RESUL" src="../Views/images/resultado.png" title="<?php echo $strings['Ver correccion'] ?>"></a>
-            
+            <a href="../Controllers/NOTA_TRABAJO_Controller.php?action=ALL"><input type="image" name="action" value="ALL" src="../Views/images/back.png" title="<?php echo $strings['Volver'] ?>"></a> 
+         
+                    
         </div>
+
+        
     </section>	
 <?php
   include '../Views/Footer.php';
