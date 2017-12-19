@@ -137,14 +137,32 @@ function DELETE()
 {	// se construye la sentencia sql de busqueda con los atributos de la clase
     $sql = "SELECT * FROM ACCION WHERE (IdAccion = '$this->IdAccion')";
     // se ejecuta la query
-    $result = $this->mysqli->query($sql);
+    $resultado = $this->mysqli->query($sql);
+    $num_rows = mysqli_num_rows($resultado);
+
     // si existe una tupla con ese valor de clave
-    if ($result->num_rows == 1)
+    if ($num_rows  == 1)
     {
     	// se construye la sentencia sql de borrado
         $sql = "DELETE FROM ACCION WHERE (IdAccion = '$this->IdAccion')";
         // se ejecuta la query
-        $this->mysqli->query($sql);
+       $resultado =  $this->mysqli->query($sql);
+
+       $sql = "SELECT * FROM FUNC_ACCION WHERE (IdAccion = '$this->IdAccion')";
+       if( $resultado = $this->mysqli->query($sql)){
+        $sql = "DELETE FROM FUNC_ACCION WHERE (IdAccion = '$this->IdAccion')";
+    	// se ejecuta la query
+   		 $resultado = $this->mysqli->query($sql);
+   		}
+
+   		$sql = "SELECT * FROM PERMISO WHERE (IdAccion = '$this->IdAccion')";
+       if( $resultado = $this->mysqli->query($sql)){
+        $sql = "DELETE FROM PERMISO WHERE (IdAccion = '$this->IdAccion')";
+    	// se ejecuta la query
+   		 $resultado = $this->mysqli->query($sql);
+   		}
+
+
         // se devuelve el mensaje de borrado correcto
         $this->lista['mensaje'] = 'Borrado correctamente'; 
 			return $this->lista;
