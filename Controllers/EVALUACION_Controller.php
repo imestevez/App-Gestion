@@ -267,8 +267,8 @@ function getCalificarChecbox(){
 				$IdTrabajo = $_REQUEST['IdTrabajo'];
 				$login = $_REQUEST['login'];
 			}
-
-			$AliasEvaluado = obtenerAlias($login);
+			$EVALUACIONP = new EVALUACION_Model('', '', '', '', '', '', '', '', '');
+			$AliasEvaluado = $EVALUACIONP->obtenerAlias($login);
 
 			$EVALUACION = new EVALUACION_Model($IdTrabajo, '', $AliasEvaluado, '', '', '', '', '', ''); //crea una EVALUACION_Model con los campos clave del usuario y del trabajo
 			$contar = $EVALUACION->contar(); //contamos los login evaluadores
