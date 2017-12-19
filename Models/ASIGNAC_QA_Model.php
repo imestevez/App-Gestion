@@ -324,6 +324,7 @@ function asig_QAS($IdTrabajo, $numEntregas){
 	$sql_cmp_reset = "SELECT * FROM ASIGNAC_QA WHERE IdTrabajo = '$IdTrabajo'";
 	$cmp_reset = $this->mysqli->query($sql_cmp_reset);
 	$num_cmp_reset = mysqli_num_rows($cmp_reset);
+
 	if($num_cmp_reset > 0){
 			$sql_reset = "DELETE FROM ASIGNAC_QA WHERE IdTrabajo = '$IdTrabajo'";
 			$cmp_reset = $this->mysqli->query($sql_reset);
@@ -360,57 +361,52 @@ function asig_QAS($IdTrabajo, $numEntregas){
 
 		    	$cont_exito = 0; //Cuenta las inserciones realizadas con éxito
 
-		    	for ($i = 0; $i < sizeof($lista); $i++) { //Para cada alumno que entregó un trabajo con IdTrabajo
+		    	for ($i = 0; $i < sizeof($lista); $i++) {//Para cada alumno que entregó un trabajo con IdTrabajo
 					
 					$LoginEvaluador = $lista[$i][1]; //Cogemos el login al que se le asignarán las QAs 
 					$aux = $i;	//Comenzamos a recorrer la lista por la posición de esa entrega	
 
-		    		for($j = 0; $j < $posiciones; $j++){ //Tantas veces como QAs se le vayan a asignar
-		    			
-			   			for($k = 0; $k < $posiciones; $k++){ //Recorremos 5 posiciones 
+					$cont = 0;
+					$rep = 0;
 
-			   				if($aux >= sizeof($lista)-1){ //Si el índice supera el número máximo de entregas volvemos a empezar por el comienzo de la lista
-			   					$aux = 0;
-			   				}
-			   				else $aux++;
+					while($cont < $posiciones){ //Tantas veces como QAs se le vayan a asignar
+			   			
+			   		$aux += $posiciones; //Sumamos a la posición actual tantos posiciones como indique $posiciones
+
+			   			if($aux > sizeof($lista)-1){ //Si el índice supera el número máximo de entregas volvemos a empezar por el comienzo de la lista
+			   				$aux =$aux - sizeof($lista);
 			   			}
+			   			
 
 			   			$AliasEvaluado = $lista[$aux][2]; //Guardamos el alias de la Qa
 			   			$LoginEvaluado = $lista[$aux][1]; //Guardamos el login de la Qa
-
 			   			//Comprobamos si ya existe esa entrega previamente
-			   			$sql = "SELECT * FROM ASIGNAC_QA WHERE IdTrabajo = $IdTrabajo AND 
-			   												LoginEvaluador = $LoginEvaluador AND
-			   												AliasEvaluado = AliasEvaluado";	
-
-			   			if ($result = $this->mysqli->query($sql)) {$num_rows = mysqli_num_rows($result);}
+			   			$sql = "SELECT * FROM ASIGNAC_QA WHERE IdTrabajo = '$IdTrabajo' AND 
+			   												LoginEvaluador = '$LoginEvaluador' AND
+			   												AliasEvaluado = '$AliasEvaluado'";	
+			   			if ($result = $this->mysqli->query($sql)) {
+			   				$num_rows = mysqli_num_rows($result);}
 			   			else {$num_rows = 0;}
 
-			   			while($num_rows == 1 || $LoginEvaluador == $LoginEvaluado){ //Si ya existe la asignación de QA o la QA es del mismo usuario al que se le asigna
-		   					
-
-			   				if($aux >= sizeof($lista)-1){
-			   					$aux = 0;
-			   				}
-			   				else {$aux++;}
-
-			   				if($result) {$num_rows = mysqli_num_rows($result);}
-			   				else {$num_rows = 0;}
-
+			   			if(($num_rows > 0) || ($LoginEvaluador === $LoginEvaluado)){
+		   						$aux++;
 						}
+						else{
 									
-			   			$sql = "INSERT INTO ASIGNAC_QA(
-												IdTrabajo,
-												LoginEvaluador,
-												LoginEvaluado,
-												AliasEvaluado) VALUES(
-																	'$IdTrabajo',
-																	'$LoginEvaluador',
-																	'$LoginEvaluado',
-																	'$AliasEvaluado')";	
+				   			$sql = "INSERT INTO ASIGNAC_QA(
+													IdTrabajo,
+													LoginEvaluador,
+													LoginEvaluado,
+													AliasEvaluado) VALUES(
+																		'$IdTrabajo',
+																		'$LoginEvaluador',
+																		'$LoginEvaluado',
+																		'$AliasEvaluado')";	
 
-						if ($result = $this->mysqli->query($sql)){
-							$cont_exito++;	
+							if ($result = $this->mysqli->query($sql)){
+								$cont_exito++;	
+								$cont++;
+							}
 						}	
 		   			}
 				}
