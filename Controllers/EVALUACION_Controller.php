@@ -259,7 +259,6 @@ function getCalificarChecbox(){
 	Switch ($action){
 
 		case 'RESUL': //si un alumno quiere visualizar sus resultados
-
 			$IdTrabajo = null;
 			$login = null;
 			$AliasEvaluado = null;
@@ -268,8 +267,8 @@ function getCalificarChecbox(){
 				$IdTrabajo = $_REQUEST['IdTrabajo'];
 				$login = $_REQUEST['login'];
 			}
-			$EV = new EVALUACION_Model('', '', '', '', '', '', '', '', '');
-			$AliasEvaluado = $EV->obtenerAlias($login);
+			$EV = new ENTREGA_Model($_REQUEST['login'], $_REQUEST['IdTrabajo'], '', '', '', '', '');
+			$AliasEvaluado = $EV->obtenerAlias();
 
 			$EVALUACION = new EVALUACION_Model($IdTrabajo, '', $AliasEvaluado, '', '', '', '', '', ''); //crea una EVALUACION_Model con los campos clave del usuario y del trabajo
 			$contar = $EVALUACION->contar(); //contamos los login evaluadores

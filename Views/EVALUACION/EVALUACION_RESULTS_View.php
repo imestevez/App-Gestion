@@ -119,7 +119,12 @@ include '../Views/Header.php';
                             ?>
                             <tr>
                                 <td class="comentA" colspan="5">
-                                    &nbsp;<?php echo $this->datos[$k][3]?> 
+
+
+                                    <textarea name="ComenIncorrectoA" readonly maxlength="300" rows="6" cols="50" onblur="" style="margin-left: 10px; border-radius: 20px; border-top-left-radius: 0px; border-width: 2px; border-color: darkblue; width: 90%;" ><?php echo $this->datos[$k][3] ?></textarea>
+
+                                    
+                                    <?php //echo $this->datos[$k][3]?> 
                                 </td>
                             </tr>
                             <?php
@@ -147,7 +152,11 @@ include '../Views/Header.php';
                         </tr>
                         <tr>
                             <td class="comentA" colspan="5"> 
-                                    &nbsp;<?php echo $this->datos[$indiceComentarioP][5] ?>
+
+                                <textarea name="ComentIncorrectoP" readonly maxlength="300" rows="6" cols="50" onblur="" style="margin-left: 10px; border-radius: 20px; border-top-left-radius: 0px; border-width: 2px; border-color: darkblue; width: 90%;" ><?php echo $this->datos[$indiceComentarioP][5] ?></textarea>
+
+
+                                    <?php //echo $this->datos[$indiceComentarioP][5] ?>
                             </td>                          
                         </tr>
 
