@@ -168,17 +168,34 @@ function DELETE()
         									(IdTrabajo = '$this->IdTrabajo') AND 
         									(IdHistoria = '$this->IdHistoria'))";
     // se ejecuta la query
-    $result = $this->mysqli->query($sql);
+    $resultado = $this->mysqli->query($sql);
+    $num_rows = mysqli_num_rows($resultado) ;
     // si existe una tupla con ese valor de clave
-    if ($result->num_rows == 1)
+    if ($num_rows == 1)
     {
     	// se construye la sentencia sql de borrado
         $sql = "DELETE FROM HISTORIA WHERE (
         									(IdTrabajo = '$this->IdTrabajo') AND 
         									(IdHistoria = '$this->IdHistoria'))";
         // se ejecuta la query
-        $this->mysqli->query($sql);
+        $resultado = $this->mysqli->query($sql);
         // se devuelve el mensaje de borrado correcto
+
+
+
+        $sql = "SELECT * FROM EVALUACION WHERE (
+        									(IdTrabajo = '$this->IdTrabajo') AND 
+        									(IdHistoria = '$this->IdHistoria'))";
+
+        if($resultado = $this->mysqli->query($sql)){
+    	   $sql = "DELETE FROM EVALUACION WHERE (
+        									(IdTrabajo = '$this->IdTrabajo') AND 
+        									(IdHistoria = '$this->IdHistoria'))";
+        	$resultado = $this->mysqli->query($sql);
+
+
+        }
+
         $this->lista['mensaje'] = 'Borrado correctamente'; 
 			return $this->lista;
     } // si no existe el IdTrabajo a borrar se devuelve el mensaje de que no existe
