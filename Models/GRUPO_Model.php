@@ -156,16 +156,16 @@ function DELETE()
     {
     	// se construye la sentencia sql de busqueda con los atributos de la clase
   
-    	 $sql = "SELECT * FROM USU_GRUPO WHERE (login = '$this->login')";
+    	 $sql = "SELECT * FROM USU_GRUPO WHERE (idgrupo = '$this->idgrupo')";
       	if($resultado =  $this->mysqli->query($sql)){
-	       	$sql = "DELETE FROM USU_GRUPO WHERE (login = '$this->login')";
+	       	$sql = "DELETE FROM USU_GRUPO WHERE (idgrupo = '$this->idgrupo')";
         	// se ejecuta la query
        		$resultado =  $this->mysqli->query($sql);
        	}
 
-    	 $sql = "SELECT * FROM PERMISO WHERE (LoginEvaluador = '$this->login')";
+    	 $sql = "SELECT * FROM PERMISO WHERE (idgrupo = '$this->idgrupo')";
     	 	if($resultado =  $this->mysqli->query($sql)){
-    	 		$sql = "DELETE FROM PERMISO WHERE (loginEvaluador = '$this->login')";
+    	 		$sql = "DELETE FROM PERMISO WHERE (idgrupo = '$this->idgrupo')";
        		 // se ejecuta la query
        			$resultado = $this->mysqli->query($sql);
         	}

@@ -381,10 +381,8 @@ array(
 //Generación automática de notas
 'La generación automática de notas se ha realizado correctamente para todos los trabajos de la BD' => 'Qualification automatic generation has been successfully performed for all BD jobs',
 'ERROR: La generación automática de notas ha fallado' => 'ERROR: Qualification automatic generation has failed',
-
-
-
-
+'Nota Total' => 'Total qualification',
+'Generación automática de notas' => 'Qualification automatic generation',
 
 
 
