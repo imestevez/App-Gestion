@@ -347,7 +347,7 @@ INSERT INTO `FUNC_ACCION` (`IdFuncionalidad`, `IdAccion`) VALUES  (1, 'ADD'), (1
                                   (11, 'ADD'), (11, 'EDIT'), (11, 'SEARCH'), (11, 'DELETE'), (11, 'ALL'), (11, 'SHOW'), (11,'GENNOT');
 
                                   
-INSERT INTO `USU_GRUPO` (`login`, `IdGrupo`) VALUES ('admin', 'ADMIN'), ('user', 'ALUMNO'),('pablo','ALUMNO'),('lucia','ALUMNO'),('juan','ALUMNO'),('marta','ALUMNO'),('raul','ALUMNO');
+INSERT INTO `USU_GRUPO` (`login`, `IdGrupo`) VALUES ('admin', 'ADMIN'), ('user', 'ALUMNO'),('pablo','ALUMNO'),('juan','ALUMNO'),('marta','ALUMNO'),('raul','ALUMNO');
 
 INSERT INTO `PERMISO`(`IdGrupo`,`IdFuncionalidad`,`IdAccion`) VALUES  ('ADMIN',1,'ADD'),('ADMIN',1,'EDIT'),('ADMIN',1,'SHOW'),('ADMIN',1,'DELETE'), ('ADMIN',1,'SEARCH'),('ADMIN',1,'ALL'), ('ADMIN',1,'ASIG'),
                                     ('ADMIN',2,'ADD'),('ADMIN',2,'EDIT'),('ADMIN',2,'SHOW'),('ADMIN',2,'DELETE'), ('ADMIN',2,'SEARCH'),('ADMIN',2,'ALL'), ('ADMIN',2,'ASIG'),
