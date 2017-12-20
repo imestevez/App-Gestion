@@ -187,16 +187,18 @@ function renderSearch(){
 
 ?>
      <section class="pagina"  style="min-height: 500px; height: 100%;">
-                <table class="showAll">
-                 <caption><?php echo $strings['Resultado de búsqueda: Asignación de QAs']?></caption>
+              
+                  <table class="showAll">
+                <caption><?php echo $strings['Asignación de QAs']?></caption>
                 <tr>
-                <th><?php echo $strings['Id del trabajo']?></th> 
-                <th><?php echo $strings['Nombre del trabajo']?></th>  
-                <th><?php echo $strings['Login del evaluador']?></th>
-                <th><?php echo $strings['Login del evaluado']?></th>
-                <th><?php echo $strings['Alias del evaluado']?></th> 
+                <th rowspan="2"><?php echo $strings['Id del trabajo']?></th> 
+                <th rowspan="2"><?php echo $strings['Nombre del trabajo']?></th>  
+                <th rowspan="2"><?php echo $strings['Login del evaluador']?></th>
+                <th rowspan="2"><?php echo $strings['Login del evaluado']?></th>
+                <th rowspan="2"><?php echo $strings['Alias del evaluado']?></th>      
+                <td rowspan="2">
 
-                       <?php 
+                     <?php 
 
                     foreach ($this->acciones as $key => $value) {
                         if($value == 'SEARCH'){
@@ -248,21 +250,21 @@ function renderSearch(){
                     ?>
                     
                 </tr>
+
+
+<?php       
+ 
+            while( ($this->num_tupla < $this->max_tuplas) && ($row = mysqli_fetch_array($this->datos)) ) { //Mientras el numero de tuplas no llegue al máximo y haya tuplas en la BD
+?>
                 <tr>
-
-
-<?php   
-            while( $row = mysqli_fetch_array($this->datos)) { //Mientras el numero de tuplas no llegue al máximo y haya tuplas en la BD
-?>  <tr>
                 <td><?php echo $row["IdTrabajo"]; ?></td>
                 <td><?php echo $row["NombreTrabajo"]; ?></td>
                 <td><?php echo $row["LoginEvaluador"]?></td>
                 <td><?php echo $row["LoginEvaluado"]?></td>
                 <td><?php echo $row["AliasEvaluado"]; ?></td>
-                
 
-             <td class="edit_tabla">
-                 <?php 
+                <td class="edit_tabla">
+                   <?php 
 
                     foreach ($this->acciones as $key => $value) {
                         if($value == 'SHOW'){
@@ -287,17 +289,19 @@ function renderSearch(){
                         }
                     }
                     ?>     
-                
                 </td>
-                </tr>                
+                </tr>              
            
 <?php
-    }
+    $this->num_tupla++;//incremento del numero de tupla
+    }//fin del while
 ?>
      </table>
     <div class="acciones">
 
 <?php
+
+
 
     if(isset($_REQUEST['action'])){ //si viene de un formulario
         if($_REQUEST['action'] == 'SEARCH'){  //Si se muestra a partir de un SEARCH
