@@ -70,7 +70,7 @@ function DELETE()
     $num_rows = mysqli_num_rows($resultado);
 
     // si existe una tupla con ese valor de clave
-    if ($num_rows > )
+    if ($num_rows > 0 )
     {
     	// se construye la sentencia sql de borrado
         $sql = "DELETE FROM USUARIO WHERE (login = '$this->login')";
