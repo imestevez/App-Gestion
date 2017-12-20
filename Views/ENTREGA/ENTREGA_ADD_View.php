@@ -109,22 +109,22 @@ include '../Views/Header.php';
             <form method="post" name="ADD"  action="../Controllers/ENTREGA_Controller.php" enctype="multipart/form-data" >
                  <div id="izquierda">
                     <label for="login"><?php echo $strings['Login'] ?>: </label>
-                        <input type="text" name="login" maxlength="9" value="<?php echo $this->login ?>" size="9" readonly  ><div id="login" class="oculto" style="display:none">
+                        <input type="text" name="login" maxlength="9" value="<?php echo $this->login ?>" size="9" readonly  ><div id="login" class="oculto" style="display:none"><div id="login" class="oculto" style="display:none"><?php echo $strings['div_Alfanumerico']?></div> <div id="loginVacio" class="oculto" style="display:none"><?php echo $strings['div_vacio']?></div> 
                 </div>
               <div id="izquierda">
                     <label for="IdTrabajo"><?php echo $strings['IdTrabajo'] ?>: </label>
-                        <input type="text" name="IdTrabajo" maxlength="6" size="6" readonly value="<?php echo $this->IdTrabajo ?>"> 
+                        <input type="text" name="IdTrabajo" maxlength="6" size="6" readonly value="<?php echo $this->IdTrabajo ?>"> <div id="IdTrabajo" class="oculto" style="display:none"><?php echo $strings['div_Alfanumerico']?></div> <div id="IdTrabajoVacio" class="oculto" style="display:none"><?php echo $strings['div_vacio']?></div> 
                 </div>
 
                  <div id="izquierda">
                     <label for="Alias"><?php echo $strings['Alias'] ?>: </label>
-                        <input type="text" name="Alias" maxlength="9" size="9" readonly value="<?php echo $this->Alias ?>"> 
+                        <input type="text" name="Alias" maxlength="9" size="9" readonly value="<?php echo $this->Alias ?>"><div id="Alias" class="oculto" style="display:none"><?php echo $strings['div_Alfanumerico']?></div> <div id="AliasVacio" class="oculto" style="display:none"><?php echo $strings['div_vacio']?></div>  
                 </div>
 
 
                 <div id="izquierda">
                     <label for="Horas"><?php echo $strings['Horas']?>:</label>
-                        <input type="number" name="Horas" maxlength="2" size="2" min="0" max="99"  onblur="validarHoras(this, 0,99)"><div id="Horas" class="oculto" style="display:none"><?php echo $strings['div_numeros']?></div> <div id="HorasMax" class="oculto" style="display:none"><?php echo $strings['div_numerosRango']?> </div> 
+                        <input type="number" name="Horas" maxlength="2" size="2" min="0" max="99"  onblur="validarHoras(this, 0,99)"><div id="Horas" class="oculto" style="display:none"><?php echo $strings['div_numeros']?></div> <div id="HorasMax" class="oculto" style="display:none"><?php echo $strings['div_numerosRango']?> </div>  
                 </div>
                
                 <!-- Se coloca un maxlength 54 porque se añaden 6 caracteres a mayores de Files/ al almacenar en la BD-->

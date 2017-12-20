@@ -82,7 +82,7 @@ include '../Views/Header.php';
 
                <div id="izquierda">
                      <label for="Ruta"><?php echo $strings['Ruta']?>: </label>
-                     <input type="text" name="Ruta" size="60" readOnly value="<?php echo $this->Ruta ?>" >
+                     <input type="text" name="Ruta" size="60" readonly value="<?php echo $this->Ruta ?>" >
 
                </div>
                 <!-- Se coloca un maxlength 54 porque se añaden 6 caracteres a mayores de Files/ al almacenar en la BD-->
