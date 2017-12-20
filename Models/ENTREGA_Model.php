@@ -241,16 +241,17 @@ function DELETE()
 			        // se ejecuta la query
 			       $resultado =  $this->mysqli->query($sql);
 			    }
+			}
 	        
 	      	$sql = "DELETE FROM ENTREGA WHERE (login = '$this->login' AND IdTrabajo = '$this->IdTrabajo')";
         	// se ejecuta la query
        		$resultado =  $this->mysqli->query($sql);
 
-	       }
+	       
         // se devuelve el mensaje de borrado correcto
         $this->lista['mensaje'] = 'Borrado correctamente'; 
 			return $this->lista;
-    } // si no existe el login a borrar se devuelve el mensaje de que no existe
+    // si no existe el login a borrar se devuelve el mensaje de que no existe
     	// se construye la sentencia sql de borrado
         $sql = "DELETE FROM ENTREGA WHERE (login = '$this->login' AND IdTrabajo = '$this->IdTrabajo')";
         // se ejecuta la query
