@@ -103,9 +103,9 @@ if (!isset($_REQUEST['action'])){
 			}
 			break;
 		case 'DELETE': //Si quiere hacer un DELETE
-			if (!$_POST){ //viene del showall con una clave
+			if (isset($_REQUEST['case'])){ //viene del showall con una clave
 				$lista = array('login','IdTrabajo','NotaTrabajo');
-				$NOTA_TRABAJO = new NOTA_TRABAJO_Model($_REQUEST['login'],'','');//crea un un NOTA_TRABAJO_Model con el IdTrabajo del usuario
+				$NOTA_TRABAJO = new NOTA_TRABAJO_Model($_REQUEST['login'],$_REQUEST['IdTrabajo'], '');//crea un un NOTA_TRABAJO_Model con el IdTrabajo del usuario
 				$lista = $NOTA_TRABAJO->rellenarLista();
 				//$tupla = $NOTA_TRABAJO->RellenaDatos();//A partir del IdTrabajo recoge todos los atributos
 				$usuario = new NOTA_TRABAJO_DELETE($lista); //Crea la vista de DELETE con los datos del usuario
