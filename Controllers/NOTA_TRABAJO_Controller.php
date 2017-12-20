@@ -233,7 +233,7 @@ if (!isset($_REQUEST['action'])){
 				$alumnos = $NOTA_TRABAJO->getAlumno();
 				$num_trabajos = $NOTA_TRABAJO->getNumTrabajos();
 				$notas = $NOTA_TRABAJO->calcNotaF();
-				$UsuariosBD = new NOTA_TRABAJO_SHOWALL($lista, $datos, $num_tupla, $max_tuplas, $totalTuplas, $num_pagina, 'ALL', '../Controllers/NOTA_TRABAJO_Controller.php',$acciones, $trabajos, $num_trabajos, $trabajosNota, $alumnos, $notas); //Crea la vista SHOWALL de los usuarios de la BD	
+				$UsuariosBD = new NOTA_TRABAJO_SHOWALL($lista, $datos, $num_tupla, $max_tuplas, $totalTuplas, $num_pagina, 'ALL', '../Controllers/NOTA_TRABAJO_Controller.php',$acciones, $trabajos, $num_trabajos, $trabajosNota, $alumnos, $notas,''); //Crea la vista SHOWALL de los usuarios de la BD	
 			}
 		}
 	}
