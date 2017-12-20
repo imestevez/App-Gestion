@@ -343,7 +343,7 @@ INSERT INTO `FUNC_ACCION` (`IdFuncionalidad`, `IdAccion`) VALUES  (1, 'ADD'), (1
                                   (7, 'ADD'), (7, 'EDIT'), (7, 'SEARCH'), (7, 'DELETE'), (7, 'ALL'), (7, 'SHOW'), (7,'SHOWH'),
                                   (8, 'ADD'), (8, 'EDIT'), (8, 'SEARCH'), (8, 'DELETE'), (8, 'ALL'), (8, 'SHOW'), (8,'ADDAL'),
                                   (9, 'ADD'), (9, 'EDIT'), (9, 'SEARCH'), (9, 'DELETE'), (9, 'ALL'), (9, 'SHOW'), (9, 'GENQA'),(9, 'GENEV'),
-                                  (10, 'ADD'), (10, 'EDIT'), (10, 'SEARCH'), (10, 'DELETE'), (10, 'ALL'), (10, 'SHOW'), (10,'CALIF'),(11,'RESUL'),
+                                  (10, 'ADD'), (10, 'EDIT'), (10, 'SEARCH'), (10, 'DELETE'), (10, 'ALL'), (10, 'SHOW'), (10,'CALIF'),(10,'RESUL'),
                                   (11, 'ADD'), (11, 'EDIT'), (11, 'SEARCH'), (11, 'DELETE'), (11, 'ALL'), (11, 'SHOW'), (11,'GENNOT');
 
                                   
