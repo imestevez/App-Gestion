@@ -76,9 +76,14 @@ function render(){
                     ?>
                 </td>
                   <?php 
+                  $genqa=0;
+                  $genev=0;
+
 
                     foreach ($this->acciones as $key => $value) {
                         if($value == 'GENQA'){
+                            $genqa=1;
+
                             ?>
                                 <th><?php echo $strings['Asignación auto. de QAs']?></th>
                         <td>
@@ -92,6 +97,8 @@ function render(){
                     foreach ($this->acciones as $key => $value) {
 
                          if($value == 'GENEV'){
+                            $genev=1;
+
                             ?>
                             <tr>
 
@@ -105,6 +112,27 @@ function render(){
                     <?php
                         }
                     }
+                      if(($genqa == 0) && ($genev == 0)){
+                             ?>
+                            </tr>
+                            <tr>
+                            </tr>
+
+                       <?php
+                      }else{
+                        if(($genqa == 1) && ($genev == 0)){
+                            ?>
+                            <tr>
+                            </tr>
+                            <?php
+                        }if(($genqa == 0) && ($genev == 1)){
+                            ?>
+                            </tr>
+                            <?php
+                        }
+
+                      }
+
                     ?>
                     
                 </tr>
@@ -146,7 +174,7 @@ function render(){
                     <?php
                         }
                     }
-                    ?>     
+                                       ?>     
                 </td>
                 </tr>              
            
@@ -217,10 +245,15 @@ function renderSearch(){
                     }
                     ?>
                 </td>
-                  <?php 
+                    <?php 
+                  $genqa=0;
+                  $genev=0;
+
 
                     foreach ($this->acciones as $key => $value) {
                         if($value == 'GENQA'){
+                            $genqa=1;
+
                             ?>
                                 <th><?php echo $strings['Asignación auto. de QAs']?></th>
                         <td>
@@ -234,6 +267,8 @@ function renderSearch(){
                     foreach ($this->acciones as $key => $value) {
 
                          if($value == 'GENEV'){
+                            $genev=1;
+
                             ?>
                             <tr>
 
@@ -247,11 +282,30 @@ function renderSearch(){
                     <?php
                         }
                     }
+                      if(($genqa == 0) && ($genev == 0)){
+                             ?>
+                            </tr>
+                            <tr>
+                            </tr>
+
+                       <?php
+                      }else{
+                        if(($genqa == 1) && ($genev == 0)){
+                            ?>
+                            <tr>
+                            </tr>
+                            <?php
+                        }if(($genqa == 0) && ($genev == 1)){
+                            ?>
+                            </tr>
+                            <?php
+                        }
+
+                      }
+
                     ?>
                     
                 </tr>
-
-
 <?php       
  
             while( ($this->num_tupla < $this->max_tuplas) && ($row = mysqli_fetch_array($this->datos)) ) { //Mientras el numero de tuplas no llegue al máximo y haya tuplas en la BD
