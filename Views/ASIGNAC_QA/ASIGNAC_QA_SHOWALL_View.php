@@ -308,7 +308,7 @@ function renderSearch(){
                 </tr>
 <?php       
  
-            while( ($this->num_tupla < $this->max_tuplas) && ($row = mysqli_fetch_array($this->datos)) ) { //Mientras el numero de tuplas no llegue al máximo y haya tuplas en la BD
+            while( ($row = mysqli_fetch_array($this->datos)) ) { //Mientras el numero de tuplas no llegue al máximo y haya tuplas en la BD
 ?>
                 <tr>
                 <td><?php echo $row["IdTrabajo"]; ?></td>
