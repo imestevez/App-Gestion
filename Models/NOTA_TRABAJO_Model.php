@@ -160,13 +160,14 @@ function DELETE()
     } // si no existe el IdTrabajo a borrar se devuelve el mensaje de que no existe	
 } // fin metodo DELETE
 
-function DELETE_LOG(){
+function DELETEALL(){
 	$sql = "SELECT * FROM NOTA_TRABAJO WHERE login = '$this->login'"; //comprobar que no hay claves iguales
 
     // se ejecuta la query
     $result = $this->mysqli->query($sql);
     // si existe una tupla con ese valor de clave
-    if ($result->num_rows == 1)
+    $num_rows = mysqli_num_rows($result);
+    if ($num_rows > 0)
     {
     	// se construye la sentencia sql de borrado
         $sql = "DELETE FROM NOTA_TRABAJO WHERE login = '$this->login'";

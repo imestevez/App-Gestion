@@ -144,8 +144,8 @@ function render(){
                         foreach ($this->acciones as $key => $value) {
                     
                                if($value == 'DELETE'){
-                                ?>
-                        <a href="../Controllers/NOTA_TRABAJO_Controller.php?action=DELETE_LOG&login=<?php echo $this->datos[$row['login']]["login"]?>"><input type="image" src="../Views/images/delete.png" name="action" title="<?php echo $strings['Eliminar'] ?>" value="DELETE_LOG"></a>
+                                ?>     
+                        <a href="../Controllers/NOTA_TRABAJO_Controller.php?action=DELETEALL&login=<?php echo $this->datos[$row['login']]["login"]?>"><input type="image" src="../Views/images/delete.png" name="action" title="<?php echo $strings['Eliminar'] ?>" value="DELETEALL"></a>
                         
                         <?php
                             }

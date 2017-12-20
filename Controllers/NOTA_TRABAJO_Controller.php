@@ -103,18 +103,25 @@ if (!isset($_REQUEST['action'])){
 			}
 			break;
 		case 'DELETE': //Si quiere hacer un DELETE
-			if (isset($_REQUEST['case'])){ //viene del showall con una clave
-				$lista = array('login','IdTrabajo','NotaTrabajo');
-				$NOTA_TRABAJO = new NOTA_TRABAJO_Model($_REQUEST['login'],$_REQUEST['IdTrabajo'], '');//crea un un NOTA_TRABAJO_Model con el IdTrabajo del usuario
-				$lista = $NOTA_TRABAJO->rellenarLista();
-				//$tupla = $NOTA_TRABAJO->RellenaDatos();//A partir del IdTrabajo recoge todos los atributos
-				$usuario = new NOTA_TRABAJO_DELETE($lista); //Crea la vista de DELETE con los datos del usuario
+			if (!$_POST){ //si viene del showall (no es un post) --> Delete de todas las notas 
+				$NOTA_TRABAJO = new NOTA_TRABAJO_Model($_REQUEST['login'],'', '');
+				$form = new NOTA_TRABAJO_DELETE($lista); //Crea la vista ADD y muestra formulario para rellenar por el usuario
+				$delete = new NOTA_TRABAJO_DELETE($lista); //Crea la vista de DELETE con los datos del usuario		
 			}
-			else{//si viene con un post
-				$NOTA_TRABAJO = get_data_form(); //coge los datos del formulario del usuario que desea borrar
-				$respuesta = $NOTA_TRABAJO->DELETE(); //Ejecuta la funcion DELETE() en el NOTA_TRABAJO_Model
-				$mensaje = new MESSAGE($respuesta, '../Controllers/NOTA_TRABAJO_Controller.php'); //muestra el mensaje despues de la sentencia sql
-			}
+			else{
+				if (isset($_REQUEST['case'])){ //viene del showall con una clave
+					$lista = array('login','IdTrabajo','NotaTrabajo');
+					$NOTA_TRABAJO = new NOTA_TRABAJO_Model($_REQUEST['login'],$_REQUEST['IdTrabajo'], '');//crea un un NOTA_TRABAJO_Model con el IdTrabajo del usuario
+					$lista = $NOTA_TRABAJO->rellenarLista();
+					//$tupla = $NOTA_TRABAJO->RellenaDatos();//A partir del IdTrabajo recoge todos los atributos
+					$usuario = new NOTA_TRABAJO_DELETE($lista); //Crea la vista de DELETE con los datos del usuario
+				}
+				else{//si viene con un post
+					$NOTA_TRABAJO = get_data_form(); //coge los datos del formulario del usuario que desea borrar
+					$respuesta = $NOTA_TRABAJO->DELETE(); //Ejecuta la funcion DELETE() en el NOTA_TRABAJO_Model
+					$mensaje = new MESSAGE($respuesta, '../Controllers/NOTA_TRABAJO_Controller.php'); //muestra el mensaje despues de la sentencia sql
+				}
+			}	
 			break;
 		case 'EDIT': //si el usuario quiere editar	
 			if (isset($_REQUEST['case'])){
