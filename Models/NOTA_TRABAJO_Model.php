@@ -160,13 +160,14 @@ function DELETE()
     } // si no existe el IdTrabajo a borrar se devuelve el mensaje de que no existe	
 } // fin metodo DELETE
 
-function DELETE_LOG(){
+function DELETEALL(){
 	$sql = "SELECT * FROM NOTA_TRABAJO WHERE login = '$this->login'"; //comprobar que no hay claves iguales
 
     // se ejecuta la query
     $result = $this->mysqli->query($sql);
     // si existe una tupla con ese valor de clave
-    if ($result->num_rows == 1)
+    $num_rows = mysqli_num_rows($result);
+    if ($num_rows > 0)
     {
     	// se construye la sentencia sql de borrado
         $sql = "DELETE FROM NOTA_TRABAJO WHERE login = '$this->login'";
@@ -395,7 +396,7 @@ function genAutoNotasET($IdTrabajo){
 									WHERE IdTrabajo = '$IdTrabajo' AND
 											AliasEvaluado = '$Alias' AND
 											 IdHistoria = '$IdHistoria'";
-										 			 
+				echo $sql_ev."<br>";			 			 
 
 				if($evaluaciones = $this->mysqli->query($sql_ev)){
 
@@ -406,6 +407,7 @@ function genAutoNotasET($IdTrabajo){
 						$num_correctos = 0; //Contará las historias que están correctas sobre la entrega del login					
 
 						while($row_ev = mysqli_fetch_array($evaluaciones)){
+							echo "Log: ".$login."NUMHIS: ".$num_historias."num_evaluaciones".$num_evaluaciones."<br>";
 							$correcto = $row_ev['CorrectoP'];
 
 							if($correcto == 1) $num_correctos++;
@@ -414,40 +416,39 @@ function genAutoNotasET($IdTrabajo){
 						if($correcto == 1) $num_histCorrectas++;
 					}
 				}
+
+			}
+
+			if($num_evaluaciones > 0){
+
+				//Calculamos la nota total de un trabajo para un alumno, según las historias que tiene correctas y el total y lo pasamos a base 10
+				$nota = (($num_histCorrectas/$num_historias)*10);
+
+				$sql_existe = "SELECT * FROM NOTA_TRABAJO WHERE IdTrabajo = '$IdTrabajo' AND login = '$login'";
+
+				$existe = $this->mysqli->query($sql_existe);
+
+				$num_rows_existe = mysqli_num_rows($existe);
+
+				if($num_rows_existe == 0){
+					//Insertamos la nota calculada en la BD
+					$sql_insert = "INSERT INTO NOTA_TRABAJO(
+												login,
+												IdTrabajo,
+												NotaTrabajo) VALUES(
+																'$login',
+																'$IdTrabajo',
+												                '$nota')";
+
+					if ($result_insert = $this->mysqli->query($sql_insert)) $cont_exitos++;
+				}
 				else{
-					$this->lista['mensaje'] = 'ERROR: La generación automática de notas ha fallado (EVALUACION-ET)';
-					return $this->lista;
-				}	
+				//Actualizamos la nota para el usuario
+				$sql_update = "UPDATE NOTA_TRABAJO SET NotaTrabajo = $nota  WHERE IdTrabajo = '$IdTrabajo' AND login = '$login'";
 
-			}
-
-			//Calculamos la nota total de un trabajo para un alumno, según las historias que tiene correctas y el total y lo pasamos a base 10
-			$nota = (($num_histCorrectas/$num_historias)*10);
-
-			$sql_existe = "SELECT * FROM NOTA_TRABAJO WHERE IdTrabajo = '$IdTrabajo' AND login = '$login'";
-
-			$existe = $this->mysqli->query($sql_existe);
-
-			$num_rows_existe = mysqli_num_rows($existe);
-
-			if($num_rows_existe == 0){
-				//Insertamos la nota calculada en la BD
-				$sql_insert = "INSERT INTO NOTA_TRABAJO(
-											login,
-											IdTrabajo,
-											NotaTrabajo) VALUES(
-															'$login',
-															'$IdTrabajo',
-											                '$nota')";
-
-				if ($result_insert = $this->mysqli->query($sql_insert)) $cont_exitos++;
-			}
-			else{
-			//Actualizamos la nota para el usuario
-			$sql_update = "UPDATE NOTA_TRABAJO SET NotaTrabajo = $nota  WHERE IdTrabajo = '$IdTrabajo' AND login = '$login'";
-
-			if ($result_insert = $this->mysqli->query($sql_update)) $cont_exitos++;
-			}
+				if ($result_insert = $this->mysqli->query($sql_update)) $cont_exitos++;
+				}
+			}	
 																	                
 		}
 
@@ -506,42 +507,49 @@ function genAutoNotaQA($IdTrabajoQA){
 							WHERE IdTrabajo = '$IdTrabajoET' AND
 									LoginEvaluador = '$LoginEvaluador' AND
 									 IdHistoria = '$IdHistoria'";
+				echo "SQL EV: ".$sql_evs."<br>";							 
 
 				$evaluaciones = $this->mysqli->query($sql_evs );
 				//Número de Qas realizadas por alumno sobre el IdTrabajo
 				$num_evaluaciones = mysqli_num_rows($evaluaciones);
-
+				echo "EV: ".$num_evaluaciones."<br>";
 				while($row_ev = mysqli_fetch_array($evaluaciones)){
 					if($row_ev['OK'] == 1) $num_correctos++;
 				}
 			}
 
 			//Calculamos la nota de QA del IdTrabajo del alumno con LoginEvaluador en base 10
-			$nota = ($num_correctos/($num_historias*$num_evaluaciones))*10;
+			if($num_evaluaciones > 0){
+				$nota = ($num_correctos/($num_historias*$num_evaluaciones))*10;
+				echo "Log: ".$LoginEvaluador."NUMHIS: ".$num_historias."num_evaluaciones".$num_evaluaciones."<br>";
 
-			$sql_existe = "SELECT * FROM NOTA_TRABAJO WHERE IdTrabajo = '$IdTrabajoQA' AND login = '$LoginEvaluador'";
+				$sql_existe = "SELECT * FROM NOTA_TRABAJO WHERE IdTrabajo = '$IdTrabajoQA' AND login = '$LoginEvaluador'";
 
-			$existe = $this->mysqli->query($sql_existe);
+				$existe = $this->mysqli->query($sql_existe);
 
-			$num_rows_existe = mysqli_num_rows($existe);
+				$num_rows_existe = mysqli_num_rows($existe);
 
-			if($num_rows_existe == 0){
-				//Insertamos la nota calculada en la BD
-				$sql_insert = "INSERT INTO NOTA_TRABAJO(
-											login,
-											IdTrabajo,
-											NotaTrabajo) VALUES(
-															'$LoginEvaluador',
-															'$IdTrabajoQA',
-											                '$nota')";
+				if($num_rows_existe == 0){
 
-				if ($result_insert = $this->mysqli->query($sql_insert)) $cont_exitos++;
+					//Insertamos la nota calculada en la BD
+					$sql_insert = "INSERT INTO NOTA_TRABAJO(
+												login,
+												IdTrabajo,
+												NotaTrabajo) VALUES(
+																'$LoginEvaluador',
+																'$IdTrabajoQA',
+												                '$nota')";
+
+					echo "SQL EV: ".$sql_insert."<br>";							              
+					if ($result_insert = $this->mysqli->query($sql_insert)) $cont_exitos++;
+				}
+				else{
+					//Actualizamos la nota para el usuario
+					$sql_update = "UPDATE NOTA_TRABAJO SET NotaTrabajo = $nota  WHERE IdTrabajo = '$IdTrabajoQA' AND login = '$LoginEvaluador'";
+
+					if ($result_insert = $this->mysqli->query($sql_update)) $cont_exitos++;
+				}	
 			}
-			else{
-				//Actualizamos la nota para el usuario
-				$sql_update = "UPDATE NOTA_TRABAJO SET NotaTrabajo = $nota  WHERE IdTrabajo = '$IdTrabajoQA' AND login = '$LoginEvaluador'";
-				if ($result_insert = $this->mysqli->query($sql_update)) $cont_exitos++;
-			}	
 		}
 		else{
 			return true;
@@ -555,6 +563,17 @@ function genAutoNotaQA($IdTrabajoQA){
 }//Fin genAutoNotaQA()
 
 function genAutoNota(){
+
+	//Comprobamos si ya se ha realizado la generación automática de notas
+	$sql_cmp_reset = "SELECT * FROM NOTA_TRABAJO";
+	$cmp_reset = $this->mysqli->query($sql_cmp_reset);
+	$num_cmp_reset = mysqli_num_rows($cmp_reset);
+
+	if($num_cmp_reset > 0){
+			$sql_reset = "DELETE FROM NOTA_TRABAJO";
+			$cmp_reset = $this->mysqli->query($sql_reset);
+	}
+
 	//Cogemos todos los trabajos
 	$sql = "SELECT * FROM TRABAJO";
 
