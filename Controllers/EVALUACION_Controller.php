@@ -41,6 +41,7 @@ $acceso=false;
 
 include_once '../Models/EVALUACION_Model.php';
 include_once '../Models/ENTREGA_Model.php';
+include_once '../Models/USU_GRUPO_Model.php';
 include_once '../Models/Calificacion_Model.php';
 
 include_once '../Views/EVALUACION/EVALUACION_SHOWALL_View.php';
@@ -371,11 +372,9 @@ function getCalificarChecbox(){
 			
 				$EVALUACION = new EVALUACION_Model($_REQUEST['IdTrabajo'], $_REQUEST['LoginEvaluador'], $_REQUEST['AliasEvaluado'], $_REQUEST['IdHistoria'], '', '', '', '', ''); //crea una EVALUACION_Model con los campos clave del usuario y del trabajo
 				$lista = $EVALUACION->rellenarListaIdHistoria();  //Recoge todos los atributos
-				$usuario = new EVALUACION_EDIT($lista); //Crea la vista EDIT con los datos del usuario
-
-
-
-				
+				$grupo_user= new USU_GRUPO_Model($_SESSION['login'], ''); 
+				$idgrupo = $grupo_user->grupoUsuario(); //Comprobamos si es un ADMIN
+				$usuario = new EVALUACION_EDIT($lista, $idgrupo); //Crea la vista EDIT con los datos del usuario
 
 			break;
 		case 'SEARCH': //si desea realizar una busqueda
