@@ -317,7 +317,7 @@ INSERT INTO `ACCION`(`IdAccion`, `NombreAccion`, `DescripAccion`) VALUES  ('ADD'
                                       ('ADDAL', 'Anadir Entrega', 'Permite anadir entrega'),
                                       ('CALIF', 'Calificar', 'Permite calificar Evaluaciones'),
                                       ('SHOWH', 'Mostrar Historias', 'Mostrar historias de un trabajo'),
-                                      ('RESULT', 'Resultados QA', 'Mostrar resultados de una QA'),
+                                      ('RESUL', 'Resultados QA', 'Mostrar resultados de una QA'),
                                       ('GENNOT', 'Generar Notas', 'Generar Notas');
 
 INSERT INTO `FUNCIONALIDAD` (`IdFuncionalidad`, `NombreFuncionalidad`, `DescripFuncionalidad`)
