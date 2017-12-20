@@ -14,13 +14,18 @@ class NOTA_TRABAJO_DELETE{
     var $IdTrabajo; //declaración del atributo IdTrabajo
     var $NombreTrabajo; //declaración del atributo NombreTrabajo 
     var $NotaTrabajo;  //declaración del atributo NotaTrabajo
-
+    var $PorcentajeNota;
+    var $aux;
+    var $case;
 function __construct($lista){
     $this->login = $lista['login'];
     $this->Nombre = $lista['Nombre'];
     $this->IdTrabajo = $lista['IdTrabajo'];
     $this->NombreTrabajo = $lista['NombreTrabajo'];
     $this->NotaTrabajo = $lista['NotaTrabajo'];
+    $this->PorcentajeNota = $lista['PorcentajeNota'];
+    $this->aux = ($this->NotaTrabajo * $this->PorcentajeNota)/100;
+    $this->case = 0; 
     $this->render();
 }
 
@@ -39,6 +44,8 @@ function render(){
                 <tr><th><?php echo $strings['IdTrabajo'] ?></th><td><?php echo $this->IdTrabajo ?></td></tr>
                 <tr><th><?php echo $strings['NombreTrabajo'] ?></th><td><?php echo $this->NombreTrabajo ?></td></tr>
                 <tr><th><?php echo $strings['Nota Trabajo'] ?></th><td><?php echo $this->NotaTrabajo ?></td></tr>
+                <tr><th><?php echo $strings['PorcentajeNota'] ?></th><td><?php echo $this->PorcentajeNota ?></td></tr>
+                <tr><th><?php echo $strings['Nota Parcial'] ?></th><td><?php echo $this->aux  ?></td></tr>
         </table>
 
         <form method="post" name="DELETE" action="../Controllers/NOTA_TRABAJO_Controller.php">
@@ -47,6 +54,8 @@ function render(){
             <input class="del" type="text" name="IdTrabajo" size="<?php echo strlen($this->IdTrabajo); ?>" readonly value="<?php echo $this->IdTrabajo ?>" >
             <input class="del" type="text" name="NombreTrabajo" size="<?php echo strlen($this->NombreTrabajo); ?>" readonly value="<?php echo $this->NombreTrabajo ?>" >
             <input class="del" type="text" name="NotaTrabajo"  size="<?php echo strlen($this->NotaTrabajo); ?>" readonly value="<?php echo $this->NotaTrabajo ?>">
+            <input class="del" type="text" name="PorcentajeNota" size="<?php echo strlen($this->PorcentajeNota); ?>" readonly value="<?php echo $this->NombreTrabajo ?>" >
+            <input class="del" type="text" name="Nota Parcial"  size="<?php echo strlen($this->aux); ?>" readonly value="<?php echo $this->aux ?>">
               
             <div class="accionesTable" style="margin-left: 0%; float: right; margin-right: 45%">
                 <a href="../Controllers/NOTA_TRABAJO_Controller.php?action=DELETE&login=<?php echo $this->login ?>&IdTrabajo=<?php echo $this->IdTrabajo ?>"><input type="image" name="action" value="DELETE" action="#" src="../Views/images/confirmar.png" title="<?php echo $strings['Borrar Nota'] ?>" ></a>
