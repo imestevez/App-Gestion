@@ -145,7 +145,7 @@ function render(){
                     
                                if($value == 'DELETE'){
                                 ?>     
-                        <a href="../Controllers/NOTA_TRABAJO_Controller.php?action=DELETEALL&login=<?php echo $this->datos[$row['login']]["login"]?>"><input type="image" src="../Views/images/delete.png" name="action" title="<?php echo $strings['Eliminar'] ?>" value="DELETEALL"></a>
+                        <a href="../Controllers/NOTA_TRABAJO_Controller.php?action=DELETE&login=<?php echo $this->datos[$row['login']]["login"]?>&Nombre=<?php echo $this->datos[$row['login']]["Nombre"]; ?>"><input type="image" src="../Views/images/delete.png" name="action" title="<?php echo $strings['Eliminar'] ?>" value="DELETEALL"></a>
                         
                         <?php
                             }

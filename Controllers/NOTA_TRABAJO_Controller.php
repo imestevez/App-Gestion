@@ -46,6 +46,7 @@ include_once '../Views/NOTA_TRABAJO/NOTA_TRABAJO_ADD_View.php';
 include_once '../Views/NOTA_TRABAJO/NOTA_TRABAJO_EDIT_View.php';
 include_once '../Views/NOTA_TRABAJO/NOTA_TRABAJO_SEARCH_View.php';
 include_once '../Views/NOTA_TRABAJO/NOTA_TRABAJO_DELETE_View.php';
+include_once '../Views/NOTA_TRABAJO/NOTA_TRABAJO_DELETEALL_View.php';
 include_once '../Views/MESSAGE_View.php';
 
 
@@ -103,25 +104,31 @@ if (!isset($_REQUEST['action'])){
 			}
 			break;
 		case 'DELETE': //Si quiere hacer un DELETE
-			if (!$_POST){ //si viene del showall (no es un post) --> Delete de todas las notas 
-				$NOTA_TRABAJO = new NOTA_TRABAJO_Model($_REQUEST['login'],'', '');
-				$form = new NOTA_TRABAJO_DELETE($lista); //Crea la vista ADD y muestra formulario para rellenar por el usuario
-				$delete = new NOTA_TRABAJO_DELETE($lista); //Crea la vista de DELETE con los datos del usuario		
-			}
-			else{
-				if (isset($_REQUEST['case'])){ //viene del showall con una clave
+			if($_POST){
+				if (isset($_REQUEST['case'])){ //viene de la showcurrent de nota
 					$lista = array('login','IdTrabajo','NotaTrabajo');
 					$NOTA_TRABAJO = new NOTA_TRABAJO_Model($_REQUEST['login'],$_REQUEST['IdTrabajo'], '');//crea un un NOTA_TRABAJO_Model con el IdTrabajo del usuario
 					$lista = $NOTA_TRABAJO->rellenarLista();
 					//$tupla = $NOTA_TRABAJO->RellenaDatos();//A partir del IdTrabajo recoge todos los atributos
-					$usuario = new NOTA_TRABAJO_DELETE($lista); //Crea la vista de DELETE con los datos del usuario
+					$delete = new NOTA_TRABAJO_DELETE($lista); //Crea la vista de DELETE con los datos del usuario
 				}
-				else{//si viene con un post
+				if (isset($_REQUEST['case1'])){ //si viene del delete
 					$NOTA_TRABAJO = get_data_form(); //coge los datos del formulario del usuario que desea borrar
 					$respuesta = $NOTA_TRABAJO->DELETE(); //Ejecuta la funcion DELETE() en el NOTA_TRABAJO_Model
-					$mensaje = new MESSAGE($respuesta, '../Controllers/NOTA_TRABAJO_Controller.php'); //muestra el mensaje despues de la sentencia sql
-				}
-			}	
+					$mensaje = new MESSAGE($respuesta, '../Controllers/NOTA_TRABAJO_Controller.php'); //muestra el mensaje despues de la sentencia sql	
+				}		
+				if (isset($_REQUEST['case2'])){ //si viene del delete all 
+					$NOTA_TRABAJO = get_data_form(); //coge los datos del formulario del usuario que desea borrar
+					$respuesta = $NOTA_TRABAJO->DELETEALL(); //Ejecuta la funcion DELETEALL() en el NOTA_TRABAJO_Model
+					$mensaje = new MESSAGE($respuesta, '../Controllers/NOTA_TRABAJO_Controller.php'); //muestra el mensaje despues de la sentencia sql	
+				}	
+			}else{//si viene del showall
+				$lista = array('login', 'Nombre' );
+				$NOTA_TRABAJO = new NOTA_TRABAJO_Model($_REQUEST['login'],'', '');
+				$notas = $NOTA_TRABAJO->calcNotaF();
+				$lista = $NOTA_TRABAJO->rellernarNombre();
+				$delete = new NOTA_TRABAJO_DELETEALL($lista,$notas); //Crea la vista de DELETE con los datos del usuario	
+			}
 			break;
 		case 'EDIT': //si el usuario quiere editar	
 			if (isset($_REQUEST['case'])){
