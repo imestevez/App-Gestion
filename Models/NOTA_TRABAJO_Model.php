@@ -12,15 +12,20 @@ Modelo de datos de usuarios que accede a la Base de Datos
 
 class NOTA_TRABAJO_Model { //declaración de la clase
 	var $login; 
+	var $Nombre;
 	var $IdTrabajo; 
+	var $NombreTrabajo;
 	var $NotaTrabajo;
 	var $mysqli; 
 
 
-function __construct($login,$IdTrabajo,$NotaTrabajo){
+function __construct($login,$Nombre,$IdTrabajo,$NombreTrabajo,$NotaTrabajo){
 	//asignación de valores de parámetro a los atributos de la clase
 	$this->login = $login;
+	$this->Nombre = $Nombre;
 	$this->IdTrabajo = $IdTrabajo;
+	$this->NombreTrabajo = $NombreTrabajo;
+
 	$this->NotaTrabajo = $NotaTrabajo;
 
 
@@ -32,9 +37,9 @@ function __construct($login,$IdTrabajo,$NotaTrabajo){
 	//lista con los datos del usuario
 	$this->lista = array(
 			"login" => $this->login,
-			"Nombre" => '',
+			"Nombre" => $this->Nombre,
 			"IdTrabajo"=>$this->IdTrabajo,
-			"NombreTrabajo"=>'',
+			"NombreTrabajo"=>$this->NombreTrabajo,
 			"NotaTrabajo" => $this->NotaTrabajo,
 			"sql" => $this->mysqli, 
 			"mensaje"=> '');
@@ -123,7 +128,9 @@ function SEARCH()
     			WHERE 
     				(
     				(N.login LIKE '%$this->login%') &&
+    				(Nombre LIKE '%$this->Nombre%') &&
     				(N.IdTrabajo LIKE '%$this->IdTrabajo%') &&
+    				(NombreTrabajo LIKE '%$this->NombreTrabajo%') &&
 	 				(N.NotaTrabajo LIKE '%$this->NotaTrabajo%') &&
 	 				(N.login = U.login) &&
 	 				(N.IdTrabajo = T.IdTrabajo)
