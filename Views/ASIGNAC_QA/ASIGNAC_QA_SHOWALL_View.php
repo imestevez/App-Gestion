@@ -122,9 +122,31 @@ function render(){
                 <td><?php echo $row["AliasEvaluado"]; ?></td>
 
                 <td class="edit_tabla">
-                    <a href="../Controllers/ASIGNAC_QA_Controller.php?action=SHOWCURRENT&IdTrabajo=<?php echo $row["IdTrabajo"]?>&LoginEvaluador=<?php echo $row["LoginEvaluador"]?>&AliasEvaluado=<?php echo $row["AliasEvaluado"]?>"><input type="image" src="../Views/images/ojo.png" name="action" title="<?php echo $strings['Mostrar en detalle'] ?>" value="SHOWCURRENT" action=""></a>
-                    <a href="../Controllers/ASIGNAC_QA_Controller.php?action=EDIT&IdTrabajo=<?php echo $row["IdTrabajo"]?>&LoginEvaluador=<?php echo $row["LoginEvaluador"]?>&AliasEvaluado=<?php echo $row["AliasEvaluado"]?>"><input type="image" src="../Views/images/edit.png" name="action" title="<?php echo $strings['Editar'] ?>" value="EDIT"></a>
+                   <?php 
+
+                    foreach ($this->acciones as $key => $value) {
+                        if($value == 'SHOW'){
+                            ?>
+                               
+                               <a href="../Controllers/ASIGNAC_QA_Controller.php?action=SHOW&IdTrabajo=<?php echo $row["IdTrabajo"]?>&LoginEvaluador=<?php echo $row["LoginEvaluador"]?>&AliasEvaluado=<?php echo $row["AliasEvaluado"]?>"><input type="image" src="../Views/images/ojo.png" name="action" title="<?php echo $strings['Mostrar en detalle'] ?>" value="SHOW" action=""></a>
+
+                            <?php
+                        }
+
+                         if($value == 'EDIT'){
+                            ?>
+                      <a href="../Controllers/ASIGNAC_QA_Controller.php?action=EDIT&IdTrabajo=<?php echo $row["IdTrabajo"]?>&LoginEvaluador=<?php echo $row["LoginEvaluador"]?>&AliasEvaluado=<?php echo $row["AliasEvaluado"]?>"><input type="image" src="../Views/images/edit.png" name="action" title="<?php echo $strings['Editar'] ?>" value="EDIT"></a>
+                    <?php
+                        }
+                           if($value == 'DELETE'){
+                            ?>
+                    
+                   
                     <a href="../Controllers/ASIGNAC_QA_Controller.php?action=DELETE&IdTrabajo=<?php echo $row["IdTrabajo"]?>&LoginEvaluador=<?php echo $row["LoginEvaluador"]?>&AliasEvaluado=<?php echo $row["AliasEvaluado"]?>"><input type="image" src="../Views/images/delete.png" name="action" title="<?php echo $strings['Eliminar'] ?>" value="DELETE"></a>
+                    <?php
+                        }
+                    }
+                    ?>     
                 </td>
                 </tr>              
            
@@ -174,7 +196,7 @@ function renderSearch(){
                 <th><?php echo $strings['Login del evaluado']?></th>
                 <th><?php echo $strings['Alias del evaluado']?></th> 
 
-                     <?php 
+                       <?php 
 
                     foreach ($this->acciones as $key => $value) {
                         if($value == 'SEARCH'){
@@ -202,18 +224,23 @@ function renderSearch(){
                         <td>
                             <a href="../Controllers/ASIGNAC_QA_Controller.php?action=GENQA" ><input type="image" src="../Views/images/flecha.png" name="action" title="<?php echo $strings['Asignación automática de QAs']?>" value="GENQA" ></a>
                         </td> 
+                            </tr>
                                 
                             <?php
                         }
+                    }
+                    foreach ($this->acciones as $key => $value) {
 
                          if($value == 'GENEV'){
                             ?>
-                           
+                            <tr>
+
                     <th><?php echo $strings['Gen. historias evaluación']?></th>
                     <td>
                         <a href="../Controllers/ASIGNAC_QA_Controller.php?action=GENEV" ><input type="image" src="../Views/images/flecha.png" name="action" title="<?php echo $strings['Generación de historias a evaluar']?>" value="GENEV" ></a>
                     </td> 
-                </tr>
+                            </tr>
+
                             
                     <?php
                         }
@@ -235,9 +262,32 @@ function renderSearch(){
                 
 
              <td class="edit_tabla">
-                    <a href="../Controllers/ASIGNAC_QA_Controller.php?action=SHOWCURRENT&IdTrabajo=<?php echo $row["IdTrabajo"]?>&LoginEvaluador=<?php echo $row["LoginEvaluador"]?>&AliasEvaluado=<?php echo $row["AliasEvaluado"]?>"><input type="image" src="../Views/images/ojo.png" name="action" title="<?php echo $strings['Mostrar en detalle'] ?>" value="SHOWCURRENT" action=""></a>
-                    <a href="../Controllers/ASIGNAC_QA_Controller.php?action=EDIT&IdTrabajo=<?php echo $row["IdTrabajo"]?>&LoginEvaluador=<?php echo $row["LoginEvaluador"]?>&AliasEvaluado=<?php echo $row["AliasEvaluado"]?>"><input type="image" src="../Views/images/edit.png" name="action" title="<?php echo $strings['Editar'] ?>" value="EDIT"></a>
+                 <?php 
+
+                    foreach ($this->acciones as $key => $value) {
+                        if($value == 'SHOW'){
+                            ?>
+                               
+                               <a href="../Controllers/ASIGNAC_QA_Controller.php?action=SHOW&IdTrabajo=<?php echo $row["IdTrabajo"]?>&LoginEvaluador=<?php echo $row["LoginEvaluador"]?>&AliasEvaluado=<?php echo $row["AliasEvaluado"]?>"><input type="image" src="../Views/images/ojo.png" name="action" title="<?php echo $strings['Mostrar en detalle'] ?>" value="SHOW" action=""></a>
+
+                            <?php
+                        }
+
+                         if($value == 'EDIT'){
+                            ?>
+                      <a href="../Controllers/ASIGNAC_QA_Controller.php?action=EDIT&IdTrabajo=<?php echo $row["IdTrabajo"]?>&LoginEvaluador=<?php echo $row["LoginEvaluador"]?>&AliasEvaluado=<?php echo $row["AliasEvaluado"]?>"><input type="image" src="../Views/images/edit.png" name="action" title="<?php echo $strings['Editar'] ?>" value="EDIT"></a>
+                    <?php
+                        }
+                           if($value == 'DELETE'){
+                            ?>
+                    
+                   
                     <a href="../Controllers/ASIGNAC_QA_Controller.php?action=DELETE&IdTrabajo=<?php echo $row["IdTrabajo"]?>&LoginEvaluador=<?php echo $row["LoginEvaluador"]?>&AliasEvaluado=<?php echo $row["AliasEvaluado"]?>"><input type="image" src="../Views/images/delete.png" name="action" title="<?php echo $strings['Eliminar'] ?>" value="DELETE"></a>
+                    <?php
+                        }
+                    }
+                    ?>     
+                
                 </td>
                 </tr>                
            
