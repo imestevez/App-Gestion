@@ -24,7 +24,7 @@ function __construct($lista){
     $this->NombreTrabajo = $lista['NombreTrabajo'];
     $this->NotaTrabajo = $lista['NotaTrabajo'];
     $this->PorcentajeNota = $lista['PorcentajeNota'];
-    $this->aux = $this->NotaTrabajo * $this->PorcentajeNota;
+    $this->aux = ($this->NotaTrabajo * $this->PorcentajeNota)/100;
     $this->case = 0; 
     $this->render();
 }
@@ -60,7 +60,7 @@ function render(){
             <div class="results1">
                 <a href="../Controllers/NOTA_TRABAJO_Controller.php?action=EDIT&login=<?php echo $this->login?>&IdTrabajo=<?php echo $this->IdTrabajo?>&case=<?php echo $this->case?>"><input type="image" src="../Views/images/edit.png" name="action" title="<?php echo $strings['Editar'] ?>" value="EDIT"></a>
                 
-                <a href="../Controllers/NOTA_TRABAJO_Controller.php?action=DELETE&login=<?php echo $this->login?>&IdTrabajo=<?php echo $this->IdTrabajo?>"><input type="image" src="../Views/images/delete.png" name="action" title="<?php echo $strings['Eliminar'] ?>" value="DELETE"></a>
+                <a href="../Controllers/NOTA_TRABAJO_Controller.php?action=DELETE&login=<?php echo $this->login?>&IdTrabajo=<?php echo $this->IdTrabajo?>&case=<?php echo $this->case?>"><input type="image" src="../Views/images/delete.png" name="action" title="<?php echo $strings['Eliminar'] ?>" value="DELETE"></a>
             </div>
         </form>
         <div class="results2">
