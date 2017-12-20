@@ -17,7 +17,10 @@ class NOTA_TRABAJO_SHOWCURRENT{
     var $PorcentajeNota;
     var $aux;
     var $case;
-function __construct($lista){
+    var $permisos; //PErmidos del grupo
+    var $acciones; //acciones sobre nota
+
+function __construct($lista,$permisos,$acciones){
     $this->login = $lista['login'];
     $this->Nombre = $lista['Nombre'];
     $this->IdTrabajo = $lista['IdTrabajo'];
@@ -26,6 +29,9 @@ function __construct($lista){
     $this->PorcentajeNota = $lista['PorcentajeNota'];
     $this->aux = ($this->NotaTrabajo * $this->PorcentajeNota)/100;
     $this->case = 0; 
+
+    $this->permisos = $permisos;
+    $this->acciones = $acciones;
     $this->render();
 }
 
@@ -57,15 +63,46 @@ function render(){
             <input class="del" type="text" name="Nota Parcial"  size="<?php echo strlen($this->aux); ?>" readonly value="<?php echo $this->aux ?>">
             <input class="del" type="text" name="case" size="<?php echo strlen($this->case); ?>" readonly value="<?php echo $this->case ?>">
 
-            <div class="results1">
-                <a href="../Controllers/NOTA_TRABAJO_Controller.php?action=EDIT&login=<?php echo $this->login?>&IdTrabajo=<?php echo $this->IdTrabajo?>&case=<?php echo $this->case?>"><input type="image" src="../Views/images/edit.png" name="action" title="<?php echo $strings['Editar'] ?>" value="EDIT"></a>
-                
+            <div class="results1" >
+
+                <?php
+                foreach ($this->acciones as $key => $value) {
+
+                    if($value == 'EDIT'){
+                        ?>
+                        <a href="../Controllers/NOTA_TRABAJO_Controller.php?action=EDIT&login=<?php echo $this->login?>&IdTrabajo=<?php echo $this->IdTrabajo?>&case=<?php echo $this->case?>"><input type="image" src="../Views/images/edit.png" name="action" title="<?php echo $strings['Editar'] ?>" value="EDIT"></a>
+
+                        <?php
+                    }
+                    if($value == 'EDIT'){
+                        ?>
                 <a href="../Controllers/NOTA_TRABAJO_Controller.php?action=DELETE&login=<?php echo $this->login?>&IdTrabajo=<?php echo $this->IdTrabajo?>&case=<?php echo $this->case?>"><input type="image" src="../Views/images/delete.png" name="action" title="<?php echo $strings['Eliminar'] ?>" value="DELETE"></a>
+
+                    <?php
+                    }
+                }
+                ?>
             </div>
         </form>
-        <div class="results2">
+        <div class="results2" >
 
+            <?php
+                $resul = false;
+
+                foreach ($this->permisos as $key => $value) {
+
+                    if(($value[1] == 10)  && ($value[2] == 'RESUL') ){
+                        $resul = true;
+                    }
+                }
+                    if($resul == true){
+                        ?>
             <a href="../Controllers/EVALUACION_Controller.php?action=RESUL&login=<?php echo $this->login?>&IdTrabajo=<?php echo $this->IdTrabajo?>"><input type="image" name="action" value="RESUL" src="../Views/images/resultado.png" title="<?php echo $strings['Ver correccion'] ?>"></a>
+            <?php
+
+                    }
+                ?>
+
             <a href="../Controllers/NOTA_TRABAJO_Controller.php?action=ALL"><input type="image" name="action" value="ALL" src="../Views/images/back.png" title="<?php echo $strings['Volver'] ?>"></a> 
          
                     

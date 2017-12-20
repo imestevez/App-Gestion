@@ -21,7 +21,7 @@ class Index {
 		include_once '../Views/Header.php';
 ?>
 
-		 <section class="pagina" style="min-height: 400px">
+		 <section class="pagina" style="min-height: 800px">
 
 		 	   <div class="texto" style=" width: 70%; margin-left: 15%">
             <h2 style="text-align: center;"><strong><?php echo $strings['Grupo SOLFAMIDAS'] ?></strong></h2><br>

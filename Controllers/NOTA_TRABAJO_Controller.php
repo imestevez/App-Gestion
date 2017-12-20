@@ -29,8 +29,8 @@ if(isset($_REQUEST["action"]))  {
 
 //Si no tiene permisos para acceder a este controlador con la accion que trae
 if(!HavePermissions(11, $action)) {
-	//new MESSAGE('No tienes permisos para realizar esta accion', '../index.php');
-	header('Location:../index.php'); //vuelve al index
+	new MESSAGE('No tienes permisos para realizar esta accion', '../index.php');exit();
+	//header('Location:../index.php'); //vuelve al index
 }
 //almacenamos un array de permidos del grupo
 $permisos = listaPermisos();
@@ -157,7 +157,7 @@ if (!isset($_REQUEST['action'])){
 			$NOTA_TRABAJO = new NOTA_TRABAJO_Model($_REQUEST['login'],$_REQUEST['IdTrabajo'], '');//crea un un NOTA_TRABAJO_Model con el IdTrabajo del usuario
 			$lista = $NOTA_TRABAJO->rellenarLista();
 			//$tupla = $NOTA_TRABAJO->RellenaDatos();//A partir del IdTrabajo recoge todos los atributos
-			$usuario = new NOTA_TRABAJO_SHOWCURRENT($lista); //Crea la vista SHOWCURRENT del usuario requerido
+			$usuario = new NOTA_TRABAJO_SHOWCURRENT($lista,$permisos,$acciones); //Crea la vista SHOWCURRENT del usuario requerido
 			break;
 		case 'GENNOT':
 				$NOTA_TRABAJO = new NOTA_TRABAJO_Model('','','');

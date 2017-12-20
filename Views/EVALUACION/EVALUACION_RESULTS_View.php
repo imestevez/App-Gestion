@@ -165,11 +165,11 @@ include '../Views/Header.php';
                   
                 ?>
         </table>
+         </fieldset> 
                           
-                <div class="acciones" style="float: left;">
+                <div class="acciones" style="float: left; margin-left: 45%">
                      <a href="../Controllers/NOTA_TRABAJO_Controller.php?action=ALL"><input type="image" src="../Views/images/back.png" title="<?php echo $strings['Volver']?>"></a>
                 </div>
-         </fieldset> 
     </section>
 <?php
         include '../Views/Footer.php';

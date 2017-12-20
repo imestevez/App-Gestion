@@ -343,8 +343,8 @@ INSERT INTO `FUNC_ACCION` (`IdFuncionalidad`, `IdAccion`) VALUES  (1, 'ADD'), (1
                                   (7, 'ADD'), (7, 'EDIT'), (7, 'SEARCH'), (7, 'DELETE'), (7, 'ALL'), (7, 'SHOW'), (7,'SHOWH'),
                                   (8, 'ADD'), (8, 'EDIT'), (8, 'SEARCH'), (8, 'DELETE'), (8, 'ALL'), (8, 'SHOW'), (8,'ADDAL'),
                                   (9, 'ADD'), (9, 'EDIT'), (9, 'SEARCH'), (9, 'DELETE'), (9, 'ALL'), (9, 'SHOW'), (9, 'GENQA'),(9, 'GENEV'),
-                                  (10, 'ADD'), (10, 'EDIT'), (10, 'SEARCH'), (10, 'DELETE'), (10, 'ALL'), (10, 'SHOW'), (10,'CALIF'),
-                                  (11, 'ADD'), (11, 'EDIT'), (11, 'SEARCH'), (11, 'DELETE'), (11, 'ALL'), (11, 'SHOW'), (11,'GENNOT'),(10,'RESUL');
+                                  (10, 'ADD'), (10, 'EDIT'), (10, 'SEARCH'), (10, 'DELETE'), (10, 'ALL'), (10, 'SHOW'), (10,'CALIF'),(11,'RESUL'),
+                                  (11, 'ADD'), (11, 'EDIT'), (11, 'SEARCH'), (11, 'DELETE'), (11, 'ALL'), (11, 'SHOW'), (11,'GENNOT');
 
                                   
 INSERT INTO `USU_GRUPO` (`login`, `IdGrupo`) VALUES ('admin', 'ADMIN'), ('user', 'ALUMNO'),('pablo','ALUMNO'),('lucia','ALUMNO'),('juan','ALUMNO'),('marta','ALUMNO'),('raul','ALUMNO');
@@ -358,12 +358,12 @@ INSERT INTO `PERMISO`(`IdGrupo`,`IdFuncionalidad`,`IdAccion`) VALUES  ('ADMIN',1
                                     ('ADMIN',7,'ADD'),('ADMIN',7,'EDIT'),('ADMIN',7,'SHOW'),('ADMIN',7,'DELETE'), ('ADMIN',7,'SEARCH'),('ADMIN',7,'ALL'),('ADMIN',7,'SHOWH'),
                                     ('ADMIN',8,'ADD'),('ADMIN',8,'EDIT'),('ADMIN',8,'SHOW'),('ADMIN',8,'DELETE'), ('ADMIN',8,'SEARCH'),('ADMIN',8,'ALL'),
                                     ('ADMIN',9,'ADD'),('ADMIN',9,'EDIT'),('ADMIN',9,'SHOW'),('ADMIN',9,'DELETE'), ('ADMIN',9,'SEARCH'),('ADMIN',9,'ALL'),('ADMIN',9, 'GENQA'),('ADMIN',9, 'GENEV'),
-                                    ('ADMIN',10,'ADD'),('ADMIN',10,'SHOW'),('ADMIN',10,'DELETE'), ('ADMIN',10,'SEARCH'),('ADMIN',10,'ALL'),('ADMIN',10, 'CALIF'),('ADMIN',10, 'EDIT'),
-                                    ('ADMIN',11,'ADD'),('ADMIN',11,'EDIT'),('ADMIN',11,'SHOW'),('ADMIN',11,'DELETE'), ('ADMIN',11,'SEARCH'),('ADMIN',11,'ALL'),('ADMIN',11,'GENNOT'),('ADMIN',11, 'RESUL'),
+                                    ('ADMIN',10,'ADD'),('ADMIN',10,'SHOW'),('ADMIN',10,'DELETE'), ('ADMIN',10,'SEARCH'),('ADMIN',10,'ALL'),('ADMIN',10, 'CALIF'),('ADMIN',10, 'EDIT'),('ADMIN',11, 'RESUL'),
+                                    ('ADMIN',11,'ADD'),('ADMIN',11,'EDIT'),('ADMIN',11,'SHOW'),('ADMIN',11,'DELETE'), ('ADMIN',11,'SEARCH'),('ADMIN',11,'ALL'),('ADMIN',11,'GENNOT'),
                                     ('ALUMNO',6,'SHOW'),
                                     ('ALUMNO',8,'EDIT'),('ALUMNO',8,'SHOW'),('ALUMNO',8,'ADDAL'),
-                                    ('ALUMNO',10,'EDIT'),('ALUMNO',10,'SHOW'),
-                                    ('ALUMNO',11,'SHOW'),('ALUMNO',11, 'RESUL');
+                                    ('ALUMNO',10,'EDIT'),('ALUMNO',10,'SHOW'),('ALUMNO',10, 'RESUL'),
+                                    ('ALUMNO',11,'SHOW');
 
 INSERT INTO `TRABAJO` ( `IdTrabajo`, `NombreTrabajo`, `FechaIniTrabajo`, `FechaFinTrabajo` , `PorcentajeNota`)
                                 VALUES  ('ET1', 'Trabajo de Formularios', '2017-09-05', '2017-09-15', 25),

@@ -27,7 +27,6 @@ include '../Models/USUARIO_Model.php';
 
 //Funcion que comprueeba si un usuario tiene permisos
 function HavePermissions($IdFuncionalidad, $IdAccion){
-
 	$USU_GRUPO = new USU_GRUPO_Model($_SESSION["login"], '');
 	$listaGrupos = $USU_GRUPO->listagrupoUsuario();
 	if($listaGrupos == null){
