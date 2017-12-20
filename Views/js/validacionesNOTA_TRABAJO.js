@@ -526,9 +526,9 @@ function validar(formulario)
 
         if( 
           (validarLoginBuscar(form.login, 9)) && 
-          (validarNombreBuscar(nombre, 30)) &&
+          (validarNombreBuscar(form.Nombre, 30)) &&
           (validarIdTrabajoBuscar(form.IdTrabajo, 6)) && 
-          (validarNombreTrabajoBuscar(form.login, 30)) &&
+          (validarNombreTrabajoBuscar(form.NombreTrabajo, 30)) &&
           (validarNotaTrabajoBuscar(form.NotaTrabajo, 2, 0, 10)) ){
 
           alerta = false; //Se le asigna false a la variable alerta 
