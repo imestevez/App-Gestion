@@ -358,7 +358,7 @@ INSERT INTO `PERMISO`(`IdGrupo`,`IdFuncionalidad`,`IdAccion`) VALUES  ('ADMIN',1
                                     ('ADMIN',7,'ADD'),('ADMIN',7,'EDIT'),('ADMIN',7,'SHOW'),('ADMIN',7,'DELETE'), ('ADMIN',7,'SEARCH'),('ADMIN',7,'ALL'),('ADMIN',7,'SHOWH'),
                                     ('ADMIN',8,'ADD'),('ADMIN',8,'EDIT'),('ADMIN',8,'SHOW'),('ADMIN',8,'DELETE'), ('ADMIN',8,'SEARCH'),('ADMIN',8,'ALL'),
                                     ('ADMIN',9,'ADD'),('ADMIN',9,'EDIT'),('ADMIN',9,'SHOW'),('ADMIN',9,'DELETE'), ('ADMIN',9,'SEARCH'),('ADMIN',9,'ALL'),('ADMIN',9, 'GENQA'),('ADMIN',9, 'GENEV'),
-                                    ('ADMIN',10,'ADD'),('ADMIN',10,'SHOW'),('ADMIN',10,'DELETE'), ('ADMIN',10,'SEARCH'),('ADMIN',10,'ALL'),('ADMIN',10, 'CALIF'),('ADMIN',10, 'EDIT'),('ADMIN',11, 'RESUL'),
+                                    ('ADMIN',10,'ADD'),('ADMIN',10,'SHOW'),('ADMIN',10,'DELETE'), ('ADMIN',10,'SEARCH'),('ADMIN',10,'ALL'),('ADMIN',10, 'CALIF'),('ADMIN',10, 'EDIT'),('ADMIN',10, 'RESUL'),
                                     ('ADMIN',11,'ADD'),('ADMIN',11,'EDIT'),('ADMIN',11,'SHOW'),('ADMIN',11,'DELETE'), ('ADMIN',11,'SEARCH'),('ADMIN',11,'ALL'),('ADMIN',11,'GENNOT'),
                                     ('ALUMNO',6,'SHOW'),
                                     ('ALUMNO',8,'EDIT'),('ALUMNO',8,'SHOW'),('ALUMNO',8,'ADDAL'),
