@@ -162,7 +162,6 @@ function DELETE()
 
 function DELETEALL(){
 	$sql = "SELECT * FROM NOTA_TRABAJO WHERE login = '$this->login'"; //comprobar que no hay claves iguales
-
     // se ejecuta la query
     $result = $this->mysqli->query($sql);
     // si existe una tupla con ese valor de clave
@@ -302,6 +301,19 @@ function contarTuplas(){
 
 
 }
+
+function rellernarNombre(){
+	$sql = "SELECT U.Nombre FROM USUARIO U, NOTA_TRABAJO N WHERE (U.login = '$this->login' AND U.login = N.login)";
+
+	if (!($result = $this->mysqli->query($sql))){
+	    	//return  'ERROR'; 
+		}else{
+			$row = mysqli_fetch_array($result);
+			$this->lista['Nombre'] = $row['Nombre'];
+		}
+	return $this->lista;	
+}
+
 function rellenarLista(){
 		$sql = "SELECT * FROM USUARIO U, TRABAJO T, NOTA_TRABAJO N
 						WHERE (U.login = '$this->login' AND
