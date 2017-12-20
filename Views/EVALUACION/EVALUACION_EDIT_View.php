@@ -20,9 +20,10 @@ class EVALUACION_EDIT{
     var $CorrectoP; //atributo para almacenar el valor Correcto del profesor
     var $ComentIncorrectoP; //atributo para almacenar el comentario incorrecto del profesor
     var $OK; //atributo para almacenar el resultado (1 - 0) de la evaluacion de la QA
-    var $idgrupo;
+    var $listaGrupos;
+    var $resul; //variable para controlar el grupo al que pertenece 
 
-function __construct($lista, $idgrupo){
+function __construct($lista, $listaGrupos){
     //asignación de valores de parámetro a los atributos de la clase
     $this->IdTrabajo = $lista['IdTrabajo'];
     $this->LoginEvaluador = $lista['LoginEvaluador'];
@@ -33,15 +34,28 @@ function __construct($lista, $idgrupo){
     $this->CorrectoP = $lista['CorrectoP'];
     $this->ComentIncorrectoP = $lista['ComentIncorrectoP'];
     $this->OK = $lista['OK'];
-    $this->idgrupo = $idgrupo;
+    $this->listaGrupos = $listaGrupos;
 
 
-    //para comprobar si quien hace el edit es ADMIN o USUARIO sin privilegios
-    if($this->idgrupo == 'ADMIN'){
+
+    
+    $this->resul = false;
+
+    foreach ($this->listaGrupos as $key => $value) {
+
+                    if(($value == 'ADMIN') ){
+                        $resul = true;
+                    }
+    }
+    if($this->resul == true){
+
         $this->renderADMIN();
+
     }else{
+        
         $this->render();
     }
+
 
 }
 

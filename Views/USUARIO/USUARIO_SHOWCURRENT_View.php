@@ -54,7 +54,7 @@ function render(){
                 <tr><th><?php echo $strings['Direccion'] ?></th><td><?php echo $this->direccion ?></td></tr>
             </table>
             <div class="accionesTable">
-                <a href="../Controllers/USUARIO_Controller.php?action=SHOWALL"><input type="image" name="action" value="SHOWALL" src="../Views/images/back.png" title="<?php echo $strings['Volver'] ?>"></a>
+                <a href="../Controllers/USUARIO_Controller.php?action=ALL"><input type="image" name="action" value="SHOWALL" src="../Views/images/back.png" title="<?php echo $strings['Volver'] ?>"></a>
             </div>
 
     </section>	

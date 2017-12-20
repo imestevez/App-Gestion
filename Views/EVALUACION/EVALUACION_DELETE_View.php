@@ -68,7 +68,7 @@ function render(){
              </form>
 
                   <div class="accionesTable" style="float: left;">
-                    <a href="../Controllers/EVALUACION_Controller.php?action=SHOWALL"><input type="image" src="../Views/images/back.png" title="<?php echo $strings['Volver'] ?>"></a>  
+                    <a href="../Controllers/EVALUACION_Controller.php?action=ALL"><input type="image" src="../Views/images/back.png" title="<?php echo $strings['Volver'] ?>"></a>  
                   </div>    
     </section>
 <?php

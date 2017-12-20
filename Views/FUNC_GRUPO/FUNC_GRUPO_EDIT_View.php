@@ -111,7 +111,7 @@ function render(){
  <input type="text" name="IdGrupo" value="<?php echo $this->IdGrupo ?>" style="visibility: hidden;" >
         </form>
             <div class="acciones" style="float: left; ">
-                <a href="../Controllers/FUNC_GRUPO_Controller.php?action=SHOWALL&IdGrupo=<?php echo $this->IdGrupo ?>"><input type="image" name="action" value="SHOWALL" src="../Views/images/back.png" title="<?php echo $strings['Volver'] ?>"></a>
+                <a href="../Controllers/FUNC_GRUPO_Controller.php?action=ALL&IdGrupo=<?php echo $this->IdGrupo ?>"><input type="image" name="action" value="SHOWALL" src="../Views/images/back.png" title="<?php echo $strings['Volver'] ?>"></a>
             </div>
 
     </section>  

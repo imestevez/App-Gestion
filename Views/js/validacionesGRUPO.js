@@ -125,7 +125,7 @@ function validarNombreGrupo(NombreGrupo, tamaño_max)
 
   if(comprobarVacio(NombreGrupo))//Si el campo no está vacio el campo
       {
-          if(comprobarAlfanumerico(NombreGrupo,tamaño_max))//Si login cumple la expresión regular de campo Alfabético
+          if(comprobarTexto(NombreGrupo,tamaño_max))//Si login cumple la expresión regular de campo Alfabético
        {
            return true;
        }else{ //Si no cumple la expresión regular
@@ -143,7 +143,7 @@ function validarDescripGrupo(DescripGrupo, tamaño_max)
 
   if(comprobarVacio(DescripGrupo))//Si el campo no está vacio el campo
       {
-          if(comprobarAlfabetico(DescripGrupo,tamaño_max))//Si login cumple la expresión regular de campo Alfabético
+          if(comprobarTexto(DescripGrupo,tamaño_max))//Si login cumple la expresión regular de campo Alfabético
        {
            return true;
        }else{ //Si no cumple la expresión regular
@@ -177,6 +177,33 @@ function comprobarVacioBuscar(campo)
             return false;
         }
          return true;
+}
+
+
+//Función para comprobar que un campo de tipo texto no supera el máximo de caracteres
+function comprobarTextoBuscar(campo, tamaño_max) {
+    
+     var expr_alfanum; //Expresión regular para comprobar que un campo (login y contraseña) es alfanumerico y puede incluir caracteres como 
+    expr_alfanum =  /^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚçÇ_.,-\s]+$/; //letras y numeros _ . - y espacios
+    
+     if (expr_alfanum.test(campo.value) == false) //Si no cumple la expresión regular
+    { 
+        document.getElementById(campo.name).style.display = 'block';      
+        return false;
+    }
+      else //Si cumple la expresión regular
+      {
+        if (campo.value.length > tamaño_max) //Si el tamaño del campo supera el maximo
+        {
+          document.getElementById(campo.name).style.display = 'block';
+            return false;
+        }
+        else //si el tamaño del campo no supera el máximo
+        {     
+            document.getElementById(campo.name).style.display = 'none';
+            return true;
+        }
+  }
 }
 
 
@@ -253,7 +280,7 @@ function validarIdGrupoBuscar(IdGrupo, tamaño_max)
 function validarNombreGrupoBuscar(NombreGrupo, tamaño_max)
 {
     if(comprobarVacioBuscar(NombreGrupo)){ //Si el IdGrupo no está vacío
-        if(comprobarAlfanumericoBuscar(NombreGrupo,tamaño_max)) //Si cumple la expresión regular de campo Alfabético
+        if(comprobarTextoBuscar(NombreGrupo,tamaño_max)) //Si cumple la expresión regular de campo Alfabético
             {
                 return true;
             }else{ //si no cumple la expresión regular
@@ -270,7 +297,7 @@ function validarNombreGrupoBuscar(NombreGrupo, tamaño_max)
 function validarDescripGrupoBuscar(DescripGrupo, tamaño_max)
 {
     if(comprobarVacioBuscar(DescripGrupo)){ //Si el IdGrupo no está vacío
-        if(comprobarAlfabeticoBuscar(DescripGrupo,tamaño_max)) //Si cumple la expresión regular de campo Alfabético
+        if(comprobarTextoBuscar(DescripGrupo,tamaño_max)) //Si cumple la expresión regular de campo Alfabético
             {
                 return true;
             }else{ //si no cumple la expresión regular

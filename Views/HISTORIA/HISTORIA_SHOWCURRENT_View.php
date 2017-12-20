@@ -44,7 +44,7 @@ function render(){
                  <tr><th><?php echo $strings['Texto de la historia'] ?></th><td><?php echo $this->TextoHistoria ?></td></tr>
                 </table>
                     <div class="accionesTable">
-                     <a href="../Controllers/HISTORIA_Controller.php?action=SHOWALL"><input type="image" name="action" value="SHOWALL" src="../Views/images/back.png" title="<?php echo $strings['Volver'] ?>"></a>
+                     <a href="../Controllers/HISTORIA_Controller.php?action=ALL"><input type="image" name="action" value="SHOWALL" src="../Views/images/back.png" title="<?php echo $strings['Volver'] ?>"></a>
                  </div>
 
         </section>	

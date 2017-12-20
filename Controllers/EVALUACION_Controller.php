@@ -372,9 +372,10 @@ function getCalificarChecbox(){
 			
 				$EVALUACION = new EVALUACION_Model($_REQUEST['IdTrabajo'], $_REQUEST['LoginEvaluador'], $_REQUEST['AliasEvaluado'], $_REQUEST['IdHistoria'], '', '', '', '', ''); //crea una EVALUACION_Model con los campos clave del usuario y del trabajo
 				$lista = $EVALUACION->rellenarListaIdHistoria();  //Recoge todos los atributos
-				$grupo_user= new USU_GRUPO_Model($_SESSION['login'], ''); 
-				$idgrupo = $grupo_user->grupoUsuario(); //Comprobamos si es un ADMIN
-				$usuario = new EVALUACION_EDIT($lista, $idgrupo); //Crea la vista EDIT con los datos del usuario
+				
+				$grupos_user= new USU_GRUPO_Model($_SESSION['login'], ''); 
+				$listaGrupos = $grupos_user->listagrupoUsuario(); //Comprobamos si es un ADMIN
+				$usuario = new EVALUACION_EDIT($lista, $listaGrupos); //Crea la vista EDIT con los datos del usuario
 
 			break;
 		case 'SEARCH': //si desea realizar una busqueda

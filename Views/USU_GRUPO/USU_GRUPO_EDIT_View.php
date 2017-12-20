@@ -103,7 +103,7 @@ function render(){
 
         </form>
             <div class="acciones" style="float: left; ">
-                <a href="../Controllers/USU_GRUPO_Controller.php?action=SHOWALL&login=<?php echo $this->login ?>"><input type="image" name="action" value="SHOWALL" src="../Views/images/back.png" title="<?php echo $strings['Volver'] ?>"></a>
+                <a href="../Controllers/USU_GRUPO_Controller.php?action=ALL&login=<?php echo $this->login ?>"><input type="image" name="action" value="SHOWALL" src="../Views/images/back.png" title="<?php echo $strings['Volver'] ?>"></a>
             </div>
 
     </section>  

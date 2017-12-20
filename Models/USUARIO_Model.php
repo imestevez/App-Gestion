@@ -57,6 +57,104 @@ function __construct($login, $password, $DNI,$nombre,$apellidos,$telefono,$email
 
 
 
+// {//Metodo ADD()
+// //Inserta en la tabla  de la bd  los valores
+// // de los atributos del objeto. Comprueba si la clave/s esta vacia y si 
+// //existe ya en la tabla
+// function ADD()
+// {
+
+//     if (($this->login <> '')){ // si el atributo clave de la entidad no esta vacio
+// 		// construimos el sql para buscar esa clave en la tabla
+//         $sql = "SELECT * FROM USUARIO WHERE (login = '$this->login')"; //comprobar que no hay claves iguales
+
+// 		if (!$result = $this->mysqli->query($sql)){ // si da error la ejecución de la query
+// 			$this->lista['mensaje'] = 'ERROR: No se ha podido conectar con la base de datos';
+// 			return $this->lista; // error en la consulta (no se ha podido conectar con la bd). Devolvemos un mensaje que el controlador manejara
+
+// 		}
+// 		else { // si la ejecución de la query no da error
+
+// 			$num_rows = mysqli_num_rows($result);
+
+// 			if ($num_rows == 0){ // miramos si el resultado de la consulta es vacio (no existe el login)
+
+// 				//construimos la sentencia sql de inserción en la bd
+// 				$sql = "INSERT INTO USUARIO(
+// 				login,
+// 				password,
+// 				DNI,
+// 				Nombre,
+// 				Apellidos,
+// 				Telefono,
+// 				Correo,
+// 				Direccion) VALUES(
+// 									'$this->login',
+// 									'$this->password',
+// 									'$this->DNI',
+// 									'$this->nombre',
+// 									'$this->apellidos',
+// 									'$this->telefono', 
+// 									'$this->email',
+// 									'$this->direccion'
+// 								)";
+				
+// 				 if (!($result = $this->mysqli->query($sql))){ //si da error la consulta se comrpueba el por que
+
+// 			        $sql = "SELECT * FROM USUARIO WHERE (DNI = '$this->DNI')"; //comprobar que no hay DNI iguales
+// 				 	$result = $this->mysqli->query($sql); ;// numero de tuplas de la consulta
+// 					$num_rows = mysqli_num_rows($result);
+				
+// 				    if ($num_rows > 0)    // si el numero de filas es mayor que 0 es que existe un DNI duplicado
+// 				    {
+// 			        	$this->lista['mensaje'] = 'ERROR: Fallo en la inserción. Ya existe el DNI'; 
+// 						return $this->lista; 
+// 					}
+
+// 			        $sql = "SELECT * FROM USUARIO WHERE (Correo = '$this->email')"; //comprobar que no hay email iguales
+// 				 	$result = $this->mysqli->query($sql);
+// 					$num_rows = mysqli_num_rows($result);// numero de tuplas de la consulta
+				    
+// 				    if ($num_rows > 0) // si el numero de filas es mayor que 0 es que existe un DNI duplicado
+// 				    {
+// 			        	$this->lista['mensaje'] = 'ERROR: Fallo en la inserción. Ya existe el email'; 
+// 						return $this->lista;
+// 					}
+				
+// 					//Si no hay atributos Clave y unique duplicados es que hay campos sin completar
+//         			return 'ERROR: Introduzca todos los valores de todos los campos'; // introduzca un valor para el usuario
+// 				}
+
+//     			else{ //si no da error en la insercion del usuario, lo añadimos al grupo alumnos y devolvemos mensaje de exito
+
+//     				//Creamos la sentencia sql
+//     				$sql2 = "INSERT INTO USU_GRUPO(
+// 												login,
+// 												IdGrupo) VALUES (
+// 															'$this->login',
+// 															'ALUMNO')";
+
+//     				if($result2 = $this->mysqli->query($sql2)){
+// 						$this->lista['mensaje'] = 'Inserción realizada con éxito';
+// 						return $this->lista; //operacion de insertado correcta
+// 					}else{//si se produce un error al insertarlo en alumnos lanzamos mensaje 
+// 						$this->lista['mensaje'] = 'Error en la inserción'; 
+// 					}
+// 				}
+// 			}else{ //si hay un login igual
+
+// 	        	$this->lista['mensaje'] = 'ERROR: Fallo en la inserción. Ya existe el login'; 
+// 				return $this->lista; 
+// 			}
+// 		}
+    
+// 	}else{ //Si no se introduce un login
+// 			return 'ERROR: Introduzca todos los valores de todos los campos'; // introduzca un valor para el usuario
+// 	}
+				
+// } // fin del metodo ADD}
+
+
 //Metodo ADD()
 //Inserta en la tabla  de la bd  los valores
 // de los atributos del objeto. Comprueba si la clave/s esta vacia y si 
@@ -68,18 +166,39 @@ function ADD()
 		// construimos el sql para buscar esa clave en la tabla
         $sql = "SELECT * FROM USUARIO WHERE (login = '$this->login')"; //comprobar que no hay claves iguales
 
-		if (!$result = $this->mysqli->query($sql)){ // si da error la ejecución de la query
+		if (!$result = $this->mysqli->query($sql)){ //si da error la ejecución de la query
 			$this->lista['mensaje'] = 'ERROR: No se ha podido conectar con la base de datos';
-			return $this->lista; // error en la consulta (no se ha podido conectar con la bd). Devolvemos un mensaje que el controlador manejara
+			return $this->lista; //error en la consulta (no se ha podido conectar con la bd). Devolvemos un mensaje que el controlador manejara
 
-		}
-		else { // si la ejecución de la query no da error
+		}else { //si la ejecución de la query no da error
 
-			$num_rows = mysqli_num_rows($result);
+			$num_rows = mysqli_num_rows($result); 
 
-			if ($num_rows == 0){ // miramos si el resultado de la consulta es vacio (no existe el login)
+			if ($num_rows == 0){ //miramos si no existe el login
 
-				//construimos la sentencia sql de inserción en la bd
+				$sql = "SELECT * FROM USUARIO WHERE (DNI = '$this->DNI')"; //comprobar que no hay DNI iguales
+				$result = $this->mysqli->query($sql); ;// numero de tuplas de la consulta
+				$num_rows = mysqli_num_rows($result);
+				
+				if ($num_rows > 0){ //DNI duplicado
+
+			    	$this->lista['mensaje'] = 'ERROR: Fallo en la inserción. Ya existe el DNI'; 
+					return $this->lista; 
+				}
+
+
+				$sql = "SELECT * FROM USUARIO WHERE (Correo = '$this->email')"; //comprobar que no hay EMAILs iguales
+				$result = $this->mysqli->query($sql);
+				$num_rows = mysqli_num_rows($result);// numero de tuplas de la consulta
+				    
+				if ($num_rows > 0){ // EMAIL duplicado
+				    
+			        $this->lista['mensaje'] = 'ERROR: Fallo en la inserción. Ya existe el email'; 
+					return $this->lista;
+				}
+
+
+				//Construimos la sentencia sql de inserción en la bd
 				$sql = "INSERT INTO USUARIO(
 				login,
 				password,
@@ -99,33 +218,12 @@ function ADD()
 									'$this->direccion'
 								)";
 				
-				 if (!($result = $this->mysqli->query($sql))){ //si da error la consulta se comrpueba el por que
+				if (!($result = $this->mysqli->query($sql))){ //ERROR en la consulta ADD
 
-			        $sql = "SELECT * FROM USUARIO WHERE (DNI = '$this->DNI')"; //comprobar que no hay DNI iguales
-				 	$result = $this->mysqli->query($sql); ;// numero de tuplas de la consulta
-					$num_rows = mysqli_num_rows($result);
-				
-				    if ($num_rows > 0)    // si el numero de filas es mayor que 0 es que existe un DNI duplicado
-				    {
-			        	$this->lista['mensaje'] = 'ERROR: Fallo en la inserción. Ya existe el DNI'; 
-						return $this->lista; 
-					}
-
-			        $sql = "SELECT * FROM USUARIO WHERE (Correo = '$this->email')"; //comprobar que no hay email iguales
-				 	$result = $this->mysqli->query($sql);
-					$num_rows = mysqli_num_rows($result);// numero de tuplas de la consulta
-				    
-				    if ($num_rows > 0) // si el numero de filas es mayor que 0 es que existe un DNI duplicado
-				    {
-			        	$this->lista['mensaje'] = 'ERROR: Fallo en la inserción. Ya existe el email'; 
-						return $this->lista;
-					}
-				
-					//Si no hay atributos Clave y unique duplicados es que hay campos sin completar
+			    	//Si no hay atributos Clave y unique duplicados es que hay campos sin completar
         			return 'ERROR: Introduzca todos los valores de todos los campos'; // introduzca un valor para el usuario
-				}
 
-    			else{ //si no da error en la insercion del usuario, lo añadimos al grupo alumnos y devolvemos mensaje de exito
+				}else{ //si no da error en la insercion del usuario, lo añadimos al grupo alumnos y devolvemos mensaje de exito
 
     				//Creamos la sentencia sql
     				$sql2 = "INSERT INTO USU_GRUPO(
@@ -153,7 +251,6 @@ function ADD()
 	}
 				
 } // fin del metodo ADD
-
 
 
 //funcion de destrucción del objeto: se ejecuta automaticamente

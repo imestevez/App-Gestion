@@ -105,7 +105,7 @@ function render(){
 
         </form>
             <div class="acciones" style="float: left; ">
-                <a href="../Controllers/FUNC_ACCION_Controller.php?action=SHOWALL&IdFuncionalidad=<?php echo $this->IdFuncionalidad ?>"><input type="image" name="action" value="SHOWALL" src="../Views/images/back.png" title="<?php echo $strings['Volver'] ?>"></a>
+                <a href="../Controllers/FUNC_ACCION_Controller.php?action=ALL&IdFuncionalidad=<?php echo $this->IdFuncionalidad ?>"><input type="image" name="action" value="ALL" src="../Views/images/back.png" title="<?php echo $strings['Volver'] ?>"></a>
             </div>
 
     </section>  

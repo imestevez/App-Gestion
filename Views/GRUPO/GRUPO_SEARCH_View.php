@@ -37,11 +37,11 @@ function render(){
                 </div>
                  <div id="izquierda">
                     <label for="NombreGrupo"><?php echo $strings['NombreGrupo']?>: </label>
-                        <input type="text" name="NombreGrupo" maxlength="60" size="60" onblur="javascript:void(validarNombreGrupoBuscar(this, 100))" ><div id="NombreGrupo" class="oculto" style="display:none"><?php echo $strings['div_Alfanumerico']?></div> <div id="NombreGrupoVacio" class="oculto" style="display:none"><?php echo $strings['div_vacio']?></div> 
+                        <input type="text" name="NombreGrupo" maxlength="60" size="60" onblur="javascript:void(validarNombreGrupoBuscar(this, 100))" ><div id="NombreGrupo" class="oculto" style="display:none"><?php echo $strings['div_AlfanumericoTexto']?></div> <div id="NombreGrupoVacio" class="oculto" style="display:none"><?php echo $strings['div_vacio']?></div> 
                 </div>
                  <div id="izquierda">
                      <label for="DescripGrupo"><?php echo $strings['DescripGrupo']?>: </label>
-                        <textarea name="DescripGrupo" maxlength="100" rows="2" cols="50" onblur="javascript:void(validarDescripGrupoBuscar(this, 100))" style="margin-left: 10px; border-radius: 20px; border-top-left-radius: 0px; border-width: 2px; border-color: darkblue;" ></textarea><div id="DescripGrupo" class="oculto" style="display:none"><?php echo $strings['div_Alfanumerico']?></div> <div id="DescripGrupoVacio" class="oculto" style="display:none"><?php echo $strings['div_vacio'] ?></div>
+                        <textarea name="DescripGrupo" maxlength="100" rows="2" cols="50" onblur="javascript:void(validarDescripGrupoBuscar(this, 100))" style="margin-left: 10px; border-radius: 20px; border-top-left-radius: 0px; border-width: 2px; border-color: darkblue;" ></textarea><div id="DescripGrupo" class="oculto" style="display:none"><?php echo $strings['div_AlfanumericoTexto']?></div> <div id="DescripGrupoVacio" class="oculto" style="display:none"><?php echo $strings['div_vacio'] ?></div>
                 </div>
                 
                 <div class="acciones" style="float: right; margin-left:0%; margin-right: 50%">
@@ -50,7 +50,7 @@ function render(){
                 </div>
              </form>  
                    <div class="acciones" style="float: left;">
-                     <a href="../Controllers/GRUPO_Controller.php?action=SHOWALL"><input type="image" src="../Views/images/back.png" title="<?php echo $strings['Volver']?>"></a>
+                     <a href="../Controllers/GRUPO_Controller.php?action=ALL"><input type="image" src="../Views/images/back.png" title="<?php echo $strings['Volver']?>"></a>
                 </div>
             </fieldset>
 
