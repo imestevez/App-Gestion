@@ -395,8 +395,7 @@ function genAutoNotasET($IdTrabajo){
 				$sql_ev = "SELECT * FROM EVALUACION 
 									WHERE IdTrabajo = '$IdTrabajo' AND
 											AliasEvaluado = '$Alias' AND
-											 IdHistoria = '$IdHistoria'";
-				echo $sql_ev."<br>";			 			 
+											 IdHistoria = '$IdHistoria'";		 			 
 
 				if($evaluaciones = $this->mysqli->query($sql_ev)){
 
@@ -407,7 +406,6 @@ function genAutoNotasET($IdTrabajo){
 						$num_correctos = 0; //Contará las historias que están correctas sobre la entrega del login					
 
 						while($row_ev = mysqli_fetch_array($evaluaciones)){
-							echo "Log: ".$login."NUMHIS: ".$num_historias."num_evaluaciones".$num_evaluaciones."<br>";
 							$correcto = $row_ev['CorrectoP'];
 
 							if($correcto == 1) $num_correctos++;
@@ -506,13 +504,11 @@ function genAutoNotaQA($IdTrabajoQA){
 				$sql_evs = "SELECT * FROM EVALUACION 
 							WHERE IdTrabajo = '$IdTrabajoET' AND
 									LoginEvaluador = '$LoginEvaluador' AND
-									 IdHistoria = '$IdHistoria'";
-				echo "SQL EV: ".$sql_evs."<br>";							 
+									 IdHistoria = '$IdHistoria'";							 
 
 				$evaluaciones = $this->mysqli->query($sql_evs );
 				//Número de Qas realizadas por alumno sobre el IdTrabajo
 				$num_evaluaciones = mysqli_num_rows($evaluaciones);
-				echo "EV: ".$num_evaluaciones."<br>";
 				while($row_ev = mysqli_fetch_array($evaluaciones)){
 					if($row_ev['OK'] == 1) $num_correctos++;
 				}
@@ -521,7 +517,6 @@ function genAutoNotaQA($IdTrabajoQA){
 			//Calculamos la nota de QA del IdTrabajo del alumno con LoginEvaluador en base 10
 			if($num_evaluaciones > 0){
 				$nota = ($num_correctos/($num_historias*$num_evaluaciones))*10;
-				echo "Log: ".$LoginEvaluador."NUMHIS: ".$num_historias."num_evaluaciones".$num_evaluaciones."<br>";
 
 				$sql_existe = "SELECT * FROM NOTA_TRABAJO WHERE IdTrabajo = '$IdTrabajoQA' AND login = '$LoginEvaluador'";
 
@@ -539,8 +534,7 @@ function genAutoNotaQA($IdTrabajoQA){
 																'$LoginEvaluador',
 																'$IdTrabajoQA',
 												                '$nota')";
-
-					echo "SQL EV: ".$sql_insert."<br>";							              
+						              
 					if ($result_insert = $this->mysqli->query($sql_insert)) $cont_exitos++;
 				}
 				else{

@@ -244,13 +244,12 @@ function EDIT()
 	    $sql = "SELECT * FROM ASIGNAC_QA WHERE (IdTrabajo = '$this->IdTrabajo') AND
 											   (LoginEvaluador = '$this->LoginEvaluador') AND
 											   (AliasEvaluado = '$this->AliasEvaluado')";
-	    // se ejecuta la query
-											   echo $sql."<br>";
+	    // se ejecuta la query;
+											 
 
 	    $result = $this->mysqli->query($sql);
 	    $num_rows = mysqli_num_rows($result);
 	    // si el numero de filas es igual a uno es que lo encuentra
-	    echo "FILAS: ".$num_rows."<br>";
 	    if ($num_rows == 1)
 	    {	// se construye la sentencia de modificacion en base a los atributos de la clase
 			$sql = "UPDATE ASIGNAC_QA SET 
