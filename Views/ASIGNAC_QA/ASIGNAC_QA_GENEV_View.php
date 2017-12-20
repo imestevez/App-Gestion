@@ -18,6 +18,12 @@
 			include '../Views/Header.php';
 
 ?>
+         <script type="text/javascript">
+    
+        <?php include '../Views/js/validacionesASIGNAC_QA.js'; ?>
+
+        </script>
+
 
 			<section class="pagina" style="min-height: 900px" >
        		<fieldset class="edit" style="width: 70%; margin-left: 15%">
@@ -31,7 +37,7 @@
 
                  
             <div class="acciones" style="float: right; margin-left:0%; margin-right: 50%">
-                    <a href="../Controllers/ASIGNAC_QA_Controller.php?action=GENEV"> <input type="image" name="action" value="GENEV" src="../Views/images/confirmar.png" title="<?php echo $strings['Enviar Formulario'] ?>" onclick="return validar('ADD')"></a>
+                    <a href="../Controllers/ASIGNAC_QA_Controller.php?action=GENEV"> <input type="image" name="action" value="GENEV" src="../Views/images/confirmar.png" title="<?php echo $strings['Enviar Formulario'] ?>" onclick="return validar('GENEV')"></a>
                 </div>
             </form>                     
             <div class="acciones" style="float: left;">

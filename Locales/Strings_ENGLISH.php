@@ -377,6 +377,8 @@ array(
 'ERROR: La generación de historias a evaluar no ha sido realizada correctamente' => 'ERROR: Generation of stories to evaluate has not been performed correctly',
 'Generación de historias a evaluar' => 'Generation of stories to evaluate',
 'Gen. historias evaluación' => 'Gen. stories to evaluate',
+'ERROR: No hay asignaciones de qas para este trabajo' => 'ERROR: There are no QAs assignments for this job',
+'ERROR: No existe ningún trabajo con ese IdTrabajo'  => 'ERROR: There is no work whit this IdWork',
 
 //Generación automática de notas
 'La generación automática de notas se ha realizado correctamente para todos los trabajos de la BD' => 'Qualification automatic generation has been successfully performed for all BD jobs',

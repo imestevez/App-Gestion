@@ -56,6 +56,7 @@ function get_data_form(){
 	$LoginEvaluador = '';
 	$LoginEvaluado = '';
 	$AliasEvaluado = '';
+	$numEntregas = '';
 	
 	$action = $_REQUEST['action'];
 
@@ -73,6 +74,9 @@ function get_data_form(){
 	}
 	if(isset($_REQUEST['AliasEvaluado'])){
 	$AliasEvaluado = $_REQUEST['AliasEvaluado'];
+	}
+	if(isset($_REQUEST['numEntregas'])){
+	$numEntregas = $_REQUEST['numEntregas'];
 	}
 
 	$ASIGNAC_QA = new ASIGNAC_QA_Model(
@@ -195,6 +199,7 @@ if (!isset($_REQUEST['action'])){
 			}
 			else{
 				$ASIGNAC_QA = new ASIGNAC_QA_Model('','','','','');
+				$ASIGNAC_QA = get_data_form();
 				$lista = $ASIGNAC_QA->asig_QAS($_REQUEST['IdTrabajo'],$_REQUEST['numEntregas']); //mete datos en respuesta usuarios despues de ejecutar el add con los de funcionalidad
 				$usuario = new MESSAGE($lista, '../Controllers/ASIGNAC_QA_Controller.php'); //muestra el mensaje despues de la sentencia sql
 			}

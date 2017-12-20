@@ -314,6 +314,23 @@ function validarTextoHistoriaBuscar(TextoHistoria, tamaño_max)
 
 }
 
+function validarNombreTrabajoBuscar(NombreTrabajo, min, max){
+  
+   if(comprobarVacioBuscar(NombreTrabajo))//Si el campo no está vacio el campo
+      {
+          if(comprobarTextoBuscar(NombreTrabajo,min, max))//Si login cumple la expresión regular de campo Alfabético
+       {
+           return true;
+       }else{ //Si no cumple la expresión regular
+           return false;
+       }
+      }else{//Si está vacio
+          return true;
+      }
+
+
+}
+
 /*-----------------------------------------------------------------
 --------------VALIDACIONES DE TODO EL FORMULARIO--------------------
 -----------------------------------------------------------------*/
@@ -330,24 +347,25 @@ function validar(formulario)
 
         if( 
           (validarIdTrabajoBuscar(form.IdTrabajo, 6)) && 
-          (validarIdHistoriaBuscar(form.IdHistoria, 2)) && 
+          (validarNombreTrabajoBuscar(form.NombreTrabajo,60)) &&
+          (validarIdHistoriaBuscar(form.IdHistoria, 0,99)) && 
           (validarTextoHistoriaBuscar(form.TextoHistoria, 300)) ){
 
           alerta = false; //Se le asigna false a la variable alerta 
         }
-      }
-    if(formulario == 'ADD_FROM_TRABAJO'){
+    }
+    else if(formulario == 'ADD_FROM_TRABAJO'){
         if(  
-          (validarIdHistoriaBuscar(form.IdHistoria, 2)) && 
-          (validarTextoHistoriaBuscar(form.TextoHistoria, 300)) ){
-
+          (validarIdHistoria(form.IdHistoria, 0,99)) && 
+          (validarTextoHistoria(form.TextoHistoria, 300)) 
+          ){
           alerta = false; //Se le asigna false a la variable alerta 
         }
     }  
       else{ //si es edit o add
           if( 
             (validarIdTrabajo(form.IdTrabajo, 6)) && 
-            (validarIdHistoria(form.IdHistoria, 2)) && 
+            (validarIdHistoria(form.IdHistoria, 0,99)) && 
             (validarTextoHistoria(form.TextoHistoria, 300)) ){
 
             alerta = false; //Se le asigna false a la variable alerta 

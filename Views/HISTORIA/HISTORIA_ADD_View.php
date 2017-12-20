@@ -81,16 +81,16 @@ function render_add_from_trabajo(){
     include '../Views/Header.php';
 ?>
 
-<script type="text/javascript">
+            <script type="text/javascript">
     
-    <?php include '../Views/js/validacionesHISTORIA.js'; ?>
+            <?php include '../Views/js/validacionesHISTORIA.js'; ?>
 
-</script>
+            </script>
 
      <section class="pagina">
          <fieldset class="add" >
                 <legend style="margin-left: 30%"><?php echo $strings['Añadir historia'] ?></legend>
-            <form method="post" name="ADD"  action="../Controllers/HISTORIA_Controller.php" enctype="multipart/form-data" >
+            <form method="post" name="ADD_FROM_TRABAJO"  action="../Controllers/HISTORIA_Controller.php" enctype="multipart/form-data" >
                
                 <div id="izquierda">
                     <label for="IdTrabajo"><?php echo $strings['Id del trabajo'] ?>: </label>
@@ -111,9 +111,6 @@ function render_add_from_trabajo(){
                     <label for="TextoHistoria"><?php echo $strings['Texto de la historia'] ?>: </label>
                         <textarea name="TextoHistoria" maxlength="300" rows="6" cols="50" onblur="javascript:void(validarTextoHistoria(this, 300))" style="margin-left: 10px; border-radius: 20px; border-top-left-radius: 0px; border-width: 2px; border-color: darkblue;" ></textarea><div id="TextoHistoria" class="oculto" style="display:none"><?php echo $strings['div_Alfanumerico']?></div><div id="TextoHistoriaVacio" class="oculto" style="display:none"><?php echo $strings['div_vacio']?></div> 
                 </div>
-
-
-
                
                 <div class="acciones" style="float: right; margin-left:0%; margin-right: 50%">
                     <a href="../Controllers/TRABAJO_Controller.php?action=ADD"> <input type="image" name="action" value="ADD" src="../Views/images/confirmar.png" title="<?php echo $strings['Enviar Formulario'] ?>" onclick="return validar('ADD_FROM_TRABAJO') "></a>

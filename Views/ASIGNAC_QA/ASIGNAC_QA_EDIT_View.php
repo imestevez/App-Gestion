@@ -22,6 +22,7 @@ function __construct($tupla){
     $this->LoginEvaluador = $tupla['LoginEvaluador'];
     $this->LoginEvaluado = $tupla['LoginEvaluado'];
     $this->AliasEvaluado = $tupla['AliasEvaluado'];
+    echo "login: ".$this->LoginEvaluado."<br>";
     $this->render();
 }
 
@@ -53,7 +54,7 @@ function render(){
 
                 <div id="izquierda">
                     <label for="LoginEvaluado"><?php echo $strings['Login del evaluado']?>: </label>
-                        <input type="text" name="LoginEvaluado" maxlength="9" size="9" value="<?php echo $this->LoginEvaluado?>" onblur="javascript:void(validarLoginEvaluador(this, 9))" ><div id="LoginEvaluado" class="oculto" style="display:none"><?php echo $strings['div_Alfanumerico']?></div> <div id="LoginEvaluadoVacio" class="oculto" style="display:none"><?php echo $strings['div_vacio']?></div> 
+                        <input type="text" name="LoginEvaluado" maxlength="9" size="9" value="<?php echo $this->LoginEvaluado?>" onblur="validarLoginEvaluador(this, 9)" ><div id="LoginEvaluado" class="oculto" style="display:none"><?php echo $strings['div_Alfanumerico']?></div> <div id="LoginEvaluadoVacio" class="oculto" style="display:none"><?php echo $strings['div_vacio']?></div> 
                 </div>
 
                  <div id="izquierda">

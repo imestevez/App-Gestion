@@ -137,13 +137,13 @@ function __destruct()
 //los datos proporcionados. Si van vacios devuelve todos
 function SEARCH()
 { 	// construimos la sentencia de busqueda con LIKE y los atributos de la entidad
-    $sql = "SELECT  IdTrabajo,
-    				IdHistoria,
-    				TextoHistoria
-       			FROM HISTORIA 
+    $sql = "SELECT  *
+       			FROM HISTORIA H, TRABAJO T
     			WHERE 
     				(
-    				(IdTrabajo LIKE '%$this->IdTrabajo%') &&
+    				(H.IdTrabajo = T.IdTrabajo) &&
+    				(H.IdTrabajo LIKE '%$this->IdTrabajo%') &&
+    				(NombreTrabajo LIKE '%$this->NombreTrabajo%') &&
     				(IdHistoria LIKE '%$this->IdHistoria%') &&
     				(TextoHistoria LIKE '%$this->TextoHistoria%') 
 	 				)";

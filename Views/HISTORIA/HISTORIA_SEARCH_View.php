@@ -33,7 +33,10 @@
                         <input type="text" name="IdTrabajo" maxlength="6" size="6" onblur="validarIdTrabajoBuscar(this,6)"  ><div id="IdTrabajo" class="oculto" style="display:none"><?php echo $strings['div_Alfanumerico']?></div> <div id="IdTrabajoVacio" class="oculto" style="display:none"><?php echo $strings['div_vacio']?></div> 
                 </div>
 
-                
+                <div id="izquierda">
+                    <label for="NombreTrabajo"><?php echo $strings['NombreTrabajo']?>: </label>
+                        <input type="text" name="NombreTrabajo" maxlength="60" size="60" onblur="validarNombreTrabajoBuscar(this,60)"  ><div id="NombreTrabajo" class="oculto" style="display:none"><?php echo $strings['div_Alfanumerico']?></div> 
+                </div>
 
                 <div id="izquierda">
                     <label for="IdHistoria"><?php echo $strings['Id de la historia']?>:</label>

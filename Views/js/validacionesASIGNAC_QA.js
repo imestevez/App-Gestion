@@ -247,6 +247,25 @@ function validarAliasEvaluado(AliasEvaluado, tamaño_max)
       }
 }
 
+//Función para validar el número de qas por alumno en generación automática de QAS
+function validarNumEntregas(numEntregas, min, max)
+{  
+
+  if(comprobarVacio(numEntregas))//Si el campo no está vacio el campo
+      {
+          if(comprobarEntero(numEntregas,0,99))//Si IdHistoria cumple la expresión regular de campo Alfabético
+       {
+
+           return true;
+       }else{ //Si no cumple la expresión regular
+           return false;
+       }
+      }else{//Si está vacio
+          return false;
+      }
+
+}
+
 
 //Comprueba si los campos estan vacios o si solo hay espacios para el formulario SEARCH
 function comprobarVacioBuscar(campo)
@@ -437,11 +456,12 @@ function validarAliasEvaluadoBuscar(AliasEvaluado, tamaño_max)
 //Función para validar todos los campos. Se pasa el  nombre del formulario como parámetro
 function validar(formulario) 
 {
+
   var alerta = true; //Variable para controlar si alguna validacion por campo no es correcta
 
     var form;// almacena el formulario que se pase por parámetro del HMTL
     form =  document.forms[formulario];
-    if(formulario == 'SEARCH'){ //Si es el formulario es el de añadir
+    if(formulario == 'SEARCH'){ //Si es formulario de búsqueda
         //si todos los campos estan correctos y devuelven true
         if( 
           (validarIdTrabajoBuscar(form.IdTrabajo, 6)) && 
@@ -452,14 +472,29 @@ function validar(formulario)
 
           alerta = false; //Se le asigna false a la variable alerta 
         }
-      }else{ //si son EDIT O ADD
+      }
+      else if(formulario == 'GENQA'){ //si todos los campos estan correctos y devuelven true
+        if(
+        (validarIdTrabajo(form.IdTrabajo, 6)) &&
+        (validarNumEntregas(form.numEntregas,0,99)) ){
+          alerta = false; //Se le asigna false a la variable alerta 
+        }          
+      }
+      else if(formulario == 'GENEV'){
+          //si todos los campos estan correctos y devuelven true
+        if(
+        (validarIdTrabajo(form.IdTrabajo, 6)) ){
+          alerta = false; //Se le asigna false a la variable alerta 
+        }          
+      }
+      else{ //si son EDIT O ADD
         //si todos los campos estan correctos y devuelven true
 
          if( 
           (validarIdTrabajo(form.IdTrabajo, 6)) && 
           (validarNombreTrabajo(form.NombreTrabajo, 60)) && 
           (validarLoginEvaluador(form.LoginEvaluador, 9)) && 
-          (validarLoginEvaluado(form.LoginEvaluado,)) && 
+          (validarLoginEvaluado(form.LoginEvaluado, 9)) && 
           (validarAliasEvaluado(form.AliasEvaluado, 6))  ){
 
           alerta = false; //Se le asigna false a la variable alerta 
