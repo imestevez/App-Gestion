@@ -317,7 +317,7 @@ INSERT INTO `ACCION`(`IdAccion`, `NombreAccion`, `DescripAccion`) VALUES  ('ADD'
                                       ('ADDAL', 'Anadir Entrega', 'Permite anadir entrega'),
                                       ('CALIF', 'Calificar', 'Permite calificar Evaluaciones'),
                                       ('SHOWH', 'Mostrar Historias', 'Mostrar historias de un trabajo'),
-                                      ('RESULT', 'Resultados QA', 'Mostrar resultados de una QA'),
+                                      ('RESUL', 'Resultados QA', 'Mostrar resultados de una QA'),
                                       ('GENNOT', 'Generar Notas', 'Generar Notas');
 
 INSERT INTO `FUNCIONALIDAD` (`IdFuncionalidad`, `NombreFuncionalidad`, `DescripFuncionalidad`)
@@ -343,11 +343,11 @@ INSERT INTO `FUNC_ACCION` (`IdFuncionalidad`, `IdAccion`) VALUES  (1, 'ADD'), (1
                                   (7, 'ADD'), (7, 'EDIT'), (7, 'SEARCH'), (7, 'DELETE'), (7, 'ALL'), (7, 'SHOW'), (7,'SHOWH'),
                                   (8, 'ADD'), (8, 'EDIT'), (8, 'SEARCH'), (8, 'DELETE'), (8, 'ALL'), (8, 'SHOW'), (8,'ADDAL'),
                                   (9, 'ADD'), (9, 'EDIT'), (9, 'SEARCH'), (9, 'DELETE'), (9, 'ALL'), (9, 'SHOW'), (9, 'GENQA'),(9, 'GENEV'),
-                                  (10, 'ADD'), (10, 'EDIT'), (10, 'SEARCH'), (10, 'DELETE'), (10, 'ALL'), (10, 'SHOW'), (10,'CALIF'),(11,'RESUL'),
+                                  (10, 'ADD'), (10, 'EDIT'), (10, 'SEARCH'), (10, 'DELETE'), (10, 'ALL'), (10, 'SHOW'), (10,'CALIF'),(10,'RESUL'),
                                   (11, 'ADD'), (11, 'EDIT'), (11, 'SEARCH'), (11, 'DELETE'), (11, 'ALL'), (11, 'SHOW'), (11,'GENNOT');
 
                                   
-INSERT INTO `USU_GRUPO` (`login`, `IdGrupo`) VALUES ('admin', 'ADMIN'), ('user', 'ALUMNO'),('pablo','ALUMNO'),('lucia','ALUMNO'),('juan','ALUMNO'),('marta','ALUMNO'),('raul','ALUMNO');
+INSERT INTO `USU_GRUPO` (`login`, `IdGrupo`) VALUES ('admin', 'ADMIN'), ('user', 'ALUMNO'),('pablo','ALUMNO'),('juan','ALUMNO'),('marta','ALUMNO'),('raul','ALUMNO');
 
 INSERT INTO `PERMISO`(`IdGrupo`,`IdFuncionalidad`,`IdAccion`) VALUES  ('ADMIN',1,'ADD'),('ADMIN',1,'EDIT'),('ADMIN',1,'SHOW'),('ADMIN',1,'DELETE'), ('ADMIN',1,'SEARCH'),('ADMIN',1,'ALL'), ('ADMIN',1,'ASIG'),
                                     ('ADMIN',2,'ADD'),('ADMIN',2,'EDIT'),('ADMIN',2,'SHOW'),('ADMIN',2,'DELETE'), ('ADMIN',2,'SEARCH'),('ADMIN',2,'ALL'), ('ADMIN',2,'ASIG'),
@@ -358,7 +358,7 @@ INSERT INTO `PERMISO`(`IdGrupo`,`IdFuncionalidad`,`IdAccion`) VALUES  ('ADMIN',1
                                     ('ADMIN',7,'ADD'),('ADMIN',7,'EDIT'),('ADMIN',7,'SHOW'),('ADMIN',7,'DELETE'), ('ADMIN',7,'SEARCH'),('ADMIN',7,'ALL'),('ADMIN',7,'SHOWH'),
                                     ('ADMIN',8,'ADD'),('ADMIN',8,'EDIT'),('ADMIN',8,'SHOW'),('ADMIN',8,'DELETE'), ('ADMIN',8,'SEARCH'),('ADMIN',8,'ALL'),
                                     ('ADMIN',9,'ADD'),('ADMIN',9,'EDIT'),('ADMIN',9,'SHOW'),('ADMIN',9,'DELETE'), ('ADMIN',9,'SEARCH'),('ADMIN',9,'ALL'),('ADMIN',9, 'GENQA'),('ADMIN',9, 'GENEV'),
-                                    ('ADMIN',10,'ADD'),('ADMIN',10,'SHOW'),('ADMIN',10,'DELETE'), ('ADMIN',10,'SEARCH'),('ADMIN',10,'ALL'),('ADMIN',10, 'CALIF'),('ADMIN',10, 'EDIT'),('ADMIN',11, 'RESUL'),
+                                    ('ADMIN',10,'ADD'),('ADMIN',10,'SHOW'),('ADMIN',10,'DELETE'), ('ADMIN',10,'SEARCH'),('ADMIN',10,'ALL'),('ADMIN',10, 'CALIF'),('ADMIN',10, 'EDIT'),('ADMIN',10, 'RESUL'),
                                     ('ADMIN',11,'ADD'),('ADMIN',11,'EDIT'),('ADMIN',11,'SHOW'),('ADMIN',11,'DELETE'), ('ADMIN',11,'SEARCH'),('ADMIN',11,'ALL'),('ADMIN',11,'GENNOT'),
                                     ('ALUMNO',6,'SHOW'),
                                     ('ALUMNO',8,'EDIT'),('ALUMNO',8,'SHOW'),('ALUMNO',8,'ADDAL'),

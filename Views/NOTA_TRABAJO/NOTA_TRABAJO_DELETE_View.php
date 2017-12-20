@@ -16,7 +16,7 @@ class NOTA_TRABAJO_DELETE{
     var $NotaTrabajo;  //declaración del atributo NotaTrabajo
     var $PorcentajeNota;
     var $aux;
-    var $case;
+    var $case1;
 function __construct($lista){
     $this->login = $lista['login'];
     $this->Nombre = $lista['Nombre'];
@@ -25,7 +25,7 @@ function __construct($lista){
     $this->NotaTrabajo = $lista['NotaTrabajo'];
     $this->PorcentajeNota = $lista['PorcentajeNota'];
     $this->aux = ($this->NotaTrabajo * $this->PorcentajeNota)/100;
-    $this->case = 0; 
+    $this->case1 = 0; 
     $this->render();
 }
 
@@ -56,9 +56,10 @@ function render(){
             <input class="del" type="text" name="NotaTrabajo"  size="<?php echo strlen($this->NotaTrabajo); ?>" readonly value="<?php echo $this->NotaTrabajo ?>">
             <input class="del" type="text" name="PorcentajeNota" size="<?php echo strlen($this->PorcentajeNota); ?>" readonly value="<?php echo $this->NombreTrabajo ?>" >
             <input class="del" type="text" name="Nota Parcial"  size="<?php echo strlen($this->aux); ?>" readonly value="<?php echo $this->aux ?>">
-              
-            <div class="accionesTable" style="margin-left: 0%; float: right; margin-right: 45%">
-                <a href="../Controllers/NOTA_TRABAJO_Controller.php?action=DELETE&login=<?php echo $this->login ?>&IdTrabajo=<?php echo $this->IdTrabajo ?>"><input type="image" name="action" value="DELETE" action="#" src="../Views/images/confirmar.png" title="<?php echo $strings['Borrar Nota'] ?>" ></a>
+            <input class="del" type="text" name="case1" size="<?php echo strlen($this->case1); ?>" readonly value="<?php echo $this->case1?>">
+
+            <div class="accionesTable" style="margin-left: 0%; float: right; margin-right: 45%; margin-top:2%">
+                <a href="../Controllers/NOTA_TRABAJO_Controller.php?action=DELETE&login=<?php echo $this->login ?>&IdTrabajo=<?php echo $this->IdTrabajo ?>&case1=<?php echo $this->case1?>"><input type="image" name="action" value="DELETE" action="#" src="../Views/images/confirmar.png" title="<?php echo $strings['Borrar Nota'] ?>" ></a>
             </div>
         </form>
 

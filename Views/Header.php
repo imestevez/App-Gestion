@@ -52,7 +52,7 @@ Contiene el html de la cabecera de las vistas
         echo $strings['Usuario'] . ' : ' . $_SESSION['login'];
 ?>          
     </strong></p> &nbsp;&nbsp;&nbsp;
-           <a href="../Controllers/USUARIO_Controller.php?action=SHOWCURRENT&login=<?php echo $_SESSION['login'] ?>"><input type="image" id="sesion" alt="Sesion" src="../Views/images/usuario.png" title="<?php echo $strings['Sesión iniciada'] ?>" style="width: 32px; height: 32px" >
+           <a href="../Controllers/USUARIO_Controller.php?action=SHOW&login=<?php echo $_SESSION['login'] ?>"><input type="image" id="sesion" alt="Sesion" src="../Views/images/usuario.png" title="<?php echo $strings['Sesión iniciada'] ?>" style="width: 32px; height: 32px" >
 
            <a href='../Functions/Desconectar.php'>
             <input type="image" src="../Views/images/exit.png" title="<?php echo $strings['Desconectar'] ?>">  

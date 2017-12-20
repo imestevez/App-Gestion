@@ -46,6 +46,7 @@ include_once '../Views/NOTA_TRABAJO/NOTA_TRABAJO_ADD_View.php';
 include_once '../Views/NOTA_TRABAJO/NOTA_TRABAJO_EDIT_View.php';
 include_once '../Views/NOTA_TRABAJO/NOTA_TRABAJO_SEARCH_View.php';
 include_once '../Views/NOTA_TRABAJO/NOTA_TRABAJO_DELETE_View.php';
+include_once '../Views/NOTA_TRABAJO/NOTA_TRABAJO_DELETEALL_View.php';
 include_once '../Views/MESSAGE_View.php';
 
 
@@ -54,14 +55,22 @@ include_once '../Views/MESSAGE_View.php';
 function get_data_form(){
 
 	$login = null;
+	$Nombre = null;
 	$IdTrabajo = null;
+	$NombreTrabajo = null;
 	$NotaTrabajo = null;
 
 	if(isset($_REQUEST['login'])){
 	$login = $_REQUEST['login'];
 	}
+	if(isset($_REQUEST['Nombre'])){
+	$Nombre = $_REQUEST['Nombre'];
+	}
 	if(isset($_REQUEST['IdTrabajo'])){
 	$IdTrabajo = $_REQUEST['IdTrabajo'];
+	}
+	if(isset($_REQUEST['NombreTrabajo'])){
+	$NombreTrabajo = $_REQUEST['NombreTrabajo'];
 	}
 	if(isset($_REQUEST['NotaTrabajo'])){
 	$NotaTrabajo = $_REQUEST['NotaTrabajo'];
@@ -69,8 +78,10 @@ function get_data_form(){
 
 	
 	$NOTA_TRABAJO = new NOTA_TRABAJO_Model(
-		$login, 
+		$login,
+		$Nombre, 
 		$IdTrabajo, 
+		$NombreTrabajo,
 		$NotaTrabajo);
 
 	return $NOTA_TRABAJO;
@@ -103,29 +114,35 @@ if (!isset($_REQUEST['action'])){
 			}
 			break;
 		case 'DELETE': //Si quiere hacer un DELETE
-			if (!$_POST){ //si viene del showall (no es un post) --> Delete de todas las notas 
-				$NOTA_TRABAJO = new NOTA_TRABAJO_Model($_REQUEST['login'],'', '');
-				$form = new NOTA_TRABAJO_DELETE($lista); //Crea la vista ADD y muestra formulario para rellenar por el usuario
-				$delete = new NOTA_TRABAJO_DELETE($lista); //Crea la vista de DELETE con los datos del usuario		
-			}
-			else{
-				if (isset($_REQUEST['case'])){ //viene del showall con una clave
+			if($_POST){
+				if (isset($_REQUEST['case'])){ //viene de la showcurrent de nota
 					$lista = array('login','IdTrabajo','NotaTrabajo');
-					$NOTA_TRABAJO = new NOTA_TRABAJO_Model($_REQUEST['login'],$_REQUEST['IdTrabajo'], '');//crea un un NOTA_TRABAJO_Model con el IdTrabajo del usuario
+					$NOTA_TRABAJO = new NOTA_TRABAJO_Model($_REQUEST['login'],'',$_REQUEST['IdTrabajo'],'', '');//crea un un NOTA_TRABAJO_Model con el IdTrabajo del usuario
 					$lista = $NOTA_TRABAJO->rellenarLista();
 					//$tupla = $NOTA_TRABAJO->RellenaDatos();//A partir del IdTrabajo recoge todos los atributos
-					$usuario = new NOTA_TRABAJO_DELETE($lista); //Crea la vista de DELETE con los datos del usuario
+					$delete = new NOTA_TRABAJO_DELETE($lista); //Crea la vista de DELETE con los datos del usuario
 				}
-				else{//si viene con un post
+				if (isset($_REQUEST['case1'])){ //si viene del delete
 					$NOTA_TRABAJO = get_data_form(); //coge los datos del formulario del usuario que desea borrar
 					$respuesta = $NOTA_TRABAJO->DELETE(); //Ejecuta la funcion DELETE() en el NOTA_TRABAJO_Model
-					$mensaje = new MESSAGE($respuesta, '../Controllers/NOTA_TRABAJO_Controller.php'); //muestra el mensaje despues de la sentencia sql
-				}
-			}	
+					$mensaje = new MESSAGE($respuesta, '../Controllers/NOTA_TRABAJO_Controller.php'); //muestra el mensaje despues de la sentencia sql	
+				}		
+				if (isset($_REQUEST['case2'])){ //si viene del delete all 
+					$NOTA_TRABAJO = get_data_form(); //coge los datos del formulario del usuario que desea borrar
+					$respuesta = $NOTA_TRABAJO->DELETEALL(); //Ejecuta la funcion DELETEALL() en el NOTA_TRABAJO_Model
+					$mensaje = new MESSAGE($respuesta, '../Controllers/NOTA_TRABAJO_Controller.php'); //muestra el mensaje despues de la sentencia sql	
+				}	
+			}else{//si viene del showall
+				$lista = array('login', 'Nombre' );
+				$NOTA_TRABAJO = new NOTA_TRABAJO_Model($_REQUEST['login'],'','','', '');
+				$notas = $NOTA_TRABAJO->calcNotaF();
+				$lista = $NOTA_TRABAJO->rellernarNombre();
+				$delete = new NOTA_TRABAJO_DELETEALL($lista,$notas); //Crea la vista de DELETE con los datos del usuario	
+			}
 			break;
 		case 'EDIT': //si el usuario quiere editar	
 			if (isset($_REQUEST['case'])){
-				$NOTA_TRABAJO = new NOTA_TRABAJO_Model($_REQUEST['login'],$_REQUEST['IdTrabajo'],''); //crea un un NOTA_TRABAJO_Model con el IdTrabajo del usuario 
+				$NOTA_TRABAJO = new NOTA_TRABAJO_Model($_REQUEST['login'],'',$_REQUEST['IdTrabajo'],'',''); //crea un un NOTA_TRABAJO_Model con el IdTrabajo del usuario 
 				$lista = $NOTA_TRABAJO->rellenarLista();  //A partir del IdTrabajo recoge todos los atributos
 				$usuario = new NOTA_TRABAJO_EDIT($lista); //Crea la vista EDIT con los datos del usuario
 			}
@@ -141,26 +158,22 @@ if (!isset($_REQUEST['action'])){
 			}
 			else{
 				$NOTA_TRABAJO = get_data_form(); //coge los datos del formulario del usuario que desea buscar
-				$datos = $NOTA_TRABAJO->SEARCH();//Ejecuta la funcion SEARCH() en el NOTA_TRABAJO_Model
-				$datos = $NOTA_TRABAJO->adaptarRecorsetParaShowAll($datos);
-				$lista = array('login', 'IdTrabajo','NotaTrabajo');
-				$trabajos = $NOTA_TRABAJO->getTrabajos();
-				$trabajosNota = $NOTA_TRABAJO->getTrabajosArray();
-				$alumnos = $NOTA_TRABAJO->getAlumnos();
-				$num_trabajos = $NOTA_TRABAJO->getNumTrabajos();
+				$datosSearch = $NOTA_TRABAJO->SEARCH();//Ejecuta la funcion SEARCH() en el NOTA_TRABAJO_Model
+				$lista = array('login','Nombre', 'IdTrabajo','NombreTrabajo','NotaTrabajo');
 				$notas = $NOTA_TRABAJO->calcNotaF();
-				$resultado = new NOTA_TRABAJO_SHOWALL($lista, $datos, 0, 0, 0, 0, 'SEARCH', '../Controllers/NOTA_TRABAJO_Controller.php',$acciones,$trabajos, $num_trabajos, $trabajosNota, $alumnos, $notas);//Crea la vista SHOWALL y muestra los usuarios que cumplen los parámetros de búsqueda 
+
+				$resultado = new NOTA_TRABAJO_SHOWALL($lista, '', 0, 0, 0, 0, 'SEARCH', '../Controllers/NOTA_TRABAJO_Controller.php',$acciones,'', '', '', '', $notas, $datosSearch);//Crea la vista SHOWALL y muestra los usuarios que cumplen los parámetros de búsqueda 
 			}
 			break;
 		case 'SHOW': //si desea ver un usuario en detalle
 			$lista = array('login','IdTrabajo','NotaTrabajo');
-			$NOTA_TRABAJO = new NOTA_TRABAJO_Model($_REQUEST['login'],$_REQUEST['IdTrabajo'], '');//crea un un NOTA_TRABAJO_Model con el IdTrabajo del usuario
+			$NOTA_TRABAJO = new NOTA_TRABAJO_Model($_REQUEST['login'],'',$_REQUEST['IdTrabajo'],'', '');//crea un un NOTA_TRABAJO_Model con el IdTrabajo del usuario
 			$lista = $NOTA_TRABAJO->rellenarLista();
 			//$tupla = $NOTA_TRABAJO->RellenaDatos();//A partir del IdTrabajo recoge todos los atributos
 			$usuario = new NOTA_TRABAJO_SHOWCURRENT($lista,$permisos,$acciones); //Crea la vista SHOWCURRENT del usuario requerido
 			break;
 		case 'GENNOT':
-				$NOTA_TRABAJO = new NOTA_TRABAJO_Model('','','');
+				$NOTA_TRABAJO = new NOTA_TRABAJO_Model('','','','','');
 				$lista = $NOTA_TRABAJO->genAutoNota(); //mete datos en respuesta usuarios despues de ejecutar el add con los de funcionalidad
 				$usuario = new MESSAGE($lista, '../Controllers/NOTA_TRABAJO_Controller.php'); //muestra el mensaje despues de la sentencia sql
 			break;
@@ -173,7 +186,7 @@ if (!isset($_REQUEST['action'])){
 			}
 			if($acceso == true){ //si tiene acceso, mostramos el showall
 				if (!$_POST){
-					$NOTA_TRABAJO = new NOTA_TRABAJO_Model('','','');//crea un NOTA_TRABAJO_Model
+					$NOTA_TRABAJO = new NOTA_TRABAJO_Model('','','','','');//crea un NOTA_TRABAJO_Model
 				}
 				else{
 					$NOTA_TRABAJO = get_data_form(); //Coge los datos del formulario
@@ -195,10 +208,10 @@ if (!isset($_REQUEST['action'])){
 				$alumnos = $NOTA_TRABAJO->getAlumnos();
 				$num_trabajos = $NOTA_TRABAJO->getNumTrabajos();
 				$notas = $NOTA_TRABAJO->calcNotaF();
-				$UsuariosBD = new NOTA_TRABAJO_SHOWALL($lista, $datos, $num_tupla, $max_tuplas, $totalTuplas, $num_pagina, 'SHOWALL', '../Controllers/NOTA_TRABAJO_Controller.php',$acciones, $trabajos, $num_trabajos, $trabajosNota, $alumnos, $notas); //Crea la vista SHOWALL de los usuarios de la BD	
+				$UsuariosBD = new NOTA_TRABAJO_SHOWALL($lista, $datos, $num_tupla, $max_tuplas, $totalTuplas, $num_pagina, 'SHOWALL', '../Controllers/NOTA_TRABAJO_Controller.php',$acciones, $trabajos, $num_trabajos, $trabajosNota, $alumnos, $notas,''); //Crea la vista SHOWALL de los usuarios de la BD	
 			}else{
 				if (!$_POST){
-					$NOTA_TRABAJO = new NOTA_TRABAJO_Model('','','');//crea un NOTA_TRABAJO_Model
+					$NOTA_TRABAJO = new NOTA_TRABAJO_Model('','','','','');//crea un NOTA_TRABAJO_Model
 				}
 				else{
 					$NOTA_TRABAJO = get_data_form(); //Coge los datos del formulario
@@ -220,7 +233,7 @@ if (!isset($_REQUEST['action'])){
 				$alumnos = $NOTA_TRABAJO->getAlumno();
 				$num_trabajos = $NOTA_TRABAJO->getNumTrabajos();
 				$notas = $NOTA_TRABAJO->calcNotaF();
-				$UsuariosBD = new NOTA_TRABAJO_SHOWALL($lista, $datos, $num_tupla, $max_tuplas, $totalTuplas, $num_pagina, 'ALL', '../Controllers/NOTA_TRABAJO_Controller.php',$acciones, $trabajos, $num_trabajos, $trabajosNota, $alumnos, $notas); //Crea la vista SHOWALL de los usuarios de la BD	
+				$UsuariosBD = new NOTA_TRABAJO_SHOWALL($lista, $datos, $num_tupla, $max_tuplas, $totalTuplas, $num_pagina, 'ALL', '../Controllers/NOTA_TRABAJO_Controller.php',$acciones, $trabajos, $num_trabajos, $trabajosNota, $alumnos, $notas,''); //Crea la vista SHOWALL de los usuarios de la BD	
 			}
 		}
 	}

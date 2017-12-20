@@ -99,8 +99,8 @@ array(
 	/*Model*/
 	'ERROR: No se ha podido conectar con la base de datos' => 'ERROR: No se ha podido conectar con la base de datos',
 	'ERROR: Fallo en la inserción. Ya existe el DNI' => 'ERROR: Fallo en la inserción. Ya existe el DNI',
-	'ERROR: Fallo en la inserción. Ya existe el email' => 'ERROR: Fallo en la modificación. Ya existe el email', 
-	'ERROR: Fallo en la inserción. Ya existe el login' => 'ERROR: Fallo en la modificación. Ya existe el nombre de usuario',
+	'ERROR: Fallo en la inserción. Ya existe el email' => 'ERROR: Fallo en la inserción. Ya existe el email', 
+	'ERROR: Fallo en la inserción. Ya existe el login' => 'ERROR: Fallo en la inserción. Ya existe el nombre de usuario',
 	'ERROR: Introduzca todos los valores de todos los campos' => 'ERROR: Introduzca todos los valores de todos los campos',
 	'ERROR: Fallo en la consulta sobre la base de datos' => 'ERROR: Fallo en la consulta sobre la base de datos',
 	'ERROR: No existe el usuario que desea borrar en la base de datos' => 'ERROR: No existe el usuario que desea borrar en la base de datos',
@@ -296,6 +296,7 @@ array(
 	'Notas' => 'Notas',
 	'Nota Parcial' => 'Nota Parcial',
 	'Ver correccion' => 'Ver correccion',
+	'Borrar todas las notas para este usuario' => 'Borrar todas las notas para este usuario',
 //FUNC_ACCION
 	'Mostrar Acciones' => 'Mostrar Acciones',
 	'ERROR: Fallo en la inserción. Ya existe ese IdFuncionalidad' => 'ERROR: Fallo en la inserción. Ya existe ese IdFuncionalidad',
@@ -304,7 +305,6 @@ array(
 	'Acciones de Funcionalidad' => 'Acciones de Funcionalidad',
 	'ERROR: No existe la funcionalidad que desea borrar en la BD' => 'ERROR: No existe la funcionalidad que desea borrar en la BD',
 	'ERROR: Fallo en la modificación. El IdFuncionalidad está vacio' => 'ERROR: Fallo en la modificación. El IdFuncionalidad está vacio',
-
 
 
 

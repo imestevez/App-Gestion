@@ -293,6 +293,7 @@ array(
 	'Notas' => 'Qualifications',
 	'Nota Parcial' => 'Partial Qualification',
 	'Ver correccion' => 'Show correction',
+	'Borrar todas las notas para este usuario' => 'Delete all qualifications for this user',
 //FUNC_ACCION
 	'Mostrar Acciones' => 'Show Actions',
 	'ERROR: Fallo en la inserción. Ya existe ese IdFuncionalidad' => 'ERROR: Insertion failed. That Id Functionality already exists',
@@ -301,7 +302,6 @@ array(
 	'Acciones de Funcionalidad' => 'Actions of Functionality',
 	'ERROR: No existe la funcionalidad que desea borrar en la BD' => 'ERROR: There is no functionality that you want to delete in the DB',
 	'ERROR: Fallo en la modificación. El IdFuncionalidad está vacio' => 'ERROR: Modification failed. Id Functionality is empty',
-
 
 
 

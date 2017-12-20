@@ -494,6 +494,8 @@ function validar(formulario)
         }
       }else{ //si son EDIT O ADD
         //si todos los campos estan correctos y devuelven true
+        if(formulario == 'ADD'){ //Si es el formulario es el de añadir
+        //si todos los campos estan correctos y devuelven true
 
          if( 
           (validarlogin(form.login, 9)) && 
@@ -505,7 +507,16 @@ function validar(formulario)
           alerta = false; //Se le asigna false a la variable alerta 
         }
     
+    }else{ //si es edit
+      if( 
+          (validarHoras(form.Horas, 0, 99)) && 
+          (validarRuta(form.newRuta,54))  ) {
+
+          alerta = false; //Se le asigna false a la variable alerta 
+        }
+    
     }
+  }
 
     if(alerta == true){ //Si hubo alguna alerta (campo no validado correctamente)
       alert('<?php echo $strings['No se puede enviar el formulario. Revise que todos los campos están correctos'] ?>');

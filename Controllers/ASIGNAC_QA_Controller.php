@@ -79,6 +79,7 @@ function get_data_form(){
 	$numEntregas = $_REQUEST['numEntregas'];
 	}
 
+
 	$ASIGNAC_QA = new ASIGNAC_QA_Model(
 		$IdTrabajo, 
 		$NombreTrabajo,

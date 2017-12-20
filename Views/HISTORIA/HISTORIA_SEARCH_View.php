@@ -50,7 +50,7 @@
 
                
                 <div class="acciones" style="float: right; margin-left:0%; margin-right: 50%">
-                    <a href="../Controllers/HISTORIA_Controller.php?action=SEARCH"> <input type="image" name="action" value="SEARCH" src="../Views/images/confirmar.png" title="<?php echo $strings['Buscar'] ?>" onclick="return validar('SEARCH') "></a>
+                    <a href="../Controllers/HISTORIA_Controller.php?action=SEARCH"> <input type="image" name="action" value="SEARCH" src="../Views/images/search.png" title="<?php echo $strings['Buscar'] ?>" onclick="return validar('SEARCH') "></a>
                 </div>
              </form>                     
                 <div class="acciones" style="float: left;">

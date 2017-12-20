@@ -50,7 +50,7 @@ function render(){
              <table class="showcurrent" style="width: 70%; margin-left: 15%">
              <caption><?php echo $strings['Mostrar entrega'] ?></caption>
                   <tr><th><?php echo $strings['Campo'] ?></th><th style="border-right-style: collapse; border-right:  5px solid black"><?php echo $strings['Valor'] ?></th></tr>
-                 <tr><th><?php echo $strings['login'] ?></th><td><?php echo $this->login ?></td>
+                 <tr><th><?php echo $strings['login'] ?></th><td style="border-right-style: collapse; border-right:  5px solid black;"><?php echo $this->login ?></td>
 
                     <?php
                         $usuario = false;
@@ -81,7 +81,7 @@ function render(){
                 </tr>    
 
                  </tr>
-                 <tr><th><?php echo $strings['IdTrabajo'] ?></th><td><?php echo $this->IdTrabajo ?>
+                 <tr><th><?php echo $strings['IdTrabajo'] ?></th><td style="border-right-style: collapse; border-right:  5px solid black;"><?php echo $this->IdTrabajo ?>
                  </td>
                   <?php
 
