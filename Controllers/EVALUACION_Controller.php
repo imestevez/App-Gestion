@@ -299,9 +299,10 @@ function getCalificarChecbox(){
 			$lista = $EVALUACION->rellenarLista();
 			$lista['IdTrabajo'] = $IdTrabajo;
 			$lista['LoginEvaluador'] = $login;
-		
+
+			$contarAlias = $EVALUACION->contarAlias();
 			$aliasEvaluados = $EVALUACION->listaEntregasQA();
-			$usuario = new EVALUACION_RESULTS_QA($lista, $aliasEvaluados, $contarHistorias);
+			$usuario = new EVALUACION_RESULTS_QA($lista,$aliasEvaluados, $contarAlias,$contarHistorias);
 
 		break;
 		case 'CALIF': //si es una calificacion
