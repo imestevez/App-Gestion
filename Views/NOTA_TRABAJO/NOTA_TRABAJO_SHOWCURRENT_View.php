@@ -87,7 +87,7 @@ function render(){
         <div class="results2" >
 
             <?php
-                $resul = false;
+                $resul = false; //para almacenar si tiene permisos para ver resultados
 
                 foreach ($this->permisos as $key => $value) {
 
@@ -95,11 +95,13 @@ function render(){
                         $resul = true;
                     }
                 }
+                $initID = $this->IdTrabajo[0]; //Se almacena la primera letra dl id del trabajo para saber si es ET o QA
                     if($resul == true){
+                        if(($initID <> 'q') && ($initID <> 'Q')){
                         ?>
             <a href="../Controllers/EVALUACION_Controller.php?action=RESUL&login=<?php echo $this->login?>&IdTrabajo=<?php echo $this->IdTrabajo?>"><input type="image" name="action" value="RESUL" src="../Views/images/resultado.png" title="<?php echo $strings['Ver correccion'] ?>"></a>
             <?php
-
+                        }
                     }
                 ?>
 
