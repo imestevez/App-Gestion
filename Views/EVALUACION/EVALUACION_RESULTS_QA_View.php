@@ -66,7 +66,7 @@ include '../Views/Header.php';
                         <td colspan="1" class="InicialIzq"><?php echo $strings['IdTrabajo']?>:</td>
                         <td colspan="4" class="InicialDer"><?php echo $this->IdTrabajo ?></td>
                     </tr>
-            
+            </table>
                 <?php
 
 
@@ -78,7 +78,7 @@ include '../Views/Header.php';
                     $fin2 = $init2 + $this->contarHistorias;
 
                 ?>   
-                        
+                        <table class="tablaRESULTS" style="margin-top: 5%" >
                         <tr>
                             <td colspan="1" class="InicialIzq"><?php echo $strings['Alias']?></td>
                             <td colspan="4" class="InicialDer"><?php echo $this->aliasEvaluados[$j*$this->contarHistorias][0]?></td>
@@ -100,14 +100,14 @@ include '../Views/Header.php';
                                 <td colspan="4" class="InicialDer"><?php echo $this->aliasEvaluados[$i][2]?></td>
                             </tr>
                             <tr>
-                                <td colspan="5" class="InicialIzq"><?php echo $strings['CorrectoAOK']?></td>
+                                <td colspan="5" class="Comments"><?php echo $strings['CorrectoAOK']?></td>
                             </tr>
                             <tr>
-                                <td colspan="2" class="InicialIzq"><?php echo $this->aliasEvaluados[$i][3]?></td>
-                                <td colspan="3" class="InicialIzq"><?php echo $this->aliasEvaluados[$i][4]?></td>
+                                <td colspan="5"><?php echo $this->aliasEvaluados[$i][3]?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <?php echo $this->aliasEvaluados[$i][4]?></td>
                             </tr>
                             <tr>
-                                <td colspan="5" class="InicialIzq"><?php echo $strings['ComenIncorrectoA']?></td>
+                                <td colspan="5" class="Comments"><?php echo $strings['ComenIncorrectoA']?></td>
                             </tr>
                             <tr>
                                 <td class="comentA" colspan="5">
@@ -115,7 +115,7 @@ include '../Views/Header.php';
                                 </td>
                             </tr>
                             <tr>
-                                <td colspan="5" class="InicialIzq"><?php echo $strings['ComentIncorrectoP']?></td>
+                                <td colspan="5" class="Comments"><?php echo $strings['ComentIncorrectoP']?></td>
                             </tr>
                             <tr>
                                 <td class="comentA" colspan="5"> 
@@ -133,14 +133,16 @@ include '../Views/Header.php';
                             $fin2 = $init2 + $this->contarHistorias;  
 
 
-
+                            ?>
+                                </table> 
+                            <?php
 
                 }//fin for1
                             
                 
 
                 ?>
-                   </table>                        
+                                          
          </fieldset> 
                           
                 <div class="acciones" style="float: left; margin-left: 45%">
