@@ -752,7 +752,6 @@ function listaEntregasQA(){
 															) 
 						ORDER BY AliasEvaluado, E.IdHistoria";
 
-						
 
 	$resultado = $this->mysqli->query($sql);
 	$this->lista=null;

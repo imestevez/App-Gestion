@@ -71,11 +71,13 @@ include '../Views/Header.php';
 
 
 
+                    $init2 = 0;
+                    $fin2 = $init2 + $this->contarHistorias;
+
                     for ($j=0; $j < $this->contarAlias ; $j++) { //mientras haya historias
                      
 
-                    $init2 = 0;
-                    $fin2 = $init2 + $this->contarHistorias;
+                    
 
                 ?>   
                         <table class="tablaRESULTS" style="margin-top: 5%" >
@@ -88,7 +90,7 @@ include '../Views/Header.php';
                        
                 <?php
                         for ($i=$init2; $i < $fin2 ; $i++) { 
-
+                            
                 ?>
 
                             <tr>
@@ -127,10 +129,13 @@ include '../Views/Header.php';
 
 
                 <?php
+
+                            
                             }//fin for2
-                              
+                            
                             $init2 = $i;
-                            $fin2 = $init2 + $this->contarHistorias;  
+                            $fin2 = $init2 + $this->contarHistorias;
+                             
 
 
                             ?>
