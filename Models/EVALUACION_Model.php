@@ -682,6 +682,29 @@ function contar(){
 
 }
 
+
+
+
+//cuenta el numero de alias 
+function contarAlias(){
+	$aux = 0;
+	$sql = "SELECT COUNT(*) 
+					FROM EVALUACION
+							WHERE IdTrabajo = '$this->IdTrabajo' AND LoginEvaluador = '$this->LoginEvaluador'
+								GROUP BY AliasEvaluado";
+
+	$result = $this->mysqli->query($sql);
+	
+	$row=mysqli_fetch_array($result);
+	$aux= $row['COUNT(*)'];
+	
+
+	return $aux;
+	
+
+}
+
+
 //cuenta el numero de historias de trabajo
 function contarHistorias(){
 	$aux = 0;
@@ -704,7 +727,7 @@ function contarHistorias(){
 
 //rellena las QAs realizadas sobre un trabajo
 function listaEntregasQA(){
-	$sql = "SELECT * FROM EVALUACION E, HISTORIA H WHERE (E.LoginEvaluador = '$this->login' AND 
+	$sql = "SELECT * FROM EVALUACION E, HISTORIA H WHERE (E.LoginEvaluador = '$this->LoginEvaluador' AND 
 															E.IdTrabajo = '$this->IdTrabajo' AND
 															H.IdHistoria = E.IdHistoria) 
 						ORDER BY AliasEvaluado, IdHistoria";
