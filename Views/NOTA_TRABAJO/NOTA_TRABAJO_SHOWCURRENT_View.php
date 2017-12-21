@@ -107,14 +107,15 @@ function render(){
                         <a href="../Controllers/EVALUACION_Controller.php?action=RESULE&login=<?php echo $this->login?>&IdTrabajo=<?php echo $this->IdTrabajo?>"><input type="image" name="action" value="RESULE" src="../Views/images/resultado.png" title="<?php echo $strings['Ver correccion'] ?>"></a>
                         <?php
                         }
+                    }
                     if($resulq == true){
-                        if(($initID == 'q') && ($initID == 'Q')){ //si es una QA
-                        ?>
+                        if(($initID == 'q') && ($initID == 'Q')){ //si es una
+                            ?>
                         <a href="../Controllers/EVALUACION_Controller.php?action=RESULQ&login=<?php echo $this->login?>&IdTrabajo=<?php echo $this->IdTrabajo?>"><input type="image" name="action" value="RESULQ" src="../Views/images/resultado.png" title="<?php echo $strings['Ver correccion'] ?>"></a>
                         <?php
                         }
                     }
-                }
+                
                 ?>
 
             <a href="../Controllers/NOTA_TRABAJO_Controller.php?action=ALL"><input type="image" name="action" value="ALL" src="../Views/images/back.png" title="<?php echo $strings['Volver'] ?>"></a> 
