@@ -736,7 +736,7 @@ function listaEntregasQA(){
 	$this->lista=null;
 	$num = 0;
 	while($row = mysqli_fetch_array($resultado)){
-		$this->lista[$num] = array($row['AliasEvaluado'], $row['IdHistoria'], $row['TextoHistoria'], $row['CorrectoP'], $row['OK'],$row['ComenIncorrectoA'], $row['ComentIncorrectoP'] );
+		$this->lista[$num] = array($row['AliasEvaluado'], $row['IdHistoria'], $row['TextoHistoria'], $row['CorrectoA'], $row['OK'],$row['ComenIncorrectoA'], $row['ComentIncorrectoP'] );
 		$num++;
 	}
 	return $this->lista;
