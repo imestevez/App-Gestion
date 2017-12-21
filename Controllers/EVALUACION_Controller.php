@@ -238,7 +238,7 @@ function getCalificarChecbox(){
 
 			//echo $evaluados[$i];
 			$check =explode("?" ,  $evaluado[$i]);
-			$listaEvaluado[$check[0]] = $check[1]; //inserto en la lista cada uno de los IDS Funcionalidad de los checkboxs seleccionados por el usuario
+			$listaEvaluado[$check[0]] = $check[1]; //inserto en la lista cada uno de las id historias con el correctoP
 		}
 	}
 
