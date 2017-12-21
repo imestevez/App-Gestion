@@ -75,7 +75,10 @@ function CALIF()
 					$this->OK = $value[3];
 					$this->ComenIncorrectoA = $value[4];
 					//$this->ComentIncorrectoP =  $this->listaComentarios[$this->IdHistoria];
-					$this->CorrectoP = $this->listaEvaluado[$this->IdHistoria][0];
+					if(array_key_exists($this->IdHistoria, $this->listaEvaluado)){
+					$this->CorrectoP = $this->listaEvaluado[$this->IdHistoria];
+						
+					}
 					
 					if($this->CorrectoP == 0){
 						$this->CorrectoP = 1;

@@ -730,7 +730,9 @@ function listaEntregasQA(){
 	$sql = "SELECT * FROM EVALUACION E, HISTORIA H WHERE (E.LoginEvaluador = '$this->LoginEvaluador' AND 
 															E.IdTrabajo = '$this->IdTrabajo' AND
 															H.IdHistoria = E.IdHistoria) 
-						ORDER BY AliasEvaluado, IdHistoria";
+						ORDER BY AliasEvaluado, E.IdHistoria";
+
+						echo $sql;
 
 	$resultado = $this->mysqli->query($sql);
 	$this->lista=null;

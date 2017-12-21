@@ -102,14 +102,14 @@ function render(){
                 }
                 $initID = $this->IdTrabajo[0]; //Se almacena la primera letra dl id del trabajo para saber si es ET o QA
                     if($resule == true){ //si tiene permisos para ver los resultados
-                        if(($initID == 'e') && ($initID == 'E')){ //si es una entrega
+                        if(($initID == 'e') || ($initID == 'E')){ //si es una entrega
                         ?>
                         <a href="../Controllers/EVALUACION_Controller.php?action=RESULE&login=<?php echo $this->login?>&IdTrabajo=<?php echo $this->IdTrabajo?>"><input type="image" name="action" value="RESULE" src="../Views/images/resultado.png" title="<?php echo $strings['Ver correccion'] ?>"></a>
                         <?php
                         }
                     }
                     if($resulq == true){
-                        if(($initID == 'q') && ($initID == 'Q')){ //si es una
+                        if(($initID == 'q') || ($initID == 'Q')){ //si es una
                             ?>
                         <a href="../Controllers/EVALUACION_Controller.php?action=RESULQ&login=<?php echo $this->login?>&IdTrabajo=<?php echo $this->IdTrabajo?>"><input type="image" name="action" value="RESULQ" src="../Views/images/resultado.png" title="<?php echo $strings['Ver correccion'] ?>"></a>
                         <?php

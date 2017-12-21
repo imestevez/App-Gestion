@@ -51,7 +51,7 @@ include '../Views/Header.php';
                 <legend style="margin-left: 30%"><?php echo $strings['Calificar evaluacion'] ?></legend>
             <form method="post" name="EDIT"  action="../Controllers/EVALUACION_Controller.php" enctype="multipart/form-data" >
 
-            <table class="tablaCalif">
+            <table class="tablaRESULTS">
                  
                     
                 <?php
