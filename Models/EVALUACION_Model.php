@@ -663,7 +663,7 @@ function listarEvaluadores(){
 	}
 }
 
-
+//cuenta el numero de logins que evaluan una entrega
 function contar(){
 	$aux = 0;
 	$sql = "SELECT COUNT(*) 
@@ -682,7 +682,7 @@ function contar(){
 
 }
 
-
+//cuenta el numero de historias de trabajo
 function contarHistorias(){
 	$aux = 0;
 	$sql = "SELECT COUNT(*) 
@@ -702,6 +702,17 @@ function contarHistorias(){
 
 }
 
+//rellena las QAs realizadas sobre un trabajo
+function listaEntregasQA(){
+	$sql = "SELECT * FROM EVALUACION WHERE (LoginEvaluador = '$this->login' AND IdTrabajo = '$this->IdTrabajo') 
+						ORDER BY AliasEvaluado, IdHistoria";
+
+	$resultado = $this->mysqli->query($sql);
+	$num = 0;
+	while($row = mysqli_fetch_array($resultado)){
+		$this->lista[$num] = array($row['AliasEvaluado'] );
+	}
+}
 
 }//Fin clase
 

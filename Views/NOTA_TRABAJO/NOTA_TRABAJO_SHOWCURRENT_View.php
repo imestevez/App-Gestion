@@ -87,22 +87,34 @@ function render(){
         <div class="results2" >
 
             <?php
-                $resul = false; //para almacenar si tiene permisos para ver resultados
+                $resule = false; //para almacenar si tiene permisos para ver resultados de entregas
+                $resulq = false; //para almacenar si tiene permisos para ver resultados de qas
+
 
                 foreach ($this->permisos as $key => $value) {
 
-                    if(($value[1] == 10)  && ($value[2] == 'RESUL') ){
-                        $resul = true;
+                    if(($value[1] == 10)  && ($value[2] == 'RESULE') ){ //si tiene permisos para ver resultados de entregas
+                        $resule = true;
+                    }
+                    if(($value[1] == 10)  && ($value[2] == 'RESULQ') ){ //si tiene permisos para ver las qas
+                        $resulq = true;
                     }
                 }
                 $initID = $this->IdTrabajo[0]; //Se almacena la primera letra dl id del trabajo para saber si es ET o QA
-                    if($resul == true){
-                        if(($initID <> 'q') && ($initID <> 'Q')){
+                    if($resule == true){ //si tiene permisos para ver los resultados
+                        if(($initID == 'e') && ($initID == 'E')){ //si es una entrega
                         ?>
-            <a href="../Controllers/EVALUACION_Controller.php?action=RESUL&login=<?php echo $this->login?>&IdTrabajo=<?php echo $this->IdTrabajo?>"><input type="image" name="action" value="RESUL" src="../Views/images/resultado.png" title="<?php echo $strings['Ver correccion'] ?>"></a>
-            <?php
+                        <a href="../Controllers/EVALUACION_Controller.php?action=RESULE&login=<?php echo $this->login?>&IdTrabajo=<?php echo $this->IdTrabajo?>"><input type="image" name="action" value="RESULE" src="../Views/images/resultado.png" title="<?php echo $strings['Ver correccion'] ?>"></a>
+                        <?php
+                        }
+                    if($resulq == true){
+                        if(($initID == 'q') && ($initID == 'Q')){ //si es una QA
+                        ?>
+                        <a href="../Controllers/EVALUACION_Controller.php?action=RESULQ&login=<?php echo $this->login?>&IdTrabajo=<?php echo $this->IdTrabajo?>"><input type="image" name="action" value="RESULQ" src="../Views/images/resultado.png" title="<?php echo $strings['Ver correccion'] ?>"></a>
+                        <?php
                         }
                     }
+                }
                 ?>
 
             <a href="../Controllers/NOTA_TRABAJO_Controller.php?action=ALL"><input type="image" name="action" value="ALL" src="../Views/images/back.png" title="<?php echo $strings['Volver'] ?>"></a> 

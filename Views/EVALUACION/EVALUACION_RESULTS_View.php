@@ -37,14 +37,11 @@ function __construct($lista, $listaHistorias, $contar, $contarHistorias, $rellen
     $this->contarHistorias = $contarHistorias;
     $this->rellenarHistorias = $rellenarHistorias;
     $this->rellenarLista();
-
-
-    $this->render();
 }
 
 //funcion que muestra los datos al usuario
 
-function render(){
+function renderET(){
 
 include '../Views/Header.php';
 ?>
