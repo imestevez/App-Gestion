@@ -55,6 +55,7 @@ include_once '../Views/MESSAGE_View.php';
 
 include_once '../Views/EVALUACION/EVALUACION_CALIFICAR_View.php';
 include_once '../Views/EVALUACION/EVALUACION_RESULTS_View.php';
+include_once '../Views/EVALUACION/EVALUACION_RESULTS_QA_View.php';
 // funcion para coger los datos del formulario
 function get_data_form(){
 
