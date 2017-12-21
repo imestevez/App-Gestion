@@ -691,7 +691,7 @@ function contarAlias(){
 	$sql = "SELECT COUNT(*) 
 					FROM EVALUACION
 							WHERE IdTrabajo = '$this->IdTrabajo' AND LoginEvaluador = '$this->LoginEvaluador'
-								GROUP BY AliasEvaluado";
+								GROUP BY IdHistoria";
 
 	$result = $this->mysqli->query($sql);
 	
@@ -724,26 +724,53 @@ function contarHistorias(){
 	
 
 }
+//cuenta el numero de historias de una QA
+function contarHistoriasQA(){
+	$aux = 0;
+	$sql = "SELECT COUNT(*) 
+					FROM EVALUACION
+							WHERE IdTrabajo = '$this->IdTrabajo' AND 
+									LoginEvaluador = '$this->LoginEvaluador'
+								GROUP BY AliasEvaluado";
+
+	$result = $this->mysqli->query($sql);
+	
+	$row=mysqli_fetch_array($result);
+	$aux= $row['COUNT(*)'];
+	
+
+	return $aux;
+	
+
+}
 
 //rellena las QAs realizadas sobre un trabajo
 function listaEntregasQA(){
-	$sql = "SELECT * FROM EVALUACION E, HISTORIA H WHERE (E.LoginEvaluador = '$this->LoginEvaluador' AND 
-															E.IdTrabajo = '$this->IdTrabajo' AND
-															H.IdHistoria = E.IdHistoria) 
+
+	$sql = "SELECT * FROM EVALUACION E WHERE (E.LoginEvaluador = '$this->LoginEvaluador' AND 
+															E.IdTrabajo = '$this->IdTrabajo' 
+															) 
 						ORDER BY AliasEvaluado, E.IdHistoria";
 
-						echo $sql;
+						
 
 	$resultado = $this->mysqli->query($sql);
 	$this->lista=null;
 	$num = 0;
 	while($row = mysqli_fetch_array($resultado)){
-		$this->lista[$num] = array($row['AliasEvaluado'], $row['IdHistoria'], $row['TextoHistoria'], $row['CorrectoA'], $row['OK'],$row['ComenIncorrectoA'], $row['ComentIncorrectoP'] );
+		$this->lista[$num] = array($row['AliasEvaluado'], $row['IdHistoria'], $this->devolverTextoHist($row['IdHistoria']), $row['CorrectoA'], $row['OK'],$row['ComenIncorrectoA'], $row['ComentIncorrectoP'] );
 		$num++;
 	}
 	return $this->lista;
 }
+function devolverTextoHist ($IdHistoria){
 
+	$sql = "SELECT * FROM HISTORIA E WHERE (IdHistoria = '$IdHistoria')";
+	$resultado = $this->mysqli->query($sql);
+	$row = mysqli_fetch_array($resultado);
+
+	return $row['TextoHistoria'];
+}
 }//Fin clase
 
 ?>

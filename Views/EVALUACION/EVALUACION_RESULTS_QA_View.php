@@ -34,7 +34,7 @@ function __construct($lista, $aliasEvaluados, $contarAlias, $contarHistorias){
     $this->aliasEvaluados = $aliasEvaluados;
     $this->contarHistorias = $contarHistorias;
     $this->contarAlias = $contarAlias;
-    $this->rellenarLista();
+
 
     $this->render();
 }
@@ -44,6 +44,7 @@ function __construct($lista, $aliasEvaluados, $contarAlias, $contarHistorias){
 function render(){
 
 include '../Views/Header.php';
+
 ?>
 
 <script type="text/javascript">
@@ -56,14 +57,7 @@ include '../Views/Header.php';
 
             <table class="tablaRESULTS">
                  
-                    
-                <?php
-
-                    $init2 = 0;
-                    $fin2 = $init2 + $this->contarHistorias;
-
-                ?>
-
+    
                     <tr>
                         <td colspan="1" class="InicialIzq"><?php echo $strings['Login']?>:</td>
                         <td colspan="4" class="InicialDer"><?php echo $this->LoginEvaluador ?></td>
@@ -72,18 +66,22 @@ include '../Views/Header.php';
                         <td colspan="1" class="InicialIzq"><?php echo $strings['IdTrabajo']?>:</td>
                         <td colspan="4" class="InicialDer"><?php echo $this->IdTrabajo ?></td>
                     </tr>
-
+            
                 <?php
 
 
 
                     for ($j=0; $j < $this->contarAlias ; $j++) { //mientras haya historias
                      
+
+                    $init2 = 0;
+                    $fin2 = $init2 + $this->contarHistorias;
+
                 ?>   
                         
                         <tr>
                             <td colspan="1" class="InicialIzq"><?php echo $strings['Alias']?></td>
-                            <td colspan="4" class="InicialDer"><?php echo $aliasEvaluados[$j][0]?></td>
+                            <td colspan="4" class="InicialDer"><?php echo $this->aliasEvaluados[$j*$this->contarHistorias][0]?></td>
                         </tr>
 
                        
@@ -98,22 +96,22 @@ include '../Views/Header.php';
                                 <td colspan="4" class="InicialDer"><?php echo $strings['TextoHistoria']?></td>
                             </tr>
                             <tr>
-                                <td colspan="1" class="InicialIzq"><?php echo $aliasEvaluados[$j][1]?></td>
-                                <td colspan="4" class="InicialDer"><?php echo $aliasEvaluados[$j][2]?></td>
+                                <td colspan="1" class="InicialIzq"><?php echo $this->aliasEvaluados[$i][1]?></td>
+                                <td colspan="4" class="InicialDer"><?php echo $this->aliasEvaluados[$i][2]?></td>
                             </tr>
                             <tr>
                                 <td colspan="5" class="InicialIzq"><?php echo $strings['CorrectoAOK']?></td>
                             </tr>
                             <tr>
-                                <td colspan="2" class="InicialIzq"><?php echo $aliasEvaluados[$j][3]?></td>
-                                <td colspan="3" class="InicialIzq"><?php echo $aliasEvaluados[$j][4]?></td>
+                                <td colspan="2" class="InicialIzq"><?php echo $this->aliasEvaluados[$i][3]?></td>
+                                <td colspan="3" class="InicialIzq"><?php echo $this->aliasEvaluados[$i][4]?></td>
                             </tr>
                             <tr>
                                 <td colspan="5" class="InicialIzq"><?php echo $strings['ComenIncorrectoA']?></td>
                             </tr>
                             <tr>
                                 <td class="comentA" colspan="5">
-                                    <textarea name="ComenIncorrectoA" readonly maxlength="300" rows="6" cols="50" onblur="" style="margin-left: 10px; border-radius: 20px; border-top-left-radius: 0px; border-width: 2px; border-color: darkblue; width: 90%;" ><?php echo $this->aliasEvaluados[$j][5] ?></textarea> 
+                                    <textarea name="ComenIncorrectoA" readonly maxlength="300" rows="6" cols="50" onblur="" style="margin-left: 10px; border-radius: 20px; border-top-left-radius: 0px; border-width: 2px; border-color: darkblue; width: 90%;" ><?php echo $this->aliasEvaluados[$i][5] ?></textarea> 
                                 </td>
                             </tr>
                             <tr>
@@ -121,11 +119,11 @@ include '../Views/Header.php';
                             </tr>
                             <tr>
                                 <td class="comentA" colspan="5"> 
-                                <textarea name="ComentIncorrectoP" readonly maxlength="300" rows="6" cols="50" onblur="" style="margin-left: 10px; border-radius: 20px; border-top-left-radius: 0px; border-width: 2px; border-color: darkblue; width: 90%;" ><?php echo $this->aliasEvaluados[$j][6] ?></textarea>
+                                <textarea name="ComentIncorrectoP" readonly maxlength="300" rows="6" cols="50" onblur="" style="margin-left: 10px; border-radius: 20px; border-top-left-radius: 0px; border-width: 2px; border-color: darkblue; width: 90%;" ><?php echo $this->aliasEvaluados[$i][6] ?></textarea>
                                 </td>
                             </tr>
 
-                        </table>
+
 
 
                 <?php
@@ -134,12 +132,15 @@ include '../Views/Header.php';
                             $init2 = $i;
                             $fin2 = $init2 + $this->contarHistorias;  
 
+
+
+
                 }//fin for1
                             
                 
 
                 ?>
-                                           
+                   </table>                        
          </fieldset> 
                           
                 <div class="acciones" style="float: left; margin-left: 45%">
