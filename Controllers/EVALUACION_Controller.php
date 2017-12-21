@@ -55,6 +55,7 @@ include_once '../Views/MESSAGE_View.php';
 
 include_once '../Views/EVALUACION/EVALUACION_CALIFICAR_View.php';
 include_once '../Views/EVALUACION/EVALUACION_RESULTS_View.php';
+include_once '../Views/EVALUACION/EVALUACION_RESULTS_QA_View.php';
 // funcion para coger los datos del formulario
 function get_data_form(){
 
@@ -294,13 +295,22 @@ function getCalificarChecbox(){
 				$login = $_REQUEST['login'];
 			}
 			
-			$EVALUACION = new EVALUACION_Model($IdTrabajo, $login, '', '', '', '', '', '', ''); //crea una EVALUACION_Model con los campos clave del usuario y del trabajo
-			$contarHistorias = $EVALUACION->contarHistorias(); //contamos las historias
+			$Idaux = $IdTrabajo[strlen($IdTrabajo)-1];
+			
+			$id = "ET";
+			$id .= $Idaux;
+			
+
+
+			$EVALUACION = new EVALUACION_Model($id, $login, '', '', '', '', '', '', ''); //crea una EVALUACION_Model con los campos clave del usuario y del trabajo
+			$contarHistorias = $EVALUACION->contarHistoriasQA(); //contamos las historias
 			$lista = $EVALUACION->rellenarLista();
 			$lista['IdTrabajo'] = $IdTrabajo;
 			$lista['LoginEvaluador'] = $login;
 
 			$contarAlias = $EVALUACION->contarAlias();
+
+			
 			$aliasEvaluados = $EVALUACION->listaEntregasQA();
 			$usuario = new EVALUACION_RESULTS_QA($lista,$aliasEvaluados, $contarAlias,$contarHistorias);
 
