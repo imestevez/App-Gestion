@@ -704,14 +704,19 @@ function contarHistorias(){
 
 //rellena las QAs realizadas sobre un trabajo
 function listaEntregasQA(){
-	$sql = "SELECT * FROM EVALUACION WHERE (LoginEvaluador = '$this->login' AND IdTrabajo = '$this->IdTrabajo') 
+	$sql = "SELECT * FROM EVALUACION E, HISTORIA H WHERE (E.LoginEvaluador = '$this->login' AND 
+															E.IdTrabajo = '$this->IdTrabajo' AND
+															H.IdHistoria = E.IdHistoria) 
 						ORDER BY AliasEvaluado, IdHistoria";
 
 	$resultado = $this->mysqli->query($sql);
+	$this->lista=null;
 	$num = 0;
 	while($row = mysqli_fetch_array($resultado)){
-		$this->lista[$num] = array($row['AliasEvaluado'] );
+		$this->lista[$num] = array($row['AliasEvaluado'], $row['IdHistoria'], $row['TextoHistoria'], $row['CorrectoP'], $row['OK'],$row['ComenIncorrectoA'], $row['ComentIncorrectoP'] );
+		$num++;
 	}
+	return $this->lista;
 }
 
 }//Fin clase

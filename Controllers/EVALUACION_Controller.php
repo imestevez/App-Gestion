@@ -288,26 +288,20 @@ function getCalificarChecbox(){
 		case 'RESULQ': //si un alumno quiere visualizar sus resultados
 			$IdTrabajo = null;
 			$login = null;
-			$AliasEvaluado = null;
 
 			if ((isset($_REQUEST['IdTrabajo'])) && (isset($_REQUEST['login']))) {
 				$IdTrabajo = $_REQUEST['IdTrabajo'];
 				$login = $_REQUEST['login'];
 			}
-			$EV = new ENTREGA_Model($_REQUEST['login'], $_REQUEST['IdTrabajo'], '', '', '', '', '');
-			$AliasEvaluado = $EV->obtenerAlias();
-
-			$EVALUACION = new EVALUACION_Model($IdTrabajo, '', $AliasEvaluado, '', '', '', '', '', ''); //crea una EVALUACION_Model con los campos clave del usuario y del trabajo
-			$contar = $EVALUACION->contar(); //contamos los login evaluadores
+			
+			$EVALUACION = new EVALUACION_Model($IdTrabajo, $login, '', '', '', '', '', '', ''); //crea una EVALUACION_Model con los campos clave del usuario y del trabajo
 			$contarHistorias = $EVALUACION->contarHistorias(); //contamos las historias
 			$lista = $EVALUACION->rellenarLista();
 			$lista['IdTrabajo'] = $IdTrabajo;
-			$lista['AliasEvaluado'] = $AliasEvaluado;
-			$listaHistorias = $EVALUACION->listarHistoriasCalificar();
-			$rellenarHistorias = $EVALUACION->rellenarHistorias();
-
-			$usuario = new EVALUACION_RESULTS($lista, $listaHistorias, $contar, $contarHistorias, $rellenarHistorias);
-			$usuario->renderQA();
+			$lista['LoginEvaluador'] = $login;
+		
+			$aliasEvaluados = $EVALUACION->listaEntregasQA();
+			$usuario = new EVALUACION_RESULTS_QA($lista, $aliasEvaluados, $contarHistorias);
 
 		break;
 		case 'CALIF': //si es una calificacion
