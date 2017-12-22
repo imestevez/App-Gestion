@@ -561,7 +561,7 @@ function validar(formulario)
 
           alerta = false; //Se le asigna false a la variable alerta 
         }
-      }else{ //si son EDIT O ADD
+      }else{ //si es EDIT 
         //si todos los campos estan correctos y devuelven true
         if(formulario == 'EDIT'){
           if( 
@@ -574,8 +574,8 @@ function validar(formulario)
 
             alerta = false; //Se le asigna false a la variable alerta 
           }
-        }else{
-
+        }else{//si es EDITProfesor 
+            //si todos los campos estan correctos y devuelven true
             if(formulario == 'EDITP'){
                if( 
                 (validarIdTrabajo(form.IdTrabajo, 6)) && 
@@ -591,7 +591,7 @@ function validar(formulario)
                 alerta = false; //Se le asigna false a la variable alerta 
               }
             }else{
-              if( 
+              if( //si es ADD
                 (validarIdTrabajo(form.IdTrabajo, 6)) && 
                 (validarlogin(form.LoginEvaluador, 9)) && 
                 (validarAlias(form.AliasEvaluado, 9)) &&  

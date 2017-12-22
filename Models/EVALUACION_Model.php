@@ -21,7 +21,7 @@ class EVALUACION_Model { //declaración de la clase
     var $ComentIncorrectoP; //atributo para almacenar el comentario incorrecto del profesor
     var $OK; //atributo para almacenar el resultado (1 - 0) de la evaluacion de la QA
 	var $lista; // array para almacenar los datos del usuario
-	var $listaIdHistoria;
+	var $listaIdHistoria; //almacena las historias
 	var $mysqli; // declaración del atributo manejador de la bd
 
 //Constructor de la clase
@@ -104,8 +104,9 @@ function ADD()
 									'$this->OK')";				
 
 				if (!$result = $this->mysqli->query($sql)){ // si da error la ejecución de la query
-						$this->lista['mensaje'] = 'ERROR: No se ha podido conectar con la base de datos';
-						return $this->lista; // error en la consulta (no se ha podido conectar con la bd). Devolvemos un mensaje que el controlador manejara
+						$this->lista['mensaje'] = 'ERROR: Fallo en la inserción. Ya existe la evaluacion'; 
+							return $this->lista;
+
 				}else{ //si no da error en la insercion devolvemos mensaje de exito
 
 					$this->lista['mensaje'] = 'Inserción realizada con éxito';
@@ -129,8 +130,8 @@ function ADD()
 		  					$this->lista['mensaje'] = 'ERROR: La historia no existe'; 
 							return $this->lista;
 		  				}else{
-		  					$this->lista['mensaje'] = 'ERROR: Fallo en la inserción. Ya existe la evaluacion'; 
-							return $this->lista;
+		  					$this->lista['mensaje'] = 'ERROR: No se ha podido conectar con la base de datos';
+						return $this->lista; // error en la consulta (no se ha podido conectar con la bd). Devolvemos un mensaje que el controlador manejara
 						}
 					} 
 		  		}
@@ -276,7 +277,7 @@ function EDIT()
 
 	    if ($num_rows == 1)
 	    {	// se construye la sentencia de modificacion en base a los atributos de la clase
-			if(($this->CorrectoP <> '') && ($this->ComentIncorrectoP <> '') && ($this->OK <> '')){
+			if(($this->CorrectoP <> '') && ($this->ComentIncorrectoP <> '') && ($this->OK <> '')){ //para edit de admin
 
 				$sql = "UPDATE EVALUACION SET 
 							IdTrabajo = '$this->IdTrabajo',
@@ -289,7 +290,7 @@ function EDIT()
 							ComentIncorrectoP = '$this->ComentIncorrectoP',
 							OK = '$this->OK'
 						WHERE (IdTrabajo = '$this->IdTrabajo' AND LoginEvaluador = '$this->LoginEvaluador' AND AliasEvaluado = '$this->AliasEvaluado' AND IdHistoria = '$this->IdHistoria')";
-			}else{
+			}else{ //para edit de alumno
 
 				$sql = "UPDATE EVALUACION SET 
 							IdTrabajo = '$this->IdTrabajo',
@@ -341,6 +342,8 @@ function SHOWALL($num_tupla,$max_tuplas){
 		return $resultado;
 	}
 } // fin metodo SHOWALL
+
+//muestra un showall personalizado para el user
 function SHOWALL_User($num_tupla,$max_tuplas){
 	$login = $_SESSION['login'];
 
@@ -377,6 +380,7 @@ function contarTuplas(){
 
 }
 
+//comprueba si existe el usuario
 function comprobarExistenciaUsuario(){
 
 	$sql = "SELECT * FROM USUARIO WHERE ( login = '$this->LoginEvaluador')";
@@ -394,7 +398,7 @@ function comprobarExistenciaUsuario(){
 	}
 }
 
-
+//comprueba si existe el trabajo
 function comprobarExistenciaTrabajo(){
 	
 
@@ -413,6 +417,7 @@ function comprobarExistenciaTrabajo(){
 	}
 }
 
+//comprueba que existe el alias
 function comprobarExistenciaAlias(){
 
 	$sql = "SELECT * FROM ENTREGA WHERE (Alias = '$this->AliasEvaluado' AND IdTrabajo = '$this->IdTrabajo')";
@@ -429,6 +434,7 @@ function comprobarExistenciaAlias(){
 	}
 }
 
+//comprueba que exista una historia
 function comprobarExistenciaHistoria(){
 
 	$sql = "SELECT * FROM HISTORIA WHERE (
@@ -762,6 +768,8 @@ function listaEntregasQA(){
 	}
 	return $this->lista;
 }
+
+//devuelve el textohistoria de una historia
 function devolverTextoHist ($IdHistoria){
 
 	$sql = "SELECT * FROM HISTORIA E WHERE (IdHistoria = '$IdHistoria')";
