@@ -552,7 +552,7 @@ function validar(formulario)
         if( 
           (validarLogin(form.login, 9)) && 
           (validarIdTrabajo(form.IdTrabajo, 6)) && 
-          (validarNotaTrabajo(form.NotaTrabajo, 2,0,10)) ){
+          (validarNotaTrabajo(form.NotaTrabajo, 2, 0, 10)) ){
 
           alerta = false; //Se le asigna false a la variable alerta 
         }
