@@ -15,14 +15,15 @@ include_once '../Functions/Authentication.php';
 include_once '../Functions/ACL.php';
 include_once '../Views/MESSAGE_View.php';
 
+//Si no esta autenticado se redirije al index de la página
 if (!IsAuthenticated()){
-	exit();
+	header('Location:../index.php');
 
-}else{
+}else{//Si está autenticado
 
-if(isset($_REQUEST["action"]))  {
+if(isset($_REQUEST["action"]))  {//Si trae acción, se almacena el valor en la variable action
 	$action = $_REQUEST["action"];
-}else{
+}else{//Si no trae accion
 
 	$action = '';
 }
@@ -223,7 +224,7 @@ if (!isset($_REQUEST['action'])){
 		case 'DELETE': //Si quiere hacer un DELETE
 			if (!$_POST){ //viene del showall con una clave
 				$lista = array('login', 'Nombre','IdTrabajo', 'NombreTrabajo', 'Alias','NotaTrabajo', 'origen');
-				$ENTREGA = new ENTREGA_Model($_REQUEST['login'],$_REQUEST['IdTrabajo'], '', '','','',''); //crea un 	un ENTREGA_Model);//crea un un ENTREGA_Model con el IdTrabajo del usuario
+				$ENTREGA = new ENTREGA_Model($_REQUEST['login'],$_REQUEST['IdTrabajo'], '', '','','',''); //crea un un ENTREGA_Model con el IdTrabajo y el login del usuario
 				$lista = $ENTREGA->rellenarLista();
 				if(isset($_REQUEST['origen'])){
 					$lista['origen'] = $_REQUEST['origen'];
@@ -241,7 +242,7 @@ if (!isset($_REQUEST['action'])){
 			break;
 		case 'EDIT': //si el usuario quiere editar	
 			if (!$_POST){
-				$ENTREGA = new ENTREGA_Model($_REQUEST['login'],$_REQUEST['IdTrabajo'],'', '','','',''); //crea un un ENTREGA_Model); //crea un un ENTREGA_Model con el IdTrabajo del usuario 
+				$ENTREGA = new ENTREGA_Model($_REQUEST['login'],$_REQUEST['IdTrabajo'],'', '','','',''); //crea un un ENTREGA_Model con el IdTrabajo del usuario 
 				$lista = $ENTREGA->rellenarLista();  //A partir del IdTrabajo recoge todos los atributos
 				$usuario = new ENTREGA_EDIT($lista); //Crea la vista EDIT con los datos del usuario
 			}
@@ -264,7 +265,7 @@ if (!isset($_REQUEST['action'])){
 			break;
 		case 'SHOW': //si desea ver un usuario en detalle
 			$lista = array('login', 'Nombre','IdTrabajo', 'NombreTrabajo', 'Alias','NotaTrabajo', 'origen');
-			$ENTREGA = new ENTREGA_Model($_REQUEST['login'],$_REQUEST['IdTrabajo'], '', '','','',''); //crea un un ENTREGA_Model);//crea un un ENTREGA_Model con el IdTrabajo del usuario
+			$ENTREGA = new ENTREGA_Model($_REQUEST['login'],$_REQUEST['IdTrabajo'], '', '','','',''); //crea un un ENTREGA_Model con el IdTrabajo del usuario
 			$lista = $ENTREGA->rellenarLista();
 			//$tupla = $ENTREGA->RellenaDatos();//A partir del IdTrabajo recoge todos los atributos
 			$usuario = new ENTREGA_SHOWCURRENT($lista,$permisos); //Crea la vista SHOWCURRENT del usuario requerido
@@ -303,9 +304,7 @@ if (!isset($_REQUEST['action'])){
 			}
 
 		default: //Por defecto, Se muestra la vista SHOWALL
-			/*if(isset($_REQUEST["origen"])){
-			header('Location:'.$_REQUEST["origen"]);
-			}*/
+			
 			//recorremos el array de permisos
 			foreach ($acciones as $key => $value) {
 				if($value == 'ALL'){ //si puede ver el showall

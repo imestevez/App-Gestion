@@ -16,13 +16,14 @@ include_once '../Functions/Authentication.php';
 include_once '../Functions/ACL.php';
 include_once '../Views/MESSAGE_View.php';
 
+//Si no esta autenticado se redirije al index de la página
 if (!IsAuthenticated()){
 	header('Location:../index.php');
-}else{
+}else{//Si está autenticado
 
-if(isset($_REQUEST["action"]))  {
+if(isset($_REQUEST["action"]))  {//Si trae acción, se almacena el valor en la variable action
 	$action = $_REQUEST["action"];
-}else{
+}else{//Si no trae accion
 
 	$action = '';
 }
@@ -105,9 +106,7 @@ if (!isset($_REQUEST['action'])){
 					$form = new NOTA_TRABAJO_ADD(); //Crea la vista ADD y muestra formulario para rellenar por el usuario
 			}
 			else{ //si viene del add 
-				/*echo $_REQUEST['login'];
-				echo $_REQUEST['IdTrabajo'];
-				*/
+				
 				$NOTA_TRABAJO = get_data_form(); //recibe datos
 				$lista = $NOTA_TRABAJO->ADD(); //mete datos en respuesta usuarios despues de ejecutar el add con los de NOTA_TRABAJO
 				$usuario = new MESSAGE($lista, '../Controllers/NOTA_TRABAJO_Controller.php'); //muestra el mensaje despues de la sentencia sql
@@ -117,9 +116,8 @@ if (!isset($_REQUEST['action'])){
 			if($_POST){
 				if (isset($_REQUEST['case'])){ //viene de la showcurrent de nota
 					$lista = array('login','IdTrabajo','NotaTrabajo');
-					$NOTA_TRABAJO = new NOTA_TRABAJO_Model($_REQUEST['login'],'',$_REQUEST['IdTrabajo'],'', '');//crea un un NOTA_TRABAJO_Model con el IdTrabajo del usuario
+					$NOTA_TRABAJO = new NOTA_TRABAJO_Model($_REQUEST['login'],'',$_REQUEST['IdTrabajo'],'', '');//crea un un NOTA_TRABAJO_Model con el IdTrabajo y el login
 					$lista = $NOTA_TRABAJO->rellenarLista();
-					//$tupla = $NOTA_TRABAJO->RellenaDatos();//A partir del IdTrabajo recoge todos los atributos
 					$delete = new NOTA_TRABAJO_DELETE($lista); //Crea la vista de DELETE con los datos del usuario
 				}
 				if (isset($_REQUEST['case1'])){ //si viene del delete
@@ -142,8 +140,8 @@ if (!isset($_REQUEST['action'])){
 			break;
 		case 'EDIT': //si el usuario quiere editar	
 			if (isset($_REQUEST['case'])){
-				$NOTA_TRABAJO = new NOTA_TRABAJO_Model($_REQUEST['login'],'',$_REQUEST['IdTrabajo'],'',''); //crea un un NOTA_TRABAJO_Model con el IdTrabajo del usuario 
-				$lista = $NOTA_TRABAJO->rellenarLista();  //A partir del IdTrabajo recoge todos los atributos
+				$NOTA_TRABAJO = new NOTA_TRABAJO_Model($_REQUEST['login'],'',$_REQUEST['IdTrabajo'],'',''); //crea un un NOTA_TRABAJO_Model con el IdTrabajo y el login
+				$lista = $NOTA_TRABAJO->rellenarLista();  //A partir del IdTrabajo y el login recoge todos los atributos
 				$usuario = new NOTA_TRABAJO_EDIT($lista); //Crea la vista EDIT con los datos del usuario
 			}
 			else{
@@ -167,10 +165,9 @@ if (!isset($_REQUEST['action'])){
 			break;
 		case 'SHOW': //si desea ver un usuario en detalle
 			$lista = array('login','IdTrabajo','NotaTrabajo');
-			$NOTA_TRABAJO = new NOTA_TRABAJO_Model($_REQUEST['login'],'',$_REQUEST['IdTrabajo'],'', '');//crea un un NOTA_TRABAJO_Model con el IdTrabajo del usuario
+			$NOTA_TRABAJO = new NOTA_TRABAJO_Model($_REQUEST['login'],'',$_REQUEST['IdTrabajo'],'', '');//crea un un NOTA_TRABAJO_Model con el IdTrabajo y el login
 			$lista = $NOTA_TRABAJO->rellenarLista();
-			//$tupla = $NOTA_TRABAJO->RellenaDatos();//A partir del IdTrabajo recoge todos los atributos
-			$usuario = new NOTA_TRABAJO_SHOWCURRENT($lista,$permisos,$acciones); //Crea la vista SHOWCURRENT del usuario requerido
+			$usuario = new NOTA_TRABAJO_SHOWCURRENT($lista,$permisos,$acciones); //Crea la vista SHOWCURRENT de la nota requerido
 			break;
 		case 'GENNOT':
 				$NOTA_TRABAJO = new NOTA_TRABAJO_Model('','','','','');

@@ -12,13 +12,14 @@ include_once '../Functions/Authentication.php';
 include_once '../Functions/ACL.php';
 include_once '../Views/MESSAGE_View.php';
 
+//Si no esta autenticado se redirije al index de la página
 if (!IsAuthenticated()){
 	header('Location:../index.php');
-}else{
+}else{//Si está autenticado
 
-if(isset($_REQUEST["action"]))  {
+if(isset($_REQUEST["action"]))  {//Si trae acción, se almacena el valor en la variable action
 	$action = $_REQUEST["action"];
-}else{
+}else{//Si no trae accion
 
 	$action = '';
 }
@@ -164,7 +165,7 @@ if (!isset($_REQUEST['action'])){
 		case 'EDIT': //si el usuario quiere editar	
 			if (!$_POST){
 				$ASIGNAC_QA = new ASIGNAC_QA_Model($_REQUEST['IdTrabajo'],'', $_REQUEST['LoginEvaluador'], '',$_REQUEST['AliasEvaluado']); //crea un un ASIGNAC_QA_Model 
-				$datos = $ASIGNAC_QA->RellenaDatos();  //A partir del IdFuncionalidad recoge todos los atributos
+				$datos = $ASIGNAC_QA->RellenaDatos();  //A partir de la clave recoge todos los atributos
 				$usuario = new ASIGNAC_QA_EDIT($datos); //Crea la vista EDIT con los datos del usuario
 			}
 			else{
@@ -190,7 +191,7 @@ if (!isset($_REQUEST['action'])){
 			break;
 		case 'SHOW': //si desea ver un usuario en detalle
 			$ASIGNAC_QA = new ASIGNAC_QA_Model($_REQUEST['IdTrabajo'],'', $_REQUEST['LoginEvaluador'],'',$_REQUEST['AliasEvaluado']);//crea un un ASIGNAC_QA_Model con el IdFuncionalidad del usuario 
-			$tupla = $ASIGNAC_QA->RellenaDatos();//A partir del IdFuncionalidad recoge todos los atributos
+			$tupla = $ASIGNAC_QA->RellenaDatos();//A partir de la clave recoge todos los atributos
 			$usuario = new ASIGNAC_QA_SHOWCURRENT($tupla); //Crea la vista SHOWCURRENT del usuario requerido
 			break;
 

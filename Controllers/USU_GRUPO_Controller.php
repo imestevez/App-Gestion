@@ -16,13 +16,14 @@ include_once '../Functions/Authentication.php';
 include_once '../Functions/ACL.php';
 include_once '../Views/MESSAGE_View.php';
 
+//Si no esta autenticado se redirije al index de la página
 if (!IsAuthenticated()){
 	header('Location:../index.php');
-}else{
+}else{//Si está autenticado
 
-if(isset($_REQUEST["action"]))  {
+if(isset($_REQUEST["action"]))  {//Si trae acción, se almacena el valor en la variable action
 	$action = $_REQUEST["action"];
-}else{
+}else{//Si no trae accion
 
 	$action = '';
 }

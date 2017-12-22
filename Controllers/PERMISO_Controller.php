@@ -16,13 +16,14 @@ include_once '../Functions/Authentication.php';
 include_once '../Functions/ACL.php';
 include_once '../Views/MESSAGE_View.php';
 
+//Si no esta autenticado se redirije al index de la página
 if (!IsAuthenticated()){
 	header('Location:../index.php');
-}else{
+}else{//Si está autenticado
 
-if(isset($_REQUEST["action"]))  {
+if(isset($_REQUEST["action"]))  {//Si trae acción, se almacena el valor en la variable action
 	$action = $_REQUEST["action"];
-}else{
+}else{//Si no trae accion
 
 	$action = '';
 }
@@ -109,7 +110,7 @@ if (!isset($_REQUEST['action'])){
 			}
 			else{
 				$PERMISOS = get_data_form(); //coge los datos del formulario del usuario que desea buscar
-				$datos = $PERMISOS->SEARCH();//Ejecuta la funcion SEARCH() en el USUARIOS_Model
+				$datos = $PERMISOS->SEARCH();//Ejecuta la funcion SEARCH() en el PERMISO_Model
 				$lista = array('NombreGrupo','NombreFuncionalidad','NombreAccion');
 				$resultado = new PERMISO_SHOWALL($lista, $datos, 0, 0, 0, 0, 'SEARCH', '../Controllers/ACCION_Controller.php',$acciones);//Crea la vista SHOWALL y muestra los usuarios que cumplen los parámetros de búsqueda 
 			}
@@ -123,7 +124,7 @@ if (!isset($_REQUEST['action'])){
 			}
 			if($acceso == true){ //si tiene acceso, mostramos el showall
 				if (!$_POST){
-					$PERMISOS = new PERMISO_Model('','','','','','');//crea un un USUARIOS_Model con el login del usuario 
+					$PERMISOS = new PERMISO_Model('','','','','','');//crea un un PERMISO_Model con el login del usuario 
 				}
 				else{
 					$PERMISOS = get_data_form(); //Coge los datos del formulario
@@ -137,12 +138,12 @@ if (!isset($_REQUEST['action'])){
 				$num_tupla = $num_pagina*10; //número de la 1º tupla a mostrar
 				$max_tuplas = $num_tupla+10; // el número de tuplas a mostrar por página
 				$totalTuplas = $PERMISOS->contarTuplas(); //Cuenta el número de tuplas que hay en la BD
-				$datos = $PERMISOS->SHOWALL($num_tupla,$max_tuplas); //Ejecuta la funcion SHOWALL() en el USUARIOS_Model
+				$datos = $PERMISOS->SHOWALL($num_tupla,$max_tuplas); //Ejecuta la funcion SHOWALL() en el PERMISO_Model
 				$lista = array('IdGrupo','IdFuncionalidad','IdAccion');
 				$AccionesBD = new PERMISO_SHOWALL($lista, $datos, $num_tupla, $max_tuplas, $totalTuplas, $num_pagina, 'SHOWALL', '../Controllers/PERMISO_Controller.php',$acciones); //Crea la vista SHOWALL de los usuarios de la BD
 			}else{
 				if (!$_POST){
-					$PERMISOS = new PERMISO_Model('','','','','','');//crea un un USUARIOS_Model con el login del usuario 
+					$PERMISOS = new PERMISO_Model('','','','','','');//crea un un PERMISO_Model
 				}
 				else{
 					$PERMISOS = get_data_form(); //Coge los datos del formulario
@@ -156,7 +157,7 @@ if (!isset($_REQUEST['action'])){
 				$num_tupla = $num_pagina*10; //número de la 1º tupla a mostrar
 				$max_tuplas = $num_tupla+10; // el número de tuplas a mostrar por página
 				$totalTuplas = $PERMISOS->contarTuplas(); //Cuenta el número de tuplas que hay en la BD
-				$datos = $PERMISOS->SHOWALL_User($num_tupla,$max_tuplas); //Ejecuta la funcion SHOWALL() en el USUARIOS_Model
+				$datos = $PERMISOS->SHOWALL_User($num_tupla,$max_tuplas); //Ejecuta la funcion SHOWALL() en el PERMISO_Model
 				$lista = array('NombreGrupo','NombreFuncionalidad','NombreAccion');
 				$AccionesBD = new PERMISO_SHOWALL($lista, $datos, $num_tupla, $max_tuplas, $totalTuplas, $num_pagina, 'ALL', '../Controllers/PERMISO_Controller.php',$acciones); //Crea la vista SHOWALL de los usuarios de la BD
 			}	

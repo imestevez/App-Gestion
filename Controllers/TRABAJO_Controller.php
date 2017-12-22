@@ -15,13 +15,14 @@ include_once '../Functions/Authentication.php';
 include_once '../Functions/ACL.php';
 include_once '../Views/MESSAGE_View.php';
 
+//Si no esta autenticado se redirije al index de la página
 if (!IsAuthenticated()){
 	header('Location:../index.php');
-}else{
+}else{//Si está autenticado
 
-if(isset($_REQUEST["action"]))  {
+if(isset($_REQUEST["action"]))  {//Si trae acción, se almacena el valor en la variable action
 	$action = $_REQUEST["action"];
-}else{
+}else{//Si no trae accion
 
 	$action = '';
 }
@@ -233,7 +234,7 @@ if (!isset($_REQUEST['action'])){
 				$resultado = new TRABAJO_SHOWALL($lista, $datos, $num_tupla, $max_tuplas, $totalTuplas, $num_pagina, 'SHOWALL', '../Controllers/TRABAJO_Controller.php',$permisos, $acciones,$entrega); //Crea la vista SHOWALL de los usuarios de la BD
 			}else{
 				if (!$_POST){
-					$TRABAJO = new TRABAJO_Model('', '','','', '');//crea un un TRABAJO_Model con el IdTrabajo del usuario 
+					$TRABAJO = new TRABAJO_Model('', '','','', '');//crea un un TRABAJO_Model con el IdTrabajo 
 				}
 				else{
 					$TRABAJO = get_data_form(); //Coge los datos del formulario

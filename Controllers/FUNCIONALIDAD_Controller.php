@@ -16,13 +16,14 @@ include_once '../Functions/Authentication.php';
 include_once '../Functions/ACL.php';
 include_once '../Views/MESSAGE_View.php';
 
+//Si no esta autenticado se redirije al index de la página
 if (!IsAuthenticated()){
 	header('Location:../index.php');
-}else{
+}else{//Si está autenticado
 
-if(isset($_REQUEST["action"]))  {
+if(isset($_REQUEST["action"]))  {//Si trae acción, se almacena el valor en la variable action
 	$action = $_REQUEST["action"];
-}else{
+}else{//Si no trae accion
 
 	$action = '';
 }
@@ -86,7 +87,7 @@ function get_data_UserBD(){
 
 //Si el usuario no elige ninguna opción
 if (!isset($_REQUEST['action'])){
-	$action = ''; //la acctión se pone vacía
+	$action = ''; //la acción se pone vacía
 }else{
 	$action = $_REQUEST['action']; //si no, se le asigna la accion elegida
 
@@ -145,7 +146,7 @@ if (!isset($_REQUEST['action'])){
 		case 'SHOW': //si desea ver un usuario en detalle
 			$FUNCIONALIDAD = new FUNCIONALIDAD_Model($_REQUEST['IdFuncionalidad'], '','');//crea un un FUNCIONALIDAD_Model con el IdFuncionalidad del usuario 
 			$tupla = $FUNCIONALIDAD->RellenaDatos();//A partir del IdFuncionalidad recoge todos los atributos
-			$usuario = new FUNCIONALIDAD_SHOWCURRENT($tupla); //Crea la vista SHOWCURRENT del usuario requerido
+			$usuario = new FUNCIONALIDAD_SHOWCURRENT($tupla); //Crea la vista SHOWCURRENT de la funcionalidad requerido
 			break;
 		default: //Por defecto, Se muestra la vista SHOWALL
 		//recorremos el array de permisos
@@ -156,7 +157,7 @@ if (!isset($_REQUEST['action'])){
 			}
 			if($acceso == true){ //si tiene acceso, mostramos el showall
 				if (!$_POST){
-					$FUNCIONALIDAD = new FUNCIONALIDAD_Model('', '','');//crea un un FUNCIONALIDAD_Model con el IdFuncionalidad del usuario 
+					$FUNCIONALIDAD = new FUNCIONALIDAD_Model('', '','');//crea un un FUNCIONALIDAD_Model con el IdFuncionalidad de la funcionalidad
 				}
 				else{
 					$FUNCIONALIDAD = get_data_form(); //Coge los datos del formulario
@@ -175,7 +176,7 @@ if (!isset($_REQUEST['action'])){
 				$UsuariosBD = new FUNCIONALIDAD_SHOWALL($lista, $datos, $num_tupla, $max_tuplas, $totalTuplas, $num_pagina, 'SHOWALL', '../Controllers/FUNCIONALIDAD_Controller.php',$acciones); //Crea la vista SHOWALL de los usuarios de la BD	
 			}else{
 				if (!$_POST){
-					$FUNCIONALIDAD = new FUNCIONALIDAD_Model('', '','');//crea un un FUNCIONALIDAD_Model con el IdFuncionalidad del usuario 
+					$FUNCIONALIDAD = new FUNCIONALIDAD_Model('', '','');//crea un un FUNCIONALIDAD_Model con el IdFuncionalidad de la funcionalidad
 				}
 				else{
 					$FUNCIONALIDAD = get_data_form(); //Coge los datos del formulario

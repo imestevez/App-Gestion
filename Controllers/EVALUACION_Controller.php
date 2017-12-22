@@ -15,22 +15,23 @@ include_once '../Functions/Authentication.php';
 include_once '../Functions/ACL.php';
 include_once '../Views/MESSAGE_View.php';
 
+//Si no esta autenticado se redirije al index de la página
 if (!IsAuthenticated()){
 	header('Location:../index.php');
-}else{
+}else{//Si está autenticado
 
-if(isset($_REQUEST["action"]))  {
+if(isset($_REQUEST["action"]))  {//Si trae acción, se almacena el valor en la variable action
 	$action = $_REQUEST["action"];
-}else{
+}else{//Si no trae accion
 
 	$action = '';
 }
 
 //Si no tiene permisos para acceder a este controlador con la accion que trae
 if(!HavePermissions(10, $action)) {
-	new MESSAGE('No tienes permisos para realizar esta accion', '../index.php');
+	new MESSAGE('No tienes permisos para realizar esta accion', '../index.php');exit();
 	//header('Location:../index.php'); //vuelve al index
-	exit();
+	
 }
 //almacenamos un array de permidos del grupo
 $permisos = listaPermisos();
@@ -56,6 +57,8 @@ include_once '../Views/MESSAGE_View.php';
 include_once '../Views/EVALUACION/EVALUACION_CALIFICAR_View.php';
 include_once '../Views/EVALUACION/EVALUACION_RESULTS_View.php';
 include_once '../Views/EVALUACION/EVALUACION_RESULTS_QA_View.php';
+
+
 // funcion para coger los datos del formulario
 function get_data_form(){
 
@@ -118,7 +121,7 @@ function get_data_form(){
 
 
 }
-//Funcion para coger los datos del formulario de un usuario ya almacenado
+//Funcion para coger los datos del formulario de una evaluacion ya almacenada
 function get_data_UserBD(){
 
 	$IdTrabajo = null;
@@ -187,6 +190,7 @@ if (!isset($_REQUEST['action'])){
 
 }
 
+//Funcion para coger los datos de los checkbox de las evaluaciones
 function getCalificarChecbox(){
 	$numHistorias = 0;
 	$numEvaluadores = 0;

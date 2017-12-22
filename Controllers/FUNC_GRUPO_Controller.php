@@ -7,6 +7,7 @@
 //Creado por: solfamidas
 //-------------------------------------------------------
 
+Sirve para el caso de uso asignar/desasignar acciones de funcionalidades a grupos
 Controlador que recibe las peticiones del usuario y este ejectuta las acciones pertinentes sobre el Model de datos y las vistas
 */
 
@@ -16,13 +17,14 @@ include_once '../Functions/Authentication.php';
 include_once '../Functions/ACL.php';
 include_once '../Views/MESSAGE_View.php';
 
+//Si no esta autenticado se redirije al index de la página
 if (!IsAuthenticated()){
 	header('Location:../index.php');
-}else{
+}else{//Si está autenticado
 
-if(isset($_REQUEST["action"]))  {
+if(isset($_REQUEST["action"]))  {//Si trae acción, se almacena el valor en la variable action
 	$action = $_REQUEST["action"];
-}else{
+}else{//Si no trae accion
 
 	$action = '';
 }
@@ -36,7 +38,7 @@ if(!HavePermissions(2, $action)) {
 $permisos = listaPermisos();
 $acciones = listaAcciones(2);
 
-//Pnemos la variabla acceso  a false con la que se controla si el usuario puede ver un showall o no
+//Ponemos la variabla acceso a false con la que se controla si el usuario puede ver un showall o no
 $acceso=false;
 include_once '../Models/FUNC_GRUPO_Model.php';
 
@@ -97,7 +99,7 @@ if (!isset($_REQUEST['action'])){
 	
 		case 'ASIG':
 		if (!$_POST){
-			$GRUPO = new FUNC_GRUPO_Model($_REQUEST['IdGrupo'], '','');//crea un un FUNCIONALIDAD_Model con el IdFUNCIONALIDAD de la funcionalidad
+			$GRUPO = new FUNC_GRUPO_Model($_REQUEST['IdGrupo'], '','');//crea un un FUNC_GRUPO_Model con el IdFUNCIONALIDAD de la funcionalidad
 			$propios = $GRUPO->rellenarPermisos();
 			$todos = $GRUPO->todosPermisos();
 			$lista = $GRUPO->rellenarLista();
@@ -110,8 +112,7 @@ if (!isset($_REQUEST['action'])){
 		}
 		break;
 		default: //Por defecto, Se muestra la vista SHOWALL
-			$GRUPO = new FUNC_GRUPO_Model($_REQUEST['IdGrupo'], '','');//crea un un FUNCIONALIDAD_Model con el IdFUNCIONALIDAD de la funcionalidad
-			//$num_rows = $GRUPO->contarNumAccionesFunc();
+			$GRUPO = new FUNC_GRUPO_Model($_REQUEST['IdGrupo'], '','');//crea un un FUNC_GRUPO_Model con el IdFUNCIONALIDAD de la funcionalidad
 			$recordset = $GRUPO->rellenarPermisos();
 				$lista = $GRUPO->rellenarLista();
 

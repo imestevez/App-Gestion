@@ -15,13 +15,14 @@ include_once '../Functions/Authentication.php';
 include_once '../Functions/ACL.php';
 include_once '../Views/MESSAGE_View.php';
 
+//Si no esta autenticado se redirije al index de la página
 if (!IsAuthenticated()){
 	header('Location:../index.php');
-}else{
+}else{//Si está autenticado
 
-if(isset($_REQUEST["action"]))  {
+if(isset($_REQUEST["action"]))  {//Si trae acción, se almacena el valor en la variable action
 	$action = $_REQUEST["action"];
-}else{
+}else{//Si no trae accion
 
 	$action = '';
 }
@@ -89,13 +90,13 @@ if (!isset($_REQUEST['action'])){
 	Switch ($action){
 	
 		case 'ASIG':
-		if (!$_POST){
+		if (!$_POST){//Si no viene de post
 			$FUNCIONALIDAD = new FUNCIONALIDAD_Model($_REQUEST['IdFuncionalidad'], '','');//crea un un FUNCIONALIDAD_Model con el IdFUNCIONALIDAD de la funcionalidad
 			$propios = $FUNCIONALIDAD->rellenarAcciones();
 			$todos = $FUNCIONALIDAD->todosAcciones();
 			$lista = $FUNCIONALIDAD->rellenarLista();
 			$resultado = new FUNC_ACCION_EDIT($lista,$propios,$todos);
-		}else{
+		}else{//Si viene de post
 
 			$FUNC_ACCION = get_data_form();
 			$respuesta = $FUNC_ACCION->EDIT();
@@ -106,7 +107,6 @@ if (!isset($_REQUEST['action'])){
 		break;
 		default: //Por defecto, Se muestra la vista SHOWALL
 			$FUNCIONALIDAD = new FUNCIONALIDAD_Model($_REQUEST['IdFuncionalidad'], '','');//crea un un FUNCIONALIDAD_Model con el IdFUNCIONALIDAD de la funcionalidad
-			//$num_rows = $FUNCIONALIDAD->contarNumAccionesFunc();
 			$recordset = $FUNCIONALIDAD->rellenarAcciones();
 				$lista = $FUNCIONALIDAD->rellenarLista();
 

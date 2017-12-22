@@ -12,13 +12,14 @@ include_once '../Functions/Authentication.php';
 include_once '../Functions/ACL.php';
 include_once '../Views/MESSAGE_View.php';
 
+//Si no esta autenticado se redirije al index de la página
 if (!IsAuthenticated()){
 	header('Location:../index.php');
-}else{
+}else{//Si está autenticado
 
-if(isset($_REQUEST["action"]))  {
+if(isset($_REQUEST["action"]))  {//Si trae acción, se almacena el valor en la variable action
 	$action = $_REQUEST["action"];
-}else{
+}else{//Si no trae accion
 
 	$action = '';
 }
@@ -113,7 +114,7 @@ function get_data_UserBD(){
 
 //Si el usuario no elige ninguna opción
 if (!isset($_REQUEST['action'])){
-	$action = ''; //la acctión se pone vacía
+	$action = ''; //la acción se pone vacía
 }else{
 	$action = $_REQUEST['action']; //si no, se le asigna la accion elegida
 
@@ -159,7 +160,7 @@ if (!isset($_REQUEST['action'])){
 			break;
 		case 'EDIT': //si el usuario quiere editar	
 			if (!$_POST){
-				$HISTORIA = new HISTORIA_Model($_REQUEST['IdTrabajo'],'',  $_REQUEST['IdHistoria'],''); //crea un un HISTORIA_Model con el IdTrabajo del usuario 
+				$HISTORIA = new HISTORIA_Model($_REQUEST['IdTrabajo'],'',  $_REQUEST['IdHistoria'],''); //crea un un HISTORIA_Model con el IdTrabajo y el IdHistoria
 				$datos = $HISTORIA->RellenaDatos(); //A partir del IdTrabajo recoge todos los atributos
 				$usuario = new HISTORIA_EDIT($datos); //Crea la vista EDIT con los datos del usuario
 			}
@@ -177,11 +178,11 @@ if (!isset($_REQUEST['action'])){
 				$HISTORIA = get_data_UserBD(); //coge los datos del formulario del usuario que desea buscar
 				$datos = $HISTORIA->SEARCH();//Ejecuta la funcion SEARCH() en el HISTORIA_Model
 				$lista = array('IdTrabajo','NombreTrabajo','IdHistoria','TextoHistoria');
-				$resultado = new HISTORIA_SHOWALL($lista, $datos, 0, 0, 0, 0, 'SEARCH', '../Controllers/HISTORIA_Controller.php',$acciones);//Crea la vista SHOWALL y muestra los usuarios que cumplen los parámetros de búsqueda 
+				$resultado = new HISTORIA_SHOWALL($lista, $datos, 0, 0, 0, 0, 'SEARCH', '../Controllers/HISTORIA_Controller.php',$acciones);//Crea la vista SHOWALL y muestra las historias que cumplen los parámetros de búsqueda 
 			}
 			break;
 		case 'SHOW': //si desea ver un usuario en detalle
-			$HISTORIA = new HISTORIA_Model($_REQUEST['IdTrabajo'], '', $_REQUEST['IdHistoria'],'');//crea un un HISTORIA_Model con el IdTrabajo del usuario 
+			$HISTORIA = new HISTORIA_Model($_REQUEST['IdTrabajo'], '', $_REQUEST['IdHistoria'],'');//crea un un HISTORIA_Model con el IdTrabajo y el IdHistoria 
 			$tupla = $HISTORIA->RellenaDatos();//A partir del IdTrabajo recoge todos los atributos
 			$usuario = new HISTORIA_SHOWCURRENT($tupla); //Crea la vista SHOWCURRENT del usuario requerido
 			break;
@@ -194,7 +195,7 @@ if (!isset($_REQUEST['action'])){
 			}
 			if($acceso == true){ //si tiene acceso, mostramos el showall
 				if (!$_POST){
-					$HISTORIA = new HISTORIA_Model('', '','','');//crea un un HISTORIA_Model con el IdTrabajo del usuario 
+					$HISTORIA = new HISTORIA_Model('', '','','');//crea un un HISTORIA_Model
 				}
 				else{
 					$HISTORIA = get_data_form(); //Coge los datos del formulario
@@ -213,7 +214,7 @@ if (!isset($_REQUEST['action'])){
 				$UsuariosBD = new HISTORIA_SHOWALL($lista, $datos, $num_tupla, $max_tuplas, $totalTuplas, $num_pagina, 'SHOWALL', '../Controllers/HISTORIA_Controller.php',$acciones); //Crea la vista SHOWALL de los usuarios de la BD	
 			}else{
 				if (!$_POST){
-					$HISTORIA = new HISTORIA_Model('', '','','');//crea un un HISTORIA_Model con el IdTrabajo del usuario 
+					$HISTORIA = new HISTORIA_Model('', '','','');//crea un un HISTORIA_Model
 				}
 				else{
 					$HISTORIA = get_data_form(); //Coge los datos del formulario

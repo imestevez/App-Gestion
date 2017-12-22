@@ -15,13 +15,14 @@ include_once '../Functions/Authentication.php';
 include_once '../Functions/ACL.php';
 include_once '../Views/MESSAGE_View.php';
 
+//Si no esta autenticado se redirije al index de la página
 if (!IsAuthenticated()){
 	header('Location:../index.php');
-}else{
+}else{//Si está autenticado
 
-if(isset($_REQUEST["action"]))  {
+if(isset($_REQUEST["action"]))  {//Si trae acción, se almacena el valor en la variable action
 	$action = $_REQUEST["action"];
-}else{
+}else{//Si no trae accion
 
 	$action = '';
 }
@@ -31,7 +32,7 @@ if(!HavePermissions(4, $action)) {
 	new MESSAGE('No tienes permisos para realizar esta accion', '../index.php');exit();
 	//header('Location:../index.php'); //vuelve al index
 }
-//almacenamos un array de permidos del grupo
+//almacenamos un array de permisos del grupo
 $permisos = listaPermisos();
 $acciones = listaAcciones(4);
 
@@ -80,15 +81,11 @@ function get_data_form(){
 	return $ACCIONES;
 }
 
-//Funcion para coger los datos del formulario de un usuario ya almacenado
-function get_data_UserBD(){
 
-	
-}
 
 //Si el usuario no elige ninguna opción
 if (!isset($_REQUEST['action'])){
-	$action = ''; //la acctión se pone vacía
+	$action = ''; //la acción se pone vacía
 }else{
 	$action = $_REQUEST['action']; //si no, se le asigna la accion elegida
 
@@ -103,31 +100,31 @@ if (!isset($_REQUEST['action'])){
 			else{ //si viene del add 
 
 				$ACCIONES = get_data_form(); //recibe datos
-				$lista = $ACCIONES->ADD(); //mete datos en respuesta usuarios despues de ejecutar el add con los de ACCIONES
+				$lista = $ACCIONES->ADD(); //mete datos en lista despues de ejecutar el add con los de ACCIONES
 				$accion = new MESSAGE($lista, '../Controllers/ACCION_Controller.php'); //muestra el mensaje despues de la sentencia sql
 			}
 			break;
 		case 'DELETE': //Si quiere hacer un DELETE
 			if (!$_POST){ //viene del showall con una clave
-				$ACCIONES = new ACCION_Model($_REQUEST['IdAccion'], '',''); //crea un un USUARIOS_Model con el login del accion
+				$ACCIONES = new ACCION_Model($_REQUEST['IdAccion'], '',''); //crea un un ACCION_Model con el Id de la accion
 				$valores = $ACCIONES->RellenaDatos(); //completa el resto de atributos a partir de la clave
-				$accion = new ACCION_DELETE($valores); //Crea la vista de DELETE con los datos del accion
+				$accion = new ACCION_DELETE($valores); //Crea la vista de DELETE con los datos de la accion
 			}
 			else{//si viene con un post
-				$ACCIONES = get_data_form(); //coge los datos del formulario del accion que desea borrar
-				$respuesta = $ACCIONES->DELETE(); //Ejecuta la funcion DELETE() en el USUARIOS_Model
+				$ACCIONES = get_data_form(); //coge los datos del formulario de la accion que desea borrar
+				$respuesta = $ACCIONES->DELETE(); //Ejecuta la funcion DELETE() en el ACCION_Model
 				$mensaje = new MESSAGE($respuesta, '../Controllers/ACCION_Controller.php'); //muestra el mensaje despues de la sentencia sql
 			}
 			break;
 		case 'EDIT': //si el usuario quiere editar	
 			if (!$_POST){
-				$ACCIONES = new ACCION_Model($_REQUEST['IdAccion'],'',''); //crea un un ACCION_Model con el login del accion 
+				$ACCIONES = new ACCION_Model($_REQUEST['IdAccion'],'',''); //crea un un ACCION_Model con el Id de la accion 
 				$datos = $ACCIONES->RellenaDatos();  //A partir del login recoge todos los atributos
 				$accion = new ACCION_EDIT($datos); //Crea la vista EDIT con los datos del accion
 			}
 			else{
 				$ACCIONES = get_data_form(); //coge los datos del formulario del usuario que desea editar
-				$respuesta = $ACCIONES->EDIT(); //Ejecuta la funcion EDIT() en el USUARIOS_Model
+				$respuesta = $ACCIONES->EDIT(); //Ejecuta la funcion EDIT() en el ACCION_Model
 				$mensaje = new MESSAGE($respuesta, '../Controllers/ACCION_Controller.php');//muestra el mensaje despues de la sentencia sql
 			}
 			break;
@@ -137,15 +134,15 @@ if (!isset($_REQUEST['action'])){
 			}
 			else{
 				$ACCIONES = get_data_form(); //coge los datos del formulario del usuario que desea buscar
-				$datos = $ACCIONES->SEARCH();//Ejecuta la funcion SEARCH() en el USUARIOS_Model
+				$datos = $ACCIONES->SEARCH();//Ejecuta la funcion SEARCH() en el ACCION_Model
 				$lista = array('IdAccion','NombreAccion','DescripAccion');
-				$resultado = new ACCION_SHOWALL($lista, $datos, 0, 0, 0, 0, 'SEARCH', '../Controllers/ACCION_Controller.php',$acciones);//Crea la vista SHOWALL y muestra los usuarios que cumplen los parámetros de búsqueda 
+				$resultado = new ACCION_SHOWALL($lista, $datos, 0, 0, 0, 0, 'SEARCH', '../Controllers/ACCION_Controller.php',$acciones);//Crea la vista SHOWALL y muestra las acciones que cumplen los parámetros de búsqueda 
 			}
 			break;
-		case 'SHOW': //si desea ver un usuario en detalle
-			$ACCIONES = new ACCION_Model($_REQUEST['IdAccion'], '','');//crea un un USUARIOS_Model con el login del usuario 
-			$tupla = $ACCIONES->RellenaDatos();//A partir del login recoge todos los atributos
-			$accion = new ACCION_SHOWCURRENT($tupla); //Crea la vista SHOWCURRENT del accion requerido
+		case 'SHOW': //si desea ver una accion en detalle
+			$ACCIONES = new ACCION_Model($_REQUEST['IdAccion'], '','');//crea un un ACCION_Model con el login del usuario 
+			$tupla = $ACCIONES->RellenaDatos();//A partir de la Id recoge todos los atributos
+			$accion = new ACCION_SHOWCURRENT($tupla); //Crea la vista SHOWCURRENT de la accion requerido
 			break;
 		default: //Por defecto, Se muestra la vista SHOWALL
 			//recorremos el array de permisos
@@ -170,9 +167,9 @@ if (!isset($_REQUEST['action'])){
 				$num_tupla = $num_pagina*10; //número de la 1º tupla a mostrar
 				$max_tuplas = $num_tupla+10; // el número de tuplas a mostrar por página
 				$totalTuplas = $ACCION->contarTuplas(); //Cuenta el número de tuplas que hay en la BD
-				$datos = $ACCION->SHOWALL($num_tupla,$max_tuplas); //Ejecuta la funcion SHOWALL() en el USUARIOS_Model
+				$datos = $ACCION->SHOWALL($num_tupla,$max_tuplas); //Ejecuta la funcion SHOWALL() en el ACCION_Model
 				$lista = array('IdAccion','NombreAccion','DescripAccion');
-				$AccionesBD = new ACCION_SHOWALL($lista, $datos, $num_tupla, $max_tuplas, $totalTuplas, $num_pagina, 'SHOWALL', '../Controllers/ACCION_Controller.php',$acciones); //Crea la vista SHOWALL de los usuarios de la BD	
+				$AccionesBD = new ACCION_SHOWALL($lista, $datos, $num_tupla, $max_tuplas, $totalTuplas, $num_pagina, 'SHOWALL', '../Controllers/ACCION_Controller.php',$acciones); //Crea la vista SHOWALL de las acciones de la BD	
 			}else{//si no tiene acceso solo mostramos los datos del usuario que entra en el sistema
 			
 				if (!$_POST){
