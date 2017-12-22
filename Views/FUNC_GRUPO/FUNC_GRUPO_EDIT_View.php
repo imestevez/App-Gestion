@@ -1,6 +1,6 @@
 <?php
 /*
-//Clase : FUNC_ACCION_EDIT
+//Clase : FUNC_GRUPO_EDIT
 //Creado el : 09-12-2017
 //Creado por: SOLFAMIDAS
 //-------------------------------------------------------
