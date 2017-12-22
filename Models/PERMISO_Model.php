@@ -10,8 +10,8 @@ Modelo de datos de usuarios que accede a la Base de Datos
 */
 class PERMISO_Model { //declaración de la clase
 
-	var $IdGrupo; //declaración del atributo IdGrupo de la accion
-    var $IdFuncionalidad; //declaración del atributo IdFuncionalidad de la accion
+	var $IdGrupo; //declaración del atributo IdGrupo
+    var $IdFuncionalidad; //declaración del atributo IdFuncionalidad
     var $IdAccion; //declaración del atributo IdAccion
     var $lista; // array para almacenar los datos del usuario
     var $NombreGrupo; //nombre del grupo
@@ -46,28 +46,8 @@ function __construct($IdGrupo, $IdFuncionalidad, $IdAccion, $NombreGrupo, $Nombr
 } // fin del constructor
 
 
-
-//Metodo ADD()
-//Inserta en la tabla  de la bd  los valores
-// de los atributos del objeto. Comprueba si la clave/s esta vacia y si 
-//existe ya en la tabla
-function ADD()
-{
-				
-} // fin del metodo ADD
-
-
-
-//funcion de destrucción del objeto: se ejecuta automaticamente
-//al finalizar el script
-function __destruct()
-{
-
-} // fin del metodo destruct
-
-
 //funcion SEARCH: hace una búsqueda en la tabla con
-//los datos proporcionados. Si van vacios devuelve todos
+//los datos proporcionados. Si van vacios devuelve todos. Se busca por nombres, no por ids.
 function SEARCH()
 { 	// construimos la sentencia de busqueda con LIKE y los atributos de la entidad
     $sql = "SELECT  G.NombreGrupo,
@@ -92,12 +72,6 @@ function SEARCH()
 
 } // fin metodo SEARCH
 
-// funcion DELETE()
-// comprueba que exista el valor de clave por el que se va a borrar,si existe se ejecuta el borrado, sino
-// se manda un mensaje de que ese valor de clave no existe
-function DELETE()
-{	// se construye la sentencia sql de busqueda con los atributos de la clase
-} // fin metodo DELETE
 
 // funcion RellenaDatos()
 // Esta función obtiene de la entidad de la bd todos los atributos a partir del valor de la clave que esta
@@ -118,13 +92,6 @@ function RellenaDatos()
 	}
 } // fin del metodo RellenaDatos()
 
-// funcion EDIT()
-// Se comprueba que la tupla a modificar exista en base al valor de su clave primaria
-// si existe se modifica
-function EDIT()
-{
-	
-} // fin del metodo EDIT
 
 /*
 Funcion de SHOWALL
@@ -152,6 +119,7 @@ function SHOWALL($num_tupla,$max_tuplas){
 	}
 } // fin metodo SHOWALL
 
+//Funcion que muestra un showall particular del usuario que está conectado a la aplicacion
 function SHOWALL_User($num_tupla,$max_tuplas){
 	$login = $_SESSION['login'];
 	$sql = "SELECT * 
@@ -205,7 +173,6 @@ function funcionalidadesGrupo(){
 
 	$resultado = $this->mysqli->query($sql);
 
-	
     return $resultado;
 }
 //acciones de un grupo
@@ -213,7 +180,6 @@ function accionesGrupo(){
 	$sql = "SELECT DISTINCT IdAccion FROM PERMISO WHERE (IdGrupo = '$this->IdGrupo' AND IdFuncionalidad = '$this->IdFuncionalidad')";
 
 	$resultado = $this->mysqli->query($sql);
-
 	
     return $resultado;
 }

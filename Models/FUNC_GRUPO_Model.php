@@ -1,7 +1,7 @@
 
 <?php
 /*
-//Clase : FUNC_ACCION_Model.php
+//Clase : FUNC_GRUPO_Model.php
 //Creado el : 9-12-2017
 //Creado por: SOLFAMIDAS
 //-------------------------------------------------------
@@ -13,7 +13,7 @@ class FUNC_GRUPO_Model { //declaración de la clase
 	var $IdGrupo; //atributo IdGrupo
 	var $lista; //lista de retorno
 	var $listaF; // lista Funcionalidades de grupos
-	var $listaA; //lista de acciones de funionalidades
+	var $listaA; //lista de acciones de funcionalidades
 
 
 //Constructor de la clase
@@ -34,41 +34,6 @@ function __construct($IdGrupo, $listaF, $listaA){
 } // fin del constructor
 
 
-
-//Metodo ADD()
-//Inserta en la tabla  de la bd  los valores
-// de los atributos del objeto. Comprueba si la clave/s esta vacia y si 
-//existe ya en la tabla
-function ADD()
-{
-
-				
-} // fin del metodo ADD
-
-
-
-//funcion de destrucción del objeto: se ejecuta automaticamente
-//al finalizar el script
-function __destruct()
-{
-
-} // fin del metodo destruct
-
-
-//funcion SEARCH: hace una búsqueda en la tabla con
-//los datos proporcionados. Si van vacios devuelve todos
-function SEARCH()
-{ 	// construimos la sentencia de busqueda con LIKE y los atributos de la entidad
-   
-} // fin metodo SEARCH
-
-// funcion DELETE()
-// comprueba que exista el valor de clave por el que se va a borrar,si existe se ejecuta el borrado, sino
-// se manda un mensaje de que ese valor de clave no existe
-function DELETE()
-{	// se construye la sentencia sql de busqueda con los atributos de la clase
-  
-} // fin metodo DELETE
 
 // funcion RellenaDatos()
 // Esta función obtiene de la entidad de la bd todos los atributos a partir del valor de la clave que esta
@@ -148,6 +113,7 @@ function contarTuplas(){
     return $total_tuplas;
 }
 
+//Funcion que completa los datos con el idGrupo
 function rellenarlista(){
 	$sql ="SELECT * FROM GRUPO WHERE(IdGrupo = '$this->IdGrupo')";
 	$result = $this->mysqli->query($sql);
@@ -159,7 +125,7 @@ function rellenarlista(){
 	return $this->lista;
 }
 
-
+//Funcion que devuelve los las acciones de funcionalidades de un grupo
 function todosPermisos(){
 		$sql = "SELECT * FROM  FUNC_ACCION FA, ACCION A, FUNCIONALIDAD F
 								WHERE (FA.IdFuncionalidad = F.IdFuncionalidad AND
@@ -173,6 +139,8 @@ function todosPermisos(){
 	}*/
 	return $result;
 }
+
+//Devuelve los permisos de un grupo
 function rellenarPermisos(){
 	$sql = "SELECT * FROM PERMISO P, FUNC_ACCION FA, GRUPO G, FUNCIONALIDAD F, ACCION A WHERE (P.IdGrupo = '$this->IdGrupo' AND
 														P.IdFuncionalidad = FA.IdFuncionalidad AND

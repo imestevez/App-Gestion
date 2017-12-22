@@ -6,7 +6,7 @@
 //Creado por: SOLFAMIDAS
 //-------------------------------------------------------
 
-Modelo de datos de usuarios que accede a la Base de Datos
+Modelo de datos de accion que accede a la Base de Datos
 */
 class ACCION_Model { //declaración de la clase
 
@@ -268,12 +268,7 @@ function SHOWALL_User($num_tupla,$max_tuplas){
 					P.IdAccion = A.IdAccion
 					)
 			LIMIT $num_tupla, $max_tuplas";
-/*
-	$sql = "SELECT * FROM USUARIO U, USU_GRUPO UG, GRUPO G
-					WHERE (U.login = UG.login AND
-							UG.IdGrupo = G.IdGrupo )
-					LIMIT $num_tupla, $max_tuplas";
-*/
+
 	    // si se produce un error en la busqueda mandamos el mensaje de error en la consulta
     if (!($resultado = $this->mysqli->query($sql))){
     	$this->lista['mensaje'] =  'ERROR: Fallo en la consulta sobre la base de datos'; 
@@ -294,27 +289,7 @@ function contarTuplas(){
 
     return $total_tuplas;
 }
-//funcion que comprueba si el login y la password son correctos
-function IdAccion(){
 
-}//fin metodo login
 
-//Funcion para comprobar si se realiza un registro correctamente
-function comprobarRegistro(){
-
-		$sql = "SELECT * FROM ACCION WHERE IdAccion = '$this->IdAccion'";
-
-		$result = $this->mysqli->query($sql);
-		$total_tuplas = mysqli_num_rows($result);
-
-		if ($total_tuplas > 0){  // esi hay mas de 0 tuplas, existe ya el usuarios
-			$this->lista['mensaje'] = 'ERROR: El usuario ya existe';
-			return $this->lista;
-			}
-		else{
-	    	return true; //no existe el usuario
-		}
-
-	}
 }
 ?> 
