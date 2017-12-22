@@ -2,7 +2,7 @@
 /*
 	Autor: SOLFAMIDAS
 	Fecha de creación: 24/11/2017
-	Descripción: Vista para añadir historias de usuario.
+	Descripción: Vista para editar historias de usuario.
 
 */
 

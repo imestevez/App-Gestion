@@ -5,7 +5,7 @@
 //Creado por: SOLFAMIDAS
 //-------------------------------------------------------
 
-Muestra la tabla en detalle de la funcionalidad seleccionada 
+Muestra la tabla en detalle de la asignación de QA seleccionada 
 
 */
 class ASIGNAC_QA_SHOWCURRENT{

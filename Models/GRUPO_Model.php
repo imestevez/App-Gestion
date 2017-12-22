@@ -156,16 +156,16 @@ function DELETE()
     {
     	// se construye la sentencia sql de busqueda con los atributos de la clase
   
-    	 $sql = "SELECT * FROM USU_GRUPO WHERE (idgrupo = '$this->idgrupo')";
+    	 $sql = "SELECT * FROM USU_GRUPO WHERE (IdGrupo = '$this->idgrupo')";
       	if($resultado =  $this->mysqli->query($sql)){
-	       	$sql = "DELETE FROM USU_GRUPO WHERE (idgrupo = '$this->idgrupo')";
+	       	$sql = "DELETE FROM USU_GRUPO WHERE (IdGrupo = '$this->idgrupo')";
         	// se ejecuta la query
        		$resultado =  $this->mysqli->query($sql);
        	}
 
-    	 $sql = "SELECT * FROM PERMISO WHERE (idgrupo = '$this->idgrupo')";
+    	 $sql = "SELECT * FROM PERMISO WHERE (IdGrupo = '$this->idgrupo')";
     	 	if($resultado =  $this->mysqli->query($sql)){
-    	 		$sql = "DELETE FROM PERMISO WHERE (idgrupo = '$this->idgrupo')";
+    	 		$sql = "DELETE FROM PERMISO WHERE (IdGrupo = '$this->idgrupo')";
        		 // se ejecuta la query
        			$resultado = $this->mysqli->query($sql);
         	}
@@ -316,33 +316,7 @@ function contarTuplas(){
 
     return $total_tuplas;
 }
-//funcion que comprueba si el login y la password son correctos
 
-/*
-function login(){
-
-	$sql = "SELECT *
-			FROM USUARIO
-			WHERE (
-				(login = '$this->login') 
-			)";
-	$resultado = $this->mysqli->query($sql);
-	$num_rows = mysqli_num_rows($resultado);
-
-	if ($num_rows == 0){ //si hay 0 tuplas con ese login
-		return 'ERROR: El login no existe';
-	}
-	else{//si no hay 0 tuplas
-		$tupla = $resultado->fetch_array();
-		if ($tupla['password'] == $this->password){//si coinciden las contraseñas
-			return true;
-		}
-		else{//si no coinciden las contraseñas
-			return 'ERROR: La contraseña para este usuario no es correcta';
-		}
-	}
-}//fin metodo login
-*/
 
 //Funcion para comprobar si se realiza un registro correctamente
 function comprobarRegistro(){

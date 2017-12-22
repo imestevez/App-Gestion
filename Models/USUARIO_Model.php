@@ -56,105 +56,6 @@ function __construct($login, $password, $DNI,$nombre,$apellidos,$telefono,$email
 } // fin del constructor
 
 
-
-// {//Metodo ADD()
-// //Inserta en la tabla  de la bd  los valores
-// // de los atributos del objeto. Comprueba si la clave/s esta vacia y si 
-// //existe ya en la tabla
-// function ADD()
-// {
-
-//     if (($this->login <> '')){ // si el atributo clave de la entidad no esta vacio
-// 		// construimos el sql para buscar esa clave en la tabla
-//         $sql = "SELECT * FROM USUARIO WHERE (login = '$this->login')"; //comprobar que no hay claves iguales
-
-// 		if (!$result = $this->mysqli->query($sql)){ // si da error la ejecución de la query
-// 			$this->lista['mensaje'] = 'ERROR: No se ha podido conectar con la base de datos';
-// 			return $this->lista; // error en la consulta (no se ha podido conectar con la bd). Devolvemos un mensaje que el controlador manejara
-
-// 		}
-// 		else { // si la ejecución de la query no da error
-
-// 			$num_rows = mysqli_num_rows($result);
-
-// 			if ($num_rows == 0){ // miramos si el resultado de la consulta es vacio (no existe el login)
-
-// 				//construimos la sentencia sql de inserción en la bd
-// 				$sql = "INSERT INTO USUARIO(
-// 				login,
-// 				password,
-// 				DNI,
-// 				Nombre,
-// 				Apellidos,
-// 				Telefono,
-// 				Correo,
-// 				Direccion) VALUES(
-// 									'$this->login',
-// 									'$this->password',
-// 									'$this->DNI',
-// 									'$this->nombre',
-// 									'$this->apellidos',
-// 									'$this->telefono', 
-// 									'$this->email',
-// 									'$this->direccion'
-// 								)";
-				
-// 				 if (!($result = $this->mysqli->query($sql))){ //si da error la consulta se comrpueba el por que
-
-// 			        $sql = "SELECT * FROM USUARIO WHERE (DNI = '$this->DNI')"; //comprobar que no hay DNI iguales
-// 				 	$result = $this->mysqli->query($sql); ;// numero de tuplas de la consulta
-// 					$num_rows = mysqli_num_rows($result);
-				
-// 				    if ($num_rows > 0)    // si el numero de filas es mayor que 0 es que existe un DNI duplicado
-// 				    {
-// 			        	$this->lista['mensaje'] = 'ERROR: Fallo en la inserción. Ya existe el DNI'; 
-// 						return $this->lista; 
-// 					}
-
-// 			        $sql = "SELECT * FROM USUARIO WHERE (Correo = '$this->email')"; //comprobar que no hay email iguales
-// 				 	$result = $this->mysqli->query($sql);
-// 					$num_rows = mysqli_num_rows($result);// numero de tuplas de la consulta
-				    
-// 				    if ($num_rows > 0) // si el numero de filas es mayor que 0 es que existe un DNI duplicado
-// 				    {
-// 			        	$this->lista['mensaje'] = 'ERROR: Fallo en la inserción. Ya existe el email'; 
-// 						return $this->lista;
-// 					}
-				
-// 					//Si no hay atributos Clave y unique duplicados es que hay campos sin completar
-//         			return 'ERROR: Introduzca todos los valores de todos los campos'; // introduzca un valor para el usuario
-// 				}
-
-//     			else{ //si no da error en la insercion del usuario, lo añadimos al grupo alumnos y devolvemos mensaje de exito
-
-//     				//Creamos la sentencia sql
-//     				$sql2 = "INSERT INTO USU_GRUPO(
-// 												login,
-// 												IdGrupo) VALUES (
-// 															'$this->login',
-// 															'ALUMNO')";
-
-//     				if($result2 = $this->mysqli->query($sql2)){
-// 						$this->lista['mensaje'] = 'Inserción realizada con éxito';
-// 						return $this->lista; //operacion de insertado correcta
-// 					}else{//si se produce un error al insertarlo en alumnos lanzamos mensaje 
-// 						$this->lista['mensaje'] = 'Error en la inserción'; 
-// 					}
-// 				}
-// 			}else{ //si hay un login igual
-
-// 	        	$this->lista['mensaje'] = 'ERROR: Fallo en la inserción. Ya existe el login'; 
-// 				return $this->lista; 
-// 			}
-// 		}
-    
-// 	}else{ //Si no se introduce un login
-// 			return 'ERROR: Introduzca todos los valores de todos los campos'; // introduzca un valor para el usuario
-// 	}
-				
-// } // fin del metodo ADD}
-
-
 //Metodo ADD()
 //Inserta en la tabla  de la bd  los valores
 // de los atributos del objeto. Comprueba si la clave/s esta vacia y si 
@@ -307,48 +208,48 @@ function DELETE()
     // si existe una tupla con ese valor de clave
     if ($num_rows > 0)
     {
-    	 $sql = "SELECT * FROM ENTREGA WHERE (login = '$this->login')";
+    	 $sql = "SELECT * FROM ENTREGA WHERE (login = '$this->login')"; //miramos si tiene entregas este usuario
       	if($resultado =  $this->mysqli->query($sql)){
 	    	$row = mysqli_fetch_array($resultado);
-	       	$Alias = $row['Alias'];
-	       	$sql = "DELETE FROM ENTREGA WHERE (login = '$this->login')";
+	       	$Alias = $row['Alias']; //guardamos en la variable el alias del usuario, para utilizarlo después
+	       	$sql = "DELETE FROM ENTREGA WHERE (login = '$this->login')"; //borramos las entregas del usuario
         	// se ejecuta la query
        		$resultado =  $this->mysqli->query($sql);
 
-	    	 $sql = "SELECT * FROM EVALUACION WHERE (LoginEvaluador = '$this->login')";
+	    	 $sql = "SELECT * FROM EVALUACION WHERE (LoginEvaluador = '$this->login')"; //miramos si tiene evaluaciones
 	    	 	if($resultado =  $this->mysqli->query($sql)){
-	    	 		$sql = "DELETE FROM EVALUACION WHERE (loginEvaluador = '$this->login')";
+	    	 		$sql = "DELETE FROM EVALUACION WHERE (loginEvaluador = '$this->login')"; //las borramos en caso de que las tenga
 	       		 // se ejecuta la query
 	       			$resultado = $this->mysqli->query($sql);
 	        	}
-	    	 $sql = "SELECT * FROM EVALUACION WHERE (AliasEvaluado = '$Alias')";
+	    	 $sql = "SELECT * FROM EVALUACION WHERE (AliasEvaluado = '$Alias')"; 
 				if($resultado =  $this->mysqli->query($sql)){
-		        	$sql = "DELETE FROM EVALUACION WHERE (AliasEvaluado = '$Alias')";
+		        	$sql = "DELETE FROM EVALUACION WHERE (AliasEvaluado = '$Alias')"; //borramos las evaluaciones en las que aparece como QA
 	       		 	// se ejecuta la query
 	       			$resultado = $this->mysqli->query($sql);
 	       		}
 	       		 $sql = "SELECT * FROM ASIGNAC_QA WHERE (LoginEvaluador = '$this->login')";
 	    	 	if($resultado =  $this->mysqli->query($sql)){
-	    	 		$sql = "DELETE FROM ASIGNAC_QA WHERE (loginEvaluador = '$this->login')";
+	    	 		$sql = "DELETE FROM ASIGNAC_QA WHERE (loginEvaluador = '$this->login')"; //borramos la asignación de QAs en las que participe el usuario
 	       		 // se ejecuta la query
 	       			$resultado = $this->mysqli->query($sql);
 	        	}
 	    	 $sql = "SELECT * FROM ASIGNAC_QA WHERE (LoginEvaluado = '$this->login')";
 				if($resultado =  $this->mysqli->query($sql)){
-		        	$sql = "DELETE FROM ASIGNAC_QA WHERE (LoginEvaluado = '$this->login')";
+		        	$sql = "DELETE FROM ASIGNAC_QA WHERE (LoginEvaluado = '$this->login')"; //borramos la asignación de QAs en las que participe el usuario
 	       		 	// se ejecuta la query
 	       			$resultado = $this->mysqli->query($sql);
 	       		}
 	       		 $sql = "SELECT * FROM ASIGNAC_QA WHERE (AliasEvaluado = '$Alias')";
 				if($resultado =  $this->mysqli->query($sql)){
-		        	$sql = "DELETE FROM ASIGNAC_QA WHERE (AliasEvaluado = '$Alias')";
+		        	$sql = "DELETE FROM ASIGNAC_QA WHERE (AliasEvaluado = '$Alias')"; //borramos la asignación de QAs en las que participe el usuario
 	       		 	// se ejecuta la query
 	       			$resultado = $this->mysqli->query($sql);
 	       		}
 
    			$sql = "SELECT * FROM NOTA_TRABAJO WHERE (login = '$this->login')";
 				if($resultado =  $this->mysqli->query($sql)){
-			        $sql = "DELETE FROM NOTA_TRABAJO WHERE (login = '$this->login')";
+			        $sql = "DELETE FROM NOTA_TRABAJO WHERE (login = '$this->login')";  //borramos la nota del usuario
 
 			        // se ejecuta la query
 			       $resultado =  $this->mysqli->query($sql);
@@ -357,12 +258,12 @@ function DELETE()
 	        $sql = "SELECT FROM USU_GRUPO WHERE (login = '$this->login')";	
 				if($resultado =  $this->mysqli->query($sql)){
 			        
-			        $sql = "DELETE FROM USU_GRUPO WHERE (login = '$this->login')";
+			        $sql = "DELETE FROM USU_GRUPO WHERE (login = '$this->login')";  //borramos la asignación de grupo del usuario
 
 			        // se ejecuta la query
 			        $resultado = $this->mysqli->query($sql);
 			    }
-			        $sql = "DELETE FROM USUARIO WHERE (login = '$this->login')";
+			        $sql = "DELETE FROM USUARIO WHERE (login = '$this->login')"; //finalmente se borra al usuario
 			        // se ejecuta la query
 			        $resultado = $this->mysqli->query($sql);
 	       }
@@ -446,7 +347,7 @@ function EDIT()
 					return $this->lista;
 				}
 
-			     $sql = "SELECT * FROM USUARIO WHERE (Correo = '$this->email')";
+			     $sql = "SELECT * FROM USUARIO WHERE (Correo = '$this->email')"; 
 			    // se ejecuta la query
 			    $result = $this->mysqli->query($sql);
 			    $num_rows = mysqli_num_rows($result);
@@ -574,6 +475,7 @@ function comprobarRegistro(){
 
 	}
 
+//devuelve una lista con los datos del usuario
 function rellenarLista(){
 	$sql ="SELECT * FROM USUARIO WHERE(login = '$this->login')";
 	$result = $this->mysqli->query($sql);
@@ -589,7 +491,7 @@ function rellenarLista(){
 }
 
 
-
+//devuelve el numero de grupos a los que pertenece un usuario
 function contarNumGruposUser(){
 
 	$sql = "SELECT COUNT(*) FROM USU_GRUPO WHERE (login = '$this->login')";
@@ -598,6 +500,8 @@ function contarNumGruposUser(){
 	$num_rows = mysqli_num_rows($result);
 	return $num_rows;
 	}
+
+//devuelve todos los grupos que existen en la BD
 function todosGrupos(){
 		$sql = "SELECT * FROM  GRUPO ";
 
@@ -609,6 +513,8 @@ function todosGrupos(){
 	}*/
 	return $result;
 }
+
+//devuelve un recordset con todos los grupos a los que pertenece un usuario
 function rellenarGrupos(){
 	$sql = "SELECT * FROM USU_GRUPO UG, GRUPO G WHERE (UG.login = '$this->login' AND
 														UG.IdGrupo = G.IdGrupo)";

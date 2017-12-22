@@ -5,7 +5,7 @@
 //Creado por: SOLFAMIDAS
 //-------------------------------------------------------
 
-Vista para que el  administrador pueda crear funcionalidades en el sistema
+Vista para que el  administrador pueda crear asignaciones de QA en el sistema
 
 */
 

@@ -295,7 +295,7 @@ function SHOWALL($num_tupla,$max_tuplas){
 	}
 } // fin metodo SHOWALL
 
-
+//Función para mostrar los datos sólo del usuario conectado en la aplicación
 function SHOWALL_User($num_tupla,$max_tuplas){
 	$login = $_SESSION['login'];
 	$sql = "SELECT * 
@@ -333,6 +333,7 @@ function contarTuplas(){
     return $total_tuplas;
 }
 
+//Función para crear los índices del array lista
 function rellenarLista(){
 
 		$sql = "SELECT * FROM TRABAJO T, HISTORIA H 

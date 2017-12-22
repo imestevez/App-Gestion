@@ -3,7 +3,7 @@
 
 /*
 //Script : Strings_GALICIAN.php
-//Creado el : 18-10-2017
+//Creado el : 18-11-2017
 //Creado por: SOLFAMIDAS
 //-------------------------------------------------------
 
@@ -139,15 +139,6 @@ array(
 	'Gestión Asignatura IU' => 'Xestión Asignatura IU',
 
 
-
-
-
-
-
-
-
-
-	// ----------------- ESPACIO DE TRABAJO PARA DANIEL -------------------------
 	'AñadirGrupo' => 'Engadir Grupo',
 	'NombreGrupo' => 'Nome Grupo',
 	'DescripGrupo' => 'Descripción Grupo',
@@ -191,97 +182,63 @@ array(
 	'Resultados' => 'Resultados',
 
 
+	'Gestiones' => 'Xestións',
+	'Trabajos' => 'Traballos',
+	'Añadir trabajo' => 'Añadir traballo',
+	'IdTrabajo' => 'ID traballo',
+	'NombreTrabajo' => 'Nome traballo',
+	'FechaIniTrabajo' => 'Data Inicio',
+	'FechaFinTrabajo' => 'Data Fin',
+	'PorcentajeNota' => 'Porcentaxe nota',
+	'Buscar trabajo' => 'Buscar traballo',
+	'Editar trabajo' => 'Editar traballo',
+	'div_numeros' => 'Solo se aceptan numeros',
+	'div_numerosRango' => 'O numero ten que estar entre 0 e 99',
+	'div_textoRango' => 'O numero de caracteres supera o maximo',
+	'div_fechaParcial'=> 'Solo se aceptan numeros e -',
+	'Borrar trabajo' => "Borrar traballo",
+	'ERROR: Fallo en la inserción. Ya existe el IdTrabajo' => 'ERROR: Fallo na inserción. Xa existe o ID traballo',
+	'ERROR: No existe la entrega que desea borrar en la BD' => 'ERROR: Non existe a entrega que desea borrar na BD',
+	'ERROR: No se ha modificado' => 'ERROR: Non se ha modificado',
+	'Añadir entrega' => 'Añadir entrega',
+	'Borrar entrega' => 'Borrar entrega',
+	'Buscar entrega' => 'Buscar entrega',
+	'Editar entrega' => 'Editar entrega',
+	'div_AlfanumericoTexto' => 'Solo se aceptan letras, espacios, números e os caracteres . _ -',
+	'div_Ruta_vacia' => 'A ruta non pode estar vacia',
+	'Horas' => 'Horas',
+	'Ruta' => 'Ruta',
+	'Cambiar la ruta' => 'Cambiar a ruta',
+	'Mostrar trabajo' => 'Mostrar traballo',
+	'Entregas' => 'Entregas',
+	'Mostrar entrega' => 'Mostrar entrega',
+	'div_Ruta_Max' => 'A ruta da entrega supera o máximo de caracteres permitidos',
+	'ERROR: El IdTrabajo no existe' => 'ERROR: O IdTrabajo non existe',
+	'ERROR: Fallo en la inserción. Ya existe la entrega' => 'ERROR: Fallo na inserción. Xa existe a entrega',
+	'Historia' => 'Historia',
+	'Grupo SOLFAMIDAS' => 'Grupo SOLFAMIDAS',
+	'Imagen Solfamidas' => 'Solfamidas image',
+	'Imagen Solfamidas' => 'Imaxe Solfamidas',
+	'ERROR: Fallo en la modificacion. Ya existe la entrega' => 'ERROR: Fallo na modificacion. Xa existe a entrega',
+	'Entrega' => 'Entrega',
+	'NotaTrabajo' => 'Nota',
+	'Añadir nota' => 'Añadir nota',
+	'Borrar nota' => 'Borrar nota',
+	'Buscar nota' => 'Buscar nota',
+	'Editar nota' => 'Editar nota',
+	'Sin calificar' => 'Sen calificar',
+	'Grupo' => 'Grupo',
+	'Mostrar Grupos' => 'Mostrar Grupos',
+	'Asignar/Desasignar Grupos' => 'Asignar/Desasignar Grupos',
+	'Grupos de Usuario' => 'Grupos de Usuario',
+	'ERROR: Fallo en la modificación. El login está vacio' => 'ERROR: Fallo en la modificación. El login está vacio',
+	'Seleccionar Grupos' => 'Seleccionar Grupos',
+	'div_Num_Decs' => 'O número máximo de decimales é 2',
+	'div_numerosRango10' => 'O numero ten que estar entre 0 e 10',
+	'No tienes permisos para realizar esta accion' => 'Non tes permisos para realizar esta accion',
+	'Debe de seleccionar al menos 1 campo' => 'Debe de seleccionar polo menos 1 campo',
+	'ERROR: No existe el trabajo que desea borrar en la BD' => 'ERROR: Non existe o traballo que desea borrar en la BD',
 
-
-
-
-
-
-
- // ------------------------ ESPACIO DE TRABAJO PARA IVAN ---------------------------
-'Gestiones' => 'Xestións',
-'Trabajos' => 'Traballos',
-'Añadir trabajo' => 'Añadir traballo',
-'IdTrabajo' => 'ID traballo',
-'NombreTrabajo' => 'Nome traballo',
-'FechaIniTrabajo' => 'Data Inicio',
-'FechaFinTrabajo' => 'Data Fin',
-'PorcentajeNota' => 'Porcentaxe nota',
-'Buscar trabajo' => 'Buscar traballo',
-'Editar trabajo' => 'Editar traballo',
-'div_numeros' => 'Solo se aceptan numeros',
-'div_numerosRango' => 'O numero ten que estar entre 0 e 99',
-'div_textoRango' => 'O numero de caracteres supera o maximo',
-'div_fechaParcial'=> 'Solo se aceptan numeros e -',
-'Borrar trabajo' => "Borrar traballo",
-'ERROR: Fallo en la inserción. Ya existe el IdTrabajo' => 'ERROR: Fallo na inserción. Xa existe o ID traballo',
-'ERROR: No existe la entrega que desea borrar en la BD' => 'ERROR: Non existe a entrega que desea borrar na BD',
-'ERROR: No se ha modificado' => 'ERROR: Non se ha modificado',
-'Añadir entrega' => 'Añadir entrega',
-'Borrar entrega' => 'Borrar entrega',
-'Buscar entrega' => 'Buscar entrega',
-'Editar entrega' => 'Editar entrega',
-'div_AlfanumericoTexto' => 'Solo se aceptan letras, espacios, números e os caracteres . _ -',
-'div_Ruta_vacia' => 'A ruta non pode estar vacia',
-'Horas' => 'Horas',
-'Ruta' => 'Ruta',
-'Cambiar la ruta' => 'Cambiar a ruta',
-'Mostrar trabajo' => 'Mostrar traballo',
-'Entregas' => 'Entregas',
-'Mostrar entrega' => 'Mostrar entrega',
-'div_Ruta_Max' => 'A ruta da entrega supera o máximo de caracteres permitidos',
-'ERROR: El IdTrabajo no existe' => 'ERROR: O IdTrabajo non existe',
-'ERROR: Fallo en la inserción. Ya existe la entrega' => 'ERROR: Fallo na inserción. Xa existe a entrega',
-'Historia' => 'Historia',
-'Grupo SOLFAMIDAS' => 'Grupo SOLFAMIDAS',
-'Imagen Solfamidas' => 'Solfamidas image',
-'Imagen Solfamidas' => 'Imaxe Solfamidas',
-'ERROR: Fallo en la modificacion. Ya existe la entrega' => 'ERROR: Fallo na modificacion. Xa existe a entrega',
-'Entrega' => 'Entrega',
-'NotaTrabajo' => 'Nota',
-'Añadir nota' => 'Añadir nota',
-'Borrar nota' => 'Borrar nota',
-'Buscar nota' => 'Buscar nota',
-'Editar nota' => 'Editar nota',
-'Sin calificar' => 'Sen calificar',
-'Grupo' => 'Grupo',
-'Mostrar Grupos' => 'Mostrar Grupos',
-'Asignar/Desasignar Grupos' => 'Asignar/Desasignar Grupos',
-'Grupos de Usuario' => 'Grupos de Usuario',
-'ERROR: Fallo en la modificación. El login está vacio' => 'ERROR: Fallo en la modificación. El login está vacio',
-'Seleccionar Grupos' => 'Seleccionar Grupos',
-'div_Num_Decs' => 'O número máximo de decimales é 2',
-'div_numerosRango10' => 'O numero ten que estar entre 0 e 10',
-'No tienes permisos para realizar esta accion' => 'Non tes permisos para realizar esta accion',
-'Debe de seleccionar al menos 1 campo' => 'Debe de seleccionar polo menos 1 campo',
-'ERROR: No existe el trabajo que desea borrar en la BD' => 'ERROR: Non existe o traballo que desea borrar en la BD',
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// ------------------------ ESPACIO DE TRABAJO PARA PABLO ---------------------------
 //Funcionalidades
 	'div_vacio' => 'O campo non pode estar valeiro.',
 	'Funcionalidades' => 'Funcionalidades',
@@ -314,125 +271,70 @@ array(
 	'ERROR: Fallo en la modificación. El IdFuncionalidad está vacio' => 'ERRO: Fallo na modificación. O IdFuncionalidade está valeiro',
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// ------------------------ ESPACIO DE TRABAJO PARA CRISTINA ---------------------------
 //Historias de usuario:
-'Añadir historia' => 'Engadir historia',
-'Id del trabajo' => 'Id do traballo',
-'Id de la historia' => 'Id da historia',
-'Texto de la historia' => 'Texto da historia',
+	'Añadir historia' => 'Engadir historia',
+	'Id del trabajo' => 'Id do traballo',
+	'Id de la historia' => 'Id da historia',
+	'Texto de la historia' => 'Texto da historia',
 
-'Eliminar historia' => 'Eliminar historia',
+	'Eliminar historia' => 'Eliminar historia',
 
-'Editar historia' => 'Editar historia',
+	'Editar historia' => 'Editar historia',
 
-'Buscar historia' => 'Buscar historia',
+	'Buscar historia' => 'Buscar historia',
 
-'Historias' => 'Historias',
+	'Historias' => 'Historias',
 
-'IdHistoria' => 'IdHistoria',
-'TextoHistoria' => 'TextoHistoria',
+	'IdHistoria' => 'IdHistoria',
+	'TextoHistoria' => 'TextoHistoria',
 
-'Vista en detalle historia' => 'Vista en detalle historia',
+	'Vista en detalle historia' => 'Vista en detalle historia',
 
-'div_Numerico' => 'Sólo se aceptan números',
+	'div_Numerico' => 'Sólo se aceptan números',
 
-'ERROR: No existe ningún trabajo con ese IdTrabajo' => 'ERROR: Non existe ningún traballo con es IdTrabajo',
-'ERROR: Fallo en la inserción. Ya existe una historia con esos parámetros' => 'ERROR: Fallo na inserción. Xa existe unha historia con esos parámetros.',
-'ERROR: No existe la historia que desea borrar en la BD' => 'ERROR: Non existe a historia que desexa borrar na BD',
-'Nombre del trabajo' => 'Nome do traballo',
+	'ERROR: No existe ningún trabajo con ese IdTrabajo' => 'ERROR: Non existe ningún traballo con es IdTrabajo',
+	'ERROR: Fallo en la inserción. Ya existe una historia con esos parámetros' => 'ERROR: Fallo na inserción. Xa existe unha historia con esos parámetros.',
+	'ERROR: No existe la historia que desea borrar en la BD' => 'ERROR: Non existe a historia que desexa borrar na BD',
+	'Nombre del trabajo' => 'Nome do traballo',
 
 //Asignación de QA:
-'Añadir asignación de QA' => 'Engadir aignación de QA',
-'Login del evaluador' => 'Login do evaluador',
-'Login del evaluado' => 'Login do evaluado',
-'Alias del evaluado' => 'Alias do evaluado',
-'Borrar asignación de QA' => 'Borrar asignación de QA',
-'Buscar asignación de QA' => 'Buscar asignación de QA',
-'Asignación de QAs' => 'Asignación de QAs',
-'Asignación de QA' => 'Asignación de QA',
-'Editar asignación de QA' => 'Editar asignación de QA',
-'Resultado de búsqueda: Asignación de QAs' => 'Resultado da búsqueda: Asignación de QAs',
+	'Añadir asignación de QA' => 'Engadir aignación de QA',
+	'Login del evaluador' => 'Login do evaluador',
+	'Login del evaluado' => 'Login do evaluado',
+	'Alias del evaluado' => 'Alias do evaluado',
+	'Borrar asignación de QA' => 'Borrar asignación de QA',
+	'Buscar asignación de QA' => 'Buscar asignación de QA',
+	'Asignación de QAs' => 'Asignación de QAs',
+	'Asignación de QA' => 'Asignación de QA',
+	'Editar asignación de QA' => 'Editar asignación de QA',
+	'Resultado de búsqueda: Asignación de QAs' => 'Resultado da búsqueda: Asignación de QAs',
 
-'ERROR: Fallo en la inserción. Ya existe esa asignación de QA' => 'ERROR: Fallo na inserción. Xa existe esa asignación de QA',
-'ERROR: No existe esa entrega para evaluar' => 'ERROR: Non existe esa entrega para evaluar',
-'ERROR: No existe el usuario con LoginEvaluador'  => 'ERROR: Non existe ningún usuario con LoginEvaluador',
+	'ERROR: Fallo en la inserción. Ya existe esa asignación de QA' => 'ERROR: Fallo na inserción. Xa existe esa asignación de QA',
+	'ERROR: No existe esa entrega para evaluar' => 'ERROR: Non existe esa entrega para evaluar',
+	'ERROR: No existe el usuario con LoginEvaluador'  => 'ERROR: Non existe ningún usuario con LoginEvaluador',
 
 //Generación de asignación automática de QAs:
-'Asignación auto. de QAs' => 'Asignación auto. de QAs',
-'Asignación automática de QAs' => 'Asignación automática de QAs',
-'Asignación automática de QAs realizada correctamente' => 'Asignación automática de QAs realizada correctamente',
-'ERROR: La Asignación automática de QAs no ha sido realizada correctamente' => 'ERROR: A asignación automática de QAs non foi realizada correctamente',
-'Número de QAs a corregir por alumno' => 'Número de QAs a correxir por alumno',
-'ERROR: El número de entregas no es suficiente para realizar la asignacion de QA' => 'ERROR: O número de entregas non e suficiente para realizar a asignación de QA',
+	'Asignación auto. de QAs' => 'Asignación auto. de QAs',
+	'Asignación automática de QAs' => 'Asignación automática de QAs',
+	'Asignación automática de QAs realizada correctamente' => 'Asignación automática de QAs realizada correctamente',
+	'ERROR: La Asignación automática de QAs no ha sido realizada correctamente' => 'ERROR: A asignación automática de QAs non foi realizada correctamente',
+	'Número de QAs a corregir por alumno' => 'Número de QAs a correxir por alumno',
+	'ERROR: El número de entregas no es suficiente para realizar la asignacion de QA' => 'ERROR: O número de entregas non e suficiente para realizar a asignación de QA',
 
 //Generación de historias de usuario a evaluar:
-'Generación de historias a evaluar realizada correctamente' => 'Xeración de historias a evaluar realizada correctamente',
-'ERROR: La generación de historias a evaluar no ha sido realizada correctamente' => 'ERROR: A xeración de historias a evaluar non foi realizada correctamente',
-'Generación de historias a evaluar' => 'Xeración de historias a evaluar',
-'Gen. historias evaluación' => 'Xer. historias evaluación',
-'ERROR: No hay asignaciones de qas para este trabajo' => 'ERROR: Non hay asignacións de QAs para ese IdTraballo',
-'ERROR: No existe ningún trabajo con ese IdTrabajo'  => 'ERROR: Non existe ningún traballo con ese IdTraballo',
+	'Generación de historias a evaluar realizada correctamente' => 'Xeración de historias a evaluar realizada correctamente',
+	'ERROR: La generación de historias a evaluar no ha sido realizada correctamente' => 'ERROR: A xeración de historias a evaluar non foi realizada correctamente',
+	'Generación de historias a evaluar' => 'Xeración de historias a evaluar',
+	'Gen. historias evaluación' => 'Xer. historias evaluación',
+	'ERROR: No hay asignaciones de qas para este trabajo' => 'ERROR: Non hay asignacións de QAs para ese IdTraballo',
+	'ERROR: No existe ningún trabajo con ese IdTrabajo'  => 'ERROR: Non existe ningún traballo con ese IdTraballo',
 
 //Generación automática de notas
-'La generación automática de notas se ha realizado correctamente para todos los trabajos de la BD' => 'A xeración automática de notas foi realizada correctamente para todos os traballos da BD',
-'ERROR: La generación automática de notas ha fallado' => 'ERROR: A xeración automática de notas fallou.',
-'Nota Total' => 'Nota Total',
-'Generación automática de notas' => 'Generación automática de notas',
+	'La generación automática de notas se ha realizado correctamente para todos los trabajos de la BD' => 'A xeración automática de notas foi realizada correctamente para todos os traballos da BD',
+	'ERROR: La generación automática de notas ha fallado' => 'ERROR: A xeración automática de notas fallou.',
+	'Nota Total' => 'Nota Total',
+	'Generación automática de notas' => 'Generación automática de notas',
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// ------------------------ ESPACIO DE TRABAJO PARA DIEGO ---------------------------
 	'Id de la accion' => 'Id da accion',
 	'Nombre de la accion' => 'Nome da accion',
 	'Descripcion de la accion' => 'Descripcion da accion',

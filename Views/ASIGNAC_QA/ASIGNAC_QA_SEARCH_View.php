@@ -5,7 +5,7 @@
 //Creado por: SOLFAMIDAS
 //-------------------------------------------------------
 
-Muestra el formulario de búsqueda de funcionalidades con todos los campos de funcionalidades
+Muestra el formulario de búsqueda de asignaciones de QA con todos los campos de asignaciones de QA
 
 */
 class ASIGNAC_QA_SEARCH{

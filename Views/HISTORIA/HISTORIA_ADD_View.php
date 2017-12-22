@@ -7,7 +7,7 @@
 //Creado por: SOLFAMIDAS
 //-------------------------------------------------------
 
-Vista para que el  usuario pueda crear trabajos en el sistema
+Vista para que el  usuario pueda crear historias en el sistema
 
 */
 

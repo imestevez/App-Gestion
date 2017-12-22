@@ -40,12 +40,12 @@ function __construct($lista, $listaGrupos){
 
     
     $this->resul = false;
-
-    foreach ($this->listaGrupos as $key => $value) {
-
-                    if(($value == 'ADMIN') ){
-                        $resul = true;
-                    }
+    if($this->listaGrupos <> null){
+        foreach ($this->listaGrupos as $key => $value) {
+            if(($value == 'ADMIN') ){ //si es administrador se pone resul a true
+                $this->resul = true;
+            }
+        }
     }
     if($this->resul == true){
 

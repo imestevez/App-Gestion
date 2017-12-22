@@ -5,7 +5,7 @@
 //Creado por: SOLFAMIDAS
 //-------------------------------------------------------
     
-    Esta clase es la vista de los usuarios de la BD
+    Esta clase es la vista de las accinoes que tiene una funcionalidad
 
 */
     class FUNC_ACCION_SHOWALL{

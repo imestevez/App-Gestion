@@ -2,7 +2,7 @@
 
 /*
 //Script : Strings_ENGLISH.php
-//Creado el : 18-10-2017
+//Creado el : 18-11-2017
 //Creado por: SOLFAMIDAS
 //-------------------------------------------------------
 
@@ -135,19 +135,6 @@ array(
 	'Error en la inserción' => 'Add error',
 	'Gestión Asignatura IU' => 'User Interface Management',
 
-
-
-
-
-
-
-
-
-
-
-
-
-	// ----------------- ESPACIO DE TRABAJO PARA DANIEL -------------------------
 	'AñadirGrupo' => 'Add Group',
 	'NombreGrupo' => 'Group Name',
 	'DescripGrupo' => 'Group Description',
@@ -191,87 +178,63 @@ array(
 	'Resultados' => 'Results',
 
 
+	'Gestiones' => 'Management',
+	'Trabajos' => 'Works',
+	'Añadir trabajo' => 'Add work',
+	'IdTrabajo' => 'Work ID',
+	'NombreTrabajo' => 'Work name',
+	'FechaIniTrabajo' => 'Date to begin',
+	'FechaFinTrabajo' => 'Date to finish',
+	'PorcentajeNota' => 'Percentage of qualification',
+	'Borrar trabajo' => 'Delete work',
+	'Buscar trabajo' => 'Search work',
+	'Editar trabajo' => 'Edit work',
+	'div_numeros' => 'Only are accepted numbers',
+	'div_numerosRango' => 'The number has to be between 0 and 99',
+	'div_textoRango' => 'The number of characters overcomes the maximum',
+	'div_fechaParcial'=> 'Only are accepted numbers and -',
+	'Borrar trabajo' => 'Delete work',
+	'ERROR: Fallo en la inserción. Ya existe el IdTrabajo' => 'ERROR: Insertion failed. The ID work already exists ',
+	'ERROR: No existe la entrega que desea borrar en la BD' => 'ERROR: The delivery that you wish to delete doesn´t exists in the database',
+	'ERROR: No se ha modificado' => 'ERROR: It has not been modified',
+	'Añadir entrega' => 'Add delivery',
+	'Borrar entrega' => 'Delete delivery',
+	'Buscar entrega' => 'Search delivery',
+	'Editar entrega' => 'Edit delivery',
+	'div_AlfanumericoTexto' => 'Only letters, spaces, numbers and the characters . _ - are accepted',
+	'div_Ruta_vacia' => 'The route does not has be empty',
+	'Horas' => 'Hours',
+	'Ruta' => 'Route',
+	'Cambiar la ruta' => 'Change the route',
+	'Mostrar trabajo' => 'Show work',
+	'Entregas' => 'Deliveries',
+	'Mostrar entrega' => 'Show delivery',
+	'div_Ruta_Max' => 'The route of the delivery overcomes the allowed maximum',
+	'ERROR: El IdTrabajo no existe' => 'ERROR: IdTrabajo doesn´t exist',
+	'ERROR: Fallo en la inserción. Ya existe la entrega' => 'ERROR: Insertion failed. The delivery already exists',
+	'Historia' => 'Story',
+	'Grupo SOLFAMIDAS' => 'SOLFAMIDAS Group',
+	'Imagen Solfamidas' => 'Solfamidas image',
+	'ERROR: Fallo en la modificacion. Ya existe la entrega' => 'ERROR: Modification failed. The delivery already exists',
+	'Entrega' => 'Delivery',
+	'NotaTrabajo' => 'Note',
+	'Añadir nota' => 'Add note',
+	'Borrar nota' => 'Delete note',
+	'Buscar nota' => 'Search note',
+	'Editar nota' => 'Edit note',
+	'Sin calificar' => 'Unrated',
+	'Grupo' => 'Group',
+	'Mostrar Grupos' => 'Show Groups',
+	'Asignar/Desasignar Grupos' => 'Assign/Unassign groups',
+	'Grupos de Usuario' => 'Groups of User',
+	'ERROR: Fallo en la modificación. El login está vacio' => 'ERROR: Modification failed. The login is empty',
+	'Seleccionar Grupos' => 'Select groups',
+	'div_Num_Decs' => 'The maximum number of decimals are 2',
+	'div_numerosRango10' => 'The number has to be between 0 and 10',
+	'No tienes permisos para realizar esta accion' => 'You do not have permission to perform this action',
+	'Debe de seleccionar al menos 1 campo' => 'Must be selected 1 field',
+	'ERROR: No existe el trabajo que desea borrar en la BD' => 'ERROR: The work that you wish to delete doesn´t exists in the database',
 
-
-
-
-
-
- // ------------------------ ESPACIO DE TRABAJO PARA IVAN ---------------------------
-'Gestiones' => 'Management',
-'Trabajos' => 'Works',
-'Añadir trabajo' => 'Add work',
-'IdTrabajo' => 'Work ID',
-'NombreTrabajo' => 'Work name',
-'FechaIniTrabajo' => 'Date to begin',
-'FechaFinTrabajo' => 'Date to finish',
-'PorcentajeNota' => 'Percentage of qualification',
-'Borrar trabajo' => 'Delete work',
-'Buscar trabajo' => 'Search work',
-'Editar trabajo' => 'Edit work',
-'div_numeros' => 'Only are accepted numbers',
-'div_numerosRango' => 'The number has to be between 0 and 99',
-'div_textoRango' => 'The number of characters overcomes the maximum',
-'div_fechaParcial'=> 'Only are accepted numbers and -',
-'Borrar trabajo' => 'Delete work',
-'ERROR: Fallo en la inserción. Ya existe el IdTrabajo' => 'ERROR: Insertion failed. The ID work already exists ',
-'ERROR: No existe la entrega que desea borrar en la BD' => 'ERROR: The delivery that you wish to delete doesn´t exists in the database',
-'ERROR: No se ha modificado' => 'ERROR: It has not been modified',
-'Añadir entrega' => 'Add delivery',
-'Borrar entrega' => 'Delete delivery',
-'Buscar entrega' => 'Search delivery',
-'Editar entrega' => 'Edit delivery',
-'div_AlfanumericoTexto' => 'Only letters, spaces, numbers and the characters . _ - are accepted',
-'div_Ruta_vacia' => 'The route does not has be empty',
-'Horas' => 'Hours',
-'Ruta' => 'Route',
-'Cambiar la ruta' => 'Change the route',
-'Mostrar trabajo' => 'Show work',
-'Entregas' => 'Deliveries',
-'Mostrar entrega' => 'Show delivery',
-'div_Ruta_Max' => 'The route of the delivery overcomes the allowed maximum',
-'ERROR: El IdTrabajo no existe' => 'ERROR: IdTrabajo doesn´t exist',
-'ERROR: Fallo en la inserción. Ya existe la entrega' => 'ERROR: Insertion failed. The delivery already exists',
-'Historia' => 'Story',
-'Grupo SOLFAMIDAS' => 'SOLFAMIDAS Group',
-'Imagen Solfamidas' => 'Solfamidas image',
-'ERROR: Fallo en la modificacion. Ya existe la entrega' => 'ERROR: Modification failed. The delivery already exists',
-'Entrega' => 'Delivery',
-'NotaTrabajo' => 'Note',
-'Añadir nota' => 'Add note',
-'Borrar nota' => 'Delete note',
-'Buscar nota' => 'Search note',
-'Editar nota' => 'Edit note',
-'Sin calificar' => 'Unrated',
-'Grupo' => 'Group',
-'Mostrar Grupos' => 'Show Groups',
-'Asignar/Desasignar Grupos' => 'Assign/Unassign groups',
-'Grupos de Usuario' => 'Groups of User',
-'ERROR: Fallo en la modificación. El login está vacio' => 'ERROR: Modification failed. The login is empty',
-'Seleccionar Grupos' => 'Select groups',
-'div_Num_Decs' => 'The maximum number of decimals are 2',
-'div_numerosRango10' => 'The number has to be between 0 and 10',
-'No tienes permisos para realizar esta accion' => 'You do not have permission to perform this action',
-'Debe de seleccionar al menos 1 campo' => 'Must be selected 1 field',
-'ERROR: No existe el trabajo que desea borrar en la BD' => 'ERROR: The work that you wish to delete doesn´t exists in the database',
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// ------------------------ ESPACIO DE TRABAJO PARA PABLO ---------------------------
 //Funcionalidades
 	'div_vacio' => 'The field can not be empty',
 	'Funcionalidades' => 'Functionalities',
@@ -283,6 +246,7 @@ array(
 	'Editar Funcionalidad' => 'Edit Functionality',
 	'Buscar Funcionalidad' => 'Search Functionality',
 	'Funcionalidad' => 'Functionality',
+
 //Nota_Trabajo
 	'Añadir Nota' => 'Add Qualification',
 	'Nota Trabajo' => 'Work Qualification',
@@ -294,6 +258,7 @@ array(
 	'Nota Parcial' => 'Partial Qualification',
 	'Ver correccion' => 'Show correction',
 	'Borrar todas las notas para este usuario' => 'Delete all qualifications for this user',
+
 //FUNC_ACCION
 	'Mostrar Acciones' => 'Show Actions',
 	'ERROR: Fallo en la inserción. Ya existe ese IdFuncionalidad' => 'ERROR: Insertion failed. That Id Functionality already exists',
@@ -305,125 +270,70 @@ array(
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// ------------------------ ESPACIO DE TRABAJO PARA CRISTINA ---------------------------
 //Historias de usuario:
-'Añadir historia' => 'Add story',
-'Id del trabajo' => 'Work ID',
-'Id de la historia' => 'Story ID',
-'Texto de la historia' => 'Story text',
+	'Añadir historia' => 'Add story',
+	'Id del trabajo' => 'Work ID',
+	'Id de la historia' => 'Story ID',
+	'Texto de la historia' => 'Story text',
 
-'Eliminar historia' => 'Delete story',
+	'Eliminar historia' => 'Delete story',
 
-'Editar historia' => 'Edit story',
+	'Editar historia' => 'Edit story',
 
-'Buscar historia' => 'Search story',
+	'Buscar historia' => 'Search story',
 
-'Historias' => 'Storys',
+	'Historias' => 'Storys',
 
-'IdHistoria' => 'StoryId',
-'TextoHistoria' => 'StoryText',
+	'IdHistoria' => 'StoryId',
+	'TextoHistoria' => 'StoryText',
 
-'Vista en detalle historia' => 'Showcurrent story',
+	'Vista en detalle historia' => 'Showcurrent story',
 
-'div_Numerico' => 'Only numbers accepted',
+	'div_Numerico' => 'Only numbers accepted',
 
-'ERROR: No existe ningún trabajo con ese IdTrabajo' => 'ERROR: Work not found',
-'ERROR: Fallo en la inserción. Ya existe una historia con esos parámetros' => 'ERROR: Insertion failed. The ID story already exists',
-'ERROR: No existe la historia que desea borrar en la BD' => 'ERROR: The story that you wish to delete doesn´t exists in the database',
-'Nombre del trabajo' => 'Work name',
+	'ERROR: No existe ningún trabajo con ese IdTrabajo' => 'ERROR: Work not found',
+	'ERROR: Fallo en la inserción. Ya existe una historia con esos parámetros' => 'ERROR: Insertion failed. The ID story already exists',
+	'ERROR: No existe la historia que desea borrar en la BD' => 'ERROR: The story that you wish to delete doesn´t exists in the database',
+	'Nombre del trabajo' => 'Work name',
 
 //Asignación de QA:
-'Añadir asignación de QA' => 'Add QA assignment',
-'Login del evaluador' => 'Evaluator login',
-'Login del evaluado' => 'Evaluated login',
-'Alias del evaluado' => 'Evaluated alias',
-'Borrar asignación de QA' => 'Delete QA assignment',
-'Buscar asignación de QA' => 'Search QA assignment',
-'Asignación de QAs' => 'QAs assignment',
-'Asignación de QA' => 'QA assignment',
-'Editar asignación de QA' => 'Edit QA assignment',
-'Resultado de búsqueda: Asignación de QAs' => 'Search result: QAs assignment',
+	'Añadir asignación de QA' => 'Add QA assignment',
+	'Login del evaluador' => 'Evaluator login',
+	'Login del evaluado' => 'Evaluated login',
+	'Alias del evaluado' => 'Evaluated alias',
+	'Borrar asignación de QA' => 'Delete QA assignment',
+	'Buscar asignación de QA' => 'Search QA assignment',
+	'Asignación de QAs' => 'QAs assignment',
+	'Asignación de QA' => 'QA assignment',
+	'Editar asignación de QA' => 'Edit QA assignment',
+	'Resultado de búsqueda: Asignación de QAs' => 'Search result: QAs assignment',
 
-'ERROR: Fallo en la inserción. Ya existe esa asignación de QA' => 'ERROR: Insertion failed. That QA assignment already exists',
-'ERROR: No existe esa entrega para evaluar' => 'ERROR: There is no such delivery to evaluate',
-'ERROR: No existe el usuario con LoginEvaluador'  => 'ERROR: There is no user with LoginEvaluador',
+	'ERROR: Fallo en la inserción. Ya existe esa asignación de QA' => 'ERROR: Insertion failed. That QA assignment already exists',
+	'ERROR: No existe esa entrega para evaluar' => 'ERROR: There is no such delivery to evaluate',
+	'ERROR: No existe el usuario con LoginEvaluador'  => 'ERROR: There is no user with LoginEvaluador',
 
 //Generación de asignación automática de QAs:
-'Asignación auto. de QAs' => 'Auto. QA assignment',
-'Asignación automática de QAs' => 'Automatic QA assignment',
-'Asignación automática de QAs realizada correctamente' => 'Automatic QAs assignment performed correctly',
-'ERROR: La Asignación automática de QAs no ha sido realizada correctamente' => 'ERROR: Automatic QA assignment has not been performed correctly',
-'Número de QAs a corregir por alumno' => 'Number of QAs to correct',
-'ERROR: El número de entregas no es suficiente para realizar la asignacion de QA' => 'Delivery number isn`t enough to do the QA assignment',
+	'Asignación auto. de QAs' => 'Auto. QA assignment',
+	'Asignación automática de QAs' => 'Automatic QA assignment',
+	'Asignación automática de QAs realizada correctamente' => 'Automatic QAs assignment performed correctly',
+	'ERROR: La Asignación automática de QAs no ha sido realizada correctamente' => 'ERROR: Automatic QA assignment has not been performed correctly',
+	'Número de QAs a corregir por alumno' => 'Number of QAs to correct',
+	'ERROR: El número de entregas no es suficiente para realizar la asignacion de QA' => 'Delivery number isn`t enough to do the QA assignment',
 
 //Generación de historias de usuario a evaluar:
-'Generación de historias a evaluar realizada correctamente' => 'Generation of stories to evaluate performed correctly',
-'ERROR: La generación de historias a evaluar no ha sido realizada correctamente' => 'ERROR: Generation of stories to evaluate has not been performed correctly',
-'Generación de historias a evaluar' => 'Generation of stories to evaluate',
-'Gen. historias evaluación' => 'Gen. stories to evaluate',
-'ERROR: No hay asignaciones de qas para este trabajo' => 'ERROR: There are no QAs assignments for this job',
-'ERROR: No existe ningún trabajo con ese IdTrabajo'  => 'ERROR: There is no work whit this IdWork',
+	'Generación de historias a evaluar realizada correctamente' => 'Generation of stories to evaluate performed correctly',
+	'ERROR: La generación de historias a evaluar no ha sido realizada correctamente' => 'ERROR: Generation of stories to evaluate has not been performed correctly',
+	'Generación de historias a evaluar' => 'Generation of stories to evaluate',
+	'Gen. historias evaluación' => 'Gen. stories to evaluate',
+	'ERROR: No hay asignaciones de qas para este trabajo' => 'ERROR: There are no QAs assignments for this job',
+	'ERROR: No existe ningún trabajo con ese IdTrabajo'  => 'ERROR: There is no work whit this IdWork',
 
 //Generación automática de notas
-'La generación automática de notas se ha realizado correctamente para todos los trabajos de la BD' => 'Qualification automatic generation has been successfully performed for all BD jobs',
-'ERROR: La generación automática de notas ha fallado' => 'ERROR: Qualification automatic generation has failed',
-'Nota Total' => 'Total qualification',
-'Generación automática de notas' => 'Qualification automatic generation',
+	'La generación automática de notas se ha realizado correctamente para todos los trabajos de la BD' => 'Qualification automatic generation has been successfully performed for all BD jobs',
+	'ERROR: La generación automática de notas ha fallado' => 'ERROR: Qualification automatic generation has failed',
+	'Nota Total' => 'Total qualification',
+	'Generación automática de notas' => 'Qualification automatic generation',
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// ------------------------ ESPACIO DE TRABAJO PARA DIEGO ---------------------------
 	'Id de la accion' => 'Action ID',
 	'Nombre de la accion' => 'Action Name',
 	'Descripcion de la accion' => 'Action description',
@@ -442,8 +352,6 @@ array(
 	'ERROR: Fallo en la modificación. El IdGrupo está vacio' => 'ERROR: Modify failed. IdGrupo is empty',
 	'Componentes del grupo SOLFAMIDAS' => 'SOLFAMIDAS group components'
 
-
-	
  )
 ;
  ?>
