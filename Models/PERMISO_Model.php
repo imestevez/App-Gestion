@@ -190,7 +190,7 @@ function contarTuplas(){
 
     return $total_tuplas;
 }
-
+//permidos de un grupo
 function permisosGrupo(){
 	$sql = "SELECT * FROM PERMISO WHERE (IdGrupo = '$this->IdGrupo')";
 
@@ -199,6 +199,7 @@ function permisosGrupo(){
 	
     return $resultado;
 }
+//funcionalidades de un grupo
 function funcionalidadesGrupo(){
 	$sql = "SELECT DISTINCT IdFuncionalidad FROM PERMISO WHERE (IdGrupo = '$this->IdGrupo')";
 
@@ -207,7 +208,7 @@ function funcionalidadesGrupo(){
 	
     return $resultado;
 }
-
+//acciones de un grupo
 function accionesGrupo(){
 	$sql = "SELECT DISTINCT IdAccion FROM PERMISO WHERE (IdGrupo = '$this->IdGrupo' AND IdFuncionalidad = '$this->IdFuncionalidad')";
 

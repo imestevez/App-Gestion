@@ -357,6 +357,7 @@ function SHOWALL($num_tupla,$max_tuplas){
 	}
 } // fin metodo SHOWALL
 
+//muestra la informacion de un usuario solo
 function SHOWALL_User($num_tupla,$max_tuplas){
 	$login = $_SESSION['login'];
 	$sql = "SELECT * 
@@ -395,7 +396,7 @@ function contarTuplas(){
 
 
 }
-
+//comprueba si existe una un usuario
 function comprobarExistenciaUsuario(){
 
 	$sql = "SELECT * FROM USUARIO WHERE ( login = '$this->login')";
@@ -431,7 +432,7 @@ function comprobarExistenciaTrabajo(){
 		}
 	}
 }
-
+//comprueba si existe una entrega
 function comprobarExistenciaEntrega(){
 
 	$sql = "SELECT * FROM ENTREGA WHERE (login = '$this->login' AND IdTrabajo = '$this->IdTrabajo' )";
@@ -447,7 +448,7 @@ function comprobarExistenciaEntrega(){
 		}
 	}
 }
-
+//comprueba si existe un alias
 function comprobarExistenciaAlias(){
 
 	$sql = "SELECT * FROM ENTREGA WHERE (Alias = '$this->Alias' AND IdTrabajo = '$this->IdTrabajo')";
@@ -463,7 +464,7 @@ function comprobarExistenciaAlias(){
 		}
 	}
 }
-
+//rellena los datos para un usuario
 function rellenarLista(){
 
 	$existenciaNota = $this->comprobarExistenciaNota();
@@ -508,7 +509,7 @@ function rellenarLista(){
 	}
 	return $this->lista;
 }
-
+//comprueba si existe una nota para una entrega
 function comprobarExistenciaNota(){
 
 	$sql = "SELECT * FROM ENTREGA E, USUARIO U, TRABAJO T, NOTA_TRABAJO N 

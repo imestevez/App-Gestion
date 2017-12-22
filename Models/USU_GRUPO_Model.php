@@ -221,7 +221,7 @@ function comprobarRegistro(){
 		}
 
 	}
-
+//rellena una lista con los datos de un usuario
 function rellenarLista(){
 	$sql ="SELECT * FROM USUARIO WHERE(login = '$this->login')";
 	$result = $this->mysqli->query($sql);
@@ -235,52 +235,16 @@ function rellenarLista(){
 
 
 }
-
-
-
-function contarNumGruposUser(){
-
-	$sql = "SELECT COUNT(*) FROM USU_GRUPO WHERE (login = '$this->login')";
-
-	$result = $this->mysqli->query($sql);
-	$num_rows = mysqli_num_rows($result);
-	return $num_rows;
-	}
+//devuelve todos los grupos 
 function todosGrupos(){
 		$sql = "SELECT * FROM  GRUPO ";
 
-
 	$result = $this->mysqli->query($sql);
-	/*
-	while($row = mysqli_num_rows($result)){
-		$lista[$row['IdGrupo']] =$row['NombreGrupo'];
-	}*/
-	return $result;
-}
-function rellenarGrupos(){
-	$sql = "SELECT * FROM USU_GRUPO UG, GRUPO G WHERE (UG.login = '$this->login' AND
-														UG.IdGrupo = G.IdGrupo)";
 
-
-	$result = $this->mysqli->query($sql);
-	/*
-	while($row = mysqli_num_rows($result)){
-		$lista[$row['IdGrupo']] =$row['NombreGrupo'];
-	}*/
 	return $result;
 }
 
-function grupoUsuario(){
-	$sql = "SELECT * FROM USU_GRUPO WHERE (login = '$this->login')";
-	$result = $this->mysqli->query($sql);
-	while ($row = mysqli_fetch_array($result)) {
-		$this->IdGrupo =  $row['IdGrupo'];
-
-	}
-	return $this->IdGrupo;
-
-}
-
+//devuelve una lista con los grupos de un usuario
 function listagrupoUsuario(){
 
 	$sql = "SELECT * FROM USU_GRUPO WHERE (login = '$this->login')";

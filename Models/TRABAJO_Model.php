@@ -321,7 +321,7 @@ function SHOWALL($num_tupla,$max_tuplas){
 		return $resultado;
 	}
 } // fin metodo SHOWALL
-
+//muestra la informacion de un usuario solo
 function SHOWALL_User($num_tupla,$max_tuplas){
 	$login = $_SESSION['login'];
 	$sql = "SELECT * 
@@ -347,6 +347,7 @@ function SHOWALL_User($num_tupla,$max_tuplas){
 	}
 } // fin metodo SHOWALL
 
+//lista las historias para un trabajo
 function listarHistorias(){
 
 	$sql = "SELECT * FROM TRABAJO T, HISTORIA H WHERE (T.IdTrabajo = H.IdTrabajo AND T.IdTrabajo = '$this->IdTrabajo')";
@@ -371,7 +372,7 @@ function contarTuplas(){
 
     return $total_tuplas;
 }
-
+//comprueba su existe una entrega
 function comprobarEntrega(){
 	$login = $_SESSION['login'];
 	$lista = null;
