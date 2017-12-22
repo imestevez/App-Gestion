@@ -5,7 +5,7 @@
 //Creado por: SOLFAMIDAS
 //-------------------------------------------------------
 
-Muestra la tabla de borrado de la funcionalidad seleccionada
+Muestra la tabla de borrado de la asignación de QA seleccionada
 
 */
 class ASIGNAC_QA_DELETE{
