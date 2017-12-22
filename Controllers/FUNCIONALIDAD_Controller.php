@@ -174,7 +174,7 @@ if (!isset($_REQUEST['action'])){
 				$datos = $FUNCIONALIDAD->SHOWALL($num_tupla,$max_tuplas); //Ejecuta la funcion SHOWALL() en el FUNCIONALIDAD_Model
 				$lista = array('IdFuncionalidad','NombreFuncionalidad','DescripFuncionalidad');
 				$UsuariosBD = new FUNCIONALIDAD_SHOWALL($lista, $datos, $num_tupla, $max_tuplas, $totalTuplas, $num_pagina, 'SHOWALL', '../Controllers/FUNCIONALIDAD_Controller.php',$acciones); //Crea la vista SHOWALL de los usuarios de la BD	
-			}else{
+			}else{ //si no tiene acceso mostramos el showall propio
 				if (!$_POST){
 					$FUNCIONALIDAD = new FUNCIONALIDAD_Model('', '','');//crea un un FUNCIONALIDAD_Model con el IdFuncionalidad de la funcionalidad
 				}

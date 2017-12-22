@@ -6,7 +6,7 @@
 //Creado por: SOLFAMIDAS
 //-------------------------------------------------------
 
-Modelo de datos de usuarios que accede a la Base de Datos
+Modelo de datos de notas que accede a la Base de Datos
 
 */
 
