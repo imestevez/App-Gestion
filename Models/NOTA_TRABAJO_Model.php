@@ -271,6 +271,7 @@ function SHOWALL(){
 	}
 } // fin metodo SHOWALL
 
+//Función para mostrar las notas de el usuario conectado en la aplicación
 function SHOWALL_User(){
 	$login = $_SESSION['login'];
 	$sql = "SELECT * 
@@ -309,6 +310,7 @@ function contarTuplas(){
 
 }
 
+//Función para recibir el Nombre de un usuario
 function rellernarNombre(){
 	$sql = "SELECT U.Nombre FROM USUARIO U, NOTA_TRABAJO N WHERE (U.login = '$this->login' AND U.login = N.login)";
 
@@ -321,6 +323,7 @@ function rellernarNombre(){
 	return $this->lista;	
 }
 
+//Función para rellenar Lista
 function rellenarLista(){
 		$sql = "SELECT * FROM USUARIO U, TRABAJO T, NOTA_TRABAJO N
 						WHERE (U.login = '$this->login' AND
@@ -339,6 +342,7 @@ function rellenarLista(){
 	return $this->lista;
 }
 
+//Función para comprobar la existencia de un usuario en la BD
 function comprobarExistenciaUsuario(){
 
 	$sql = "SELECT * FROM USUARIO WHERE ( login = '$this->login')";
@@ -356,7 +360,7 @@ function comprobarExistenciaUsuario(){
 	}
 }
 
-
+//Función para comprobar la existencia de un trabajo
 function comprobarExistenciaTrabajo(){
 	
 
@@ -575,6 +579,7 @@ function genAutoNotaQA($IdTrabajoQA){
 
 }//Fin genAutoNotaQA()
 
+//Función para la generación automática de notas
 function genAutoNota(){
 
 	//Comprobamos si ya se ha realizado la generación automática de notas
@@ -657,6 +662,7 @@ function getNumTrabajos(){
 	return $num_trabajos;
 }//Fin getNumTrabajos()
 
+//Función para adaptar los datos provenientes del recordset de SHOWALL para mostrarlos en la tabla de SHOWALL de la gestión de usuarios
 function adaptarRecorsetParaShowAll($datos){
 
 	$num_rows = mysqli_num_rows($datos);
@@ -675,6 +681,7 @@ function adaptarRecorsetParaShowAll($datos){
 
 }//Fin adaptarRecorsetParaShowAll()
 
+//Función para coger de la BD todos los alumnos que tienen alguna nota asociada
 function getAlumnos(){
 
 	$sql = "SELECT DISTINCT login FROM NOTA_TRABAJO WHERE login <> 'admin'";
@@ -683,6 +690,7 @@ function getAlumnos(){
 	return $alumnos;
 }
 
+//Función para colocar todos los trabajos existentes en un array para la vista del showall
 function getTrabajosArray(){
 
 	$trabajos = $this->getTrabajos();
@@ -752,6 +760,7 @@ function calcNotaF(){
 	}	
 }//Fin calcNotaF() 
 
+//Función para comprobar si existe una nota
 function existeNota(){
 
 	//Si un alumno no ha entregado un trabajo se le asigna una nota con 0

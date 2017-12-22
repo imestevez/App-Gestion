@@ -82,7 +82,7 @@ include '../Views/Header.php';
                 </div>
                 <div  id="izquierda">    
                     <label for="ComenIncorrectoA"><?php echo $strings['ComenIncorrectoA']?>: </label>
-                    <textarea name="ComenIncorrectoA" maxlength="300" rows="6" cols="50" onblur="validarComentIncorrecto(this,300)" style="margin-left: 10px; border-radius: 20px; border-top-left-radius: 0px; border-width: 2px; border-color: darkblue;" ></textarea><div id="ComenIncorrectoA" class="oculto" style="display:none"><?php echo $strings['div_Alfanumerico']?></div><div id="ComenIncorrectoAVacio" class="oculto" style="display:none"><?php echo $strings['div_vacio']?></div>  
+                    <textarea name="ComenIncorrectoA" maxlength="300" rows="6" cols="50" onblur="validarComentIncorrectoBuscar(this,300)" style="margin-left: 10px; border-radius: 20px; border-top-left-radius: 0px; border-width: 2px; border-color: darkblue;" ></textarea><div id="ComenIncorrectoA" class="oculto" style="display:none"><?php echo $strings['div_Alfanumerico']?>
                 </div>
                 <div  id="izquierda">    
                     <label for="CorrectoP"><?php echo $strings['CorrectoP']?>: </label>
@@ -90,7 +90,7 @@ include '../Views/Header.php';
                 </div>
                 <div  id="izquierda">    
                     <label for="ComentIncorrectoP"><?php echo $strings['ComentIncorrectoP']?>: </label>
-                    <textarea name="ComentIncorrectoP" maxlength="300" rows="6" cols="50" onblur="validarComentIncorrecto(this,300)" style="margin-left: 10px; border-radius: 20px; border-top-left-radius: 0px; border-width: 2px; border-color: darkblue;" ></textarea><div id="ComentIncorrectoP" class="oculto" style="display:none"><?php echo $strings['div_Alfanumerico']?></div><div id="ComentIncorrectoPVacio" class="oculto" style="display:none"><?php echo $strings['div_vacio']?></div>  
+                    <textarea name="ComentIncorrectoP" maxlength="300" rows="6" cols="50" onblur="validarComentIncorrectoBuscar(this,300)" style="margin-left: 10px; border-radius: 20px; border-top-left-radius: 0px; border-width: 2px; border-color: darkblue;" ></textarea><div id="ComentIncorrectoP" class="oculto" style="display:none"><?php echo $strings['div_Alfanumerico']?></div> 
                 </div>
                 <div  id="izquierda">    
                     <label for="OK"><?php echo $strings['OK']?>: </label>

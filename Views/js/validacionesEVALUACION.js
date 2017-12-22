@@ -597,9 +597,9 @@ function validar(formulario)
                 (validarAlias(form.AliasEvaluado, 9)) &&  
                 (validarIdHistoria(form.IdHistoria)) && 
                 (validarCorrecto(form.CorrectoA, 0, 1)) && 
-                (validarComentIncorrecto(form.ComenIncorrectoA, 300)) && 
+                (validarComentIncorrectoBuscar(form.ComenIncorrectoA, 300)) && 
                 (validarCorrecto(form.CorrectoP, 0, 1)) && 
-                (validarComentIncorrecto(form.ComentIncorrectoP, 300)) && 
+                (validarComentIncorrectoBuscar(form.ComentIncorrectoP, 300)) && 
                 (validarOK(form.OK,0,1)) ){
 
                 alerta = false; //Se le asigna false a la variable alerta 

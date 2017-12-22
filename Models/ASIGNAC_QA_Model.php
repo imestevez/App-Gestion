@@ -315,6 +315,7 @@ function contarTuplas(){
     return $total_tuplas;
 }
 
+//Función para devolver el login evaluado 
 function devolverLoginEvaluado(){
 
 	$sql = "SELECT * FROM ENTREGA WHERE Alias = '$this->AliasEvaluado'";

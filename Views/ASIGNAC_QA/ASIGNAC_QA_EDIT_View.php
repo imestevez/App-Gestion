@@ -22,7 +22,6 @@ function __construct($tupla){
     $this->LoginEvaluador = $tupla['LoginEvaluador'];
     $this->LoginEvaluado = $tupla['LoginEvaluado'];
     $this->AliasEvaluado = $tupla['AliasEvaluado'];
-    echo "login: ".$this->LoginEvaluado."<br>";
     $this->render();
 }
 
